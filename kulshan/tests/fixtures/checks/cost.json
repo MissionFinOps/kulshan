@@ -1,0 +1,119 @@
+{
+  "tool": "cost",
+  "scores": {
+    "overall_score": 72,
+    "grade": "C-",
+    "total_findings": 3,
+    "severity_counts": {"critical": 1, "high": 1, "medium": 1},
+    "breakdown": {"ri_coverage": 60, "anomalies": 80, "waste": 75},
+    "total_spend": 12345.67
+  },
+  "findings": [
+    {
+      "id": "cost-anomaly_statistical-aaaaaaaaaaaaaaaa",
+      "pack": "cost",
+      "kind": "anomaly_statistical",
+      "fingerprint": "aaaaaaaaaaaaaaaa",
+      "title": "EC2 - Other spike, 78% in account 000000000000, 95% in us-east-1, 88% USE1-NatGateway-Bytes",
+      "severity": "critical",
+      "score_impact": -15,
+      "estimated_monthly_impact": 18712.50,
+      "confidence": 0.95,
+      "effort": "medium",
+      "risk": "safe",
+      "account": "000000000000",
+      "region": "us-east-1",
+      "service": "EC2 - Other",
+      "usage_type": "USE1-NatGateway-Bytes",
+      "operation": null,
+      "resource_id": null,
+      "evidence": {
+        "date": "2026-04-15",
+        "z_score": 4.1,
+        "methods": "Z:4.1σ, IQR, MAD:5.2",
+        "num_methods": 3,
+        "overlap_with": ["cost-anomaly_aws_native-bbbbbbbbbbbbbbbb"]
+      },
+      "why_it_matters": "Cost is 98% above baseline (z-score 4.1, methods: Z:4.1σ, IQR, MAD:5.2).",
+      "recommended_action": "Investigate in account 000000000000, region us-east-1, usage type USE1-NatGateway-Bytes.",
+      "owner_hint": null
+    },
+    {
+      "id": "cost-anomaly_aws_native-bbbbbbbbbbbbbbbb",
+      "pack": "cost",
+      "kind": "anomaly_aws_native",
+      "fingerprint": "bbbbbbbbbbbbbbbb",
+      "title": "AWS-detected anomaly: EC2 - Other, in us-east-1, account 000000000000, $1,248 impact",
+      "severity": "high",
+      "score_impact": -10,
+      "estimated_monthly_impact": 18712.50,
+      "confidence": 0.95,
+      "effort": "medium",
+      "risk": "safe",
+      "account": "000000000000",
+      "region": "us-east-1",
+      "service": "EC2 - Other",
+      "usage_type": "USE1-NatGateway-Bytes",
+      "operation": null,
+      "resource_id": null,
+      "evidence": {
+        "source": "aws_cost_anomaly_detection",
+        "aws_anomaly_id": "AnomalyOverlap-0001",
+        "start_date": "2026-04-13",
+        "end_date": "2026-04-15",
+        "anomaly_days": 2,
+        "total_impact": 1247.50,
+        "max_impact": 891.00,
+        "total_actual": 2496.00,
+        "total_expected": 1248.50,
+        "feedback": "",
+        "overlap_with": ["cost-anomaly_statistical-aaaaaaaaaaaaaaaa"]
+      },
+      "why_it_matters": "AWS Cost Anomaly Detection ML model flagged $2,496 actual vs $1,249 expected over 2026-04-13 to 2026-04-15.",
+      "recommended_action": "Verify in the AWS Cost Anomaly Detection console; AnomalyId: AnomalyOverlap-0001; mark feedback if expected.",
+      "owner_hint": null
+    },
+    {
+      "id": "cost-anomaly_statistical-cccccccccccccccc",
+      "pack": "cost",
+      "kind": "anomaly_statistical",
+      "fingerprint": "cccccccccccccccc",
+      "title": "Amazon RDS spike, 92% in eu-west-1",
+      "severity": "medium",
+      "score_impact": -5,
+      "estimated_monthly_impact": 1356.00,
+      "confidence": 0.80,
+      "effort": "medium",
+      "risk": "safe",
+      "account": null,
+      "region": "eu-west-1",
+      "service": "Amazon Relational Database Service",
+      "usage_type": null,
+      "operation": null,
+      "resource_id": null,
+      "evidence": {
+        "date": "2026-04-22",
+        "z_score": 2.6,
+        "methods": "Z:2.6σ, IQR",
+        "num_methods": 2
+      },
+      "why_it_matters": "Cost is 100% above baseline (z-score 2.6, methods: Z:2.6σ, IQR).",
+      "recommended_action": "Investigate Amazon RDS cost change; no single account drives it. Compare per-account spend over the anomaly window.",
+      "owner_hint": null
+    }
+  ],
+  "metadata": {
+    "cost_anomaly_detection": {
+      "status": "ok",
+      "anomaly_count": 1,
+      "lookback_days": 90,
+      "details": "",
+      "overlap": {
+        "both_count": 1,
+        "Kulshan_only_count": 1,
+        "aws_only_count": 0
+      }
+    }
+  },
+  "errors": []
+}

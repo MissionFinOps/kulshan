@@ -1,0 +1,11 @@
+{
+  "tool": "pulse",
+  "scores": {
+    "overall_score": 83,
+    "grade": "B",
+    "total_findings": 7,
+    "severity_counts": {"high": 1, "medium": 4, "low": 2},
+    "breakdown": {"logging": 80, "alarms": 88, "tracing": 80}
+  },
+  "errors": []
+}

@@ -1,0 +1,114 @@
+{
+  "_doc": "Synthetic Cost Explorer responses used by test_cost_attribution.py. Account IDs are placeholders only (000000000000 / 111111111111 / 222222222222). No real billing data.",
+  "cases": [
+    {
+      "name": "ec2_other_nat_gateway_dominant",
+      "anomaly": {
+        "service": "EC2 - Other",
+        "date": "2026-04-15",
+        "latest_cost": 896.33,
+        "avg_cost": 452.10,
+        "pct_change": 98.3,
+        "z_score": 4.1,
+        "mad_score": 5.2,
+        "methods": "Z:4.1σ, IQR, MAD:5.2",
+        "num_methods": 3,
+        "severity": "critical"
+      },
+      "fetcher_data": {
+        "service_and_account": [
+          {"date": "2026-04-15", "service": "EC2 - Other", "account": "000000000000", "cost": 700.0},
+          {"date": "2026-04-15", "service": "EC2 - Other", "account": "111111111111", "cost": 96.33},
+          {"date": "2026-04-15", "service": "EC2 - Other", "account": "222222222222", "cost": 100.00}
+        ],
+        "region": [
+          {"region": "us-east-1", "cost": 850.0},
+          {"region": "us-west-2", "cost": 46.33}
+        ],
+        "usage_type": [
+          {"usage_type": "USE1-NatGateway-Bytes", "cost": 790.0},
+          {"usage_type": "USE1-DataTransfer-Out-Bytes", "cost": 106.33}
+        ]
+      },
+      "expected_attribution": {
+        "account": "000000000000",
+        "region": "us-east-1",
+        "usage_type": "USE1-NatGateway-Bytes",
+        "resource_id": null
+      }
+    },
+    {
+      "name": "lambda_spread_no_dominant_account",
+      "anomaly": {
+        "service": "AWS Lambda",
+        "date": "2026-04-16",
+        "latest_cost": 280.0,
+        "avg_cost": 140.0,
+        "pct_change": 100.0,
+        "z_score": 3.0,
+        "methods": "Z:3.0σ, IQR",
+        "num_methods": 2,
+        "severity": "warning"
+      },
+      "fetcher_data": {
+        "service_and_account": [
+          {"date": "2026-04-16", "service": "AWS Lambda", "account": "000000000000", "cost": 95.0},
+          {"date": "2026-04-16", "service": "AWS Lambda", "account": "111111111111", "cost": 95.0},
+          {"date": "2026-04-16", "service": "AWS Lambda", "account": "222222222222", "cost": 90.0}
+        ],
+        "region": [
+          {"region": "eu-west-1", "cost": 250.0},
+          {"region": "us-east-1", "cost": 30.0}
+        ],
+        "usage_type": [
+          {"usage_type": "EU-Lambda-GB-Second", "cost": 250.0},
+          {"usage_type": "EU-Lambda-Request", "cost": 30.0}
+        ]
+      },
+      "expected_attribution": {
+        "account": null,
+        "region": "eu-west-1",
+        "usage_type": "EU-Lambda-GB-Second",
+        "resource_id": null
+      }
+    },
+    {
+      "name": "ec2_compute_with_resource_id",
+      "anomaly": {
+        "service": "Amazon Elastic Compute Cloud - Compute",
+        "date": "2026-04-17",
+        "latest_cost": 5200.0,
+        "avg_cost": 4100.0,
+        "pct_change": 26.8,
+        "z_score": 2.6,
+        "methods": "Z:2.6σ, MAD:3.8",
+        "num_methods": 2,
+        "severity": "warning"
+      },
+      "fetcher_data": {
+        "service_and_account": [
+          {"date": "2026-04-17", "service": "Amazon Elastic Compute Cloud - Compute", "account": "000000000000", "cost": 4400.0},
+          {"date": "2026-04-17", "service": "Amazon Elastic Compute Cloud - Compute", "account": "111111111111", "cost": 800.0}
+        ],
+        "region": [
+          {"region": "us-east-1", "cost": 5000.0},
+          {"region": "ap-southeast-1", "cost": 200.0}
+        ],
+        "usage_type": [
+          {"usage_type": "BoxUsage:m5.24xlarge", "cost": 4800.0},
+          {"usage_type": "BoxUsage:t3.medium", "cost": 400.0}
+        ],
+        "top_resources": [
+          {"resource_id": "i-0aaaa1234567890ab", "cost": 4500.0},
+          {"resource_id": "i-0bbbb1234567890cd", "cost": 700.0}
+        ]
+      },
+      "expected_attribution": {
+        "account": "000000000000",
+        "region": "us-east-1",
+        "usage_type": "BoxUsage:m5.24xlarge",
+        "resource_id": "i-0aaaa1234567890ab"
+      }
+    }
+  ]
+}

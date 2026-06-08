@@ -1,0 +1,102 @@
+# ============================================================
+# Mission FinOps: repo hygiene
+# Default policy: track everything by default; opt out below.
+# ============================================================
+
+# --- Local history backups (NEVER commit; contains pre-scrub history) ---
+.git.backup-*
+.git-backup-*
+*.git.backup
+*.bak
+
+# --- Secrets / credentials (NEVER commit) ---
+.env
+.env.*
+*.envrc
+*.pem
+*.key
+*.p12
+*.pfx
+id_rsa*
+id_ecdsa*
+id_ed25519*
+credentials
+credentials.json
+.aws/
+aws-credentials*
+**/secrets/
+**/secret.json
+**/secrets.json
+**/.netrc
+
+# --- Customer / scan / audit / report output (NEVER commit) ---
+cost_report_*
+*.cost-analyzer-scores.json
+.cost-analyzer-scores.json
+scan-output/
+audit-output/
+reckoner-runs/
+
+# --- Internal source dumps (drift hazard) ---
+FULL_SOURCE_REFERENCE.txt
+
+# --- Python build / test / cache artifacts ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg
+*.egg-info/
+.eggs/
+build/
+dist/
+pip-wheel-metadata/
+.coverage
+.coverage.*
+htmlcov/
+.pytest_cache/
+.hypothesis/
+.tox/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+env/
+
+# --- Node (in case anything web-side ever lands) ---
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# --- OS / editor junk ---
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# --- Agent / planning scratch (explicit, not via *.md blanket) ---
+.claude/
+.kiro/specs/*/design.md
+.kiro/specs/*/requirements.md
+.kiro/specs/*/tasks.md
+
+# --- Internal strategy docs (not for buyers) ---
+AWS_TOOLS_ANALYSIS.md
+
+# --- Research scratch (LOCAL-ONLY, review later before any commit) ---
+docs/research for finops site/
+
+# --- Marketing / GTM (LOCAL-ONLY, NEVER commit, NEVER push) ---
+# Outreach playbooks, prospecting lists, founder-team plans.
+# Must never reach any public or shared remote.
+marketing/
+
+# --- Local-only assets ---
+*.pdf
+*.zip
+*.tar.gz
+*.tgz

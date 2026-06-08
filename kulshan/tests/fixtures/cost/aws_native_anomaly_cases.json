@@ -1,0 +1,89 @@
+{
+  "_doc": "Synthetic AWS Cost Anomaly Detection responses (one row each, in the shape produced by cost_fetcher.get_anomalies_from_service). Account IDs are placeholders only (000000000000 / 111111111111 / 222222222222). No real billing data.",
+  "rows": {
+    "nat_gateway_critical_overlap": {
+      "anomaly_id": "AnomalyOverlap-0001",
+      "start_date": "2026-04-13",
+      "end_date": "2026-04-15",
+      "service": "EC2 - Other",
+      "region": "us-east-1",
+      "account": "000000000000",
+      "usage_type": "USE1-NatGateway-Bytes",
+      "total_impact": 1247.50,
+      "max_impact": 891.00,
+      "total_actual": 2496.00,
+      "total_expected": 1248.50,
+      "feedback": ""
+    },
+    "lambda_aws_only": {
+      "anomaly_id": "AnomalyAwsOnly-0002",
+      "start_date": "2026-04-20",
+      "end_date": "2026-04-21",
+      "service": "AWS Lambda",
+      "region": "eu-west-1",
+      "account": "111111111111",
+      "usage_type": "EU-Lambda-GB-Second",
+      "total_impact": 312.40,
+      "max_impact": 280.10,
+      "total_actual": 612.40,
+      "total_expected": 300.00,
+      "feedback": ""
+    },
+    "rds_low_severity": {
+      "anomaly_id": "AnomalyLow-0003",
+      "start_date": "2026-04-22",
+      "end_date": "2026-04-22",
+      "service": "Amazon Relational Database Service",
+      "region": "ap-southeast-1",
+      "account": "222222222222",
+      "usage_type": "APS1-InstanceUsage:db.t4g.medium",
+      "total_impact": 45.20,
+      "max_impact": 45.20,
+      "total_actual": 90.40,
+      "total_expected": 45.20,
+      "feedback": ""
+    },
+    "user_confirmed_yes": {
+      "anomaly_id": "AnomalyConfirmed-0004",
+      "start_date": "2026-04-23",
+      "end_date": "2026-04-25",
+      "service": "Amazon CloudFront",
+      "region": "global",
+      "account": "000000000000",
+      "usage_type": "DataTransfer-Out-Bytes",
+      "total_impact": 50.00,
+      "max_impact": 50.00,
+      "total_actual": 100.00,
+      "total_expected": 50.00,
+      "feedback": "YES"
+    },
+    "user_marked_no": {
+      "anomaly_id": "AnomalyDismissed-0005",
+      "start_date": "2026-04-24",
+      "end_date": "2026-04-24",
+      "service": "Amazon S3",
+      "region": "us-east-1",
+      "account": "000000000000",
+      "usage_type": "USE1-Requests-Tier1",
+      "total_impact": 200.00,
+      "max_impact": 200.00,
+      "total_actual": 400.00,
+      "total_expected": 200.00,
+      "feedback": "NO"
+    },
+    "no_root_cause": {
+      "anomaly_id": "AnomalyNoRoot-0006",
+      "start_date": "2026-04-26",
+      "end_date": "2026-04-26",
+      "service": "Unknown",
+      "region": "",
+      "account": "",
+      "usage_type": "",
+      "total_impact": 6500.00,
+      "max_impact": 6500.00,
+      "total_actual": 13000.00,
+      "total_expected": 6500.00,
+      "feedback": ""
+    }
+  }
+}

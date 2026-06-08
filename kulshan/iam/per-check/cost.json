@@ -1,0 +1,32 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "CostAnalyzerReadOnly",
+      "Effect": "Allow",
+      "Action": [
+        "ce:GetCostAndUsage",
+        "ce:GetCostAndUsageWithResources",
+        "ce:GetCostForecast",
+        "ce:GetCostAndUsageComparisons",
+        "ce:GetCostComparisonDrivers",
+        "ce:GetReservationCoverage",
+        "ce:GetReservationUtilization",
+        "ce:GetReservationPurchaseRecommendation",
+        "ce:GetSavingsPlansUtilization",
+        "ce:GetSavingsPlansPurchaseRecommendation",
+        "ce:GetRightsizingRecommendation",
+        "ce:GetAnomalies"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "CostAnalyzerAccountNames",
+      "Effect": "Allow",
+      "Action": [
+        "organizations:ListAccounts"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

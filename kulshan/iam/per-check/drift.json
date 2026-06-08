@@ -1,0 +1,22 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [{
+        "Sid": "AwsdriftReadOnly",
+        "Effect": "Allow",
+        "Action": [
+            "cloudformation:ListStacks",
+            "cloudformation:DetectStackDrift",
+            "cloudformation:DescribeStackDriftDetectionStatus",
+            "cloudformation:DescribeStackResourceDrifts",
+            "cloudformation:ListStackResources",
+            "ec2:DescribeInstances",
+            "ec2:DescribeSecurityGroups",
+            "ec2:DescribeRegions",
+            "s3:ListAllMyBuckets",
+            "lambda:ListFunctions",
+            "rds:DescribeDBInstances",
+            "sts:GetCallerIdentity"
+        ],
+        "Resource": "*"
+    }]
+}

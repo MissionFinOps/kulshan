@@ -1,0 +1,17 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [{
+        "Sid": "AwsageReadOnly",
+        "Effect": "Allow",
+        "Action": [
+            "lambda:ListFunctions", "lambda:GetFunction",
+            "rds:DescribeDBInstances", "rds:DescribeDBClusters", "rds:DescribeDBEngineVersions",
+            "ec2:DescribeInstances", "ec2:DescribeImages", "ec2:DescribeVolumes", "ec2:DescribeRegions",
+            "acm:ListCertificates", "acm:DescribeCertificate",
+            "eks:ListClusters", "eks:DescribeCluster",
+            "elasticache:DescribeReplicationGroups", "elasticache:DescribeCacheClusters",
+            "sts:GetCallerIdentity"
+        ],
+        "Resource": "*"
+    }]
+}

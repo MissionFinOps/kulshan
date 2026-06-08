@@ -1,0 +1,41 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "AwsdrReadOnly",
+            "Effect": "Allow",
+            "Action": [
+                "backup:ListBackupPlans",
+                "backup:ListBackupVaults",
+                "backup:ListRecoveryPointsByBackupVault",
+                "backup:ListProtectedResources",
+                "backup:DescribeRecoveryPoint",
+                "ec2:DescribeInstances",
+                "ec2:DescribeAvailabilityZones",
+                "ec2:DescribeNatGateways",
+                "ec2:DescribeSubnets",
+                "ec2:DescribeRegions",
+                "autoscaling:DescribeAutoScalingGroups",
+                "elasticloadbalancing:DescribeLoadBalancers",
+                "elasticloadbalancing:DescribeTargetGroups",
+                "elasticloadbalancing:DescribeTargetHealth",
+                "rds:DescribeDBInstances",
+                "rds:DescribeDBClusters",
+                "rds:DescribeDBSnapshots",
+                "dynamodb:ListTables",
+                "dynamodb:DescribeContinuousBackups",
+                "elasticache:DescribeReplicationGroups",
+                "s3:ListAllMyBuckets",
+                "s3:GetBucketVersioning",
+                "s3:GetBucketReplication",
+                "s3:GetBucketLifecycleConfiguration",
+                "s3:GetBucketLocation",
+                "route53:ListHealthChecks",
+                "route53:ListHostedZones",
+                "route53:ListResourceRecordSets",
+                "sts:GetCallerIdentity"
+            ],
+            "Resource": "*"
+        }
+    ]
+}

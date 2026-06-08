@@ -1,0 +1,11 @@
+{
+  "tool": "age",
+  "scores": {
+    "overall_score": 77,
+    "grade": "C+",
+    "total_findings": 5,
+    "severity_counts": {"medium": 4, "low": 1},
+    "breakdown": {"lambda": 70, "rds": 80, "ec2": 75, "acm": 85}
+  },
+  "errors": []
+}

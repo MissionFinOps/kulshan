@@ -1,0 +1,11 @@
+{
+  "tool": "security",
+  "scores": {
+    "overall_score": 65,
+    "grade": "D",
+    "total_findings": 14,
+    "severity_counts": {"high": 4, "medium": 7, "low": 3},
+    "breakdown": {"iam": 50, "network": 70, "data": 65, "compute": 80, "logging": 55, "encryption": 70}
+  },
+  "errors": []
+}

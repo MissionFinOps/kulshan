@@ -1,0 +1,11 @@
+{
+  "tool": "limit",
+  "scores": {
+    "overall_score": 92,
+    "grade": "A",
+    "total_findings": 1,
+    "severity_counts": {"high": 1},
+    "breakdown": {"ec2": 95, "rds": 90, "lambda": 92, "vpc": 91}
+  },
+  "errors": []
+}

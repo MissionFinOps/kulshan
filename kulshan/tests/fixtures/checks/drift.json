@@ -1,0 +1,11 @@
+{
+  "tool": "drift",
+  "scores": {
+    "overall_score": 90,
+    "grade": "A-",
+    "total_findings": 2,
+    "severity_counts": {"medium": 2},
+    "breakdown": {"drift": 92, "coverage": 88}
+  },
+  "errors": []
+}

@@ -1,0 +1,36 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "MfSweepReadOnly",
+            "Effect": "Allow",
+            "Action": [
+                "ec2:DescribeVolumes",
+                "ec2:DescribeAddresses",
+                "ec2:DescribeSnapshots",
+                "ec2:DescribeImages",
+                "ec2:DescribeInstances",
+                "ec2:DescribeNetworkInterfaces",
+                "ec2:DescribeSecurityGroups",
+                "ec2:DescribeNatGateways",
+                "ec2:DescribeRegions",
+                "elasticloadbalancing:DescribeLoadBalancers",
+                "elasticloadbalancing:DescribeTargetGroups",
+                "elasticloadbalancing:DescribeTargetHealth",
+                "s3:ListAllMyBuckets",
+                "s3:ListBucket",
+                "s3:GetBucketTagging",
+                "ecr:DescribeRepositories",
+                "ecr:ListImages",
+                "rds:DescribeDBSnapshots",
+                "rds:DescribeDBInstances",
+                "logs:DescribeLogGroups",
+                "cloudwatch:DescribeAlarms",
+                "cloudwatch:GetMetricStatistics",
+                "lambda:ListFunctions",
+                "sts:GetCallerIdentity"
+            ],
+            "Resource": "*"
+        }
+    ]
+}

@@ -1,0 +1,11 @@
+{
+  "tool": "topo",
+  "scores": {
+    "overall_score": 86,
+    "grade": "B+",
+    "total_findings": 3,
+    "severity_counts": {"medium": 2, "low": 1},
+    "breakdown": {"vpc_design": 88, "subnet_layout": 84, "peering": 86}
+  },
+  "errors": []
+}

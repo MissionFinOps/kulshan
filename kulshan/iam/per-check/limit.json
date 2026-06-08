@@ -1,0 +1,31 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "AwslimitReadOnly",
+            "Effect": "Allow",
+            "Action": [
+                "servicequotas:ListServices",
+                "servicequotas:ListServiceQuotas",
+                "servicequotas:GetServiceQuota",
+                "servicequotas:ListRequestedServiceQuotaChangeHistory",
+                "cloudwatch:GetMetricStatistics",
+                "ec2:DescribeInstances",
+                "ec2:DescribeVpcs",
+                "ec2:DescribeSecurityGroups",
+                "ec2:DescribeSnapshots",
+                "ec2:DescribeRegions",
+                "elasticloadbalancing:DescribeLoadBalancers",
+                "iam:ListRoles",
+                "iam:ListUsers",
+                "iam:ListPolicies",
+                "lambda:GetAccountSettings",
+                "rds:DescribeDBInstances",
+                "cloudformation:ListStacks",
+                "s3:ListAllMyBuckets",
+                "sts:GetCallerIdentity"
+            ],
+            "Resource": "*"
+        }
+    ]
+}

@@ -1,0 +1,45 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "AwstagReadOnly",
+            "Effect": "Allow",
+            "Action": [
+                "tag:GetResources",
+                "tag:GetTagKeys",
+                "tag:GetTagValues",
+                "ec2:DescribeInstances",
+                "ec2:DescribeVolumes",
+                "ec2:DescribeSnapshots",
+                "ec2:DescribeImages",
+                "ec2:DescribeSecurityGroups",
+                "ec2:DescribeAddresses",
+                "ec2:DescribeRegions",
+                "s3:ListAllMyBuckets",
+                "s3:GetBucketTagging",
+                "rds:DescribeDBInstances",
+                "rds:DescribeDBClusters",
+                "rds:DescribeDBSnapshots",
+                "rds:ListTagsForResource",
+                "lambda:ListFunctions",
+                "lambda:ListTags",
+                "elasticloadbalancing:DescribeLoadBalancers",
+                "elasticloadbalancing:DescribeTargetGroups",
+                "elasticloadbalancing:DescribeTags",
+                "dynamodb:ListTables",
+                "dynamodb:DescribeTable",
+                "dynamodb:ListTagsOfResource",
+                "ecs:ListClusters",
+                "ecs:DescribeClusters",
+                "ecs:ListServices",
+                "ecs:DescribeServices",
+                "eks:ListClusters",
+                "eks:DescribeCluster",
+                "ce:GetCostAndUsage",
+                "ce:GetTags",
+                "sts:GetCallerIdentity"
+            ],
+            "Resource": "*"
+        }
+    ]
+}

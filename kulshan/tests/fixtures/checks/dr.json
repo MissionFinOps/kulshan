@@ -1,0 +1,11 @@
+{
+  "tool": "dr",
+  "scores": {
+    "overall_score": 81,
+    "grade": "B-",
+    "total_findings": 4,
+    "severity_counts": {"high": 1, "medium": 3},
+    "breakdown": {"backup": 85, "compute": 78, "database": 82, "storage": 80, "dns": 75, "spof": 86}
+  },
+  "errors": []
+}

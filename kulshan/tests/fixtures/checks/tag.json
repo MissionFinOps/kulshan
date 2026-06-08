@@ -1,0 +1,11 @@
+{
+  "tool": "tag",
+  "scores": {
+    "overall_score": 55,
+    "grade": "F",
+    "total_findings": 47,
+    "severity_counts": {"high": 12, "medium": 35},
+    "breakdown": {"compliance": 40, "consistency": 65, "cost_attribution": 60}
+  },
+  "errors": []
+}

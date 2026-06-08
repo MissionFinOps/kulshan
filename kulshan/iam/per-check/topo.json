@@ -1,0 +1,17 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [{
+        "Sid": "AwstopoReadOnly",
+        "Effect": "Allow",
+        "Action": [
+            "ec2:DescribeVpcs", "ec2:DescribeSubnets", "ec2:DescribeRouteTables",
+            "ec2:DescribeInternetGateways", "ec2:DescribeNatGateways",
+            "ec2:DescribeVpcPeeringConnections", "ec2:DescribeVpcEndpoints",
+            "ec2:DescribeTransitGateways", "ec2:DescribeTransitGatewayAttachments",
+            "ec2:DescribeVpnConnections", "ec2:DescribeFlowLogs",
+            "ec2:DescribeNetworkAcls", "ec2:DescribeRegions",
+            "sts:GetCallerIdentity"
+        ],
+        "Resource": "*"
+    }]
+}

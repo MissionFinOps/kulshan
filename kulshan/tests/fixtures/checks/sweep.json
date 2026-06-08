@@ -1,0 +1,12 @@
+{
+  "tool": "sweep",
+  "scores": {
+    "overall_score": 88,
+    "grade": "B+",
+    "total_findings": 6,
+    "severity_counts": {"high": 1, "medium": 3, "low": 2},
+    "breakdown": {"compute": 92, "network": 85, "storage": 88, "database": 90, "monitoring": 85},
+    "monthly_waste": 124.50
+  },
+  "errors": []
+}
