@@ -54,24 +54,36 @@ def test_composed_policy_exists():
 
 def test_per_check_dir_has_ten_files():
     files = _per_check_files()
-    assert len(files) == 10, f"expected 10 per-check policies, got {len(files)}: {[f.name for f in files]}"
+    assert len(files) == 10, (
+        f"expected 10 per-check policies, got {len(files)}: {[f.name for f in files]}"
+    )
 
 
-def test_composed_is_superset_of_every_per_check_action():
+def test_composed_matches_union_of_per_check_actions():
     composed = json.loads(COMPOSED_PATH.read_text(encoding="utf-8"))
     composed_actions = _actions(composed)
 
     missing: dict[str, set[str]] = {}
+    required_actions: set[str] = set()
     for f in _per_check_files():
         pack_actions = _actions(json.loads(f.read_text(encoding="utf-8")))
+        required_actions.update(pack_actions)
         delta = pack_actions - composed_actions
         if delta:
             missing[f.stem] = delta
 
-    assert not missing, (
-        "composed policy is missing actions; regenerate Kulshan-readonly.json. "
-        f"Missing per pack: {missing}"
+    extra = composed_actions - required_actions
+    assert not missing and not extra, (
+        "composed policy must equal the union of per-check policies. "
+        f"Missing per pack: {missing}; extra actions: {sorted(extra)}"
     )
+
+
+@pytest.mark.parametrize("policy_file", _per_check_files() + [COMPOSED_PATH])
+def test_no_action_wildcards(policy_file: Path):
+    actions = _actions(json.loads(policy_file.read_text(encoding="utf-8")))
+    wildcard_actions = sorted(action for action in actions if "*" in action)
+    assert not wildcard_actions, f"{policy_file.name} contains wildcards: {wildcard_actions}"
 
 
 @pytest.mark.parametrize("policy_file", _per_check_files() + [COMPOSED_PATH])
