@@ -10,6 +10,7 @@ from rich.console import Console
 def run_preflight(
     session: Any,
     console: Console | None = None,
+    verbose: bool = False,
 ) -> Tuple[bool, List[str]]:
     """Run pre-flight checks and print results.
 
@@ -46,10 +47,12 @@ def run_preflight(
         all_passed = False
 
     # 3. STS identity (credentials not expired)
+    account = None
     try:
         sts = session.client("sts")
         identity = sts.get_caller_identity()
         account = identity.get("Account", "unknown")
+        arn = identity.get("Arn", "")
         console.print(f"  [green]✓[/green] Authenticated (account {account})")
     except Exception as e:
         error_msg = str(e)
@@ -63,7 +66,13 @@ def run_preflight(
             console.print(f"  [red]✗[/red] Auth failed: {error_msg[:80]}")
         all_passed = False
 
+    # If auth failed, skip API probes
+    if not all_passed:
+        console.print()
+        return all_passed, warnings
+
     # 4. Cost Explorer access (warning only, not critical)
+    ce_ok = False
     try:
         from datetime import date, timedelta
         probe_end = date.today()
@@ -75,17 +84,56 @@ def run_preflight(
             Metrics=["BlendedCost"],
         )
         console.print("  [green]✓[/green] Cost Explorer API accessible")
+        ce_ok = True
     except Exception as e:
         error_msg = str(e)
         if "not enabled" in error_msg.lower() or "OptIn" in error_msg:
-            console.print("  [yellow]⚠[/yellow] Cost Explorer not enabled (cost pack will be empty)")
+            console.print("  [yellow]⚠[/yellow] Cost Explorer not enabled")
+            console.print("    [dim]Enable in AWS Console → Billing → Cost Explorer. Cost pack will skip.[/dim]")
             warnings.append("Cost Explorer not enabled")
         elif "AccessDenied" in error_msg:
-            console.print("  [yellow]⚠[/yellow] No Cost Explorer permission (cost pack may be limited)")
+            console.print("  [yellow]⚠[/yellow] No Cost Explorer permission")
+            console.print("    [dim]Need ce:GetCostAndUsage. Cost pack will be limited.[/dim]")
             warnings.append("No ce:GetCostAndUsage permission")
         else:
             console.print("  [yellow]⚠[/yellow] Cost Explorer check inconclusive")
             warnings.append(f"CE check: {error_msg[:60]}")
+
+    # 5. EC2 describe (tests basic resource-level read access)
+    ec2_ok = False
+    try:
+        ec2 = session.client("ec2", region_name="us-east-1")
+        ec2.describe_instances(MaxResults=5)
+        console.print("  [green]✓[/green] EC2 read access (security, sweep, dr packs)")
+        ec2_ok = True
+    except Exception as e:
+        error_msg = str(e)
+        if "UnauthorizedOperation" in error_msg or "AccessDenied" in error_msg:
+            console.print("  [yellow]⚠[/yellow] No EC2 read permission (some packs limited)")
+            warnings.append("No ec2:DescribeInstances")
+        else:
+            console.print("  [yellow]⚠[/yellow] EC2 probe inconclusive")
+            warnings.append(f"EC2 check: {error_msg[:60]}")
+
+    # 6. Organizations access (for multi-account context)
+    try:
+        org = session.client("organizations", region_name="us-east-1")
+        org.describe_organization()
+        console.print("  [green]✓[/green] Organizations API (multi-account context)")
+    except Exception:
+        console.print("  [dim]  ─[/dim] [dim]Organizations not available (single-account mode)[/dim]")
+
+    # Summary guidance
+    console.print()
+    if ce_ok and ec2_ok:
+        console.print("  [green bold]All 10 packs will run.[/green bold]")
+    elif ce_ok:
+        console.print("  [yellow]Cost pack ✓. Other packs may be limited by permissions.[/yellow]")
+    elif ec2_ok:
+        console.print("  [yellow]Security/sweep/DR packs ✓. Cost pack unavailable.[/yellow]")
+        console.print("  [dim]  Use --packs security,sweep,dr to skip cost pack.[/dim]")
+    else:
+        console.print("  [yellow]Limited permissions. Kulshan will run what it can and skip the rest.[/yellow]")
 
     console.print()
     return all_passed, warnings

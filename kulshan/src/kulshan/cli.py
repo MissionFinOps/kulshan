@@ -151,25 +151,33 @@ def _emit_output(
 @click.option("--role-arn", default=None, help="IAM role ARN to assume.")
 @click.pass_context
 def main(ctx: click.Context, profile: Optional[str], role_arn: Optional[str]) -> None:
-    """Kulshan: Operations Intelligence from your terminal."""
+    """Kulshan: local-first AWS FinOps audit."""
     ctx.ensure_object(dict)
     ctx.obj["profile"] = profile
     ctx.obj["role_arn"] = role_arn
 
-    # Zero-argument smart help
+    # Zero-argument landing page
     if ctx.invoked_subcommand is None:
         from rich.console import Console as RichConsole
         from rich.panel import Panel
         c = RichConsole()
         c.print()
         c.print(Panel.fit(
-            "[bold]Kulshan[/bold] — Operations Intelligence from your terminal.\n"
-            "Free, open-source, non-mutating AWS audit CLI.\n\n"
-            "[dim]Quick start:[/dim]\n"
-            "  [green]kulshan report --quick[/green]        Quick scan (3 regions)\n"
-            "  [green]kulshan report --format html -o r.html[/green]  HTML report\n"
-            "  [green]kulshan shell[/green]                 Interactive REPL\n\n"
-            "[dim]Run[/dim] [bold]kulshan --help[/bold] [dim]for all commands and flags.[/dim]",
+            "[bold]Kulshan[/bold] — local-first AWS FinOps audit\n"
+            "[dim]Read-only. Privacy-first. No uploads. No SaaS.[/dim]\n\n"
+            "[bold]Get started:[/bold]\n"
+            "  [green]kulshan doctor[/green]              Check what works with your current AWS creds\n"
+            "  [green]kulshan report --quick[/green]     Run a fast audit (3 regions, ~60s)\n"
+            "  [green]kulshan report[/green]             Full audit (all regions, ~3min)\n\n"
+            "[bold]Output:[/bold]\n"
+            "  [green]kulshan report -o report.html[/green]   Save HTML report\n"
+            "  [green]kulshan report --format json[/green]    Machine-readable JSON\n\n"
+            "[bold]Other:[/bold]\n"
+            "  [green]kulshan history[/green]             Past scan results\n"
+            "  [green]kulshan shell[/green]               Interactive REPL\n\n"
+            "[dim]Already have AWS creds configured? Just run it — Kulshan is read-only\n"
+            "and the preflight will tell you exactly what's available.[/dim]\n\n"
+            "[dim]Tip: append [bold]?[/bold] to any command for options. Example: [green]kulshan report ?[/green][/dim]",
             title="[bold blue]kulshan[/bold blue]",
             border_style="blue",
         ))
@@ -188,17 +196,42 @@ def main(ctx: click.Context, profile: Optional[str], role_arn: Optional[str]) ->
 @click.option("--days", default=90, type=click.IntRange(1, 365), help="Cost analysis lookback (1-365 days). Default: 90.")
 @click.option("--show-pii", is_flag=True, default=False, help="Show full account IDs and PII in exported reports.")
 @click.option("--yes", "-y", is_flag=True, default=False, help="Skip the API cost notice (for CI/CD).")
-@click.option("--packs", default=None, help="Packs to run: cost,security,sweep,dr,age,drift,tag,pulse,limit,topo. Default: all.")
+@click.option("--packs", default=None, help="Packs to run (comma-separated). Available: cost,security,sweep,dr,age,drift,tag,pulse,limit,topo")
 @click.option("--no-history", is_flag=True, help="Do not retain this scan in local history.")
 @click.pass_context
 def report(ctx: click.Context, quick: bool, fmt: str, output: Optional[str], days: int, show_pii: bool, yes: bool, packs: Optional[str], no_history: bool) -> None:
-    """Run all operational audits and display a combined report."""
-    from kulshan.orchestrator import compute_overall, run_all_scans
+    """Run all operational audits and display a combined report.
+
+    \b
+    Examples:
+      kulshan report --quick          Fast scan (3 regions, ~60s)
+      kulshan report -o report.html   Full scan, save HTML
+      kulshan report --packs cost     Cost pack only
+      kulshan report --format json    JSON output to stdout
+    """
+    from kulshan.orchestrator import compute_overall, run_all_scans, TOOL_ORDER
     from kulshan.session import create_session, get_account_id, get_enabled_regions
 
     console = Console(stderr=True) if fmt == "json" and output is None else Console()
     profile = ctx.obj.get("profile")
     role_arn = ctx.obj.get("role_arn")
+
+    # Validate --packs early (no AWS calls needed)
+    selected_packs = None
+    if packs:
+        selected_packs = [p.strip() for p in packs.split(",")]
+        invalid = [p for p in selected_packs if p not in TOOL_ORDER]
+        if invalid:
+            console.print(f"  [red]Unknown pack(s): {', '.join(invalid)}[/red]")
+            console.print(f"  [dim]Available: {', '.join(TOOL_ORDER)}[/dim]")
+            sys.exit(ExitCode.CONFIG_ERROR)
+
+    # Smart format detection from output file extension
+    if output and fmt == "terminal":
+        ext = output.rsplit(".", 1)[-1].lower() if "." in output else ""
+        ext_map = {"html": "html", "json": "json", "sarif": "sarif", "csv": "csv"}
+        if ext in ext_map:
+            fmt = ext_map[ext]
 
     session = create_session(profile=profile, role_arn=role_arn)
 
@@ -238,13 +271,9 @@ def report(ctx: click.Context, quick: bool, fmt: str, output: Optional[str], day
         console.print("  [green]AWS API cost: $0.00[/green] [dim](cost pack excluded, all other APIs are free)[/dim]")
         console.print()
 
-    # Parse pack selection
-    selected_packs = None
-    if packs:
-        selected_packs = [p.strip() for p in packs.split(",")]
-    elif quick:
+    # Parse pack selection for quick mode
+    if not selected_packs and quick:
         # Exclude slow packs in quick mode
-        from kulshan.orchestrator import TOOL_ORDER
         selected_packs = [p for p in TOOL_ORDER if p not in SLOW_PACKS]
 
     start = time.time()
@@ -515,6 +544,53 @@ def delete_history(yes: bool) -> None:
     deleted = store.delete_all()
     store.close()
     click.echo(f"Deleted {deleted} scan(s) from {get_history_db_path()}")
+
+
+@main.command()
+@click.pass_context
+def doctor(ctx: click.Context) -> None:
+    """Check AWS connectivity and readiness without running a scan.
+
+    \b
+    Validates:
+      - AWS credentials are configured
+      - STS caller identity resolves
+      - Cost Explorer API is reachable
+      - Required permissions are present
+
+    No data is written. No cost is incurred. Safe to run repeatedly.
+    """
+    from rich.console import Console as RichConsole
+    from kulshan.session import create_session
+    from kulshan.preflight import run_preflight
+
+    console = RichConsole()
+    profile = ctx.obj.get("profile")
+    role_arn = ctx.obj.get("role_arn")
+
+    console.print()
+    console.print("  [bold]Kulshan Doctor[/bold] — checking AWS readiness")
+    console.print()
+
+    try:
+        session = create_session(profile=profile, role_arn=role_arn)
+    except Exception as e:
+        console.print(f"  [red]✗ Cannot create AWS session: {e}[/red]")
+        console.print()
+        console.print("  [dim]Check: AWS credentials configured? Try: aws sts get-caller-identity[/dim]")
+        sys.exit(ExitCode.CONFIG_ERROR)
+
+    passed, warnings = run_preflight(session, console=console)
+
+    if passed:
+        console.print()
+        console.print("  [green bold]✓ All checks passed.[/green bold] Ready to run [green]kulshan report[/green].")
+    else:
+        console.print()
+        console.print("  [red bold]✗ Pre-flight checks failed.[/red bold] Fix the issues above and retry.")
+        sys.exit(ExitCode.CONFIG_ERROR)
+
+    console.print()
 
 
 # -- Wire up tab completion, ? help, theming, and Rich help formatting --

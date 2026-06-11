@@ -158,7 +158,7 @@ def run_all_scans(
         packs_to_run = [p for p in selected_packs if p in TOOL_ORDER]
 
     # --- Scan Plan Tree Preview ---
-    tree = Tree("[bold]Kulshan Scan Plan[/bold]")
+    tree = Tree(f"[bold]Kulshan Scan Plan[/bold]  [dim]({len(regions)} region{'s' if len(regions) != 1 else ''}, {len(packs_to_run)} packs)[/dim]")
     for tool_key in packs_to_run:
         tree.add(f"[dim]{tool_key}[/dim]  {TOOL_LABELS[tool_key]}")
     console.print(tree)
@@ -194,11 +194,11 @@ def run_all_scans(
     ) as progress:
         overall_task = progress.add_task("Kulshan scan", total=len(packs_to_run))
 
-        for tool_key in packs_to_run:
+        for idx, tool_key in enumerate(packs_to_run, start=1):
             label = TOOL_LABELS[tool_key]
             progress.update(
                 overall_task,
-                description=f"[bold]Scanning {label}[/bold]  {_tally_description()}",
+                description=f"[bold]{idx}/{len(packs_to_run)} {label}[/bold]  {_tally_description()}",
             )
 
             check = _load_check(tool_key)
