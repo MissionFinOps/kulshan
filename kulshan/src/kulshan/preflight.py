@@ -132,14 +132,13 @@ def run_preflight(
     # Summary guidance
     console.print()
     if ce_ok and ec2_ok:
-        console.print("  [green bold]All 10 packs will run.[/green bold]")
+        console.print("  [green bold]Ready.[/green bold] Cost baseline will run. Inventory packs available with --packs.")
     elif ce_ok:
-        console.print("  [yellow]Cost pack ✓. Other packs may be limited by permissions.[/yellow]")
+        console.print("  [green]Cost baseline ready.[/green] [dim]Inventory packs may be limited by permissions.[/dim]")
     elif ec2_ok:
-        console.print("  [yellow]Security/sweep/DR packs ✓. Cost pack unavailable.[/yellow]")
-        console.print("  [dim]  Use --packs security,sweep,dr to skip cost pack.[/dim]")
+        console.print("  [yellow]No Cost Explorer access.[/yellow] Use --packs security,sweep,dr for free inventory scans.")
     else:
-        console.print("  [yellow]Limited permissions. Kulshan will run what it can and skip the rest.[/yellow]")
+        console.print("  [yellow]Limited permissions. Run kulshan report to see what's available.[/yellow]")
 
     console.print()
     return all_passed, warnings
