@@ -185,7 +185,7 @@ def main(ctx: click.Context, profile: Optional[str], role_arn: Optional[str]) ->
 
 
 @main.command()
-@click.option("--quick", is_flag=True, help="Quick scan (3 regions, skip slow checks).")
+@click.option("--quick", is_flag=True, help="Fast baseline (same as default, skips confirmation).")
 @click.option(
     "--format", "fmt",
     type=click.Choice(["terminal", "json", "html", "sarif", "csv"]),
@@ -195,19 +195,24 @@ def main(ctx: click.Context, profile: Optional[str], role_arn: Optional[str]) ->
 @click.option("--output", "-o", type=click.Path(), default=None, help="Write output to file.")
 @click.option("--days", default=90, type=click.IntRange(1, 365), help="Cost analysis lookback (1-365 days). Default: 90.")
 @click.option("--show-pii", is_flag=True, default=False, help="Show full account IDs and PII in exported reports.")
-@click.option("--yes", "-y", is_flag=True, default=False, help="Skip the API cost notice (for CI/CD).")
-@click.option("--packs", default=None, help="Packs to run (comma-separated). Available: cost,security,sweep,dr,age,drift,tag,pulse,limit,topo")
+@click.option("--yes", "-y", is_flag=True, default=False, help="Skip confirmations (for CI/CD).")
+@click.option("--packs", default=None, help="Packs: cost,security,sweep,dr,age,drift,tag,pulse,limit,topo or 'all'.")
+@click.option("--regions", "region_override", default=None, help="Regions to scan (comma-separated). Default: 3 for inventory packs.")
 @click.option("--no-history", is_flag=True, help="Do not retain this scan in local history.")
 @click.pass_context
-def report(ctx: click.Context, quick: bool, fmt: str, output: Optional[str], days: int, show_pii: bool, yes: bool, packs: Optional[str], no_history: bool) -> None:
-    """Run all operational audits and display a combined report.
+def report(ctx: click.Context, quick: bool, fmt: str, output: Optional[str], days: int, show_pii: bool, yes: bool, packs: Optional[str], region_override: Optional[str], no_history: bool) -> None:
+    """Run a FinOps baseline using AWS Cost Explorer.
+
+    \b
+    Default: Cost Explorer baseline only (~30s, pennies).
+    Other packs available with --packs.
 
     \b
     Examples:
-      kulshan report --quick          Fast scan (3 regions, ~60s)
-      kulshan report -o report.html   Full scan, save HTML
-      kulshan report --packs cost     Cost pack only
-      kulshan report --format json    JSON output to stdout
+      kulshan report                    Cost baseline (default, fast)
+      kulshan report -o report.html     Cost baseline → HTML
+      kulshan report --packs security --regions us-east-1
+      kulshan report --packs all --regions us-east-1
     """
     from kulshan.orchestrator import compute_overall, run_all_scans, TOOL_ORDER
     from kulshan.session import create_session, get_account_id, get_enabled_regions
@@ -216,15 +221,22 @@ def report(ctx: click.Context, quick: bool, fmt: str, output: Optional[str], day
     profile = ctx.obj.get("profile")
     role_arn = ctx.obj.get("role_arn")
 
-    # Validate --packs early (no AWS calls needed)
+    # ── Pack selection (no AWS calls) ────────────────────────────────────
     selected_packs = None
     if packs:
-        selected_packs = [p.strip() for p in packs.split(",")]
-        invalid = [p for p in selected_packs if p not in TOOL_ORDER]
-        if invalid:
-            console.print(f"  [red]Unknown pack(s): {', '.join(invalid)}[/red]")
-            console.print(f"  [dim]Available: {', '.join(TOOL_ORDER)}[/dim]")
-            sys.exit(ExitCode.CONFIG_ERROR)
+        if packs.strip().lower() == "all":
+            selected_packs = list(TOOL_ORDER)
+        else:
+            selected_packs = [p.strip() for p in packs.split(",")]
+            invalid = [p for p in selected_packs if p not in TOOL_ORDER]
+            if invalid:
+                console.print(f"  [red]Unknown pack(s): {', '.join(invalid)}[/red]")
+                console.print(f"  [dim]Available: {', '.join(TOOL_ORDER)}[/dim]")
+                console.print(f"  [dim]Or: --packs all[/dim]")
+                sys.exit(ExitCode.CONFIG_ERROR)
+    else:
+        # DEFAULT: cost pack only — fast, focused, predictable
+        selected_packs = ["cost"]
 
     # Smart format detection from output file extension
     if output and fmt == "terminal":
@@ -243,30 +255,36 @@ def report(ctx: click.Context, quick: bool, fmt: str, output: Optional[str], day
         sys.exit(ExitCode.CONFIG_ERROR)
 
     account_id = get_account_id(session)
-    regions = get_enabled_regions(session)
-    if quick:
-        regions = regions[:3]
-    elif len(regions) > 6:
-        # Cap at 6 regions by default for reasonable scan times
-        # Users with 17+ regions can use --quick (3) or explicit packs
-        console.print(f"  [dim]{len(regions)} regions enabled. Scanning top 6 by default. Use --quick for 3.[/dim]")
-        regions = regions[:6]
 
-    # In quick mode, exclude slow packs unless user explicitly selected them
-    SLOW_PACKS = {"limit", "topo", "drift", "pulse"}  # These scan all regions sequentially — 5+ min on large accounts
-    if quick and not selected_packs:
-        selected_packs = [p for p in TOOL_ORDER if p not in SLOW_PACKS]
-        console.print("  [dim]Quick mode: running 6 fast packs. Use --packs to include all 10.[/dim]")
-    elif not quick and not selected_packs:
-        # Default (no --quick, no --packs): exclude only the very slowest pack
-        VERY_SLOW = {"limit"}  # limit enumerates every service quota — 300s+
-        selected_packs = [p for p in TOOL_ORDER if p not in VERY_SLOW]
-        console.print("  [dim]Excluding 'limit' pack (300s+). Use --packs limit to include it.[/dim]")
+    # ── Region selection ─────────────────────────────────────────────────
+    if region_override:
+        regions = [r.strip() for r in region_override.split(",")]
+    else:
+        regions = get_enabled_regions(session)
+        has_regional_packs = any(p != "cost" for p in selected_packs)
+        if has_regional_packs:
+            max_regions = 3
+            if len(regions) > max_regions:
+                console.print(f"  [dim]{len(regions)} regions enabled → scanning {max_regions}. Use --regions to override.[/dim]")
+                regions = regions[:max_regions]
+        else:
+            # Cost pack is global (us-east-1 only)
+            regions = regions[:1] if regions else ["us-east-1"]
 
-    # API cost notice (Cost Explorer charges $0.01/request, billed by AWS)
-    has_cost_pack = packs is None or "cost" in (packs or "").split(",")
-    if not yes and has_cost_pack:
-        est_cost = "$0.15-0.25" if quick else "$0.20-0.40"
+    # ── Warning for --packs all ──────────────────────────────────────────
+    if packs and packs.strip().lower() == "all" and not yes:
+        console.print(
+            f"\n  [yellow bold]⚠ Full scan:[/yellow bold] "
+            f"All 10 packs × {len(regions)} region(s). This can take several minutes."
+        )
+        if not click.confirm("  Proceed?", default=True):
+            console.print("  Aborted.")
+            sys.exit(0)
+
+    # ── API cost notice ──────────────────────────────────────────────────
+    has_cost_pack = "cost" in selected_packs
+    if not yes and not quick and has_cost_pack:
+        est_cost = "$0.15-0.25"
         console.print(
             f"  [red bold]⚠ AWS Cost:[/red bold] "
             f"The cost pack calls AWS Cost Explorer API (typically {est_cost})."
@@ -274,27 +292,21 @@ def report(ctx: click.Context, quick: bool, fmt: str, output: Optional[str], day
         console.print(
             f"  [dim]AWS bills CE API requests at $0.01 each. This is charged by AWS, not Kulshan.[/dim]"
         )
-        console.print(
-            f"  [dim]All other 9 packs use free read-only APIs ($0).[/dim]"
-        )
         console.print()
         if not click.confirm("  Include the cost pack?", default=True):
-            console.print("  [dim]Cost pack excluded. Running remaining packs.[/dim]")
-            console.print()
-            if selected_packs:
-                selected_packs = [p for p in selected_packs if p != "cost"]
-            else:
-                from kulshan.orchestrator import TOOL_ORDER as _TO
-                selected_packs = [p for p in _TO if p != "cost"]
+            selected_packs = [p for p in selected_packs if p != "cost"]
+            if not selected_packs:
+                console.print()
+                console.print("  [dim]No packs to run. Add inventory packs with --packs:[/dim]")
+                console.print("  [dim]  kulshan report --packs security --regions us-east-1[/dim]")
+                console.print("  [dim]  kulshan report --packs all --regions us-east-1[/dim]")
+                sys.exit(0)
             has_cost_pack = False
     elif not yes and not has_cost_pack:
-        console.print("  [green]AWS API cost: $0.00[/green] [dim](cost pack excluded, all other APIs are free)[/dim]")
+        console.print("  [green]AWS API cost: $0.00[/green] [dim](free read-only APIs only)[/dim]")
         console.print()
 
-    # Parse pack selection for quick mode
-    if not selected_packs and quick:
-        # Already handled above
-        pass
+    # Pack selection already resolved above
 
     start = time.time()
     results = run_all_scans(
