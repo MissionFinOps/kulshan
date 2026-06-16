@@ -7,16 +7,19 @@ Kulshan scans your AWS account across ten audit dimensions and produces a unifie
 ## Install
 
 ```bash
-pip install kulshan
+pip install kulshan        # all platforms: macOS, Linux, Windows
 ```
+
+Requires Python 3.9+. Works with the AWS credentials you already use (`aws sts get-caller-identity`).
 
 ## Quick Start
 
 ```bash
-kulshan report --quick              # Quick scan (3 regions)
-kulshan report --format html        # Full HTML report
+kulshan doctor              # Check AWS readiness (no cost, no writes)
+kulshan report --quick      # Quick scan (3 regions)
+kulshan report -o report.html  # Full HTML report
 kulshan report --packs security,sweep  # Free packs only ($0 AWS cost)
-kulshan shell                       # Interactive REPL
+kulshan shell               # Interactive REPL
 ```
 
 ## What You Get
@@ -54,12 +57,14 @@ Output formats: terminal (scored dashboard), JSON, HTML, SARIF, CSV.
 
 Kulshan is the Lummi name for the mountain known colonially as Mt. Baker — meaning "great white watcher." We acknowledge the Lummi and Nooksack peoples as the original namers of this mountain.
 
+## Built by
+
+[Mission FinOps](https://missionfinops.com) — Mission, BC, Canada.
+
+## AI Agents
+
+Kulshan works with Claude Code, Codex, Kiro, Cursor, and any agent that can run shell commands. See [`agent-pack/`](https://github.com/azz-kikkr/kulshan/tree/master/agent-pack) for integration instructions.
+
 ## License
 
 Apache 2.0 — free and open source forever.
-
-## Built by
-
-[Mission FinOps](https://github.com/azz-kikkr/kulshan) — Mission, BC, Canada.
-
-6+ years at AWS helping enterprise customers build FinOps solutions. Kulshan shows the art of the possible: what a proper FinOps pipeline looks like using Cost Explorer, without fancy tooling or $50K platforms.

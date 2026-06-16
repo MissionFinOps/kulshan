@@ -58,20 +58,43 @@ Output: terminal, JSON, HTML (self-contained), SARIF (CI/CD), CSV.
 
 ## Install
 
+### macOS / Linux
+
 ```bash
 # Recommended: isolated install via pipx
 pipx install kulshan
 
-# Or classic pip
+# Or classic pip (use a virtualenv if you prefer)
 pip install kulshan
-
-# From source
-git clone https://github.com/azz-kikkr/kulshan.git
-cd kulshan
-pip install -e kulshan
 ```
 
-Requires: Python 3.9+ and AWS credentials scoped to the published audit policy.
+### Windows
+
+```powershell
+# PowerShell — recommended: isolated install via pipx
+pipx install kulshan
+
+# Or classic pip
+pip install kulshan
+```
+
+> **Requires:** Python 3.9+ ([python.org/downloads](https://python.org/downloads))
+> If `python --version` shows 3.9 or higher, you're good.
+
+### From source (all platforms)
+
+```bash
+git clone https://github.com/azz-kikkr/kulshan.git
+cd kulshan/kulshan
+pip install -e .
+```
+
+### Verify install
+
+```bash
+kulshan --version
+kulshan doctor          # Check AWS readiness (no cost, no writes)
+```
 
 ---
 
@@ -191,6 +214,44 @@ kulshan shell                             # Interactive REPL
 kulshan history                           # View past scans
 kulshan convert -i scan.json --format csv # Re-render without re-scanning
 ```
+
+---
+
+## Use with AI Agents
+
+Kulshan is designed to work with AI coding agents — Claude Code, Codex, Kiro, Cursor, and any agent that can run shell commands.
+
+### Quick setup
+
+| Agent | What to do |
+|-------|-----------|
+| **Claude Code** | Copy `agent-pack/CLAUDE.md` to your project root |
+| **Codex** | Copy `agent-pack/AGENTS.md` to your project root |
+| **Kiro** | Copy skills from `agent-pack/skills/` to `.kiro/skills/` |
+| **Any agent** | Just run `kulshan` commands via shell — output is local JSON/HTML |
+
+### How agents use Kulshan
+
+```bash
+kulshan doctor                           # Agent verifies AWS access first
+kulshan report --format json -o scan.json  # Agent runs audit, gets structured data
+kulshan report -o report.html            # Agent generates HTML for human review
+```
+
+The agent reads the JSON output, interprets findings, and can produce executive summaries, remediation plans, or PR review comments — all locally.
+
+### Data flow
+
+```
+Your AWS credentials → Kulshan CLI (local) → AWS APIs (read-only)
+                                            → Local JSON + HTML files
+                                            → Agent reads local files
+                                            → Natural-language audit review
+```
+
+No SaaS. No uploads. No API keys beyond your existing AWS credentials.
+
+Full agent integration docs: [`agent-pack/README.md`](agent-pack/README.md)
 
 ---
 
