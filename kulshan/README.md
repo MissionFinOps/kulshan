@@ -1,57 +1,79 @@
 # Kulshan
 
-**Free, open-source AWS audit CLI with no infrastructure mutation or remediation.**
+**Local-first AWS FinOps baseline. One command, one report.**
 
-Kulshan scans your AWS account across ten audit dimensions and produces a unified scored report. Scanning and report generation are local-first by default.
+```bash
+pip install kulshan
+kulshan report
+```
+
+Kulshan reads your AWS Cost Explorer and produces a local FinOps baseline report. Where is the spend? What changed? What should you investigate next?
+
+No SaaS. No CUR upload. No telemetry. No write access. Apache 2.0.
 
 ## Install
 
 ```bash
-pip install kulshan        # all platforms: macOS, Linux, Windows
+pip install kulshan        # macOS, Linux, Windows
 ```
 
-Requires Python 3.9+. Works with the AWS credentials you already use (`aws sts get-caller-identity`).
+Requires Python 3.9+. Works with the AWS credentials you already use.
 
 ## Quick Start
 
 ```bash
-kulshan doctor              # Check AWS readiness (no cost, no writes)
-kulshan report --quick      # Quick scan (3 regions)
-kulshan report -o report.html  # Full HTML report
-kulshan report --packs security,sweep  # Free packs only ($0 AWS cost)
-kulshan shell               # Interactive REPL
+kulshan doctor              # Check what works with your current creds
+kulshan report              # 90-day Cost Explorer baseline (default)
+kulshan report -o report.html   # Save as HTML
+kulshan report --packs cost,tag     # Add tag allocation
+kulshan report --packs all --regions us-east-1   # Full diagnostic
 ```
 
-## What You Get
+## What You Get (Default)
 
-- **Cost analysis** — multi-method anomaly detection (z-score, IQR, MAD), RI/SP coverage, forecasting
-- **Security posture** — 50+ checks across IAM, network, encryption, logging
-- **Waste detection** — orphaned EBS, EIPs, snapshots, idle ALBs, NAT gateways
-- **DR readiness** — backup coverage, Multi-AZ, single points of failure
-- **Lifecycle audit** — EOL runtimes, expiring certs, stale AMIs
-- **IaC drift** — CloudFormation drift detection, coverage gaps
-- **Tag compliance** — untagged resources, cost attribution gaps
-- **Observability** — alarm coverage, logging gaps, blind spots
-- **Quota headroom** — service limits, scaling blockers
-- **Network topology** — CIDR overlaps, route integrity, flow log coverage
+The default `kulshan report` runs the Cost Explorer baseline:
 
-Output formats: terminal (scored dashboard), JSON, HTML, SARIF, CSV.
+- **Spend analysis** — 90-day lookback, anomaly detection (z-score, IQR, MAD)
+- **Commitment health** — RI/SP coverage, utilization, on-demand exposure
+- **Spend concentration** — which services dominate, diversification assessment
+- **Spend trend** — daily average, direction, acceleration
+- **Addressable savings** — what can be optimized and how much
+- **Executive summary** — one paragraph for stakeholders
+
+## Additional Packs (Opt-In)
+
+Add inventory packs when you want deeper analysis:
+
+```bash
+kulshan report --packs security    # IAM, encryption, network posture
+kulshan report --packs sweep       # Orphaned EBS, idle ALBs, waste
+kulshan report --packs tag         # Tag compliance, cost attribution
+kulshan report --packs all --regions us-east-1   # Everything
+```
+
+Output formats: terminal, JSON, HTML, SARIF, CSV.
 
 ## Trust & Security
 
-- **No infrastructure mutation** — no remediation or customer-resource changes
-- **Auditable permissions** — 147 explicit actions, including non-mutating `DetectStackDrift`
-- **Local-first by default** — no active telemetry implementation
-- **Explicit integrations** — optional webhooks send data only when deliberately invoked
+- **Read-only** — 147 explicit audit actions, zero write actions
+- **Local-first** — reports stay on your machine, no uploads
+- **No telemetry** — no phone-home, no tracking
 - **Published IAM policy** — inspect every action before granting access
-- **Open source** — Apache 2.0, read every line of code on GitHub
-- **Sensitive-data masking** — common identifiers are masked by default; review reports before sharing
+- **Open source** — Apache 2.0, read every line on GitHub
 
 ## AWS API Costs
 
-- Cost pack: ~$0.20-0.40/run (Cost Explorer @ $0.01/request, billed by AWS)
-- All other 9 packs: $0 (free-tier APIs only)
-- Skip cost pack: `kulshan report --packs security,sweep,dr`
+| Mode | AWS Cost |
+|------|----------|
+| Default (Cost Explorer baseline) | ~$0.20 (CE @ $0.01/request) |
+| Security, sweep, DR, tag, etc. | $0 (free-tier APIs) |
+| `kulshan report --packs all` | ~$0.20 (only cost pack charges) |
+
+This is charged by AWS to your account, not by Kulshan.
+
+## AI Agents
+
+Kulshan works with Claude Code, Codex, Kiro, Cursor, and any agent that can run shell commands. See [`agent-pack/`](https://github.com/azz-kikkr/kulshan/tree/master/agent-pack) for integration docs.
 
 ## About the Name
 
@@ -60,10 +82,6 @@ Kulshan is the Lummi name for the mountain known colonially as Mt. Baker — mea
 ## Built by
 
 [Mission FinOps](https://missionfinops.com) — Mission, BC, Canada.
-
-## AI Agents
-
-Kulshan works with Claude Code, Codex, Kiro, Cursor, and any agent that can run shell commands. See [`agent-pack/`](https://github.com/azz-kikkr/kulshan/tree/master/agent-pack) for integration instructions.
 
 ## License
 
