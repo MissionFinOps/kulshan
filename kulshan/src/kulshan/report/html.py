@@ -717,8 +717,7 @@ def _build_executive_summary(results: dict, overall_score: int, overall_grade: s
     total_spend = scores.get("total_spend", 0)
     metadata = cost.get("metadata", {})
     velocity = metadata.get("cost_velocity", {})
-    hhi = metadata.get("hhi_concentration", {})
-    purchase_mix = metadata.get("purchase_mix", {})
+    purchase_mix = metadata.get("purchase_mix") or {}
 
     sentences: list[str] = []
 
@@ -726,7 +725,7 @@ def _build_executive_summary(results: dict, overall_score: int, overall_grade: s
     if total_spend and abs(total_spend) > 1:
         sentences.append(f"This account spent <strong>${total_spend:,.0f}</strong> over the analysis period.")
     else:
-        sentences.append("This account has near-zero AWS spend. Analysis is limited to configuration checks.")
+        sentences.append("This account has near-zero AWS spend, so cost analysis is limited. Run Kulshan against an account with meaningful spend for richer recommendations.")
 
     # Trend
     trend = velocity.get("trend", "")
@@ -963,7 +962,6 @@ def _build_spend_trend(results: dict) -> str:
 
     daily_avg = velocity.get("daily_avg", 0)
     vel_pct = velocity.get("velocity_pct", 0)
-    trend = velocity.get("trend", "stable")
 
     # Sparkline
     sparkline_svg = ""
