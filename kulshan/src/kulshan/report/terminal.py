@@ -233,23 +233,26 @@ def render_report(
         icon = TOOL_ICONS.get(tool_key, "  ")
         label = TOOL_LABELS.get(tool_key, tool_key)
 
-        if result.get("skipped"):
-            table.add_row(
-                f"{icon} {label}",
-                "[dim]--[/dim]", "[dim]N/A[/dim]",
-                "[dim]skipped[/dim]", "[dim]--[/dim]",
-            )
-        else:
-            gc = grade_color(grade)
-            table.add_row(
-                f"{icon} {label}",
-                f"[{gc}]{score}[/{gc}]",
-                f"[{gc}]{grade}[/{gc}]",
-                score_bar(score),
-                str(findings),
-            )
+        # Only show packs that actually ran (not skipped, not absent)
+        if not result or result.get("skipped"):
+            continue
+
+        gc = grade_color(grade)
+        table.add_row(
+            f"{icon} {label}",
+            f"[{gc}]{score}[/{gc}]",
+            f"[{gc}]{grade}[/{gc}]",
+            score_bar(score),
+            str(findings),
+        )
 
     console.print(table)
+
+    # Show which packs were not run
+    not_run = [TOOL_LABELS.get(k, k) for k in TOOL_ORDER if k not in results or results.get(k, {}).get("skipped")]
+    if not_run and len(not_run) < len(TOOL_ORDER):
+        console.print(f"  [dim]Not run: {', '.join(not_run[:5])}{'...' if len(not_run) > 5 else ''}. Add with --packs.[/dim]")
+
     console.print()
 
     # -- Severity summary --

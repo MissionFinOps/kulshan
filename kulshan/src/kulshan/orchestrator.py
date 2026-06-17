@@ -158,7 +158,7 @@ def run_all_scans(
         packs_to_run = [p for p in selected_packs if p in TOOL_ORDER]
 
     # --- Scan Plan Tree Preview ---
-    tree = Tree(f"[bold]Kulshan Scan Plan[/bold]  [dim]({len(regions)} region{'s' if len(regions) != 1 else ''}, {len(packs_to_run)} packs)[/dim]")
+    tree = Tree(f"[bold]Kulshan Scan Plan[/bold]  [dim]({len(regions)} region{'s' if len(regions) != 1 else ''}, {len(packs_to_run)} pack{'s' if len(packs_to_run) != 1 else ''})[/dim]")
     for tool_key in packs_to_run:
         tree.add(f"[dim]{tool_key}[/dim]  {TOOL_LABELS[tool_key]}")
     console.print(tree)
