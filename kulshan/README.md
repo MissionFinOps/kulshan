@@ -1,15 +1,22 @@
 # Kulshan
 
-**Local-first AWS FinOps baseline. One command, one report.**
+**Generate a VP/CFO-ready AWS audit report in minutes.**
+
+Local-first. Read-only. No CUR. No Athena. No SaaS.
 
 ```bash
 pip install kulshan
+aws sso login
 kulshan report
 ```
 
-Kulshan reads your AWS Cost Explorer and produces a local FinOps baseline report. Where is the spend? What changed? What should you investigate next?
+## What is Kulshan?
 
-No SaaS. No CUR upload. No telemetry. No write access. Apache 2.0.
+Kulshan is a local-first AWS audit tool that generates a business-ready report from your AWS account.
+
+Think of it as a blood test for your AWS bill.
+
+One command. Ten audit packs. HTML and JSON output. No data leaves your machine.
 
 ## Install
 
@@ -22,44 +29,56 @@ Requires Python 3.9+. Works with the AWS credentials you already use.
 ## Quick Start
 
 ```bash
-kulshan doctor              # Check what works with your current creds
-kulshan report              # 90-day Cost Explorer baseline (default)
-kulshan report -o report.html   # Save as HTML
-kulshan report --packs cost,tag     # Add tag allocation
-kulshan report --packs all --regions us-east-1   # Full diagnostic
+pip install kulshan
+aws sso login
+kulshan report
 ```
 
-## What You Get (Default)
+Generates HTML and JSON reports locally using your existing AWS credentials.
+
+## What You Get
 
 The default `kulshan report` runs the Cost Explorer baseline:
 
-- **Spend analysis** — 90-day lookback, anomaly detection (z-score, IQR, MAD)
-- **Commitment health** — RI/SP coverage, utilization, on-demand exposure
-- **Spend concentration** — which services dominate, diversification assessment
-- **Spend trend** — daily average, direction, acceleration
-- **Addressable savings** — what can be optimized and how much
-- **Executive summary** — one paragraph for stakeholders
+- **Cost analysis:** multi-method anomaly detection (z-score, IQR, MAD), cross-referenced against AWS Cost Anomaly Detection
+- **Commitment health:** RI/SP coverage, utilization, on-demand exposure
+- **Spend concentration:** which services dominate, diversification assessment
+- **Spend trend:** daily average, direction, acceleration
+- **Addressable savings:** what can be optimized and how much
+- **Executive summary:** one paragraph for stakeholders
 
-## Additional Packs (Opt-In)
+### Additional Packs (Opt-In)
 
-Add inventory packs when you want deeper analysis:
-
-```bash
-kulshan report --packs security    # IAM, encryption, network posture
-kulshan report --packs sweep       # Orphaned EBS, idle ALBs, waste
-kulshan report --packs tag         # Tag compliance, cost attribution
-kulshan report --packs all --regions us-east-1   # Everything
-```
+- **Security posture:** 50+ checks across IAM, encryption, network exposure, logging, public access
+- **Waste detection:** orphaned EBS volumes, idle ALBs, unused EIPs, NAT gateway waste
+- **DR readiness:** backup coverage, multi-AZ deployment, single points of failure
+- **Lifecycle audit:** EOL runtimes, expiring certificates, staleness tax
+- **IaC drift:** CloudFormation drift detection, IaC coverage gaps
+- **Tag compliance:** tag governance, unattributed spend, dark money
+- **Observability:** alarm coverage, logging gaps, blind-spot heatmap
+- **Quota headroom:** service limits, scaling event planner
+- **Network topology:** VPC mapping, CIDR overlaps, route integrity
 
 Output formats: terminal, JSON, HTML, SARIF, CSV.
 
+## More Commands
+
+```bash
+kulshan doctor                          # Verify credentials and permissions
+kulshan report --quick                  # Fast scan (3 regions, ~60s)
+kulshan report -o report.html           # Save as HTML
+kulshan report --packs security,sweep   # Run specific packs
+kulshan report --packs all              # Full 10-pack diagnostic
+kulshan shell                           # Interactive REPL
+```
+
 ## Trust & Security
 
-- **Read-only** — 147 explicit audit actions, zero write actions
-- **Local-first** — reports stay on your machine, no uploads
-- **No telemetry** — no phone-home, no tracking
-- **Published IAM policy** — inspect every action before granting access
-- **Open source** — Apache 2.0, read every line on GitHub
+- **Read-only:** 147 explicit audit actions, zero write actions
+- **Local-first:** reports stay on your machine, no uploads
+- **No telemetry:** no phone-home, no tracking
+- **Published IAM policy:** inspect every action before granting access
+- **Open source:** Apache 2.0, read every line on GitHub
 
 ## AWS API Costs
 
@@ -71,18 +90,18 @@ Output formats: terminal, JSON, HTML, SARIF, CSV.
 
 This is charged by AWS to your account, not by Kulshan.
 
-## AI Agents
-
-Kulshan works with Claude Code, Codex, Kiro, Cursor, and any agent that can run shell commands. See [`agent-pack/`](https://github.com/azz-kikkr/kulshan/tree/master/agent-pack) for integration docs.
-
 ## About the Name
 
-Kulshan is the Lummi name for the mountain known colonially as Mt. Baker — meaning "great white watcher." We acknowledge the Lummi and Nooksack peoples as the original namers of this mountain.
+Kulshan is the Lummi name for the mountain known colonially as Mt. Baker, meaning "great white watcher." We acknowledge the Lummi and Nooksack peoples as the original namers of this mountain.
 
 ## Built by
 
-[Mission FinOps](https://missionfinops.com) — Mission, BC, Canada.
+[Mission FinOps](https://missionfinops.com) | Mission, BC, Canada.
+
+## AI Agents
+
+Kulshan works with Claude Code, Codex, Kiro, Cursor, and any agent that can run shell commands. See [`agents/`](https://github.com/azz-kikkr/kulshan/tree/master/agents) for integration docs.
 
 ## License
 
-Apache 2.0 — free and open source forever.
+Apache 2.0. Free and open source forever.
