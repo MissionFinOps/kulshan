@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.2] - 2026-06-18
+
+### Changed
+- README rewritten: report-first positioning, compressed credentials/IAM/cost sections, 20-second Reddit test
+
 ## [0.1.1] - 2026-06-18
 
 ### Changed
