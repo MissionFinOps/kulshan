@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.1] - 2026-06-18
+
+### Changed
+- PyPI description rewritten: business-outcome-first positioning
+- README rewritten: simplified Quick Start, em dashes replaced with colons, section reorder (humans first, agents second)
+- Package description: "Local-first, read-only AWS audit CLI. Generate a VP/CFO-ready AWS audit report in minutes."
+
 ## [0.1.0] - 2026-04-21
 
 ### Added
