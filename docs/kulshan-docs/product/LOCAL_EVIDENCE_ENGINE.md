@@ -2,6 +2,8 @@
 
 Read this document before building the CUR / Data Exports query path.
 
+Read `docs/product/CUR_AUTOMATION_AND_ATHENA_RESEARCH.md` alongside this document before building automated CUR discovery, Glue/Athena compatibility, or `--cur auto`.
+
 This is the architecture companion to `docs/product/MTTE.md`. The MTTE spec defines the product workflow. This document defines the local evidence engine that should power it.
 
 ## Executive recommendation
