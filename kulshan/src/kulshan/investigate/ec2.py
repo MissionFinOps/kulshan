@@ -1,4 +1,4 @@
-﻿"""EC2 investigation brief generation from local CUR/Data Exports evidence."""
+"""EC2 investigation brief generation from local CUR/Data Exports evidence."""
 
 from __future__ import annotations
 
@@ -8,7 +8,7 @@ from kulshan.cur.duckdb_engine import connect_memory, create_ec2_view, register_
 from kulshan.cur.errors import CurDataError
 from kulshan.cur.source import local_parquet_source
 from kulshan.investigate.errors import CurInvestigationError
-from kulshan.investigate.models import DeltaRow, Ec2InvestigationBrief
+from kulshan.investigate.models import DeltaRow, Ec2InvestigationBrief, EvidenceItem
 
 
 def investigate_ec2_cur(cur_path: str) -> Ec2InvestigationBrief:
@@ -43,6 +43,8 @@ def investigate_ec2_cur(cur_path: str) -> Ec2InvestigationBrief:
             delta_percent=delta_percent,
             top_resources=top_resources,
             top_usage_types=top_usage_types,
+            evidence_available=_available_evidence(mapping.resource_id is not None),
+            evidence_missing=_missing_evidence(mapping.resource_id is not None),
             review_questions=_review_questions(top_resources, top_usage_types),
         )
     except CurInvestigationError:
@@ -121,6 +123,44 @@ def _delta_rows(
         for row in rows
     ]
 
+
+def _available_evidence(has_resource_id: bool) -> list[EvidenceItem]:
+    evidence = [
+        EvidenceItem("CUR/Data Exports Parquet", "Local billing export was readable."),
+        EvidenceItem(
+            "EC2 service delta",
+            "Previous and current EC2 monthly spend were computed.",
+        ),
+        EvidenceItem("Usage type delta", "Top EC2 usage type contributors were computed."),
+    ]
+    if has_resource_id:
+        evidence.append(
+            EvidenceItem("Resource ID delta", "Top EC2 resource contributors were computed.")
+        )
+    return evidence
+
+
+def _missing_evidence(has_resource_id: bool) -> list[EvidenceItem]:
+    evidence = []
+    if not has_resource_id:
+        evidence.append(
+            EvidenceItem("Resource IDs", "Export does not expose resource-level contributors.")
+        )
+    evidence.extend(
+        [
+            EvidenceItem("Owner tags", "Owner/application/environment tags are not evaluated yet."),
+            EvidenceItem(
+                "Resource inventory",
+                "Live EC2 metadata is not joined to billing evidence yet.",
+            ),
+            EvidenceItem("CloudTrail correlation", "Change events are not correlated yet."),
+            EvidenceItem(
+                "Deployment record",
+                "Ticket, deploy, or release context is not available.",
+            ),
+        ]
+    )
+    return evidence
 
 def _review_questions(resources: list[DeltaRow], usage_types: list[DeltaRow]) -> list[str]:
     resource = resources[0].name if resources else "the top EC2 resource"

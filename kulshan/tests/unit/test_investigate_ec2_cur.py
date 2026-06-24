@@ -1,4 +1,4 @@
-﻿"""Tests for local EC2 CUR investigations."""
+"""Tests for local EC2 CUR investigations."""
 from __future__ import annotations
 
 from pathlib import Path
@@ -26,6 +26,8 @@ def test_investigate_ec2_cur_calculates_period_delta() -> None:
     assert brief.top_resources[0].name == "i-prod-a"
     assert brief.top_resources[0].delta == 190.0
     assert brief.top_usage_types[0].name == "BoxUsage:m6i.4xlarge"
+    assert brief.evidence_available[0].label == "CUR/Data Exports Parquet"
+    assert "Owner tags" in {item.label for item in brief.evidence_missing}
     assert len(brief.review_questions) == 3
 
 
@@ -76,5 +78,7 @@ def test_investigate_ec2_cli_outputs_readable_brief() -> None:
     assert "Delta: +$320.00 (+160.0%)" in result.output
     assert "i-prod-a" in result.output
     assert "BoxUsage:m6i.4xlarge" in result.output
+    assert "Evidence Available" in result.output
+    assert "Evidence Missing" in result.output
     assert "Review Questions" in result.output
 

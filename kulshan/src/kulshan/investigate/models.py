@@ -1,4 +1,4 @@
-﻿"""Investigation result models."""
+"""Investigation result models."""
 
 from __future__ import annotations
 
@@ -16,6 +16,14 @@ class DeltaRow:
 
 
 @dataclass(frozen=True)
+class EvidenceItem:
+    """One available or missing evidence signal in an investigation brief."""
+
+    label: str
+    detail: str
+
+
+@dataclass(frozen=True)
 class Ec2InvestigationBrief:
     """The deterministic evidence needed for the first EC2 brief."""
 
@@ -28,4 +36,6 @@ class Ec2InvestigationBrief:
     delta_percent: float | None
     top_resources: list[DeltaRow]
     top_usage_types: list[DeltaRow]
+    evidence_available: list[EvidenceItem]
+    evidence_missing: list[EvidenceItem]
     review_questions: list[str]

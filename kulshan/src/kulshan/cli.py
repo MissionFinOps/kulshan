@@ -587,6 +587,16 @@ def investigate_ec2(cur_path: str) -> None:
     console.print(usage)
     console.print()
 
+    console.print("[bold]Evidence Available[/bold]")
+    for item in brief.evidence_available:
+        console.print(f"[green][available][/green] {item.label}: {item.detail}")
+    console.print()
+
+    console.print("[bold]Evidence Missing[/bold]")
+    for item in brief.evidence_missing:
+        console.print(f"[yellow][missing][/yellow] {item.label}: {item.detail}")
+    console.print()
+
     console.print("[bold]Review Questions[/bold]")
     for index, question in enumerate(brief.review_questions, start=1):
         console.print(f"{index}. {question}")
