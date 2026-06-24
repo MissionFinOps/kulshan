@@ -16,6 +16,7 @@ from rich.tree import Tree
 from rich.text import Text
 
 from kulshan.adapter import adapt
+from kulshan.aws_runtime import ApiProfiler, render_perf_summary, set_active_profiler
 from kulshan.models import VALID_EFFORT, VALID_RISK, VALID_SEVERITY
 from kulshan.scoring_utils import grade as _grade
 
@@ -140,6 +141,8 @@ def run_all_scans(
     quick: bool = False,
     console: Optional[Console] = None,
     selected_packs: Optional[List[str]] = None,
+    perf: bool = False,
+    deep: bool = False,
 ) -> Dict[str, dict]:
     if console is None:
         console = Console()
@@ -163,6 +166,9 @@ def run_all_scans(
         tree.add(f"[dim]{tool_key}[/dim]  {TOOL_LABELS[tool_key]}")
     console.print(tree)
     console.print()
+
+    profiler = ApiProfiler() if perf else None
+    set_active_profiler(profiler)
 
     # --- Live severity tally state ---
     severity_tally: Dict[str, int] = {
@@ -201,6 +207,7 @@ def run_all_scans(
                 description=f"[bold]{idx}/{len(packs_to_run)} {label}[/bold]  {_tally_description()}",
             )
 
+            pack_start = time.perf_counter()
             check = _load_check(tool_key)
             if check is None:
                 results[tool_key] = _skip(tool_key, "Not installed")
@@ -208,7 +215,7 @@ def run_all_scans(
                 try:
                     with concurrent.futures.ThreadPoolExecutor(max_workers=1) as executor:
                         future = executor.submit(
-                            check.run_scan, session, regions, quick=quick, profile=profile
+                            check.run_scan, session, regions, quick=quick, profile=profile, deep=deep
                         )
                         results[tool_key] = future.result(timeout=300)
                 except concurrent.futures.TimeoutError:
@@ -216,6 +223,9 @@ def run_all_scans(
                     logger.warning("Pack %s timed out after 300s", tool_key)
                 except Exception as e:
                     results[tool_key] = _skip(tool_key, str(e))
+
+            if profiler:
+                profiler.record_pack(tool_key, time.perf_counter() - pack_start)
 
             # Ensure findings key exists (empty list for packs that don't emit findings)
             if "findings" not in results[tool_key]:
@@ -269,6 +279,8 @@ def run_all_scans(
 
             progress.advance(overall_task)
 
+    set_active_profiler(None)
+
     # --- Final tally summary ---
     console.print()
     tally_parts = []
@@ -287,6 +299,8 @@ def run_all_scans(
     else:
         console.print("  [green]No findings detected.[/green]")
     console.print()
+    if profiler:
+        render_perf_summary(console, profiler)
 
     return results
 

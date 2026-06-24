@@ -1,35 +1,79 @@
 """Scan service quotas and current usage across key AWS services."""
 
 from typing import Dict, List, Tuple
-from ..utils.aws import safe_api_call, paginate_all
 
-# High-value quotas to always check with direct resource counting
+from ..utils.aws import paginate_all, safe_api_call
+
+# High-value quotas to check in the default fast path. These are the quotas most
+# likely to block a scaling event or audit conversation.
 CRITICAL_QUOTAS = [
-    {"service": "ec2", "name": "Running On-Demand Standard instances", "counter": "_count_ec2_instances"},
+    {"service": "ec2", "name": "Running On-Demand Standard", "counter": "_count_ec2_instances"},
     {"service": "vpc", "name": "VPCs per Region", "counter": "_count_vpcs"},
     {"service": "vpc", "name": "Security groups per Region", "counter": "_count_security_groups"},
-    {"service": "elasticloadbalancing", "name": "Application Load Balancers per Region", "counter": "_count_albs"},
-    {"service": "iam", "name": "IAM Roles", "counter": "_count_iam_roles"},
-    {"service": "iam", "name": "IAM Users", "counter": "_count_iam_users"},
-    {"service": "iam", "name": "Customer managed policies", "counter": "_count_iam_policies"},
-    {"service": "lambda", "name": "Lambda concurrent executions", "counter": None},
+    {"service": "elasticloadbalancing", "name": "Application Load Balancers", "counter": "_count_albs"},
     {"service": "rds", "name": "DB instances", "counter": "_count_rds_instances"},
     {"service": "cloudformation", "name": "Stack count", "counter": "_count_cfn_stacks"},
     {"service": "ebs", "name": "Snapshots per Region", "counter": "_count_ebs_snapshots"},
-    {"service": "s3", "name": "Buckets", "counter": "_count_s3_buckets"},
+    {"service": "iam", "name": "IAM Roles", "counter": "_count_iam_roles", "global": True},
+    {"service": "iam", "name": "IAM Users", "counter": "_count_iam_users", "global": True},
+    {"service": "iam", "name": "Customer managed policies", "counter": "_count_iam_policies", "global": True},
+    {"service": "s3", "name": "Buckets", "counter": "_count_s3_buckets", "global": True},
 ]
 
 
-def scan_quotas(session, regions, quick=False, progress=None, task_id=None) -> Tuple[List[Dict], List[str]]:
-    """Scan service quotas and compute utilization percentages."""
+def scan_quotas(session, regions, quick=False, deep=False, progress=None, task_id=None) -> Tuple[List[Dict], List[str]]:
+    """Scan service quotas and compute utilization percentages.
+
+    Default mode is intentionally narrow and fast: it checks critical quota
+    headroom only. Deep mode preserves the old exhaustive Service Quotas crawl.
+    """
+    if deep:
+        return _scan_quotas_deep(session, regions, quick=quick, progress=progress, task_id=task_id)
+    return _scan_critical_quotas(session, regions, progress=progress, task_id=task_id)
+
+
+def _scan_critical_quotas(session, regions, progress=None, task_id=None) -> Tuple[List[Dict], List[str]]:
+    quotas = []
+    errors = []
+    quota_cache = {}
+
+    for region in regions:
+        sq = session.client("service-quotas", region_name=region)
+        for spec in CRITICAL_QUOTAS:
+            if spec.get("global") and region != regions[0]:
+                continue
+
+            svc_code = spec["service"]
+            cache_key = (region, svc_code)
+            if cache_key not in quota_cache:
+                svc_quotas, q_err = paginate_all(sq, "list_service_quotas", "Quotas", ServiceCode=svc_code)
+                if q_err:
+                    errors.append(f"Service Quotas {svc_code} ({region}): {q_err}")
+                    quota_cache[cache_key] = []
+                else:
+                    quota_cache[cache_key] = svc_quotas
+
+            quota = _match_quota(quota_cache[cache_key], spec["name"])
+            if not quota:
+                continue
+
+            current_usage = _count_for_spec(session, region, spec, errors)
+            quotas.append(_quota_row(svc_code, quota, region, current_usage))
+
+        if progress and task_id:
+            progress.advance(task_id)
+
+    return quotas, errors
+
+
+def _scan_quotas_deep(session, regions, quick=False, progress=None, task_id=None) -> Tuple[List[Dict], List[str]]:
+    """Exhaustive Service Quotas scan. This is intentionally opt-in."""
     quotas = []
     errors = []
 
-    # Phase 1: Service Quotas API (region-scoped services)
     for region in regions:
         sq = session.client("service-quotas", region_name=region)
 
-        # Get all services
         services, err = paginate_all(sq, "list_services", "Services")
         if err:
             errors.append(f"Service Quotas ({region}): {err}")
@@ -37,62 +81,95 @@ def scan_quotas(session, regions, quick=False, progress=None, task_id=None) -> T
                 progress.advance(task_id)
             continue
 
-        # For quick mode, only check top services
         if quick:
-            top_codes = {"ec2", "vpc", "elasticloadbalancing", "lambda", "rds",
-                         "cloudformation", "ebs", "s3", "iam", "dynamodb",
-                         "elasticache", "ecs", "eks", "sns", "sqs"}
+            top_codes = {
+                "ec2", "vpc", "elasticloadbalancing", "lambda", "rds",
+                "cloudformation", "ebs", "s3", "iam", "dynamodb",
+                "elasticache", "ecs", "eks", "sns", "sqs",
+            }
             services = [s for s in services if s.get("ServiceCode", "") in top_codes]
 
         for svc in services:
             svc_code = svc.get("ServiceCode", "")
-            svc_name = svc.get("ServiceName", svc_code)
-
-            svc_quotas, q_err = paginate_all(sq, "list_service_quotas", "Quotas",
-                                              ServiceCode=svc_code)
+            svc_quotas, q_err = paginate_all(sq, "list_service_quotas", "Quotas", ServiceCode=svc_code)
             if q_err:
                 continue
 
-            for q in svc_quotas:
-                quota_value = q.get("Value")
+            for quota in svc_quotas:
+                quota_value = quota.get("Value")
                 if quota_value is None or quota_value == 0:
                     continue
 
-                usage_metric = q.get("UsageMetric")
                 current_usage = None
-
-                # Try to get usage from CloudWatch if metric exists
+                usage_metric = quota.get("UsageMetric")
                 if usage_metric:
                     current_usage = _get_usage_from_metric(session, region, usage_metric)
 
-                utilization_pct = None
-                if current_usage is not None and quota_value > 0:
-                    utilization_pct = (current_usage / quota_value) * 100
-
-                quotas.append({
-                    "service_code": svc_code,
-                    "service_name": svc_name,
-                    "quota_name": q.get("QuotaName", "?"),
-                    "quota_code": q.get("QuotaCode", "?"),
-                    "quota_value": quota_value,
-                    "current_usage": current_usage,
-                    "utilization_pct": round(utilization_pct, 1) if utilization_pct is not None else None,
-                    "region": region,
-                    "adjustable": q.get("Adjustable", False),
-                    "global_quota": q.get("GlobalQuota", False),
-                })
+                quotas.append(_quota_row(svc_code, quota, region, current_usage))
 
         if progress and task_id:
             progress.advance(task_id)
 
-    # Phase 2: Direct resource counting for critical quotas (fills gaps)
     _enrich_with_direct_counts(session, regions, quotas, errors)
-
     return quotas, errors
 
 
+def _match_quota(quotas, quota_name):
+    needle = quota_name.lower()
+    for quota in quotas:
+        candidate = quota.get("QuotaName", "").lower()
+        if needle in candidate or candidate in needle:
+            return quota
+    return None
+
+
+def _count_for_spec(session, region, spec, errors):
+    counter_name = spec.get("counter")
+    if not counter_name:
+        return None
+    counter_fn = globals().get(counter_name)
+    if counter_fn is None:
+        return None
+    try:
+        return counter_fn(session, region)
+    except Exception as exc:
+        errors.append(f"Direct count {spec['service']}/{spec['name']} ({region}): {exc}")
+        return None
+
+
+def _quota_row(svc_code, quota, region, current_usage):
+    quota_value = quota.get("Value") or 0
+    utilization_pct = None
+    if current_usage is not None and quota_value > 0:
+        utilization_pct = round((current_usage / quota_value) * 100, 1)
+
+    status = "ok"
+    if utilization_pct is not None:
+        if utilization_pct >= 80:
+            status = "critical"
+        elif utilization_pct >= 60:
+            status = "warning"
+
+    return {
+        "service_code": svc_code,
+        "service_name": quota.get("ServiceName", svc_code),
+        "quota_name": quota.get("QuotaName", "?"),
+        "quota_code": quota.get("QuotaCode", "?"),
+        "quota_value": quota_value,
+        "limit_value": quota_value,
+        "current_usage": current_usage,
+        "current_value": current_usage,
+        "utilization_pct": utilization_pct,
+        "usage_percent": utilization_pct or 0,
+        "status": status,
+        "region": region,
+        "adjustable": quota.get("Adjustable", False),
+        "global_quota": quota.get("GlobalQuota", False),
+    }
+
+
 def _get_usage_from_metric(session, region, usage_metric):
-    """Get current usage from CloudWatch metric."""
+    """Get current usage from CloudWatch metric. Used only in deep scans."""
     try:
         namespace = usage_metric.get("MetricNamespace", "")
         metric_name = usage_metric.get("MetricName", "")
@@ -102,7 +179,7 @@ def _get_usage_from_metric(session, region, usage_metric):
             return None
 
         cw = session.client("cloudwatch", region_name=region)
-        from datetime import datetime, timezone, timedelta
+        from datetime import datetime, timedelta, timezone
         end = datetime.now(timezone.utc)
         start = end - timedelta(hours=1)
 
@@ -112,8 +189,10 @@ def _get_usage_from_metric(session, region, usage_metric):
             Namespace=namespace,
             MetricName=metric_name,
             Dimensions=cw_dims,
-            StartTime=start, EndTime=end,
-            Period=3600, Statistics=["Maximum"],
+            StartTime=start,
+            EndTime=end,
+            Period=3600,
+            Statistics=["Maximum"],
         )
         datapoints = resp.get("Datapoints", [])
         if datapoints:
@@ -126,45 +205,34 @@ def _get_usage_from_metric(session, region, usage_metric):
 def _enrich_with_direct_counts(session, regions, quotas, errors):
     """Fill in usage for critical quotas via direct API calls."""
     for region in regions:
-        # EC2 instances
-        _try_direct_count(session, region, quotas,
-                          "ec2", "Running On-Demand Standard",
-                          _count_ec2_instances, errors)
-        # VPCs
-        _try_direct_count(session, region, quotas,
-                          "vpc", "VPCs per Region",
-                          _count_vpcs, errors)
-        # IAM (global, only run once)
-        if region == regions[0]:
-            _try_direct_count(session, region, quotas,
-                              "iam", "Roles",
-                              _count_iam_roles, errors)
-            _try_direct_count(session, region, quotas,
-                              "s3", "Buckets",
-                              _count_s3_buckets, errors)
+        for spec in CRITICAL_QUOTAS:
+            if spec.get("global") and region != regions[0]:
+                continue
+            _try_direct_count(session, region, quotas, spec["service"], spec["name"], globals().get(spec.get("counter", "")), errors)
 
 
 def _try_direct_count(session, region, quotas, svc_code, quota_name, counter_fn, errors):
-    """Try to fill in a direct count for a quota that's missing usage data."""
     if counter_fn is None:
         return
-    for q in quotas:
-        if q["service_code"] == svc_code and q["region"] == region and quota_name.lower() in q["quota_name"].lower():
-            if q["current_usage"] is None:
+    for quota in quotas:
+        if quota["service_code"] == svc_code and quota["region"] == region and quota_name.lower() in quota["quota_name"].lower():
+            if quota["current_usage"] is None:
                 try:
-                    count = counter_fn(session, q["region"])
-                    if count is not None:
-                        q["current_usage"] = count
-                        if q["quota_value"] > 0:
-                            q["utilization_pct"] = round((count / q["quota_value"]) * 100, 1)
-                except Exception as e:
-                    errors.append(f"Direct count {svc_code}/{quota_name} ({region}): {e}")
+                    count = counter_fn(session, quota["region"])
+                    quota["current_usage"] = count
+                    quota["current_value"] = count
+                    if quota["quota_value"] > 0:
+                        pct = round((count / quota["quota_value"]) * 100, 1)
+                        quota["utilization_pct"] = pct
+                        quota["usage_percent"] = pct
+                        quota["status"] = "critical" if pct >= 80 else "warning" if pct >= 60 else "ok"
+                except Exception as exc:
+                    errors.append(f"Direct count {svc_code}/{quota_name} ({region}): {exc}")
 
 
 def _count_ec2_instances(session, region):
     ec2 = session.client("ec2", region_name=region)
-    resp, _ = safe_api_call(ec2, "describe_instances",
-                            Filters=[{"Name": "instance-state-name", "Values": ["running"]}])
+    resp, _ = safe_api_call(ec2, "describe_instances", Filters=[{"Name": "instance-state-name", "Values": ["running"]}])
     return sum(len(r.get("Instances", [])) for r in (resp or {}).get("Reservations", []))
 
 

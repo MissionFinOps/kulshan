@@ -5,7 +5,7 @@ from typing import Dict, List, Tuple
 from ..utils.aws import safe_api_call, paginate_all
 
 
-def scan_topology(session, regions, progress=None, task_id=None) -> Tuple[Dict, List[str]]:
+def scan_topology(session, regions, progress=None, task_id=None, estimate_transfer=False) -> Tuple[Dict, List[str]]:
     findings = []
     errors = []
     topo = {"vpcs": [], "subnets": [], "igws": [], "nat_gws": [], "peerings": [],
@@ -108,8 +108,11 @@ def scan_topology(session, regions, progress=None, task_id=None) -> Tuple[Dict, 
         if progress and task_id:
             progress.advance(task_id)
 
-    # Data transfer cost estimation
-    _estimate_transfer_costs(session, topo, errors)
+    # Data transfer cost estimation uses CloudWatch metrics and is reserved for deep scans.
+    if estimate_transfer:
+        _estimate_transfer_costs(session, topo, errors)
+    else:
+        topo["transfer_costs"] = {"total_monthly": 0, "skipped": "Run with --deep to estimate transfer costs from CloudWatch metrics."}
 
     # CIDR overlap detection
     _detect_cidr_overlaps(topo, findings)

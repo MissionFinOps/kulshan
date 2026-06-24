@@ -65,7 +65,7 @@ def _extract_findings(scan_results: dict) -> list:
     return findings
 
 
-def run_scan(session, regions: List[str], *, quick: bool = False, **kwargs) -> dict:
+def run_scan(session, regions: List[str], *, quick: bool = False, deep: bool = False, **kwargs) -> dict:
     """Run the IaC drift + coverage scan and return a scored result dict."""
     from .scanner.cfn_drift import scan_cfn_drift
     from .scoring.engine import calculate_score
@@ -76,12 +76,13 @@ def run_scan(session, regions: List[str], *, quick: bool = False, **kwargs) -> d
     scan_results: dict = {}
     all_errors: list[str] = []
 
-    try:
-        drift_result, drift_errors = scan_cfn_drift(session, regions, timeout=120)
-        scan_results["drift"] = drift_result
-        all_errors.extend(drift_errors)
-    except Exception as e:
-        all_errors.append(f"Drift scan: {e}")
+    if deep:
+        try:
+            drift_result, drift_errors = scan_cfn_drift(session, regions, timeout=120)
+            scan_results["drift"] = drift_result
+            all_errors.extend(drift_errors)
+        except Exception as e:
+            all_errors.append(f"Drift scan: {e}")
 
     if not quick:
         try:

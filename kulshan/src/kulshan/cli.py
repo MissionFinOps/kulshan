@@ -199,8 +199,10 @@ def main(ctx: click.Context, profile: Optional[str], role_arn: Optional[str]) ->
 @click.option("--packs", default=None, help="Packs: cost,security,sweep,dr,age,drift,tag,pulse,limit,topo or 'all'.")
 @click.option("--regions", "region_override", default=None, help="Regions to scan (comma-separated). Default: 3 for inventory packs.")
 @click.option("--no-history", is_flag=True, help="Do not retain this scan in local history.")
+@click.option("--perf", is_flag=True, help="Show pack and AWS API timing details after the scan.")
+@click.option("--deep", is_flag=True, help="Run expensive deep checks instead of the fast default path.")
 @click.pass_context
-def report(ctx: click.Context, quick: bool, fmt: str, output: Optional[str], days: int, show_pii: bool, yes: bool, packs: Optional[str], region_override: Optional[str], no_history: bool) -> None:
+def report(ctx: click.Context, quick: bool, fmt: str, output: Optional[str], days: int, show_pii: bool, yes: bool, packs: Optional[str], region_override: Optional[str], no_history: bool, perf: bool, deep: bool) -> None:
     """Run a FinOps baseline using AWS Cost Explorer.
 
     \b
@@ -311,7 +313,7 @@ def report(ctx: click.Context, quick: bool, fmt: str, output: Optional[str], day
     start = time.time()
     results = run_all_scans(
         session=session, regions=regions, profile=profile, quick=quick, console=console,
-        selected_packs=selected_packs,
+        selected_packs=selected_packs, perf=perf, deep=deep,
     )
     duration = time.time() - start
 

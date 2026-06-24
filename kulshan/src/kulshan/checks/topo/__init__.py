@@ -88,7 +88,7 @@ def _extract_findings(result: dict) -> list:
     return findings
 
 
-def run_scan(session, regions: List[str], *, quick: bool = False, **kwargs) -> dict:
+def run_scan(session, regions: List[str], *, quick: bool = False, deep: bool = False, **kwargs) -> dict:
     """Run the network-topology scan and return a scored result dict."""
     from .scanner.topology import scan_topology
     from .scoring.engine import calculate_score
@@ -98,7 +98,7 @@ def run_scan(session, regions: List[str], *, quick: bool = False, **kwargs) -> d
 
     all_errors: list[str] = []
     try:
-        result, errors = scan_topology(session, regions)
+        result, errors = scan_topology(session, regions, estimate_transfer=deep)
         all_errors.extend(errors)
     except Exception as e:
         result = {}

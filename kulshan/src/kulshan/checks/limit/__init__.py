@@ -59,7 +59,7 @@ def _quota_to_finding(quota: dict) -> dict:
     }
 
 
-def run_scan(session, regions: List[str], *, quick: bool = False, **kwargs) -> dict:
+def run_scan(session, regions: List[str], *, quick: bool = False, deep: bool = False, **kwargs) -> dict:
     """Run the quota/headroom scan and return a scored result dict."""
     from .scanner.quotas import scan_quotas
     from .scoring.engine import calculate_score
@@ -69,7 +69,7 @@ def run_scan(session, regions: List[str], *, quick: bool = False, **kwargs) -> d
 
     all_errors: list[str] = []
     try:
-        quotas, errors = scan_quotas(session, regions, quick=quick)
+        quotas, errors = scan_quotas(session, regions, quick=quick, deep=deep)
         all_errors.extend(errors)
     except Exception as e:
         quotas = []

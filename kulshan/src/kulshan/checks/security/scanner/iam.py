@@ -83,8 +83,9 @@ class IAMScanner(BaseScanner):
         self._check_unused_users(cred_report)
         self._check_password_policy(password_policy, pp_err)
 
-        # Checks merged from awsperm, deep IAM analysis
-        self._check_service_last_accessed(roles)
+        # Checks merged from awsperm. Service-last-accessed is slow, so keep it in deep mode.
+        if getattr(self, "deep", False):
+            self._check_service_last_accessed(roles)
         self._check_access_analyzer()
 
         return ScanResult(findings=self.findings, resources=self.resources, errors=self.errors)

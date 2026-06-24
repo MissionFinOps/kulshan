@@ -8,6 +8,8 @@ import threading
 from datetime import datetime, timedelta, timezone
 from typing import Optional, Dict, List, Tuple
 
+from kulshan.aws_runtime import BOTO_CONFIG, get_active_profiler
+
 
 class _RateLimiter:
     """Simple thread-safe rate limiter for AWS API calls (default 4 req/sec)."""
@@ -53,8 +55,9 @@ class CostFetcher:
         if profile:
             session_kwargs["profile_name"] = profile
         session = boto3.Session(**session_kwargs)
-        self.ce = session.client("ce", region_name=region)
-        self.org = session.client("organizations", region_name=region)
+        self.ce = session.client("ce", region_name=region, config=BOTO_CONFIG)
+        self.org = session.client("organizations", region_name=region, config=BOTO_CONFIG)
+        self.region = region
         self._services_cache: Optional[list[tuple[str, float]]] = None
         self._account_names_cache: Optional[dict[str, str]] = None
         self._rate_limiter = _RateLimiter(calls_per_second=4.0)
@@ -62,7 +65,18 @@ class CostFetcher:
     def _ce_call(self, method: str, **kwargs):
         """Rate-limited Cost Explorer API call."""
         self._rate_limiter.wait()
-        return getattr(self.ce, method)(**kwargs)
+        start = time.perf_counter()
+        try:
+            result = getattr(self.ce, method)(**kwargs)
+            profiler = get_active_profiler()
+            if profiler:
+                profiler.record_call("ce", method, self.region, time.perf_counter() - start)
+            return result
+        except Exception:
+            profiler = get_active_profiler()
+            if profiler:
+                profiler.record_call("ce", method, self.region, time.perf_counter() - start, error=True)
+            raise
 
     def _date_range(self, days: int) -> tuple[str, str]:
         end = datetime.now(timezone.utc).date()

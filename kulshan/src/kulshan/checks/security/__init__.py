@@ -188,7 +188,7 @@ def _convert_to_canonical(internal_finding) -> dict:
     return canonical.to_dict()
 
 
-def run_scan(session, regions: List[str], *, quick: bool = False, **kwargs) -> dict:
+def run_scan(session, regions: List[str], *, quick: bool = False, deep: bool = False, **kwargs) -> dict:
     """Run the security posture scan and return a scored result dict."""
     from .scanner.iam import IAMScanner
     from .scanner.network import NetworkScanner
@@ -211,6 +211,7 @@ def run_scan(session, regions: List[str], *, quick: bool = False, **kwargs) -> d
     for cls in scanner_classes:
         try:
             scanner = cls(session, regions)
+            scanner.deep = deep
             result = scanner.scan()
             all_findings.extend(result.findings)
             all_errors.extend(result.errors)
