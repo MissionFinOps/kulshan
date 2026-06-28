@@ -152,18 +152,38 @@ kulshan report --packs all --regions us-east-1
 
 ---
 
-## Local CUR/Data Export Investigations
+## Experimental Local CUR/Data Export Investigations
 
-Kulshan is also growing into a local-first FinOps evidence engine for reducing MTTE: Mean Time To Explanation. The first CUR MVP investigates EC2 cost movement from customer-owned billing exports.
+Kulshan has an experimental local-only EC2 investigation path for customer-owned CUR/Data Export Parquet files. It is intended to reduce MTTE: Mean Time To Explanation.
+
+Current support:
+
+- Local `.parquet` file or local directory containing `.parquet` files.
+- Terminal EC2 investigation brief.
+- No AWS API calls from the investigation command.
+- No `s3://` path support, S3 bucket/prefix listing, AWS Data Export discovery, Glue, or Athena query support.
+
+Local-only onboarding:
+
+1. Export, download, or sync CUR/Data Export Parquet files to a local directory such as `./cur/`.
+2. Validate the local files:
+   ```bash
+   kulshan cur validate --path ./cur/
+   ```
+3. Investigate EC2 movement for a billing month:
+   ```bash
+   kulshan investigate ec2 --cur ./cur/ --month YYYY-MM
+   ```
+
+Optional schema inspection:
 
 ```bash
-kulshan cur schema --path ./exports
-kulshan cur validate --path ./exports
-kulshan investigate ec2 --cur ./exports
-kulshan investigate ec2 --cur ./exports --month 2026-06
+kulshan cur schema --path ./cur/
 ```
 
-This path reads local Parquet CUR/Data Export files only. It does not call AWS APIs, upload billing data, require SaaS, or make AWS changes.
+IAM note:
+
+Current local-only mode requires no AWS IAM permissions for the investigation command. S3 sync and future Athena/S3 discovery modes would require separate AWS permissions and are not implemented yet.
 
 The EC2 investigation brief currently includes:
 

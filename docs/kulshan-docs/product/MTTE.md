@@ -130,28 +130,46 @@ Questions for Meeting:
 
 ## ASAP capability: local CUR query engine
 
-Kulshan should be able to query AWS Data Exports / CUR data directly from S3 without requiring Athena, Redshift, a SaaS backend, or a dashboard.
+Kulshan's implemented CUR/EC2 investigation is experimental and local Parquet only today. It accepts a local `.parquet` file or a local directory containing `.parquet` files.
 
 Architecture details live in `docs/product/LOCAL_EVIDENCE_ENGINE.md`.
 
-The first implementation should be local, read-only, and embedded:
+Current local-only onboarding:
+
+1. Export, download, or sync CUR/Data Export Parquet files to a local directory such as `./cur/`.
+2. Validate the local files:
 
 ```bash
-kulshan investigate ec2 --cur s3://billing-bucket/exports/cur-2/
+kulshan cur validate --path ./cur/
 ```
 
-The engine should:
+3. Investigate EC2 movement for a billing month:
 
-- Read CUR 2.0 or AWS Data Exports files directly from S3.
-- Prefer Parquet because it supports column pruning and efficient scans.
-- Use local SQL over S3 objects for investigation diffs, top contributors, service deltas, account deltas, usage type deltas, and resource-level drilldowns.
-- Cache only local metadata and optional query fragments, never upload billing data.
-- Fall back to Cost Explorer when CUR is unavailable.
-- Treat missing CUR as an evidence gap, not a product failure.
+```bash
+kulshan investigate ec2 --cur ./cur/ --month YYYY-MM
+```
+
+The implemented local engine:
+
+- Reads local CUR 2.0 or AWS Data Exports Parquet files.
+- Does not support `s3://` paths.
+- Does not discover AWS Data Exports.
+- Does not list S3 buckets or prefixes.
+- Does not query Athena or use Glue.
+- Requires no AWS IAM permissions for the investigation command.
+- Treats missing CUR as an evidence gap, not a product failure.
+
+Future / not implemented yet:
+
+- S3 CUR/Data Export reads.
+- S3 bucket or prefix listing.
+- AWS Data Export discovery.
+- Athena queries and Glue Catalog integration.
+- Cost Explorer fallback from this investigation path.
 
 Recommended first engine:
 
-- DuckDB for embedded SQL over local files and S3 Parquet.
+- DuckDB for embedded SQL over local Parquet files.
 - Python integration first, because Kulshan is Python and DuckDB can run in process.
 - Polars may be useful for dataframe transforms, but SQL is the better first interface for repeatable investigation queries.
 - GPU acceleration is a later optimization, not an MVP dependency. Most first-pass CUR investigations are limited by S3 IO, Parquet pruning, partition layout, and aggregation strategy before they are limited by GPU compute.

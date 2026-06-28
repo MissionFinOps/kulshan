@@ -13,13 +13,31 @@ CID proves the question set: cost overview, KPIs, service movement, account move
 Kulshan should reuse that question catalog locally:
 
 ```text
-CUR / Data Exports in S3 or local files
+Local CUR / Data Exports Parquet files
   -> DuckDB SQL views
   -> investigation packs
   -> evidence packet
-  -> terminal / Markdown / JSON brief
+  -> terminal brief
 ```
 
+
+Current implemented reality:
+
+- Experimental local Parquet only.
+- Accepts a local `.parquet` file or a local directory containing `.parquet` files.
+- Does not support `s3://` paths.
+- Does not discover AWS Data Exports.
+- Does not list S3 buckets or prefixes.
+- Does not query Athena or use Glue.
+- Requires no AWS IAM permissions for the investigation command.
+
+Future / not implemented yet:
+
+- S3 CUR/Data Export reads.
+- AWS Data Export discovery.
+- S3 bucket/prefix listing.
+- Glue/Athena query support.
+- Markdown and JSON investigation output.
 Do not copy CID's deployment model:
 
 ```text
@@ -36,15 +54,38 @@ SaaS control plane
 
 Build a proof-of-concept local CUR query engine.
 
-Commands:
+Implemented commands:
 
 ```bash
-kulshan cur validate --path <s3-or-local-path>
-kulshan cur schema --path <s3-or-local-path>
-kulshan cur top-services --path <s3-or-local-path> --month YYYY-MM
-kulshan investigate ec2 --cur <s3-or-local-path>
+kulshan cur validate --path <local-parquet-file-or-dir>
+kulshan cur schema --path <local-parquet-file-or-dir>
+kulshan investigate ec2 --cur <local-parquet-file-or-dir> --month YYYY-MM
 ```
 
+Future / not implemented yet:
+
+```bash
+kulshan cur top-services --path <local-parquet-file-or-dir> --month YYYY-MM
+kulshan investigate ec2 --cur s3://billing-bucket/prefix/ --month YYYY-MM
+```
+
+
+Local-only onboarding:
+
+1. Export, download, or sync CUR/Data Export Parquet files to a local directory such as `./cur/`.
+2. Validate the local files:
+
+```bash
+kulshan cur validate --path ./cur/
+```
+
+3. Investigate EC2 movement for a billing month:
+
+```bash
+kulshan investigate ec2 --cur ./cur/ --month YYYY-MM
+```
+
+IAM note: current local-only mode requires no AWS IAM permissions for the investigation command. S3 sync and future Athena/S3 discovery modes would require separate AWS permissions and are not implemented yet.
 Goal:
 
 Prove Kulshan can query CUR / Data Exports Parquet locally and produce a simple EC2 delta brief.
@@ -139,7 +180,7 @@ cudos-lite:
 Start with the EC2 investigation command:
 
 ```bash
-kulshan investigate ec2 --cur <s3-or-local-path> --month YYYY-MM
+kulshan investigate ec2 --cur <local-parquet-file-or-dir> --month YYYY-MM
 ```
 
 The first version should reuse the local SQL engine and evidence contract, then emit the brief defined in `docs/product/MTTE.md`.

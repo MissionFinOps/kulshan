@@ -18,7 +18,7 @@ Do not discuss or implement Rust, GPU, dashboards, SaaS, agents, MCP, Slack, Jir
 
 ## Goal
 
-Prove that Kulshan can generate a useful EC2 investigation brief from local or S3-hosted CUR / Data Exports Parquet.
+Prove that Kulshan can generate a useful EC2 investigation brief from local CUR / Data Exports Parquet files.
 
 The moat is not DuckDB, Parquet, or SQLite. The moat is:
 
@@ -37,22 +37,42 @@ The product artifact is the investigation brief.
 Implemented now:
 
 ```bash
-kulshan cur schema --path <local-parquet-path>
-kulshan cur validate --path <local-parquet-path>
-kulshan investigate ec2 --cur <local-parquet-path>
-kulshan investigate ec2 --cur <local-parquet-path> --month YYYY-MM
+kulshan cur schema --path <local-parquet-file-or-dir>
+kulshan cur validate --path <local-parquet-file-or-dir>
+kulshan investigate ec2 --cur <local-parquet-file-or-dir>
+kulshan investigate ec2 --cur <local-parquet-file-or-dir> --month YYYY-MM
 ```
 
-The current EC2 brief reads local Parquet only and reports previous/current cost, delta, account contributors, region contributors, resource contributors, usage type contributors, tag/owner evidence, missing evidence, and review questions.
+The current EC2 brief reads local Parquet only and reports previous/current cost, delta, account contributors, region contributors, resource contributors, usage type contributors, tag/owner evidence, missing evidence, and review questions. It accepts a local `.parquet` file or a local directory containing `.parquet` files.
 
 Not implemented yet:
 
 - S3 `s3://` CUR reads.
+- AWS Data Export discovery.
+- S3 bucket or prefix listing to find CUR Parquet files.
+- Athena queries or Glue Catalog integration.
 - `kulshan cur top-services`.
 - JSON or Markdown investigation output.
 - SQLite source manifests or investigation run state.
-- Athena, Glue, or dashboard replacement behavior.
+- Dashboard replacement behavior.
 
+
+## Local-only onboarding
+
+1. Export, download, or sync CUR/Data Export Parquet files to a local directory such as `./cur/`.
+2. Validate the local files:
+
+```bash
+kulshan cur validate --path ./cur/
+```
+
+3. Investigate EC2 movement for a billing month:
+
+```bash
+kulshan investigate ec2 --cur ./cur/ --month YYYY-MM
+```
+
+Current local-only mode requires no AWS IAM permissions for the investigation command. S3 sync and future S3/Athena modes would require separate AWS permissions and are not implemented yet.
 ## Required modules
 
 Proposed CLI repository structure:
@@ -89,8 +109,8 @@ kulshan/
 
 Responsibilities:
 
-- `cur/source.py`: resolve local paths and S3 paths into DuckDB-readable Parquet globs.
-- `cur/duckdb_engine.py`: create DuckDB connection, install/load `httpfs` when S3 is used, register CUR relation.
+- `cur/source.py`: resolve local paths into DuckDB-readable Parquet globs. Future/not implemented yet: resolve S3 paths.
+- `cur/duckdb_engine.py`: create DuckDB connection and register the local CUR relation. Future/not implemented yet: install/load `httpfs` when S3 is used.
 - `cur/validate.py`: verify readable Parquet files and required billing columns.
 - `cur/schema.py`: print detected columns and map them to normalized names.
 - `cur/normalize.py`: create a normalized CUR view with stable column names.
@@ -101,13 +121,19 @@ Responsibilities:
 
 ## CLI commands
 
-Minimum commands:
+Implemented commands:
 
 ```bash
-kulshan cur validate --path <s3-or-local-path>
-kulshan cur schema --path <s3-or-local-path>
-kulshan cur top-services --path <s3-or-local-path> --month YYYY-MM
-kulshan investigate ec2 --cur <s3-or-local-path> --month YYYY-MM
+kulshan cur validate --path <local-parquet-file-or-dir>
+kulshan cur schema --path <local-parquet-file-or-dir>
+kulshan investigate ec2 --cur <local-parquet-file-or-dir> --month YYYY-MM
+```
+
+Future / not implemented yet:
+
+```bash
+kulshan cur top-services --path <local-parquet-file-or-dir> --month YYYY-MM
+kulshan investigate ec2 --cur s3://billing-bucket/prefix/ --month YYYY-MM
 ```
 
 The first successful product moment is:
@@ -283,7 +309,7 @@ Questions for Meeting:
 
 1. Add DuckDB dependency and a tiny connection wrapper.
 2. Implement local Parquet path resolution.
-3. Implement S3 path support through DuckDB `httpfs`.
+3. Future/not implemented yet: implement S3 path support through DuckDB `httpfs`.
 4. Add `kulshan cur schema --path`.
 5. Add `kulshan cur validate --path`.
 6. Create normalized CUR view with stable column aliases.

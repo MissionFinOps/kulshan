@@ -5,6 +5,34 @@ Read this document before building the CUR / Data Exports query path.
 Read `docs/product/CUR_AUTOMATION_AND_ATHENA_RESEARCH.md` alongside this document before building automated CUR discovery, Glue/Athena compatibility, or `--cur auto`.
 
 This is the architecture companion to `docs/product/MTTE.md`. The MTTE spec defines the product workflow. This document defines the local evidence engine that should power it.
+## Current implementation boundary
+
+The implemented CUR/EC2 investigation is experimental and local-only today.
+
+Implemented now:
+
+- `kulshan cur schema --path <local-parquet-file-or-dir>`
+- `kulshan cur validate --path <local-parquet-file-or-dir>`
+- `kulshan investigate ec2 --cur <local-parquet-file-or-dir> --month YYYY-MM`
+- Local `.parquet` file input.
+- Local directory input containing `.parquet` files.
+
+Not implemented yet:
+
+- `s3://` path support.
+- AWS Data Export discovery.
+- S3 bucket or prefix listing to find CUR Parquet files.
+- Athena queries.
+- Glue Catalog integration.
+- `--cur auto`.
+
+Local-only onboarding:
+
+1. Export, download, or sync CUR/Data Export Parquet files to a local directory such as `./cur/`.
+2. Run `kulshan cur validate --path ./cur/`.
+3. Run `kulshan investigate ec2 --cur ./cur/ --month YYYY-MM`.
+
+IAM note: current local-only mode requires no AWS IAM permissions for the investigation command. S3 sync and future Athena/S3 discovery modes would require separate AWS permissions and are not implemented yet.
 
 ## Executive recommendation
 
@@ -51,7 +79,7 @@ DuckDB should be the default engine because it is embedded, local, vectorized, c
 
 Use DuckDB for:
 
-- Reading S3-hosted Parquet CUR / Data Exports.
+- Future/not implemented yet: reading S3-hosted Parquet CUR / Data Exports.
 - Reading local Parquet cache files.
 - Aggregating service, account, usage type, region, resource, and tag deltas.
 - Producing deterministic top-contributor tables.
@@ -145,13 +173,20 @@ These stages may use auditable heuristics:
 
 LLMs may help write prose after the evidence packet is assembled. LLMs must not own parsing, accounting, joins, owner attribution primitives, evidence inclusion rules, or final cost deltas.
 
-## MVP query scope
+## Current experimental query scope
 
-The first local CUR engine should support:
+The current local CUR engine supports local Parquet files only:
+
+```bash
+kulshan investigate ec2 --cur ./cur/
+kulshan investigate ec2 --cur ./cur/ --month YYYY-MM
+```
+
+Future / not implemented yet:
 
 ```bash
 kulshan investigate ec2 --cur s3://billing-bucket/exports/cur-2/
-kulshan investigate ec2 --cur ./exports/cur-2/
+kulshan investigate ec2 --cur auto
 ```
 
 Minimum query outputs:
@@ -179,15 +214,20 @@ Design the query layer so a future backend can use RAPIDS/cuDF, Polars GPU, or a
 
 ## Roadmap
 
-MVP:
+Current experimental local MVP:
 
 - Existing CLI language path.
 - DuckDB local query engine.
-- S3 and local Parquet CUR / Data Exports input.
+- Local Parquet CUR / Data Exports input.
+- Deterministic evidence packet.
+- Terminal investigation brief.
+
+Future / not implemented yet:
+
+- S3 CUR / Data Exports input.
 - SQLite manifests and investigation state.
 - Local Parquet cache for normalized slices.
-- Deterministic evidence packet.
-- Markdown, JSON, and terminal investigation brief.
+- Markdown and JSON investigation brief.
 
 Next:
 

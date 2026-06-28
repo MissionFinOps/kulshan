@@ -1,12 +1,35 @@
 # CUR Automation And Athena Research
 
 Read this before building `kulshan cur discover`, `kulshan cur inspect`, `kulshan cur sample`, or `kulshan investigate ... --cur auto`.
+## Current implementation boundary
+
+This is a future research note. The S3, Athena, Glue, AWS Data Export discovery, `--cur auto`, `kulshan cur discover`, `kulshan cur inspect`, and `kulshan cur sample` flows described below are not implemented yet.
+
+Implemented today:
+
+- Experimental local Parquet only.
+- Accepts a local `.parquet` file or a local directory containing `.parquet` files.
+- Supports `kulshan cur validate --path ./cur/`.
+- Supports `kulshan investigate ec2 --cur ./cur/ --month YYYY-MM`.
+- Does not support `s3://` paths.
+- Does not discover AWS Data Exports.
+- Does not list S3 buckets or prefixes.
+- Does not query Athena or use Glue.
+- Requires no AWS IAM permissions for the local investigation command.
+
+Local-only onboarding:
+
+1. Export, download, or sync CUR/Data Export Parquet files to a local directory such as `./cur/`.
+2. Run `kulshan cur validate --path ./cur/`.
+3. Run `kulshan investigate ec2 --cur ./cur/ --month YYYY-MM`.
+
+IAM note: S3 sync and future Athena/S3 discovery modes would require separate AWS permissions and are not implemented yet.
 
 ## Research question
 
 What is the easiest, simplest, most automated UX for getting AWS CUR / Data Exports evidence into Kulshan?
 
-The answer is not local-only and not Athena-only. Kulshan should support a hybrid execution model:
+Future direction: the answer may not be local-only or Athena-only. Kulshan could support a hybrid execution model:
 
 ```text
 AWS billing export discovery
@@ -17,11 +40,11 @@ AWS billing export discovery
   -> same investigation brief
 ```
 
-Product rule:
+Future product rule, not implemented yet:
 
 > Kulshan should not require Glue, Athena, QuickSight, or S3 Tables, but it should use Glue Catalog and Athena when they already exist and improve the user path.
 
-## Target UX
+## Future Target UX - Not Implemented Yet
 
 Best case:
 
@@ -48,7 +71,7 @@ kulshan investigate ec2 --cur auto --engine athena
 
 `--engine auto` should choose the lowest-friction path that can produce the evidence packet.
 
-## Why Athena must be first-class
+## Future Athena Research - Not Implemented Yet
 
 Many AWS cost teams already have the CUDOS-style stack:
 
@@ -71,7 +94,7 @@ Kulshan should be able to run serverless investigation queries against that stac
 
 Kulshan should still produce a brief, not a dashboard.
 
-## Execution modes
+## Future Execution Modes - Not Implemented Yet
 
 ### Local mode
 
@@ -122,7 +145,7 @@ else:
     print missing permissions and setup guidance
 ```
 
-## Discovery layer
+## Future Discovery Layer - Not Implemented Yet
 
 Always try all discovery paths and collect diagnostics. Do not stop after one access denied.
 
@@ -169,7 +192,7 @@ Scoring:
 -100 unhealthy destination or no readable S3 prefix
 ```
 
-## Glue/Athena readiness checks
+## Future Glue/Athena Readiness Checks - Not Implemented Yet
 
 Given a discovered S3 export candidate, Kulshan should check whether Athena can already query it.
 
@@ -188,7 +211,7 @@ Checks:
 
 Do not create a crawler, Glue table, Athena workgroup, or result bucket by default. Kulshan is read-only by default.
 
-## Athena permissions
+## Future Athena Permissions - Not Implemented Yet
 
 Athena mode likely needs:
 
@@ -218,7 +241,7 @@ Athena mode does not modify AWS resources, but Athena writes query result files 
 
 For strict local read-only behavior, use local mode.
 
-## Local mode permissions
+## Future S3 Local-Sampling Permissions - Not Implemented Yet
 
 Local sampling needs:
 
