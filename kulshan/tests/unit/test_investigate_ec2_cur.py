@@ -148,6 +148,36 @@ def test_investigate_ec2_cur_fails_when_previous_month_is_missing() -> None:
         raise AssertionError("Expected missing previous month to fail")
 
 
+def test_investigate_ec2_cur_fails_when_cur_path_is_missing() -> None:
+    missing_path = _sample_cur_path().parent / "missing-cur"
+
+    try:
+        investigate_ec2_cur(str(missing_path))
+    except CurInvestigationError as exc:
+        assert "does not exist" in str(exc)
+    else:
+        raise AssertionError("Expected missing CUR path to fail")
+
+
+def test_investigate_ec2_cur_fails_for_non_parquet_file() -> None:
+    try:
+        investigate_ec2_cur(__file__)
+    except CurInvestigationError as exc:
+        assert "must be a Parquet file or directory" in str(exc)
+    else:
+        raise AssertionError("Expected non-Parquet CUR input to fail")
+
+
+def test_investigate_ec2_cur_fails_for_directory_without_parquet() -> None:
+    cur_dir = Path(__file__).parent
+
+    try:
+        investigate_ec2_cur(str(cur_dir))
+    except CurInvestigationError as exc:
+        assert "No Parquet files found" in str(exc)
+    else:
+        raise AssertionError("Expected CUR directory without Parquet files to fail")
+
 def test_cur_schema_resolves_athena_style_aliases() -> None:
     mapping = resolve_cur_columns(
         {

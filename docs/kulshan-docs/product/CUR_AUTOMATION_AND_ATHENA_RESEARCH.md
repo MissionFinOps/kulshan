@@ -499,7 +499,7 @@ Before local sampling:
 ```text
 Local mode will download 16 Parquet files.
 Estimated download: 420 MB.
-Destination: .kulshan/cur/166484409834/lab-cur2/
+Destination: .kulshan/cur/123456789012/lab-cur2/
 Proceed? [y/N]
 ```
 

@@ -132,7 +132,9 @@ def _client_identity(client_obj: Any) -> tuple[str, str]:
     region = "global"
     if meta is not None:
         service_model = getattr(meta, "service_model", None)
-        service = getattr(service_model, "service_name", None) or getattr(meta, "service_model", service)
+        service = getattr(service_model, "service_name", None) or getattr(
+            meta, "service_model", service
+        )
         region = getattr(meta, "region_name", None) or "global"
     return str(service), str(region)
 

@@ -274,9 +274,13 @@ def _available_evidence(
         EvidenceItem("Usage type delta", "Top EC2 usage type contributors were computed."),
     ]
     if has_account_id:
-        evidence.append(EvidenceItem("Account delta", "Top EC2 account contributors were computed."))
+        evidence.append(
+            EvidenceItem("Account delta", "Top EC2 account contributors were computed.")
+        )
     if has_region:
-        evidence.append(EvidenceItem("Region delta", "Top EC2 region contributors were computed."))
+        evidence.append(
+            EvidenceItem("Region delta", "Top EC2 region contributors were computed.")
+        )
     if has_resource_id:
         evidence.append(
             EvidenceItem("Resource ID delta", "Top EC2 resource contributors were computed.")
@@ -320,7 +324,9 @@ def _missing_evidence(
             EvidenceItem("Account IDs", "Export does not expose account-level contributors.")
         )
     if not has_region:
-        evidence.append(EvidenceItem("Regions", "Export does not expose region-level contributors."))
+        evidence.append(
+            EvidenceItem("Regions", "Export does not expose region-level contributors.")
+        )
     if not has_resource_id:
         evidence.append(
             EvidenceItem("Resource IDs", "Export does not expose resource-level contributors.")
