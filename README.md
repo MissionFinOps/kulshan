@@ -152,6 +152,22 @@ kulshan report --packs all --regions us-east-1
 
 ---
 
+## S3 Readiness Check, Not S3 Analysis
+
+Kulshan can check whether your AWS identity can see a CUR/Data Export layout in S3 before you copy files locally:
+
+```bash
+kulshan cur s3-check --s3 s3://bucket/prefix/
+```
+
+This command only lists up to 50 S3 objects and reads object metadata for one manifest and one Parquet file when found. It does not download CUR data, query Athena, use Glue, discover Data Exports, or run analysis. Local investigation still requires local Parquet files:
+
+```bash
+kulshan cur validate --path ./cur/
+kulshan investigate ec2 --cur ./cur/ --month YYYY-MM
+```
+
+See `docs/iam-setup.md` for the optional read-only S3 policy.
 ## Experimental Local CUR/Data Export Investigations
 
 Kulshan has an experimental local-only EC2 investigation path for customer-owned CUR/Data Export Parquet files. It is intended to reduce MTTE: Mean Time To Explanation.
@@ -161,7 +177,7 @@ Current support:
 - Local `.parquet` file or local directory containing `.parquet` files.
 - Terminal EC2 investigation brief.
 - No AWS API calls from the investigation command.
-- No `s3://` path support, S3 bucket/prefix listing, AWS Data Export discovery, Glue, or Athena query support.
+- No `s3://` path support for analysis, AWS Data Export discovery, Glue, or Athena query support.
 
 Local-only onboarding:
 

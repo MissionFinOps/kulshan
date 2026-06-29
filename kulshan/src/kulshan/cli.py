@@ -1,3 +1,4 @@
+# ruff: noqa: E501, I001, UP045, UP015, B904, W293
 """Kulshan CLI entry point."""
 from __future__ import annotations
 
@@ -410,7 +411,7 @@ def report(ctx: click.Context, quick: bool, fmt: str, output: Optional[str], day
 
 @main.group()
 def cur() -> None:
-    """Inspect local CUR/Data Exports evidence."""
+    """Inspect CUR/Data Exports evidence."""
 
 
 @cur.command("schema")
@@ -518,6 +519,131 @@ def cur_validate(cur_path: str) -> None:
             "[yellow]resource_id column missing; resource-level contributors unavailable.[/yellow]"
         )
 
+
+@cur.command("s3-check")
+@click.option(
+    "--s3",
+    "s3_uri",
+    required=True,
+    help="S3 CUR/Data Export prefix to check, for example s3://bucket/prefix/.",
+)
+def cur_s3_check(s3_uri: str) -> None:
+    """Check S3 CUR/Data Export readiness without downloading data."""
+    from pathlib import PurePosixPath
+
+    from rich.console import Console as RichConsole
+    from rich.table import Table
+
+    from kulshan.cur.s3_check import S3CheckError, check_s3_cur_layout
+
+    console = RichConsole()
+    try:
+        report = check_s3_cur_layout(s3_uri)
+    except S3CheckError as exc:
+        console.print(f"[red]S3 readiness check failed: {exc}[/red]")
+        if exc.kind == "invalid_s3_uri":
+            console.print("[yellow]Use an s3://bucket/prefix/ path.[/yellow]")
+        elif exc.kind == "list_access_denied":
+            console.print(
+                f"[yellow]Likely missing s3:ListBucket on arn:aws:s3:::{exc.bucket}.[/yellow]"
+            )
+            console.print(
+                f"[dim]If scoped by prefix, allow s3:prefix matching {exc.prefix or '*'}.[/dim]"
+            )
+        elif exc.kind == "head_access_denied":
+            console.print(
+                f"[yellow]Likely missing s3:GetObject on arn:aws:s3:::{exc.bucket}/{exc.prefix}*.[/yellow]"
+            )
+            console.print(
+                "[dim]kms:Decrypt may also be required for customer-managed KMS keys.[/dim]"
+            )
+        sys.exit(ExitCode.CONFIG_ERROR)
+
+    table = Table(title="S3 CUR/Data Export Readiness", show_lines=False)
+    table.add_column("Check")
+    table.add_column("Result")
+    table.add_row("S3 path", report.s3_uri)
+    table.add_row("Can list prefix", "yes" if report.can_list_prefix else "no")
+    table.add_row("metadata/ found", "yes" if report.metadata_prefix_found else "no")
+    table.add_row("data/ found", "yes" if report.data_prefix_found else "no")
+    table.add_row("Manifest found", "yes" if report.manifest_found else "no")
+    table.add_row("Parquet found", "yes" if report.parquet_found else "no")
+    table.add_row(
+        "Billing periods found",
+        ", ".join(report.billing_periods) if report.billing_periods else "none",
+    )
+    table.add_row(
+        "Manifest readable",
+        _object_readable_text(report.manifest.readable, report.manifest.size),
+    )
+    table.add_row(
+        "Manifest access issue",
+        _object_access_issue_text(report.manifest),
+    )
+    table.add_row(
+        "Parquet readable",
+        _object_readable_text(report.parquet.readable, report.parquet.size),
+    )
+    table.add_row(
+        "Parquet access issue",
+        _object_access_issue_text(report.parquet),
+    )
+    table.add_row("Total listed objects", str(report.total_listed_objects))
+    table.add_row("Approximate listed bytes", str(report.approximate_listed_bytes))
+    console.print(table)
+
+    if report.has_head_access_denial:
+        console.print("[red]S3 prefix is not ready for manual CUR validation.[/red]")
+        for label, probe in (("Manifest", report.manifest), ("Parquet", report.parquet)):
+            if probe.error_code:
+                console.print(
+                    f"[yellow]{label} HeadObject denied; likely missing "
+                    f"{probe.likely_missing_action} on {probe.object_arn}.[/yellow]"
+                )
+                click.echo(
+                    f"{label} HeadObject denied: likely missing "
+                    f"{probe.likely_missing_action} on {probe.object_arn}"
+                )
+                console.print(f"[dim]{probe.kms_hint}[/dim]")
+        sys.exit(ExitCode.CONFIG_ERROR)
+
+    if not report.manifest_found or not report.parquet_found:
+        console.print("[red]S3 prefix is not ready for manual CUR validation.[/red]")
+        if not report.manifest_found:
+            console.print("[yellow]No Manifest.json found in the first 50 listed objects.[/yellow]")
+        if not report.parquet_found:
+            console.print("[yellow]No .parquet file found in the first 50 listed objects.[/yellow]")
+        console.print("[dim]Check the bucket, prefix, export name, and billing period path.[/dim]")
+        sys.exit(ExitCode.CONFIG_ERROR)
+
+    if report.ready_for_manual_copy and report.parquet.key:
+        filename = PurePosixPath(report.parquet.key).name
+        console.print("[green]S3 prefix is ready for manual local CUR validation.[/green]")
+        console.print("Next manual copy command:")
+        click.echo(
+            f"aws s3 cp s3://{report.bucket}/{report.parquet.key} "
+            f"./.kulshan-real-cur-test/{filename}"
+        )
+    else:
+        console.print("[red]S3 prefix is not ready for manual CUR validation.[/red]")
+        sys.exit(ExitCode.CONFIG_ERROR)
+
+
+def _object_readable_text(readable: bool, size: int | None) -> str:
+    if not readable:
+        return "no"
+    if size is None:
+        return "yes"
+    return f"yes ({size} bytes)"
+
+
+def _object_access_issue_text(probe) -> str:
+    if not probe.error_code:
+        return "none"
+    return (
+        f"operation={probe.operation}; likely missing {probe.likely_missing_action}; "
+        f"object ARN={probe.object_arn}; {probe.kms_hint}"
+    )
 @main.group()
 def investigate() -> None:
     """Investigate a specific cloud cost movement from local evidence."""
