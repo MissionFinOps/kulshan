@@ -474,37 +474,64 @@ def cur_schema(cur_path: str) -> None:
 @click.option(
     "--path",
     "cur_path",
-    required=True,
+    required=False,
     type=click.Path(exists=True, file_okay=True, dir_okay=True),
     help="Local CUR/Data Exports Parquet file or directory.",
 )
-def cur_validate(cur_path: str) -> None:
-    """Validate that local CUR Parquet data can support EC2 investigation."""
+@click.option(
+    "--s3",
+    "s3_uri",
+    required=False,
+    help="S3 CUR/Data Export prefix for manifest/schema validation.",
+)
+@click.option(
+    "--month",
+    required=False,
+    help="Billing month for S3 manifest validation in YYYY-MM format.",
+)
+def cur_validate(cur_path: str | None, s3_uri: str | None, month: str | None) -> None:
+    """Validate local Parquet or S3 manifest/schema evidence."""
     from rich.console import Console as RichConsole
+    from rich.table import Table
 
-    from kulshan.cur.duckdb_engine import (
-        connect_memory,
-        create_ec2_view,
-        register_cur_raw,
-    )
     from kulshan.cur.errors import CurDataError
-    from kulshan.cur.source import local_parquet_source
+    from kulshan.cur.manifest_reader import CurManifestError, read_manifest_uri
+    from kulshan.cur.validation import validate_local_cur
 
     console = RichConsole()
-    try:
-        source = local_parquet_source(cur_path)
-        con = connect_memory()
+    if bool(cur_path) == bool(s3_uri):
+        console.print("[red]Provide exactly one of --path or --s3.[/red]")
+        sys.exit(ExitCode.CONFIG_ERROR)
+
+    if s3_uri:
+        if not month:
+            console.print("[red]S3 manifest validation requires --month YYYY-MM.[/red]")
+            sys.exit(ExitCode.CONFIG_ERROR)
         try:
-            mapping = register_cur_raw(con, source)
-            create_ec2_view(con, mapping)
-            ec2_rows = con.execute("SELECT COUNT(*) FROM cur_ec2").fetchone()[0]
-            periods = con.execute("SELECT COUNT(DISTINCT period) FROM cur_ec2").fetchone()[0]
-            if ec2_rows == 0:
-                raise CurDataError("No EC2 rows found in the local CUR export.")
-            if periods < 2:
-                raise CurDataError("Need at least two EC2 periods for investigation.")
-        finally:
-            con.close()
+            manifest = read_manifest_uri(s3_uri, billing_period=month)
+        except CurManifestError as exc:
+            console.print(f"[red]S3 manifest validation failed: {exc}[/red]")
+            sys.exit(ExitCode.CONFIG_ERROR)
+        console.print("[green]S3 manifest validation passed.[/green]")
+        console.print("[dim]S3 manifest/schema validation only; no Parquet data was downloaded or queried.[/dim]")
+        table = Table(title="S3 CUR Manifest", show_lines=False)
+        table.add_column("Field")
+        table.add_column("Value")
+        table.add_row("manifest read", "yes")
+        table.add_row("manifest key", manifest.manifest_key)
+        table.add_row("manifest size", str(manifest.manifest_size_bytes))
+        table.add_row("billing period", manifest.billing_period or month)
+        table.add_row("file count", str(len(manifest.files)))
+        table.add_row("total export size", str(manifest.total_size_bytes))
+        table.add_row("columns", str(len(manifest.columns)))
+        console.print(table)
+        if manifest.columns:
+            console.print("Semantic columns from manifest:")
+            console.print(", ".join(manifest.columns[:25]))
+        return
+
+    try:
+        report = validate_local_cur(cur_path or "")
     except CurDataError as exc:
         console.print(f"[red]CUR validation failed: {exc}[/red]")
         sys.exit(ExitCode.CONFIG_ERROR)
@@ -513,12 +540,33 @@ def cur_validate(cur_path: str) -> None:
         sys.exit(ExitCode.CONFIG_ERROR)
 
     console.print("[green]CUR validation passed.[/green]")
-    console.print(f"[dim]EC2 rows: {ec2_rows}; EC2 periods: {periods}[/dim]")
-    if mapping.resource_id is None:
-        console.print(
-            "[yellow]resource_id column missing; resource-level contributors unavailable.[/yellow]"
-        )
+    table = Table(title="CUR/Data Export Validation", show_lines=False)
+    table.add_column("Check")
+    table.add_column("Result")
+    table.add_row("readable", "yes" if report.readable else "no")
+    table.add_row("row count", str(report.row_count))
+    table.add_row("column count", str(report.column_count))
+    table.add_row("semantic fields found", ", ".join(report.semantic_fields))
+    table.add_row("selected cost column", report.selected_cost_column)
+    table.add_row("fallback note", report.fallback_note or "none")
+    table.add_row("EC2 rows", "yes" if report.ec2_rows else "no")
+    table.add_row("network usage patterns", "yes" if report.network_usage_patterns else "no")
+    table.add_row("Bedrock rows", "yes" if report.bedrock_rows else "no")
+    console.print(table)
+    console.print(f"[dim]EC2 rows: {'yes' if report.ec2_rows else 'no'}[/dim]")
+    _print_count_table(console, "Top Product Codes", report.top_product_codes)
+    _print_count_table(console, "Top Usage Types", report.top_usage_types)
 
+
+def _print_count_table(console, title: str, rows: tuple[tuple[str, int], ...]) -> None:
+    from rich.table import Table
+
+    table = Table(title=title, show_lines=False)
+    table.add_column("Value")
+    table.add_column("Rows", justify="right")
+    for value, count in rows:
+        table.add_row(value, str(count))
+    console.print(table)
 
 @cur.command("s3-check")
 @click.option(
@@ -649,6 +697,136 @@ def investigate() -> None:
     """Investigate a specific cloud cost movement from local evidence."""
 
 
+
+@investigate.command("cost")
+@click.option(
+    "--s3",
+    "s3_uri",
+    required=False,
+    help="S3 CUR/Data Export prefix to query with DuckDB httpfs.",
+)
+@click.option(
+    "--path",
+    "cur_path",
+    required=False,
+    type=click.Path(exists=True, file_okay=True, dir_okay=True),
+    help="Local CUR/Data Export Parquet file or directory.",
+)
+@click.option(
+    "--month",
+    required=True,
+    help="Billing month to investigate in YYYY-MM format.",
+)
+@click.option(
+    "--confirm-scan",
+    is_flag=True,
+    default=False,
+    help="Confirm S3 Parquet scan when the estimate exceeds the configured threshold.",
+)
+def investigate_cost(
+    s3_uri: str | None,
+    cur_path: str | None,
+    month: str,
+    confirm_scan: bool,
+) -> None:
+    """Investigate generic monthly cost movement from CUR/Data Export evidence."""
+    from rich.console import Console as RichConsole
+
+    from kulshan.cur.errors import CurDataError
+    from kulshan.cur.manifest_reader import CurManifestError, read_manifest_uri
+    from kulshan.cur.s3_query import (
+        connect_s3_duckdb,
+        cur_columns,
+        estimate_scan_bytes,
+        investigate_cost_s3,
+        select_cost_column,
+    )
+
+    console = RichConsole()
+    if bool(s3_uri) == bool(cur_path):
+        console.print("[red]Provide exactly one source: --s3 s3://bucket/prefix/ or --path ./cur/.[/red]")
+        sys.exit(ExitCode.CONFIG_ERROR)
+    if cur_path:
+        console.print(
+            "[red]investigate cost --path is not implemented yet; use "
+            "kulshan cur validate --path for local validation or --s3 for S3-native cost investigation.[/red]"
+        )
+        sys.exit(ExitCode.CONFIG_ERROR)
+
+    try:
+        manifest = read_manifest_uri(s3_uri or "", billing_period=month)
+        console.print("[green]manifest read: yes[/green]")
+        console.print(f"manifest size: {manifest.manifest_size_bytes} bytes")
+        console.print(f"file count: {len(manifest.files)}")
+        console.print(f"total export size: {manifest.total_size_bytes} bytes")
+        con = connect_s3_duckdb()
+        try:
+            columns = cur_columns(con, manifest)
+            cost_selection = select_cost_column(con, manifest, columns, month)
+            estimate_columns = tuple(
+                column
+                for column in (
+                    cost_selection.column,
+                    "line_item_product_code",
+                    "product_servicecode",
+                    "line_item_usage_type",
+                    "lineitem_usagetype",
+                    "line_item_usage_start_date",
+                    "lineitem_usagestartdate",
+                    "line_item_usage_account_id",
+                    "usage_account_id",
+                    "product_region",
+                    "region",
+                )
+                if column in columns
+            )
+            estimate = estimate_scan_bytes(con, manifest, estimate_columns)
+            threshold_mb = int(os.environ.get("KULSHAN_MAX_SCAN_MB", "100"))
+            threshold_bytes = threshold_mb * 1024 * 1024
+            console.print(
+                f"scan estimate: {estimate.estimated_bytes} bytes ({estimate.method}; "
+                f"upper bound {estimate.upper_bound_bytes} bytes)"
+            )
+            console.print(f"scan estimate note: {estimate.note}")
+            if estimate.estimated_bytes > threshold_bytes and not confirm_scan:
+                console.print(
+                    f"[red]Estimated scan exceeds {threshold_mb} MB. Re-run with --confirm-scan "
+                    "to continue.[/red]"
+                )
+                sys.exit(ExitCode.CONFIG_ERROR)
+            result = investigate_cost_s3(con, manifest, month)
+        finally:
+            con.close()
+    except (CurManifestError, CurDataError) as exc:
+        console.print(f"[red]Cost investigation failed: {exc}[/red]")
+        sys.exit(ExitCode.CONFIG_ERROR)
+    except Exception as exc:
+        console.print(f"[red]Cost investigation failed: {exc}[/red]")
+        sys.exit(ExitCode.CONFIG_ERROR)
+
+    console.print("[bold]Cost Investigation[/bold]")
+    console.print(f"Billing month: {month}")
+    console.print(f"Total spend: ${result.total_spend:,.2f}")
+    console.print(f"Cost column used: {result.cost_column}")
+    if result.fallback_note:
+        console.print(f"Cost column fallback: {result.fallback_note}")
+    _print_cost_table(console, "Top Product Codes / Services", result.top_services)
+    _print_cost_table(console, "Top Usage Types", result.top_usage_types)
+    _print_cost_table(console, "Top Usage Accounts", result.top_accounts)
+    if result.top_regions:
+        _print_cost_table(console, "Top Regions", result.top_regions)
+    console.print("Note: standard S3 request and transfer charges may apply.")
+
+
+def _print_cost_table(console, title: str, rows: tuple[tuple[str, float], ...]) -> None:
+    from rich.table import Table
+
+    table = Table(title=title, show_lines=False)
+    table.add_column("Name")
+    table.add_column("Cost", justify="right")
+    for name, cost in rows:
+        table.add_row(name, f"${cost:,.2f}")
+    console.print(table)
 @investigate.command("ec2")
 @click.option(
     "--cur",

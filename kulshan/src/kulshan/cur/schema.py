@@ -1,4 +1,4 @@
-﻿"""Schema normalization for CUR/Data Exports inputs."""
+"""Schema normalization for CUR/Data Exports inputs."""
 
 from __future__ import annotations
 
@@ -43,6 +43,7 @@ def resolve_cur_columns(columns: set[str]) -> CurColumnMapping:
             "line_item_unblended_cost",
             "line_item_blended_cost",
             "lineitem_unblendedcost",
+            "pricing_public_on_demand_cost",
             "cost",
         ),
         service=_required(
