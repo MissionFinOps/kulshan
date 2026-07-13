@@ -139,7 +139,7 @@ kulshan investigate cost --s3 s3://bucket/prefix/ --month 2024-06
 
 All investigation outputs include a full evidence contract for AI agent trust:
 
-- `human_review_required: true` — always
+- `human_review_required: true` (always)
 - Structured confidence assessment (not a numeric score)
 - Evidence items with unique IDs for traceability
 - Full provenance (schema version, kulshan version, timestamps)
@@ -161,6 +161,8 @@ All investigation outputs include a full evidence contract for AI agent trust:
 ## Trust & Security
 
 Read-only by design. No write permissions required. Published IAM policy included.
+
+> Kulshan is read-only by construction, not read-only by default. There is no cleanup mode to leave off, no write path to enable, and no telemetry to opt out of. Nothing to disable, because nothing exists. The published IAM policy contains zero write actions. Read every line, verify everything.
 
 - 147 read-only audit actions, zero write actions
 - Reports stay on your machine, no uploads
