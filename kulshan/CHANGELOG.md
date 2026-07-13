@@ -7,6 +7,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.1] - 2026-07-13
+
+### Added
+- Local CUR cost investigation (`kulshan investigate cost --path`) for multi-service top-mover detection
+- Generic `export_brief()` function for unified JSON/markdown/terminal output across all investigation types
+- Full provenance on all investigation outputs (schema_version, kulshan_version, generated_at, data_through)
+- Structured confidence assessment (label, source_agreement, data_completeness, ownership_confidence)
+- Owner candidate inference with explicit `confirmation_required` flag
+- Evidence items with unique IDs for traceability
+- Suggested deep dives based on top movers (e.g., "kulshan investigate ec2" when EC2 is top mover)
+- Review questions tailored to cost movement direction
+
+### Changed
+- `investigate cost` command now supports both `--path` (local) and `--s3` (remote) sources
+- All investigation briefs now include `human_review_required: true`
+
+### Design Decisions
+- Confidence is structured components, NOT a numeric score
+- Owner is always a candidate requiring human confirmation
+- Every output includes provenance for reproducibility
+- Evidence items have unique IDs for cross-referencing
+
 ## [0.2.0] - 2026-07-07
 
 ### Added

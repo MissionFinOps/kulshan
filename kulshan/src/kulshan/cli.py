@@ -767,12 +767,38 @@ def investigate_cost(
     if bool(s3_uri) == bool(cur_path):
         console.print("[red]Provide exactly one source: --s3 s3://bucket/prefix/ or --path ./cur/.[/red]")
         sys.exit(ExitCode.CONFIG_ERROR)
+
+    # Local CUR investigation
     if cur_path:
-        console.print(
-            "[red]investigate cost --path is not implemented yet; use "
-            "kulshan cur validate --path for local validation or --s3 for S3-native cost investigation.[/red]"
+        from kulshan.investigate.cost import investigate_cost_cur
+        from kulshan.investigate.export import (
+            export_brief,
+            investigation_format_from_path,
         )
-        sys.exit(ExitCode.CONFIG_ERROR)
+
+        export_format = None
+        if output:
+            try:
+                export_format = investigation_format_from_path(output)
+            except ValueError as exc:
+                click.echo(str(exc), err=True)
+                sys.exit(ExitCode.CONFIG_ERROR)
+
+        try:
+            brief = investigate_cost_cur(cur_path, month=month)
+        except Exception as exc:
+            console.print(f"[red]Cost investigation failed: {exc}[/red]")
+            sys.exit(ExitCode.CONFIG_ERROR)
+
+        # Export
+        if output:
+            content = export_brief(brief, export_format or "json", output)
+            console.print(f"Wrote: {output}")
+        else:
+            # Terminal output
+            from kulshan.investigate.export import brief_to_terminal
+            console.print(brief_to_terminal(brief))
+        return
 
     try:
         manifest = read_manifest_uri(s3_uri or "", billing_period=month)
