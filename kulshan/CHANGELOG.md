@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.2] - 2026-07-13
+
+### Fixed
+- Handle Decimal types from DuckDB in cost investigation (fixes `unsupported operand type` error)
+
 ## [0.2.1] - 2026-07-13
 
 ### Added
