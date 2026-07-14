@@ -6,17 +6,33 @@ from rich.console import Console
 from rich.table import Table
 
 from kulshan.redact import redact_account_id, redact_arn
-from kulshan.workspace.config import read_workspace_config
-from kulshan.workspace.errors import WorkspaceNotFoundError, WorkspaceConfigError
+from kulshan.workspace.config import (
+    AwsConnection,
+    WorkspaceAwsConfig,
+    WorkspaceConfig,
+    read_workspace_config,
+    write_workspace_config,
+)
+from kulshan.workspace.errors import (
+    WorkspaceConfigError,
+    WorkspaceExistsError,
+    WorkspaceNotFoundError,
+    WorkspaceValidationError,
+)
 from kulshan.workspace.paths import get_workspace_path
 from kulshan.workspace.resolution import (
+    get_active_workspace_name,
     list_workspaces,
     resolve_workspace,
     set_active_workspace_name,
-    get_active_workspace_name,
     workspace_exists,
 )
-from kulshan.workspace.validation import validate_workspace_name
+from kulshan.workspace.validation import (
+    validate_account_id,
+    validate_connection_name,
+    validate_profile_name,
+    validate_workspace_name,
+)
 
 
 @click.group()
@@ -168,3 +184,417 @@ def workspace_use(name: str) -> None:
     
     set_active_workspace_name(name)
     console.print(f"Active workspace set to: [cyan]{name}[/cyan]")
+
+
+# ---------------------------------------------------------------------------
+# workspace create
+# ---------------------------------------------------------------------------
+
+
+@workspace.command("create")
+@click.argument("name")
+@click.option("--profile", required=True, help="AWS CLI profile name for the initial connection.")
+@click.option("--payer-account", required=True, help="Payer/management account ID (12 digits).")
+@click.option("--display-name", default=None, help="Human-readable workspace display name.")
+@click.option("--connection-name", default=None, help="Name for the initial connection (default: profile name).")
+@click.option("--credential-account", default=None, help="Assert the STS account ID (12 digits).")
+@click.option("--role-arn", default=None, help="IAM role ARN to assume after profile authentication.")
+def workspace_create(
+    name: str,
+    profile: str,
+    payer_account: str,
+    display_name: str | None,
+    connection_name: str | None,
+    credential_account: str | None,
+    role_arn: str | None,
+) -> None:
+    """Create a new bound workspace with STS-verified credentials.
+
+    \b
+    Example:
+      kulshan workspace create customer-a \\
+        --profile customer-a-finops \\
+        --payer-account 999999999999
+    """
+    from datetime import datetime, timezone
+
+    from kulshan.workspace.sts import StsVerificationError, verify_credentials
+
+    console = Console()
+
+    # 1. Validate workspace name
+    try:
+        validate_workspace_name(name)
+    except WorkspaceValidationError as e:
+        console.print(f"[red]Invalid workspace name: {e}[/red]")
+        raise SystemExit(1)
+
+    # 2. Reject 'default'
+    if name == "default":
+        console.print("[red]Cannot create a workspace named 'default'. It is reserved.[/red]")
+        raise SystemExit(1)
+
+    # 3. Reject existing
+    if workspace_exists(name):
+        console.print(f"[red]Workspace '{name}' already exists.[/red]")
+        raise SystemExit(1)
+
+    # 4. Validate account IDs
+    try:
+        validate_account_id(payer_account, "payer-account")
+    except WorkspaceValidationError as e:
+        console.print(f"[red]{e}[/red]")
+        raise SystemExit(1)
+
+    if credential_account:
+        try:
+            validate_account_id(credential_account, "credential-account")
+        except WorkspaceValidationError as e:
+            console.print(f"[red]{e}[/red]")
+            raise SystemExit(1)
+
+    # 5. Validate connection and profile names
+    conn_name = connection_name or profile.split("/")[-1].split("\\")[-1]
+    try:
+        validate_connection_name(conn_name)
+        validate_profile_name(profile)
+    except WorkspaceValidationError as e:
+        console.print(f"[red]{e}[/red]")
+        raise SystemExit(1)
+
+    # 6-10. STS verification (before creating any directory)
+    console.print(f"  Verifying credentials for profile [cyan]{profile}[/cyan]...")
+    try:
+        sts_result = verify_credentials(
+            profile=profile,
+            role_arn=role_arn,
+            credential_account=credential_account,
+        )
+    except StsVerificationError as e:
+        console.print(f"[red]Credential verification failed: {e}[/red]")
+        raise SystemExit(1)
+
+    console.print(
+        f"  [green]✓[/green] Verified: account "
+        f"{redact_account_id(sts_result.account_id)}"
+    )
+
+    # 11. Build complete configuration in memory
+    connection = AwsConnection(
+        name=conn_name,
+        profile=profile,
+        expected_session_account_id=sts_result.account_id,
+        role_arn=role_arn,
+    )
+
+    aws_config = WorkspaceAwsConfig(
+        payer_account_id=payer_account,
+        default_connection=conn_name,
+        connections=[connection],
+    )
+
+    config = WorkspaceConfig(
+        name=name,
+        display_name=display_name or name,
+        created_at=datetime.now(timezone.utc).isoformat(),
+        binding_mode="bound",
+        aws=aws_config,
+    )
+
+    # 12. Write atomically — only after STS verification succeeds
+    workspace_path = get_workspace_path(name)
+    workspace_path.mkdir(mode=0o700, parents=True, exist_ok=True)
+    try:
+        write_workspace_config(workspace_path, config)
+    except Exception as e:
+        # Clean up empty directory on write failure
+        try:
+            workspace_path.rmdir()
+        except OSError:
+            pass
+        console.print(f"[red]Failed to write workspace configuration: {e}[/red]")
+        raise SystemExit(1)
+
+    console.print(f"  [green]✓[/green] Workspace [cyan]{name}[/cyan] created.")
+    console.print()
+
+
+# ---------------------------------------------------------------------------
+# workspace connection subgroup
+# ---------------------------------------------------------------------------
+
+
+@workspace.group("connection")
+def workspace_connection() -> None:
+    """Manage AWS connections within a workspace."""
+    pass
+
+
+@workspace_connection.command("add")
+@click.argument("workspace_name")
+@click.option("--name", "conn_name", required=True, help="Connection name.")
+@click.option("--profile", required=True, help="AWS CLI profile name.")
+@click.option("--role-arn", default=None, help="IAM role ARN to assume.")
+@click.option("--credential-account", default=None, help="Assert the STS account ID (12 digits).")
+def connection_add(
+    workspace_name: str,
+    conn_name: str,
+    profile: str,
+    role_arn: str | None,
+    credential_account: str | None,
+) -> None:
+    """Add a new AWS connection to an existing bound workspace.
+
+    \b
+    Example:
+      kulshan workspace connection add customer-a \\
+        --name audit \\
+        --profile customer-a-audit
+    """
+    from kulshan.workspace.sts import StsVerificationError, verify_credentials
+
+    console = Console()
+
+    # Validate inputs
+    try:
+        validate_workspace_name(workspace_name, allow_default=True)
+        validate_connection_name(conn_name)
+        validate_profile_name(profile)
+    except WorkspaceValidationError as e:
+        console.print(f"[red]{e}[/red]")
+        raise SystemExit(1)
+
+    if credential_account:
+        try:
+            validate_account_id(credential_account, "credential-account")
+        except WorkspaceValidationError as e:
+            console.print(f"[red]{e}[/red]")
+            raise SystemExit(1)
+
+    # Load workspace
+    ws_path = get_workspace_path(workspace_name)
+    if not workspace_exists(workspace_name):
+        console.print(f"[red]Workspace not found: {workspace_name}[/red]")
+        raise SystemExit(1)
+
+    try:
+        config = read_workspace_config(ws_path)
+    except WorkspaceConfigError as e:
+        console.print(f"[red]{e}[/red]")
+        raise SystemExit(1)
+
+    # Must be bound
+    if config.binding_mode != "bound" or config.aws is None:
+        console.print(
+            f"[red]Workspace '{workspace_name}' is unbound. "
+            "Cannot add connections to the default unbound workspace.[/red]"
+        )
+        raise SystemExit(1)
+
+    # Duplicate connection name
+    if config.aws.get_connection(conn_name):
+        console.print(f"[red]Connection '{conn_name}' already exists in workspace '{workspace_name}'.[/red]")
+        raise SystemExit(1)
+
+    # Duplicate equivalent (same profile + same role)
+    for existing in config.aws.connections:
+        if existing.profile == profile and existing.role_arn == role_arn:
+            console.print(
+                f"[red]Equivalent connection already exists: '{existing.name}' "
+                f"(same profile '{profile}'"
+                f"{' and role' if role_arn else ''}).[/red]"
+            )
+            raise SystemExit(1)
+
+    # STS verification
+    console.print(f"  Verifying credentials for profile [cyan]{profile}[/cyan]...")
+    try:
+        sts_result = verify_credentials(
+            profile=profile,
+            role_arn=role_arn,
+            credential_account=credential_account,
+        )
+    except StsVerificationError as e:
+        console.print(f"[red]Credential verification failed: {e}[/red]")
+        raise SystemExit(1)
+
+    console.print(
+        f"  [green]✓[/green] Verified: account "
+        f"{redact_account_id(sts_result.account_id)}"
+    )
+
+    # Add connection
+    new_connection = AwsConnection(
+        name=conn_name,
+        profile=profile,
+        expected_session_account_id=sts_result.account_id,
+        role_arn=role_arn,
+    )
+    config.aws.connections.append(new_connection)
+
+    # Write atomically
+    try:
+        write_workspace_config(ws_path, config)
+    except Exception as e:
+        # Revert in-memory change
+        config.aws.connections.remove(new_connection)
+        console.print(f"[red]Failed to write configuration: {e}[/red]")
+        raise SystemExit(1)
+
+    console.print(f"  [green]✓[/green] Connection [cyan]{conn_name}[/cyan] added.")
+    console.print()
+
+
+@workspace_connection.command("remove")
+@click.argument("workspace_name")
+@click.argument("connection_name")
+def connection_remove(workspace_name: str, connection_name: str) -> None:
+    """Remove an AWS connection from a workspace.
+
+    Cannot remove the last connection or the default connection
+    (set another default first).
+
+    \b
+    Example:
+      kulshan workspace connection remove customer-a audit
+    """
+    console = Console()
+
+    # Validate
+    try:
+        validate_workspace_name(workspace_name, allow_default=True)
+    except WorkspaceValidationError as e:
+        console.print(f"[red]{e}[/red]")
+        raise SystemExit(1)
+
+    # Load workspace
+    ws_path = get_workspace_path(workspace_name)
+    if not workspace_exists(workspace_name):
+        console.print(f"[red]Workspace not found: {workspace_name}[/red]")
+        raise SystemExit(1)
+
+    try:
+        config = read_workspace_config(ws_path)
+    except WorkspaceConfigError as e:
+        console.print(f"[red]{e}[/red]")
+        raise SystemExit(1)
+
+    if config.binding_mode != "bound" or config.aws is None:
+        console.print(
+            f"[red]Workspace '{workspace_name}' is unbound. "
+            "Cannot manage connections on the default unbound workspace.[/red]"
+        )
+        raise SystemExit(1)
+
+    # Connection must exist
+    target = config.aws.get_connection(connection_name)
+    if target is None:
+        console.print(
+            f"[red]Connection '{connection_name}' not found in "
+            f"workspace '{workspace_name}'.[/red]"
+        )
+        raise SystemExit(1)
+
+    # Cannot remove the last connection
+    if len(config.aws.connections) <= 1:
+        console.print(
+            f"[red]Cannot remove the last connection from a bound workspace.[/red]"
+        )
+        raise SystemExit(1)
+
+    # Cannot remove the default connection
+    if connection_name == config.aws.default_connection:
+        others = [c.name for c in config.aws.connections if c.name != connection_name]
+        console.print(
+            f"[red]Cannot remove default connection \"{connection_name}\".[/red]"
+        )
+        console.print()
+        console.print("Set another default first:")
+        console.print()
+        for other in others:
+            console.print(f"  kulshan workspace default-connection {workspace_name} {other}")
+        console.print()
+        raise SystemExit(1)
+
+    # Remove and write
+    config.aws.connections = [c for c in config.aws.connections if c.name != connection_name]
+
+    try:
+        write_workspace_config(ws_path, config)
+    except Exception as e:
+        console.print(f"[red]Failed to write configuration: {e}[/red]")
+        raise SystemExit(1)
+
+    console.print(f"  [green]✓[/green] Connection [cyan]{connection_name}[/cyan] removed.")
+    console.print()
+
+
+# ---------------------------------------------------------------------------
+# workspace default-connection
+# ---------------------------------------------------------------------------
+
+
+@workspace.command("default-connection")
+@click.argument("workspace_name")
+@click.argument("connection_name")
+def workspace_default_connection(workspace_name: str, connection_name: str) -> None:
+    """Set the default connection for a workspace. No AWS call required.
+
+    \b
+    Example:
+      kulshan workspace default-connection customer-a audit
+    """
+    console = Console()
+
+    # Validate
+    try:
+        validate_workspace_name(workspace_name, allow_default=True)
+        validate_connection_name(connection_name)
+    except WorkspaceValidationError as e:
+        console.print(f"[red]{e}[/red]")
+        raise SystemExit(1)
+
+    # Load workspace
+    ws_path = get_workspace_path(workspace_name)
+    if not workspace_exists(workspace_name):
+        console.print(f"[red]Workspace not found: {workspace_name}[/red]")
+        raise SystemExit(1)
+
+    try:
+        config = read_workspace_config(ws_path)
+    except WorkspaceConfigError as e:
+        console.print(f"[red]{e}[/red]")
+        raise SystemExit(1)
+
+    if config.binding_mode != "bound" or config.aws is None:
+        console.print(
+            f"[red]Workspace '{workspace_name}' is unbound. "
+            "Cannot set default connection on the unbound workspace.[/red]"
+        )
+        raise SystemExit(1)
+
+    # Connection must exist
+    if not config.aws.get_connection(connection_name):
+        available = [c.name for c in config.aws.connections]
+        console.print(
+            f"[red]Connection '{connection_name}' not found. "
+            f"Available: {', '.join(available)}[/red]"
+        )
+        raise SystemExit(1)
+
+    # Update default
+    old_default = config.aws.default_connection
+    config.aws.default_connection = connection_name
+
+    try:
+        write_workspace_config(ws_path, config)
+    except Exception as e:
+        config.aws.default_connection = old_default
+        console.print(f"[red]Failed to write configuration: {e}[/red]")
+        raise SystemExit(1)
+
+    console.print(
+        f"  [green]✓[/green] Default connection for [cyan]{workspace_name}[/cyan] "
+        f"set to [cyan]{connection_name}[/cyan]."
+    )
+    console.print()

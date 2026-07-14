@@ -191,6 +191,17 @@ class WorkspaceConfig:
     migration: WorkspaceMigrationStatus | None = None
     aws: WorkspaceAwsConfig | None = None
 
+    def __post_init__(self):
+        if self.binding_mode == "unbound" and self.name != "default":
+            raise WorkspaceValidationError(
+                "Only the 'default' workspace may be unbound. "
+                f"Workspace '{self.name}' must have binding_mode='bound'."
+            )
+        if self.binding_mode == "bound" and self.aws is None:
+            raise WorkspaceValidationError(
+                f"Bound workspace '{self.name}' must have AWS configuration."
+            )
+
     @property
     def is_bound(self) -> bool:
         """True if workspace has configured AWS connections."""
@@ -252,7 +263,8 @@ class WorkspaceConfig:
                 "Bound workspace must have at least one AWS connection.",
             )
 
-        # Only 'default' may be unbound — named workspaces must be bound
+        # Only 'default' may be unbound — enforced in __post_init__ too
+        # but from_dict gives a better error message with workspace context
         if binding_mode == "unbound" and workspace_name != "default":
             raise WorkspaceConfigError(
                 workspace_name,

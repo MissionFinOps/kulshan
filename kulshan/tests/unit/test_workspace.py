@@ -628,14 +628,26 @@ class TestListWorkspaces:
     def test_lists_valid_workspaces(self, tmp_path):
         """Lists only directories with workspace.toml."""
         ws_root = tmp_path / "workspaces"
-        # Valid workspace
+        # Valid workspace (bound)
         ws1 = ws_root / "alpha"
         ws1.mkdir(parents=True)
-        write_workspace_config(ws1, WorkspaceConfig(name="alpha"))
-        # Valid workspace
+        write_workspace_config(ws1, WorkspaceConfig(
+            name="alpha", binding_mode="bound",
+            aws=WorkspaceAwsConfig(
+                payer_account_id="111122223333", default_connection="main",
+                connections=[AwsConnection(name="main", profile="a", expected_session_account_id="111122223333")],
+            ),
+        ))
+        # Valid workspace (bound)
         ws2 = ws_root / "beta"
         ws2.mkdir(parents=True)
-        write_workspace_config(ws2, WorkspaceConfig(name="beta"))
+        write_workspace_config(ws2, WorkspaceConfig(
+            name="beta", binding_mode="bound",
+            aws=WorkspaceAwsConfig(
+                payer_account_id="222233334444", default_connection="main",
+                connections=[AwsConnection(name="main", profile="b", expected_session_account_id="222233334444")],
+            ),
+        ))
         # Invalid: directory without workspace.toml
         (ws_root / "orphan").mkdir()
 
@@ -649,7 +661,13 @@ class TestListWorkspaces:
         for name in ["zeta", "alpha", "middle"]:
             d = ws_root / name
             d.mkdir(parents=True)
-            write_workspace_config(d, WorkspaceConfig(name=name))
+            write_workspace_config(d, WorkspaceConfig(
+                name=name, binding_mode="bound",
+                aws=WorkspaceAwsConfig(
+                    payer_account_id="111122223333", default_connection="main",
+                    connections=[AwsConnection(name="main", profile=name, expected_session_account_id="111122223333")],
+                ),
+            ))
 
         with patch("kulshan.workspace.resolution.get_workspaces_root", return_value=ws_root):
             assert list_workspaces() == ["alpha", "middle", "zeta"]
@@ -689,10 +707,10 @@ class TestWorkspaceContext:
 
     def test_from_path_unbound(self, tmp_path):
         """Context from unbound workspace has correct paths."""
-        config = WorkspaceConfig(name="test-ws", binding_mode="unbound")
+        config = WorkspaceConfig(name="default", binding_mode="unbound")
         ctx = WorkspaceContext.from_path(tmp_path, config)
 
-        assert ctx.name == "test-ws"
+        assert ctx.name == "default"
         assert ctx.path == tmp_path
         assert ctx.is_bound is False
         assert ctx.binding_mode == "unbound"
@@ -773,7 +791,19 @@ class TestWorkspaceCLI:
         ws2 = ws_root / "customer-a"
         ws2.mkdir(parents=True)
         write_workspace_config(
-            ws2, WorkspaceConfig(name="customer-a", display_name="Customer A")
+            ws2, WorkspaceConfig(
+                name="customer-a",
+                display_name="Customer A",
+                binding_mode="bound",
+                aws=WorkspaceAwsConfig(
+                    payer_account_id="111122223333",
+                    default_connection="main",
+                    connections=[AwsConnection(
+                        name="main", profile="cust-a",
+                        expected_session_account_id="111122223333",
+                    )],
+                ),
+            )
         )
 
         runner = CliRunner()
@@ -788,12 +818,6 @@ class TestWorkspaceCLI:
 
     def test_workspace_use_valid(self, tmp_path):
         """workspace use sets active workspace."""
-        ws_root = tmp_path / "workspaces"
-        ws = ws_root / "customer-a"
-        ws.mkdir(parents=True)
-        write_workspace_config(ws, WorkspaceConfig(name="customer-a"))
-        config_path = tmp_path / "config.toml"
-
         runner = CliRunner()
         with patch("kulshan.workspace.cli.workspace_exists", return_value=True), \
              patch("kulshan.workspace.cli.set_active_workspace_name") as mock_set:

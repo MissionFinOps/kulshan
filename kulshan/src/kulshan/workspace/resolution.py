@@ -161,7 +161,6 @@ def ensure_workspace_infrastructure() -> None:
     global _migration_attempted
     if _migration_attempted:
         return
-    _migration_attempted = True
 
     # Ensure default workspace exists first
     ensure_default_workspace()
@@ -173,7 +172,7 @@ def ensure_workspace_infrastructure() -> None:
         report = migrate_legacy_to_default_workspace()
 
         if report.any_failed:
-            # Log warning — don't block workspace access
+            # Log warning — don't block workspace access but allow retry
             if report.main_history.status == "failed":
                 logger.warning(
                     "Legacy main history migration failed: %s. "
@@ -186,8 +185,13 @@ def ensure_workspace_infrastructure() -> None:
                     "Original database preserved at legacy location.",
                     report.security_history.error,
                 )
+            # Do NOT set guard — allow retry on next invocation
+        else:
+            # Success or nothing to do — suppress future runs
+            _migration_attempted = True
     except Exception as e:
         # Migration must never prevent workspace access
+        # Do NOT set guard — allow retry
         logger.warning("Workspace migration check failed: %s", e)
 
 
