@@ -171,18 +171,25 @@ def _validate_workspace_name_callback(
     callback=_validate_workspace_name_callback,
     help="Workspace name for multi-payer isolation. Overrides KULSHAN_WORKSPACE env var.",
 )
+@click.option(
+    "--connection", "-c",
+    default=None,
+    help="Named AWS connection within the workspace.",
+)
 @click.pass_context
 def main(
     ctx: click.Context,
     profile: Optional[str],
     role_arn: Optional[str],
     workspace: Optional[str],
+    connection: Optional[str],
 ) -> None:
     """Kulshan: local-first AWS FinOps baseline."""
     ctx.ensure_object(dict)
     ctx.obj["profile"] = profile
     ctx.obj["role_arn"] = role_arn
     ctx.obj["workspace"] = workspace
+    ctx.obj["connection"] = connection
 
     # Zero-argument landing page
     if ctx.invoked_subcommand is None:
@@ -277,6 +284,52 @@ def report(ctx: click.Context, quick: bool, fmt: str, output: Optional[str], day
 
     session = create_session(profile=profile, role_arn=role_arn)
 
+    # ── Workspace-aware execution context ────────────────────────────────
+    from kulshan.workspace.resolution import resolve_workspace as _resolve_ws
+    from kulshan.workspace.execution import resolve_aws_execution, AwsExecutionContext
+    from kulshan.workspace.sts import StsVerificationError
+    from kulshan.workspace.errors import WorkspaceError
+
+    workspace_name = ctx.obj.get("workspace")
+    connection_name = ctx.obj.get("connection")
+
+    try:
+        ws_ctx = _resolve_ws(workspace_name)
+    except WorkspaceError as e:
+        console.print(f"[red]{e}[/red]")
+        sys.exit(ExitCode.CONFIG_ERROR)
+
+    if ws_ctx.is_bound:
+        # Bound workspace: use workspace execution resolver
+        try:
+            exec_ctx = resolve_aws_execution(
+                workspace=ws_ctx,
+                connection_name=connection_name,
+                profile=profile,
+                role_arn=role_arn,
+                show_pii=show_pii,
+            )
+            session = exec_ctx.session
+            account_id = exec_ctx.session_account_id
+        except (WorkspaceError, StsVerificationError) as e:
+            console.print(f"[red]{e}[/red]")
+            sys.exit(ExitCode.CONFIG_ERROR)
+    else:
+        # Unbound default: use legacy session creation
+        pass  # session already created above
+
+    # ── Fail-closed: security pack history not yet workspace-isolated ─────
+    if ws_ctx.is_bound and "security" in (selected_packs or []):
+        console.print(
+            "  [yellow]⚠ Security pack history isolation is not yet implemented "
+            "for bound workspaces.[/yellow]"
+        )
+        console.print(
+            "  [dim]Security findings will be included in the report output, but "
+            "security trend history will not be written until Commit 5.[/dim]"
+        )
+        console.print()
+
     # Pre-flight health check (with CUR discovery)
     from kulshan.preflight import run_preflight_with_cur
     preflight_result = run_preflight_with_cur(session, console=console)
@@ -324,7 +377,8 @@ def report(ctx: click.Context, quick: bool, fmt: str, output: Optional[str], day
             console.print(f"    [green]→ CUR only mode (no CE API calls)[/green]")
         console.print()
 
-    account_id = get_account_id(session)
+    if not ws_ctx.is_bound:
+        account_id = get_account_id(session)
 
     # ── Region selection ─────────────────────────────────────────────────
     if region_override:
@@ -534,7 +588,7 @@ def report(ctx: click.Context, quick: bool, fmt: str, output: Optional[str], day
         try:
             from kulshan.history import HistoryStore
 
-            history = HistoryStore()
+            history = HistoryStore(ws_ctx.history_db_path)
             history.purge_old(retention_days=365)
             history.save_scan(
                 account_id=account_id,
@@ -1371,12 +1425,15 @@ def _validate_account_id(ctx: click.Context, param: click.Parameter, value: str 
     callback=_validate_account_id,
     help="Filter by AWS account ID (12 digits). This is the credential account used during the scan.",
 )
-def history(limit: int, show_pii: bool, account: str | None) -> None:
+@click.pass_context
+def history(ctx: click.Context, limit: int, show_pii: bool, account: str | None) -> None:
     """Show past scan history with scores and trends.
 
     The account ID stored in history is the credential account from
     sts:GetCallerIdentity at scan time, not necessarily the payer
     or linked accounts being analyzed.
+
+    No AWS credentials or STS calls required.
     """
     from rich.console import Console as RichConsole
     from rich.table import Table
@@ -1384,9 +1441,19 @@ def history(limit: int, show_pii: bool, account: str | None) -> None:
 
     console = RichConsole()
 
+    # Resolve workspace (no AWS calls)
+    from kulshan.workspace.resolution import resolve_workspace as _resolve_ws
+    from kulshan.workspace.errors import WorkspaceError
+    workspace_name = ctx.obj.get("workspace")
+    try:
+        ws_ctx = _resolve_ws(workspace_name)
+    except WorkspaceError as e:
+        console.print(f"[red]{e}[/red]")
+        raise SystemExit(1)
+
     try:
         from kulshan.history import HistoryStore
-        store = HistoryStore()
+        store = HistoryStore(ws_ctx.history_db_path)
         scans = store.list_scans(limit=limit, account_id=account)
         store.close()
     except Exception as e:
@@ -1432,18 +1499,32 @@ def history(limit: int, show_pii: bool, account: str | None) -> None:
 
 @main.command("delete-history")
 @click.option("--yes", is_flag=True, help="Delete without an interactive confirmation.")
-def delete_history(yes: bool) -> None:
-    """Permanently delete all locally stored scan history."""
-    from kulshan.history import HistoryStore, get_history_db_path
+@click.pass_context
+def delete_history(ctx: click.Context, yes: bool) -> None:
+    """Permanently delete all locally stored scan history for the active workspace."""
+    from kulshan.history import HistoryStore
+    from kulshan.workspace.resolution import resolve_workspace as _resolve_ws
+    from kulshan.workspace.errors import WorkspaceError
 
-    if not yes and not click.confirm("Delete all locally stored Kulshan scan history?"):
+    workspace_name = ctx.obj.get("workspace")
+    try:
+        ws_ctx = _resolve_ws(workspace_name)
+    except WorkspaceError as e:
+        click.echo(f"Error: {e}", err=True)
+        raise SystemExit(1)
+
+    db_path = ws_ctx.history_db_path
+
+    if not yes and not click.confirm(
+        f"Delete all scan history for workspace '{ws_ctx.name}'?"
+    ):
         click.echo("History was not deleted.")
         return
 
-    store = HistoryStore()
+    store = HistoryStore(db_path)
     deleted = store.delete_all()
     store.close()
-    click.echo(f"Deleted {deleted} scan(s) from {get_history_db_path()}")
+    click.echo(f"Deleted {deleted} scan(s) from {db_path}")
 
 
 @main.command("mcp-serve")

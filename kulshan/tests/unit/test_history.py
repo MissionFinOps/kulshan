@@ -3,13 +3,38 @@ from __future__ import annotations
 
 import sqlite3
 from datetime import datetime, timedelta, timezone
-from unittest.mock import patch
+from pathlib import Path
+from unittest.mock import patch, MagicMock
 
 from click.testing import CliRunner
 
 from kulshan import history as history_module
 from kulshan.cli import main
 from kulshan.history import HistoryStore, get_history_db_path
+
+
+def _mock_workspace_context():
+    """Create a mock workspace context for history CLI tests."""
+    from kulshan.workspace.context import WorkspaceContext
+    from kulshan.workspace.config import WorkspaceConfig
+
+    config = WorkspaceConfig(name="default", binding_mode="unbound")
+    ctx = WorkspaceContext(
+        name="default",
+        path=Path("fake-workspace"),
+        config=config,
+        history_db_path=Path("unused.db"),
+        security_history_db_path=Path("unused-sec.db"),
+    )
+    return ctx
+
+
+def _patch_workspace_resolution():
+    """Return a context manager that patches workspace resolution for history tests."""
+    return patch(
+        "kulshan.workspace.resolution.resolve_workspace",
+        return_value=_mock_workspace_context(),
+    )
 
 
 def _memory_store() -> HistoryStore:
@@ -81,9 +106,9 @@ def test_delete_history_command():
     real_close = store.close
 
     runner = CliRunner()
-    with patch.object(store, "close", wraps=real_close) as close_spy, patch(
-        "kulshan.history.get_history_db_path", return_value="memory-history.db"
-    ), patch("kulshan.history.HistoryStore", return_value=store):
+    with _patch_workspace_resolution(), \
+         patch.object(store, "close", wraps=real_close) as close_spy, \
+         patch("kulshan.history.HistoryStore", return_value=store):
         result = runner.invoke(main, ["delete-history", "--yes"])
 
     assert result.exit_code == 0
@@ -111,7 +136,8 @@ def test_history_account_filter_valid_12_digits():
 
     # Test CLI accepts the option without error
     runner = CliRunner()
-    with patch("kulshan.history.HistoryStore", return_value=store):
+    with _patch_workspace_resolution(), \
+         patch("kulshan.history.HistoryStore", return_value=store):
         result = runner.invoke(main, ["history", "--account", "111122223333"])
 
     assert result.exit_code == 0
@@ -142,7 +168,8 @@ def test_history_account_filter_no_match_shows_empty_message():
     _save_scan(store, account_id="111122223333")
 
     runner = CliRunner()
-    with patch("kulshan.history.HistoryStore", return_value=store):
+    with _patch_workspace_resolution(), \
+         patch("kulshan.history.HistoryStore", return_value=store):
         result = runner.invoke(main, ["history", "--account", "999988887777"])
 
     assert result.exit_code == 0
@@ -161,7 +188,8 @@ def test_history_without_account_filter_shows_all():
 
     # Test CLI shows table
     runner = CliRunner()
-    with patch("kulshan.history.HistoryStore", return_value=store):
+    with _patch_workspace_resolution(), \
+         patch("kulshan.history.HistoryStore", return_value=store):
         result = runner.invoke(main, ["history"])
 
     assert result.exit_code == 0
@@ -173,7 +201,8 @@ def test_history_empty_without_filter_shows_generic_message():
     store = _memory_store()
 
     runner = CliRunner()
-    with patch("kulshan.history.HistoryStore", return_value=store):
+    with _patch_workspace_resolution(), \
+         patch("kulshan.history.HistoryStore", return_value=store):
         result = runner.invoke(main, ["history"])
 
     assert result.exit_code == 0
