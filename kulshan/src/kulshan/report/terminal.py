@@ -1,6 +1,7 @@
 """Rich terminal renderer for the combined Kulshan Report."""
 from __future__ import annotations
 
+from pathlib import Path
 from typing import Dict, List, Optional
 
 from rich import box
@@ -168,6 +169,7 @@ def render_report(
     duration_secs: float,
     console: Optional[Console] = None,
     top_actions: Optional[List[dict]] = None,
+    history_db_path: Optional["Path"] = None,
 ) -> None:
     if console is None:
         console = Console()
@@ -199,7 +201,7 @@ def render_report(
     # Delta from last scan (from history)
     try:
         from kulshan.history import HistoryStore
-        store = HistoryStore()
+        store = HistoryStore(history_db_path) if history_db_path else HistoryStore()
         prev = store.get_previous_scan(account_id)
         store.close()
         if prev and prev.get("overall_score") is not None:

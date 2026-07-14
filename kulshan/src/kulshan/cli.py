@@ -63,6 +63,7 @@ def _emit_output(
     output: Optional[str],
     show_pii: bool,
     console: Console,
+    history_db_path: Optional[str] = None,
 ) -> None:
     """Shared output dispatch for report and convert commands."""
     from kulshan.redact import redact_account_id, redact_payload, redact_filename
@@ -143,6 +144,7 @@ def _emit_output(
             duration_secs=duration,
             console=console,
             top_actions=top_actions,
+            history_db_path=history_db_path,
         )
 
 
@@ -624,6 +626,7 @@ def report(ctx: click.Context, quick: bool, fmt: str, output: Optional[str], day
         regions=regions, duration=duration, top_actions=top_actions,
         all_findings=all_findings, output=output, show_pii=show_pii,
         scan_metadata=scan_metadata, console=console,
+        history_db_path=ws_ctx.history_db_path,
     )
 
     # Auto-save HTML report (redacted by default) unless user already exported HTML

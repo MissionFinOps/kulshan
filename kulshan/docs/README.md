@@ -530,3 +530,56 @@ The CLI asks for confirmation before running Cost Explorer queries. Use `--yes` 
 - [PyPI](https://pypi.org/project/kulshan/)
 - [IAM Policy](../iam/kulshan-readonly.json)
 - [Mission FinOps](https://missionfinops.com)
+
+
+---
+
+## Workspaces (Multi-Payer Isolation)
+
+Workspaces provide physical data isolation for consultants managing multiple unrelated AWS payer environments.
+
+### Quick start
+
+```bash
+# Create a bound workspace with STS verification
+kulshan workspace create customer-a \
+  --profile customer-a-finops \
+  --payer-account 999999999999
+
+# Run a report in the isolated workspace
+kulshan --workspace customer-a report
+
+# View history (no AWS credentials required)
+kulshan --workspace customer-a history
+```
+
+### Multiple connections
+
+```bash
+# Add a second connection with a different role
+kulshan workspace connection add customer-a \
+  --name audit \
+  --profile customer-a-audit \
+  --role-arn arn:aws:iam::999999999999:role/KulshanAudit
+
+# Switch default connection
+kulshan workspace default-connection customer-a audit
+```
+
+### Upgrade behaviour
+
+- Existing history migrates automatically to the `default` workspace
+- `default` remains unbound (backward compatible)
+- All existing scan IDs are preserved unchanged
+- Old scans are not automatically assigned to payer workspaces
+- Re-running commands after upgrade is harmless (idempotent)
+
+### Current limitations
+
+- One payer per workspace
+- No consolidated multi-payer report
+- No automatic SSO login (run `aws sso login` manually)
+- No AWS Organizations discovery
+- No cross-workspace history search
+- Local CUR validation depends on `bill_payer_account_id` column presence
+- Security pack findings stored in main workspace history (no separate security trend DB)
