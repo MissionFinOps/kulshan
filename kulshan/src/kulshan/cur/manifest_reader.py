@@ -110,16 +110,21 @@ def _locate_manifest(
 ) -> tuple[str, int]:
     normalized = prefix.strip("/")
     candidates: list[str] = []
+
+    # Try specific billing period paths first (most selective)
     if billing_period:
         candidates.append(f"{normalized}/metadata/BILLING_PERIOD={billing_period}/")
     candidates.append(f"{normalized}/metadata/")
+
+    # Also search the full prefix (Data Exports v2 may nest under export name)
+    candidates.append(f"{normalized}/")
 
     for search_prefix in candidates:
         try:
             response = client.list_objects_v2(
                 Bucket=bucket,
                 Prefix=search_prefix,
-                MaxKeys=100,
+                MaxKeys=200,
             )
         except ClientError as exc:
             if _client_error_code(exc) in {"403", "AccessDenied", "Forbidden"}:
@@ -134,7 +139,8 @@ def _locate_manifest(
             if str(obj.get("Key", "")).endswith("Manifest.json")
         ]
         if matches:
-            first = sorted(matches, key=lambda obj: str(obj.get("Key", "")))[0]
+            # Prefer the most recent manifest (sort by key for billing period ordering)
+            first = sorted(matches, key=lambda obj: str(obj.get("Key", "")), reverse=True)[0]
             return str(first["Key"]), int(first.get("Size", 0) or 0)
 
     raise CurManifestError(

@@ -284,6 +284,10 @@ def _load_existing_workspace(
     config = read_workspace_config(workspace_path)
     context = WorkspaceContext.from_path(workspace_path, config)
 
+    # Update active workspace so history and other commands find it
+    from kulshan.workspace.resolution import set_active_workspace_name
+    set_active_workspace_name(entry.workspace_dir)
+
     return OnboardingResult(
         workspace_context=context,
         verified_session=verified,
@@ -371,6 +375,10 @@ def _create_onboarded_workspace(
         created_at=now,
         arn=arn,
     )
+
+    # Set as active workspace so history and other commands find it
+    from kulshan.workspace.resolution import set_active_workspace_name
+    set_active_workspace_name(workspace_dir)
 
     # Build context
     context = WorkspaceContext.from_path(workspace_path, config)
