@@ -325,6 +325,8 @@ def resolve_workspace_with_profile(
             ws_path = get_workspace_path(entry.workspace_dir)
             if ws_path.exists() and (ws_path / "workspace.toml").exists():
                 config = read_workspace_config(ws_path)
+                # Update active workspace so subsequent commands find it
+                set_active_workspace_name(entry.workspace_dir)
                 return WorkspaceContext.from_path(ws_path, config)
 
         # Profile supplied but no registry match → signal auto-create.
@@ -351,6 +353,8 @@ def resolve_workspace_with_profile(
         ws_path = get_workspace_path(entry.workspace_dir)
         if ws_path.exists() and (ws_path / "workspace.toml").exists():
             config = read_workspace_config(ws_path)
+            # Update active workspace so subsequent commands find it
+            set_active_workspace_name(entry.workspace_dir)
             return WorkspaceContext.from_path(ws_path, config)
 
     # 6. No match — signal that caller should use unbound default
