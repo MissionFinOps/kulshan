@@ -75,12 +75,15 @@ class AwsConnection:
 class WorkspaceAwsConfig:
     """AWS configuration for a bound workspace."""
 
-    payer_account_id: str
+    payer_account_id: str | None
     default_connection: str
     connections: list[AwsConnection] = field(default_factory=list)
+    payer_binding_source: str | None = None
+    payer_bound_at: str | None = None
 
     def __post_init__(self):
-        validate_account_id(self.payer_account_id, "payer_account_id")
+        if self.payer_account_id is not None:
+            validate_account_id(self.payer_account_id, "payer_account_id")
         validate_connection_name(self.default_connection)
 
         # Validate connection names are unique
@@ -129,11 +132,17 @@ class WorkspaceAwsConfig:
 
     def to_dict(self) -> dict[str, Any]:
         """Convert to dictionary for TOML serialization."""
-        return {
-            "payer_account_id": self.payer_account_id,
+        d: dict[str, Any] = {
             "default_connection": self.default_connection,
             "connections": [c.to_dict() for c in self.connections],
         }
+        if self.payer_account_id is not None:
+            d["payer_account_id"] = self.payer_account_id
+        if self.payer_binding_source is not None:
+            d["payer_binding_source"] = self.payer_binding_source
+        if self.payer_bound_at is not None:
+            d["payer_bound_at"] = self.payer_bound_at
+        return d
 
     @classmethod
     def from_dict(cls, data: dict[str, Any], workspace_name: str) -> WorkspaceAwsConfig:
@@ -144,9 +153,11 @@ class WorkspaceAwsConfig:
                 for c in data.get("connections", [])
             ]
             return cls(
-                payer_account_id=data.get("payer_account_id", ""),
+                payer_account_id=data.get("payer_account_id"),
                 default_connection=data.get("default_connection", ""),
                 connections=connections,
+                payer_binding_source=data.get("payer_binding_source"),
+                payer_bound_at=data.get("payer_bound_at"),
             )
         except WorkspaceConfigError:
             raise

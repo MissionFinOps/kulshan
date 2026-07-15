@@ -1143,22 +1143,48 @@ def investigate_cost(
             expected_payer = ws_ctx.config.aws.payer_account_id
             ws_name = ws_ctx.name
 
-        if expected_payer:
+        if ws_ctx and ws_ctx.is_bound:
+            # Attempt payer binding or validation from CUR evidence
+            from kulshan.workspace.payer_binding import (
+                try_bind_payer_from_cur,
+                InvalidPayerEvidenceError,
+                MultiplePayerEvidenceError,
+            )
+            from kulshan.workspace.onboarding import PayerBindingConflictError
+
             try:
                 _payer_con = connect_memory()
                 _payer_source = local_parquet_source(str(cur_path))
                 register_cur_raw(_payer_con, _payer_source)
-                payer_result = validate_cur_payer(_payer_con, expected_payer, ws_name)
-                _payer_con.close()
 
-                if payer_result.status == "missing":
-                    console.print(
-                        f"  [yellow]Warning:[/yellow] {payer_result.message}"
-                    )
-                    console.print(
-                        f"  [dim]Continuing with unverified local input.[/dim]"
-                    )
-                    console.print()
+                if expected_payer:
+                    # Already bound — validate
+                    payer_result = validate_cur_payer(_payer_con, expected_payer, ws_name)
+                    if payer_result.status == "missing":
+                        console.print(
+                            f"  [yellow]Warning:[/yellow] {payer_result.message}"
+                        )
+                        console.print(
+                            f"  [dim]Continuing with unverified local input.[/dim]"
+                        )
+                        console.print()
+                else:
+                    # Unverified payer — attempt binding
+                    binding_result = try_bind_payer_from_cur(_payer_con, ws_ctx)
+                    if binding_result.status == "bound":
+                        console.print(
+                            f"  [green]✓[/green] {binding_result.message}",
+                            highlight=False,
+                        )
+                        console.print()
+                    elif binding_result.status == "missing":
+                        console.print(
+                            f"  [yellow]Warning:[/yellow] {binding_result.message}",
+                            highlight=False,
+                        )
+                        console.print()
+
+                _payer_con.close()
             except PayerMismatchError as e:
                 console.print(f"[red]CUR payer mismatch[/red]")
                 console.print()
@@ -1169,6 +1195,12 @@ def investigate_cost(
                 console.print("  The selected CUR data does not belong to this workspace.")
                 sys.exit(ExitCode.CONFIG_ERROR)
             except MultiplePayersError as e:
+                console.print(f"[red]{e}[/red]")
+                sys.exit(ExitCode.CONFIG_ERROR)
+            except PayerBindingConflictError as e:
+                console.print(f"[red]CUR payer conflict: {e}[/red]")
+                sys.exit(ExitCode.CONFIG_ERROR)
+            except (InvalidPayerEvidenceError, MultiplePayerEvidenceError) as e:
                 console.print(f"[red]{e}[/red]")
                 sys.exit(ExitCode.CONFIG_ERROR)
             except Exception:
@@ -1339,22 +1371,47 @@ def investigate_ec2(ctx: click.Context, cur_path: str, month: str | None, output
         expected_payer = ws_ctx.config.aws.payer_account_id
         ws_name = ws_ctx.name
 
-    if expected_payer:
+    if ws_ctx and ws_ctx.is_bound:
+        from kulshan.workspace.payer_binding import (
+            try_bind_payer_from_cur,
+            InvalidPayerEvidenceError,
+            MultiplePayerEvidenceError,
+        )
+        from kulshan.workspace.onboarding import PayerBindingConflictError
+
         try:
             _payer_con = connect_memory()
             _payer_source = local_parquet_source(str(cur_path))
             register_cur_raw(_payer_con, _payer_source)
-            payer_result = validate_cur_payer(_payer_con, expected_payer, ws_name)
-            _payer_con.close()
 
-            if payer_result.status == "missing":
-                console.print(
-                    f"  [yellow]Warning:[/yellow] {payer_result.message}"
-                )
-                console.print(
-                    f"  [dim]Continuing with unverified local input.[/dim]"
-                )
-                console.print()
+            if expected_payer:
+                # Already bound — validate
+                payer_result = validate_cur_payer(_payer_con, expected_payer, ws_name)
+                if payer_result.status == "missing":
+                    console.print(
+                        f"  [yellow]Warning:[/yellow] {payer_result.message}"
+                    )
+                    console.print(
+                        f"  [dim]Continuing with unverified local input.[/dim]"
+                    )
+                    console.print()
+            else:
+                # Unverified payer — attempt binding
+                binding_result = try_bind_payer_from_cur(_payer_con, ws_ctx)
+                if binding_result.status == "bound":
+                    console.print(
+                        f"  [green]✓[/green] {binding_result.message}",
+                        highlight=False,
+                    )
+                    console.print()
+                elif binding_result.status == "missing":
+                    console.print(
+                        f"  [yellow]Warning:[/yellow] {binding_result.message}",
+                        highlight=False,
+                    )
+                    console.print()
+
+            _payer_con.close()
         except PayerMismatchError as e:
             console.print(f"[red]CUR payer mismatch[/red]")
             console.print()
@@ -1365,6 +1422,12 @@ def investigate_ec2(ctx: click.Context, cur_path: str, month: str | None, output
             console.print("  The selected CUR data does not belong to this workspace.")
             sys.exit(ExitCode.CONFIG_ERROR)
         except MultiplePayersError as e:
+            console.print(f"[red]{e}[/red]")
+            sys.exit(ExitCode.CONFIG_ERROR)
+        except PayerBindingConflictError as e:
+            console.print(f"[red]CUR payer conflict: {e}[/red]")
+            sys.exit(ExitCode.CONFIG_ERROR)
+        except (InvalidPayerEvidenceError, MultiplePayerEvidenceError) as e:
             console.print(f"[red]{e}[/red]")
             sys.exit(ExitCode.CONFIG_ERROR)
         except Exception:

@@ -231,7 +231,7 @@ def _create_onboarded_workspace(
     )
 
     aws_config = WorkspaceAwsConfig(
-        payer_account_id=account_id,  # Use session account as initial payer
+        payer_account_id=None,  # Unverified — will be bound when CUR evidence appears
         default_connection=conn_name,
         connections=[connection],
     )
@@ -320,24 +320,31 @@ def bind_payer_account(
     workspace_dir: str,
     payer_account_id: str,
 ) -> bool:
-    """Bind the true payer/management account to a workspace.
+    """Bind the true payer/management account to a workspace from CUR evidence.
 
-    Called when CUR data reveals the actual bill_payer_account_id.
-    Updates only the payer_account_id in workspace.toml.
+    Called when CUR data reveals exactly one valid bill_payer_account_id.
 
-    Does NOT:
-    - Rename the workspace or change its display name.
-    - Merge workspaces that share the same payer.
-    - Change the workspace directory or internal ID.
+    Rules:
+    1. If the workspace has no verified payer (None) → bind it, record source.
+    2. If already bound to the same payer → return True (no-op).
+    3. If bound to a different payer → raise PayerBindingConflictError.
+    4. Does NOT rename the workspace or change display name.
+    5. Does NOT merge with another workspace.
+    6. Does NOT change the ws_<hex> directory.
 
     Args:
         workspace_dir: Workspace directory name (e.g. 'ws_7f3a842c').
         payer_account_id: The 12-digit payer account ID from CUR.
 
     Returns:
-        True if the binding was applied, False if workspace not found
-        or already had a different non-session payer bound.
+        True if the binding was applied or already correct.
+
+    Raises:
+        PayerBindingConflictError: If workspace is already bound to a different payer.
+        PayerBindingError: If workspace not found or has no AWS config.
     """
+    from datetime import datetime, timezone
+
     from kulshan.workspace.config import read_workspace_config, write_workspace_config
     from kulshan.workspace.validation import validate_account_id
 
@@ -345,26 +352,38 @@ def bind_payer_account(
 
     workspace_path = get_workspace_path(workspace_dir)
     if not workspace_path.exists() or not (workspace_path / "workspace.toml").exists():
-        logger.warning("bind_payer_account: workspace %s not found", workspace_dir)
-        return False
+        raise PayerBindingError(f"Workspace '{workspace_dir}' not found.")
 
     config = read_workspace_config(workspace_path)
     if config.aws is None:
-        return False
+        raise PayerBindingError(
+            f"Workspace '{workspace_dir}' has no AWS configuration."
+        )
 
     old_payer = config.aws.payer_account_id
-    if old_payer == payer_account_id:
-        return True  # Already correct
 
-    # Update the payer account
+    # Rule 6: already bound to same payer — no-op
+    if old_payer == payer_account_id:
+        return True
+
+    # Rule 7: bound to a DIFFERENT verified payer — conflict
+    if old_payer is not None:
+        raise PayerBindingConflictError(
+            workspace_dir=workspace_dir,
+            existing_payer=old_payer,
+            new_payer=payer_account_id,
+        )
+
+    # Rule 1: no payer yet — bind it
     config.aws.payer_account_id = payer_account_id
+    config.aws.payer_binding_source = "cur"
+    config.aws.payer_bound_at = datetime.now(timezone.utc).isoformat()
     write_workspace_config(workspace_path, config)
 
     logger.info(
-        "Bound payer account %s to workspace %s (was %s)",
+        "Bound payer account %s to workspace %s (source: CUR)",
         payer_account_id,
         workspace_dir,
-        old_payer,
     )
     return True
 
@@ -374,3 +393,23 @@ class OnboardingError(Exception):
 
     def __init__(self, message: str):
         super().__init__(message)
+
+
+class PayerBindingError(Exception):
+    """Payer binding operation failed (workspace not found, no AWS config)."""
+
+    def __init__(self, message: str):
+        super().__init__(message)
+
+
+class PayerBindingConflictError(Exception):
+    """CUR payer conflicts with an already-bound workspace payer."""
+
+    def __init__(self, workspace_dir: str, existing_payer: str, new_payer: str):
+        self.workspace_dir = workspace_dir
+        self.existing_payer = existing_payer
+        self.new_payer = new_payer
+        super().__init__(
+            f"Payer conflict for workspace '{workspace_dir}': "
+            f"already bound to {existing_payer}, CUR shows {new_payer}."
+        )

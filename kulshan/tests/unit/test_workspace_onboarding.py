@@ -455,7 +455,8 @@ class TestAutoOnboard:
 
         assert config.binding_mode == "bound"
         assert config.aws is not None
-        assert config.aws.payer_account_id == "444444444444"
+        assert config.aws.payer_account_id is None  # Unverified until CUR evidence
+        assert config.aws.payer_binding_source is None
         assert len(config.aws.connections) == 1
         assert config.aws.connections[0].profile == "my-prod"
         assert config.aws.connections[0].expected_session_account_id == "444444444444"
@@ -1068,7 +1069,7 @@ class TestBindPayerAccount:
             lambda name: self.workspaces_root / name,
         )
 
-    def _create_workspace(self, name, payer="123456789012"):
+    def _create_workspace(self, name, payer=None):
         """Create a bound workspace."""
         ws_path = self.workspaces_root / name
         ws_path.mkdir(parents=True, exist_ok=True)
@@ -1093,7 +1094,7 @@ class TestBindPayerAccount:
         """bind_payer_account updates payer_account_id in workspace.toml."""
         from kulshan.workspace.onboarding import bind_payer_account
 
-        self._create_workspace("ws_test1234", payer="111111111111")
+        self._create_workspace("ws_test1234", payer=None)  # Unverified
 
         result = bind_payer_account("ws_test1234", "999999999999")
         assert result is True
@@ -1101,12 +1102,14 @@ class TestBindPayerAccount:
         # Verify config was updated
         config = read_workspace_config(self.workspaces_root / "ws_test1234")
         assert config.aws.payer_account_id == "999999999999"
+        assert config.aws.payer_binding_source == "cur"
+        assert config.aws.payer_bound_at is not None
 
     def test_bind_payer_does_not_rename_workspace(self):
         """Binding payer account does not change display name."""
         from kulshan.workspace.onboarding import bind_payer_account
 
-        self._create_workspace("ws_test5678", payer="111111111111")
+        self._create_workspace("ws_test5678", payer=None)  # Unverified
 
         # Read original display name
         config_before = read_workspace_config(self.workspaces_root / "ws_test5678")
@@ -1127,8 +1130,8 @@ class TestBindPayerAccount:
         assert result is True
 
     def test_bind_payer_missing_workspace(self):
-        """Binding to a non-existent workspace returns False."""
-        from kulshan.workspace.onboarding import bind_payer_account
+        """Binding to a non-existent workspace raises PayerBindingError."""
+        from kulshan.workspace.onboarding import bind_payer_account, PayerBindingError
 
-        result = bind_payer_account("ws_nonexist", "999999999999")
-        assert result is False
+        with pytest.raises(PayerBindingError):
+            bind_payer_account("ws_nonexist", "999999999999")
