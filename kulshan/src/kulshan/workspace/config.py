@@ -201,6 +201,7 @@ class WorkspaceConfig:
     binding_mode: Literal["bound", "unbound"] = "unbound"
     migration: WorkspaceMigrationStatus | None = None
     aws: WorkspaceAwsConfig | None = None
+    superseded_by: str | None = None
 
     def __post_init__(self):
         if self.binding_mode == "unbound" and self.name != "default":
@@ -218,6 +219,11 @@ class WorkspaceConfig:
         """True if workspace has configured AWS connections."""
         return self.binding_mode == "bound" and self.aws is not None
 
+    @property
+    def is_superseded(self) -> bool:
+        """True if this workspace has been superseded by another."""
+        return self.superseded_by is not None
+
     def to_dict(self) -> dict[str, Any]:
         """Convert to dictionary for TOML serialization."""
         d: dict[str, Any] = {
@@ -233,6 +239,8 @@ class WorkspaceConfig:
             d["migration"] = self.migration.to_dict()
         if self.aws:
             d["aws"] = self.aws.to_dict()
+        if self.superseded_by:
+            d["superseded_by"] = self.superseded_by
         return d
 
     @classmethod
@@ -300,6 +308,7 @@ class WorkspaceConfig:
             binding_mode=binding_mode,
             migration=migration,
             aws=aws,
+            superseded_by=data.get("superseded_by"),
         )
 
 

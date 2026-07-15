@@ -148,6 +148,61 @@ def _emit_output(
         )
 
 
+def _offer_reconciliation_if_needed(ws_ctx, payer_account_id, console) -> None:
+    """Check if another workspace has the same payer and offer to reconcile.
+
+    Called after a successful payer binding. Non-blocking — if the user
+    declines, investigation continues normally.
+    """
+    from kulshan.workspace.reconcile import find_workspaces_for_payer, reconcile_workspace, ReconcileError
+    from kulshan.redact import redact_account_id
+
+    try:
+        matches = find_workspaces_for_payer(payer_account_id)
+        # Filter out the current workspace
+        others = [w for w in matches if w.name != ws_ctx.name]
+
+        if not others:
+            return
+
+        # There's already another workspace with this payer
+        target = others[0]
+        payer_display = redact_account_id(payer_account_id)
+
+        console.print(
+            f"  [yellow]This payer is already known.[/yellow]",
+            highlight=False,
+        )
+        console.print(
+            f"  Existing environment: [cyan]{target.display_name}[/cyan]",
+            highlight=False,
+        )
+        console.print()
+        console.print(
+            f"  Link this identity to [cyan]{target.display_name}[/cyan]? [y/N] ",
+            highlight=False,
+            end="",
+        )
+
+        import click as _click
+        confirm = _click.confirm("", default=False, prompt_suffix="")
+        if not confirm:
+            console.print("  [dim]Skipped. Environments remain separate.[/dim]")
+            console.print()
+            return
+
+        result = reconcile_workspace(
+            source_workspace=ws_ctx.name,
+            target_workspace=target.name,
+        )
+        console.print(f"  [green]✓[/green] {result.message}")
+        console.print()
+    except Exception as e:
+        # Reconciliation is non-critical — log and continue
+        import logging
+        logging.getLogger("kulshan.reconcile").debug("Reconciliation check failed: %s", e)
+
+
 def _validate_workspace_name_callback(
     ctx: click.Context, param: click.Parameter, value: str | None
 ) -> str | None:
@@ -1190,6 +1245,10 @@ def investigate_cost(
                             highlight=False,
                         )
                         console.print()
+                        # Check for payer conflict after binding
+                        _offer_reconciliation_if_needed(
+                            ws_ctx, binding_result.payer_account_id, console
+                        )
                     elif binding_result.status == "missing":
                         console.print(
                             f"  [yellow]Warning:[/yellow] {binding_result.message}",
@@ -1417,6 +1476,10 @@ def investigate_ec2(ctx: click.Context, cur_path: str, month: str | None, output
                         highlight=False,
                     )
                     console.print()
+                    # Check for payer conflict after binding
+                    _offer_reconciliation_if_needed(
+                        ws_ctx, binding_result.payer_account_id, console
+                    )
                 elif binding_result.status == "missing":
                     console.print(
                         f"  [yellow]Warning:[/yellow] {binding_result.message}",

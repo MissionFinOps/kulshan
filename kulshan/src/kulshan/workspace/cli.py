@@ -690,3 +690,99 @@ def workspace_rename(name: str, new_display_name: str) -> None:
         f"[cyan]{new_display_name.strip()}[/cyan]"
     )
     console.print()
+
+
+# ---------------------------------------------------------------------------
+# workspace reconcile
+# ---------------------------------------------------------------------------
+
+
+@workspace.command("reconcile")
+def workspace_reconcile() -> None:
+    """Detect and resolve payer conflicts between workspaces.
+
+    Scans all workspaces for shared payer accounts and offers to link
+    AWS identities into one environment per payer.
+
+    \b
+    No automatic merging occurs. History remains in original workspaces.
+    Superseded workspaces are preserved until explicitly cleaned up.
+    """
+    from kulshan.workspace.reconcile import (
+        ReconcileError,
+        find_payer_conflicts,
+        reconcile_workspace,
+    )
+    from kulshan.redact import redact_account_id
+
+    console = Console()
+    conflicts = find_payer_conflicts()
+
+    if not conflicts:
+        console.print("  [green]✓[/green] No payer conflicts found.")
+        console.print("  [dim]All workspaces have unique payer accounts.[/dim]")
+        console.print()
+        return
+
+    console.print(f"  Found [bold]{len(conflicts)}[/bold] shared payer(s):\n")
+
+    for conflict in conflicts:
+        payer_display = redact_account_id(conflict.payer_account_id)
+        console.print(f"  [bold]Payer {payer_display}[/bold]")
+
+        # Pick the oldest (or first with history) as suggested target
+        target = None
+        for ws in conflict.workspaces:
+            if target is None:
+                target = ws
+            elif ws.has_history and not target.has_history:
+                target = ws
+
+        for ws in conflict.workspaces:
+            marker = " [green]← target[/green]" if ws.name == target.name else ""
+            history_note = " [dim](has history)[/dim]" if ws.has_history else ""
+            console.print(
+                f"    • {ws.display_name} ({ws.name})"
+                f"{history_note}{marker}"
+            )
+            for conn in ws.connections:
+                console.print(f"      └─ {conn}")
+
+        console.print()
+
+        # Identify source workspaces (all except target)
+        sources = [ws for ws in conflict.workspaces if ws.name != target.name]
+
+        for source in sources:
+            console.print(
+                f"  Link [cyan]{source.display_name}[/cyan] "
+                f"into [cyan]{target.display_name}[/cyan]?"
+            )
+
+            if source.has_history:
+                console.print(
+                    f"  [yellow]Note:[/yellow] {source.display_name} has existing history. "
+                    f"History remains in the original workspace."
+                )
+
+            import click as _click
+            confirm = _click.confirm("  Proceed?", default=False)
+            if not confirm:
+                console.print("  [dim]Skipped.[/dim]")
+                console.print()
+                continue
+
+            try:
+                result = reconcile_workspace(
+                    source_workspace=source.name,
+                    target_workspace=target.name,
+                )
+                console.print(f"  [green]✓[/green] {result.message}")
+                if result.connection_added:
+                    console.print(
+                        f"    Added connection: [cyan]{result.connection_added}[/cyan]"
+                    )
+                console.print()
+            except ReconcileError as e:
+                console.print(f"  [red]{e}[/red]")
+                console.print()
