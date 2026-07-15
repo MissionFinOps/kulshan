@@ -100,3 +100,17 @@ marketing/
 *.zip
 *.tar.gz
 *.tgz
+
+# --- Test / development artifacts (auto-generated, never commit) ---
+.kulshan-test-tmp/
+kulshan-full-test.json
+kulshan-test-report.json
+kulshan-full-report.json
+kulshan-report-*.html
+pytest_*.txt
+real-cur/
+scripts/
+test-cost-brief.json
+
+# --- Sync / backup scratch (local tool artifacts) ---
+.sync-*/
