@@ -1763,9 +1763,13 @@ def _validate_account_id(ctx: click.Context, param: click.Parameter, value: str 
     callback=_validate_account_id,
     help="Filter by AWS account ID (12 digits). This is the credential account used during the scan.",
 )
+@click.option("--direct-only", is_flag=True, default=False, help="Show only scans stored directly in this workspace (exclude linked history).")
 @click.pass_context
-def history(ctx: click.Context, limit: int, show_pii: bool, account: str | None) -> None:
+def history(ctx: click.Context, limit: int, show_pii: bool, account: str | None, direct_only: bool) -> None:
     """Show past scan history with scores and trends.
+
+    By default, includes scans from linked (reconciled) workspaces.
+    Use --direct-only to show only scans from this workspace.
 
     The account ID stored in history is the credential account from
     sts:GetCallerIdentity at scan time, not necessarily the payer
@@ -1789,50 +1793,118 @@ def history(ctx: click.Context, limit: int, show_pii: bool, account: str | None)
         console.print(f"[red]{e}[/red]")
         raise SystemExit(1)
 
-    try:
-        from kulshan.history import HistoryStore
-        store = HistoryStore(ws_ctx.history_db_path)
-        scans = store.list_scans(limit=limit, account_id=account)
-        store.close()
-    except Exception as e:
-        console.print(f"[red]Could not read history: {e}[/red]")
-        raise SystemExit(1)
+    if direct_only:
+        # Direct-only: read from this workspace only
+        try:
+            from kulshan.history import HistoryStore
+            store = HistoryStore(ws_ctx.history_db_path)
+            scans_raw = store.list_scans(limit=limit, account_id=account)
+            store.close()
+        except Exception as e:
+            console.print(f"[red]Could not read history: {e}[/red]")
+            raise SystemExit(1)
 
-    if not scans:
-        if account:
-            console.print(f"[dim]No scan history found for account {account}.[/dim]")
-        else:
-            console.print("[dim]No scan history found. Run 'kulshan report' to create your first scan.[/dim]")
-        return
+        federated_scans = None
+        linked_count = 0
+        linked_scan_count = 0
+    else:
+        # Federated: include linked workspaces
+        from kulshan.workspace.federated_history import collect_federated_scans
 
-    table = Table(title="Scan History", show_lines=False)
-    table.add_column("ID", style="dim")
-    table.add_column("Date", style="cyan")
-    table.add_column("Account")
-    table.add_column("Score", justify="right")
-    table.add_column("Grade", justify="center")
-    table.add_column("Findings", justify="right")
-    table.add_column("Crit", justify="right", style="red")
-    table.add_column("High", justify="right", style="bright_red")
-    table.add_column("Duration", justify="right", style="dim")
+        try:
+            result = collect_federated_scans(ws_ctx, limit=limit, account_id=account)
+            federated_scans = result.scans
+            linked_count = result.linked_workspace_count
+            linked_scan_count = result.linked_scan_count
+        except Exception as e:
+            console.print(f"[red]Could not read history: {e}[/red]")
+            raise SystemExit(1)
 
-    for scan in scans:
-        ts = scan.get("timestamp", "")[:16].replace("T", " ")
-        raw_account = scan.get("account_id", "?")
-        display_account = raw_account if show_pii else redact_account_id(raw_account)
-        table.add_row(
-            scan.get("id", "?"),
-            ts,
-            display_account,
-            str(scan.get("overall_score", 0)),
-            scan.get("overall_grade", "?"),
-            str(scan.get("total_findings", 0)),
-            str(scan.get("critical_findings", 0)),
-            str(scan.get("high_findings", 0)),
-            f"{scan.get('duration_seconds', 0):.0f}s",
-        )
+        scans_raw = None
 
-    console.print(table)
+    # Determine what to render
+    if federated_scans is not None:
+        if not federated_scans:
+            if account:
+                console.print(f"[dim]No scan history found for account {account}.[/dim]")
+            else:
+                console.print("[dim]No scan history found. Run 'kulshan report' to create your first scan.[/dim]")
+            return
+
+        table = Table(title=f"History for {ws_ctx.display_name}", show_lines=False)
+        table.add_column("ID", style="dim")
+        table.add_column("Date", style="cyan")
+        table.add_column("Account")
+        table.add_column("Score", justify="right")
+        table.add_column("Grade", justify="center")
+        table.add_column("Findings", justify="right")
+        table.add_column("Crit", justify="right", style="red")
+        table.add_column("High", justify="right", style="bright_red")
+        table.add_column("Source", style="dim")
+
+        for fs in federated_scans:
+            scan = fs.scan
+            ts = scan.get("timestamp", "")[:16].replace("T", " ")
+            raw_account = scan.get("account_id", "?")
+            display_account = raw_account if show_pii else redact_account_id(raw_account)
+            source = f"{fs.source_display_name} (linked)" if fs.is_linked else fs.source_display_name
+            table.add_row(
+                scan.get("id", "?"),
+                ts,
+                display_account,
+                str(scan.get("overall_score", 0)),
+                scan.get("overall_grade", "?"),
+                str(scan.get("total_findings", 0)),
+                str(scan.get("critical_findings", 0)),
+                str(scan.get("high_findings", 0)),
+                source,
+            )
+
+        console.print(table)
+
+        if linked_count > 0 and linked_scan_count > 0:
+            console.print(
+                f"\n  [dim]Includes {linked_scan_count} earlier scan(s) "
+                f"from {linked_count} linked environment(s).[/dim]"
+            )
+            console.print()
+    else:
+        # Direct-only mode
+        if not scans_raw:
+            if account:
+                console.print(f"[dim]No scan history found for account {account}.[/dim]")
+            else:
+                console.print("[dim]No scan history found. Run 'kulshan report' to create your first scan.[/dim]")
+            return
+
+        table = Table(title="Scan History", show_lines=False)
+        table.add_column("ID", style="dim")
+        table.add_column("Date", style="cyan")
+        table.add_column("Account")
+        table.add_column("Score", justify="right")
+        table.add_column("Grade", justify="center")
+        table.add_column("Findings", justify="right")
+        table.add_column("Crit", justify="right", style="red")
+        table.add_column("High", justify="right", style="bright_red")
+        table.add_column("Duration", justify="right", style="dim")
+
+        for scan in scans_raw:
+            ts = scan.get("timestamp", "")[:16].replace("T", " ")
+            raw_account = scan.get("account_id", "?")
+            display_account = raw_account if show_pii else redact_account_id(raw_account)
+            table.add_row(
+                scan.get("id", "?"),
+                ts,
+                display_account,
+                str(scan.get("overall_score", 0)),
+                scan.get("overall_grade", "?"),
+                str(scan.get("total_findings", 0)),
+                str(scan.get("critical_findings", 0)),
+                str(scan.get("high_findings", 0)),
+                f"{scan.get('duration_seconds', 0):.0f}s",
+            )
+
+        console.print(table)
 
 
 @main.command("delete-history")

@@ -138,7 +138,7 @@ def test_history_account_filter_valid_12_digits():
     runner = CliRunner()
     with _patch_workspace_resolution(), \
          patch("kulshan.history.HistoryStore", return_value=store):
-        result = runner.invoke(main, ["history", "--account", "111122223333"])
+        result = runner.invoke(main, ["history", "--account", "111122223333", "--direct-only"])
 
     assert result.exit_code == 0
     assert "Scan History" in result.output  # Table renders
@@ -190,7 +190,7 @@ def test_history_without_account_filter_shows_all():
     runner = CliRunner()
     with _patch_workspace_resolution(), \
          patch("kulshan.history.HistoryStore", return_value=store):
-        result = runner.invoke(main, ["history"])
+        result = runner.invoke(main, ["history", "--direct-only"])
 
     assert result.exit_code == 0
     assert "Scan History" in result.output

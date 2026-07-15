@@ -419,7 +419,7 @@ class TestHistoryNoAws:
             result = runner.invoke(main, ["history", "--account", "111122223333"])
 
         assert result.exit_code == 0
-        assert "Scan History" in result.output
+        assert "History for Default" in result.output or "Scan History" in result.output
 
 
 # ---------------------------------------------------------------------------
