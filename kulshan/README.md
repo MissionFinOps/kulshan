@@ -1,49 +1,38 @@
 # Kulshan
 
-The blood test for your AWS bill.
-
-Generate a local AWS audit report in minutes.
+The great white watcher for your AWS account.
 
 ```bash
 pip install kulshan
 kulshan report
 ```
 
-No setup. No data uploads. No infrastructure changes.
-
-Just your AWS account and your laptop.
+One command. One report. Zero writes to your AWS account.
 
 [![PyPI](https://img.shields.io/pypi/v/kulshan)](https://pypi.org/project/kulshan/)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue)](LICENSE.txt)
 [![Python](https://img.shields.io/badge/python-3.9%2B-blue)](https://python.org)
 
-[Documentation](docs/README.md) | [IAM Policy](iam/kulshan-readonly.json) | [GitHub](https://github.com/azz-kikkr/kulshan)
+[Documentation](https://github.com/azz-kikkr/kulshan/tree/master/docs) | [IAM Policy](https://github.com/azz-kikkr/kulshan/blob/master/iam/kulshan-readonly.json) | [Changelog](https://github.com/azz-kikkr/kulshan/blob/master/CHANGELOG.md)
 
 ---
 
-## What is Kulshan?
+## What Kulshan does
 
-Kulshan reads your AWS account (Cost Explorer and your own CUR/Data Export files) and generates a business-ready report covering:
+Ten read-only audit packs in one CLI. Cost anomalies, security posture, waste detection, DR gaps, drift, tag compliance, observability blind spots, quota headroom, and network topology — scored 0-100, exportable as HTML, JSON, SARIF, or CSV.
 
-- Cost anomalies and trends
-- Waste and orphaned resources
-- Tag compliance and cost attribution
-- Commitment health (RI/SP coverage)
-- Spend forecasting and acceleration
-- Security posture
-- DR readiness
-
-Reads Cost Explorer and your own CUR data in place. No data leaves your environment.
+Reads your Cost Explorer data and your own CUR/Data Export Parquet files in place. No data leaves your machine. No SaaS account. No telemetry. Nothing to opt out of, because nothing exists.
 
 Think of it as a baseline before deeper FinOps work, platform evaluations, or leadership reviews.
 
 ---
 
-## What You Get
+## What Kulshan does not do
 
-An HTML report you can open in a browser and hand to your VP, CFO, or platform team. Also available as JSON, SARIF, and CSV.
-
-The report scores your account 0-100 across each dimension, highlights the top findings by dollar impact, and provides an executive summary paragraph.
+- Does not write to AWS. The IAM policy contains only Get, List, and Describe actions.
+- Does not phone home. No telemetry, no update checks, no analytics.
+- Does not require infrastructure. No databases, no containers, no SaaS.
+- Does not hold credentials. Uses the same credential chain as the AWS CLI.
 
 ---
 
@@ -53,289 +42,173 @@ The report scores your account 0-100 across each dimension, highlights the top f
 pip install kulshan
 ```
 
-Requires Python 3.9+. macOS, Linux, Windows.
+Python 3.9+. macOS, Linux, Windows. Optional extras: `kulshan[pdf]`, `kulshan[excel]`, `kulshan[pptx]`, `kulshan[mcp]`, `kulshan[slm]`, or `kulshan[all]`.
 
 ---
 
-## AWS Credentials
+## Credentials
 
-Kulshan uses your existing AWS CLI credentials. If `aws sts get-caller-identity` works, Kulshan works.
-
-The recommended flow is:
+If `aws sts get-caller-identity` works, Kulshan works.
 
 ```bash
 aws login
 kulshan report
 ```
 
-Kulshan identifies your active AWS identity automatically and routes to the correct local database.
-
-Named profiles and explicit credentials also work:
+Named profiles, environment variables, and role assumption all work:
 
 ```bash
-# Named profile
-kulshan --profile your-profile report
-
-# Environment variable
-AWS_PROFILE=customer-a kulshan report
-
-# Assume role
+kulshan --profile production report
 kulshan --role-arn arn:aws:iam::123456789012:role/KulshanAudit report
+```
+
+Run `kulshan doctor` to verify connectivity and permissions without incurring any cost.
+
+---
+
+## The 10 Audit Packs
+
+| Pack | What it watches |
+|------|-----------------|
+| `cost` | Anomalies (z-score, IQR, MAD), commitment gaps, spend acceleration, forecasts |
+| `security` | IAM, encryption, network exposure, logging, public access, GuardDuty |
+| `sweep` | Orphaned volumes, unused EIPs, idle LBs, detached ENIs, empty repos |
+| `dr` | Backup coverage, single-AZ, single points of failure, missing replication |
+| `age` | EOL runtimes, expiring certs, stale AMIs, outdated engines |
+| `drift` | CloudFormation drift, IaC coverage, severity classification |
+| `tag` | Missing required tags, unattributed spend, key inconsistencies |
+| `pulse` | Alarm gaps, missing metric filters, blind spots |
+| `limit` | Quota headroom, at-limit services, scaling risk |
+| `topo` | CIDR overlaps, route integrity, peering issues, TGW misconfigs |
+
+```bash
+kulshan report                                    # cost only (default, ~$0.15)
+kulshan report --packs security,sweep             # specific packs (free APIs)
+kulshan report --packs all --regions us-east-1    # full diagnostic
 ```
 
 ---
 
-## Multi-Environment Isolation
+## Automatic Environment Isolation
 
-Kulshan automatically separates data for different AWS identities.
+On first run, Kulshan identifies your AWS principal, creates an isolated local environment, and routes all data there. Different identities get separate environments. No flags required.
 
-On first use, Kulshan creates a local environment named after your AWS role or user:
-
-```text
+```
 ✓ Created environment readonlyrole-cedar
   Using readonlyrole-cedar · account 1234…5678
 ```
 
-Future runs with the same identity reuse the same environment and database. Different identities get separate environments automatically.
-
-No `--workspace` flags or manual setup required.
-
-### Payer Binding
-
-When Kulshan reads CUR data containing a `bill_payer_account_id`, it binds the environment to that payer:
-
-```text
-✓ Bound this environment to payer XXXX-XXXX-9999 using CUR evidence.
-```
-
-### Reconciliation
-
-If multiple AWS identities access the same payer account, Kulshan offers to link them:
+When CUR data reveals a payer account, the environment binds to that payer. Multiple identities accessing the same payer can be reconciled into a unified timeline:
 
 ```bash
 kulshan workspace reconcile
 ```
 
-After linking, all identities route to one payer environment, and `kulshan history` shows a unified timeline.
-
-### Workspace Commands
-
-```bash
-kulshan workspace list                    # Show all environments
-kulshan workspace show                    # Show current environment details
-kulshan workspace rename ws_abc "Acme"    # Change display name
-kulshan workspace reconcile               # Link shared-payer environments
-kulshan workspace use ws_abc              # Set active workspace
-```
-
-### History
-
-```bash
-kulshan history                    # Show scans (including linked environments)
-kulshan history --direct-only      # Only scans from this workspace
-kulshan history --account 123456789012   # Filter by credential account
-```
-
-### Consolidated Reports
-
-When a payer environment has multiple approved connections:
-
-```bash
-kulshan report     # Runs all approved connections, produces one report
-```
-
-The report shows coverage and source attribution:
-
-```text
-Report status: Complete
-Payer cost coverage: Verified payer-wide
-Connections: billing, audit
-Accounts verified: XXXX-XXXX-1111, XXXX-XXXX-2222
-```
-
-To run a single connection:
-
-```bash
-kulshan --connection audit report
-```
+Workspaces with multiple connections produce consolidated reports automatically — one scan, all connections, deduplicated findings, per-connection coverage metadata.
 
 ---
 
-## Quick Commands
+## CUR / Data Export Investigation
+
+Query your CUR Parquet files locally or from S3. No Athena, no Glue, no data warehouse. DuckDB queries in place.
 
 ```bash
-kulshan --version                       # Show version
-kulshan doctor                          # Verify credentials and permissions
-kulshan report                          # Default FinOps baseline (cost pack)
-kulshan report --quick                  # Fast scan (skips confirmation)
-kulshan report -o report.html           # Save as HTML
-kulshan report --packs security,sweep   # Run specific packs
-kulshan report --packs all --regions us-east-1  # Full 10-pack diagnostic
-kulshan history                         # View past scans
-kulshan shell                           # Interactive REPL
-```
-
----
-
-## All 10 Audit Packs
-
-| Pack | What it detects |
-|------|-----------------|
-| `cost` | Cost trends, anomalies, commitment gaps (default) |
-| `security` | IAM misconfigurations, encryption gaps, network exposure |
-| `sweep` | Orphaned and idle resources (waste detection) |
-| `dr` | Backup coverage gaps, multi-AZ gaps, single points of failure |
-| `age` | EOL runtimes, expiring certificates, stale resources |
-| `drift` | CloudFormation drift, IaC coverage gaps |
-| `tag` | Tag compliance violations, unattributed spend |
-| `pulse` | Observability gaps, missing alarms |
-| `limit` | Service quota headroom issues |
-| `topo` | VPC topology issues, CIDR overlaps, route integrity problems |
-
-```bash
-kulshan report --packs cost,security,sweep --regions us-east-1
-kulshan report --packs all --regions us-east-1,us-west-2
-```
-
----
-
-## CUR / Data Export Investigations
-
-Kulshan can investigate cost movements directly from AWS Cost and Usage Report (CUR) or Data Export Parquet files, both locally and from S3. No Athena, no Glue, no data warehouse required. DuckDB queries your data in place.
-
-### Validate and Inspect
-
-```bash
-# Validate CUR Parquet structure
 kulshan cur validate --path ./cur/
-
-# Validate S3 manifest
-kulshan cur validate --s3 s3://bucket/prefix/ --month 2024-06
-
-# Inspect schema mapping
-kulshan cur schema --path ./cur/
-
-# Check S3 readiness (no data download)
-kulshan cur s3-check --s3 s3://bucket/prefix/
-```
-
-### Investigate Cost Movements
-
-```bash
-# Local investigation
 kulshan investigate cost --path ./cur/ --month 2024-06
-
-# S3 investigation (queries in place via DuckDB httpfs)
-kulshan investigate cost --s3 s3://bucket/prefix/ --month 2024-06
-
-# EC2-specific investigation
 kulshan investigate ec2 --cur ./cur/ --month 2024-06
-
-# Export as JSON or Markdown
-kulshan investigate cost --path ./cur/ --month 2024-06 -o report.json
-kulshan investigate ec2 --cur ./cur/ --month 2024-06 -o report.md
+kulshan investigate cost --s3 s3://bucket/prefix/ --month 2024-06
 ```
 
-### What Investigations Include
-
-**Cost Investigation:** Top movers by service, account, region, usage type. Period-over-period delta with percentages. Suggested next steps for deeper analysis.
-
-**EC2 Investigation:** Instance family, region, and pricing model breakdowns. Resource-level contributors. Tag coverage analysis.
-
-All investigation outputs include structured evidence with unique IDs, schema version, timestamps, and `human_review_required: true`.
+Top movers by service, account, region, usage type. Period-over-period deltas. Resource-level contributors. Tag coverage. All outputs include provenance, evidence IDs, and `human_review_required: true`.
 
 ---
 
-## MCP Server (Agent Integration)
+## MCP Server
 
-Kulshan exposes its findings to MCP-compatible agents (Claude Desktop, Cursor, Kiro, and others). The agent may reason over that evidence; Kulshan itself returns deterministic, inspectable evidence.
+Kulshan exposes its findings to MCP-compatible agents (Claude Desktop, Cursor, Kiro, others). Deterministic evidence in, agent reasoning out.
 
 ```bash
 kulshan mcp-serve
 ```
 
-### MCP Configuration
-
-Add to your MCP client configuration (e.g., `.kiro/settings/mcp.json` or Claude Desktop config):
-
 ```json
 {
   "mcpServers": {
-    "kulshan": {
-      "command": "kulshan",
-      "args": ["mcp-serve"]
-    }
+    "kulshan": { "command": "kulshan", "args": ["mcp-serve"] }
   }
 }
 ```
 
-### Available MCP Tools
-
-| Tool | Parameters | Description |
-|------|------------|-------------|
-| `kulshan_doctor` | (none) | Check AWS caller identity |
-| `kulshan_report` | `packs`, `days`, `regions` | Run audit packs and return findings |
-| `kulshan_quick_security` | `region` | Fast security scan of a single region |
-| `kulshan_list_packs` | (none) | List available audit packs |
-| `kulshan_cur_validate` | `cur_path` | Validate local CUR Parquet |
-| `kulshan_investigate_ec2` | `cur_path`, `month` | Investigate EC2 costs from local CUR |
-| `kulshan_investigate_cost` | `s3_uri`, `month` | Investigate costs from S3 CUR |
-
-Kulshan produces deterministic, inspectable evidence that humans and AI systems can verify.
+Seven tools: `kulshan_doctor`, `kulshan_report`, `kulshan_quick_security`, `kulshan_list_packs`, `kulshan_cur_validate`, `kulshan_investigate_ec2`, `kulshan_investigate_cost`.
 
 ---
 
 ## Output Formats
 
 ```bash
-kulshan report                          # Terminal
-kulshan report -o report.html           # HTML (self-contained, shareable)
-kulshan report --format json            # JSON
-kulshan report --format sarif           # SARIF (GitHub Security tab compatible)
-kulshan report --format csv             # CSV (spreadsheet)
+kulshan report -o report.html           # Self-contained HTML, hand to your VP
+kulshan report --format json -o s.json  # Structured, machine-readable
+kulshan report --format sarif -o r.sarif # GitHub Security tab
+kulshan report --format csv -o f.csv    # Spreadsheet / JIRA import
+kulshan convert -i scan.json -o r.html  # Re-render without re-scanning
 ```
 
-Convert a previous scan to a different format without re-running:
+Account IDs redacted by default. `--show-pii` for full IDs. Atomic writes prevent partial files.
+
+---
+
+## CI/CD
 
 ```bash
-kulshan convert -i previous-scan.json --format html -o report.html
+kulshan report --packs security --format sarif -o results.sarif --yes --no-history
 ```
+
+Exit code 1 when critical findings are present — use as a quality gate. SARIF uploads to GitHub Code Scanning. Full GitHub Actions and GitLab CI examples in [docs/ci-cd.md](https://github.com/azz-kikkr/kulshan/blob/master/docs/ci-cd.md).
 
 ---
 
 ## Trust and Security
 
-Read-only by design. No write permissions required. Published IAM policy included.
+> Read-only by construction, not read-only by default. There is no cleanup mode to leave off, no write path to enable. The published IAM policy contains zero actions that create, modify, or delete resources.
 
-> Kulshan is read-only by construction, not read-only by default. There is no cleanup mode to leave off, no write path to enable, and no telemetry to opt out of. Nothing to disable, because nothing exists. The published IAM policy contains zero actions that create, modify, or delete resources. Read every line, verify everything.
-
-- Every action in the published policy is read-level per the AWS service authorization reference
-- 147 read-only actions, zero write actions
-- Reports stay on your machine, no uploads
+- 147 read-only actions, zero write actions. [Read every line.](https://github.com/azz-kikkr/kulshan/blob/master/iam/kulshan-readonly.json)
+- Reports stay on your machine
 - No telemetry, no phone-home
-- Open source: Apache 2.0
+- Open source: Apache 2.0. IAM policy additionally CC BY 4.0.
+- Per-pack least-privilege policies at [`iam/per-check/`](https://github.com/azz-kikkr/kulshan/tree/master/iam/per-check)
+- Compliance metadata: CIS, SOC 2, NIST 800-53, Well-Architected
 
-[View the IAM policy](iam/kulshan-readonly.json)
+---
+
+## Quick Reference
+
+```bash
+kulshan --version                       # Version
+kulshan doctor                          # Check credentials and permissions
+kulshan report                          # Cost baseline (default)
+kulshan report --quick                  # Skip confirmation
+kulshan report -o report.html           # HTML report
+kulshan report --packs all --regions us-east-1 --deep  # Full deep scan
+kulshan report --perf                   # Show API timing
+kulshan history                         # Past scans
+kulshan history --direct-only           # Current workspace only
+kulshan workspace list                  # All environments
+kulshan workspace reconcile             # Link shared-payer environments
+kulshan shell                           # Interactive REPL
+kulshan convert -i scan.json -o r.html  # Re-render
+```
 
 ---
 
 ## AWS API Cost
 
-Typical run cost: approximately $0.15 to $0.25 in AWS Cost Explorer API charges. AWS bills Cost Explorer requests at $0.01 per request. All non-cost packs use free AWS APIs.
-
-The CLI asks for confirmation before running Cost Explorer queries. Use `--yes` for CI/CD.
-
----
-
-## Performance
-
-Kulshan uses parallel execution for audit packs and region scanning. A full 10-pack scan completes substantially faster than sequential execution.
+Cost pack: ~$0.15 (CE API at $0.01/request). All other packs use free APIs. Kulshan confirms before making CE calls. Use `--yes` in CI/CD.
 
 ---
 
 ## About the Name
 
-Kulshan is the Lummi name for the mountain known colonially as Mt. Baker, meaning "great white watcher." We acknowledge the Lummi and Nooksack peoples as the original namers of this mountain.
+Kulshan is the Lummi name for the mountain known colonially as Mt. Baker — meaning "great white watcher." We acknowledge the Lummi and Nooksack peoples as the original namers of this mountain.
 
 ---
 
@@ -343,16 +216,7 @@ Kulshan is the Lummi name for the mountain known colonially as Mt. Baker, meanin
 
 [Mission FinOps](https://missionfinops.com) | Mission, BC, Canada
 
-For questions about what Kulshan detects, or for help investigating and explaining findings, contact Mission FinOps.
-
----
-
-## Links
-
-- [Documentation](docs/README.md)
-- [IAM Policy](iam/kulshan-readonly.json)
-- [GitHub](https://github.com/azz-kikkr/kulshan)
-- [PyPI](https://pypi.org/project/kulshan/)
+hello@missionfinops.com | security@missionfinops.com
 
 ---
 
