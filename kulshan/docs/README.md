@@ -1,6 +1,6 @@
 # Kulshan Documentation
 
-Version 0.3.0 | [GitHub](https://github.com/azz-kikkr/kulshan) | [PyPI](https://pypi.org/project/kulshan/)
+Version 0.3.1 | [GitHub](https://github.com/azz-kikkr/kulshan) | [PyPI](https://pypi.org/project/kulshan/)
 
 ---
 

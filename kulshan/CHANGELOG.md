@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.1] - 2026-07-15
+
+### Changed
+- README rewritten: full v0.3 feature coverage, all links absolute for PyPI rendering
+- Documentation suite: 9 focused guides (getting started, CLI reference, audit packs, workspaces, output formats, MCP, CI/CD, security/IAM, architecture, contributing)
+- Consolidated docs from 16 files to 9 (merged configuration, troubleshooting, CUR investigation, security+IAM)
+
 ## [0.3.0] - 2026-07-15
 
 ### Added
