@@ -340,6 +340,9 @@ def report(ctx: click.Context, quick: bool, fmt: str, output: Optional[str], day
             fmt = ext_map[ext]
 
     # ── Workspace-aware execution context ────────────────────────────────
+    # Pre-resolve regions for consolidated path (which exits before normal region selection)
+    regions: list = [r.strip() for r in region_override.split(",")] if region_override else []
+
     from kulshan.workspace.resolution import (
         resolve_workspace as _resolve_ws,
         resolve_workspace_with_profile,
@@ -472,7 +475,7 @@ def report(ctx: click.Context, quick: bool, fmt: str, output: Optional[str], day
             try:
                 consolidated = run_consolidated_report(
                     connections=conn_dicts,
-                    regions=regions if 'regions' in dir() else ["us-east-1"],
+                    regions=regions,
                     selected_packs=selected_packs,
                     payer_account_id=ws_ctx.payer_account_id,
                     cost_connection_name=ws_ctx.config.aws.cost_connection if ws_ctx.config.aws else None,
@@ -551,7 +554,7 @@ def report(ctx: click.Context, quick: bool, fmt: str, output: Optional[str], day
                     history = HistoryStore(ws_ctx.history_db_path)
                     history.purge_old(retention_days=365)
                     scan_id = history.save_consolidated_scan(
-                        regions=regions if 'regions' in dir() else [],
+                        regions=regions,
                         duration_seconds=duration,
                         overall_score=overall_score,
                         overall_grade=overall_grade,
@@ -602,7 +605,7 @@ def report(ctx: click.Context, quick: bool, fmt: str, output: Optional[str], day
             _emit_output(
                 fmt=fmt, results=results, overall_score=overall_score,
                 overall_grade=overall_grade, account_id=account_id,
-                regions=regions if 'regions' in dir() else [],
+                regions=regions,
                 duration=duration, top_actions=top_actions,
                 all_findings=all_findings, output=output, show_pii=show_pii,
                 scan_metadata=scan_metadata, console=console,
