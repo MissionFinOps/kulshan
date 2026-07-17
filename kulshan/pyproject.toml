@@ -73,10 +73,11 @@ all = ["kulshan[slm,pdf,excel,pptx,mcp]"]
 kulshan = "kulshan.cli:main"
 
 [project.urls]
-Homepage = "https://github.com/azz-kikkr/kulshan"
-Repository = "https://github.com/azz-kikkr/kulshan"
-Documentation = "https://github.com/azz-kikkr/kulshan/tree/master/docs"
-Issues = "https://github.com/azz-kikkr/kulshan/issues"
+Homepage = "https://github.com/MissionFinOps/kulshan"
+Repository = "https://github.com/MissionFinOps/kulshan"
+Documentation = "https://github.com/MissionFinOps/kulshan/tree/master/kulshan/docs"
+Issues = "https://github.com/MissionFinOps/kulshan/issues"
+Changelog = "https://github.com/MissionFinOps/kulshan/blob/master/kulshan/CHANGELOG.md"
 
 [tool.hatch.version]
 path = "src/kulshan/__version__.py"

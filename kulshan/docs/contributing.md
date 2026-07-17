@@ -7,7 +7,7 @@ Development setup, testing, common issues, and FAQ.
 ## Development Setup
 
 ```bash
-git clone https://github.com/azz-kikkr/kulshan.git
+git clone https://github.com/MissionFinOps/kulshan.git
 cd kulshan
 pip install -e ".[dev]"
 ```
@@ -137,6 +137,5 @@ Maintainer-managed: update `__version__.py` → CHANGELOG → tag → push tag �
 
 ## Contact
 
-- GitHub Issues: [github.com/azz-kikkr/kulshan/issues](https://github.com/azz-kikkr/kulshan/issues)
-- General: hello@missionfinops.com
+- GitHub Issues: [github.com/MissionFinOps/kulshan/issues](https://github.com/MissionFinOps/kulshan/issues)
 - Security: security@missionfinops.com

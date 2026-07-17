@@ -7,11 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [0.3.3] - 2026-07-17
+## [0.3.4] - 2026-07-17
 
 ### Fixed
 - All project URLs updated from legacy `azz-kikkr/kulshan` to `MissionFinOps/kulshan`
-- Changelog link in PyPI README now points to the correct path
+- Changelog link added to PyPI sidebar
+- Em-dashes removed from all documentation files
+- Contributing and getting-started docs point to correct repo
 
 ## [0.3.3] - 2026-07-17
 

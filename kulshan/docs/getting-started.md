@@ -23,7 +23,7 @@ pip install kulshan
 ### From source
 
 ```bash
-git clone https://github.com/azz-kikkr/kulshan.git
+git clone https://github.com/MissionFinOps/kulshan.git
 cd kulshan
 pip install -e .
 ```
