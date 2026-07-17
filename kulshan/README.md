@@ -206,7 +206,7 @@ Cost pack: ~$0.15 (CE API at $0.01/request). All other packs use free APIs. Kuls
 
 ## About the Name
 
-Kulshan is the Lummi name for the mountain known colonially as Mt. Baker. We acknowledge the Lummi and Nooksack peoples as the original namers of this mountain.
+Kulshan is the Lummi name for the mountain known colonially as Mt. Baker, meaning "great white watcher." The mountain is visible from Mission, BC and is an active volcano in the Cascade Range. We acknowledge the Lummi and Nooksack peoples as the original namers of this mountain.
 
 ---
 

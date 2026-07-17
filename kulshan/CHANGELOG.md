@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.3] - 2026-07-17
+
+### Fixed
+- All project URLs updated from legacy `azz-kikkr/kulshan` to `MissionFinOps/kulshan`
+- Changelog link in PyPI README now points to the correct path
+
+## [0.3.3] - 2026-07-17
+
+### Changed
+- README: restored mountain meaning in About the Name section, removed em-dashes
+- Tagline updated to "Read-only AWS audit CLI"
+
 ## [0.3.2] - 2026-07-16
 
 ### Changed

@@ -96,7 +96,7 @@ kulshan mcp-serve                       # MCP server for AI agents
 
 ## About the Name
 
-Kulshan is the Lummi name for the mountain known colonially as Mt. Baker. We acknowledge the Lummi and Nooksack peoples as the original namers of this mountain.
+Kulshan is the Lummi name for the mountain known colonially as Mt. Baker, meaning "great white watcher." The mountain is visible from Mission, BC and is an active volcano in the Cascade Range. We acknowledge the Lummi and Nooksack peoples as the original namers of this mountain.
 
 ---
 
