@@ -69,7 +69,7 @@ kulshan report
 Or with a named profile:
 
 ```bash
-aws sso login --profile your-profile
+aws login --profile your-profile
 kulshan --profile your-profile report
 ```
 

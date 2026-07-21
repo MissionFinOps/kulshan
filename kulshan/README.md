@@ -6,7 +6,7 @@ Something changed in AWS. Kulshan helps you investigate what moved, what evidenc
 
 ```bash
 pip install kulshan
-aws sso login
+aws login
 kulshan preflight
 kulshan report
 ```
@@ -80,7 +80,7 @@ Python 3.9+. macOS, Linux, Windows. Optional extras: `kulshan[pdf]`, `kulshan[ex
 If `aws sts get-caller-identity` works, Kulshan works.
 
 ```bash
-aws sso login
+aws login
 kulshan preflight
 kulshan report
 ```

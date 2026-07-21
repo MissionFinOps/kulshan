@@ -14,6 +14,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - Corrected IAM ownership and source coverage validation.
 
+## [0.4.3] - 2026-07-20
+
+### Fixed
+- Replaced `aws sso login` with `aws login` throughout README, docs, diagnostics, preflight, and workspace modules. The `aws login` command is the current canonical form for AWS Identity Center authentication.
+
 ## [0.4.2] - 2026-07-20
 
 ### Fixed

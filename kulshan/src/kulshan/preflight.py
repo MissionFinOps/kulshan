@@ -95,7 +95,7 @@ def run_preflight(
         error_msg = str(e)
         if "ExpiredToken" in error_msg:
             console.print("  [red]✗[/red] Credentials expired")
-            console.print("    [dim]Run 'aws sso login' or refresh your credentials[/dim]")
+            console.print("    [dim]Run 'aws login' or refresh your credentials[/dim]")
         elif "InvalidClientTokenId" in error_msg:
             console.print("  [red]✗[/red] Invalid credentials")
             console.print("    [dim]Check your AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY[/dim]")

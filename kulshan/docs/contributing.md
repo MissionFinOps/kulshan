@@ -83,7 +83,7 @@ Maintainer-managed: update `__version__.py` → CHANGELOG → tag → push tag �
 |-------|-----|
 | "No valid AWS credentials found" | Run `aws sts get-caller-identity` to verify. Re-authenticate with `aws login`. |
 | "Credential mismatch for workspace" | Switch profile (`--profile`) or use `--workspace default` |
-| "ExpiredTokenException" | Re-authenticate: `aws login` or `aws sso login --profile X` |
+| "ExpiredTokenException" | Re-authenticate: `aws login` or `aws login --profile X` |
 
 ### Permission issues
 

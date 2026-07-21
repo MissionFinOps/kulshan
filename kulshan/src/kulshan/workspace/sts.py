@@ -130,7 +130,7 @@ def verify_credentials(
         except NoCredentialsError as e:
             raise StsVerificationError(
                 f"No valid credentials for profile '{profile}'. "
-                "SSO session may be expired. Run: aws sso login --profile "
+                "SSO session may be expired. Run: aws login --profile "
                 f"{profile}",
                 cause=e,
             ) from e
@@ -147,7 +147,7 @@ def verify_credentials(
     except NoCredentialsError as e:
         raise StsVerificationError(
             f"No valid credentials for profile '{profile}'. "
-            "SSO session may be expired. Run: aws sso login --profile "
+            "SSO session may be expired. Run: aws login --profile "
             f"{profile}",
             cause=e,
         ) from e
@@ -263,7 +263,7 @@ def create_verified_session(
         except NoCredentialsError as e:
             raise StsVerificationError(
                 f"No valid credentials for profile '{profile}'. "
-                "SSO session may be expired. Run: aws sso login --profile "
+                "SSO session may be expired. Run: aws login --profile "
                 f"{profile}",
                 cause=e,
             ) from e
@@ -280,7 +280,7 @@ def create_verified_session(
     except NoCredentialsError as e:
         raise StsVerificationError(
             f"No valid credentials for profile '{profile}'. "
-            "SSO session may be expired. Run: aws sso login --profile "
+            "SSO session may be expired. Run: aws login --profile "
             f"{profile}",
             cause=e,
         ) from e

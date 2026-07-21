@@ -96,7 +96,7 @@ class Diagnostic:
 
 def credential_expired(profile: Optional[str] = None) -> Diagnostic:
     """Diagnostic for expired AWS credentials."""
-    help_cmd = f"aws sso login --profile {profile}" if profile else "aws sso login"
+    help_cmd = f"aws login --profile {profile}" if profile else "aws login"
     return Diagnostic(
         title="AWS credentials expired",
         message="Your AWS session token has expired. The scan cannot authenticate.",
@@ -114,7 +114,7 @@ def no_credentials() -> Diagnostic:
             "Configure credentials using one of:\n"
             "  • [green]aws configure[/green] (interactive setup)\n"
             "  • Export [green]AWS_ACCESS_KEY_ID[/green] and [green]AWS_SECRET_ACCESS_KEY[/green]\n"
-            "  • [green]aws sso login --profile your-profile[/green]"
+            "  • [green]aws login --profile your-profile[/green]"
         ),
         severity="error",
     )
