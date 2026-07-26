@@ -127,9 +127,18 @@ def _show_result(
     installed = Version(current_version)
     available = Version(latest)
     if available > installed:
+        heading = click.style("UPDATE AVAILABLE", fg="yellow", bold=True)
+        warning = click.style(
+            "Manual installation required. Kulshan will never install updates automatically.",
+            fg="yellow",
+            bold=True,
+        )
+        command = click.style(UPDATE_COMMAND, fg="cyan", bold=True)
         click.echo(
-            f"\nKulshan {latest} is available. You have {current_version}.\n"
-            f"Update with:\n  {UPDATE_COMMAND}\n",
+            f"\n{heading}\n"
+            f"Kulshan {latest} is available. You have {current_version}.\n\n"
+            f"{warning}\n"
+            f"Run this command yourself:\n  {command}\n",
             file=error_stream,
         )
     else:

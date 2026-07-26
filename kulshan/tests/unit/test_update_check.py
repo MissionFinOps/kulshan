@@ -80,6 +80,8 @@ def test_consent_fetches_and_reports_newer_version(tmp_path) -> None:
 
     fetch.assert_called_once_with("0.4.5")
     assert "Kulshan 0.4.6 is available" in output.getvalue()
+    assert "Manual installation required" in output.getvalue()
+    assert "will never install updates automatically" in output.getvalue()
     assert "python -m pip install --upgrade kulshan" in output.getvalue()
 
 
