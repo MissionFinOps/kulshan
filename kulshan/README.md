@@ -53,7 +53,7 @@ Reads Cost Explorer data and your own CUR/Data Export Parquet files in place. No
 
 ## Trust model
 
-Read-only by construction, not by default. There is no cleanup mode, no write path, no telemetry to opt out of.
+Read-only by construction, not by default. There is no cleanup mode, no write path, and no telemetry. Optional PyPI update checks require explicit consent every time.
 
 - 159 read-only IAM actions, zero write actions. [Verify the policy.](https://github.com/MissionFinOps/kulshan/blob/master/kulshan/iam/kulshan-readonly.json)
 - Reports stay on your machine.
@@ -72,6 +72,17 @@ pip install kulshan
 ```
 
 Python 3.9+. macOS, Linux, Windows. Optional extras: `kulshan[pdf]`, `kulshan[excel]`, `kulshan[pptx]`, `kulshan[mcp]`, or `kulshan[all]`.
+
+### Consent-first update checks
+
+Every interactive run shows when the installed Kulshan version was released and asks before checking PyPI. The default is **No**. No request is sent unless you answer **Yes**, and the question appears before AWS credentials, profiles, workspaces, or APIs are accessed.
+
+```text
+Kulshan 0.4.5: July 25, 2026 ? released 10 days ago.
+Check PyPI for a newer version? [y/N]
+```
+
+Non-interactive and CI runs never prompt or contact PyPI. The request contains no AWS account, credential, profile, workspace, or report data. Kulshan reports the available version and update command but never installs software automatically.
 
 ---
 

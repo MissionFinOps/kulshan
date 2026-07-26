@@ -11,7 +11,7 @@ There is no write mode to enable, no cleanup command to accidentally run, no con
 - 159 read-only actions (Get, List, Describe). Zero write actions.
 - Every action verified against the [AWS Service Authorization Reference](https://docs.aws.amazon.com/service-authorization/latest/reference/)
 - No code path in Kulshan calls a write API
-- No telemetry, no phone-home, no crash analytics, no update checks
+- No telemetry or crash analytics. Optional PyPI update checks occur only after explicit consent on each interactive run; the default is No.
 - Reports stay on your local filesystem. Nothing leaves your machine.
 
 ---

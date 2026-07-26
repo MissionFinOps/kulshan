@@ -5,6 +5,17 @@ All notable changes to Kulshan will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.5] - 2026-07-25
+
+### Added
+- Added a consent-first PyPI update check before any AWS credential, workspace, or API access.
+- Added local release-age disclosure so users can decide whether an update check is worthwhile without making a network request.
+
+### Privacy
+- Interactive users must explicitly approve every PyPI request; the default is No and consent is never persisted.
+- Non-interactive and CI runs never prompt or contact PyPI.
+- Update checks send no AWS account, credential, profile, workspace, or report data and never install software automatically.
+
 ## [0.4.4] - 2026-07-25
 
 ### Fixed

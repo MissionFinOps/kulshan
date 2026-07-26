@@ -1,8 +1,12 @@
 # CLI Reference
 
-Complete command, option, and flag reference for Kulshan v0.3.0.
+Complete command, option, and flag reference for Kulshan v0.4.5.
 
 ---
+
+## Startup privacy prompt
+
+Interactive command runs show the installed release age and ask before making one optional request to PyPI. The default is No. This occurs before AWS credential, profile, workspace, or API access. Non-interactive runs never prompt or check.
 
 ## Global Options
 

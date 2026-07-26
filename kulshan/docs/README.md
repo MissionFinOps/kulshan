@@ -1,6 +1,6 @@
 # Kulshan Documentation
 
-Version 0.3 | [GitHub](https://github.com/MissionFinOps/kulshan) | [PyPI](https://pypi.org/project/kulshan/)
+Version 0.4 | [GitHub](https://github.com/MissionFinOps/kulshan) | [PyPI](https://pypi.org/project/kulshan/)
 
 ---
 
@@ -18,6 +18,8 @@ Version 0.3 | [GitHub](https://github.com/MissionFinOps/kulshan) | [PyPI](https:
 | [Contributing](contributing.md) | Dev setup, testing, troubleshooting, FAQ |
 
 ---
+
+Interactive runs disclose the installed release age and ask before making an optional PyPI version request. The default is No; CI runs never check. This happens before any AWS credential or API access.
 
 Read-only by construction. Local-first. No telemetry. Apache 2.0.
 

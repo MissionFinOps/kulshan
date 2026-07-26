@@ -21,14 +21,14 @@ One command. One report. Zero writes to your AWS account.
 
 Ten read-only audit packs in one CLI. Cost anomalies, security posture, waste detection, DR gaps, drift, tag compliance, observability blind spots, quota headroom, and network topology - scored 0-100, exportable as HTML, JSON, SARIF, or CSV.
 
-Reads your Cost Explorer data and your own CUR/Data Export Parquet files in place. No data leaves your machine. No SaaS account. No telemetry. Nothing to opt out of, because nothing exists.
+Reads your Cost Explorer data and your own CUR/Data Export Parquet files in place. No data leaves your machine. No SaaS account. No telemetry. No automatic outbound update requests.
 
 ---
 
 ## What Kulshan does not do
 
 - Does not write to AWS. The IAM policy contains only Get, List, and Describe actions.
-- Does not phone home. No telemetry, no update checks, no analytics.
+- Does not phone home. No telemetry or analytics. An optional PyPI update request is made only after you explicitly approve it.
 - Does not require infrastructure. No databases, no containers, no SaaS.
 - Does not hold credentials. Uses the same credential chain as the AWS CLI.
 
@@ -41,6 +41,17 @@ pip install kulshan
 ```
 
 Python 3.9+. macOS, Linux, Windows. Optional extras: `kulshan[mcp]`, `kulshan[pdf]`, `kulshan[excel]`, `kulshan[pptx]`, or `kulshan[all]`.
+
+### Consent-first update checks
+
+At the start of every interactive run, Kulshan shows the installed release date and age, then asks whether to check PyPI. The default is **No**. PyPI is contacted only after you answer **Yes**, before Kulshan reads AWS credentials or calls AWS.
+
+```text
+Kulshan 0.4.5: July 25, 2026 ? released 10 days ago.
+Check PyPI for a newer version? [y/N]
+```
+
+Non-interactive and CI runs never prompt or contact PyPI. The request contains no AWS account, credential, profile, workspace, or report data. Kulshan never installs updates automatically.
 
 ---
 
@@ -73,7 +84,7 @@ kulshan report --packs all --regions us-east-1    # full diagnostic
 
 - 159 read-only actions, zero write actions. [Read every line.](kulshan/iam/kulshan-readonly.json)
 - Reports stay on your machine
-- No telemetry, no phone-home
+- No telemetry or analytics; optional PyPI checks require consent every time
 - Open source: Apache 2.0. IAM policy additionally CC BY 4.0.
 
 ---

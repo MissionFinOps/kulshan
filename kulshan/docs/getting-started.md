@@ -55,6 +55,18 @@ kulshan --version
 
 ---
 
+## Consent-first update prompt
+
+Before accessing AWS credentials or APIs, every interactive command displays when the installed Kulshan release was published and asks whether to check PyPI for a newer version. The default is **No** and the answer is never remembered.
+
+```text
+Kulshan 0.4.5: July 25, 2026 ? released 10 days ago.
+Check PyPI for a newer version? [y/N]
+```
+
+Answering No sends no request. Answering Yes sends one HTTPS request to `pypi.org` containing no AWS account, credential, profile, workspace, or report data. CI and other non-interactive runs never prompt or check. Kulshan never installs an update automatically.
+
+---
 ## AWS Credentials
 
 Kulshan uses the standard AWS credential chain. Any method that makes `aws sts get-caller-identity` work will work with Kulshan.

@@ -38,6 +38,6 @@ that is a critical security issue and should be reported immediately.
 ## Security Design Principles
 
 1. **Non-mutating AWS access**: No infrastructure remediation or resource changes
-2. **Local-first defaults**: No telemetry implementation is active; optional integrations require explicit invocation
+2. **Local-first defaults**: No telemetry is active; the optional PyPI version request requires explicit consent every time and runs before AWS access
 3. **Offline license validation**: JWT verification uses a bundled public key
 4. **No credential storage**: Kulshan uses your existing AWS credential chain

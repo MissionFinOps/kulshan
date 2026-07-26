@@ -18,7 +18,7 @@ configure_windows_utf8()
 
 from rich.console import Console
 
-from kulshan.__version__ import __version__
+from kulshan.__version__ import __release_date__, __version__
 from kulshan.constants import ExitCode
 
 
@@ -267,6 +267,10 @@ def main(
     connection: Optional[str],
 ) -> None:
     """Kulshan: local-first AWS FinOps baseline."""
+    from kulshan.update_check import prompt_for_update_check
+
+    prompt_for_update_check(__version__, __release_date__)
+
     ctx.ensure_object(dict)
     ctx.obj["profile"] = profile
     ctx.obj["role_arn"] = role_arn
