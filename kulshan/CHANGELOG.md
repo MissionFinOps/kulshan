@@ -5,6 +5,12 @@ All notable changes to Kulshan will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.7] - 2026-07-26
+
+### Changed
+- Update notices now prominently state that installation is manual and Kulshan never installs updates automatically.
+- Reduced the CI suite to fast, trust-critical checks covering read-only IAM, denied-permission honesty, billing and output integrity, CLI startup, and CUR/update primitives.
+
 ## [0.4.6] - 2026-07-26
 
 ### Added
