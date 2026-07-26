@@ -46,7 +46,7 @@ jobs:
 
   tests:
     name: Test suite
-    if: ${{ github.event_name != 'workflow_call' || inputs.run_full_tests }}
+    if: ${{ github.ref_type != 'tag' || inputs.run_full_tests }}
     runs-on: ubuntu-latest
     defaults:
       run:
