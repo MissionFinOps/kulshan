@@ -11,11 +11,6 @@ permissions:
 jobs:
   quality:
     uses: ./.github/workflows/ci.yml
-    with:
-      # The full suite remains mandatory on branch and PR CI. Release publishing
-      # uses the fast deterministic gates because hosted runners repeatedly
-      # terminate the full-suite job before pytest can finish.
-      run_full_tests: false
 
   publish:
     needs: quality

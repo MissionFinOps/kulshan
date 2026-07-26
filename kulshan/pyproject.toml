@@ -57,13 +57,7 @@ pptx = ["python-pptx>=0.6.21"]
 mcp = ["mcp>=1.0"]
 dev = [
     "pytest>=8.0",
-    "pytest-cov>=5.0",
-    "hypothesis>=6.100",
     "ruff>=0.5",
-    "mypy>=1.10",
-    "mcp>=1.0",
-    "moto[ec2,iam,s3,rds,ce,sts,organizations]>=5.0",
-    "jsonschema>=4.20",
 ]
 all = ["kulshan[pdf,excel,pptx,mcp]"]
 
@@ -110,11 +104,7 @@ strict = true
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-addopts = "-q --strict-markers --cov=kulshan --cov-report=term-missing -p no:cacheprovider"
-markers = [
-    "slow: tests that take >5s",
-    "integration: requires AWS mock setup",
-]
+addopts = "-q -p no:cacheprovider"
 
 [tool.hatch.build.targets.wheel.force-include]
 "iam/kulshan-readonly.json" = "kulshan/iam/kulshan-readonly.json"

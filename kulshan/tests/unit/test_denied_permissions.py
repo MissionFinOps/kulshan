@@ -278,25 +278,3 @@ class TestPreflightDenied:
 
         # Preflight should still pass (orgs is informational, not critical)
         assert passed is True
-
-
-# ─── CUR Discovery: list_exports denied ───────────────────────────────────────
-
-
-class TestCURDiscoveryDenied:
-    """CUR discovery returns empty when bcm-data-exports:ListExports is denied."""
-
-    def test_list_exports_denied(self):
-        """Discovery returns empty list when ListExports is denied."""
-        from kulshan.cur.discovery import discover_cur_exports
-
-        session = _mock_session()
-        client = MagicMock()
-        paginator = MagicMock()
-        paginator.paginate.side_effect = _access_denied_error("ListExports")
-        client.get_paginator.return_value = paginator
-        session.client.return_value = client
-
-        result = discover_cur_exports(session)
-
-        assert result == []

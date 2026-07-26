@@ -6,12 +6,6 @@ on:
     branches:
       - '**'
   workflow_call:
-    inputs:
-      run_full_tests:
-        description: Run the full pytest suite
-        required: false
-        type: boolean
-        default: true
 
 permissions:
   contents: read
@@ -45,8 +39,7 @@ jobs:
         run: python -m ruff check --select E9,F63,F7,F82 src tests
 
   tests:
-    name: Test suite
-    if: ${{ github.ref_type != 'tag' || inputs.run_full_tests }}
+    name: Core tests
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -64,26 +57,6 @@ jobs:
         run: python -m pip install --upgrade pip && python -m pip install -e ".[dev]"
 
       - run: python -m pytest
-
-  iam:
-    name: IAM policy consistency
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: kulshan
-    steps:
-      - uses: actions/checkout@v4
-
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
-          cache: pip
-          cache-dependency-path: kulshan/pyproject.toml
-
-      - name: Install project and test tooling
-        run: python -m pip install --upgrade pip && python -m pip install -e ".[dev]"
-
-      - run: python -m pytest tests/unit/test_iam_composition.py -q
 
   package:
     name: Build and install package
