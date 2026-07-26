@@ -49,7 +49,7 @@ Replace `BILLING_BUCKET_NAME` and `EXPORT/PREFIX/` with the customer billing exp
 
 ## Optional KulshanDataExportsDiscoveryReadOnly Policy
 
-Kulshan does not currently discover AWS Data Exports. If a future workflow adds discovery, an administrator can consider a separate read-only policy like this:
+Kulshan discovers modern AWS Data Exports and legacy CUR definitions. The baseline policy therefore includes `bcm-data-exports:GetExport`, `bcm-data-exports:ListExports`, and `cur:DescribeReportDefinitions`. Generate the required export-prefix S3 policy without applying it using `kulshan cur iam --export EXPORT_NAME`:
 
 ```json
 {
@@ -142,3 +142,11 @@ kulshan cur validate --path ./.kulshan-real-cur-test/
 ```
 
 `kulshan cur validate` validates generic CUR readability and should not fail just because EC2 rows are absent. EC2 investigation is one pack, not the validation gate. `kulshan analyze ec2` still uses local files only and can fail clearly when the selected data has no EC2 rows.
+## Discovery and least-privilege workflow
+
+1. Run `kulshan cur discover` with the intended payer profile or role.
+2. Persist a choice with `kulshan cur select EXPORT_NAME --cost-source hybrid`.
+3. Run `kulshan cur iam --export EXPORT_NAME` to generate a policy limited to that bucket and prefix.
+4. Have an AWS administrator review and apply it. Kulshan never changes IAM, S3, Data Exports, or CUR configuration.
+
+Customer-managed S3 KMS encryption adds `kms:Decrypt` limited to the discovered key and S3 service context. AWS-managed S3 encryption needs no KMS grant.

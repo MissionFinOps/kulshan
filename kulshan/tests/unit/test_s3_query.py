@@ -53,7 +53,7 @@ class FakeCon:
         self.sql.append("close")
 
 
-def test_connect_s3_duckdb_uses_aws_credential_chain(monkeypatch: pytest.MonkeyPatch) -> None:
+def test_connect_s3_duckdb_resolves_exact_session_credentials(monkeypatch: pytest.MonkeyPatch) -> None:
     con = FakeCon()
     duckdb = MagicMock()
     duckdb.connect.return_value = con
@@ -67,7 +67,8 @@ def test_connect_s3_duckdb_uses_aws_credential_chain(monkeypatch: pytest.MonkeyP
     joined = "\n".join(con.sql)
     assert "LOAD httpfs" in joined
     assert "CREATE TEMPORARY SECRET" in joined
-    assert "PROVIDER credential_chain" in joined
+    assert "PROVIDER credential_chain" not in joined
+    assert "KEY_ID" in joined
     assert "ca-central-1" in joined
 
 

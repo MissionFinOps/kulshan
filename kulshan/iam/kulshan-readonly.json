@@ -48,6 +48,7 @@
                 "config:DescribeConfigurationRecorderStatus",
                 "config:DescribeConfigurationRecorders",
                 "config:DescribeDeliveryChannels",
+                "cur:DescribeReportDefinitions",
                 "dynamodb:DescribeContinuousBackups",
                 "dynamodb:DescribeTable",
                 "dynamodb:ListTables",

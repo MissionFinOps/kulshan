@@ -47,9 +47,15 @@ def read_manifest(
     billing_period: str | None = None,
     *,
     s3_client=None,
+    session=None,
+    region_name: str | None = None,
 ) -> ManifestIndex:
     """Locate and parse a CUR/Data Export manifest without reading Parquet files."""
-    client = s3_client or boto3.client("s3")
+    client = s3_client
+    if client is None and session is not None:
+        client = session.client("s3", region_name=region_name)
+    if client is None:
+        client = boto3.client("s3", region_name=region_name)
     manifest_key, manifest_size = _locate_manifest(client, bucket, prefix, billing_period)
     try:
         response = client.get_object(Bucket=bucket, Key=manifest_key)
@@ -99,10 +105,19 @@ def read_manifest_uri(
     billing_period: str | None = None,
     *,
     s3_client=None,
+    session=None,
+    region_name: str | None = None,
 ) -> ManifestIndex:
     """Read a manifest from an s3://bucket/prefix URI."""
     bucket, prefix = parse_s3_uri(s3_uri)
-    return read_manifest(bucket, prefix, billing_period, s3_client=s3_client)
+    return read_manifest(
+        bucket,
+        prefix,
+        billing_period,
+        s3_client=s3_client,
+        session=session,
+        region_name=region_name,
+    )
 
 
 def _locate_manifest(
@@ -121,11 +136,7 @@ def _locate_manifest(
 
     for search_prefix in candidates:
         try:
-            response = client.list_objects_v2(
-                Bucket=bucket,
-                Prefix=search_prefix,
-                MaxKeys=200,
-            )
+            contents = _list_objects(client, bucket, search_prefix)
         except ClientError as exc:
             if _client_error_code(exc) in {"403", "AccessDenied", "Forbidden"}:
                 raise CurManifestError(
@@ -135,7 +146,7 @@ def _locate_manifest(
             raise
         matches = [
             obj
-            for obj in response.get("Contents", [])
+            for obj in contents
             if str(obj.get("Key", "")).endswith("Manifest.json")
         ]
         if matches:
@@ -237,3 +248,17 @@ def _first_string(data: dict[str, Any], *keys: str) -> str | None:
 
 def _client_error_code(exc: ClientError) -> str:
     return str(exc.response.get("Error", {}).get("Code", ""))
+
+def _list_objects(client, bucket: str, prefix: str) -> list[dict[str, Any]]:
+    """List every object under a prefix without a 200-key blind spot."""
+    objects: list[dict[str, Any]] = []
+    token: str | None = None
+    while True:
+        kwargs: dict[str, Any] = {"Bucket": bucket, "Prefix": prefix}
+        if token:
+            kwargs["ContinuationToken"] = token
+        response = client.list_objects_v2(**kwargs)
+        objects.extend(response.get("Contents", []))
+        token = response.get("NextContinuationToken")
+        if not response.get("IsTruncated") or not token:
+            return objects

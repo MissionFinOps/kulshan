@@ -1,6 +1,6 @@
 # CLI Reference
 
-Complete command, option, and flag reference for Kulshan v0.4.5.
+Complete command, option, and flag reference for Kulshan v0.4.6.
 
 ---
 
@@ -493,3 +493,14 @@ cert_expiry_critical = 30
 | Configuration | `~/.config/kulshan/` | `%APPDATA%\kulshan\` |
 | Data (workspaces, history) | `~/.local/share/kulshan/` | `%LOCALAPPDATA%\kulshan\` |
 | Cache | `~/.cache/kulshan/` | `%LOCALAPPDATA%\kulshan\cache\` |
+
+### Automated CUR discovery and report source controls
+
+```text
+kulshan cur discover [--json]
+kulshan cur select SELECTOR [--cost-source auto|ce|hybrid|cur]
+kulshan cur iam [--export SELECTOR] [--kms-key-arn ARN]
+kulshan report [--cost-source auto|ce|hybrid|cur] [--cur-export SELECTOR] [--billing-period YYYY-MM]
+```
+
+`auto` preserves Cost Explorer for unattended runs. `hybrid` adds CUR top-mover detail, while `cur` skips Cost Explorer. With no explicit month, Kulshan selects the newest complete billing period rather than the partial current month.

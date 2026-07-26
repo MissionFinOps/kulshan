@@ -53,7 +53,7 @@ Reads Cost Explorer data and your own CUR/Data Export Parquet files in place. No
 
 ## Trust model
 
-Read-only by construction, not by default. There is no cleanup mode, no write path, and no telemetry. Optional PyPI update checks require explicit consent every time.
+Read-only by construction, not by default. There is no cleanup mode, no write path, and no telemetry. Optional PyPI update checks require explicit consent, with either decision remembered for nine hours.
 
 - 159 read-only IAM actions, zero write actions. [Verify the policy.](https://github.com/MissionFinOps/kulshan/blob/master/kulshan/iam/kulshan-readonly.json)
 - Reports stay on your machine.
@@ -78,7 +78,7 @@ Python 3.9+. macOS, Linux, Windows. Optional extras: `kulshan[pdf]`, `kulshan[ex
 Every interactive run shows when the installed Kulshan version was released and asks before checking PyPI. The default is **No**. No request is sent unless you answer **Yes**, and the question appears before AWS credentials, profiles, workspaces, or APIs are accessed.
 
 ```text
-Kulshan 0.4.5: July 25, 2026 ? released 10 days ago.
+Kulshan 0.4.6: July 26, 2026 - released today.
 Check PyPI for a newer version? [y/N]
 ```
 
@@ -249,3 +249,16 @@ Kulshan is the Lummi name for the mountain known colonially as Mt. Baker, meanin
 ## License
 
 Apache 2.0. Free and open source forever.
+
+### Automatic CUR discovery
+
+Kulshan discovers both modern AWS Data Exports and legacy Cost and Usage Reports using the exact selected AWS profile or role. It ranks healthy Parquet exports deterministically, verifies the configured payer connection, and defaults to the newest complete billing month. Unattended `auto` runs remain on Cost Explorer; CUR is used unattended only when explicitly configured.
+
+```text
+kulshan cur discover
+kulshan cur select EXPORT_NAME --cost-source hybrid
+kulshan cur iam --export EXPORT_NAME
+kulshan report --cost-source hybrid --billing-period 2026-06
+```
+
+`kulshan cur iam` prints a prefix-scoped read policy and optional customer-managed KMS permission. It never applies the policy or changes AWS.

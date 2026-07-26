@@ -24,7 +24,7 @@ from kulshan.workspace.validation import (
 
 
 # Current schema version
-SCHEMA_VERSION = 1
+SCHEMA_VERSION = 2
 
 # Migration status values
 MigrationStatusValue = Literal["not_found", "pending", "migrated", "failed"]
@@ -81,11 +81,18 @@ class WorkspaceAwsConfig:
     payer_binding_source: str | None = None
     payer_bound_at: str | None = None
     cost_connection: str | None = None
+    cur_export: str | None = None
+    cost_source: Literal["auto", "ce", "hybrid", "cur"] = "auto"
 
     def __post_init__(self):
         if self.payer_account_id is not None:
             validate_account_id(self.payer_account_id, "payer_account_id")
         validate_connection_name(self.default_connection)
+
+        if self.cost_source not in {"auto", "ce", "hybrid", "cur"}:
+            raise WorkspaceValidationError(
+                "cost_source must be auto, ce, hybrid, or cur"
+            )
 
         # Validate connection names are unique
         names = [c.name for c in self.connections]
@@ -145,6 +152,10 @@ class WorkspaceAwsConfig:
             d["payer_bound_at"] = self.payer_bound_at
         if self.cost_connection is not None:
             d["cost_connection"] = self.cost_connection
+        if self.cur_export is not None:
+            d["cur_export"] = self.cur_export
+        if self.cost_source != "auto":
+            d["cost_source"] = self.cost_source
         return d
 
     @classmethod
@@ -162,6 +173,8 @@ class WorkspaceAwsConfig:
                 payer_binding_source=data.get("payer_binding_source"),
                 payer_bound_at=data.get("payer_bound_at"),
                 cost_connection=data.get("cost_connection"),
+                cur_export=data.get("cur_export"),
+                cost_source=data.get("cost_source", "auto"),
             )
         except WorkspaceConfigError:
             raise
@@ -297,7 +310,7 @@ class WorkspaceConfig:
 
         # Validate schema version
         schema_version = data.get("schema_version", SCHEMA_VERSION)
-        if schema_version != SCHEMA_VERSION:
+        if schema_version not in {1, SCHEMA_VERSION}:
             raise WorkspaceConfigError(
                 workspace_name,
                 f"Unsupported schema_version {schema_version} "
@@ -306,7 +319,7 @@ class WorkspaceConfig:
 
         return cls(
             name=name,
-            schema_version=schema_version,
+            schema_version=SCHEMA_VERSION,
             display_name=data.get("display_name"),
             created_at=data.get("created_at"),
             binding_mode=binding_mode,

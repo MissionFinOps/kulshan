@@ -49,7 +49,9 @@ class CostInvestigationResult:
     estimate: ScanEstimate
 
 
-def connect_s3_duckdb() -> Any:
+def connect_s3_duckdb(
+    session: Any | None = None, region_name: str | None = None
+) -> Any:
     """Create a DuckDB connection configured for S3 httpfs reads."""
     try:
         import duckdb
@@ -68,16 +70,9 @@ def connect_s3_duckdb() -> Any:
             "need to install or package DuckDB httpfs for this environment."
         ) from exc
 
-    session = boto3.session.Session()
-    region = session.region_name or "us-east-1"
-    try:
-        con.execute(
-            "CREATE TEMPORARY SECRET kulshan_s3 ("
-            "TYPE S3, PROVIDER credential_chain, REGION "
-            f"{_sql_string(region)})"
-        )
-    except Exception:
-        _create_boto3_resolved_secret(con, session, region)
+    resolved_session = session or boto3.session.Session()
+    region = region_name or resolved_session.region_name or "us-east-1"
+    _create_boto3_resolved_secret(con, resolved_session, region)
     return con
 
 
@@ -132,6 +127,18 @@ def estimate_scan_bytes(
         note="Upper bound from manifest total bytes; Parquet metadata estimate unavailable.",
     )
 
+
+def validate_s3_payer(
+    con: Any,
+    manifest: ManifestIndex,
+    expected_payer: str | None,
+    workspace_name: str | None = None,
+):
+    """Validate payer evidence before labeling S3 CUR data authoritative."""
+    from kulshan.cur.payer_validation import validate_cur_payer
+
+    con.execute(f"CREATE OR REPLACE TEMP VIEW cur_raw AS SELECT * FROM {_source_sql(manifest)}")
+    return validate_cur_payer(con, expected_payer, workspace_name)
 
 def analyze_cost_s3(
     con: Any, manifest: ManifestIndex, month: str

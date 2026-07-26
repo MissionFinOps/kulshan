@@ -5,6 +5,16 @@ All notable changes to Kulshan will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.6] - 2026-07-26
+
+### Added
+- Added modern AWS Data Exports and legacy CUR discovery, deterministic ranking, workspace selection, and scoped IAM policy generation.
+- Added explicit `--cost-source`, `--cur-export`, and `--billing-period` controls plus `kulshan cur discover`, `select`, and `iam` commands.
+- Added newest-complete-period selection and exact-session S3/DuckDB access.
+
+### Privacy
+- Yes and No update-check decisions are cached locally for nine hours; during that window Kulshan is silent and makes no PyPI request.
+- Added `kulshan update check` as an explicit cooldown-bypassing check. Kulshan still never installs updates automatically.
 ## [0.4.5] - 2026-07-25
 
 ### Added
@@ -12,7 +22,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added local release-age disclosure so users can decide whether an update check is worthwhile without making a network request.
 
 ### Privacy
-- Interactive users must explicitly approve every PyPI request; the default is No and consent is never persisted.
+- Interactive users must explicitly approve every PyPI request; the default is No; this historical behavior was superseded in 0.4.6 by a nine-hour local decision cache.
 - Non-interactive and CI runs never prompt or contact PyPI.
 - Update checks send no AWS account, credential, profile, workspace, or report data and never install software automatically.
 

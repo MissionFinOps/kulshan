@@ -22,6 +22,8 @@ class PreflightResult:
     passed: bool
     warnings: List[str]
     cur_export: Optional[Any] = None  # CurExportInfo if discovered
+    cur_exports: List[Any] = field(default_factory=list)
+    cur_discovery_issues: List[Any] = field(default_factory=list)
     cur_accessible: bool = False
 
 
@@ -179,6 +181,9 @@ def run_preflight_with_cur(
     session: Any,
     console: Console | None = None,
     verbose: bool = False,
+    session_account_id: str | None = None,
+    payer_account_id: str | None = None,
+    preferred_cur_export: str | None = None,
 ) -> PreflightResult:
     """Run pre-flight checks including CUR/Data Export discovery.
     
@@ -207,9 +212,32 @@ def run_preflight_with_cur(
     
     # 7. CUR/Data Export discovery (best-effort, non-blocking)
     try:
-        from kulshan.cur.discovery import find_best_cur_export, check_cur_s3_access
+        from kulshan.cur.discovery import (
+            check_cur_s3_access,
+            discover_cur_exports_detailed,
+            rank_cur_exports,
+        )
         
-        export = find_best_cur_export(session)
+        discovery = discover_cur_exports_detailed(
+            session,
+            session_account_id=session_account_id,
+            payer_account_id=payer_account_id,
+        )
+        ranked = rank_cur_exports(
+            discovery.exports,
+            preferred_selector=preferred_cur_export,
+        )
+        result.cur_exports = ranked
+        result.cur_discovery_issues = discovery.issues
+        for issue in discovery.issues:
+            console.print(
+                f"  [dim]CUR discovery could not check {issue.provider} "
+                f"({issue.code}).[/dim]"
+            )
+        export = next(
+            (item for item in ranked if check_cur_s3_access(session, item)),
+            ranked[0] if ranked else None,
+        )
         if export:
             # Check if we can actually access the S3 data
             accessible = check_cur_s3_access(session, export)

@@ -41,7 +41,7 @@ def test_noninteractive_run_never_prompts_or_contacts_pypi() -> None:
     fetch.assert_not_called()
 
 
-def test_declining_consent_does_not_contact_pypi() -> None:
+def test_declining_consent_does_not_contact_pypi(tmp_path) -> None:
     output = StringIO()
     with (
         patch("kulshan.update_check.click.confirm", return_value=False),
@@ -52,6 +52,7 @@ def test_declining_consent_does_not_contact_pypi() -> None:
             "2026-07-25",
             stdin=TTYInput(),
             stderr=output,
+            state_path=tmp_path / "update-check.json",
         )
 
     fetch.assert_not_called()
@@ -60,7 +61,7 @@ def test_declining_consent_does_not_contact_pypi() -> None:
     assert "No AWS account, credentials, profile, workspace" in output.getvalue()
 
 
-def test_consent_fetches_and_reports_newer_version() -> None:
+def test_consent_fetches_and_reports_newer_version(tmp_path) -> None:
     output = StringIO()
     with (
         patch("kulshan.update_check.click.confirm", return_value=True),
@@ -74,6 +75,7 @@ def test_consent_fetches_and_reports_newer_version() -> None:
             "2026-07-25",
             stdin=TTYInput(),
             stderr=output,
+            state_path=tmp_path / "update-check.json",
         )
 
     fetch.assert_called_once_with("0.4.5")
@@ -89,7 +91,7 @@ def test_root_cli_invokes_update_prompt_before_landing_page() -> None:
         result = CliRunner().invoke(main, [])
 
     assert result.exit_code == 0
-    prompt.assert_called_once_with("0.4.5", "2026-07-25")
+    prompt.assert_called_once_with("0.4.6", "2026-07-26")
 
 
 def test_update_prompt_precedes_preflight_aws_access() -> None:

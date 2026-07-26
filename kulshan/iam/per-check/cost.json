@@ -7,6 +7,7 @@
       "Action": [
         "bcm-data-exports:GetExport",
         "bcm-data-exports:ListExports",
+        "cur:DescribeReportDefinitions",
         "ce:GetAnomalies",
         "ce:GetCostAndUsage",
         "ce:GetCostAndUsageComparisons",

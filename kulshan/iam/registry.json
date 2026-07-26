@@ -114,6 +114,14 @@
       "baseline_eligible": true
     },
     {
+      "iam_action": "cur:DescribeReportDefinitions",
+      "boto3_method": "cur.describe_report_definitions",
+      "aws_access_level": "Read",
+      "status": "required",
+      "capability": "cost",
+      "baseline_eligible": true
+    },
+    {
       "iam_action": "budgets:DescribeBudgets",
       "boto3_method": "budgets.describe_budgets",
       "aws_access_level": "Read",

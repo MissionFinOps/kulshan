@@ -44,10 +44,10 @@ Python 3.9+. macOS, Linux, Windows. Optional extras: `kulshan[mcp]`, `kulshan[pd
 
 ### Consent-first update checks
 
-At the start of every interactive run, Kulshan shows the installed release date and age, then asks whether to check PyPI. The default is **No**. PyPI is contacted only after you answer **Yes**, before Kulshan reads AWS credentials or calls AWS.
+When no update decision has been recorded in the previous nine hours, Kulshan shows the installed release date and age, then asks whether to check PyPI. The default is **No**. PyPI is contacted only after you answer **Yes**, before Kulshan reads AWS credentials or calls AWS.
 
 ```text
-Kulshan 0.4.5: July 25, 2026 ? released 10 days ago.
+Kulshan 0.4.6: July 26, 2026 - released today.
 Check PyPI for a newer version? [y/N]
 ```
 
@@ -84,7 +84,7 @@ kulshan report --packs all --regions us-east-1    # full diagnostic
 
 - 159 read-only actions, zero write actions. [Read every line.](kulshan/iam/kulshan-readonly.json)
 - Reports stay on your machine
-- No telemetry or analytics; optional PyPI checks require consent every time
+- No telemetry or analytics; optional PyPI checks require consent; either answer is remembered locally for nine hours
 - Open source: Apache 2.0. IAM policy additionally CC BY 4.0.
 
 ---
@@ -120,3 +120,16 @@ Kulshan is the Lummi name for the mountain known colonially as Mt. Baker, meanin
 ## License
 
 Apache 2.0. Free and open source forever.
+
+## CUR / Data Export automation
+
+Kulshan discovers modern AWS Data Exports and legacy CUR definitions through the selected payer profile or role. It ranks Parquet exports, remembers a workspace selection, uses the newest complete month by default, and can combine Cost Explorer with CUR top-mover detail.
+
+```bash
+kulshan cur discover
+kulshan cur select EXPORT_NAME --cost-source hybrid
+kulshan cur iam --export EXPORT_NAME       # prints policy; never applies it
+kulshan report --cost-source hybrid --billing-period 2026-06
+```
+
+Unattended `auto` runs stay on Cost Explorer. Select `hybrid` or `cur` explicitly to permit unattended CUR reads.

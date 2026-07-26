@@ -20,6 +20,7 @@ from rich.console import Console
 
 from kulshan.__version__ import __release_date__, __version__
 from kulshan.constants import ExitCode
+from kulshan.cur.errors import CurDataError
 
 
 def _handle_sigint(sig, frame):
@@ -269,7 +270,8 @@ def main(
     """Kulshan: local-first AWS FinOps baseline."""
     from kulshan.update_check import prompt_for_update_check
 
-    prompt_for_update_check(__version__, __release_date__)
+    if ctx.invoked_subcommand != "update":
+        prompt_for_update_check(__version__, __release_date__)
 
     ctx.ensure_object(dict)
     ctx.obj["profile"] = profile
@@ -322,8 +324,41 @@ def main(
 @click.option("--no-history", is_flag=True, help="Do not retain this scan in local history.")
 @click.option("--perf", is_flag=True, help="Show pack and AWS API timing details after the scan.")
 @click.option("--deep", is_flag=True, help="Run expensive deep checks instead of the fast default path.")
+@click.option(
+    "--cost-source",
+    type=click.Choice(["auto", "ce", "hybrid", "cur"]),
+    default=None,
+    help="Cost evidence source. Unattended auto mode remains Cost Explorer.",
+)
+@click.option(
+    "--cur-export",
+    default=None,
+    help="Preferred CUR export ARN, name, or s3:// URI.",
+)
+@click.option(
+    "--billing-period",
+    default=None,
+    help="Explicit CUR billing period in YYYY-MM form.",
+)
+
 @click.pass_context
-def report(ctx: click.Context, quick: bool, fmt: str, output: Optional[str], days: int, show_pii: bool, yes: bool, packs: Optional[str], region_override: Optional[str], no_history: bool, perf: bool, deep: bool) -> None:
+def report(
+    ctx: click.Context,
+    quick: bool,
+    fmt: str,
+    output: Optional[str],
+    days: int,
+    show_pii: bool,
+    yes: bool,
+    packs: Optional[str],
+    region_override: Optional[str],
+    no_history: bool,
+    perf: bool,
+    deep: bool,
+    cost_source: str | None,
+    cur_export: str | None,
+    billing_period: str | None,
+) -> None:
     """Run a FinOps baseline using AWS Cost Explorer.
 
     \b
@@ -715,7 +750,22 @@ def report(ctx: click.Context, quick: bool, fmt: str, output: Optional[str], day
 
     # Pre-flight health check (with CUR discovery)
     from kulshan.preflight import run_preflight_with_cur
-    preflight_result = run_preflight_with_cur(session, console=console)
+    workspace_aws = ws_ctx.config.aws if ws_ctx and ws_ctx.config.aws else None
+    effective_cost_source = cost_source or (
+        workspace_aws.cost_source if workspace_aws else "auto"
+    )
+    preferred_cur_export = cur_export or (
+        workspace_aws.cur_export if workspace_aws else None
+    )
+    preflight_result = run_preflight_with_cur(
+        session,
+        console=console,
+        session_account_id=account_id,
+        payer_account_id=(
+            workspace_aws.payer_account_id if workspace_aws else None
+        ),
+        preferred_cur_export=preferred_cur_export,
+    )
     if not preflight_result.passed:
         console.print("[red]Pre-flight checks failed. Fix the issues above and retry.[/red]")
         sys.exit(ExitCode.CONFIG_ERROR)
@@ -729,6 +779,28 @@ def report(ctx: click.Context, quick: bool, fmt: str, output: Optional[str], day
         preflight_result.cur_export
         and preflight_result.cur_accessible
         and has_cost_pack
+        and effective_cost_source in {"hybrid", "cur"}
+    ):
+        use_cur = "additive" if effective_cost_source == "hybrid" else "only"
+        cur_s3_uri = preflight_result.cur_export.s3_uri
+    elif effective_cost_source == "cur" and has_cost_pack:
+        console.print(
+            "  [red]CUR was requested but no readable export was found.[/red]"
+        )
+        console.print(
+            "  [dim]Run kulshan cur discover and kulshan cur iam.[/dim]"
+        )
+        raise SystemExit(ExitCode.CONFIG_ERROR)
+    elif effective_cost_source == "hybrid" and has_cost_pack:
+        console.print(
+            "  [yellow]CUR unavailable; continuing with Cost Explorer only.[/yellow]"
+        )
+
+    if (
+        preflight_result.cur_export
+        and preflight_result.cur_accessible
+        and has_cost_pack
+        and effective_cost_source == "auto"
         and not yes
         and not quick
     ):
@@ -818,22 +890,47 @@ def report(ctx: click.Context, quick: bool, fmt: str, output: Optional[str], day
 
     # ── CUR-only mode: skip CE, run CUR analysis directly ───────────
     if use_cur == "only":
-        from kulshan.cur.s3_query import connect_s3_duckdb, analyze_cost_s3
+        from kulshan.cur.s3_query import connect_s3_duckdb, analyze_cost_s3, validate_s3_payer
         from kulshan.cur.manifest_reader import read_manifest_uri
-        from datetime import date
+        from kulshan.cur.periods import list_manifest_periods, select_billing_period
         
         console.print("  [cyan]Running CUR-only cost analysis...[/cyan]")
         start = time.time()
         
         try:
             # Determine current month for analysis
-            current_month = date.today().strftime("%Y-%m")
+            selected_cur = preflight_result.cur_export
+            s3_client = session.client(
+                "s3", region_name=selected_cur.s3_region
+            )
+            periods = list_manifest_periods(
+                selected_cur.s3_bucket,
+                selected_cur.s3_prefix,
+                s3_client=s3_client,
+            )
+            current_month, period_complete = select_billing_period(
+                periods, requested=billing_period
+            )
             
             # Connect to S3 and read manifest
-            con = connect_s3_duckdb()
-            manifest = read_manifest_uri(cur_s3_uri, billing_period=current_month)
+            con = connect_s3_duckdb(
+                session, region_name=selected_cur.s3_region
+            )
+            manifest = read_manifest_uri(
+                cur_s3_uri,
+                billing_period=current_month,
+                session=session,
+                region_name=selected_cur.s3_region,
+            )
             
             # Run CUR analysis from S3
+            payer_check = validate_s3_payer(
+                con, manifest,
+                workspace_aws.payer_account_id if workspace_aws else None,
+                ws_ctx.name if ws_ctx else None,
+            )
+            if workspace_aws and payer_check.status != "match":
+                raise CurDataError(payer_check.message or "CUR payer could not be verified.")
             brief = analyze_cost_s3(con, manifest, current_month)
             con.close()
             duration = time.time() - start
@@ -933,16 +1030,41 @@ def report(ctx: click.Context, quick: bool, fmt: str, output: Optional[str], day
         # ── Additive CUR mode: also run CUR analysis ────────────────
         if use_cur == "additive" and cur_s3_uri:
             try:
-                from kulshan.cur.s3_query import connect_s3_duckdb, analyze_cost_s3
+                from kulshan.cur.s3_query import connect_s3_duckdb, analyze_cost_s3, validate_s3_payer
                 from kulshan.cur.manifest_reader import read_manifest_uri
-                from datetime import date
+                from kulshan.cur.periods import list_manifest_periods, select_billing_period
                 
                 console.print()
                 console.print("  [cyan]Running supplementary CUR analysis...[/cyan]")
                 
-                current_month = date.today().strftime("%Y-%m")
-                con = connect_s3_duckdb()
-                manifest = read_manifest_uri(cur_s3_uri, billing_period=current_month)
+                selected_cur = preflight_result.cur_export
+                s3_client = session.client(
+                    "s3", region_name=selected_cur.s3_region
+                )
+                periods = list_manifest_periods(
+                    selected_cur.s3_bucket,
+                    selected_cur.s3_prefix,
+                    s3_client=s3_client,
+                )
+                current_month, period_complete = select_billing_period(
+                    periods, requested=billing_period
+                )
+                con = connect_s3_duckdb(
+                    session, region_name=selected_cur.s3_region
+                )
+                manifest = read_manifest_uri(
+                    cur_s3_uri,
+                    billing_period=current_month,
+                    session=session,
+                    region_name=selected_cur.s3_region,
+                )
+                payer_check = validate_s3_payer(
+                    con, manifest,
+                    workspace_aws.payer_account_id if workspace_aws else None,
+                    ws_ctx.name if ws_ctx else None,
+                )
+                if workspace_aws and payer_check.status != "match":
+                    raise CurDataError(payer_check.message or "CUR payer could not be verified.")
                 brief = analyze_cost_s3(con, manifest, current_month)
                 con.close()
                 
@@ -1053,8 +1175,28 @@ def report(ctx: click.Context, quick: bool, fmt: str, output: Optional[str], day
 
 
 @main.group()
+def update() -> None:
+    """Check for Kulshan software updates."""
+
+
+@update.command("check")
+def update_check_command() -> None:
+    """Explicitly contact PyPI and report the latest Kulshan version."""
+    from kulshan.update_check import check_for_update
+
+    if not check_for_update(__version__):
+        raise SystemExit(1)
+
+
+# CUR/Data Export commands
+
+@main.group()
 def cur() -> None:
     """Inspect CUR/Data Exports evidence."""
+
+from kulshan.cur.cli_commands import register_cur_commands
+
+register_cur_commands(cur)
 
 
 @cur.command("schema")
@@ -1536,12 +1678,21 @@ def analyze_cost(
         return
 
     try:
-        manifest = read_manifest_uri(s3_uri or "", billing_period=month)
+        from kulshan.session import create_session
+        aws_session = create_session(
+            profile=ctx.obj.get("profile"), role_arn=ctx.obj.get("role_arn")
+        )
+
+        manifest = read_manifest_uri(
+            s3_uri or "",
+            billing_period=month,
+            session=aws_session,
+        )
         console.print("[green]manifest read: yes[/green]")
         console.print(f"manifest size: {manifest.manifest_size_bytes} bytes")
         console.print(f"file count: {len(manifest.files)}")
         console.print(f"total export size: {manifest.total_size_bytes} bytes")
-        con = connect_s3_duckdb()
+        con = connect_s3_duckdb(aws_session)
         try:
             columns = cur_columns(con, manifest)
             cost_selection = select_cost_column(con, manifest, columns, month)

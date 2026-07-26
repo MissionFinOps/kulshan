@@ -119,10 +119,10 @@ class TestIAMActionCorrectness:
             )
 
     def test_policy_action_count_consistent(self):
-        """Composed policy action count should be 159."""
+        """Composed policy action count should be 160."""
         actions = _actions(_load_composed())
-        assert len(actions) == 159, (
-            f"Expected 159 actions, got {len(actions)}"
+        assert len(actions) == 160, (
+            f"Expected 160 actions, got {len(actions)}"
         )
 
 

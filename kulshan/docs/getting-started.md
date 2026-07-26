@@ -60,7 +60,7 @@ kulshan --version
 Before accessing AWS credentials or APIs, every interactive command displays when the installed Kulshan release was published and asks whether to check PyPI for a newer version. The default is **No** and the answer is never remembered.
 
 ```text
-Kulshan 0.4.5: July 25, 2026 ? released 10 days ago.
+Kulshan 0.4.6: July 26, 2026 - released today.
 Check PyPI for a newer version? [y/N]
 ```
 
