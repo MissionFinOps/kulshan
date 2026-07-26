@@ -14,7 +14,7 @@ from typing import Any, Dict, List
 from kulshan.__version__ import __version__
 
 
-# Kulshan severity â†’ SARIF level mapping
+# Kulshan severity → SARIF level mapping
 SEVERITY_TO_SARIF_LEVEL = {
     "critical": "error",
     "high": "error",
@@ -23,7 +23,7 @@ SEVERITY_TO_SARIF_LEVEL = {
     "info": "note",
 }
 
-# Kulshan pack â†’ SARIF tool component
+# Kulshan pack → SARIF tool component
 PACK_DESCRIPTIONS = {
     "cost": "AWS cost analysis and anomaly detection",
     "security": "IAM, network, encryption, and logging posture checks",

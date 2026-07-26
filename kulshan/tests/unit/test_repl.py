@@ -2,11 +2,14 @@
 from __future__ import annotations
 
 from pathlib import Path
+from unittest.mock import Mock, patch
 
 import click
+from prompt_toolkit.document import Document
 
 from kulshan.repl import (
     ClickCompleter,
+    build_key_bindings,
     detect_unicode_support,
     get_history_path,
     inject_context_args,
@@ -42,12 +45,12 @@ class TestMakePromptText:
         prompt = make_prompt_text(supports_unicode=True)
         # HTML object has a value attribute or can be converted to string
         prompt_str = str(prompt)
-        assert "\U0001f984" in prompt_str
+        assert "\u25b2" in prompt_str
 
     def test_unicode_false_does_not_contain_mountain(self):
         prompt = make_prompt_text(supports_unicode=False)
         prompt_str = str(prompt)
-        assert "\U0001f984" not in prompt_str
+        assert "\u25b2" not in prompt_str
 
     def test_prompt_contains_Kulshan(self):
         prompt = make_prompt_text(supports_unicode=True)
@@ -141,3 +144,30 @@ class TestClickCompleter:
     def test_stores_group_reference(self, nested_click_group):
         completer = ClickCompleter(nested_click_group)
         assert completer.cli_group is nested_click_group
+
+
+class TestQuestionMarkBinding:
+    """Verify help output cooperates with prompt_toolkit's renderer."""
+
+    def test_renders_in_terminal_then_invalidates(self, simple_click_group):
+        bindings = build_key_bindings(simple_click_group, "kulshan", "kulshan")
+        handler = next(
+            binding.handler
+            for binding in bindings.bindings
+            if binding.keys == ("?",)
+        )
+        app = Mock()
+        app.current_buffer.document = Document("")
+        app.current_buffer.text = ""
+        event = Mock(app=app)
+
+        with (
+            patch("kulshan.repl.render_help_overlay") as render_overlay,
+            patch("kulshan.repl.run_in_terminal") as terminal_runner,
+        ):
+            terminal_runner.side_effect = lambda callback: callback()
+            handler(event)
+
+        terminal_runner.assert_called_once()
+        render_overlay.assert_called_once()
+        app.invalidate.assert_called_once_with()

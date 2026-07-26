@@ -15,6 +15,7 @@ from typing import Iterable, Optional
 
 import click
 from prompt_toolkit import PromptSession
+from prompt_toolkit.application import run_in_terminal
 from prompt_toolkit.completion import Completer, Completion
 from prompt_toolkit.document import Document
 from prompt_toolkit.formatted_text import HTML
@@ -32,7 +33,7 @@ from kulshan.theme import get_theme, render_banner
 
 REPL_HISTORY_MAX_ENTRIES = 1000
 REPL_EXIT_COMMANDS = {"exit", "quit"}
-UNICODE_mountain = "\U0001f984"
+UNICODE_PROMPT_PREFIX = "\u25b2"
 ASCII_FALLBACK_PREFIX = "kulshan> "
 
 
@@ -98,7 +99,7 @@ def make_prompt_text(supports_unicode: bool = True) -> HTML:
     """
     if supports_unicode:
         return HTML(
-            f"{UNICODE_mountain} <style fg='purple'><b>kulshan&gt;</b></style> "
+            f"{UNICODE_PROMPT_PREFIX} <style fg='purple'><b>kulshan&gt;</b></style> "
         )
     return HTML("<style fg='purple'><b>kulshan&gt;</b></style> ")
 
@@ -239,7 +240,18 @@ def build_key_bindings(
             parts = parts[:-1]
         context_label = " ".join(parts) if parts else tool_name
 
-        render_help_overlay(completions, tool_name, theme_name, context_label)
+        def _render_help() -> None:
+            try:
+                render_help_overlay(
+                    completions, tool_name, theme_name, context_label
+                )
+            finally:
+                # Rich changed the terminal outside prompt_toolkit's render
+                # cycle, so redraw the prompt after the overlay is complete.
+                event.app.invalidate()  # type: ignore[union-attr]
+
+        # Suspend prompt_toolkit's renderer while Rich writes the overlay.
+        run_in_terminal(_render_help)
         # Do NOT insert '?' into the buffer
 
     return kb
@@ -338,6 +350,6 @@ def run_repl(
     # Session cleanup
     truncate_history(history_path, REPL_HISTORY_MAX_ENTRIES)
     if supports_unicode:
-        print(f"Goodbye! {UNICODE_mountain}")
+        print(f"Goodbye! {UNICODE_PROMPT_PREFIX}")
     else:
         print("Goodbye!")

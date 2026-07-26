@@ -5,6 +5,14 @@ All notable changes to Kulshan will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.4] - 2026-07-25
+
+### Fixed
+- Repaired corrupted Unicode output in the CLI, HTML reports, scan history, and SARIF metadata.
+- Prevented Rich help overlays from corrupting the active `kulshan shell` input line.
+- Replaced the wide REPL emoji with a terminal-safe prompt marker.
+- Added regression coverage for source encoding and REPL terminal redraw behavior.
+
 ## [0.4.0] - 2026-07-17
 
 ### Added
