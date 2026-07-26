@@ -5,6 +5,12 @@ All notable changes to Kulshan will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.8] - 2026-07-26
+
+### Fixed
+- Allowed `aws login` to run directly inside `kulshan shell`, matching the credential recovery guidance shown to users.
+- Routed CUR discovery and IAM commands through identity-aware workspace resolution so deleted or stale active workspaces recover automatically.
+
 ## [0.4.7] - 2026-07-26
 
 ### Changed

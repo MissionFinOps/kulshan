@@ -27,9 +27,21 @@ def _resolved_session(ctx: click.Context):
 
 
 def _workspace(ctx: click.Context):
-    from kulshan.workspace.resolution import resolve_workspace
+    import os
 
-    return resolve_workspace(ctx.find_root().obj.get("workspace"))
+    from kulshan.workspace.onboarding import auto_onboard
+    from kulshan.workspace.resolution import resolve_workspace, resolve_workspace_with_profile
+
+    root = ctx.find_root()
+    workspace_name = root.obj.get("workspace")
+    profile = root.obj.get("profile") or os.environ.get("AWS_PROFILE")
+    role_arn = root.obj.get("role_arn")
+    if workspace_name:
+        return resolve_workspace(workspace_name)
+    workspace = resolve_workspace_with_profile(profile=profile, role_arn=role_arn)
+    if workspace is not None:
+        return workspace
+    return auto_onboard(profile=profile, role_arn=role_arn).workspace_context
 
 
 def _discover(ctx: click.Context):

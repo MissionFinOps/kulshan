@@ -9,6 +9,7 @@ tree for command resolution and execution.
 from __future__ import annotations
 
 import shlex
+import subprocess
 import sys
 from pathlib import Path
 from typing import Iterable, Optional
@@ -120,6 +121,20 @@ def inject_context_args(
     if role_arn and "--role-arn" not in args:
         prefix.extend(["--role-arn", role_arn])
     return prefix + args
+
+
+def run_aws_login(args: list[str]) -> None:
+    """Run the AWS CLI login flow from inside the Kulshan shell."""
+    try:
+        completed = subprocess.run(args, check=False)
+    except FileNotFoundError:
+        print("Error: AWS CLI not found. Install or repair the AWS CLI, then retry.")
+        return
+    except OSError as exc:
+        print(f"Error: could not start AWS CLI: {exc}")
+        return
+    if completed.returncode:
+        print(f"Error: aws login exited with status {completed.returncode}.")
 
 
 # ---------------------------------------------------------------------------
@@ -328,6 +343,10 @@ def run_repl(
             args = shlex.split(text)
         except ValueError:
             print("Error: unclosed quote in input")
+            continue
+
+        if len(args) >= 2 and args[0].lower() == "aws" and args[1].lower() == "login":
+            run_aws_login(args)
             continue
 
         args = inject_context_args(args, profile, role_arn)
