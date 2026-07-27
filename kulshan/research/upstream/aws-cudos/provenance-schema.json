@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://missionfinops.com/schemas/reckoner-provenance-1.0.json",
+  "title": "Kulshan Reckoner provenance record",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "record_id",
+    "upstream_repository",
+    "upstream_commit",
+    "licence",
+    "source_file",
+    "source_locator",
+    "upstream_blob_hash",
+    "kulshan_destination",
+    "adaptation_type",
+    "material_changes",
+    "kulshan_formula_id",
+    "kulshan_formula_version",
+    "golden_fixture",
+    "required_notice",
+    "verification_status"
+  ],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "record_id": {"type": "string", "minLength": 1},
+    "upstream_repository": {"type": "string", "minLength": 1},
+    "upstream_commit": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "licence": {"type": "string", "minLength": 1},
+    "source_file": {"type": "string", "minLength": 1},
+    "source_locator": {"type": "string", "minLength": 1},
+    "upstream_blob_hash": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "kulshan_destination": {"type": ["string", "null"]},
+    "adaptation_type": {"type": "string", "minLength": 1},
+    "material_changes": {"type": "array", "items": {"type": "string"}},
+    "kulshan_formula_id": {"type": ["string", "null"]},
+    "kulshan_formula_version": {"type": ["string", "null"]},
+    "golden_fixture": {"type": ["string", "null"]},
+    "required_notice": {"type": ["string", "null"]},
+    "verification_status": {"type": "string", "minLength": 1}
+  }
+}

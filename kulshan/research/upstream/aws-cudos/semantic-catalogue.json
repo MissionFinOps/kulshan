@@ -1,0 +1,202 @@
+{
+  "catalogue_id": "aws-cudos-semantics-v1",
+  "concepts": [
+    {
+      "category": "analytical-question",
+      "concept_id": "analytical-question:what-changed",
+      "description": "Which grouped contributors explain period cost movement?",
+      "name": "what changed",
+      "source_references": [
+        {
+          "source_file": "dashboards/cudos/CUDOS-v5-definition.yaml",
+          "source_id": "aws-cudos-framework",
+          "source_locator": "summary and trend sheets"
+        }
+      ]
+    },
+    {
+      "category": "analytical-question",
+      "concept_id": "analytical-question:where-is-spend-concentrated",
+      "description": "Which services, accounts, regions, usage types, or resources dominate spend?",
+      "name": "where is spend concentrated",
+      "source_references": [
+        {
+          "source_file": "dashboards/cudos/CUDOS-v5-definition.yaml",
+          "source_id": "aws-cudos-framework",
+          "source_locator": "grouped cost visuals"
+        }
+      ]
+    },
+    {
+      "category": "charge-classification",
+      "concept_id": "charge-classification:charge-type-and-category",
+      "description": "Classify usage, fees, credits, refunds, support, taxes, and commitments.",
+      "name": "charge type and category",
+      "source_references": [
+        {
+          "source_file": "data-exports/deploy/data-exports-aggregation.yaml",
+          "source_id": "aws-cudos-data-collection",
+          "source_locator": "CUR and FOCUS export column declarations"
+        }
+      ]
+    },
+    {
+      "category": "commitment-logic",
+      "concept_id": "commitment-logic:commitment-utilization-inputs",
+      "description": "Identify reserved-instance and Savings Plans commitment, effective-cost, used, and unused inputs without defining formulas.",
+      "name": "commitment utilization inputs",
+      "source_references": [
+        {
+          "source_file": "data-exports/deploy/data-exports-aggregation.yaml",
+          "source_id": "aws-cudos-data-collection",
+          "source_locator": "reservation_* and savings_plan_* schema fields"
+        }
+      ]
+    },
+    {
+      "category": "comparison-rule",
+      "concept_id": "comparison-rule:period-over-period-comparison",
+      "description": "Compare a resolved period with an aligned prior period and identify deltas and membership changes.",
+      "name": "period-over-period comparison",
+      "source_references": [
+        {
+          "source_file": "dashboards/cudos/CUDOS-v5-definition.yaml",
+          "source_id": "aws-cudos-framework",
+          "source_locator": "period comparison calculated fields and visuals"
+        }
+      ]
+    },
+    {
+      "category": "dimension",
+      "concept_id": "dimension:grouped-spend-dimension",
+      "description": "One grouped-query concept covers service, account, region, usage type, operation, resource, and purchase option variants.",
+      "name": "grouped spend dimension",
+      "source_references": [
+        {
+          "source_file": "dashboards/cudos/CUDOS-v5-definition.yaml",
+          "source_id": "aws-cudos-framework",
+          "source_locator": "visual field wells and drilldown definitions"
+        }
+      ]
+    },
+    {
+      "category": "dimension",
+      "concept_id": "dimension:tag-and-cost-category",
+      "description": "Dynamic allocation dimensions keyed by customer-defined tag or Cost Category names.",
+      "name": "tag and cost category",
+      "source_references": [
+        {
+          "source_file": "data-exports/deploy/data-exports-aggregation.yaml",
+          "source_id": "aws-cudos-data-collection",
+          "source_locator": "resource_tags and cost_category schema fields"
+        }
+      ]
+    },
+    {
+      "category": "drilldown",
+      "concept_id": "drilldown:cost-allocation-drilldown",
+      "description": "Move from service to account, region, usage type, operation, and resource evidence.",
+      "name": "cost allocation drilldown",
+      "source_references": [
+        {
+          "source_file": "dashboards/cudos/CUDOS-v5-definition.yaml",
+          "source_id": "aws-cudos-framework",
+          "source_locator": "visual field wells and actions"
+        }
+      ]
+    },
+    {
+      "category": "filter-contract",
+      "concept_id": "filter-contract:dimension-predicate",
+      "description": "Typed inclusion, exclusion, null, text, and comparison predicates scoped to supported dimensions.",
+      "name": "dimension predicate",
+      "source_references": [
+        {
+          "source_file": "dashboards/cudos/CUDOS-v5-definition.yaml",
+          "source_id": "aws-cudos-framework",
+          "source_locator": "filter groups"
+        }
+      ]
+    },
+    {
+      "category": "metric",
+      "concept_id": "metric:amortized-cost",
+      "description": "Cost basis used by CUDOS summary and grouped visuals.",
+      "name": "amortized cost",
+      "source_references": [
+        {
+          "source_file": "dashboards/cudos/CUDOS-v5-definition.yaml",
+          "source_id": "aws-cudos-framework",
+          "source_locator": "calculated field: amortized cost"
+        }
+      ]
+    },
+    {
+      "category": "metric",
+      "concept_id": "metric:usage-quantity",
+      "description": "Aggregatable usage quantity used for unit-cost and utilization questions.",
+      "name": "usage quantity",
+      "source_references": [
+        {
+          "source_file": "dashboards/cudos/CUDOS-v5-definition.yaml",
+          "source_id": "aws-cudos-framework",
+          "source_locator": "calculated fields referencing usage_quantity"
+        }
+      ]
+    },
+    {
+      "category": "parameter",
+      "concept_id": "parameter:analytical-grouping-selector",
+      "description": "Parameter chooses a grouping semantic rather than creating separate queries per visual.",
+      "name": "analytical grouping selector",
+      "source_references": [
+        {
+          "source_file": "dashboards/cudos/CUDOS-v5-definition.yaml",
+          "source_id": "aws-cudos-framework",
+          "source_locator": "group-by parameters and calculated dimensions"
+        }
+      ]
+    },
+    {
+      "category": "period-rule",
+      "concept_id": "period-rule:day-and-billing-month-truncation",
+      "description": "Usage time is grouped into day or billing-month periods with explicit boundaries.",
+      "name": "day and billing-month truncation",
+      "source_references": [
+        {
+          "source_file": "dashboards/cudos/CUDOS-v5-definition.yaml",
+          "source_id": "aws-cudos-framework",
+          "source_locator": "calculated fields: period day; period month"
+        }
+      ]
+    },
+    {
+      "category": "recommendation-candidate",
+      "concept_id": "recommendation-candidate:unused-commitment-review",
+      "description": "Candidate question for unused commitment cost; implementation and recommendations are deferred.",
+      "name": "unused commitment review",
+      "source_references": [
+        {
+          "source_file": "dashboards/cudos/CUDOS-v5-definition.yaml",
+          "source_id": "aws-cudos-framework",
+          "source_locator": "unused simulated commitment calculated fields"
+        }
+      ]
+    },
+    {
+      "category": "service-grouping",
+      "concept_id": "service-grouping:service-category",
+      "description": "Normalize service identity into analysis-oriented service groupings.",
+      "name": "service category",
+      "source_references": [
+        {
+          "source_file": "data-exports/deploy/data-exports-aggregation.yaml",
+          "source_id": "aws-cudos-data-collection",
+          "source_locator": "service and service-category export fields"
+        }
+      ]
+    }
+  ],
+  "content_sha256": "aa0512559ff6a8d34abdc07c1a1e1777a70ce1a924eafd4ee908dad9bb674fcc",
+  "schema_version": "1.0"
+}

@@ -1,0 +1,31 @@
+{
+  "schema_version": "1.0",
+  "module_id": "contract-smoke-test",
+  "question": "Can a harmless grouped request be validated?",
+  "description": "Fixture for module schema validation only; it performs no analysis.",
+  "query_defaults": {
+    "schema_version": "1.0",
+    "metric": "unblended-cost",
+    "period": {
+      "period_id": "previous-complete-month",
+      "range_rule": "start <= usage_time < end"
+    },
+    "groupings": ["service"],
+    "filters": [],
+    "exclusions": [],
+    "comparison": {"kind": "none"},
+    "sort": [{"field": "unblended-cost", "direction": "desc"}],
+    "limit": 20,
+    "visualization": "table",
+    "execution_source": "auto",
+    "output_format": "json"
+  },
+  "allowed_overrides": ["period", "groupings", "filters", "limit"],
+  "output_sections": ["table"],
+  "suggested_drilldowns": ["account", "region"],
+  "chart_preference": "table",
+  "explanation_text": "This fixture validates declarative structure only.",
+  "freshness_requirements": ["The eventual result must disclose freshness."],
+  "limitations": ["No query execution or formula is provided by this fixture."],
+  "formula_provenance_references": []
+}
