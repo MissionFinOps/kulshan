@@ -205,17 +205,25 @@ def parse_dashboard(source: SourceFile, doc: dict[str, Any]) -> tuple[list, list
                     },
                 )
             )
-            drills = [
-                (path, child) for path, key, child in walk(definition) if "drilldown" in key.lower()
-            ]
-            for drill_index, (path, child) in enumerate(drills):
+            for drill_index, hierarchy in enumerate(definition.get("ColumnHierarchies", [])):
+                hierarchy_type = next(iter(hierarchy), "UnknownHierarchy")
+                hierarchy_definition = hierarchy.get(hierarchy_type, {})
+                columns = hierarchy_definition.get("Columns", [])
+                raw_hierarchy = {
+                    "sheet": sheet_name,
+                    "visual_id": visual_id,
+                    "hierarchy_type": hierarchy_type,
+                    "columns": columns,
+                }
+                column_names = [str(column.get("ColumnName", "unknown")) for column in columns]
+                hierarchy_name = f"{hierarchy_type}:{'>'.join(column_names) or 'implicit'}"
                 items.append(
                     record(
                         source,
-                        f"{visual_path}.{path}",
+                        f"{visual_path}.ColumnHierarchies[{drill_index}]",
                         "drilldown",
-                        f"{visual_id}-drilldown-{drill_index}",
-                        child,
+                        hierarchy_name,
+                        raw_hierarchy,
                     )
                 )
     return items, unsupported
@@ -415,6 +423,14 @@ def signature(item: dict[str, Any]) -> str:
                 "fields": raw["field_references"],
             }
         )
+    if category == "drilldown":
+        return canonical(
+            {
+                "category": category,
+                "hierarchy_type": raw["hierarchy_type"],
+                "columns": raw["columns"],
+            }
+        )
     if category == "filter-group":
         filters = [
             {"type": entry["type"], "fields": field_refs(entry["definition"])}
@@ -461,6 +477,13 @@ def report(inventory: dict[str, Any], catalogue: dict[str, Any]) -> str:
         Counter(item["category"] for item in inventory["entities"]),
         Counter(item["category"] for item in catalogue["concepts"]),
     )
+    declared_calculations = sum(
+        item["source_file"] == "dashboards/cudos/CUDOS-v5-definition.yaml"
+        and item["source_path"].startswith("CalculatedFields[")
+        for item in inventory["entities"]
+    )
+    raw_drilldowns = raw.get("drilldown", 0)
+    semantic_drilldowns = semantic.get("drilldown", 0)
     lines = [
         "# AWS CUDOS semantic extraction report",
         "",
@@ -469,6 +492,8 @@ def report(inventory: dict[str, Any], catalogue: dict[str, Any]) -> str:
         "",
         f"Parsed pinned files: {len(inventory['parsed_files'])}",
         f"Raw upstream entities: {len(inventory['entities'])}",
+        f"Declared CUDOS calculated fields: {declared_calculations}",
+        f"Drilldown hierarchies: {raw_drilldowns} raw / {semantic_drilldowns} semantic",
         f"Unsupported or skipped structures: {len(inventory['unsupported_structures'])}",
         f"Entities deduplicated: {len(inventory['entities']) - len(catalogue['concepts'])}",
         f"Final semantic concepts: {len(catalogue['concepts'])}",
@@ -499,6 +524,8 @@ def report(inventory: dict[str, Any], catalogue: dict[str, Any]) -> str:
         "## Parser limitations",
         "",
         "- QuickSight visuals are summarized to type and field references.",
+        "- Drilldowns preserve hierarchy type and ordered columns; empty runtime "
+        "filters are ignored.",
         "- Layout, styling, and presentation-only settings are not semantic inputs.",
         "- Markdown is contextual unless it contains a fenced SQL query.",
         "- CloudFormation tags are loaded as inert data and never executed.",

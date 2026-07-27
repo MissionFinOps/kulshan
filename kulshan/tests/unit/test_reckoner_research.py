@@ -165,9 +165,21 @@ Sheets:
   - BarChartVisual:
       VisualId: spend-service
       FieldWells: {Values: ['{Cost}'], Category: ['{service}']}
+      ColumnHierarchies:
+      - ExplicitHierarchy:
+          Columns:
+          - {ColumnName: service, DataSetIdentifier: summary_view}
+          - {ColumnName: account, DataSetIdentifier: summary_view}
+          DrillDownFilters: []
   - BarChartVisual:
       VisualId: spend-service-copy
       FieldWells: {Values: ['{Cost}'], Category: ['{service}']}
+      ColumnHierarchies:
+      - ExplicitHierarchy:
+          Columns:
+          - {ColumnName: service, DataSetIdentifier: summary_view}
+          - {ColumnName: account, DataSetIdentifier: summary_view}
+          DrillDownFilters: []
 UnsupportedFutureStructure: {value: true}
 """
 
@@ -190,6 +202,7 @@ def test_cudos_shaped_dashboard_inventory_and_semantic_deduplication(tmp_path: P
     assert counts["filter-control"] == 1
     assert counts["filter-group"] == 2
     assert counts["parameter"] == 1
+    assert counts["drilldown"] == 2
     formulas = [item for item in entities if item["raw_name"] == "Cost"]
     assert len(formulas) == 2
     assert extractor.signature(formulas[0]) != extractor.signature(formulas[1])
@@ -207,6 +220,9 @@ def test_cudos_shaped_dashboard_inventory_and_semantic_deduplication(tmp_path: P
     assert len(visual_concepts[0]["inventory_ids"]) == 2
     filter_concepts = [item for item in catalogue["concepts"] if item["category"] == "filter-group"]
     assert len(filter_concepts) == 1
+    drilldown_concepts = [item for item in catalogue["concepts"] if item["category"] == "drilldown"]
+    assert len(drilldown_concepts) == 1
+    assert len(drilldown_concepts[0]["inventory_ids"]) == 2
     assert unsupported == [
         {
             "source_file": path.name,
@@ -258,6 +274,30 @@ def test_committed_inventory_is_fully_traceable_to_manifest_and_catalogue() -> N
         for concept in catalogue["concepts"]
     )
     assert inventory["unsupported_structures"]
+    calculated_categories = {
+        "calculated-field",
+        "charge-classification",
+        "commitment-calculation",
+        "comparison-expression",
+        "period-expression",
+        "recommendation-candidate",
+        "service-grouping",
+    }
+    declared_calculations = [
+        item
+        for item in inventory["entities"]
+        if item["source_file"] == "dashboards/cudos/CUDOS-v5-definition.yaml"
+        and item["category"] in calculated_categories
+    ]
+    assert len(declared_calculations) == 399
+    raw_drilldowns = [item for item in inventory["entities"] if item["category"] == "drilldown"]
+    semantic_drilldowns = [
+        item for item in catalogue["concepts"] if item["category"] == "drilldown"
+    ]
+    assert len(raw_drilldowns) == 279
+    assert len(semantic_drilldowns) == 51
+    assert sum(len(item["inventory_ids"]) for item in semantic_drilldowns) == 279
+    assert all("hierarchy_type" in item["raw_definition"] for item in raw_drilldowns)
     assert "raw-concepts.json" not in {path.name for path in RESEARCH_ROOT.iterdir()}
 
 

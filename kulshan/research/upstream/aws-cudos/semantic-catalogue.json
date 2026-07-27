@@ -5885,289 +5885,639 @@
     },
     {
       "category": "drilldown",
-      "concept_id": "drilldown:53dd3cd7-7f8d-4fcf-85dd-770754c4d0e5-drilldown-0:43f7efb8e0b910a9",
+      "concept_id": "drilldown:datetimehierarchy-implicit:58bd6f68ee16a9d3",
       "inventory_ids": [
-        "inv-001e48a04378d7370083",
-        "inv-033c2c6c12277c9ea54a",
-        "inv-040070d90b67d456ed71",
-        "inv-07a8b7b9effa9db28c4e",
-        "inv-0853529cc74246b662f7",
-        "inv-09be83df763461f1f2a5",
-        "inv-0ab245089a0d4f617256",
-        "inv-0b9e9816912485776ea4",
-        "inv-0bdc6bc2cdef9cfc2d3d",
-        "inv-0d4f6a20afa43ec63a95",
-        "inv-0e43693108255afd638e",
-        "inv-0e4f00ce0e5969f075db",
-        "inv-0f11e9bb699d38096147",
-        "inv-0ff2ed66de92ddb768ad",
-        "inv-1204660e83d4636079f8",
-        "inv-120cfb4d5a45d1a1e350",
-        "inv-120ef1bc8cdebe3ed346",
-        "inv-121defbd8ae4b952610d",
-        "inv-1368cdea277dd32530b7",
-        "inv-13f832852b733ed03b7d",
-        "inv-1462065e473ada2df8d2",
-        "inv-16924db7a917cfa7dcbe",
-        "inv-16de798da03b68eccd5b",
-        "inv-1720621dd042786808fa",
-        "inv-172b0a107e3395559d23",
-        "inv-1873226932b4a29c4a97",
-        "inv-190ef33361525034fe15",
-        "inv-19c0e7e67e15a04b0410",
-        "inv-1a23ffc89fd84a7d132e",
-        "inv-1acd112164d0f56ac30d",
-        "inv-1b43d274ff9d54536ff0",
-        "inv-1cd24851e2da4bfa2321",
-        "inv-1cfb26e3943b68e03340",
-        "inv-1f8e1b613b87514d6e76",
-        "inv-1fa5d8164588c36e3d43",
-        "inv-1ff0bcdc10d83f90f8c3",
-        "inv-1fff2769424ba4e0e79a",
-        "inv-20751282ec7917325291",
-        "inv-24791da1dd54329a2e76",
-        "inv-24fd041bf7bdcdabfce5",
-        "inv-27688be3a85bae385ea9",
-        "inv-280c7657017e9db0935e",
-        "inv-2b2e8ffcb6883645c18a",
-        "inv-2b974fd9cb87ce06c4c5",
-        "inv-2bd51aa460884780ada6",
-        "inv-2dafcd44cca21d89936d",
-        "inv-2db92c7d2965f1514156",
-        "inv-2f0bd60dd79772b1728b",
-        "inv-2f41187afdf3c2e799d0",
-        "inv-306fe8c0d42aaf1ad8e7",
-        "inv-30f22a570232cdee57f3",
-        "inv-31eef71c4fc41bf6a100",
-        "inv-32526a0404cd3d090980",
-        "inv-344fb2ea28607156815d",
-        "inv-359e693c92109a3fb92b",
-        "inv-35a47c7a9c1e2398d9d7",
-        "inv-3814e3c4c2d9a6b3bfd4",
-        "inv-38507c1a52ca0a634cc3",
-        "inv-389fcbddd1aaa5afa119",
-        "inv-38d5cd6bb97dc2e41b46",
-        "inv-390c0f98cea0dc8f7e43",
-        "inv-3c1801b61ea8bca96166",
-        "inv-3c6bca03d33573f052c7",
-        "inv-3c8ca849f630310c9d14",
-        "inv-3d37ed0973f68038d21b",
-        "inv-3e9cd185625664046b34",
-        "inv-3eb299443b7906ae9686",
-        "inv-407d4ccf2a2ec7114b30",
-        "inv-40e94e19cc3053684b7c",
-        "inv-45a16b0d2c98be1c8f61",
-        "inv-4646ff8dd5c5651aa6f8",
-        "inv-465ce0242ec23b312bf1",
-        "inv-46ad7d724ba63e1f874a",
-        "inv-46cd72c4ca8ea119b38d",
-        "inv-483881add95daa5295dd",
-        "inv-4917a950ff6f92bff3da",
-        "inv-4922e2b97883f876d5ad",
-        "inv-49d4e39dc4d79ad14d36",
-        "inv-4bc28c002b3c9c21aff1",
-        "inv-4bc5c42c334bccbf1885",
-        "inv-4d2ba88d04ae273fa42d",
-        "inv-4da81e564ecd0361c796",
-        "inv-4da857a8d71bd313cfcd",
-        "inv-4dc371f6b05fc6acf188",
-        "inv-4e226ba06bfd4be1fb69",
-        "inv-4ef476540aa3d7ccf9d7",
-        "inv-4fd891104e47ed77d567",
-        "inv-52cccaff495c725b6b78",
-        "inv-539066110129f0e52554",
-        "inv-54126f921f2be5400fcd",
-        "inv-54626f3907697e5c676c",
-        "inv-56ed24e6b7a4565fb56e",
-        "inv-5825021ff8c6a4f298a7",
-        "inv-58c02c60e509827648d4",
-        "inv-5a6131e7773be7716338",
-        "inv-5b126d267ce4ed76018e",
-        "inv-5b4290dacfe00dba1b1d",
-        "inv-5b43ce49b734a747d13b",
-        "inv-5c56261bcdfedbafa64a",
-        "inv-5d1503685cd0fff3304d",
-        "inv-5d73a903eb29f1a42ac7",
-        "inv-5e38584d1bdb69523a25",
-        "inv-62cb01d057d246ee32da",
-        "inv-640111d6d110a92fa3df",
-        "inv-6496d472c6e52860744f",
-        "inv-674f864b5a7510422947",
-        "inv-680eb7a062843eba08cf",
-        "inv-68c0391b5e24c6518ca5",
-        "inv-693fc46dea7d981e4386",
-        "inv-69790f3a25a92ca2cc74",
-        "inv-6ac26d690d3335d38275",
-        "inv-6b5f6d38ecdddb964da4",
-        "inv-6d0ff91f6d23e06ddc4b",
-        "inv-6f34d24516f5fe044ca4",
-        "inv-7117732c40d73d15c787",
-        "inv-714c4f0137b2beb9b989",
-        "inv-71669aafb015b0a45465",
-        "inv-72266d4e637d40adc6e8",
-        "inv-7345666f898af98489ea",
-        "inv-739d64a155784fde583e",
-        "inv-73f90076f15d13eaeb0e",
-        "inv-752402a5213d24f6cf3d",
-        "inv-75b7adc1a44ce76d92cd",
-        "inv-761233b6fcbb3b6996e0",
-        "inv-76327d0a39f859bb472f",
-        "inv-767ba5b3004268666f45",
-        "inv-768ab6411cb65c9479d4",
-        "inv-7702a93d893421b368c1",
-        "inv-794438f63d69159cf150",
-        "inv-7ae2a14b5622e7076da3",
-        "inv-7b01e72bd64abc3daa1f",
-        "inv-7c31253a79d3d67b8d2a",
-        "inv-7d363d392489b10ca76d",
-        "inv-7e21383a1f7c1da829a3",
-        "inv-7e6a6190ad99cb1663c7",
-        "inv-7fb5350eb94a3e150e92",
-        "inv-83915fcfe51ab30b461a",
-        "inv-83b3907fd77ae8b106ee",
-        "inv-840437a1e101cf5d8870",
-        "inv-84d968318a4e3812f651",
-        "inv-854cead0addec890404c",
-        "inv-867a67e68615a5faddcf",
-        "inv-8743b5e3836ec71b18be",
-        "inv-87f71cb61eb1ce2db9ed",
-        "inv-88bc0a826e6ebb8e107b",
-        "inv-893b780c91ff2d0a08ef",
-        "inv-89a36d48d16fb0af2fb4",
-        "inv-90718aae45f92d6ac208",
-        "inv-92b5c85b2cc94514e76c",
-        "inv-942be17c3fb7e531143a",
-        "inv-94466ef9481c19ebd473",
-        "inv-949a9aafafcd0825a2b4",
-        "inv-95789c93ad46793a6820",
-        "inv-958b14176bb5495a4486",
-        "inv-9797625cf633bdf29441",
-        "inv-97994c8d6bdb31c4b128",
-        "inv-984daec27ba9aab519d7",
-        "inv-99cad622bf3b4f692ed4",
-        "inv-9aa9f707346d819ee285",
-        "inv-9ac1b97f78eae161df9b",
-        "inv-9be757a376f382504791",
-        "inv-9bfe04ebc54532616a41",
-        "inv-9e17587a254af2810668",
-        "inv-9f47037ce25e9059105c",
-        "inv-9f7f1ecac182624ffaa8",
-        "inv-9fda528ab7caeb137808",
-        "inv-a05cda0d40eb8f82b26e",
-        "inv-a098ca58b5033e32a7fa",
-        "inv-a123eca1d728b1d0bf0b",
-        "inv-a21a8e8585cb6d1dd270",
-        "inv-a2c2da1cfc9df70e1ae2",
-        "inv-a3898a142acec701a1d1",
-        "inv-a39adda0132e47367e40",
-        "inv-a5f9dde1cd0b252ae6bd",
-        "inv-a63ad1185f1be121687a",
-        "inv-a6ad89b163a8359c15d4",
-        "inv-a6add6580d3b5c60b409",
-        "inv-a6e218714e9d2583dfca",
-        "inv-a735950cdfd512de394a",
-        "inv-a90040c0e0913f6dd223",
-        "inv-a9b91ce8157222f04b5b",
-        "inv-a9e558bf5284aafe3299",
-        "inv-aac94c3f89a95dc68e52",
-        "inv-ab211045e72e48a35c71",
-        "inv-ac4d078414f09a90c7cd",
-        "inv-ac8b02ffdf2f0b827c06",
-        "inv-adb32cac4b1d7cfb7cc9",
-        "inv-adc0a264782abbce3d82",
-        "inv-adf7cf1babaa7e8742a0",
-        "inv-af5fbc2278599e379fe1",
-        "inv-af652fe3b85c7a8e53a0",
-        "inv-b0c4d09c337714266553",
-        "inv-b13f42e705739d028ae8",
-        "inv-b14800424aa834c4c301",
-        "inv-b1e24209ece7f8d2ea57",
-        "inv-b23219c4158210b2f7d2",
-        "inv-b2a2e58956776a9e1701",
-        "inv-b776d621d0701f74220a",
-        "inv-b7899d41dcfe050aa025",
-        "inv-b7ac262bf4486ba85ba9",
-        "inv-b90ee1fb2e612f274830",
-        "inv-b94ca245861b38182b01",
-        "inv-ba2eb088685d7fc1263f",
-        "inv-baa12281575de9b10f56",
-        "inv-bae1268675e18e9b174f",
-        "inv-bb2e3f13c79889508da1",
-        "inv-bd5437aeb6c05a9729b3",
-        "inv-bf179b4542f2cc27b47f",
-        "inv-c0a7acd4610129c917f7",
-        "inv-c0ae0ea0382e504c1c6c",
-        "inv-c0c418932ec5db1b02d7",
-        "inv-c1795e603526d53d9b68",
-        "inv-c18357c5acd62a17c924",
-        "inv-c18f9f62f8d8ce07fbb9",
-        "inv-c1937723fa0f72e1e303",
-        "inv-c1cdc088f8d3c4c15be5",
-        "inv-c2d3271e2455bd379629",
-        "inv-c3f4f45c19e1eace792f",
-        "inv-c46eb26ea8e8a33fad46",
-        "inv-c5967c9432ffa14e365a",
-        "inv-c683fb65d045e9bdbb1e",
-        "inv-c76e0cb877926b947adc",
-        "inv-c792d6215cc4c5f43909",
-        "inv-c84787069b8fe4e367e0",
-        "inv-ca7cf49ffcdce8bcdd0b",
-        "inv-caf8dbb06a49d2b6292a",
-        "inv-ce0a1075719ee746e8bd",
-        "inv-cf5864615519c7fb578c",
-        "inv-cfe7b364cce70ed3a406",
-        "inv-d0bab6b56c44234fb985",
-        "inv-d0d77073252f14c209c7",
-        "inv-d1c39ca7fe01f469eae8",
-        "inv-d22eabdd59fabde9ddcc",
-        "inv-d3e07a72dceec56d9716",
-        "inv-d444e8ed827002205da2",
-        "inv-d494df1d7de4819c754c",
-        "inv-d55256557583c08f6584",
-        "inv-d6167fb966b3b457fd3d",
-        "inv-d67e242a8215df4651f3",
-        "inv-d6e5040c514c741ff4c6",
-        "inv-d6f2a2c4bf00877b7639",
-        "inv-d971e4d8751b19581ef2",
-        "inv-da9fb44bc4199c4db0b2",
-        "inv-db5e95b8e0a8e2d5b9b6",
-        "inv-db66eb8e68ffc18ce153",
-        "inv-dcaf974e6e21bdbedd32",
-        "inv-dcd65ba8c1699454b24b",
-        "inv-dd8ee24ce18df2625221",
-        "inv-df5bd8d7b6d90f6629d0",
-        "inv-dff89ad0d2c0d6b5035e",
-        "inv-e05ca4918667a26aa28c",
-        "inv-e128c099caf1ee979558",
-        "inv-e22717bcf8c625178cf9",
-        "inv-e28e25e363b9cb3e0d6b",
-        "inv-e2938147711d32b33c0b",
-        "inv-e9d37884ca6c5a3fb858",
-        "inv-ea557ae50c946da77cfd",
-        "inv-eacf1d2e645b010939ff",
-        "inv-ebbfc2a584bea8f1f3bc",
-        "inv-eff3bda948895238c05a",
-        "inv-f0641ac58f2eabb87052",
-        "inv-f07929aa2b77bd3a278f",
-        "inv-f0d3f760e318ad6cc504",
-        "inv-f240fcbacc13864afddc",
-        "inv-f297c2c832f6b58ab1b0",
-        "inv-f5eede40f47164008527",
-        "inv-f62c3f7e0924d88251c4",
-        "inv-f744dac29dc75686ab2f",
-        "inv-f86b1492ecc7d9b7a533",
-        "inv-f925337fbd7b22ac659b",
-        "inv-f947aa63de23279b1388",
-        "inv-faf29fa295abe17227e5",
-        "inv-fbd4a4f373d3a4cb9df9",
-        "inv-fd4cf35601c80b410276",
-        "inv-fd82944a13f0ee9b7687",
-        "inv-fee841c13bb863796efe",
-        "inv-ff6546869622687d5b8b",
-        "inv-ffd2ee3e900ecbadadcf",
-        "inv-fff24534c22f3891eec1"
+        "inv-00270b94c838f607927a",
+        "inv-00f6f35e09451d9d0e8b",
+        "inv-01b4ebb9131654b07a05",
+        "inv-04c6ca5a1f16fdc165c1",
+        "inv-057f768651e7754e0f68",
+        "inv-082b18f7e352657a70bd",
+        "inv-0889afa30a9e63cbc5e7",
+        "inv-08deefe8a798313ef70b",
+        "inv-09a1173d039f9e2fcc37",
+        "inv-09e1774ddd5eac4076af",
+        "inv-0a5a84b3e8e787983428",
+        "inv-0a94df0d10ea45f6fd8a",
+        "inv-0eef3b0cfe8afda6a590",
+        "inv-0f08418bc2892eb2ef8c",
+        "inv-100ca6edb766a867e7e9",
+        "inv-10214499328c3c85045b",
+        "inv-1235defa4d29e3b384b6",
+        "inv-1282be209ee591674698",
+        "inv-15988b76c4ead097dadd",
+        "inv-1654237b625348986931",
+        "inv-18c6782f0f5a1c3dd67b",
+        "inv-196b70382527970f7e62",
+        "inv-1abfa43cd549ca811190",
+        "inv-2171735da250fff3a528",
+        "inv-222e5cd715ebfca89f9b",
+        "inv-2245f1c11af5c5a6657f",
+        "inv-2282495bb500fa16700e",
+        "inv-23c26e6fc41e9e7519d8",
+        "inv-24f77f57df7ffeac9069",
+        "inv-2a71c7671c962cd96d34",
+        "inv-2b045b7e76a6f9670465",
+        "inv-2cd98e1e4188c8ef75f0",
+        "inv-2d48a63308a690ec5848",
+        "inv-2d75fe430d87b086e6b8",
+        "inv-2dd5a35e31f51a09b3f4",
+        "inv-31837ec53a2a77a97187",
+        "inv-3193436c6f0b96777dd2",
+        "inv-325e364cbd39565f82bf",
+        "inv-338e27ef9b17ec222830",
+        "inv-341b8428a46cc2a185ef",
+        "inv-38660fc7820ba8a2c845",
+        "inv-3993840e0840dc50533e",
+        "inv-3b12d662a18115144328",
+        "inv-3b432759a1edc087ef5d",
+        "inv-3b4b95024ab1045e9fc9",
+        "inv-3d81499eabf980710488",
+        "inv-4250a8a72aa2274def5d",
+        "inv-429b0fb8162fe57acdad",
+        "inv-429de6b49a902cb0fc1a",
+        "inv-42fa1e074d7a902fad7c",
+        "inv-4430c3328991695bb5e3",
+        "inv-4889023af0375c050162",
+        "inv-4994ca1ba88a09f8524d",
+        "inv-4aab2e29e35739050676",
+        "inv-4acbb04b54574661a66a",
+        "inv-4aeeae1cb20561a72abc",
+        "inv-4b04e48fdc19582eab55",
+        "inv-4c0946b82a33a38d0f16",
+        "inv-4cdd96781a7ce478e717",
+        "inv-4d29c503fb46467e5810",
+        "inv-4e00b5ae785e26e5cd81",
+        "inv-4e5c4217d9a0cf3507d1",
+        "inv-4ed1901c58b0ae0f8282",
+        "inv-508628f3432fdac15fc1",
+        "inv-5349047b89e8e7d4b4c6",
+        "inv-54ebfbc07ba16693bb92",
+        "inv-557461740ee0db3651ed",
+        "inv-56276032ab2d3e34f55f",
+        "inv-564c3738b3f364cc7c91",
+        "inv-56b88265c1fdaf464553",
+        "inv-56b910c048cadaa92f9d",
+        "inv-5765576c11ae1af7ce77",
+        "inv-59d509a31e2dcfbeacab",
+        "inv-59d61484da66ff192829",
+        "inv-59ecdcf22a91a28f87a6",
+        "inv-5aa62376bec674fe1456",
+        "inv-5c345cc72ec903e19111",
+        "inv-5e418ec5f3f6df10b996",
+        "inv-5f04931c7652491c84e8",
+        "inv-62f12b2c4fc57bb03ba3",
+        "inv-63c2e16ad45406903d4f",
+        "inv-63f4dc8ecccbc01fcd8e",
+        "inv-656c1d2a7451800f9e01",
+        "inv-666ada419684e8845d2a",
+        "inv-66cc0165b890e06c8262",
+        "inv-67269cc670b1ca1b8ce7",
+        "inv-67d4ae8a3fc6216fcd34",
+        "inv-6809f5d462e5150080c7",
+        "inv-6a6cec9fbe63ef6d30fa",
+        "inv-6b20aba9d7b0ed901381",
+        "inv-6e015cc5e3d137d3c450",
+        "inv-6e2f970895e1141c676e",
+        "inv-6e8abe7785df70a006a3",
+        "inv-6f2a02b93757704df0ce",
+        "inv-71f49f5270670971c41c",
+        "inv-738e45dffe52b9662e0e",
+        "inv-76546d8562d273974205",
+        "inv-7969fade301ae11c667f",
+        "inv-7a88866ed36b0c525b04",
+        "inv-7afb03e0ddab81fc85d0",
+        "inv-7c824218ecdbe6320160",
+        "inv-7d4e8b40cca398936810",
+        "inv-7da05a369aea04c55f1a",
+        "inv-7e10e156b5db8d2b7451",
+        "inv-7ff22c85eda2d74fb3d5",
+        "inv-801dbe05942ee8d9e6a7",
+        "inv-82dc4bbf6fab10d61fc6",
+        "inv-82f15f27d8cbf69fd071",
+        "inv-83dd3f1484288db69657",
+        "inv-84df363f0c3701fc1bae",
+        "inv-8678957a19147b4ef220",
+        "inv-88e417f6caabe6d690f6",
+        "inv-899d50b12f5153b44c2f",
+        "inv-8b58a5c83d42e445fe34",
+        "inv-8c20942ac1debe6a8d93",
+        "inv-8e8d8b921db0232a7850",
+        "inv-8ea3ec26a482e684eb1b",
+        "inv-8ea937b8ecd838fb44fd",
+        "inv-8f3f327d99490b35b436",
+        "inv-90a9df7dccb3cb107945",
+        "inv-9236915c518c5c9ba3ad",
+        "inv-928821bf5ae00515e379",
+        "inv-93e140cef698194e277c",
+        "inv-94cdba00f1e2bd2c882d",
+        "inv-962870f75929549b39b1",
+        "inv-9677c3aca6496df9748d",
+        "inv-9709403ab5b9036a8b5d",
+        "inv-97b20e38fa3cc8f15d29",
+        "inv-987d8f6e2aca20661689",
+        "inv-990c66aa13072853014f",
+        "inv-9ac18358b11a039b2b48",
+        "inv-a0c3430a7694e67a037b",
+        "inv-a3a6131492b1adb4ab23",
+        "inv-a3be41f59ded286fc5c0",
+        "inv-a46531be70fe6f777e5f",
+        "inv-a944b07309fca30579b7",
+        "inv-aa97dbea24674cf67fb6",
+        "inv-ad8916771664d04ab1f4",
+        "inv-ada41182b6c2d162f5cd",
+        "inv-b02f72924027e06cefbc",
+        "inv-b04a7988b5f8d3213378",
+        "inv-b2b604aeb6d039813e42",
+        "inv-b3bb6332c842952a5b7b",
+        "inv-b5a74636d874b1aa26f0",
+        "inv-b70a36f700b99b04d61c",
+        "inv-b792e9bcc3c70fcbb8fe",
+        "inv-b92541d77877024143bf",
+        "inv-b9689d10fc68c312e5d8",
+        "inv-b9e637e7ec17fbe3c4e6",
+        "inv-bd370ca2564b4da80382",
+        "inv-be75de73df4f087d024f",
+        "inv-be9dc4b86c4924ba5dee",
+        "inv-c035ea1d7aa5c945b28d",
+        "inv-c3e49bd1f4a8448c65ac",
+        "inv-c45b50fd6e5fe92a054d",
+        "inv-c48b8a655e7e5f047d4b",
+        "inv-c81e45e35657781c64db",
+        "inv-c87f31240451579b8dff",
+        "inv-ccf1a55382cb517b13e3",
+        "inv-cdafa27fd942083243db",
+        "inv-d10ecee53e8191c5e5e3",
+        "inv-d125e0c607b3b601bbf9",
+        "inv-d2ba1bec736d61f2135d",
+        "inv-d2efbd3aedc6d37aeafc",
+        "inv-d2fb718d8ecaf91f7579",
+        "inv-d32c76d69d144f0ee8f8",
+        "inv-d3957e35e619d88d9c3a",
+        "inv-d3c6364d23691bb59e8e",
+        "inv-d43fdb3854f442db90f5",
+        "inv-d5891055390331703fcd",
+        "inv-d5b4500ace0ff3b2d413",
+        "inv-d6940dfcf0a1cad9c40d",
+        "inv-d7ee0bb3c1ff9f24223d",
+        "inv-d896ac1ee91c2c5e6bac",
+        "inv-d961e8d092a6aea8c6f1",
+        "inv-da7f5330f0523690da8c",
+        "inv-da9b8852d5c3f4b2c13b",
+        "inv-dc5ee9a70332f848279f",
+        "inv-dd5c364057819ff9f7b7",
+        "inv-dd6481dafa0e5a319544",
+        "inv-de2984a8c098a8c2c4c0",
+        "inv-de392c3b919029ce199f",
+        "inv-e23bd43f0f3d872afde0",
+        "inv-e28554403a9362439783",
+        "inv-e5eb5c4a489b7bff3d46",
+        "inv-e6259df4090166345337",
+        "inv-e64a3b0a3feb903f8ff0",
+        "inv-e684bbf5c14d1ddd63de",
+        "inv-e7612af8a2be4a02becc",
+        "inv-e7a35a84044f7ac62f92",
+        "inv-e7a7c3e512e9756f1af8",
+        "inv-e96cbd60b0aa10841f18",
+        "inv-e977cd01c4f52d1cce78",
+        "inv-e97b24681d889c39bfaf",
+        "inv-ea967344377b359ef97e",
+        "inv-eab6454e25383bc30728",
+        "inv-ecd94608e67d94465c48",
+        "inv-ee01d969309f338793ca",
+        "inv-ee5e51c03e63ea7fa879",
+        "inv-eeac52a191a126a366f5",
+        "inv-efabb8c4caf5d8170715",
+        "inv-f56ee077e51a9d2569e0",
+        "inv-f684037b3021211a95c7",
+        "inv-f80e557ef99760836c50",
+        "inv-f90d629218575f37f9ab",
+        "inv-faa171a8895cb3032bf8",
+        "inv-fb51b7ed2beff88e29cb",
+        "inv-fbdebe52d357cc2e5617",
+        "inv-fc6186b698abd8f8161e",
+        "inv-ff2154a902a368cdffa1",
+        "inv-ffb28b6cdcbc1a6e5de9"
       ],
-      "name": "53dd3cd7-7f8d-4fcf-85dd-770754c4d0e5-drilldown-0"
+      "name": "DateTimeHierarchy:implicit"
+    },
+    {
+      "category": "drilldown",
+      "concept_id": "drilldown:explicithierarchy-account-linked-account-id:4296b092bcf781c8",
+      "inventory_ids": [
+        "inv-1fd866f5e9ac29b911f2",
+        "inv-553108187631b8a819ae",
+        "inv-82583265dd73f617c5b5",
+        "inv-e112c6e34467488b6fed"
+      ],
+      "name": "ExplicitHierarchy:Account>linked_account_id"
+    },
+    {
+      "category": "drilldown",
+      "concept_id": "drilldown:explicithierarchy-account-region:cb5d852e8ccd0c1d",
+      "inventory_ids": [
+        "inv-84a1a7855be630c1c772",
+        "inv-88db43d2692af15a4e2b",
+        "inv-b11445109dab2f21b5d8",
+        "inv-c5400bd276bffee321be",
+        "inv-eb3c49bc35e5e6a94fad"
+      ],
+      "name": "ExplicitHierarchy:Account>region"
+    },
+    {
+      "category": "drilldown",
+      "concept_id": "drilldown:explicithierarchy-account-service:d48028ad5905ba45",
+      "inventory_ids": [
+        "inv-b2b8dbcfbe0709fab9d7"
+      ],
+      "name": "ExplicitHierarchy:Account>service"
+    },
+    {
+      "category": "drilldown",
+      "concept_id": "drilldown:explicithierarchy-account-usagetype-short:a33255784737d58e",
+      "inventory_ids": [
+        "inv-12742b4b4a2c2c101ba6"
+      ],
+      "name": "ExplicitHierarchy:Account>UsageType Short"
+    },
+    {
+      "category": "drilldown",
+      "concept_id": "drilldown:explicithierarchy-amazon-q-usagetype-group-operation:70673ba73979b780",
+      "inventory_ids": [
+        "inv-ca92f92e69286c232a8b"
+      ],
+      "name": "ExplicitHierarchy:Amazon Q UsageType Group>operation"
+    },
+    {
+      "category": "drilldown",
+      "concept_id": "drilldown:explicithierarchy-bedrock-usagetype-group-usagetype-short:19b39a337783f8cb",
+      "inventory_ids": [
+        "inv-d08ff29dc76f4b61dc71"
+      ],
+      "name": "ExplicitHierarchy:Bedrock UsageType Group>UsageType Short"
+    },
+    {
+      "category": "drilldown",
+      "concept_id": "drilldown:explicithierarchy-billing-summary-group-by-charge-type-group-service-category-account:51079a1fa313e1b8",
+      "inventory_ids": [
+        "inv-5037931b7e9f3ea82049",
+        "inv-b8c0508458aebc505985"
+      ],
+      "name": "ExplicitHierarchy:Billing Summary Group By>Charge Type Group>Service Category>Account"
+    },
+    {
+      "category": "drilldown",
+      "concept_id": "drilldown:explicithierarchy-charge-type-description-account:0e311c1a785ffacb",
+      "inventory_ids": [
+        "inv-cd74b0999123459ba38d"
+      ],
+      "name": "ExplicitHierarchy:charge_type>Description>Account"
+    },
+    {
+      "category": "drilldown",
+      "concept_id": "drilldown:explicithierarchy-cloudwatch-usage-type-sub-group-usage-type:9187742fe4d4a418",
+      "inventory_ids": [
+        "inv-55a9a6bd9d7e73ec4d8e"
+      ],
+      "name": "ExplicitHierarchy:CloudWatch Usage Type Sub Group>usage_type"
+    },
+    {
+      "category": "drilldown",
+      "concept_id": "drilldown:explicithierarchy-datatransfer-type-operation-usage-type:15a81e8a6a206d61",
+      "inventory_ids": [
+        "inv-5428c65104a4211c6723"
+      ],
+      "name": "ExplicitHierarchy:DataTransfer Type>operation>usage_type"
+    },
+    {
+      "category": "drilldown",
+      "concept_id": "drilldown:explicithierarchy-ddb-usage-type-group-ddb-provisioned-units-purchase-option-detailed:39c2454d547f8b4a",
+      "inventory_ids": [
+        "inv-c0025d0ba876c14a0649"
+      ],
+      "name": "ExplicitHierarchy:DDB Usage Type Group>DDB Provisioned Units Purchase Option Detailed"
+    },
+    {
+      "category": "drilldown",
+      "concept_id": "drilldown:explicithierarchy-ddb-usage-type-group-usagetype-short-operation:13ee7a128e0597c7",
+      "inventory_ids": [
+        "inv-1ef64784814ae1a51258"
+      ],
+      "name": "ExplicitHierarchy:DDB Usage Type Group>UsageType Short>operation"
+    },
+    {
+      "category": "drilldown",
+      "concept_id": "drilldown:explicithierarchy-ddb-usage-type-group-usagetype-short-pricing-term-sorted:91e5663e140fe8ba",
+      "inventory_ids": [
+        "inv-5732ef1261eeeac42e1d"
+      ],
+      "name": "ExplicitHierarchy:DDB Usage Type Group>UsageType Short>Pricing Term Sorted"
+    },
+    {
+      "category": "drilldown",
+      "concept_id": "drilldown:explicithierarchy-ebs-volume-linked-account-id:389993824ac5c2e0",
+      "inventory_ids": [
+        "inv-9da68747903386809ee5"
+      ],
+      "name": "ExplicitHierarchy:EBS Volume>linked_account_id"
+    },
+    {
+      "category": "drilldown",
+      "concept_id": "drilldown:explicithierarchy-emr-usagetype-sub-group-usagetype-short:27d477c5075144ed",
+      "inventory_ids": [
+        "inv-4d4d5ab28c1103d0d1fa"
+      ],
+      "name": "ExplicitHierarchy:EMR UsageType Sub Group>UsageType Short"
+    },
+    {
+      "category": "drilldown",
+      "concept_id": "drilldown:explicithierarchy-emr-usagetype-sub-group-usagetype-short:83cf701b936097c2",
+      "inventory_ids": [
+        "inv-3897c7f3b9dd451c198d"
+      ],
+      "name": "ExplicitHierarchy:EMR UsageType Sub Group>UsageType Short"
+    },
+    {
+      "category": "drilldown",
+      "concept_id": "drilldown:explicithierarchy-glue-usagetype-group-operation:f8cffb0b06b8e2ec",
+      "inventory_ids": [
+        "inv-526c5b192e5ed4d0a14b"
+      ],
+      "name": "ExplicitHierarchy:Glue UsageType Group>operation"
+    },
+    {
+      "category": "drilldown",
+      "concept_id": "drilldown:explicithierarchy-instance-group-by-ec2-usage-family-type-ec2-usage-family:17d0ef64d67949a4",
+      "inventory_ids": [
+        "inv-aef00cd3d53f5c02f938"
+      ],
+      "name": "ExplicitHierarchy:Instance Group By>EC2 Usage Family Type>EC2 Usage Family"
+    },
+    {
+      "category": "drilldown",
+      "concept_id": "drilldown:explicithierarchy-instance-type-operation:aec0945fe0478e3a",
+      "inventory_ids": [
+        "inv-296c0711fd582d4635a5",
+        "inv-5f2f73e60c72b0cd1209"
+      ],
+      "name": "ExplicitHierarchy:instance_type>operation"
+    },
+    {
+      "category": "drilldown",
+      "concept_id": "drilldown:explicithierarchy-lambda-architecture-usagetype-short-item-description:29c33b689a33a2fe",
+      "inventory_ids": [
+        "inv-86ef2949f431c091a17a"
+      ],
+      "name": "ExplicitHierarchy:Lambda Architecture>UsageType Short>item_description"
+    },
+    {
+      "category": "drilldown",
+      "concept_id": "drilldown:explicithierarchy-month-purchase-option:06859b1c8cfa4439",
+      "inventory_ids": [
+        "inv-09a284d7ebd2c2f760df",
+        "inv-286b0aed6f23f3cc0490",
+        "inv-498f5248af733cca9175",
+        "inv-7b555c7f395810448367",
+        "inv-b454457432705a26f905",
+        "inv-c3c0bdc037a532c158e2"
+      ],
+      "name": "ExplicitHierarchy:month>purchase_option"
+    },
+    {
+      "category": "drilldown",
+      "concept_id": "drilldown:explicithierarchy-network-resource-id-datatransfer-type:f4ac0ef4fd7e35e4",
+      "inventory_ids": [
+        "inv-6c333cf3c5af3c6523f5"
+      ],
+      "name": "ExplicitHierarchy:Network Resource Id>DataTransfer Type"
+    },
+    {
+      "category": "drilldown",
+      "concept_id": "drilldown:explicithierarchy-operation-usagetype-short-usage-type:b4b62c99a7f44180",
+      "inventory_ids": [
+        "inv-05c898d2e197ca40c723"
+      ],
+      "name": "ExplicitHierarchy:operation>UsageType Short>usage_type"
+    },
+    {
+      "category": "drilldown",
+      "concept_id": "drilldown:explicithierarchy-payer-account-id-product-code-pretty-account:6384ae188391206b",
+      "inventory_ids": [
+        "inv-955c73fa815978b7f2f8"
+      ],
+      "name": "ExplicitHierarchy:payer_account_id>Product Code Pretty>Account"
+    },
+    {
+      "category": "drilldown",
+      "concept_id": "drilldown:explicithierarchy-product-code-pretty-usagetype-short-operation-description:91af2e37829fd262",
+      "inventory_ids": [
+        "inv-75edeee132ad87c0c189"
+      ],
+      "name": "ExplicitHierarchy:Product Code Pretty>UsageType Short>operation>Description"
+    },
+    {
+      "category": "drilldown",
+      "concept_id": "drilldown:explicithierarchy-product-code-pretty-usagetype-short:9624d76052817c57",
+      "inventory_ids": [
+        "inv-67253291412edff1e8a9"
+      ],
+      "name": "ExplicitHierarchy:Product Code Pretty>UsageType Short"
+    },
+    {
+      "category": "drilldown",
+      "concept_id": "drilldown:explicithierarchy-product-name-pretty-datatransfer-type-operation-usage-type:4d2f59c5cd115edd",
+      "inventory_ids": [
+        "inv-3b878300a7e7ef6a23cf"
+      ],
+      "name": "ExplicitHierarchy:Product Name Pretty>DataTransfer Type>operation>usage_type"
+    },
+    {
+      "category": "drilldown",
+      "concept_id": "drilldown:explicithierarchy-purchase-option-account:a9e4b98698d14b1e",
+      "inventory_ids": [
+        "inv-d26d47588b5b175101dd"
+      ],
+      "name": "ExplicitHierarchy:purchase_option>Account"
+    },
+    {
+      "category": "drilldown",
+      "concept_id": "drilldown:explicithierarchy-purchase-option-product-name-pretty:3d5755a4d0ac795f",
+      "inventory_ids": [
+        "inv-42223a909ae20c095b25"
+      ],
+      "name": "ExplicitHierarchy:purchase_option>Product Name Pretty"
+    },
+    {
+      "category": "drilldown",
+      "concept_id": "drilldown:explicithierarchy-purchase-option-sorted-account:d33ccb2381a254d0",
+      "inventory_ids": [
+        "inv-aaad33c51e3c168b573b",
+        "inv-e2e5fdbc250e45ad41e7"
+      ],
+      "name": "ExplicitHierarchy:Purchase Option Sorted>Account"
+    },
+    {
+      "category": "drilldown",
+      "concept_id": "drilldown:explicithierarchy-purchase-option-sorted-product-code-pretty-account:1aa0bdee98fcd266",
+      "inventory_ids": [
+        "inv-6ed675c8d02fe9776eff",
+        "inv-f9ffc0d46f15397d05da"
+      ],
+      "name": "ExplicitHierarchy:Purchase Option Sorted>Product Code Pretty>Account"
+    },
+    {
+      "category": "drilldown",
+      "concept_id": "drilldown:explicithierarchy-purchase-option-sorted-product-code-pretty:c3dd035afb41ba27",
+      "inventory_ids": [
+        "inv-a377b415481988d65009"
+      ],
+      "name": "ExplicitHierarchy:Purchase Option Sorted>Product Code Pretty"
+    },
+    {
+      "category": "drilldown",
+      "concept_id": "drilldown:explicithierarchy-purchase-option-usagetype-short:955092474bdb02bc",
+      "inventory_ids": [
+        "inv-f64f51e38c99b3378f6a"
+      ],
+      "name": "ExplicitHierarchy:purchase_option>UsageType Short"
+    },
+    {
+      "category": "drilldown",
+      "concept_id": "drilldown:explicithierarchy-quicksight-usage-type-group-account-usage-type:c3e7ddd9f29fb1ee",
+      "inventory_ids": [
+        "inv-05ae73b3b7b94d5ea8eb",
+        "inv-875e95b27e032190379c"
+      ],
+      "name": "ExplicitHierarchy:QuickSight Usage Type Group>Account>usage_type"
+    },
+    {
+      "category": "drilldown",
+      "concept_id": "drilldown:explicithierarchy-quicksight-usage-type-group-account:cbddf98f54d4a03b",
+      "inventory_ids": [
+        "inv-84964e67f29fb8358ee6"
+      ],
+      "name": "ExplicitHierarchy:QuickSight Usage Type Group>Account"
+    },
+    {
+      "category": "drilldown",
+      "concept_id": "drilldown:explicithierarchy-rds-extended-support-type-account-usage-type:8cc48ca82667c513",
+      "inventory_ids": [
+        "inv-6882536cb809762d4ff5"
+      ],
+      "name": "ExplicitHierarchy:RDS Extended Support Type>Account>usage_type"
+    },
+    {
+      "category": "drilldown",
+      "concept_id": "drilldown:explicithierarchy-region-account-operation-linked-account-id:13903eea439daa0d",
+      "inventory_ids": [
+        "inv-feda7cd3b7d9c3bc95b1"
+      ],
+      "name": "ExplicitHierarchy:region>Account>operation>linked_account_id"
+    },
+    {
+      "category": "drilldown",
+      "concept_id": "drilldown:explicithierarchy-region-account:b89541dc6e1bed26",
+      "inventory_ids": [
+        "inv-3cb5412e875d7a41ba91"
+      ],
+      "name": "ExplicitHierarchy:region>Account"
+    },
+    {
+      "category": "drilldown",
+      "concept_id": "drilldown:explicithierarchy-resource-id-short-devopsagent-task-type:a9fcd34f3c832980",
+      "inventory_ids": [
+        "inv-d4f993dc78ef493a9f70"
+      ],
+      "name": "ExplicitHierarchy:Resource Id Short>DevOpsAgent Task Type"
+    },
+    {
+      "category": "drilldown",
+      "concept_id": "drilldown:explicithierarchy-resource-id-short-resource-id:0822b00db7f88257",
+      "inventory_ids": [
+        "inv-5937ed510f7e1d292a6a"
+      ],
+      "name": "ExplicitHierarchy:Resource Id Short>resource_id"
+    },
+    {
+      "category": "drilldown",
+      "concept_id": "drilldown:explicithierarchy-resource-id-short-usagetype-short:170336a2f2f19715",
+      "inventory_ids": [
+        "inv-13908abd3b3b5b94584a"
+      ],
+      "name": "ExplicitHierarchy:Resource Id Short>UsageType Short"
+    },
+    {
+      "category": "drilldown",
+      "concept_id": "drilldown:explicithierarchy-resource-id-waf-shield-advanced-usage-type-group:e622c2e4a89d2a04",
+      "inventory_ids": [
+        "inv-6f334f85f131eab34cb1"
+      ],
+      "name": "ExplicitHierarchy:resource_id>WAF Shield Advanced Usage Type Group"
+    },
+    {
+      "category": "drilldown",
+      "concept_id": "drilldown:explicithierarchy-s3-group-by-operation-usage-type:31c08cbc0bc3e3f3",
+      "inventory_ids": [
+        "inv-9732fc25598220e188be",
+        "inv-9aaec964c0dd9789c321"
+      ],
+      "name": "ExplicitHierarchy:S3 Group By>operation>usage_type"
+    },
+    {
+      "category": "drilldown",
+      "concept_id": "drilldown:explicithierarchy-s3-group-by-operation-usagetype-short:6eb122a2025e0d1e",
+      "inventory_ids": [
+        "inv-0e41641107aaa1c7aa2d"
+      ],
+      "name": "ExplicitHierarchy:S3 Group By>operation>UsageType Short"
+    },
+    {
+      "category": "drilldown",
+      "concept_id": "drilldown:explicithierarchy-sagemaker-instance-type-family-instance-type:a2324bdd0944717b",
+      "inventory_ids": [
+        "inv-17f8d4198ce340179c56"
+      ],
+      "name": "ExplicitHierarchy:SageMaker Instance Type Family>instance_type"
+    },
+    {
+      "category": "drilldown",
+      "concept_id": "drilldown:explicithierarchy-sagemaker-usage-type-group-usagetype-short:b8c47729c3a10578",
+      "inventory_ids": [
+        "inv-a816d2f86da55f6c3828"
+      ],
+      "name": "ExplicitHierarchy:SageMaker Usage Type Group>UsageType Short"
+    },
+    {
+      "category": "drilldown",
+      "concept_id": "drilldown:explicithierarchy-usagetype-short-account:9186bd40d49d0d72",
+      "inventory_ids": [
+        "inv-0e135c76b64f553a5fbd"
+      ],
+      "name": "ExplicitHierarchy:UsageType Short>Account"
+    },
+    {
+      "category": "drilldown",
+      "concept_id": "drilldown:explicithierarchy-usagetype-short-operation-description:6b865d31e99b55ac",
+      "inventory_ids": [
+        "inv-7818d1b572fa9f703160"
+      ],
+      "name": "ExplicitHierarchy:UsageType Short>operation>Description"
+    },
+    {
+      "category": "drilldown",
+      "concept_id": "drilldown:explicithierarchy-usagetype-short-region:f5ffe717014bfbf9",
+      "inventory_ids": [
+        "inv-9100c838ed1b89d5d707"
+      ],
+      "name": "ExplicitHierarchy:UsageType Short>region"
+    },
+    {
+      "category": "drilldown",
+      "concept_id": "drilldown:explicithierarchy-usagetype-short-resource-id:a67fcdf1836d7006",
+      "inventory_ids": [
+        "inv-de559bee110391c5ddb2"
+      ],
+      "name": "ExplicitHierarchy:UsageType Short>resource_id"
     },
     {
       "category": "filter-control",
@@ -11079,7 +11429,7 @@
       "name": "summary_view"
     }
   ],
-  "content_sha256": "76b5b809f0998946249391954c6dfcb872effb081d74a360d34d38f1ae90bed9",
+  "content_sha256": "af0aa5df2e1a4e4a648bfcd0f506f351171c0b89f5117f27299d981e3ae887b5",
   "inventory_id": "aws-cudos-upstream-inventory-v1",
   "schema_version": "1.0"
 }

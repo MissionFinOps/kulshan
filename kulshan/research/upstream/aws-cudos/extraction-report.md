@@ -5,10 +5,12 @@ This is a research inventory, not an implementation backlog or formula adoption.
 
 Parsed pinned files: 12
 Raw upstream entities: 2481
+Declared CUDOS calculated fields: 399
+Drilldown hierarchies: 279 raw / 51 semantic
 Unsupported or skipped structures: 3
-Entities deduplicated: 1253
-Final semantic concepts: 1228
-Catalogue content SHA-256: `76b5b809f0998946249391954c6dfcb872effb081d74a360d34d38f1ae90bed9`
+Entities deduplicated: 1203
+Final semantic concepts: 1278
+Catalogue content SHA-256: `af0aa5df2e1a4e4a648bfcd0f506f351171c0b89f5117f27299d981e3ae887b5`
 
 ## Raw entities by category
 
@@ -43,7 +45,7 @@ Catalogue content SHA-256: `76b5b809f0998946249391954c6dfcb872effb081d74a360d34d
 - `dataset`: 3
 - `dataset-definition`: 3
 - `dataset-reference`: 1
-- `drilldown`: 1
+- `drilldown`: 51
 - `filter-control`: 54
 - `filter-group`: 372
 - `parameter`: 40
@@ -69,6 +71,7 @@ Catalogue content SHA-256: `76b5b809f0998946249391954c6dfcb872effb081d74a360d34d
 ## Parser limitations
 
 - QuickSight visuals are summarized to type and field references.
+- Drilldowns preserve hierarchy type and ordered columns; empty runtime filters are ignored.
 - Layout, styling, and presentation-only settings are not semantic inputs.
 - Markdown is contextual unless it contains a fenced SQL query.
 - CloudFormation tags are loaded as inert data and never executed.

@@ -62,6 +62,18 @@ Visual variants deduplicate by visual type and field references; presentation
 layout and styling do not create implementation work. This inventory and the
 semantic catalogue remain research evidence, not adopted Kulshan formulas.
 
+## Semantic acceptance notes
+
+`CUDOS-v5-definition.yaml` declares 399 top-level calculated fields. The inventory
+preserves all 399: 239 remain in the generic `calculated-field` category and 160
+are classified into charge, commitment, comparison, period, recommendation, or
+service-grouping categories. The category count is not a declaration count.
+
+The dashboard also declares 279 column hierarchies. These are inventoried as
+drilldowns with hierarchy type and ordered columns. They reduce to 51 semantic
+hierarchies; 211 implicit date hierarchies intentionally share one semantic,
+while distinct explicit column paths remain separate. Empty QuickSight runtime
+`DrillDownFilters` arrays are not treated as drilldown definitions.
 ## PR 0 evidence levels
 
 PR 0 deliberately distinguishes five levels:
