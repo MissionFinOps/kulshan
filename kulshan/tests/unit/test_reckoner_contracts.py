@@ -297,8 +297,8 @@ def test_provenance_contract_does_not_claim_unadopted_formula() -> None:
         ProvenanceRecord.from_dict(adopted)
 
 
-def test_safe_json_compatible_yaml_module_loading() -> None:
-    module = load_module(FIXTURES / "sample-module.yaml")
+def test_safe_json_module_loading() -> None:
+    module = load_module(FIXTURES / "sample-module.json")
     assert isinstance(module, ModuleDefinition)
     assert module.schema_version == MODULE_SCHEMA_VERSION
     assert module.query_defaults.metric == "unblended-cost"
@@ -307,21 +307,25 @@ def test_safe_json_compatible_yaml_module_loading() -> None:
 
 @pytest.mark.parametrize("forbidden", ["sql", "python", "shell", "credentials", "expression"])
 def test_module_rejects_executable_or_sensitive_fields(tmp_path: Path, forbidden: str) -> None:
-    payload = json.loads((FIXTURES / "sample-module.yaml").read_text(encoding="utf-8"))
+    payload = json.loads((FIXTURES / "sample-module.json").read_text(encoding="utf-8"))
     payload[forbidden] = "do something"
-    path = tmp_path / "bad.yaml"
+    path = tmp_path / "bad.json"
     path.write_text(json.dumps(payload), encoding="utf-8")
     with pytest.raises(ReckonerContractError):
         load_module(path)
 
 
-def test_module_rejects_unknown_or_future_schema_and_unsafe_yaml(tmp_path: Path) -> None:
-    payload = json.loads((FIXTURES / "sample-module.yaml").read_text(encoding="utf-8"))
+def test_module_rejects_unknown_future_schema_and_yaml_syntax(tmp_path: Path) -> None:
+    payload = json.loads((FIXTURES / "sample-module.json").read_text(encoding="utf-8"))
     payload["schema_version"] = "2.0"
-    path = tmp_path / "future.yaml"
+    path = tmp_path / "future.json"
     path.write_text(json.dumps(payload), encoding="utf-8")
     with pytest.raises(ReckonerContractError, match="schema_version"):
         load_module(path)
+    yaml_path = tmp_path / "unsafe.yaml"
+    yaml_path.write_text("!!python/object/apply:os.system ['whoami']", encoding="utf-8")
+    with pytest.raises(ReckonerContractError, match=".json extension"):
+        load_module(yaml_path)
     path.write_text("!!python/object/apply:os.system ['whoami']", encoding="utf-8")
-    with pytest.raises(ReckonerContractError, match="JSON-compatible"):
+    with pytest.raises(ReckonerContractError, match="valid JSON"):
         load_module(path)

@@ -1,97 +1,117 @@
 {
-  "schema_version": "1.0",
-  "retrieval_date": "2026-07-26",
-  "sources": [
-    {
-      "source_id": "aws-cudos-framework",
-      "repository": "aws-solutions-library-samples/cloud-intelligence-dashboards-framework",
-      "repository_url": "https://github.com/aws-solutions-library-samples/cloud-intelligence-dashboards-framework.git",
-      "pinned_commit": "f9e36d88c47709f10e8fa784ad11d5cc0e728021",
-      "licence_identifier": "MIT-0",
-      "licence_source_path": "LICENSE",
-      "purpose": [
-        "dashboard semantics",
-        "calculated fields",
-        "filters and parameters",
-        "analytical questions",
-        "drilldowns"
-      ],
-      "selected_files": [
+    "schema_version": "1.0",
+    "retrieval_date": "2026-07-26",
+    "sources": [
         {
-          "path": "LICENSE",
-          "git_blob_sha1": "1bb4f21e5d8b5b21b6952c0b9bf2e6220d9a56be",
-          "purpose": "licence verification"
+            "source_id": "aws-cudos-framework",
+            "repository": "aws-solutions-library-samples/cloud-intelligence-dashboards-framework",
+            "repository_url": "https://github.com/aws-solutions-library-samples/cloud-intelligence-dashboards-framework.git",
+            "pinned_commit": "f9e36d88c47709f10e8fa784ad11d5cc0e728021",
+            "licence_identifier": "MIT-0",
+            "licence_source_path": "LICENSE",
+            "purpose": [
+                "dashboard semantics",
+                "calculated fields",
+                "filters and parameters",
+                "analytical questions",
+                "drilldowns"
+            ],
+            "selected_files": [
+                {
+                    "path": "LICENSE",
+                    "git_blob_sha1": "1bb4f21e5d8b5b21b6952c0b9bf2e6220d9a56be",
+                    "purpose": "licence verification"
+                },
+                {
+                    "path": "dashboards/cudos/CUDOS-v5-definition.yaml",
+                    "git_blob_sha1": "34f040f9861c8336639e70ea0335ea7f2935d676",
+                    "purpose": "calculated fields, filters, parameters, visuals, questions, and drilldowns"
+                },
+                {
+                    "path": "dashboards/cudos/CUDOS-v5.yaml",
+                    "git_blob_sha1": "9df3a9765059e7785ce789250a126e29e1ff5a38",
+                    "purpose": "dashboard deployment identity and dataset references"
+                },
+                {
+                    "path": "cid/builtin/core/data/queries/cudos/resource_view.sql",
+                    "git_blob_sha1": "77962ed7b63708ef91266b1a53e1841d91d4c766",
+                    "purpose": "resource-grain view semantics"
+                },
+                {
+                    "path": "cid/builtin/core/data/queries/cudos/hourly_view.sql",
+                    "git_blob_sha1": "e0be7476c496e4b45a8b81b17f554c82b9763f1c",
+                    "purpose": "hourly aggregation semantics"
+                },
+                {
+                    "path": "cid/builtin/core/data/queries/shared/cur.yaml",
+                    "git_blob_sha1": "fd4bb53568d509c33f54950cffa99f1605666c45",
+                    "purpose": "shared CUR dataset and schema selection semantics"
+                },
+                {
+                    "path": "cid/builtin/core/data/queries/cid/summary_view.sql",
+                    "git_blob_sha1": "1a070bac53d7fc38bd9e7471d41cb6b05f501c2b",
+                    "purpose": "summary cost, charge, purchase-option, and commitment semantics"
+                },
+                {
+                    "path": "cid/builtin/core/data/datasets/cid/summary_view.json",
+                    "git_blob_sha1": "a37995466148e46cb164dbbe9456922fb1864e3b",
+                    "purpose": "summary dataset preparation and field contract"
+                },
+                {
+                    "path": "cid/builtin/core/data/datasets/cudos/hourly_view.json",
+                    "git_blob_sha1": "9fa5cb29264058a47d140c426054d085c9013d36",
+                    "purpose": "hourly dataset preparation and limitations"
+                },
+                {
+                    "path": "cid/builtin/core/data/datasets/cudos/resource_view.json",
+                    "git_blob_sha1": "50d6e8f7e5f95d60378bac29f8bbd56cfd3c15cb",
+                    "purpose": "resource dataset preparation and limitations"
+                }
+            ],
+            "verification_status": "verified"
         },
         {
-          "path": "dashboards/cudos/CUDOS-v5-definition.yaml",
-          "git_blob_sha1": "34f040f9861c8336639e70ea0335ea7f2935d676",
-          "purpose": "calculated fields, filters, parameters, visuals, questions, and drilldowns"
-        },
-        {
-          "path": "dashboards/cudos/CUDOS-v5.yaml",
-          "git_blob_sha1": "9df3a9765059e7785ce789250a126e29e1ff5a38",
-          "purpose": "dashboard deployment identity and dataset references"
-        },
-        {
-          "path": "cid/builtin/core/data/queries/cudos/resource_view.sql",
-          "git_blob_sha1": "77962ed7b63708ef91266b1a53e1841d91d4c766",
-          "purpose": "resource-grain view semantics"
-        },
-        {
-          "path": "cid/builtin/core/data/queries/cudos/hourly_view.sql",
-          "git_blob_sha1": "e0be7476c496e4b45a8b81b17f554c82b9763f1c",
-          "purpose": "hourly aggregation semantics"
-        },
-        {
-          "path": "cid/builtin/core/data/queries/shared/cur.yaml",
-          "git_blob_sha1": "fd4bb53568d509c33f54950cffa99f1605666c45",
-          "purpose": "shared CUR dataset and schema selection semantics"
+            "source_id": "aws-cudos-data-collection",
+            "repository": "aws-solutions-library-samples/cloud-intelligence-dashboards-data-collection",
+            "repository_url": "https://github.com/aws-solutions-library-samples/cloud-intelligence-dashboards-data-collection.git",
+            "pinned_commit": "d7945a36c3d9dc166d57752d66edfeb425f44a17",
+            "licence_identifier": "Apache-2.0",
+            "licence_source_path": "LICENSE",
+            "purpose": [
+                "CUR and CUR 2.0 schemas",
+                "aggregation preparation",
+                "export logic",
+                "service classifications",
+                "commitment inputs"
+            ],
+            "selected_files": [
+                {
+                    "path": "LICENSE",
+                    "git_blob_sha1": "67db8588217f266eb561f75fae738656325deac9",
+                    "purpose": "licence verification"
+                },
+                {
+                    "path": "NOTICE",
+                    "git_blob_sha1": "616fc5889451895dbf9768e6787c8308c33bef22",
+                    "purpose": "upstream notice verification"
+                },
+                {
+                    "path": "data-exports/deploy/data-exports-aggregation.yaml",
+                    "git_blob_sha1": "9b432af481c7fe2a07addfb2a27ad1f672c3a1f1",
+                    "purpose": "CUR 2.0/FOCUS schemas, aggregation fields, and export preparation"
+                },
+                {
+                    "path": "data-exports/deploy/cur-aggregation.yaml",
+                    "git_blob_sha1": "f8968715bfd34193575e2adbf502a0856e463229",
+                    "purpose": "legacy CUR aggregation and export preparation"
+                },
+                {
+                    "path": "data-exports/README.md",
+                    "git_blob_sha1": "6433a2a7a8695823cf3e519e1c025abdfe0fb399",
+                    "purpose": "deployment and data-source context"
+                }
+            ],
+            "verification_status": "verified"
         }
-      ],
-      "verification_status": "verified"
-    },
-    {
-      "source_id": "aws-cudos-data-collection",
-      "repository": "aws-solutions-library-samples/cloud-intelligence-dashboards-data-collection",
-      "repository_url": "https://github.com/aws-solutions-library-samples/cloud-intelligence-dashboards-data-collection.git",
-      "pinned_commit": "d7945a36c3d9dc166d57752d66edfeb425f44a17",
-      "licence_identifier": "Apache-2.0",
-      "licence_source_path": "LICENSE",
-      "purpose": [
-        "CUR and CUR 2.0 schemas",
-        "aggregation preparation",
-        "export logic",
-        "service classifications",
-        "commitment inputs"
-      ],
-      "selected_files": [
-        {
-          "path": "LICENSE",
-          "git_blob_sha1": "67db8588217f266eb561f75fae738656325deac9",
-          "purpose": "licence verification"
-        },
-        {
-          "path": "NOTICE",
-          "git_blob_sha1": "616fc5889451895dbf9768e6787c8308c33bef22",
-          "purpose": "upstream notice verification"
-        },
-        {
-          "path": "data-exports/deploy/data-exports-aggregation.yaml",
-          "git_blob_sha1": "9b432af481c7fe2a07addfb2a27ad1f672c3a1f1",
-          "purpose": "CUR 2.0/FOCUS schemas, aggregation fields, and export preparation"
-        },
-        {
-          "path": "data-exports/deploy/cur-aggregation.yaml",
-          "git_blob_sha1": "f8968715bfd34193575e2adbf502a0856e463229",
-          "purpose": "legacy CUR aggregation and export preparation"
-        },
-        {
-          "path": "data-exports/README.md",
-          "git_blob_sha1": "6433a2a7a8695823cf3e519e1c025abdfe0fb399",
-          "purpose": "deployment and data-source context"
-        }
-      ],
-      "verification_status": "verified"
-    }
-  ]
+    ]
 }

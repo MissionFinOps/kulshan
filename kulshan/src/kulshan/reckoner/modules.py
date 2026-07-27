@@ -1,8 +1,8 @@
 """Safe schema loading for declarative Reckoner modules.
 
-Module files use the JSON-compatible subset of YAML. The standard-library JSON
-parser is intentionally used so PR 0 does not add a YAML dependency or support
-tags, constructors, aliases, or executable expressions.
+Module files use JSON. True YAML support is deferred until a safe loader is justified.
+The standard-library parser admits no YAML tags, constructors, aliases, or executable
+expressions.
 """
 
 from __future__ import annotations
@@ -157,13 +157,15 @@ def _reject_forbidden_fields(value: Any, path: str = "module") -> None:
 
 
 def load_module(path: str | Path) -> ModuleDefinition:
-    """Load a module using the safe JSON-compatible YAML subset."""
+    """Load a declarative module from strict JSON."""
     module_path = Path(path)
+    if module_path.suffix.lower() != ".json":
+        raise ReckonerContractError("module files must use the .json extension")
     try:
         data = json.loads(module_path.read_text(encoding="utf-8"))
     except json.JSONDecodeError as exc:
         raise ReckonerContractError(
-            "module must use JSON-compatible YAML; tags and executable YAML are unsupported"
+            "module must contain valid JSON; YAML tags and executable syntax are unsupported"
         ) from exc
     if not isinstance(data, Mapping):
         raise ReckonerContractError("module root must be an object")

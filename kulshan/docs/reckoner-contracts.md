@@ -37,19 +37,40 @@ material changes, formula identity/version, golden fixture, and notice duty.
 
 ## Semantic deduplication
 
-The frozen raw concept inventory is transformed deterministically:
+The inventory and catalogue are regenerated directly from verified detached
+checkouts; there is no manually maintained semantic intermediate:
 
 ```powershell
 python scripts/research/extract_aws_cudos_semantics.py `
-  research/upstream/aws-cudos/raw-concepts.json `
+  research/upstream/aws-cudos/upstream-manifest.json `
+  research/upstream/aws-cudos/upstream-inventory.json `
   research/upstream/aws-cudos/semantic-catalogue.json `
-  research/upstream/aws-cudos/extraction-report.md
+  research/upstream/aws-cudos/extraction-report.md `
+  --source-root aws-cudos-framework=C:\path\to\framework `
+  --source-root aws-cudos-data-collection=C:\path\to\data-collection
 ```
 
-Concepts are deduplicated by normalized category and name. Repeated dashboard
-visuals do not become separate work items: spend grouped by service, account,
-region, usage type, operation, or resource is one grouped-query semantic with
-different dimension selections.
+The command verifies repository identity, commits, and selected blobs before it
+parses dashboard sheets, datasets, visuals, calculated fields, parameters,
+filter groups and controls, drilldowns, SQL views, and supported aggregation
+structures. `upstream-inventory.json` preserves exact document paths and blob
+provenance. Every deduplicated concept refers to one or more inventory IDs.
+Unsupported structures and parser limitations are disclosed in the report.
+
+Calculated fields deduplicate only by identical categorized expressions.
+Visual variants deduplicate by visual type and field references; presentation
+layout and styling do not create implementation work. This inventory and the
+semantic catalogue remain research evidence, not adopted Kulshan formulas.
+
+## PR 0 evidence levels
+
+PR 0 deliberately distinguishes five levels:
+
+1. Pinned upstream sources are exact, licence-checked Git objects.
+2. The machine-generated upstream inventory records source entities without adoption.
+3. The semantic catalogue deduplicates research concepts with inventory traceability.
+4. Kulshan registry descriptors reserve stable planned identifiers.
+5. Implemented Kulshan formulas remain empty in PR 0.
 
 ## Versioning and compatibility
 
@@ -117,11 +138,13 @@ provenance references, and S3 bytes. No unfinished CLI flags are exposed.
 
 ## Declarative modules
 
-Modules use the JSON-compatible subset of YAML and the standard-library JSON
-parser. They can contain only validated metadata and `QuerySpec` defaults.
-YAML tags, SQL, Python, shell commands, credentials, customer data, and
-executable expressions are rejected. The included module is a schema fixture,
-not a functional analysis module.
+PR 0 modules use strict JSON and the standard-library JSON parser. True YAML
+module support is deferred until a safe loader and dependency are justified.
+Module files can contain only validated metadata and `QuerySpec` defaults;
+SQL, Python, shell commands, credentials, customer data, and executable
+expressions are rejected. The included `.json` module is a schema fixture, not
+a functional analysis module. PyYAML is a development-only dependency used by
+the pinned upstream research extractor, not the module loader or runtime.
 
 Later PRs may consume these contracts only after they add separately reviewed
 formula, normalization, planning, execution, or rendering behavior.
