@@ -11,6 +11,7 @@ from kulshan.cur.catalog import (
     record_export,
     record_manifest,
     status,
+    storage_estimate,
 )
 
 
@@ -37,6 +38,9 @@ def test_initialize_catalog_is_workspace_local_and_idempotent(tmp_path: Path) ->
     assert path == tmp_path / "cur-catalog.db"
     assert initialize_catalog(tmp_path) == path
     assert status(tmp_path).cache_state == "not-built"
+    estimate = storage_estimate(tmp_path)
+    assert estimate.s3_estimate_required is True
+    assert estimate.cache_consent_required is False
 
 
 def test_manifest_is_deterministic_and_retains_metadata(tmp_path: Path) -> None:

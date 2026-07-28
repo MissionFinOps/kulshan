@@ -140,8 +140,7 @@ def register_cur_commands(cur_group) -> None:
         console.print(table)
         for issue in result.issues:
             console.print(
-                f"[yellow]Could not check {issue.provider} "
-                f"{issue.operation}: {issue.code}[/yellow]"
+                f"[yellow]Could not check {issue.provider} {issue.operation}: {issue.code}[/yellow]"
             )
 
     @cur_group.command("select")
@@ -160,9 +159,7 @@ def register_cur_commands(cur_group) -> None:
         """Persist a preferred export in the active bound workspace."""
         _session, workspace, _result, ranked = _discover(ctx)
         if not workspace.is_bound or not workspace.config.aws:
-            raise click.ClickException(
-                "CUR selection requires a bound workspace."
-            )
+            raise click.ClickException("CUR selection requires a bound workspace.")
         selected = _find(ranked, selector)
         if selected is None:
             raise click.ClickException(
@@ -174,8 +171,7 @@ def register_cur_commands(cur_group) -> None:
         workspace.config.aws.cost_source = cost_source
         write_workspace_config(workspace.path, workspace.config)
         click.echo(
-            f"Selected {selected.export_name} ({selected.provider}) "
-            f"for workspace {workspace.name}."
+            f"Selected {selected.export_name} ({selected.provider}) for workspace {workspace.name}."
         )
 
     @cur_group.command("iam")
@@ -191,9 +187,7 @@ def register_cur_commands(cur_group) -> None:
         session, _workspace_context, _result, ranked = _discover(ctx)
         selected = _find(ranked, selector)
         if selected is None:
-            raise click.ClickException(
-                "No matching export found. Run `kulshan cur discover`."
-            )
+            raise click.ClickException("No matching export found. Run `kulshan cur discover`.")
         from kulshan.cur.iam import (
             detect_bucket_kms_key,
             generate_cur_access_policy,
@@ -254,3 +248,22 @@ def register_cur_commands(cur_group) -> None:
                 click.echo(finding, err=True)
             raise click.ClickException("catalogue requires attention")
         click.echo("CUR catalogue is consistent.")
+
+    @catalog_group.command("refresh")
+    @click.pass_context
+    def catalog_refresh_command(ctx: click.Context) -> None:
+        """Record discovered CUR/Data Export metadata without downloading objects."""
+        from kulshan.cur.catalog import record_discovered_exports
+
+        _session, workspace, _result, ranked = _discover(ctx)
+        count = record_discovered_exports(workspace.path, ranked)
+        click.echo(f"Recorded {count} export(s) in {workspace.path / 'cur-catalog.db'}.")
+
+    @catalog_group.command("estimate")
+    @click.pass_context
+    def catalog_estimate_command(ctx: click.Context) -> None:
+        """Show known storage and whether an S3 estimate is still required."""
+        from kulshan.cur.catalog import storage_estimate
+
+        workspace = _workspace(ctx)
+        click.echo(json.dumps(storage_estimate(workspace.path).__dict__, indent=2))

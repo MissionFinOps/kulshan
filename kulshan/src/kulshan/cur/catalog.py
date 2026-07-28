@@ -314,3 +314,51 @@ def doctor(workspace_path: Path) -> tuple[str, ...]:
     if bad:
         findings.append(f"{bad} manifests have negative size or file count")
     return tuple(findings)
+
+
+@dataclass(frozen=True)
+class StorageEstimate:
+    manifest_count: int
+    known_bytes: int
+    known_files: int
+    s3_estimate_required: bool
+    cache_consent_required: bool
+
+
+def storage_estimate(workspace_path: Path) -> StorageEstimate:
+    """Return known metadata sizes without scanning or downloading S3 objects."""
+    initialize_catalog(workspace_path)
+    with _connect(catalog_path(workspace_path)) as db:
+        row = db.execute(
+
+                "SELECT count(*), coalesce(sum(total_bytes), 0), "
+                "coalesce(sum(file_count), 0) FROM manifests"
+
+        ).fetchone()
+    count, total, files = (int(row[0]), int(row[1]), int(row[2]))
+    return StorageEstimate(count, total, files, count == 0, False)
+
+
+def record_discovered_exports(workspace_path: Path, exports: Iterable[Any]) -> int:
+    """Persist read-only discovery metadata and return the number recorded."""
+    count = 0
+    for export in exports:
+        record_export(
+            workspace_path,
+            CatalogExport(
+                export_id="",
+                provider=export.provider,
+                export_name=export.export_name,
+                export_arn=export.export_arn,
+                bucket=export.s3_bucket,
+                prefix=export.s3_prefix,
+                region=export.s3_region,
+                format=export.format,
+                table_name=export.table_name,
+                status=export.status,
+                payer_account_id=None,
+                authority_scope=export.authority_scope,
+            ),
+        )
+        count += 1
+    return count
