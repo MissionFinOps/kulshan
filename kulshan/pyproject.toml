@@ -59,6 +59,7 @@ dev = [
     "pytest>=8.0",
     "ruff>=0.5",
     "PyYAML>=6.0",
+    "mcp>=1.0",
 ]
 all = ["kulshan[pdf,excel,pptx,mcp]"]
 
