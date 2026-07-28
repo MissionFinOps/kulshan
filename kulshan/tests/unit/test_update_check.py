@@ -93,7 +93,7 @@ def test_root_cli_invokes_update_prompt_before_landing_page() -> None:
         result = CliRunner().invoke(main, [])
 
     assert result.exit_code == 0
-    prompt.assert_called_once_with("0.4.8", "2026-07-26")
+    prompt.assert_called_once_with("0.4.11", "2026-07-27")
 
 
 def test_update_prompt_precedes_preflight_aws_access() -> None:
