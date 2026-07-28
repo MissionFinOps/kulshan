@@ -10,6 +10,8 @@ from pathlib import Path
 
 import pytest
 
+from kulshan.reckoner.contracts import ProvenanceRecord
+
 PROJECT_ROOT = Path(__file__).parents[2]
 RESEARCH_ROOT = PROJECT_ROOT / "research" / "upstream" / "aws-cudos"
 SCRIPTS_ROOT = PROJECT_ROOT / "scripts" / "research"
@@ -334,5 +336,10 @@ def test_provenance_schema_and_records_do_not_claim_adaptation() -> None:
         "golden_fixture",
         "required_notice",
     } <= set(schema["required"])
-    assert records["status"] == "no-upstream-implementation-adopted"
-    assert records["records"] == []
+    assert records["status"] == "qualified-upstream-adaptations"
+    parsed = [ProvenanceRecord.from_dict(item) for item in records["records"]]
+    assert {item.record_id for item in parsed} == {
+        "cudos-amortized-cost-v1",
+        "cudos-public-on-demand-cost-v1",
+    }
+    assert all(item.verification_status == "verified-pinned-blob" for item in parsed)

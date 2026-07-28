@@ -6,6 +6,7 @@ from dataclasses import dataclass
 from enum import Enum
 
 from kulshan.reckoner.contracts import FilterOperator, ReckonerContractError, validate_dimension_id
+from kulshan.reckoner.cost.semantics import FORMULAS, PLANNED_UNAVAILABLE
 
 
 class ImplementationStatus(str, Enum):
@@ -242,3 +243,36 @@ def validate_filter_operator(dimension_id: str, operator: FilterOperator) -> Non
         raise ReckonerContractError(
             f"{operator.value} is not supported for dimension {dimension_id}"
         )
+
+
+# PR 1 qualifies only formulas implemented by the canonical cost subsystem.
+
+for _metric_id, _formula_definition in FORMULAS.items():
+    METRICS[_metric_id] = MetricDescriptor(
+        metric_id=_metric_id,
+        label=_metric_id.replace("-", " ").title(),
+        description=f"Canonical formula {_formula_definition.formula_id}.",
+        unit="quantity" if _metric_id == "usage-quantity" else "currency",
+        currency_behavior=_formula_definition.currency_behavior,
+        required_source_fields=_formula_definition.required_components,
+        charge_inclusion_rules=_formula_definition.charge_inclusion,
+        charge_exclusion_rules=_formula_definition.charge_exclusion,
+        aggregation_behavior=_formula_definition.aggregation_behavior,
+        formula_version=_formula_definition.formula_version,
+        cudos_provenance=_formula_definition.provenance_ids,
+        focus_provenance=(),
+        availability_rule="available only when source schema and required fields qualify",
+        limitations=_formula_definition.limitations,
+        implementation_status=ImplementationStatus.AVAILABLE,
+    )
+
+for _metric_id, _reason in PLANNED_UNAVAILABLE.items():
+    _planned = METRICS[_metric_id]
+    METRICS[_metric_id] = MetricDescriptor(
+        **{
+            **_planned.__dict__,
+            "description": f"Unavailable in PR 1: {_reason}",
+            "limitations": (_reason,),
+            "implementation_status": ImplementationStatus.UNAVAILABLE,
+        }
+    )

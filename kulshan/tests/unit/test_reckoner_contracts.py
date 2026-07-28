@@ -213,9 +213,22 @@ def test_registry_vocabulary_and_status_are_stable() -> None:
     }
     assert set(DIMENSION_IDS) >= {"service", "account", "resource", "commitment"}
     assert all(
-        descriptor.implementation_status is ImplementationStatus.PLANNED
-        and descriptor.formula_version is None
-        for descriptor in (METRICS[metric_id] for metric_id in METRIC_IDS)
+        METRICS[metric_id].implementation_status is ImplementationStatus.AVAILABLE
+        and METRICS[metric_id].formula_version == "1.0"
+        for metric_id in (
+            "unblended-cost",
+            "amortized-cost",
+            "effective-cost",
+            "usage-quantity",
+        )
+    )
+    assert all(
+        METRICS[metric_id].implementation_status is ImplementationStatus.UNAVAILABLE
+        for metric_id in (
+            "invoiced-cost",
+            "net-amortized-cost",
+            "unused-commitment-cost",
+        )
     )
     assert METRICS["auto"].implementation_status is ImplementationStatus.COMPATIBILITY_ONLY
 

@@ -1,6 +1,43 @@
 {
   "schema_version": "1.0",
-  "status": "no-upstream-implementation-adopted",
-  "records": [],
-  "note": "PR 0 pins research sources and defines provenance contracts. No protectable formula or implementation has been copied or adapted into Kulshan."
+  "status": "qualified-upstream-adaptations",
+  "records": [
+    {
+      "schema_version": "1.0",
+      "record_id": "cudos-amortized-cost-v1",
+      "upstream_repository": "aws-solutions-library-samples/cloud-intelligence-dashboards-framework",
+      "upstream_commit": "f9e36d88c47709f10e8fa784ad11d5cc0e728021",
+      "licence": "MIT-0",
+      "source_file": "cid/builtin/core/data/queries/cudos/summary_view.sql",
+      "source_locator": "amortized_cost CASE expression",
+      "upstream_blob_hash": "1a070ce80f054563fc1d4e924087eb604eab50cd",
+      "kulshan_destination": "src/kulshan/reckoner/cost/semantics.py",
+      "adaptation_type": "semantic adaptation to canonical DuckDB columns",
+      "material_changes": ["renamed physical fields to canonical components", "removed dashboard-only currency conversion", "made unavailable when components are absent"],
+      "kulshan_formula_id": "kulshan.amortized-cost",
+      "kulshan_formula_version": "1.0",
+      "golden_fixture": "tests/unit/test_reckoner_cost_semantics.py::test_golden_cost_formulas_and_classification",
+      "required_notice": null,
+      "verification_status": "verified-pinned-blob"
+    },
+    {
+      "schema_version": "1.0",
+      "record_id": "cudos-public-on-demand-cost-v1",
+      "upstream_repository": "aws-solutions-library-samples/cloud-intelligence-dashboards-framework",
+      "upstream_commit": "f9e36d88c47709f10e8fa784ad11d5cc0e728021",
+      "licence": "MIT-0",
+      "source_file": "cid/builtin/core/data/queries/cudos/summary_view.sql",
+      "source_locator": "public_on_demand_cost CASE expression",
+      "upstream_blob_hash": "1a070ce80f054563fc1d4e924087eb604eab50cd",
+      "kulshan_destination": "src/kulshan/reckoner/cost/semantics.py",
+      "adaptation_type": "semantic adaptation to canonical DuckDB columns",
+      "material_changes": ["preserved SavingsPlanNegation exclusion", "removed dashboard-only currency conversion"],
+      "kulshan_formula_id": "kulshan.public-on-demand-cost",
+      "kulshan_formula_version": "1.0",
+      "golden_fixture": "tests/unit/test_reckoner_cost_semantics.py::test_golden_cost_formulas_and_classification",
+      "required_notice": null,
+      "verification_status": "verified-pinned-blob"
+    }
+  ],
+  "note": "PR 1 adopts only the two formula semantics named by these records. Other pinned material remains research-only."
 }
