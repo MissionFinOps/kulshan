@@ -6,6 +6,7 @@ from datetime import date
 from io import StringIO
 from unittest.mock import patch
 
+from kulshan.__version__ import __release_date__, __version__
 from kulshan.update_check import prompt_for_update_check, release_age_text
 
 
@@ -93,7 +94,7 @@ def test_root_cli_invokes_update_prompt_before_landing_page() -> None:
         result = CliRunner().invoke(main, [])
 
     assert result.exit_code == 0
-    prompt.assert_called_once_with("0.4.12", "2026-07-27")
+    prompt.assert_called_once_with(__version__, __release_date__)
 
 
 def test_update_prompt_precedes_preflight_aws_access() -> None:
