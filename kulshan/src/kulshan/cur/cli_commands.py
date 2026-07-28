@@ -210,3 +210,47 @@ def register_cur_commands(cur_group) -> None:
             "\nPolicy generated only; Kulshan did not modify IAM or S3.",
             err=True,
         )
+
+    @cur_group.group("catalog")
+    def catalog_group() -> None:
+        """Inspect the workspace-local CUR metadata catalogue."""
+
+    @catalog_group.command("status")
+    @click.option("--json", "json_output", is_flag=True)
+    @click.pass_context
+    def catalog_status_command(ctx: click.Context, json_output: bool) -> None:
+        """Show coverage, manifest, and independent catalogue states."""
+        from kulshan.cur.catalog import status
+
+        workspace = _workspace(ctx)
+        value = status(workspace.path)
+        payload = value.__dict__
+        if json_output:
+            click.echo(json.dumps(payload, indent=2))
+            return
+        for key, item in payload.items():
+            click.echo(f"{key}: {item}")
+
+    @catalog_group.command("manifests")
+    @click.pass_context
+    def catalog_manifests_command(ctx: click.Context) -> None:
+        """List immutable manifest versions recorded for the workspace."""
+        from kulshan.cur.catalog import list_manifests
+
+        workspace = _workspace(ctx)
+        for manifest in list_manifests(workspace.path):
+            click.echo(json.dumps(manifest.__dict__, sort_keys=True))
+
+    @catalog_group.command("doctor")
+    @click.pass_context
+    def catalog_doctor_command(ctx: click.Context) -> None:
+        """Report metadata consistency issues without scanning billing data."""
+        from kulshan.cur.catalog import doctor
+
+        workspace = _workspace(ctx)
+        findings = doctor(workspace.path)
+        if findings:
+            for finding in findings:
+                click.echo(finding, err=True)
+            raise click.ClickException("catalogue requires attention")
+        click.echo("CUR catalogue is consistent.")
