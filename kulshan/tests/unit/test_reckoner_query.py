@@ -13,6 +13,7 @@ from kulshan.reckoner.contracts import (
     SortSpec,
 )
 from kulshan.reckoner.cost import ParquetSource, build_canonical_relation
+from kulshan.reckoner.explore import built_in_modules, choices, drilldown, start
 from kulshan.reckoner.query import QueryExecutionError, execute_query, inspect_query, plan_source
 
 
@@ -93,3 +94,22 @@ def test_query_filters_exclusions_sort_and_limit_are_parameterized(tmp_path: Pat
         assert "?" in (result.generated_sql or "")
     finally:
         connection.close()
+
+
+def test_guided_modules_are_stable_and_breadcrumbs_immutable() -> None:
+    modules = built_in_modules()
+    assert [item.module_id for item in modules] == [
+        "where-spending",
+        "what-changed",
+        "movers",
+        "new-charges",
+    ]
+    assert [item.module_id for item in choices(modules)] == sorted(
+        item.module_id for item in modules
+    )
+    breadcrumb = start(modules[0])
+    next_breadcrumb = drilldown(breadcrumb, "account")
+    assert breadcrumb.path == ()
+    assert next_breadcrumb.path == ("account",)
+    with pytest.raises(ValueError):
+        drilldown(next_breadcrumb, "account")

@@ -34,8 +34,39 @@ def start(module: ModuleDefinition) -> DrilldownBreadcrumb:
 
 
 def drilldown(breadcrumb: DrilldownBreadcrumb, dimension: str) -> DrilldownBreadcrumb:
-    if dimension not in breadcrumb.query.groupings and dimension not in breadcrumb.query.groupings:
+    if dimension in breadcrumb.path:
         raise ValueError(f"drilldown dimension is not in the query: {dimension}")
     return DrilldownBreadcrumb(
         breadcrumb.module_id, breadcrumb.query, breadcrumb.path + (dimension,)
+    )
+
+
+def built_in_modules() -> tuple[ModuleDefinition, ...]:
+    from kulshan.reckoner.contracts import PeriodSpec
+
+    specs = (
+        ("where-spending", "Where are we spending?", "Service-level spend overview", ("service",)),
+        ("what-changed", "What changed?", "Compare recent service movement", ("service",)),
+        ("movers", "Which services moved most?", "Top service movers", ("service",)),
+        ("new-charges", "What charges are new?", "First-seen charge categories", ("charge-type",)),
+    )
+    return tuple(
+        ModuleDefinition(
+            schema_version="1.0",
+            module_id=i,
+            question=q,
+            description=d,
+            query_defaults=QuerySpec(
+                metric="unblended-cost", period=PeriodSpec("last-30-days"), groupings=g
+            ),
+            allowed_overrides=("period", "groupings", "filters", "limit", "visualization"),
+            output_sections=("summary", "table"),
+            suggested_drilldowns=g,
+            chart_preference="table",
+            explanation_text=q,
+            freshness_requirements=(),
+            limitations=(),
+            formula_provenance_references=(),
+        )
+        for i, q, d, g in specs
     )
