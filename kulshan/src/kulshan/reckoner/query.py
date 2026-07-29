@@ -73,6 +73,8 @@ def _resolved_period(
 ) -> ResolvedRange:
     if query.period.period_id == "custom":
         return ResolvedRange(query.period.start or "", query.period.end or "")
+    if connection is None or relation is None:
+        raise QueryExecutionError("period resolution requires a relation")
     row = connection.execute(
         f"SELECT MIN(usage_start), MAX(usage_start) FROM {relation.relation_name}"
     ).fetchone()
