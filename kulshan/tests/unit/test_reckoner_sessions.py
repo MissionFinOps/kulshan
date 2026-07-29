@@ -1,6 +1,12 @@
 from kulshan.reckoner.contracts import PeriodSpec, QuerySpec
 from kulshan.reckoner.investigations import built_in_investigations
-from kulshan.reckoner.sessions import InvestigationSession, load_session, save_session
+from kulshan.reckoner.sessions import (
+    InvestigationSession,
+    append_note,
+    load_session,
+    save_session,
+    start_session,
+)
 
 
 def test_investigation_modules_and_session_round_trip(tmp_path):
@@ -17,3 +23,11 @@ def test_investigation_modules_and_session_round_trip(tmp_path):
     loaded = load_session(path)
     assert loaded.entries[0].query.to_dict() == query.to_dict()
     loaded.close()
+
+
+def test_session_lifecycle_helpers_validate_notes():
+    session = start_session("session-2")
+    query = QuerySpec(metric="unblended-cost", period=PeriodSpec("last-7-days"))
+    session.add(query)
+    append_note(session, "reviewed")
+    assert session.entries[-1].note == "reviewed"

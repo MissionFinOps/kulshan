@@ -73,3 +73,20 @@ def save_session(session: InvestigationSession, path: str | Path) -> None:
 
 def load_session(path: str | Path) -> InvestigationSession:
     return InvestigationSession.from_dict(json.loads(Path(path).read_text(encoding="utf-8")))
+
+
+def start_session(session_id: str) -> InvestigationSession:
+    if not session_id or any(ch.isspace() for ch in session_id):
+        raise ValueError("session_id must be a non-empty token")
+    return InvestigationSession(session_id)
+
+
+def append_note(session: InvestigationSession, note: str) -> None:
+    if session.closed:
+        raise ValueError("session is closed")
+    if not note.strip():
+        raise ValueError("note must not be empty")
+    if not session.entries:
+        raise ValueError("a note requires a preceding query entry")
+    last = session.entries[-1]
+    session.entries[-1] = SessionEntry(last.query, last.timestamp, last.breadcrumb, note)

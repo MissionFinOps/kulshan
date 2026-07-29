@@ -35,3 +35,10 @@ def built_in_investigations() -> tuple[InvestigationModule, ...]:
             ("data-transfer-cost", "data-transfer", "How is data transfer cost moving?"),
         )
     )
+
+
+def execute_investigation(connection, relation, module: InvestigationModule):
+    """Execute a module through the shared renderer-neutral query service."""
+    from kulshan.reckoner.query import execute_query
+
+    return execute_query(connection, relation, module.query)
