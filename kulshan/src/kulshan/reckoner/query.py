@@ -93,6 +93,37 @@ def _resolved_period(
     return ResolvedRange(start.isoformat(), end.isoformat())
 
 
+def _predicate_sql(items, *, negate=False):
+    clauses, values = [], []
+    for item in items:
+        if item.dimension not in GROUPINGS:
+            raise QueryExecutionError(f"unsupported filter dimension: {item.dimension}")
+        col = '"' + GROUPINGS[item.dimension] + '"'
+        op = item.operator.value
+        if op in {"is-null", "is-not-null"}:
+            clause = f"{col} IS {'NOT ' if op == 'is-not-null' else ''}NULL"
+        elif op in {"in", "not-in"}:
+            marks = ", ".join("?" for _ in item.values)
+            clause = f"{col} {'NOT ' if op == 'not-in' else ''}IN ({marks})"
+            values.extend(item.values)
+        elif op == "between":
+            clause = f"{col} BETWEEN ? AND ?"
+            values.extend(item.values)
+        elif op in {"contains", "starts-with"}:
+            clause = f"{col} LIKE ?"
+            values.append(f"%{item.values[0]}%" if op == "contains" else f"{item.values[0]}%")
+        else:
+            sqlop = {"equals": "=", "not-equals": "<>", "greater-than": ">", "less-than": "<"}.get(
+                op
+            )
+            if sqlop is None:
+                raise QueryExecutionError(f"unsupported filter operator: {op}")
+            clause = f"{col} {sqlop} ?"
+            values.append(item.values[0])
+        clauses.append(f"NOT ({clause})" if negate else clause)
+    return " AND ".join(clauses), values
+
+
 def execute_query(connection: Any, relation: CanonicalRelation, query: QuerySpec) -> QueryResult:
     if query.execution_source not in {ExecutionSource.AUTO, ExecutionSource.LOCAL}:
         raise QueryExecutionError("this PR 5 executor accepts only local canonical relations")
@@ -108,13 +139,30 @@ def execute_query(connection: Any, relation: CanonicalRelation, query: QuerySpec
     group_sql = ", ".join('"' + item + '"' for item in groups)
     prefix = f"{group_sql}, " if group_sql else ""
     group_by = f" GROUP BY {group_sql}" if group_sql else ""
+    include_sql, include_values = _predicate_sql(query.filters)
+    exclude_sql, exclude_values = _predicate_sql(query.exclusions, negate=True)
+    predicates = ["usage_start >= CAST(? AS TIMESTAMP)", "usage_start < CAST(? AS TIMESTAMP)"]
+    if include_sql:
+        predicates.append(include_sql)
+    if exclude_sql:
+        predicates.append(exclude_sql)
+    order_sql = ""
+    if query.sort:
+        order_parts = []
+        for item in query.sort:
+            field = "value" if item.field == "value" else GROUPINGS.get(item.field)
+            if field is None:
+                raise QueryExecutionError(f"unsupported sort field: {item.field}")
+            direction = "ASC" if item.direction.value == "asc" else "DESC"
+            order_parts.append(f'"{field}" {direction}')
+        order_sql = " ORDER BY " + ", ".join(order_parts)
+    limit_sql = f" LIMIT {query.limit}"
     start = time.perf_counter()
     sql = (
         f'SELECT {prefix}SUM({formula.expression}) AS value FROM "{relation.relation_name}" '
-        f"WHERE usage_start >= CAST(? AS TIMESTAMP) "
-        f"AND usage_start < CAST(? AS TIMESTAMP){group_by}"
+        f"WHERE {' AND '.join(predicates)}{group_by}{order_sql}{limit_sql}"
     )
-    cursor = connection.execute(sql, [period.start, period.end])
+    cursor = connection.execute(sql, [period.start, period.end, *include_values, *exclude_values])
     names = [column[0] for column in cursor.description]
     rows = tuple(dict(zip(names, row)) for row in cursor.fetchall())
     duration = int((time.perf_counter() - start) * 1000)
