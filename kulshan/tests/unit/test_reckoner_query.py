@@ -1,4 +1,4 @@
-from pathlib import Path
+﻿from pathlib import Path
 
 import duckdb
 import pytest
@@ -21,7 +21,7 @@ from kulshan.reckoner.explore import (
     module_by_id,
     start,
 )
-from kulshan.reckoner.query import QueryExecutionError, execute_query, inspect_query, plan_source
+from kulshan.reckoner.query import QueryExecutionError, execute_query, inspect_query, plan_source`nfrom kulshan.reckoner.saved import load_saved_query, save_query
 
 
 def _write_cur(path: Path) -> None:
@@ -122,3 +122,11 @@ def test_guided_modules_are_stable_and_breadcrumbs_immutable() -> None:
         drilldown(next_breadcrumb, "account")
     assert module_by_id("movers").module_id == "movers"
     assert export_breadcrumb(next_breadcrumb)["path"] == ["account"]
+
+
+def test_saved_query_round_trip_is_strict_json(tmp_path: Path) -> None:
+    query = QuerySpec(metric="unblended-cost", period=PeriodSpec("last-7-days"))
+    path = tmp_path / "query.json"
+    save_query(query, path)
+    assert load_saved_query(path).to_dict() == query.to_dict()
+
