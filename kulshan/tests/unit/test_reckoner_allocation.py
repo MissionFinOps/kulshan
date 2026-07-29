@@ -1,4 +1,5 @@
 import pytest
+
 from kulshan.reckoner.allocation import ClaimClass, CommitmentProfile, claim_class
 
 
