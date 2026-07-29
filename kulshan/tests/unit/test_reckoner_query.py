@@ -22,6 +22,7 @@ from kulshan.reckoner.explore import (
     start,
 )
 from kulshan.reckoner.query import QueryExecutionError, execute_query, inspect_query, plan_source
+from kulshan.reckoner.renderers import provenance_sidecar, render_csv, render_json, render_markdown
 from kulshan.reckoner.saved import load_saved_query, save_query
 
 
@@ -130,3 +131,26 @@ def test_saved_query_round_trip_is_strict_json(tmp_path: Path) -> None:
     path = tmp_path / "query.json"
     save_query(query, path)
     assert load_saved_query(path).to_dict() == query.to_dict()
+
+
+def test_shared_renderers_preserve_query_result_contract(tmp_path: Path) -> None:
+    parquet = tmp_path / "cost.parquet"
+    _write_cur(parquet)
+    connection = duckdb.connect()
+    try:
+        relation = build_canonical_relation(connection, ParquetSource((str(parquet),)))
+        result = execute_query(
+            connection,
+            relation,
+            QuerySpec(
+                metric="unblended-cost",
+                period=PeriodSpec("custom", "2026-01-01", "2026-02-01"),
+                execution_source=ExecutionSource.LOCAL,
+            ),
+        )
+        assert '"formula_id"' in render_json(result)
+        assert "value" in render_csv(result)
+        assert "| value |" in render_markdown(result)
+        assert provenance_sidecar(result)["formula_id"] == result.formula_id
+    finally:
+        connection.close()
