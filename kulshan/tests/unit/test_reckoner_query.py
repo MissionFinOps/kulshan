@@ -13,7 +13,14 @@ from kulshan.reckoner.contracts import (
     SortSpec,
 )
 from kulshan.reckoner.cost import ParquetSource, build_canonical_relation
-from kulshan.reckoner.explore import built_in_modules, choices, drilldown, start
+from kulshan.reckoner.explore import (
+    built_in_modules,
+    choices,
+    drilldown,
+    export_breadcrumb,
+    module_by_id,
+    start,
+)
 from kulshan.reckoner.query import QueryExecutionError, execute_query, inspect_query, plan_source
 
 
@@ -113,3 +120,5 @@ def test_guided_modules_are_stable_and_breadcrumbs_immutable() -> None:
     assert next_breadcrumb.path == ("account",)
     with pytest.raises(ValueError):
         drilldown(next_breadcrumb, "account")
+    assert module_by_id("movers").module_id == "movers"
+    assert export_breadcrumb(next_breadcrumb)["path"] == ["account"]

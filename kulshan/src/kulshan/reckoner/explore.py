@@ -70,3 +70,18 @@ def built_in_modules() -> tuple[ModuleDefinition, ...]:
         )
         for i, q, d, g in specs
     )
+
+
+def module_by_id(module_id: str) -> ModuleDefinition:
+    for module in built_in_modules():
+        if module.module_id == module_id:
+            return module
+    raise KeyError(f"unknown exploration module: {module_id}")
+
+
+def export_breadcrumb(breadcrumb: DrilldownBreadcrumb) -> dict[str, object]:
+    return {
+        "module_id": breadcrumb.module_id,
+        "path": list(breadcrumb.path),
+        "query": breadcrumb.query.to_dict(),
+    }
