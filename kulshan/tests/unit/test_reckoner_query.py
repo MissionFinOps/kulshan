@@ -3,7 +3,15 @@ from pathlib import Path
 import duckdb
 import pytest
 
-from kulshan.reckoner.contracts import ExecutionSource, PeriodSpec, QuerySpec
+from kulshan.reckoner.contracts import (
+    ExecutionSource,
+    FilterOperator,
+    FilterSpec,
+    PeriodSpec,
+    QuerySpec,
+    SortDirection,
+    SortSpec,
+)
 from kulshan.reckoner.cost import ParquetSource, build_canonical_relation
 from kulshan.reckoner.query import QueryExecutionError, execute_query, inspect_query, plan_source
 
@@ -61,3 +69,27 @@ def test_named_periods_are_not_silently_guessed() -> None:
     query = QuerySpec(metric="unblended-cost", period=PeriodSpec("last-30-days"))
     with pytest.raises(QueryExecutionError, match="period resolution"):
         execute_query(None, None, query)
+
+
+def test_query_filters_exclusions_sort_and_limit_are_parameterized(tmp_path: Path) -> None:
+    parquet = tmp_path / "cost.parquet"
+    _write_cur(parquet)
+    connection = duckdb.connect()
+    try:
+        relation = build_canonical_relation(connection, ParquetSource((str(parquet),)))
+        query = QuerySpec(
+            metric="unblended-cost",
+            period=PeriodSpec("custom", "2026-01-01", "2026-02-01"),
+            groupings=("service",),
+            filters=(FilterSpec("service", FilterOperator.EQUALS, ("Amazon EC2",)),),
+            exclusions=(),
+            sort=(SortSpec("value", SortDirection.DESCENDING),),
+            limit=1,
+            execution_source=ExecutionSource.LOCAL,
+        )
+        result = execute_query(connection, relation, query)
+        assert result.rows_returned == 1
+        assert result.rows[0]["service"] == "Amazon EC2"
+        assert "?" in (result.generated_sql or "")
+    finally:
+        connection.close()
