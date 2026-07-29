@@ -89,7 +89,7 @@ def test_query_filters_exclusions_sort_and_limit_are_parameterized(tmp_path: Pat
         )
         result = execute_query(connection, relation, query)
         assert result.rows_returned == 1
-        assert result.rows[0]["service"] == "Amazon EC2"
+        assert result.rows[0]["service_name"] == "Amazon EC2"
         assert "?" in (result.generated_sql or "")
     finally:
         connection.close()
