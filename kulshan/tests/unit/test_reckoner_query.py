@@ -21,7 +21,7 @@ from kulshan.reckoner.explore import (
     module_by_id,
     start,
 )
-from kulshan.reckoner.query import QueryExecutionError, execute_query, inspect_query, plan_source`nfrom kulshan.reckoner.saved import load_saved_query, save_query
+from kulshan.reckoner.query import QueryExecutionError, execute_query, inspect_query, plan_source`r`nfrom kulshan.reckoner.saved import load_saved_query, save_query
 
 
 def _write_cur(path: Path) -> None:
@@ -129,4 +129,5 @@ def test_saved_query_round_trip_is_strict_json(tmp_path: Path) -> None:
     path = tmp_path / "query.json"
     save_query(query, path)
     assert load_saved_query(path).to_dict() == query.to_dict()
+
 
