@@ -152,6 +152,15 @@ def test_session_lifecycle(tmp_path, parquet):
     assert rejected.exit_code != 0 and "closed" in rejected.output
 
 
+def test_reckoner_compat_bridge_returns_valid_result(parquet):
+    """The compatibility bridge produces a valid Reckoner QueryResult dict."""
+    from kulshan.reckoner.compat import reckoner_cost_totals
+
+    result = reckoner_cost_totals(parquet.parent, "2026-01")
+    assert result["query"]["metric"] == "unblended-cost"
+    assert result["rows_returned"] >= 1
+
+
 def test_commitment_analysis(parquet):
     result = invoke("commitment", "analyze", "--path", str(parquet), "--output", "json")
     assert result.exit_code == 0, result.output
