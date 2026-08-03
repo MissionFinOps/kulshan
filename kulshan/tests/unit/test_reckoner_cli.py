@@ -65,6 +65,22 @@ def test_query_run_json_and_explain(parquet):
     assert "generated_sql" in explained.output and "SELECT" in explained.output
 
 
+def test_query_terminal_output_contains_table_formatting(parquet):
+    """Terminal mode produces formatted output with metric and total."""
+    result = invoke(
+        "query",
+        "run",
+        *query_args(parquet),
+        "--grouping",
+        "service",
+        "--output",
+        "terminal",
+    )
+    assert result.exit_code == 0
+    assert "unblended-cost" in result.output
+    assert "Total" in result.output or "total" in result.output
+
+
 def test_query_error_and_saved_query_round_trip(tmp_path, parquet):
     bad = invoke(
         "query",
