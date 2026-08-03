@@ -1198,6 +1198,17 @@ from kulshan.cur.cli_commands import register_cur_commands
 
 register_cur_commands(cur)
 
+# Reckoner analytical commands
+
+@main.group()
+def query() -> None:
+    """Run analytical cost queries against local billing data."""
+
+
+from kulshan.reckoner.cli import register_reckoner_commands, register_top_level_reckoner_commands
+
+register_reckoner_commands(query)
+register_top_level_reckoner_commands(main)
 
 @cur.command("schema")
 @click.option(
