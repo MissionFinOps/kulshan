@@ -17,15 +17,17 @@ def parquet(tmp_path: Path) -> Path:
     path = tmp_path / "cur.parquet"
     connection = duckdb.connect()
     connection.execute("""CREATE TABLE source AS SELECT * FROM (VALUES
+        (TIMESTAMP '2025-12-05', TIMESTAMP '2025-12-06', 'Usage', 'USD', 8.0,
+         'Amazon EC2', 'BoxUsage', NULL, NULL),
         (TIMESTAMP '2026-01-05', TIMESTAMP '2026-01-06', 'Usage', 'USD', 10.0,
-         'Amazon EC2', NULL, NULL),
+         'Amazon EC2', 'BoxUsage', NULL, NULL),
         (TIMESTAMP '2026-01-10', TIMESTAMP '2026-01-11', 'SavingsPlanRecurringFee',
-         'USD', 7.0, 'Amazon EC2', 'sp-1', 10.0),
+         'USD', 7.0, 'Amazon EC2', 'BoxUsage', 'sp-1', 10.0),
         (TIMESTAMP '2026-01-15', TIMESTAMP '2026-01-16', 'Usage', 'USD', 3.0,
-         'Amazon S3', NULL, NULL)) AS v(
+         'Amazon S3', 'TimedStorage', NULL, NULL)) AS v(
          line_item_usage_start_date, line_item_usage_end_date,
          line_item_line_item_type, line_item_currency_code,
-         line_item_unblended_cost, product_product_name,
+         line_item_unblended_cost, product_product_name, line_item_usage_type,
          savings_plan_savings_plan_a_r_n, savings_plan_total_commitment_to_date)""")
     connection.execute("COPY source TO ? (FORMAT PARQUET)", [str(path)])
     connection.close()
@@ -159,6 +161,24 @@ def test_reckoner_compat_bridge_returns_valid_result(parquet):
     result = reckoner_cost_totals(parquet.parent, "2026-01")
     assert result["query"]["metric"] == "unblended-cost"
     assert result["rows_returned"] >= 1
+
+
+def test_analyze_cost_reckoner_flag_adds_metadata(tmp_path, parquet):
+    """The --reckoner flag additively includes Reckoner data."""
+    output = tmp_path / "out.json"
+    result = invoke(
+        "analyze",
+        "cost",
+        "--path",
+        str(parquet.parent),
+        "--month",
+        "2026-01",
+        "--reckoner",
+        "--output",
+        str(output),
+    )
+    assert result.exit_code == 0, result.output
+    assert "reckoner" in json.loads(output.read_text(encoding="utf-8"))
 
 
 def test_commitment_analysis(parquet):

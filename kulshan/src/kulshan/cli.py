@@ -1526,6 +1526,10 @@ def analyze() -> None:
     default=None,
     help="Write analysis output to .json or .md.",
 )
+@click.option(
+    "--reckoner", is_flag=True, hidden=True,
+    help="Include Reckoner metadata (experimental).",
+)
 @click.pass_context
 def analyze_cost(
     ctx: click.Context,
@@ -1534,6 +1538,7 @@ def analyze_cost(
     month: str,
     confirm_scan: bool,
     output: str | None,
+    reckoner: bool,
 ) -> None:
     """Analyze generic monthly cost movement from CUR/Data Export evidence."""
     from rich.console import Console as RichConsole
@@ -1680,7 +1685,20 @@ def analyze_cost(
 
         # Export
         if output:
-            content = export_brief(brief, export_format or "json", output)
+            add_reckoner = reckoner and export_format == "json"
+            content = export_brief(
+                brief, export_format or "json", None if add_reckoner else output
+            )
+            if add_reckoner:
+                from kulshan.reckoner.compat import reckoner_cost_totals
+
+                try:
+                    metadata = reckoner_cost_totals(cur_path, month)
+                except Exception as exc:
+                    metadata = {"available": False, "reason": str(exc)}
+                payload = json.loads(content)
+                payload["reckoner"] = metadata
+                _atomic_write(output, json.dumps(payload, indent=2, default=str) + "\n")
             console.print(f"Wrote: {output}")
         else:
             # Terminal output
