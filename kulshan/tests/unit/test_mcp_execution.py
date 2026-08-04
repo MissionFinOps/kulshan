@@ -8,10 +8,12 @@ import sys
 from unittest.mock import Mock
 
 import pytest
-from mcp.server.fastmcp.exceptions import ToolError
 
-from kulshan import console_compat
-from kulshan.mcp_server import tools
+mcp_fastmcp = pytest.importorskip("mcp.server.fastmcp", reason="mcp extra not installed")
+from mcp.server.fastmcp.exceptions import ToolError  # noqa: E402
+
+from kulshan import console_compat  # noqa: E402
+from kulshan.mcp_server import tools  # noqa: E402
 
 
 class FakeProcess:

@@ -9,11 +9,26 @@ permissions:
   contents: read
 
 jobs:
+  validate:
+    name: Validate release metadata
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Match tag, package version, release date, and changelog
+        working-directory: kulshan
+        run: python scripts/validate_release.py --tag "${{ github.ref_name }}"
+
   quality:
+    needs: validate
     uses: ./.github/workflows/ci.yml
 
   publish:
-    needs: quality
+    needs: [validate, quality]
     runs-on: ubuntu-latest
     environment: pypi
     permissions:

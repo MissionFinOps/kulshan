@@ -5,6 +5,58 @@ All notable changes to Kulshan will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.0] - 2026-08-01
+
+### Added
+- Added a manifest-versioned CUR catalogue with refresh estimates and incremental refresh support.
+- Added a semantic Reckoner query engine with named periods, bounded predicates, and terminal rendering.
+- Added guided exploration modules, breadcrumbs, saved queries, and shared result renderers.
+- Added analytical-cache benchmarks and versioned cache-layout guidance.
+- Added commitment claim and allocation contracts.
+- Added investigation modules and reusable investigation-session helpers.
+
+### Changed
+- Expanded Reckoner documentation for catalogue, refresh, and cache behavior.
+- Made unavailable period resolution explicit instead of silently returning incomplete results.
+
+## [0.4.14] - 2026-07-28
+
+### Fixed
+- Decoupled update-check tests from a hard-coded release version so release bumps do not invalidate the suite.
+
+## [0.4.13] - 2026-07-28
+
+This version was tagged but not published because its release test suite failed.
+
+### Changed
+- Updated release-version test coverage.
+
+## [0.4.12] - 2026-07-28
+
+This version was tagged but not published because its release test suite failed.
+
+### Changed
+- Updated release-version assertions.
+
+## [0.4.11] - 2026-07-28
+
+This version was tagged but not published because its release test suite failed.
+
+### Fixed
+- Included the MCP dependency in the development test extra used by CI.
+
+## [0.4.10] - 2026-07-28
+
+This version was tagged but not published because its release test suite failed.
+
+### Added
+- Established versioned Reckoner contracts and source-derived AWS CUDOS semantics.
+- Added canonical AWS cost classification and formula semantics.
+
+### Fixed
+- Preserved complete CUDOS formula and drill-down semantics during extraction.
+- Restored stabilization coverage and bounded report preflight behavior.
+
 ## [0.4.8] - 2026-07-26
 
 ### Fixed

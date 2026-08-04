@@ -78,7 +78,7 @@ Python 3.9+. macOS, Linux, Windows. Optional extras: `kulshan[pdf]`, `kulshan[ex
 Every interactive run shows when the installed Kulshan version was released and asks before checking PyPI. The default is **No**. No request is sent unless you answer **Yes**, and the question appears before AWS credentials, profiles, workspaces, or APIs are accessed.
 
 ```text
-Kulshan 0.4.6: July 26, 2026 - released today.
+Kulshan 0.5.0: August 1, 2026 - released today.
 Check PyPI for a newer version? [y/N]
 ```
 

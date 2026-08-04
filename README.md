@@ -47,7 +47,7 @@ Python 3.9+. macOS, Linux, Windows. Optional extras: `kulshan[mcp]`, `kulshan[pd
 When no update decision has been recorded in the previous nine hours, Kulshan shows the installed release date and age, then asks whether to check PyPI. The default is **No**. PyPI is contacted only after you answer **Yes**, before Kulshan reads AWS credentials or calls AWS.
 
 ```text
-Kulshan 0.4.6: July 26, 2026 - released today.
+Kulshan 0.5.0: August 1, 2026 - released today.
 Check PyPI for a newer version? [y/N]
 ```
 
