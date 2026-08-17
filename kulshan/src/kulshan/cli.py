@@ -78,7 +78,8 @@ def _emit_output(
 
     if fmt == "csv":
         from kulshan.report.csv_export import findings_to_csv
-        csv_str = findings_to_csv(all_findings)
+        export_findings = all_findings if show_pii else redact_payload(all_findings)
+        csv_str = findings_to_csv(export_findings)
         if output:
             _atomic_write(output, csv_str)
             console.print(f"CSV report written to {output}")
