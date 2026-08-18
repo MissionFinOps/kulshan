@@ -171,8 +171,8 @@ def verify_credentials(
     # Step 4: Assert credential account if supplied
     if credential_account and result.account_id != credential_account:
         raise StsVerificationError(
-            f"Credential account mismatch: expected {credential_account}, "
-            f"but STS returned {result.account_id}. "
+            f"Credential account mismatch: expected ***{credential_account[-4:]}, "
+            f"but STS returned ***{result.account_id[-4:]}. "
             "Verify the profile and role configuration.",
         )
 
@@ -300,8 +300,8 @@ def create_verified_session(
     # Step 4: Assert credential account if supplied
     if credential_account and account_id != credential_account:
         raise StsVerificationError(
-            f"Credential account mismatch: expected {credential_account}, "
-            f"but STS returned {account_id}. "
+            f"Credential account mismatch: expected ***{credential_account[-4:]}, "
+            f"but STS returned ***{account_id[-4:]}. "
             "Verify the profile and role configuration.",
         )
 

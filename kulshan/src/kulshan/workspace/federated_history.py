@@ -161,8 +161,10 @@ def _find_linked_workspaces(
             ws_payer = config.aws.payer_account_id
             if ws_payer is not None and ws_payer != target_payer:
                 logger.warning(
-                    "Skipping linked workspace %s: payer %s != target payer %s",
-                    ws_name, ws_payer, target_payer,
+                    "Skipping linked workspace %s: payer ***%s != target payer ***%s",
+                    ws_name,
+                    ws_payer[-4:] if ws_payer and len(ws_payer) >= 4 else "****",
+                    target_payer[-4:] if target_payer and len(target_payer) >= 4 else "****",
                 )
                 continue
 

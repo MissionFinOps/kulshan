@@ -384,11 +384,11 @@ def _create_onboarded_workspace(
     context = WorkspaceContext.from_path(workspace_path, config)
 
     logger.info(
-        "Auto-onboarded workspace '%s' (%s) for identity %s, account %s",
+        "Auto-onboarded workspace '%s' (%s) for identity %s, account ***%s",
         display_name,
         workspace_dir,
-        arn,
-        account_id,
+        arn[:20] + "..." if arn and len(arn) > 20 else arn,
+        account_id[-4:] if account_id and len(account_id) >= 4 else "****",
     )
 
     return OnboardingResult(
@@ -490,8 +490,8 @@ def bind_payer_account(
     write_workspace_config(workspace_path, config)
 
     logger.info(
-        "Bound payer account %s to workspace %s (source: CUR)",
-        payer_account_id,
+        "Bound payer account ***%s to workspace %s (source: CUR)",
+        payer_account_id[-4:] if payer_account_id and len(payer_account_id) >= 4 else "****",
         workspace_dir,
     )
     return True
