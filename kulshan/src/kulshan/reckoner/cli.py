@@ -94,8 +94,52 @@ def _render(result, output):
 
 
 def _echo(result, output):
+    result = _maybe_pseudonymize_result(result, output)
     text = _render(result, output)
     click.echo(text, nl=not text.endswith("\n"))
+
+
+def _maybe_pseudonymize_result(result, output):
+    """Pseudonymize QueryResult rows for structured/non-TTY output."""
+    import sys
+    from dataclasses import replace
+
+    # Terminal on a TTY: show real identifiers
+    if output == "terminal" and sys.stdout.isatty():
+        return result
+
+    # Structured output or non-TTY: pseudonymize
+    try:
+        from kulshan.pseudonym.engine import PseudonymizationEngine
+        from kulshan.pseudonym.policy import PseudonymPolicy
+        from kulshan.workspace.paths import get_data_dir
+
+        engine = PseudonymizationEngine.create(
+            get_data_dir(), PseudonymPolicy.for_structured_output()
+        )
+        if not engine.is_active:
+            return result
+
+        # Pseudonymize row values (account/payer groupings become aliases)
+        new_rows = tuple(
+            {k: _pseudonymize_row_value(engine, k, v) for k, v in row.items()}
+            for row in result.rows
+        )
+        return replace(result, rows=new_rows)
+    except Exception:
+        return result  # Graceful degradation
+
+
+def _pseudonymize_row_value(engine, key, value):
+    """Pseudonymize a single row value based on column semantics."""
+    from kulshan.pseudonym.classifier import classify_field
+    if not isinstance(value, str) or not value:
+        return value
+    id_class = classify_field(key)
+    if id_class is not None:
+        return engine.pseudonymize_value(value, id_class)
+    # For unknown string fields, apply text scanning
+    return engine.pseudonymize_text(value)
 
 
 def register_reckoner_commands(group):

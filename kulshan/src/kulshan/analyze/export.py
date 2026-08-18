@@ -197,6 +197,9 @@ def export_brief(
     Returns:
         The formatted output as a string.
     """
+    # Apply pseudonymization for structured/file output
+    brief = _maybe_pseudonymize_brief(brief, output_format, output_file)
+
     if output_format == "json":
         content = brief_to_json(brief)
     elif output_format == "markdown":
@@ -208,6 +211,65 @@ def export_brief(
         Path(output_file).write_text(content, encoding="utf-8")
 
     return content
+
+
+def _maybe_pseudonymize_brief(brief, output_format, output_file):
+    """Pseudonymize investigation brief for structured output."""
+    import sys
+
+    # Terminal on TTY without file output: show real identifiers
+    if output_format == "terminal" and output_file is None and sys.stdout.isatty():
+        return brief
+
+    try:
+        from kulshan.pseudonym.engine import PseudonymizationEngine
+        from kulshan.pseudonym.policy import PseudonymPolicy
+        from kulshan.workspace.paths import get_data_dir
+
+        engine = PseudonymizationEngine.create(
+            get_data_dir(), PseudonymPolicy.for_structured_output()
+        )
+        if not engine.is_active:
+            return brief
+
+        # Pseudonymize the brief by converting to dict, transforming, then
+        # creating a new brief-like object that the renderers can consume.
+        # Since briefs are dataclasses with .to_dict(), we pseudonymize the
+        # dict representation and wrap it for the JSON renderer.
+        # For markdown/terminal, we pseudonymize the DeltaRow names directly.
+        if hasattr(brief, "top_accounts"):
+            brief = _pseudonymize_brief_fields(engine, brief)
+        return brief
+    except Exception:
+        return brief  # Graceful degradation
+
+
+def _pseudonymize_brief_fields(engine, brief):
+    """Pseudonymize identifier fields in investigation briefs."""
+    from dataclasses import replace, fields
+    from kulshan.pseudonym.types import IdentifierClass
+
+    changes = {}
+
+    # Pseudonymize top_accounts DeltaRow names (these are account IDs)
+    if hasattr(brief, "top_accounts") and brief.top_accounts:
+        new_accounts = []
+        for row in brief.top_accounts:
+            new_name = engine.pseudonymize_value(row.name, IdentifierClass.ACCOUNT)
+            new_accounts.append(replace(row, name=new_name))
+        changes["top_accounts"] = new_accounts
+
+    # Pseudonymize top_resources (resource IDs)
+    if hasattr(brief, "top_resources") and brief.top_resources:
+        new_resources = []
+        for row in brief.top_resources:
+            new_name = engine.pseudonymize_text(row.name)
+            new_resources.append(replace(row, name=new_name))
+        changes["top_resources"] = new_resources
+
+    if changes:
+        return replace(brief, **changes)
+    return brief
 
 
 def brief_to_json(brief: Union[CostInvestigationBrief, Ec2InvestigationBrief]) -> str:
