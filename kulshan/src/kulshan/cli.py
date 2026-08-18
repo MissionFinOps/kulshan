@@ -55,6 +55,54 @@ def _atomic_write(path: str, content: str, encoding: str = "utf-8") -> None:
             f.write(content)
 
 
+# ---------------------------------------------------------------------------
+# Pseudonymization engine integration
+# ---------------------------------------------------------------------------
+
+from kulshan.pseudonym.types import IdentifierClass as _IdentifierClass
+
+
+def _get_pseudonym_engine(fmt: str, output: Optional[str], show_pii: bool):
+    """Create a pseudonymization engine appropriate for the output context.
+
+    Returns None if:
+    - show_pii/show_identifiers is True (explicit bypass)
+    - format is 'terminal' and stdout is a TTY (interactive bypass)
+    - workspace path cannot be resolved (graceful degradation to legacy redact)
+
+    Returns an active engine for structured/file output.
+    """
+    from kulshan.pseudonym.policy import PseudonymPolicy
+    from kulshan.pseudonym.engine import PseudonymizationEngine
+    from kulshan.pseudonym.secret import SecretCorruptError
+
+    # Explicit bypass
+    if show_pii:
+        return None
+
+    # Terminal format on a real TTY: show real identifiers
+    if fmt == "terminal" and not output and sys.stdout.isatty():
+        return None
+
+    # Structured output or file output: pseudonymize
+    policy = PseudonymPolicy.for_structured_output(show_identifiers=False)
+
+    # Resolve workspace path for secret
+    try:
+        from kulshan.workspace.paths import get_data_dir
+        workspace_path = get_data_dir()
+    except Exception:
+        return None  # Graceful degradation to legacy redact
+
+    try:
+        return PseudonymizationEngine.create(workspace_path, policy)
+    except SecretCorruptError:
+        # Fail closed: do not produce output
+        raise
+    except Exception:
+        return None  # Graceful degradation
+
+
 def _emit_output(
     fmt: str,
     results: dict,
@@ -76,9 +124,16 @@ def _emit_output(
     """Shared output dispatch for report and convert commands."""
     from kulshan.redact import redact_account_id, redact_payload, redact_filename
 
+    # ── Pseudonymization engine (new privacy layer) ──────────────────────
+    # Determine whether to use the new engine or legacy redact.py
+    engine = _get_pseudonym_engine(fmt, output, show_pii)
+
     if fmt == "csv":
         from kulshan.report.csv_export import findings_to_csv
-        export_findings = all_findings if show_pii else redact_payload(all_findings)
+        if engine and engine.is_active:
+            export_findings = engine.pseudonymize_payload(all_findings)
+        else:
+            export_findings = all_findings if show_pii else redact_payload(all_findings)
         csv_str = findings_to_csv(export_findings)
         if output:
             _atomic_write(output, csv_str)
@@ -89,9 +144,12 @@ def _emit_output(
 
     if fmt == "sarif":
         from kulshan.report.sarif import to_sarif_json
-        # Apply redaction to SARIF unless --show-pii
-        export_findings = all_findings if show_pii else redact_payload(all_findings)
-        export_account = account_id if show_pii else redact_account_id(account_id)
+        if engine and engine.is_active:
+            export_findings = engine.pseudonymize_payload(all_findings)
+            export_account = engine.pseudonymize_value(account_id, _IdentifierClass.ACCOUNT) if account_id else account_id
+        else:
+            export_findings = all_findings if show_pii else redact_payload(all_findings)
+            export_account = account_id if show_pii else redact_account_id(account_id)
         sarif_str = to_sarif_json(
             export_findings, account_id=export_account, regions=regions, version=__version__, coverage=coverage, billing_data_integrity=billing_data_integrity,
         )
@@ -116,7 +174,14 @@ def _emit_output(
             "findings": all_findings,
             "top_actions": top_actions,
         }
-        if output and not show_pii:
+        if engine and engine.is_active:
+            payload = engine.pseudonymize_payload(payload)
+            payload["redacted"] = True
+            payload["pseudonymization"] = {
+                "policy": "normal-v1",
+                "engine_version": __version__,
+            }
+        elif output and not show_pii:
             payload = redact_payload(payload)
         json_str = json.dumps(payload, indent=2, default=str)
         if output:
@@ -127,9 +192,14 @@ def _emit_output(
 
     elif fmt == "html":
         from kulshan.report.html import generate_html_report
-        render_account = account_id if show_pii else redact_account_id(account_id)
-        render_actions = top_actions if show_pii else redact_payload(top_actions, show_pii=show_pii)
-        render_results = results if show_pii else redact_payload(results, show_pii=show_pii)
+        if engine and engine.is_active:
+            render_account = engine.pseudonymize_value(account_id, _IdentifierClass.ACCOUNT) if account_id else ""
+            render_actions = engine.pseudonymize_payload(top_actions)
+            render_results = engine.pseudonymize_payload(results)
+        else:
+            render_account = account_id if show_pii else redact_account_id(account_id)
+            render_actions = top_actions if show_pii else redact_payload(top_actions, show_pii=show_pii)
+            render_results = results if show_pii else redact_payload(results, show_pii=show_pii)
         html_str = generate_html_report(
             results=render_results,
             overall_score=overall_score,
@@ -141,8 +211,13 @@ def _emit_output(
             coverage=coverage,
             billing_data_integrity=billing_data_integrity,
         )
-        default_name = f"kulshan-report-{account_id}.html"
-        out_path = output or (default_name if show_pii else redact_filename(default_name))
+        if engine and engine.is_active:
+            default_name = f"kulshan-report-{render_account}.html"
+        else:
+            default_name = f"kulshan-report-{account_id}.html"
+            if not show_pii:
+                default_name = redact_filename(default_name)
+        out_path = output or default_name
         _atomic_write(out_path, html_str)
         console.print(f"HTML report written to {out_path}")
 
@@ -318,7 +393,8 @@ def main(
 )
 @click.option("--output", "-o", type=click.Path(), default=None, help="Write output to file.")
 @click.option("--days", default=90, type=click.IntRange(1, 365), help="Cost analysis lookback (1-365 days). Default: 90.")
-@click.option("--show-pii", is_flag=True, default=False, help="Show full account IDs and PII in exported reports.")
+@click.option("--show-pii", is_flag=True, default=False, hidden=True, help="Deprecated: use --show-identifiers.")
+@click.option("--show-identifiers", is_flag=True, default=False, help="Show real identifiers in exported reports (disables pseudonymization).")
 @click.option("--yes", "-y", is_flag=True, default=False, help="Skip confirmations (for CI/CD).")
 @click.option("--packs", default=None, help="Packs: cost,security,sweep,dr,age,drift,tag,pulse,limit,topo or 'all'.")
 @click.option("--regions", "region_override", default=None, help="Regions to scan (comma-separated). Default: 3 for inventory packs.")
@@ -350,6 +426,7 @@ def report(
     output: Optional[str],
     days: int,
     show_pii: bool,
+    show_identifiers: bool,
     yes: bool,
     packs: Optional[str],
     region_override: Optional[str],
@@ -379,6 +456,13 @@ def report(
     console = Console(stderr=True) if fmt == "json" and output is None else Console()
     profile = ctx.obj.get("profile")
     role_arn = ctx.obj.get("role_arn")
+
+    # Merge deprecated --show-pii with --show-identifiers
+    if show_pii and not show_identifiers:
+        import sys as _sys
+        Console(stderr=True).print("[dim]warning: --show-pii is deprecated, use --show-identifiers[/dim]")
+        show_identifiers = True
+    show_pii = show_pii or show_identifiers
 
     # ── Pack selection (no AWS calls) ────────────────────────────────────
     selected_packs = None
