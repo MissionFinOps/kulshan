@@ -12,11 +12,10 @@ This engine:
 """
 from __future__ import annotations
 
-import copy
 from pathlib import Path
 from typing import Any
 
-from kulshan.pseudonym.canonical import canonicalize, classify_and_canonicalize
+from kulshan.pseudonym.canonical import canonicalize
 from kulshan.pseudonym.classifier import (
     classify_field,
     is_passthrough_field,
@@ -25,7 +24,7 @@ from kulshan.pseudonym.classifier import (
 )
 from kulshan.pseudonym.hmac_scheme import derive_alias
 from kulshan.pseudonym.policy import PseudonymPolicy
-from kulshan.pseudonym.secret import SecretCorruptError, load_or_create_secret
+from kulshan.pseudonym.secret import load_or_create_secret
 from kulshan.pseudonym.types import IdentifierClass
 
 

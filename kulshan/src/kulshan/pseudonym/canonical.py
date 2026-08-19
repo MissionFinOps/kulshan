@@ -11,7 +11,6 @@ strip-ARN-to-resource-ID helper.
 from __future__ import annotations
 
 import re
-from typing import Optional
 
 from kulshan.pseudonym.types import IdentifierClass
 
