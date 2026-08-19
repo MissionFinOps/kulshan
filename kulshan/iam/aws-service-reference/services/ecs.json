@@ -1,0 +1,3815 @@
+{
+  "Name": "ecs",
+  "Actions": [
+    {
+      "Name": "AllowVendedLogDeliveryForResource",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": true,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "ContinueServiceDeployment",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "service",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}",
+            "ecs:cluster"
+          ]
+        },
+        {
+          "Name": "service-deployment",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}",
+            "ecs:cluster",
+            "ecs:service"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "CreateCapacityProvider",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys",
+        "ecs:instance-metadata-tags-propagation",
+        "ecs:propagate-tags"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "capacity-provider",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "CreateCluster",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys",
+        "ecs:capacity-provider",
+        "ecs:fargate-ephemeral-storage-kms-key"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "CreateDaemon",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys",
+        "ecs:capacity-provider",
+        "ecs:daemon-task-definition",
+        "ecs:enable-ecs-managed-tags",
+        "ecs:enable-execute-command",
+        "ecs:propagate-tags",
+        "ecs:task-cpu",
+        "ecs:task-memory"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "daemon",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}",
+            "ecs:cluster"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "CreateExpressGatewayService",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys",
+        "ecs:enable-ecs-managed-tags",
+        "ecs:propagate-tags",
+        "ecs:subnet",
+        "ecs:task-cpu",
+        "ecs:task-definition",
+        "ecs:task-memory"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "service",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}",
+            "ecs:cluster"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "CreateService",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys",
+        "ecs:auto-assign-public-ip",
+        "ecs:capacity-provider",
+        "ecs:enable-ebs-volumes",
+        "ecs:enable-ecs-managed-tags",
+        "ecs:enable-execute-command",
+        "ecs:enable-service-connect",
+        "ecs:enable-vpc-lattice",
+        "ecs:namespace",
+        "ecs:propagate-tags",
+        "ecs:subnet",
+        "ecs:task-cpu",
+        "ecs:task-definition",
+        "ecs:task-memory"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "service",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}",
+            "ecs:cluster"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "CreateTaskSet",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys",
+        "ecs:capacity-provider",
+        "ecs:cluster",
+        "ecs:service",
+        "ecs:task-definition"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "task-set"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteAccountSetting",
+      "ActionConditionKeys": [
+        "ecs:account-setting"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteAttributes",
+      "ActionConditionKeys": [
+        "aws:ResourceTag/${TagKey}",
+        "ecs:cluster"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "container-instance"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteCapacityProvider",
+      "ActionConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "capacity-provider"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteCluster",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteDaemon",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "daemon",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}",
+            "ecs:cluster"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteDaemonTaskDefinition",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "daemon-task-definition",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteExpressGatewayService",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "service",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}",
+            "ecs:cluster"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteService",
+      "ActionConditionKeys": [
+        "aws:ResourceTag/${TagKey}",
+        "ecs:cluster"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "service"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteTaskDefinitions",
+      "ActionConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "task-definition"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteTaskSet",
+      "ActionConditionKeys": [
+        "aws:ResourceTag/${TagKey}",
+        "ecs:cluster",
+        "ecs:service"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "task-set"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeregisterContainerInstance",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeregisterTaskDefinition",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeCapacityProviders",
+      "ActionConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "capacity-provider"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeClusters",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeContainerInstances",
+      "ActionConditionKeys": [
+        "aws:ResourceTag/${TagKey}",
+        "ecs:cluster"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "container-instance"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeDaemon",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "daemon",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}",
+            "ecs:cluster"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeDaemonDeployments",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "daemon",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}",
+            "ecs:cluster"
+          ]
+        },
+        {
+          "Name": "daemon-deployment",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}",
+            "ecs:cluster",
+            "ecs:daemon"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeDaemonRevisions",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "daemon",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}",
+            "ecs:cluster"
+          ]
+        },
+        {
+          "Name": "daemon-revision",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}",
+            "ecs:cluster",
+            "ecs:daemon"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeDaemonTaskDefinition",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "daemon-task-definition",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeExpressGatewayService",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "service",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}",
+            "ecs:cluster"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeServiceDeployments",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "service",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}",
+            "ecs:cluster"
+          ]
+        },
+        {
+          "Name": "service-deployment",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}",
+            "ecs:cluster",
+            "ecs:service"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeServiceRevisions",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "service",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}",
+            "ecs:cluster"
+          ]
+        },
+        {
+          "Name": "service-revision",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}",
+            "ecs:cluster",
+            "ecs:service"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeServices",
+      "ActionConditionKeys": [
+        "aws:ResourceTag/${TagKey}",
+        "ecs:cluster"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "service"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeTaskDefinition",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeTaskSets",
+      "ActionConditionKeys": [
+        "aws:ResourceTag/${TagKey}",
+        "ecs:cluster",
+        "ecs:service"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "task-set"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeTasks",
+      "ActionConditionKeys": [
+        "aws:ResourceTag/${TagKey}",
+        "ecs:cluster"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "task"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DiscoverPollEndpoint",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ExecuteCommand",
+      "ActionConditionKeys": [
+        "aws:ResourceTag/${TagKey}",
+        "ecs:cluster",
+        "ecs:container-name",
+        "ecs:task"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster"
+        },
+        {
+          "Name": "task"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetTaskProtection",
+      "ActionConditionKeys": [
+        "aws:ResourceTag/${TagKey}",
+        "ecs:cluster"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "task"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListAccountSettings",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListAttributes",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListClusters",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListContainerInstances",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListDaemonDeployments",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "daemon",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}",
+            "ecs:cluster"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListDaemonTaskDefinitions",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListDaemons",
+      "ActionConditionKeys": [
+        "ecs:cluster"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListServiceDeployments",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "service",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}",
+            "ecs:cluster"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListServices",
+      "ActionConditionKeys": [
+        "ecs:cluster"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListServicesByNamespace",
+      "ActionConditionKeys": [
+        "ecs:namespace"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListTagsForResource",
+      "ActionConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "capacity-provider"
+        },
+        {
+          "Name": "cluster"
+        },
+        {
+          "Name": "container-instance"
+        },
+        {
+          "Name": "service"
+        },
+        {
+          "Name": "task"
+        },
+        {
+          "Name": "task-definition"
+        },
+        {
+          "Name": "task-set"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "ListTaskDefinitionFamilies",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListTaskDefinitions",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListTasks",
+      "ActionConditionKeys": [
+        "aws:ResourceTag/${TagKey}",
+        "ecs:cluster"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "container-instance"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "Poll",
+      "ActionConditionKeys": [
+        "ecs:cluster"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "container-instance"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "PutAccountSetting",
+      "ActionConditionKeys": [
+        "ecs:account-setting"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "PutAccountSettingDefault",
+      "ActionConditionKeys": [
+        "ecs:account-setting"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "PutAttributes",
+      "ActionConditionKeys": [
+        "aws:ResourceTag/${TagKey}",
+        "ecs:cluster"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "container-instance"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "PutClusterCapacityProviders",
+      "ActionConditionKeys": [
+        "ecs:capacity-provider"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "PutSystemLogEvents",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}"
+          ]
+        },
+        {
+          "Name": "container-instance",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}",
+            "ecs:capacity-provider",
+            "ecs:cluster"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "RegisterContainerInstance",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "RegisterDaemonTaskDefinition",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys",
+        "ecs:privileged",
+        "ecs:task-cpu",
+        "ecs:task-memory"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "daemon-task-definition",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "RegisterTaskDefinition",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys",
+        "ecs:compute-compatibility",
+        "ecs:privileged",
+        "ecs:task-cpu",
+        "ecs:task-memory"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "task-definition",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "RunTask",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:ResourceTag/${TagKey}",
+        "aws:TagKeys",
+        "ecs:capacity-provider",
+        "ecs:cluster",
+        "ecs:enable-ebs-volumes",
+        "ecs:enable-execute-command"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "task-definition"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "StartTask",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:ResourceTag/${TagKey}",
+        "aws:TagKeys",
+        "ecs:cluster",
+        "ecs:container-instances",
+        "ecs:enable-ebs-volumes",
+        "ecs:enable-execute-command"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "task-definition"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "StartTelemetrySession",
+      "ActionConditionKeys": [
+        "ecs:cluster"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "container-instance"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "StopServiceDeployment",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "service",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}",
+            "ecs:cluster"
+          ]
+        },
+        {
+          "Name": "service-deployment",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}",
+            "ecs:cluster",
+            "ecs:service"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "StopTask",
+      "ActionConditionKeys": [
+        "aws:ResourceTag/${TagKey}",
+        "ecs:cluster"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "task"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "SubmitAttachmentStateChanges",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "SubmitContainerStateChange",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "SubmitTaskStateChange",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "TagResource",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:ResourceTag/${TagKey}",
+        "aws:TagKeys",
+        "ecs:CreateAction"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": true,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "capacity-provider"
+        },
+        {
+          "Name": "cluster"
+        },
+        {
+          "Name": "container-instance"
+        },
+        {
+          "Name": "daemon"
+        },
+        {
+          "Name": "daemon-task-definition"
+        },
+        {
+          "Name": "service"
+        },
+        {
+          "Name": "task"
+        },
+        {
+          "Name": "task-definition"
+        },
+        {
+          "Name": "task-set"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "UntagResource",
+      "ActionConditionKeys": [
+        "aws:ResourceTag/${TagKey}",
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": true,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "capacity-provider"
+        },
+        {
+          "Name": "cluster"
+        },
+        {
+          "Name": "container-instance"
+        },
+        {
+          "Name": "daemon"
+        },
+        {
+          "Name": "daemon-task-definition"
+        },
+        {
+          "Name": "service"
+        },
+        {
+          "Name": "task"
+        },
+        {
+          "Name": "task-definition"
+        },
+        {
+          "Name": "task-set"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "UpdateCapacityProvider",
+      "ActionConditionKeys": [
+        "aws:ResourceTag/${TagKey}",
+        "ecs:instance-metadata-tags-propagation",
+        "ecs:propagate-tags"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "capacity-provider"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "UpdateCluster",
+      "ActionConditionKeys": [
+        "ecs:fargate-ephemeral-storage-kms-key"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "UpdateClusterSettings",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "UpdateContainerAgent",
+      "ActionConditionKeys": [
+        "aws:ResourceTag/${TagKey}",
+        "ecs:cluster"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "container-instance"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "UpdateContainerInstancesState",
+      "ActionConditionKeys": [
+        "aws:ResourceTag/${TagKey}",
+        "ecs:cluster"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "container-instance"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "UpdateDaemon",
+      "ActionConditionKeys": [
+        "ecs:capacity-provider",
+        "ecs:daemon-task-definition",
+        "ecs:enable-ecs-managed-tags",
+        "ecs:enable-execute-command",
+        "ecs:propagate-tags",
+        "ecs:task-cpu",
+        "ecs:task-memory"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "daemon",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}",
+            "ecs:cluster"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "UpdateExpressGatewayService",
+      "ActionConditionKeys": [
+        "ecs:enable-ecs-managed-tags",
+        "ecs:propagate-tags",
+        "ecs:subnet",
+        "ecs:task-cpu",
+        "ecs:task-definition",
+        "ecs:task-memory"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "service",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}",
+            "ecs:cluster"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "UpdateService",
+      "ActionConditionKeys": [
+        "ecs:auto-assign-public-ip",
+        "ecs:capacity-provider",
+        "ecs:enable-ebs-volumes",
+        "ecs:enable-ecs-managed-tags",
+        "ecs:enable-execute-command",
+        "ecs:enable-service-connect",
+        "ecs:enable-vpc-lattice",
+        "ecs:namespace",
+        "ecs:propagate-tags",
+        "ecs:subnet",
+        "ecs:task-cpu",
+        "ecs:task-definition",
+        "ecs:task-memory"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "service",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}",
+            "ecs:cluster"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "UpdateServicePrimaryTaskSet",
+      "ActionConditionKeys": [
+        "aws:ResourceTag/${TagKey}",
+        "ecs:cluster"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "service"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "UpdateTaskProtection",
+      "ActionConditionKeys": [
+        "aws:ResourceTag/${TagKey}",
+        "ecs:cluster"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "task"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "UpdateTaskSet",
+      "ActionConditionKeys": [
+        "aws:ResourceTag/${TagKey}",
+        "ecs:cluster",
+        "ecs:service"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "task-set"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    }
+  ],
+  "ConditionKeys": [
+    {
+      "Name": "aws:RequestTag/${TagKey}",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "aws:ResourceTag/${TagKey}",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "aws:TagKeys",
+      "Types": [
+        "ArrayOfString"
+      ]
+    },
+    {
+      "Name": "ecs:CreateAction",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "ecs:ResourceTag/${TagKey}",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "ecs:account-setting",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "ecs:auto-assign-public-ip",
+      "Types": [
+        "Bool"
+      ]
+    },
+    {
+      "Name": "ecs:capacity-provider",
+      "Types": [
+        "ArrayOfARN"
+      ]
+    },
+    {
+      "Name": "ecs:cluster",
+      "Types": [
+        "ARN"
+      ]
+    },
+    {
+      "Name": "ecs:compute-compatibility",
+      "Types": [
+        "ArrayOfString"
+      ]
+    },
+    {
+      "Name": "ecs:container-instances",
+      "Types": [
+        "ARN"
+      ]
+    },
+    {
+      "Name": "ecs:container-name",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "ecs:daemon",
+      "Types": [
+        "ARN"
+      ]
+    },
+    {
+      "Name": "ecs:daemon-task-definition",
+      "Types": [
+        "ARN"
+      ]
+    },
+    {
+      "Name": "ecs:enable-ebs-volumes",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "ecs:enable-ecs-managed-tags",
+      "Types": [
+        "Bool"
+      ]
+    },
+    {
+      "Name": "ecs:enable-execute-command",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "ecs:enable-service-connect",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "ecs:enable-vpc-lattice",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "ecs:fargate-ephemeral-storage-kms-key",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "ecs:gateway",
+      "Types": [
+        "ARN"
+      ]
+    },
+    {
+      "Name": "ecs:instance-metadata-tags-propagation",
+      "Types": [
+        "Bool"
+      ]
+    },
+    {
+      "Name": "ecs:namespace",
+      "Types": [
+        "ARN"
+      ]
+    },
+    {
+      "Name": "ecs:privileged",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "ecs:propagate-tags",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "ecs:service",
+      "Types": [
+        "ARN"
+      ]
+    },
+    {
+      "Name": "ecs:subnet",
+      "Types": [
+        "ArrayOfString"
+      ]
+    },
+    {
+      "Name": "ecs:task",
+      "Types": [
+        "ARN"
+      ]
+    },
+    {
+      "Name": "ecs:task-cpu",
+      "Types": [
+        "Numeric"
+      ]
+    },
+    {
+      "Name": "ecs:task-definition",
+      "Types": [
+        "ARN"
+      ]
+    },
+    {
+      "Name": "ecs:task-memory",
+      "Types": [
+        "Numeric"
+      ]
+    }
+  ],
+  "Operations": [
+    {
+      "Name": "ContinueServiceDeployment",
+      "AuthorizedActions": [
+        {
+          "Name": "ContinueServiceDeployment",
+          "Service": "ecs"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecs",
+          "Method": "continue_service_deployment",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreateCapacityProvider",
+      "AuthorizedActions": [
+        {
+          "Name": "CreateCapacityProvider",
+          "Service": "ecs"
+        },
+        {
+          "Name": "PassRole",
+          "Context": {
+            "iam:PassedToService": [
+              "ecs.amazonaws.com"
+            ]
+          },
+          "Service": "iam"
+        },
+        {
+          "Name": "PutClusterCapacityProviders",
+          "Service": "ecs"
+        },
+        {
+          "Name": "TagResource",
+          "Service": "ecs"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecs",
+          "Method": "create_capacity_provider",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreateCluster",
+      "AuthorizedActions": [
+        {
+          "Name": "CreateCluster",
+          "Service": "ecs"
+        },
+        {
+          "Name": "TagResource",
+          "Service": "ecs"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecs",
+          "Method": "create_cluster",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreateDaemon",
+      "AuthorizedActions": [
+        {
+          "Name": "CreateDaemon",
+          "Service": "ecs"
+        },
+        {
+          "Name": "PassRole",
+          "Context": {
+            "iam:PassedToService": [
+              "ecs-tasks.amazonaws.com"
+            ]
+          },
+          "Service": "iam"
+        },
+        {
+          "Name": "TagResource",
+          "Service": "ecs"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecs",
+          "Method": "create_daemon",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreateExpressGatewayService",
+      "AuthorizedActions": [
+        {
+          "Name": "CreateCluster",
+          "Service": "ecs"
+        },
+        {
+          "Name": "CreateExpressGatewayService",
+          "Service": "ecs"
+        },
+        {
+          "Name": "PassRole",
+          "Context": {
+            "iam:PassedToService": [
+              "ecs-tasks.amazonaws.com",
+              "ecs.amazonaws.com"
+            ]
+          },
+          "Service": "iam"
+        },
+        {
+          "Name": "RegisterTaskDefinition",
+          "Service": "ecs"
+        },
+        {
+          "Name": "TagResource",
+          "Service": "ecs"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecs",
+          "Method": "create_express_gateway_service",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreateService",
+      "AuthorizedActions": [
+        {
+          "Name": "CreateService",
+          "Service": "ecs"
+        },
+        {
+          "Name": "PassRole",
+          "Context": {
+            "iam:PassedToService": [
+              "ecs-tasks.amazonaws.com",
+              "ecs.amazonaws.com"
+            ]
+          },
+          "Service": "iam"
+        },
+        {
+          "Name": "TagResource",
+          "Service": "ecs"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecs",
+          "Method": "create_service",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreateTaskSet",
+      "AuthorizedActions": [
+        {
+          "Name": "CreateTaskSet",
+          "Service": "ecs"
+        },
+        {
+          "Name": "PassRole",
+          "Context": {
+            "iam:PassedToService": [
+              "ecs-tasks.amazonaws.com"
+            ]
+          },
+          "Service": "iam"
+        },
+        {
+          "Name": "TagResource",
+          "Service": "ecs"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecs",
+          "Method": "create_task_set",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteAccountSetting",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteAccountSetting",
+          "Service": "ecs"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecs",
+          "Method": "delete_account_setting",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteAttributes",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteAttributes",
+          "Service": "ecs"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecs",
+          "Method": "delete_attributes",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteCapacityProvider",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteCapacityProvider",
+          "Service": "ecs"
+        },
+        {
+          "Name": "PutClusterCapacityProviders",
+          "Service": "ecs"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecs",
+          "Method": "delete_capacity_provider",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteCluster",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteCluster",
+          "Service": "ecs"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecs",
+          "Method": "delete_cluster",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteDaemon",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteDaemon",
+          "Service": "ecs"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecs",
+          "Method": "delete_daemon",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteDaemonTaskDefinition",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteDaemonTaskDefinition",
+          "Service": "ecs"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecs",
+          "Method": "delete_daemon_task_definition",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteExpressGatewayService",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteExpressGatewayService",
+          "Service": "ecs"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecs",
+          "Method": "delete_express_gateway_service",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteService",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteService",
+          "Service": "ecs"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecs",
+          "Method": "delete_service",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteTaskDefinitions",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteTaskDefinitions",
+          "Service": "ecs"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecs",
+          "Method": "delete_task_definitions",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteTaskSet",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteTaskSet",
+          "Service": "ecs"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecs",
+          "Method": "delete_task_set",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeregisterContainerInstance",
+      "AuthorizedActions": [
+        {
+          "Name": "DeregisterContainerInstance",
+          "Service": "ecs"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecs",
+          "Method": "deregister_container_instance",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeregisterTaskDefinition",
+      "AuthorizedActions": [
+        {
+          "Name": "DeregisterTaskDefinition",
+          "Service": "ecs"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecs",
+          "Method": "deregister_task_definition",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeCapacityProviders",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeCapacityProviders",
+          "Service": "ecs"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecs",
+          "Method": "describe_capacity_providers",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeClusters",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeClusters",
+          "Service": "ecs"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecs",
+          "Method": "describe_clusters",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeContainerInstances",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeContainerInstances",
+          "Service": "ecs"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecs",
+          "Method": "describe_container_instances",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeDaemon",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeDaemon",
+          "Service": "ecs"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecs",
+          "Method": "describe_daemon",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeDaemonDeployments",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeDaemonDeployments",
+          "Service": "ecs"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecs",
+          "Method": "describe_daemon_deployments",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeDaemonRevisions",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeDaemonRevisions",
+          "Service": "ecs"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecs",
+          "Method": "describe_daemon_revisions",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeDaemonTaskDefinition",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeDaemonTaskDefinition",
+          "Service": "ecs"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecs",
+          "Method": "describe_daemon_task_definition",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeExpressGatewayService",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeExpressGatewayService",
+          "Service": "ecs"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecs",
+          "Method": "describe_express_gateway_service",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeServiceDeployments",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeServiceDeployments",
+          "Service": "ecs"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecs",
+          "Method": "describe_service_deployments",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeServiceRevisions",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeServiceRevisions",
+          "Service": "ecs"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecs",
+          "Method": "describe_service_revisions",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeServices",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeServices",
+          "Service": "ecs"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecs",
+          "Method": "describe_services",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeTaskDefinition",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeTaskDefinition",
+          "Service": "ecs"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecs",
+          "Method": "describe_task_definition",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeTaskSets",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeTaskSets",
+          "Service": "ecs"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecs",
+          "Method": "describe_task_sets",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeTasks",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeTasks",
+          "Service": "ecs"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecs",
+          "Method": "describe_tasks",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DiscoverPollEndpoint",
+      "AuthorizedActions": [
+        {
+          "Name": "DiscoverPollEndpoint",
+          "Service": "ecs"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecs",
+          "Method": "discover_poll_endpoint",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ExecuteCommand",
+      "AuthorizedActions": [
+        {
+          "Name": "ExecuteCommand",
+          "Service": "ecs"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecs",
+          "Method": "execute_command",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetTaskProtection",
+      "AuthorizedActions": [
+        {
+          "Name": "GetTaskProtection",
+          "Service": "ecs"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecs",
+          "Method": "get_task_protection",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListAccountSettings",
+      "AuthorizedActions": [
+        {
+          "Name": "ListAccountSettings",
+          "Service": "ecs"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecs",
+          "Method": "list_account_settings",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListAttributes",
+      "AuthorizedActions": [
+        {
+          "Name": "ListAttributes",
+          "Service": "ecs"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecs",
+          "Method": "list_attributes",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListClusters",
+      "AuthorizedActions": [
+        {
+          "Name": "ListClusters",
+          "Service": "ecs"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecs",
+          "Method": "list_clusters",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListContainerInstances",
+      "AuthorizedActions": [
+        {
+          "Name": "ListContainerInstances",
+          "Service": "ecs"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecs",
+          "Method": "list_container_instances",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListDaemonDeployments",
+      "AuthorizedActions": [
+        {
+          "Name": "ListDaemonDeployments",
+          "Service": "ecs"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecs",
+          "Method": "list_daemon_deployments",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListDaemonTaskDefinitions",
+      "AuthorizedActions": [
+        {
+          "Name": "ListDaemonTaskDefinitions",
+          "Service": "ecs"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecs",
+          "Method": "list_daemon_task_definitions",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListDaemons",
+      "AuthorizedActions": [
+        {
+          "Name": "ListDaemons",
+          "Service": "ecs"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecs",
+          "Method": "list_daemons",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListServiceDeployments",
+      "AuthorizedActions": [
+        {
+          "Name": "ListServiceDeployments",
+          "Service": "ecs"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecs",
+          "Method": "list_service_deployments",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListServices",
+      "AuthorizedActions": [
+        {
+          "Name": "ListServices",
+          "Service": "ecs"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecs",
+          "Method": "list_services",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListServicesByNamespace",
+      "AuthorizedActions": [
+        {
+          "Name": "ListServicesByNamespace",
+          "Service": "ecs"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecs",
+          "Method": "list_services_by_namespace",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListTagsForResource",
+      "AuthorizedActions": [
+        {
+          "Name": "ListTagsForResource",
+          "Service": "ecs"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecs",
+          "Method": "list_tags_for_resource",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListTaskDefinitionFamilies",
+      "AuthorizedActions": [
+        {
+          "Name": "ListTaskDefinitionFamilies",
+          "Service": "ecs"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecs",
+          "Method": "list_task_definition_families",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListTaskDefinitions",
+      "AuthorizedActions": [
+        {
+          "Name": "ListTaskDefinitions",
+          "Service": "ecs"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecs",
+          "Method": "list_task_definitions",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListTasks",
+      "AuthorizedActions": [
+        {
+          "Name": "ListTasks",
+          "Service": "ecs"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecs",
+          "Method": "list_tasks",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "PutAccountSetting",
+      "AuthorizedActions": [
+        {
+          "Name": "PutAccountSetting",
+          "Service": "ecs"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecs",
+          "Method": "put_account_setting",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "PutAccountSettingDefault",
+      "AuthorizedActions": [
+        {
+          "Name": "PutAccountSettingDefault",
+          "Service": "ecs"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecs",
+          "Method": "put_account_setting_default",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "PutAttributes",
+      "AuthorizedActions": [
+        {
+          "Name": "PutAttributes",
+          "Service": "ecs"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecs",
+          "Method": "put_attributes",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "PutClusterCapacityProviders",
+      "AuthorizedActions": [
+        {
+          "Name": "PutClusterCapacityProviders",
+          "Service": "ecs"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecs",
+          "Method": "put_cluster_capacity_providers",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "RegisterContainerInstance",
+      "AuthorizedActions": [
+        {
+          "Name": "RegisterContainerInstance",
+          "Service": "ecs"
+        },
+        {
+          "Name": "TagResource",
+          "Service": "ecs"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecs",
+          "Method": "register_container_instance",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "RegisterDaemonTaskDefinition",
+      "AuthorizedActions": [
+        {
+          "Name": "PassRole",
+          "Context": {
+            "iam:PassedToService": [
+              "ecs-tasks.amazonaws.com"
+            ]
+          },
+          "Service": "iam"
+        },
+        {
+          "Name": "RegisterDaemonTaskDefinition",
+          "Service": "ecs"
+        },
+        {
+          "Name": "TagResource",
+          "Service": "ecs"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecs",
+          "Method": "register_daemon_task_definition",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "RegisterTaskDefinition",
+      "AuthorizedActions": [
+        {
+          "Name": "PassRole",
+          "Context": {
+            "iam:PassedToService": [
+              "ecs-tasks.amazonaws.com"
+            ]
+          },
+          "Service": "iam"
+        },
+        {
+          "Name": "RegisterTaskDefinition",
+          "Service": "ecs"
+        },
+        {
+          "Name": "TagResource",
+          "Service": "ecs"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecs",
+          "Method": "register_task_definition",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "RunTask",
+      "AuthorizedActions": [
+        {
+          "Name": "PassRole",
+          "Context": {
+            "iam:PassedToService": [
+              "ecs-tasks.amazonaws.com",
+              "ecs.amazonaws.com"
+            ]
+          },
+          "Service": "iam"
+        },
+        {
+          "Name": "RunTask",
+          "Service": "ecs"
+        },
+        {
+          "Name": "TagResource",
+          "Service": "ecs"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecs",
+          "Method": "run_task",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "StartTask",
+      "AuthorizedActions": [
+        {
+          "Name": "PassRole",
+          "Context": {
+            "iam:PassedToService": [
+              "ecs-tasks.amazonaws.com",
+              "ecs.amazonaws.com"
+            ]
+          },
+          "Service": "iam"
+        },
+        {
+          "Name": "StartTask",
+          "Service": "ecs"
+        },
+        {
+          "Name": "TagResource",
+          "Service": "ecs"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecs",
+          "Method": "start_task",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "StopServiceDeployment",
+      "AuthorizedActions": [
+        {
+          "Name": "StopServiceDeployment",
+          "Service": "ecs"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecs",
+          "Method": "stop_service_deployment",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "StopTask",
+      "AuthorizedActions": [
+        {
+          "Name": "StopTask",
+          "Service": "ecs"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecs",
+          "Method": "stop_task",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "SubmitAttachmentStateChanges",
+      "AuthorizedActions": [
+        {
+          "Name": "SubmitAttachmentStateChanges",
+          "Service": "ecs"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecs",
+          "Method": "submit_attachment_state_changes",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "SubmitContainerStateChange",
+      "AuthorizedActions": [
+        {
+          "Name": "SubmitContainerStateChange",
+          "Service": "ecs"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecs",
+          "Method": "submit_container_state_change",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "SubmitTaskStateChange",
+      "AuthorizedActions": [
+        {
+          "Name": "SubmitTaskStateChange",
+          "Service": "ecs"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecs",
+          "Method": "submit_task_state_change",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "TagResource",
+      "AuthorizedActions": [
+        {
+          "Name": "TagResource",
+          "Service": "ecs"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecs",
+          "Method": "tag_resource",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "UntagResource",
+      "AuthorizedActions": [
+        {
+          "Name": "UntagResource",
+          "Service": "ecs"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecs",
+          "Method": "untag_resource",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "UpdateCapacityProvider",
+      "AuthorizedActions": [
+        {
+          "Name": "PassRole",
+          "Context": {
+            "iam:PassedToService": [
+              "ecs.amazonaws.com"
+            ]
+          },
+          "Service": "iam"
+        },
+        {
+          "Name": "PutClusterCapacityProviders",
+          "Service": "ecs"
+        },
+        {
+          "Name": "UpdateCapacityProvider",
+          "Service": "ecs"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecs",
+          "Method": "update_capacity_provider",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "UpdateCluster",
+      "AuthorizedActions": [
+        {
+          "Name": "UpdateCluster",
+          "Service": "ecs"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecs",
+          "Method": "update_cluster",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "UpdateClusterSettings",
+      "AuthorizedActions": [
+        {
+          "Name": "UpdateClusterSettings",
+          "Service": "ecs"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecs",
+          "Method": "update_cluster_settings",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "UpdateContainerAgent",
+      "AuthorizedActions": [
+        {
+          "Name": "UpdateContainerAgent",
+          "Service": "ecs"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecs",
+          "Method": "update_container_agent",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "UpdateContainerInstancesState",
+      "AuthorizedActions": [
+        {
+          "Name": "UpdateContainerInstancesState",
+          "Service": "ecs"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecs",
+          "Method": "update_container_instances_state",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "UpdateDaemon",
+      "AuthorizedActions": [
+        {
+          "Name": "PassRole",
+          "Context": {
+            "iam:PassedToService": [
+              "ecs-tasks.amazonaws.com"
+            ]
+          },
+          "Service": "iam"
+        },
+        {
+          "Name": "UpdateDaemon",
+          "Service": "ecs"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecs",
+          "Method": "update_daemon",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "UpdateExpressGatewayService",
+      "AuthorizedActions": [
+        {
+          "Name": "PassRole",
+          "Context": {
+            "iam:PassedToService": [
+              "ecs-tasks.amazonaws.com",
+              "ecs.amazonaws.com"
+            ]
+          },
+          "Service": "iam"
+        },
+        {
+          "Name": "RegisterTaskDefinition",
+          "Service": "ecs"
+        },
+        {
+          "Name": "UpdateExpressGatewayService",
+          "Service": "ecs"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecs",
+          "Method": "update_express_gateway_service",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "UpdateService",
+      "AuthorizedActions": [
+        {
+          "Name": "PassRole",
+          "Context": {
+            "iam:PassedToService": [
+              "ecs-tasks.amazonaws.com",
+              "ecs.amazonaws.com"
+            ]
+          },
+          "Service": "iam"
+        },
+        {
+          "Name": "UpdateService",
+          "Service": "ecs"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecs",
+          "Method": "update_service",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "UpdateServicePrimaryTaskSet",
+      "AuthorizedActions": [
+        {
+          "Name": "UpdateServicePrimaryTaskSet",
+          "Service": "ecs"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecs",
+          "Method": "update_service_primary_task_set",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "UpdateTaskProtection",
+      "AuthorizedActions": [
+        {
+          "Name": "UpdateTaskProtection",
+          "Service": "ecs"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecs",
+          "Method": "update_task_protection",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "UpdateTaskSet",
+      "AuthorizedActions": [
+        {
+          "Name": "UpdateTaskSet",
+          "Service": "ecs"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecs",
+          "Method": "update_task_set",
+          "Package": "Boto3"
+        }
+      ]
+    }
+  ],
+  "Resources": [
+    {
+      "Name": "capacity-provider",
+      "ARNFormats": [
+        "arn:${Partition}:ecs:${Region}:${Account}:capacity-provider/${CapacityProviderName}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}",
+        "ecs:ResourceTag/${TagKey}"
+      ]
+    },
+    {
+      "Name": "cluster",
+      "ARNFormats": [
+        "arn:${Partition}:ecs:${Region}:${Account}:cluster/${ClusterName}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}",
+        "ecs:ResourceTag/${TagKey}"
+      ]
+    },
+    {
+      "Name": "container-instance",
+      "ARNFormats": [
+        "arn:${Partition}:ecs:${Region}:${Account}:container-instance/${ClusterName}/${ContainerInstanceId}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}",
+        "ecs:ResourceTag/${TagKey}"
+      ]
+    },
+    {
+      "Name": "daemon",
+      "ARNFormats": [
+        "arn:${Partition}:ecs:${Region}:${Account}:daemon/${ClusterName}/${DaemonName}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}",
+        "ecs:cluster"
+      ]
+    },
+    {
+      "Name": "daemon-deployment",
+      "ARNFormats": [
+        "arn:${Partition}:ecs:${Region}:${Account}:daemon-deployment/${ClusterName}/${DaemonName}/${DaemonDeploymentId}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}",
+        "ecs:cluster",
+        "ecs:daemon"
+      ]
+    },
+    {
+      "Name": "daemon-revision",
+      "ARNFormats": [
+        "arn:${Partition}:ecs:${Region}:${Account}:daemon-revision/${ClusterName}/${DaemonName}/${DaemonRevisionId}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}",
+        "ecs:cluster",
+        "ecs:daemon"
+      ]
+    },
+    {
+      "Name": "daemon-task-definition",
+      "ARNFormats": [
+        "arn:${Partition}:ecs:${Region}:${Account}:daemon-task-definition/${DaemonTaskDefinitionFamilyName}:${DaemonTaskDefinitionRevisionNumber}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ]
+    },
+    {
+      "Name": "service",
+      "ARNFormats": [
+        "arn:${Partition}:ecs:${Region}:${Account}:service/${ClusterName}/${ServiceName}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}",
+        "ecs:ResourceTag/${TagKey}"
+      ]
+    },
+    {
+      "Name": "service-deployment",
+      "ARNFormats": [
+        "arn:${Partition}:ecs:${Region}:${Account}:service-deployment/${ClusterName}/${ServiceName}/${ServiceDeploymentId}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}",
+        "ecs:cluster",
+        "ecs:service"
+      ]
+    },
+    {
+      "Name": "service-revision",
+      "ARNFormats": [
+        "arn:${Partition}:ecs:${Region}:${Account}:service-revision/${ClusterName}/${ServiceName}/${ServiceRevisionId}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}",
+        "ecs:cluster",
+        "ecs:service"
+      ]
+    },
+    {
+      "Name": "task",
+      "ARNFormats": [
+        "arn:${Partition}:ecs:${Region}:${Account}:task/${ClusterName}/${TaskId}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}",
+        "ecs:ResourceTag/${TagKey}"
+      ]
+    },
+    {
+      "Name": "task-definition",
+      "ARNFormats": [
+        "arn:${Partition}:ecs:${Region}:${Account}:task-definition/${TaskDefinitionFamilyName}:${TaskDefinitionRevisionNumber}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}",
+        "ecs:ResourceTag/${TagKey}"
+      ]
+    },
+    {
+      "Name": "task-set",
+      "ARNFormats": [
+        "arn:${Partition}:ecs:${Region}:${Account}:task-set/${ClusterName}/${ServiceName}/${TaskSetId}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}",
+        "ecs:ResourceTag/${TagKey}"
+      ]
+    }
+  ],
+  "Version": "v1.4"
+}

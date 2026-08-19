@@ -1,0 +1,2164 @@
+{
+  "Name": "ecr",
+  "Actions": [
+    {
+      "Name": "BatchCheckLayerAvailability",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "repository"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "BatchDeleteImage",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "repository"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "BatchGetImage",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "repository"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "BatchGetRepositoryScanningConfiguration",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "repository"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "BatchImportUpstreamImage",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "repository"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "CompleteLayerUpload",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "repository"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "CreatePullThroughCacheRule",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "CreateRepository",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "repository"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "CreateRepositoryCreationTemplate",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteLifecyclePolicy",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "repository"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeletePullThroughCacheRule",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteRegistryPolicy",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": true,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteRepository",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "repository"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteRepositoryCreationTemplate",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteRepositoryPolicy",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": true,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "repository"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteSigningConfiguration",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeregisterPullTimeUpdateExclusion",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "DescribeImageReplicationStatus",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "repository"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeImageScanFindings",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "repository"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeImageSigningStatus",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "repository"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "DescribeImages",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "repository"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribePullThroughCacheRules",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeRegistry",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeRepositories",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "repository"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeRepositoryCreationTemplates",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetAccountSetting",
+      "ActionConditionKeys": [
+        "ecr:AccountSetting"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetAuthorizationToken",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetDownloadUrlForLayer",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "repository"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetImageCopyStatus",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "repository"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "GetLifecyclePolicy",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "repository"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetLifecyclePolicyPreview",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "repository"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetRegistryPolicy",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetRegistryScanningConfiguration",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetRepositoryPolicy",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "repository"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetSigningConfiguration",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "InitiateLayerUpload",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "repository"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListImages",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "repository"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListPullTimeUpdateExclusions",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListTagsForResource",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "repository"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "PutAccountSetting",
+      "ActionConditionKeys": [
+        "ecr:AccountSetting"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "PutImage",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "repository"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "PutImageScanningConfiguration",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "repository"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "PutImageTagMutability",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "repository"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "PutLifecyclePolicy",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "repository"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "PutRegistryPolicy",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": true,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "PutRegistryScanningConfiguration",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "PutReplicationConfiguration",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "PutSigningConfiguration",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "RegisterPullTimeUpdateExclusion",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "ReplicateImage",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "repository"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "SetRepositoryPolicy",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": true,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "repository"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "StartImageScan",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "repository"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "StartLifecyclePolicyPreview",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "repository"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "TagResource",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": true,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "repository"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "UntagResource",
+      "ActionConditionKeys": [
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": true,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "repository"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "UpdateImageStorageClass",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "repository"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "UpdatePullThroughCacheRule",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "UpdateRepositoryCreationTemplate",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "UploadLayerPart",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "repository"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ValidatePullThroughCacheRule",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    }
+  ],
+  "ConditionKeys": [
+    {
+      "Name": "aws:RequestTag/${TagKey}",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "aws:ResourceTag/${TagKey}",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "aws:TagKeys",
+      "Types": [
+        "ArrayOfString"
+      ]
+    },
+    {
+      "Name": "ecr:AccountSetting",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "ecr:ResourceTag/${TagKey}",
+      "Types": [
+        "String"
+      ]
+    }
+  ],
+  "Operations": [
+    {
+      "Name": "BatchCheckLayerAvailability",
+      "AuthorizedActions": [
+        {
+          "Name": "BatchCheckLayerAvailability",
+          "Service": "ecr"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecr",
+          "Method": "batch_check_layer_availability",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "BatchDeleteImage",
+      "AuthorizedActions": [
+        {
+          "Name": "BatchDeleteImage",
+          "Service": "ecr"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecr",
+          "Method": "batch_delete_image",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "BatchGetImage",
+      "AuthorizedActions": [
+        {
+          "Name": "BatchGetImage",
+          "Service": "ecr"
+        },
+        {
+          "Name": "BatchImportUpstreamImage",
+          "Service": "ecr"
+        },
+        {
+          "Name": "CreateRepository",
+          "Service": "ecr"
+        },
+        {
+          "Name": "TagResource",
+          "Service": "ecr"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecr",
+          "Method": "batch_get_image",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "BatchGetRepositoryScanningConfiguration",
+      "AuthorizedActions": [
+        {
+          "Name": "BatchGetRepositoryScanningConfiguration",
+          "Service": "ecr"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecr",
+          "Method": "batch_get_repository_scanning_configuration",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CompleteLayerUpload",
+      "AuthorizedActions": [
+        {
+          "Name": "CompleteLayerUpload",
+          "Service": "ecr"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecr",
+          "Method": "complete_layer_upload",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreatePullThroughCacheRule",
+      "AuthorizedActions": [
+        {
+          "Name": "CreatePullThroughCacheRule",
+          "Service": "ecr"
+        },
+        {
+          "Name": "PassRole",
+          "Context": {
+            "iam:PassedToService": [
+              "ecr.amazonaws.com"
+            ]
+          },
+          "Service": "iam"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecr",
+          "Method": "create_pull_through_cache_rule",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreateRepository",
+      "AuthorizedActions": [
+        {
+          "Name": "CreateRepository",
+          "Service": "ecr"
+        },
+        {
+          "Name": "TagResource",
+          "Service": "ecr"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecr",
+          "Method": "create_repository",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreateRepositoryCreationTemplate",
+      "AuthorizedActions": [
+        {
+          "Name": "CreateRepository",
+          "Service": "ecr"
+        },
+        {
+          "Name": "CreateRepositoryCreationTemplate",
+          "Service": "ecr"
+        },
+        {
+          "Name": "PassRole",
+          "Context": {
+            "iam:PassedToService": [
+              "ecr.amazonaws.com"
+            ]
+          },
+          "Service": "iam"
+        },
+        {
+          "Name": "PutLifecyclePolicy",
+          "Service": "ecr"
+        },
+        {
+          "Name": "SetRepositoryPolicy",
+          "Service": "ecr"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecr",
+          "Method": "create_repository_creation_template",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteLifecyclePolicy",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteLifecyclePolicy",
+          "Service": "ecr"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecr",
+          "Method": "delete_lifecycle_policy",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeletePullThroughCacheRule",
+      "AuthorizedActions": [
+        {
+          "Name": "DeletePullThroughCacheRule",
+          "Service": "ecr"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecr",
+          "Method": "delete_pull_through_cache_rule",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteRegistryPolicy",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteRegistryPolicy",
+          "Service": "ecr"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecr",
+          "Method": "delete_registry_policy",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteRepository",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteRepository",
+          "Service": "ecr"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecr",
+          "Method": "delete_repository",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteRepositoryCreationTemplate",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteRepositoryCreationTemplate",
+          "Service": "ecr"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecr",
+          "Method": "delete_repository_creation_template",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteRepositoryPolicy",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteRepositoryPolicy",
+          "Service": "ecr"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecr",
+          "Method": "delete_repository_policy",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteSigningConfiguration",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteSigningConfiguration",
+          "Service": "ecr"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecr",
+          "Method": "delete_signing_configuration",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeregisterPullTimeUpdateExclusion",
+      "AuthorizedActions": [
+        {
+          "Name": "DeregisterPullTimeUpdateExclusion",
+          "Service": "ecr"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecr",
+          "Method": "deregister_pull_time_update_exclusion",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeImageReplicationStatus",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeImageReplicationStatus",
+          "Service": "ecr"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecr",
+          "Method": "describe_image_replication_status",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeImageScanFindings",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeImageScanFindings",
+          "Service": "ecr"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecr",
+          "Method": "describe_image_scan_findings",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeImageSigningStatus",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeImageSigningStatus",
+          "Service": "ecr"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecr",
+          "Method": "describe_image_signing_status",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeImages",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeImages",
+          "Service": "ecr"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecr",
+          "Method": "describe_images",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribePullThroughCacheRules",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribePullThroughCacheRules",
+          "Service": "ecr"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecr",
+          "Method": "describe_pull_through_cache_rules",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeRegistry",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeRegistry",
+          "Service": "ecr"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecr",
+          "Method": "describe_registry",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeRepositories",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeRepositories",
+          "Service": "ecr"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecr",
+          "Method": "describe_repositories",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeRepositoryCreationTemplates",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeRepositoryCreationTemplates",
+          "Service": "ecr"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecr",
+          "Method": "describe_repository_creation_templates",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetAccountSetting",
+      "AuthorizedActions": [
+        {
+          "Name": "GetAccountSetting",
+          "Service": "ecr"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecr",
+          "Method": "get_account_setting",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetAuthorizationToken",
+      "AuthorizedActions": [
+        {
+          "Name": "GetAuthorizationToken",
+          "Service": "ecr"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecr",
+          "Method": "get_authorization_token",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetDownloadUrlForLayer",
+      "AuthorizedActions": [
+        {
+          "Name": "BatchImportUpstreamImage",
+          "Service": "ecr"
+        },
+        {
+          "Name": "GetDownloadUrlForLayer",
+          "Service": "ecr"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecr",
+          "Method": "get_download_url_for_layer",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetLifecyclePolicy",
+      "AuthorizedActions": [
+        {
+          "Name": "GetLifecyclePolicy",
+          "Service": "ecr"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecr",
+          "Method": "get_lifecycle_policy",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetLifecyclePolicyPreview",
+      "AuthorizedActions": [
+        {
+          "Name": "GetLifecyclePolicyPreview",
+          "Service": "ecr"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecr",
+          "Method": "get_lifecycle_policy_preview",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetRegistryPolicy",
+      "AuthorizedActions": [
+        {
+          "Name": "GetRegistryPolicy",
+          "Service": "ecr"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecr",
+          "Method": "get_registry_policy",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetRegistryScanningConfiguration",
+      "AuthorizedActions": [
+        {
+          "Name": "GetRegistryScanningConfiguration",
+          "Service": "ecr"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecr",
+          "Method": "get_registry_scanning_configuration",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetRepositoryPolicy",
+      "AuthorizedActions": [
+        {
+          "Name": "GetRepositoryPolicy",
+          "Service": "ecr"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecr",
+          "Method": "get_repository_policy",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetSigningConfiguration",
+      "AuthorizedActions": [
+        {
+          "Name": "GetSigningConfiguration",
+          "Service": "ecr"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecr",
+          "Method": "get_signing_configuration",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "InitiateLayerUpload",
+      "AuthorizedActions": [
+        {
+          "Name": "InitiateLayerUpload",
+          "Service": "ecr"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecr",
+          "Method": "initiate_layer_upload",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListImageReferrers",
+      "AuthorizedActions": [
+        {
+          "Name": "BatchGetImage",
+          "Service": "ecr"
+        },
+        {
+          "Name": "BatchImportUpstreamImage",
+          "Service": "ecr"
+        },
+        {
+          "Name": "CreateRepository",
+          "Service": "ecr"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecr",
+          "Method": "list_image_referrers",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListImages",
+      "AuthorizedActions": [
+        {
+          "Name": "ListImages",
+          "Service": "ecr"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecr",
+          "Method": "list_images",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListPullTimeUpdateExclusions",
+      "AuthorizedActions": [
+        {
+          "Name": "ListPullTimeUpdateExclusions",
+          "Service": "ecr"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecr",
+          "Method": "list_pull_time_update_exclusions",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListTagsForResource",
+      "AuthorizedActions": [
+        {
+          "Name": "ListTagsForResource",
+          "Service": "ecr"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecr",
+          "Method": "list_tags_for_resource",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "PutAccountSetting",
+      "AuthorizedActions": [
+        {
+          "Name": "PutAccountSetting",
+          "Service": "ecr"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecr",
+          "Method": "put_account_setting",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "PutImage",
+      "AuthorizedActions": [
+        {
+          "Name": "PutImage",
+          "Service": "ecr"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecr",
+          "Method": "put_image",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "PutImageScanningConfiguration",
+      "AuthorizedActions": [
+        {
+          "Name": "PutImageScanningConfiguration",
+          "Service": "ecr"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecr",
+          "Method": "put_image_scanning_configuration",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "PutImageTagMutability",
+      "AuthorizedActions": [
+        {
+          "Name": "PutImageTagMutability",
+          "Service": "ecr"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecr",
+          "Method": "put_image_tag_mutability",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "PutLifecyclePolicy",
+      "AuthorizedActions": [
+        {
+          "Name": "PutLifecyclePolicy",
+          "Service": "ecr"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecr",
+          "Method": "put_lifecycle_policy",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "PutRegistryPolicy",
+      "AuthorizedActions": [
+        {
+          "Name": "PutRegistryPolicy",
+          "Service": "ecr"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecr",
+          "Method": "put_registry_policy",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "PutRegistryScanningConfiguration",
+      "AuthorizedActions": [
+        {
+          "Name": "PutRegistryScanningConfiguration",
+          "Service": "ecr"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecr",
+          "Method": "put_registry_scanning_configuration",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "PutReplicationConfiguration",
+      "AuthorizedActions": [
+        {
+          "Name": "PutReplicationConfiguration",
+          "Service": "ecr"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecr",
+          "Method": "put_replication_configuration",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "PutSigningConfiguration",
+      "AuthorizedActions": [
+        {
+          "Name": "PutSigningConfiguration",
+          "Service": "ecr"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecr",
+          "Method": "put_signing_configuration",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "RegisterPullTimeUpdateExclusion",
+      "AuthorizedActions": [
+        {
+          "Name": "RegisterPullTimeUpdateExclusion",
+          "Service": "ecr"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecr",
+          "Method": "register_pull_time_update_exclusion",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "SetRepositoryPolicy",
+      "AuthorizedActions": [
+        {
+          "Name": "SetRepositoryPolicy",
+          "Service": "ecr"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecr",
+          "Method": "set_repository_policy",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "StartImageScan",
+      "AuthorizedActions": [
+        {
+          "Name": "StartImageScan",
+          "Service": "ecr"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecr",
+          "Method": "start_image_scan",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "StartLifecyclePolicyPreview",
+      "AuthorizedActions": [
+        {
+          "Name": "StartLifecyclePolicyPreview",
+          "Service": "ecr"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecr",
+          "Method": "start_lifecycle_policy_preview",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "TagResource",
+      "AuthorizedActions": [
+        {
+          "Name": "TagResource",
+          "Service": "ecr"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecr",
+          "Method": "tag_resource",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "UntagResource",
+      "AuthorizedActions": [
+        {
+          "Name": "UntagResource",
+          "Service": "ecr"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecr",
+          "Method": "untag_resource",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "UpdateImageStorageClass",
+      "AuthorizedActions": [
+        {
+          "Name": "UpdateImageStorageClass",
+          "Service": "ecr"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecr",
+          "Method": "update_image_storage_class",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "UpdatePullThroughCacheRule",
+      "AuthorizedActions": [
+        {
+          "Name": "PassRole",
+          "Context": {
+            "iam:PassedToService": [
+              "ecr.amazonaws.com"
+            ]
+          },
+          "Service": "iam"
+        },
+        {
+          "Name": "UpdatePullThroughCacheRule",
+          "Service": "ecr"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecr",
+          "Method": "update_pull_through_cache_rule",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "UpdateRepositoryCreationTemplate",
+      "AuthorizedActions": [
+        {
+          "Name": "CreateRepository",
+          "Service": "ecr"
+        },
+        {
+          "Name": "PassRole",
+          "Context": {
+            "iam:PassedToService": [
+              "ecr.amazonaws.com"
+            ]
+          },
+          "Service": "iam"
+        },
+        {
+          "Name": "PutLifecyclePolicy",
+          "Service": "ecr"
+        },
+        {
+          "Name": "SetRepositoryPolicy",
+          "Service": "ecr"
+        },
+        {
+          "Name": "UpdateRepositoryCreationTemplate",
+          "Service": "ecr"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecr",
+          "Method": "update_repository_creation_template",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "UploadLayerPart",
+      "AuthorizedActions": [
+        {
+          "Name": "UploadLayerPart",
+          "Service": "ecr"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecr",
+          "Method": "upload_layer_part",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ValidatePullThroughCacheRule",
+      "AuthorizedActions": [
+        {
+          "Name": "ValidatePullThroughCacheRule",
+          "Service": "ecr"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ecr",
+          "Method": "validate_pull_through_cache_rule",
+          "Package": "Boto3"
+        }
+      ]
+    }
+  ],
+  "Resources": [
+    {
+      "Name": "repository",
+      "ARNFormats": [
+        "arn:${Partition}:ecr:${Region}:${Account}:repository/${RepositoryName}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}",
+        "ecr:ResourceTag/${TagKey}"
+      ]
+    }
+  ],
+  "Version": "v1.4"
+}

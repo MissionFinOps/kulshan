@@ -1,0 +1,2741 @@
+{
+  "Name": "autoscaling",
+  "Actions": [
+    {
+      "Name": "AttachInstances",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "autoScalingGroup",
+          "ConditionKeys": [
+            "autoscaling:ResourceTag/${TagKey}",
+            "aws:ResourceTag/${TagKey}"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "AttachLoadBalancerTargetGroups",
+      "ActionConditionKeys": [
+        "autoscaling:TargetGroupARNs"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "autoScalingGroup",
+          "ConditionKeys": [
+            "autoscaling:ResourceTag/${TagKey}",
+            "aws:ResourceTag/${TagKey}"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "AttachLoadBalancers",
+      "ActionConditionKeys": [
+        "autoscaling:LoadBalancerNames"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "autoScalingGroup",
+          "ConditionKeys": [
+            "autoscaling:ResourceTag/${TagKey}",
+            "aws:ResourceTag/${TagKey}"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "AttachTrafficSources",
+      "ActionConditionKeys": [
+        "autoscaling:TrafficSourceIdentifiers"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "autoScalingGroup",
+          "ConditionKeys": [
+            "autoscaling:ResourceTag/${TagKey}",
+            "aws:ResourceTag/${TagKey}"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "BatchDeleteScheduledAction",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "autoScalingGroup",
+          "ConditionKeys": [
+            "autoscaling:ResourceTag/${TagKey}",
+            "aws:ResourceTag/${TagKey}"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "BatchPutScheduledUpdateGroupAction",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "autoScalingGroup",
+          "ConditionKeys": [
+            "autoscaling:ResourceTag/${TagKey}",
+            "aws:ResourceTag/${TagKey}"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "CancelInstanceRefresh",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "autoScalingGroup",
+          "ConditionKeys": [
+            "autoscaling:ResourceTag/${TagKey}",
+            "aws:ResourceTag/${TagKey}"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "CompleteLifecycleAction",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "autoScalingGroup",
+          "ConditionKeys": [
+            "autoscaling:ResourceTag/${TagKey}",
+            "aws:ResourceTag/${TagKey}"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "CreateAutoScalingGroup",
+      "ActionConditionKeys": [
+        "autoscaling:CapacityReservationIds",
+        "autoscaling:CapacityReservationResourceGroupArns",
+        "autoscaling:ImageId",
+        "autoscaling:InstanceTypes",
+        "autoscaling:LaunchConfigurationName",
+        "autoscaling:LaunchTemplateVersionSpecified",
+        "autoscaling:LoadBalancerNames",
+        "autoscaling:MaxSize",
+        "autoscaling:MinSize",
+        "autoscaling:OperatorPrincipal",
+        "autoscaling:TargetGroupARNs",
+        "autoscaling:TrafficSourceIdentifiers",
+        "autoscaling:VPCZoneIdentifiers",
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "autoScalingGroup",
+          "ConditionKeys": [
+            "autoscaling:ResourceTag/${TagKey}",
+            "aws:ResourceTag/${TagKey}"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "CreateLaunchConfiguration",
+      "ActionConditionKeys": [
+        "autoscaling:ImageId",
+        "autoscaling:InstanceType",
+        "autoscaling:MetadataHttpEndpoint",
+        "autoscaling:MetadataHttpPutResponseHopLimit",
+        "autoscaling:MetadataHttpTokens",
+        "autoscaling:SpotPrice"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "launchConfiguration"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "CreateOrUpdateTags",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": true,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "autoScalingGroup",
+          "ConditionKeys": [
+            "autoscaling:ResourceTag/${TagKey}",
+            "aws:ResourceTag/${TagKey}"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "DeleteAutoScalingGroup",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "autoScalingGroup",
+          "ConditionKeys": [
+            "autoscaling:ForceDelete",
+            "autoscaling:ResourceTag/${TagKey}",
+            "aws:ResourceTag/${TagKey}"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteLaunchConfiguration",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "launchConfiguration"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteLifecycleHook",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "autoScalingGroup",
+          "ConditionKeys": [
+            "autoscaling:ResourceTag/${TagKey}",
+            "aws:ResourceTag/${TagKey}"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteNotificationConfiguration",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "autoScalingGroup",
+          "ConditionKeys": [
+            "autoscaling:ResourceTag/${TagKey}",
+            "aws:ResourceTag/${TagKey}"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeletePolicy",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "autoScalingGroup",
+          "ConditionKeys": [
+            "autoscaling:ResourceTag/${TagKey}",
+            "aws:ResourceTag/${TagKey}"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteScheduledAction",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "autoScalingGroup",
+          "ConditionKeys": [
+            "autoscaling:ResourceTag/${TagKey}",
+            "aws:ResourceTag/${TagKey}"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteTags",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": true,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "autoScalingGroup",
+          "ConditionKeys": [
+            "autoscaling:ResourceTag/${TagKey}",
+            "aws:ResourceTag/${TagKey}"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "DeleteWarmPool",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "autoScalingGroup",
+          "ConditionKeys": [
+            "autoscaling:ResourceTag/${TagKey}",
+            "aws:ResourceTag/${TagKey}"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeAccountLimits",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeAccountSettings",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "DescribeAdjustmentTypes",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeAutoScalingGroups",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeAutoScalingInstances",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeAutoScalingNotificationTypes",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeInstanceRefreshes",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeLaunchConfigurations",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeLifecycleHookTypes",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeLifecycleHooks",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeLoadBalancerTargetGroups",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeLoadBalancers",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeMetricCollectionTypes",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeNotificationConfigurations",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribePolicies",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeScalingActivities",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeScalingProcessTypes",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeScheduledActions",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeTags",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "DescribeTerminationPolicyTypes",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeTrafficSources",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeWarmPool",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DetachInstances",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "autoScalingGroup",
+          "ConditionKeys": [
+            "autoscaling:ResourceTag/${TagKey}",
+            "aws:ResourceTag/${TagKey}"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DetachLoadBalancerTargetGroups",
+      "ActionConditionKeys": [
+        "autoscaling:TargetGroupARNs"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "autoScalingGroup",
+          "ConditionKeys": [
+            "autoscaling:ResourceTag/${TagKey}",
+            "aws:ResourceTag/${TagKey}"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DetachLoadBalancers",
+      "ActionConditionKeys": [
+        "autoscaling:LoadBalancerNames"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "autoScalingGroup",
+          "ConditionKeys": [
+            "autoscaling:ResourceTag/${TagKey}",
+            "aws:ResourceTag/${TagKey}"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DetachTrafficSources",
+      "ActionConditionKeys": [
+        "autoscaling:TrafficSourceIdentifiers"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "autoScalingGroup",
+          "ConditionKeys": [
+            "autoscaling:ResourceTag/${TagKey}",
+            "aws:ResourceTag/${TagKey}"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DisableMetricsCollection",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "autoScalingGroup",
+          "ConditionKeys": [
+            "autoscaling:ResourceTag/${TagKey}",
+            "aws:ResourceTag/${TagKey}"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "EnableMetricsCollection",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "autoScalingGroup",
+          "ConditionKeys": [
+            "autoscaling:ResourceTag/${TagKey}",
+            "aws:ResourceTag/${TagKey}"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "EnterStandby",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "autoScalingGroup",
+          "ConditionKeys": [
+            "autoscaling:ResourceTag/${TagKey}",
+            "aws:ResourceTag/${TagKey}"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ExecutePolicy",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "autoScalingGroup",
+          "ConditionKeys": [
+            "autoscaling:ResourceTag/${TagKey}",
+            "aws:ResourceTag/${TagKey}"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ExitStandby",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "autoScalingGroup",
+          "ConditionKeys": [
+            "autoscaling:ResourceTag/${TagKey}",
+            "aws:ResourceTag/${TagKey}"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetPredictiveScalingForecast",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "LaunchInstances",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "autoScalingGroup",
+          "ConditionKeys": [
+            "autoscaling:ResourceTag/${TagKey}",
+            "aws:ResourceTag/${TagKey}"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "PutAccountSetting",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "PutLifecycleHook",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "autoScalingGroup",
+          "ConditionKeys": [
+            "autoscaling:ResourceTag/${TagKey}",
+            "aws:ResourceTag/${TagKey}"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "PutNotificationConfiguration",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "autoScalingGroup",
+          "ConditionKeys": [
+            "autoscaling:ResourceTag/${TagKey}",
+            "aws:ResourceTag/${TagKey}"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "PutScalingPolicy",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "autoScalingGroup",
+          "ConditionKeys": [
+            "autoscaling:ResourceTag/${TagKey}",
+            "aws:ResourceTag/${TagKey}"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "PutScheduledUpdateGroupAction",
+      "ActionConditionKeys": [
+        "autoscaling:MaxSize",
+        "autoscaling:MinSize"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "autoScalingGroup",
+          "ConditionKeys": [
+            "autoscaling:ResourceTag/${TagKey}",
+            "aws:ResourceTag/${TagKey}"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "PutWarmPool",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "autoScalingGroup",
+          "ConditionKeys": [
+            "autoscaling:ResourceTag/${TagKey}",
+            "aws:ResourceTag/${TagKey}"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "RecordLifecycleActionHeartbeat",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "autoScalingGroup",
+          "ConditionKeys": [
+            "autoscaling:ResourceTag/${TagKey}",
+            "aws:ResourceTag/${TagKey}"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ResumeProcesses",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "autoScalingGroup",
+          "ConditionKeys": [
+            "autoscaling:ResourceTag/${TagKey}",
+            "aws:ResourceTag/${TagKey}"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "RollbackInstanceRefresh",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "autoScalingGroup",
+          "ConditionKeys": [
+            "autoscaling:ResourceTag/${TagKey}",
+            "aws:ResourceTag/${TagKey}"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "SetDesiredCapacity",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "autoScalingGroup",
+          "ConditionKeys": [
+            "autoscaling:ResourceTag/${TagKey}",
+            "aws:ResourceTag/${TagKey}"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "SetInstanceHealth",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "autoScalingGroup",
+          "ConditionKeys": [
+            "autoscaling:ResourceTag/${TagKey}",
+            "aws:ResourceTag/${TagKey}"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "SetInstanceProtection",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "autoScalingGroup",
+          "ConditionKeys": [
+            "autoscaling:ResourceTag/${TagKey}",
+            "aws:ResourceTag/${TagKey}"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "StartInstanceRefresh",
+      "ActionConditionKeys": [
+        "autoscaling:ImageId"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "autoScalingGroup",
+          "ConditionKeys": [
+            "autoscaling:ResourceTag/${TagKey}",
+            "aws:ResourceTag/${TagKey}"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "SuspendProcesses",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "autoScalingGroup",
+          "ConditionKeys": [
+            "autoscaling:ResourceTag/${TagKey}",
+            "aws:ResourceTag/${TagKey}"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "TerminateInstanceInAutoScalingGroup",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "autoScalingGroup",
+          "ConditionKeys": [
+            "autoscaling:ResourceTag/${TagKey}",
+            "aws:ResourceTag/${TagKey}"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "UpdateAutoScalingGroup",
+      "ActionConditionKeys": [
+        "autoscaling:CapacityReservationIds",
+        "autoscaling:CapacityReservationResourceGroupArns",
+        "autoscaling:ImageId",
+        "autoscaling:InstanceTypes",
+        "autoscaling:LaunchConfigurationName",
+        "autoscaling:LaunchTemplateVersionSpecified",
+        "autoscaling:MaxSize",
+        "autoscaling:MinSize",
+        "autoscaling:VPCZoneIdentifiers"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "autoScalingGroup",
+          "ConditionKeys": [
+            "autoscaling:ResourceTag/${TagKey}",
+            "aws:ResourceTag/${TagKey}"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    }
+  ],
+  "ConditionKeys": [
+    {
+      "Name": "autoscaling:CapacityReservationIds",
+      "Types": [
+        "ArrayOfString"
+      ]
+    },
+    {
+      "Name": "autoscaling:CapacityReservationResourceGroupArns",
+      "Types": [
+        "ArrayOfString"
+      ]
+    },
+    {
+      "Name": "autoscaling:ForceDelete",
+      "Types": [
+        "Bool"
+      ]
+    },
+    {
+      "Name": "autoscaling:ImageId",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "autoscaling:InstanceType",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "autoscaling:InstanceTypes",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "autoscaling:LaunchConfigurationName",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "autoscaling:LaunchTemplateVersionSpecified",
+      "Types": [
+        "Bool"
+      ]
+    },
+    {
+      "Name": "autoscaling:LoadBalancerNames",
+      "Types": [
+        "ArrayOfString"
+      ]
+    },
+    {
+      "Name": "autoscaling:MaxSize",
+      "Types": [
+        "Numeric"
+      ]
+    },
+    {
+      "Name": "autoscaling:MetadataHttpEndpoint",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "autoscaling:MetadataHttpPutResponseHopLimit",
+      "Types": [
+        "Numeric"
+      ]
+    },
+    {
+      "Name": "autoscaling:MetadataHttpTokens",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "autoscaling:MinSize",
+      "Types": [
+        "Numeric"
+      ]
+    },
+    {
+      "Name": "autoscaling:OperatorPrincipal",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "autoscaling:ResourceTag/${TagKey}",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "autoscaling:SpotPrice",
+      "Types": [
+        "Numeric"
+      ]
+    },
+    {
+      "Name": "autoscaling:TargetGroupARNs",
+      "Types": [
+        "ArrayOfARN"
+      ]
+    },
+    {
+      "Name": "autoscaling:TrafficSourceIdentifiers",
+      "Types": [
+        "ArrayOfString"
+      ]
+    },
+    {
+      "Name": "autoscaling:VPCZoneIdentifiers",
+      "Types": [
+        "ArrayOfString"
+      ]
+    },
+    {
+      "Name": "aws:RequestTag/${TagKey}",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "aws:ResourceTag/${TagKey}",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "aws:TagKeys",
+      "Types": [
+        "ArrayOfString"
+      ]
+    }
+  ],
+  "Operations": [
+    {
+      "Name": "AttachInstances",
+      "AuthorizedActions": [
+        {
+          "Name": "AttachInstances",
+          "Service": "autoscaling"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "autoscaling",
+          "Method": "attach_instances",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "AttachLoadBalancerTargetGroups",
+      "AuthorizedActions": [
+        {
+          "Name": "AttachLoadBalancerTargetGroups",
+          "Service": "autoscaling"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "autoscaling",
+          "Method": "attach_load_balancer_target_groups",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "AttachLoadBalancers",
+      "AuthorizedActions": [
+        {
+          "Name": "AttachLoadBalancers",
+          "Service": "autoscaling"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "autoscaling",
+          "Method": "attach_load_balancers",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "AttachTrafficSources",
+      "AuthorizedActions": [
+        {
+          "Name": "AttachTrafficSources",
+          "Service": "autoscaling"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "autoscaling",
+          "Method": "attach_traffic_sources",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "BatchDeleteScheduledAction",
+      "AuthorizedActions": [
+        {
+          "Name": "BatchDeleteScheduledAction",
+          "Service": "autoscaling"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "autoscaling",
+          "Method": "batch_delete_scheduled_action",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "BatchPutScheduledUpdateGroupAction",
+      "AuthorizedActions": [
+        {
+          "Name": "BatchPutScheduledUpdateGroupAction",
+          "Service": "autoscaling"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "autoscaling",
+          "Method": "batch_put_scheduled_update_group_action",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CancelInstanceRefresh",
+      "AuthorizedActions": [
+        {
+          "Name": "CancelInstanceRefresh",
+          "Service": "autoscaling"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "autoscaling",
+          "Method": "cancel_instance_refresh",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CompleteLifecycleAction",
+      "AuthorizedActions": [
+        {
+          "Name": "CompleteLifecycleAction",
+          "Service": "autoscaling"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "autoscaling",
+          "Method": "complete_lifecycle_action",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreateAutoScalingGroup",
+      "AuthorizedActions": [
+        {
+          "Name": "CreateAutoScalingGroup",
+          "Service": "autoscaling"
+        },
+        {
+          "Name": "CreateOrUpdateTags",
+          "Service": "autoscaling"
+        },
+        {
+          "Name": "PassRole",
+          "Context": {
+            "iam:PassedToService": [
+              "autoscaling.amazonaws.com",
+              "ec2.amazonaws.com"
+            ]
+          },
+          "Service": "iam"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "autoscaling",
+          "Method": "create_auto_scaling_group",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreateLaunchConfiguration",
+      "AuthorizedActions": [
+        {
+          "Name": "CreateLaunchConfiguration",
+          "Service": "autoscaling"
+        },
+        {
+          "Name": "PassRole",
+          "Context": {
+            "iam:PassedToService": [
+              "ec2.amazonaws.com"
+            ]
+          },
+          "Service": "iam"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "autoscaling",
+          "Method": "create_launch_configuration",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreateOrUpdateTags",
+      "AuthorizedActions": [
+        {
+          "Name": "CreateOrUpdateTags",
+          "Service": "autoscaling"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "autoscaling",
+          "Method": "create_or_update_tags",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteAutoScalingGroup",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteAutoScalingGroup",
+          "Service": "autoscaling"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "autoscaling",
+          "Method": "delete_auto_scaling_group",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteLaunchConfiguration",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteLaunchConfiguration",
+          "Service": "autoscaling"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "autoscaling",
+          "Method": "delete_launch_configuration",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteLifecycleHook",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteLifecycleHook",
+          "Service": "autoscaling"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "autoscaling",
+          "Method": "delete_lifecycle_hook",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteNotificationConfiguration",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteNotificationConfiguration",
+          "Service": "autoscaling"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "autoscaling",
+          "Method": "delete_notification_configuration",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeletePolicy",
+      "AuthorizedActions": [
+        {
+          "Name": "DeletePolicy",
+          "Service": "autoscaling"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "autoscaling",
+          "Method": "delete_policy",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteScheduledAction",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteScheduledAction",
+          "Service": "autoscaling"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "autoscaling",
+          "Method": "delete_scheduled_action",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteTags",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteTags",
+          "Service": "autoscaling"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "autoscaling",
+          "Method": "delete_tags",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteWarmPool",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteWarmPool",
+          "Service": "autoscaling"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "autoscaling",
+          "Method": "delete_warm_pool",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeAccountLimits",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeAccountLimits",
+          "Service": "autoscaling"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "autoscaling",
+          "Method": "describe_account_limits",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeAdjustmentTypes",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeAdjustmentTypes",
+          "Service": "autoscaling"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "autoscaling",
+          "Method": "describe_adjustment_types",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeAutoScalingGroups",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeAutoScalingGroups",
+          "Service": "autoscaling"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "autoscaling",
+          "Method": "describe_auto_scaling_groups",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeAutoScalingInstances",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeAutoScalingInstances",
+          "Service": "autoscaling"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "autoscaling",
+          "Method": "describe_auto_scaling_instances",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeAutoScalingNotificationTypes",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeAutoScalingNotificationTypes",
+          "Service": "autoscaling"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "autoscaling",
+          "Method": "describe_auto_scaling_notification_types",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeInstanceRefreshes",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeInstanceRefreshes",
+          "Service": "autoscaling"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "autoscaling",
+          "Method": "describe_instance_refreshes",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeLaunchConfigurations",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeLaunchConfigurations",
+          "Service": "autoscaling"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "autoscaling",
+          "Method": "describe_launch_configurations",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeLifecycleHookTypes",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeLifecycleHookTypes",
+          "Service": "autoscaling"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "autoscaling",
+          "Method": "describe_lifecycle_hook_types",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeLifecycleHooks",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeLifecycleHooks",
+          "Service": "autoscaling"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "autoscaling",
+          "Method": "describe_lifecycle_hooks",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeLoadBalancerTargetGroups",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeLoadBalancerTargetGroups",
+          "Service": "autoscaling"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "autoscaling",
+          "Method": "describe_load_balancer_target_groups",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeLoadBalancers",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeLoadBalancers",
+          "Service": "autoscaling"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "autoscaling",
+          "Method": "describe_load_balancers",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeMetricCollectionTypes",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeMetricCollectionTypes",
+          "Service": "autoscaling"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "autoscaling",
+          "Method": "describe_metric_collection_types",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeNotificationConfigurations",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeNotificationConfigurations",
+          "Service": "autoscaling"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "autoscaling",
+          "Method": "describe_notification_configurations",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribePolicies",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribePolicies",
+          "Service": "autoscaling"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "autoscaling",
+          "Method": "describe_policies",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeScalingActivities",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeScalingActivities",
+          "Service": "autoscaling"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "autoscaling",
+          "Method": "describe_scaling_activities",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeScalingProcessTypes",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeScalingProcessTypes",
+          "Service": "autoscaling"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "autoscaling",
+          "Method": "describe_scaling_process_types",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeScheduledActions",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeScheduledActions",
+          "Service": "autoscaling"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "autoscaling",
+          "Method": "describe_scheduled_actions",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeTags",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeTags",
+          "Service": "autoscaling"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "autoscaling",
+          "Method": "describe_tags",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeTerminationPolicyTypes",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeTerminationPolicyTypes",
+          "Service": "autoscaling"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "autoscaling",
+          "Method": "describe_termination_policy_types",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeTrafficSources",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeTrafficSources",
+          "Service": "autoscaling"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "autoscaling",
+          "Method": "describe_traffic_sources",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeWarmPool",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeWarmPool",
+          "Service": "autoscaling"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "autoscaling",
+          "Method": "describe_warm_pool",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DetachInstances",
+      "AuthorizedActions": [
+        {
+          "Name": "DetachInstances",
+          "Service": "autoscaling"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "autoscaling",
+          "Method": "detach_instances",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DetachLoadBalancerTargetGroups",
+      "AuthorizedActions": [
+        {
+          "Name": "DetachLoadBalancerTargetGroups",
+          "Service": "autoscaling"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "autoscaling",
+          "Method": "detach_load_balancer_target_groups",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DetachLoadBalancers",
+      "AuthorizedActions": [
+        {
+          "Name": "DetachLoadBalancers",
+          "Service": "autoscaling"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "autoscaling",
+          "Method": "detach_load_balancers",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DetachTrafficSources",
+      "AuthorizedActions": [
+        {
+          "Name": "DetachTrafficSources",
+          "Service": "autoscaling"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "autoscaling",
+          "Method": "detach_traffic_sources",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DisableMetricsCollection",
+      "AuthorizedActions": [
+        {
+          "Name": "DisableMetricsCollection",
+          "Service": "autoscaling"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "autoscaling",
+          "Method": "disable_metrics_collection",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "EnableMetricsCollection",
+      "AuthorizedActions": [
+        {
+          "Name": "EnableMetricsCollection",
+          "Service": "autoscaling"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "autoscaling",
+          "Method": "enable_metrics_collection",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "EnterStandby",
+      "AuthorizedActions": [
+        {
+          "Name": "EnterStandby",
+          "Service": "autoscaling"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "autoscaling",
+          "Method": "enter_standby",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ExecutePolicy",
+      "AuthorizedActions": [
+        {
+          "Name": "ExecutePolicy",
+          "Service": "autoscaling"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "autoscaling",
+          "Method": "execute_policy",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ExitStandby",
+      "AuthorizedActions": [
+        {
+          "Name": "ExitStandby",
+          "Service": "autoscaling"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "autoscaling",
+          "Method": "exit_standby",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetPredictiveScalingForecast",
+      "AuthorizedActions": [
+        {
+          "Name": "GetPredictiveScalingForecast",
+          "Service": "autoscaling"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "autoscaling",
+          "Method": "get_predictive_scaling_forecast",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "LaunchInstances",
+      "AuthorizedActions": [
+        {
+          "Name": "LaunchInstances",
+          "Service": "autoscaling"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "autoscaling",
+          "Method": "launch_instances",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "PutLifecycleHook",
+      "AuthorizedActions": [
+        {
+          "Name": "PassRole",
+          "Context": {
+            "iam:PassedToService": [
+              "autoscaling.amazonaws.com"
+            ]
+          },
+          "Service": "iam"
+        },
+        {
+          "Name": "PutLifecycleHook",
+          "Service": "autoscaling"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "autoscaling",
+          "Method": "put_lifecycle_hook",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "PutNotificationConfiguration",
+      "AuthorizedActions": [
+        {
+          "Name": "PutNotificationConfiguration",
+          "Service": "autoscaling"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "autoscaling",
+          "Method": "put_notification_configuration",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "PutScalingPolicy",
+      "AuthorizedActions": [
+        {
+          "Name": "PutScalingPolicy",
+          "Service": "autoscaling"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "autoscaling",
+          "Method": "put_scaling_policy",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "PutScheduledUpdateGroupAction",
+      "AuthorizedActions": [
+        {
+          "Name": "PutScheduledUpdateGroupAction",
+          "Service": "autoscaling"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "autoscaling",
+          "Method": "put_scheduled_update_group_action",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "PutWarmPool",
+      "AuthorizedActions": [
+        {
+          "Name": "PutWarmPool",
+          "Service": "autoscaling"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "autoscaling",
+          "Method": "put_warm_pool",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "RecordLifecycleActionHeartbeat",
+      "AuthorizedActions": [
+        {
+          "Name": "RecordLifecycleActionHeartbeat",
+          "Service": "autoscaling"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "autoscaling",
+          "Method": "record_lifecycle_action_heartbeat",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ResumeProcesses",
+      "AuthorizedActions": [
+        {
+          "Name": "ResumeProcesses",
+          "Service": "autoscaling"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "autoscaling",
+          "Method": "resume_processes",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "RollbackInstanceRefresh",
+      "AuthorizedActions": [
+        {
+          "Name": "RollbackInstanceRefresh",
+          "Service": "autoscaling"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "autoscaling",
+          "Method": "rollback_instance_refresh",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "SetDesiredCapacity",
+      "AuthorizedActions": [
+        {
+          "Name": "SetDesiredCapacity",
+          "Service": "autoscaling"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "autoscaling",
+          "Method": "set_desired_capacity",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "SetInstanceHealth",
+      "AuthorizedActions": [
+        {
+          "Name": "SetInstanceHealth",
+          "Service": "autoscaling"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "autoscaling",
+          "Method": "set_instance_health",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "SetInstanceProtection",
+      "AuthorizedActions": [
+        {
+          "Name": "SetInstanceProtection",
+          "Service": "autoscaling"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "autoscaling",
+          "Method": "set_instance_protection",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "StartInstanceRefresh",
+      "AuthorizedActions": [
+        {
+          "Name": "StartInstanceRefresh",
+          "Service": "autoscaling"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "autoscaling",
+          "Method": "start_instance_refresh",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "SuspendProcesses",
+      "AuthorizedActions": [
+        {
+          "Name": "SuspendProcesses",
+          "Service": "autoscaling"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "autoscaling",
+          "Method": "suspend_processes",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "TerminateInstanceInAutoScalingGroup",
+      "AuthorizedActions": [
+        {
+          "Name": "TerminateInstanceInAutoScalingGroup",
+          "Service": "autoscaling"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "autoscaling",
+          "Method": "terminate_instance_in_auto_scaling_group",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "UpdateAutoScalingGroup",
+      "AuthorizedActions": [
+        {
+          "Name": "PassRole",
+          "Context": {
+            "iam:PassedToService": [
+              "autoscaling.amazonaws.com"
+            ]
+          },
+          "Service": "iam"
+        },
+        {
+          "Name": "UpdateAutoScalingGroup",
+          "Service": "autoscaling"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "autoscaling",
+          "Method": "update_auto_scaling_group",
+          "Package": "Boto3"
+        }
+      ]
+    }
+  ],
+  "Resources": [
+    {
+      "Name": "autoScalingGroup",
+      "ARNFormats": [
+        "arn:${Partition}:autoscaling:${Region}:${Account}:autoScalingGroup:${GroupId}:autoScalingGroupName/${GroupFriendlyName}"
+      ],
+      "ConditionKeys": [
+        "autoscaling:ResourceTag/${TagKey}",
+        "aws:ResourceTag/${TagKey}"
+      ]
+    },
+    {
+      "Name": "launchConfiguration",
+      "ARNFormats": [
+        "arn:${Partition}:autoscaling:${Region}:${Account}:launchConfiguration:${Id}:launchConfigurationName/${LaunchConfigurationName}"
+      ]
+    }
+  ],
+  "Version": "v1.4"
+}

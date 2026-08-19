@@ -1,0 +1,3840 @@
+{
+  "Name": "cloudformation",
+  "Actions": [
+    {
+      "Name": "ActivateOrganizationsAccess",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "ActivateType",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "BatchDescribeTypeConfigurations",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "CancelResourceRequest",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "CancelUpdateStack",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "stack"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ContinueUpdateRollback",
+      "ActionConditionKeys": [
+        "cloudformation:RoleArn"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "stack"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "CreateChangeSet",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys",
+        "cloudformation:ChangeSetName",
+        "cloudformation:ImportResourceTypes",
+        "cloudformation:ResourceTypes",
+        "cloudformation:RoleArn",
+        "cloudformation:StackPolicyUrl",
+        "cloudformation:TemplateUrl"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "stack"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "CreateGeneratedTemplate",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "CreateResource",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "CreateStack",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys",
+        "cloudformation:ResourceTypes",
+        "cloudformation:RoleArn",
+        "cloudformation:StackPolicyUrl",
+        "cloudformation:TemplateUrl"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "stack"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "CreateStackInstances",
+      "ActionConditionKeys": [
+        "aws:TagKeys",
+        "cloudformation:TargetRegion"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "stackset"
+        },
+        {
+          "Name": "stackset-target"
+        },
+        {
+          "Name": "type"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "CreateStackRefactor",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "stack"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "CreateStackSet",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys",
+        "cloudformation:RoleArn",
+        "cloudformation:TemplateUrl"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "CreateUploadBucket",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "DeactivateOrganizationsAccess",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "DeactivateType",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteChangeSet",
+      "ActionConditionKeys": [
+        "cloudformation:ChangeSetName"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "stack"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteGeneratedTemplate",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteResource",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "DeleteStack",
+      "ActionConditionKeys": [
+        "cloudformation:RoleArn"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "stack"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteStackInstances",
+      "ActionConditionKeys": [
+        "cloudformation:TargetRegion"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "stackset"
+        },
+        {
+          "Name": "stackset-target"
+        },
+        {
+          "Name": "type"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteStackSet",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "stackset"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeregisterType",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeAccountLimits",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeChangeSet",
+      "ActionConditionKeys": [
+        "cloudformation:ChangeSetName"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "stack"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeChangeSetHooks",
+      "ActionConditionKeys": [
+        "cloudformation:ChangeSetName"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "stack"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeEvents",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "changeset"
+        },
+        {
+          "Name": "stack"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeGeneratedTemplate",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeOrganizationsAccess",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribePublisher",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeResourceScan",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeStackDriftDetectionStatus",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeStackEvents",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "stack"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeStackInstance",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "stackset"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeStackRefactor",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "stack"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "DescribeStackResource",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "stack"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeStackResourceDrifts",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "stack"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeStackResources",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "stack"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeStackSet",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "stackset"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeStackSetOperation",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "stackset"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeStacks",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "stack"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeType",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeTypeRegistration",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DetectStackDrift",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "stack"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DetectStackResourceDrift",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "stack"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DetectStackSetDrift",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "stackset"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "EstimateTemplateCost",
+      "ActionConditionKeys": [
+        "cloudformation:TemplateUrl"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ExecuteChangeSet",
+      "ActionConditionKeys": [
+        "cloudformation:ChangeSetName"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "stack"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ExecuteStackRefactor",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "stack"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "GetGeneratedTemplate",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetHookResult",
+      "ActionConditionKeys": [
+        "cloudformation:TypeArn"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetResource",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "GetResourceRequestStatus",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "GetStackPolicy",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "stack"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetTemplate",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "stack"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetTemplateSummary",
+      "ActionConditionKeys": [
+        "cloudformation:TemplateUrl"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "stack"
+        },
+        {
+          "Name": "stackset"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ImportStacksToStackSet",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "stackset"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListAllHookResults",
+      "ActionConditionKeys": [
+        "cloudformation:TypeArn"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "ListChangeSets",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "stack"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListExports",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListGeneratedTemplates",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListHookResults",
+      "ActionConditionKeys": [
+        "cloudformation:ChangeSetName"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "stack"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListImports",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListResourceRequests",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "ListResourceScanRelatedResources",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListResourceScanResources",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListResourceScans",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListResources",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "ListStackInstanceResourceDrifts",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "stackset"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListStackInstances",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "stackset"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListStackRefactorActions",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "stack"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "ListStackRefactors",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "stack"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListStackResources",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "stack"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListStackSetAutoDeploymentTargets",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "stackset"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListStackSetOperationResults",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "stackset"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListStackSetOperations",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "stackset"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListStackSets",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListStacks",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "ListTypeRegistrations",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListTypeVersions",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListTypes",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "PublishType",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "RecordHandlerProgress",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "stack"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "RegisterPublisher",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "RegisterType",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "RollbackStack",
+      "ActionConditionKeys": [
+        "cloudformation:RoleArn"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "stack"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "SetStackPolicy",
+      "ActionConditionKeys": [
+        "cloudformation:StackPolicyUrl"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": true,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "stack"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "SetTypeConfiguration",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "SetTypeDefaultVersion",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "SignalResource",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "stack"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "StartResourceScan",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "StopStackSetOperation",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "stackset"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "TagResource",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys",
+        "cloudformation:CreateAction"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": true,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "changeset"
+        },
+        {
+          "Name": "stack"
+        },
+        {
+          "Name": "stackset"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "TestType",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "UntagResource",
+      "ActionConditionKeys": [
+        "aws:TagKeys",
+        "cloudformation:CreateAction"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": true,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "changeset"
+        },
+        {
+          "Name": "stack"
+        },
+        {
+          "Name": "stackset"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "UpdateGeneratedTemplate",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "UpdateResource",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "UpdateStack",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys",
+        "cloudformation:ResourceTypes",
+        "cloudformation:RoleArn",
+        "cloudformation:StackPolicyUrl",
+        "cloudformation:TemplateUrl"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "stack"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "UpdateStackInstances",
+      "ActionConditionKeys": [
+        "cloudformation:TargetRegion"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "stackset"
+        },
+        {
+          "Name": "stackset-target"
+        },
+        {
+          "Name": "type"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "UpdateStackSet",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys",
+        "cloudformation:RoleArn",
+        "cloudformation:TargetRegion",
+        "cloudformation:TemplateUrl"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "stackset"
+        },
+        {
+          "Name": "stackset-target"
+        },
+        {
+          "Name": "type"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "UpdateTerminationProtection",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "stack"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ValidateTemplate",
+      "ActionConditionKeys": [
+        "cloudformation:TemplateUrl"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    }
+  ],
+  "ConditionKeys": [
+    {
+      "Name": "aws:RequestTag/${TagKey}",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "aws:ResourceTag/${TagKey}",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "aws:TagKeys",
+      "Types": [
+        "ArrayOfString"
+      ]
+    },
+    {
+      "Name": "cloudformation:ChangeSetName",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "cloudformation:CreateAction",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "cloudformation:ImportResourceTypes",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "cloudformation:ResourceTypes",
+      "Types": [
+        "ArrayOfString"
+      ]
+    },
+    {
+      "Name": "cloudformation:RoleArn",
+      "Types": [
+        "ARN"
+      ]
+    },
+    {
+      "Name": "cloudformation:StackPolicyUrl",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "cloudformation:TargetRegion",
+      "Types": [
+        "ArrayOfString"
+      ]
+    },
+    {
+      "Name": "cloudformation:TemplateUrl",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "cloudformation:TypeArn",
+      "Types": [
+        "ARN"
+      ]
+    }
+  ],
+  "Operations": [
+    {
+      "Name": "ActivateOrganizationsAccess",
+      "AuthorizedActions": [
+        {
+          "Name": "ActivateOrganizationsAccess",
+          "Service": "cloudformation"
+        },
+        {
+          "Name": "CreateServiceLinkedRole",
+          "Service": "iam"
+        },
+        {
+          "Name": "GetRole",
+          "Service": "iam"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudformation",
+          "Method": "activate_organizations_access",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ActivateType",
+      "AuthorizedActions": [
+        {
+          "Name": "ActivateType",
+          "Service": "cloudformation"
+        },
+        {
+          "Name": "PassRole",
+          "Context": {
+            "iam:PassedToService": [
+              "resources.cloudformation.amazonaws.com"
+            ]
+          },
+          "Service": "iam"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudformation",
+          "Method": "activate_type",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "BatchDescribeTypeConfigurations",
+      "AuthorizedActions": [
+        {
+          "Name": "BatchDescribeTypeConfigurations",
+          "Service": "cloudformation"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudformation",
+          "Method": "batch_describe_type_configurations",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CancelResourceRequest",
+      "AuthorizedActions": [
+        {
+          "Name": "CancelResourceRequest",
+          "Service": "cloudformation"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudcontrol",
+          "Method": "cancel_resource_request",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CancelUpdateStack",
+      "AuthorizedActions": [
+        {
+          "Name": "CancelUpdateStack",
+          "Service": "cloudformation"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudformation",
+          "Method": "cancel_update_stack",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ContinueUpdateRollback",
+      "AuthorizedActions": [
+        {
+          "Name": "ContinueUpdateRollback",
+          "Service": "cloudformation"
+        },
+        {
+          "Name": "PassRole",
+          "Context": {
+            "iam:PassedToService": [
+              "cloudformation.amazonaws.com"
+            ]
+          },
+          "Service": "iam"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudformation",
+          "Method": "continue_update_rollback",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreateChangeSet",
+      "AuthorizedActions": [
+        {
+          "Name": "CreateChangeSet",
+          "Service": "cloudformation"
+        },
+        {
+          "Name": "PassRole",
+          "Context": {
+            "iam:PassedToService": [
+              "cloudformation.amazonaws.com"
+            ]
+          },
+          "Service": "iam"
+        },
+        {
+          "Name": "TagResource",
+          "Service": "cloudformation"
+        },
+        {
+          "Name": "UntagResource",
+          "Service": "cloudformation"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudformation",
+          "Method": "create_change_set",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreateGeneratedTemplate",
+      "AuthorizedActions": [
+        {
+          "Name": "CreateGeneratedTemplate",
+          "Service": "cloudformation"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudformation",
+          "Method": "create_generated_template",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreateResource",
+      "AuthorizedActions": [
+        {
+          "Name": "CreateResource",
+          "Service": "cloudformation"
+        },
+        {
+          "Name": "PassRole",
+          "Context": {
+            "iam:PassedToService": [
+              "cloudformation.amazonaws.com"
+            ]
+          },
+          "Service": "iam"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudcontrol",
+          "Method": "create_resource",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreateStack",
+      "AuthorizedActions": [
+        {
+          "Name": "CreateStack",
+          "Service": "cloudformation"
+        },
+        {
+          "Name": "PassRole",
+          "Context": {
+            "iam:PassedToService": [
+              "cloudformation.amazonaws.com"
+            ]
+          },
+          "Service": "iam"
+        },
+        {
+          "Name": "TagResource",
+          "Service": "cloudformation"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudformation",
+          "Method": "create_stack",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreateStackInstances",
+      "AuthorizedActions": [
+        {
+          "Name": "CreateStackInstances",
+          "Service": "cloudformation"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudformation",
+          "Method": "create_stack_instances",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreateStackRefactor",
+      "AuthorizedActions": [
+        {
+          "Name": "CreateStackRefactor",
+          "Service": "cloudformation"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudformation",
+          "Method": "create_stack_refactor",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreateStackSet",
+      "AuthorizedActions": [
+        {
+          "Name": "CreateStackSet",
+          "Service": "cloudformation"
+        },
+        {
+          "Name": "PassRole",
+          "Context": {
+            "iam:PassedToService": [
+              "cloudformation.amazonaws.com"
+            ]
+          },
+          "Service": "iam"
+        },
+        {
+          "Name": "TagResource",
+          "Service": "cloudformation"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudformation",
+          "Method": "create_stack_set",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeactivateOrganizationsAccess",
+      "AuthorizedActions": [
+        {
+          "Name": "DeactivateOrganizationsAccess",
+          "Service": "cloudformation"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudformation",
+          "Method": "deactivate_organizations_access",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeactivateType",
+      "AuthorizedActions": [
+        {
+          "Name": "DeactivateType",
+          "Service": "cloudformation"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudformation",
+          "Method": "deactivate_type",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteChangeSet",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteChangeSet",
+          "Service": "cloudformation"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudformation",
+          "Method": "delete_change_set",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteGeneratedTemplate",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteGeneratedTemplate",
+          "Service": "cloudformation"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudformation",
+          "Method": "delete_generated_template",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteResource",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteResource",
+          "Service": "cloudformation"
+        },
+        {
+          "Name": "PassRole",
+          "Context": {
+            "iam:PassedToService": [
+              "cloudformation.amazonaws.com"
+            ]
+          },
+          "Service": "iam"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudcontrol",
+          "Method": "delete_resource",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteStack",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteStack",
+          "Service": "cloudformation"
+        },
+        {
+          "Name": "PassRole",
+          "Context": {
+            "iam:PassedToService": [
+              "cloudformation.amazonaws.com"
+            ]
+          },
+          "Service": "iam"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudformation",
+          "Method": "delete_stack",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteStackInstances",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteStackInstances",
+          "Service": "cloudformation"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudformation",
+          "Method": "delete_stack_instances",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteStackSet",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteStackSet",
+          "Service": "cloudformation"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudformation",
+          "Method": "delete_stack_set",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeregisterType",
+      "AuthorizedActions": [
+        {
+          "Name": "DeregisterType",
+          "Service": "cloudformation"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudformation",
+          "Method": "deregister_type",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeAccountLimits",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeAccountLimits",
+          "Service": "cloudformation"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudformation",
+          "Method": "describe_account_limits",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeChangeSet",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeChangeSet",
+          "Service": "cloudformation"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudformation",
+          "Method": "describe_change_set",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeChangeSetHooks",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeChangeSetHooks",
+          "Service": "cloudformation"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudformation",
+          "Method": "describe_change_set_hooks",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeEvents",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeEvents",
+          "Service": "cloudformation"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudformation",
+          "Method": "describe_events",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeGeneratedTemplate",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeGeneratedTemplate",
+          "Service": "cloudformation"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudformation",
+          "Method": "describe_generated_template",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeOrganizationsAccess",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeOrganizationsAccess",
+          "Service": "cloudformation"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudformation",
+          "Method": "describe_organizations_access",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribePublisher",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribePublisher",
+          "Service": "cloudformation"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudformation",
+          "Method": "describe_publisher",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeResourceScan",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeResourceScan",
+          "Service": "cloudformation"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudformation",
+          "Method": "describe_resource_scan",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeStackDriftDetectionStatus",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeStackDriftDetectionStatus",
+          "Service": "cloudformation"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudformation",
+          "Method": "describe_stack_drift_detection_status",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeStackEvents",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeStackEvents",
+          "Service": "cloudformation"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudformation",
+          "Method": "describe_stack_events",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeStackInstance",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeStackInstance",
+          "Service": "cloudformation"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudformation",
+          "Method": "describe_stack_instance",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeStackRefactor",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeStackRefactor",
+          "Service": "cloudformation"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudformation",
+          "Method": "describe_stack_refactor",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeStackResource",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeStackResource",
+          "Service": "cloudformation"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudformation",
+          "Method": "describe_stack_resource",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeStackResourceDrifts",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeStackResourceDrifts",
+          "Service": "cloudformation"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudformation",
+          "Method": "describe_stack_resource_drifts",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeStackResources",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeStackResources",
+          "Service": "cloudformation"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudformation",
+          "Method": "describe_stack_resources",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeStackSet",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeStackSet",
+          "Service": "cloudformation"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudformation",
+          "Method": "describe_stack_set",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeStackSetOperation",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeStackSetOperation",
+          "Service": "cloudformation"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudformation",
+          "Method": "describe_stack_set_operation",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeStacks",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeStacks",
+          "Service": "cloudformation"
+        },
+        {
+          "Name": "ListStacks",
+          "Service": "cloudformation"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudformation",
+          "Method": "describe_stacks",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeType",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeType",
+          "Service": "cloudformation"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudformation",
+          "Method": "describe_type",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeTypeRegistration",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeTypeRegistration",
+          "Service": "cloudformation"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudformation",
+          "Method": "describe_type_registration",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DetectStackDrift",
+      "AuthorizedActions": [
+        {
+          "Name": "DetectStackDrift",
+          "Service": "cloudformation"
+        },
+        {
+          "Name": "DetectStackResourceDrift",
+          "Service": "cloudformation"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudformation",
+          "Method": "detect_stack_drift",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DetectStackResourceDrift",
+      "AuthorizedActions": [
+        {
+          "Name": "DetectStackResourceDrift",
+          "Service": "cloudformation"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudformation",
+          "Method": "detect_stack_resource_drift",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DetectStackSetDrift",
+      "AuthorizedActions": [
+        {
+          "Name": "DetectStackSetDrift",
+          "Service": "cloudformation"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudformation",
+          "Method": "detect_stack_set_drift",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "EstimateTemplateCost",
+      "AuthorizedActions": [
+        {
+          "Name": "EstimateTemplateCost",
+          "Service": "cloudformation"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudformation",
+          "Method": "estimate_template_cost",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ExecuteChangeSet",
+      "AuthorizedActions": [
+        {
+          "Name": "ExecuteChangeSet",
+          "Service": "cloudformation"
+        },
+        {
+          "Name": "TagResource",
+          "Service": "cloudformation"
+        },
+        {
+          "Name": "UntagResource",
+          "Service": "cloudformation"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudformation",
+          "Method": "execute_change_set",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ExecuteStackRefactor",
+      "AuthorizedActions": [
+        {
+          "Name": "ExecuteStackRefactor",
+          "Service": "cloudformation"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudformation",
+          "Method": "execute_stack_refactor",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetGeneratedTemplate",
+      "AuthorizedActions": [
+        {
+          "Name": "GetGeneratedTemplate",
+          "Service": "cloudformation"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudformation",
+          "Method": "get_generated_template",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetHookResult",
+      "AuthorizedActions": [
+        {
+          "Name": "GetHookResult",
+          "Service": "cloudformation"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudformation",
+          "Method": "get_hook_result",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetResource",
+      "AuthorizedActions": [
+        {
+          "Name": "GetResource",
+          "Service": "cloudformation"
+        },
+        {
+          "Name": "PassRole",
+          "Context": {
+            "iam:PassedToService": [
+              "cloudformation.amazonaws.com"
+            ]
+          },
+          "Service": "iam"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudcontrol",
+          "Method": "get_resource",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetResourceRequestStatus",
+      "AuthorizedActions": [
+        {
+          "Name": "GetResourceRequestStatus",
+          "Service": "cloudformation"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudcontrol",
+          "Method": "get_resource_request_status",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetStackPolicy",
+      "AuthorizedActions": [
+        {
+          "Name": "GetStackPolicy",
+          "Service": "cloudformation"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudformation",
+          "Method": "get_stack_policy",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetTemplate",
+      "AuthorizedActions": [
+        {
+          "Name": "GetTemplate",
+          "Service": "cloudformation"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudformation",
+          "Method": "get_template",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetTemplateSummary",
+      "AuthorizedActions": [
+        {
+          "Name": "GetTemplateSummary",
+          "Service": "cloudformation"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudformation",
+          "Method": "get_template_summary",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ImportStacksToStackSet",
+      "AuthorizedActions": [
+        {
+          "Name": "ImportStacksToStackSet",
+          "Service": "cloudformation"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudformation",
+          "Method": "import_stacks_to_stack_set",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListChangeSets",
+      "AuthorizedActions": [
+        {
+          "Name": "ListChangeSets",
+          "Service": "cloudformation"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudformation",
+          "Method": "list_change_sets",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListExports",
+      "AuthorizedActions": [
+        {
+          "Name": "ListExports",
+          "Service": "cloudformation"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudformation",
+          "Method": "list_exports",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListGeneratedTemplates",
+      "AuthorizedActions": [
+        {
+          "Name": "ListGeneratedTemplates",
+          "Service": "cloudformation"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudformation",
+          "Method": "list_generated_templates",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListHookResults",
+      "AuthorizedActions": [
+        {
+          "Name": "ListAllHookResults",
+          "Service": "cloudformation"
+        },
+        {
+          "Name": "ListHookResults",
+          "Service": "cloudformation"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudformation",
+          "Method": "list_hook_results",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListImports",
+      "AuthorizedActions": [
+        {
+          "Name": "ListImports",
+          "Service": "cloudformation"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudformation",
+          "Method": "list_imports",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListResourceRequests",
+      "AuthorizedActions": [
+        {
+          "Name": "ListResourceRequests",
+          "Service": "cloudformation"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudcontrol",
+          "Method": "list_resource_requests",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListResourceScanRelatedResources",
+      "AuthorizedActions": [
+        {
+          "Name": "ListResourceScanRelatedResources",
+          "Service": "cloudformation"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudformation",
+          "Method": "list_resource_scan_related_resources",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListResourceScanResources",
+      "AuthorizedActions": [
+        {
+          "Name": "ListResourceScanResources",
+          "Service": "cloudformation"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudformation",
+          "Method": "list_resource_scan_resources",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListResourceScans",
+      "AuthorizedActions": [
+        {
+          "Name": "ListResourceScans",
+          "Service": "cloudformation"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudformation",
+          "Method": "list_resource_scans",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListResources",
+      "AuthorizedActions": [
+        {
+          "Name": "ListResources",
+          "Service": "cloudformation"
+        },
+        {
+          "Name": "PassRole",
+          "Context": {
+            "iam:PassedToService": [
+              "cloudformation.amazonaws.com"
+            ]
+          },
+          "Service": "iam"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudcontrol",
+          "Method": "list_resources",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListStackInstanceResourceDrifts",
+      "AuthorizedActions": [
+        {
+          "Name": "ListStackInstanceResourceDrifts",
+          "Service": "cloudformation"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudformation",
+          "Method": "list_stack_instance_resource_drifts",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListStackInstances",
+      "AuthorizedActions": [
+        {
+          "Name": "ListStackInstances",
+          "Service": "cloudformation"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudformation",
+          "Method": "list_stack_instances",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListStackRefactorActions",
+      "AuthorizedActions": [
+        {
+          "Name": "ListStackRefactorActions",
+          "Service": "cloudformation"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudformation",
+          "Method": "list_stack_refactor_actions",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListStackRefactors",
+      "AuthorizedActions": [
+        {
+          "Name": "ListStackRefactors",
+          "Service": "cloudformation"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudformation",
+          "Method": "list_stack_refactors",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListStackResources",
+      "AuthorizedActions": [
+        {
+          "Name": "ListStackResources",
+          "Service": "cloudformation"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudformation",
+          "Method": "list_stack_resources",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListStackSetAutoDeploymentTargets",
+      "AuthorizedActions": [
+        {
+          "Name": "ListStackSetAutoDeploymentTargets",
+          "Service": "cloudformation"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudformation",
+          "Method": "list_stack_set_auto_deployment_targets",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListStackSetOperationResults",
+      "AuthorizedActions": [
+        {
+          "Name": "ListStackSetOperationResults",
+          "Service": "cloudformation"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudformation",
+          "Method": "list_stack_set_operation_results",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListStackSetOperations",
+      "AuthorizedActions": [
+        {
+          "Name": "ListStackSetOperations",
+          "Service": "cloudformation"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudformation",
+          "Method": "list_stack_set_operations",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListStackSets",
+      "AuthorizedActions": [
+        {
+          "Name": "ListStackSets",
+          "Service": "cloudformation"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudformation",
+          "Method": "list_stack_sets",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListStacks",
+      "AuthorizedActions": [
+        {
+          "Name": "ListStacks",
+          "Service": "cloudformation"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudformation",
+          "Method": "list_stacks",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListTypeRegistrations",
+      "AuthorizedActions": [
+        {
+          "Name": "ListTypeRegistrations",
+          "Service": "cloudformation"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudformation",
+          "Method": "list_type_registrations",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListTypeVersions",
+      "AuthorizedActions": [
+        {
+          "Name": "ListTypeVersions",
+          "Service": "cloudformation"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudformation",
+          "Method": "list_type_versions",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListTypes",
+      "AuthorizedActions": [
+        {
+          "Name": "ListTypes",
+          "Service": "cloudformation"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudformation",
+          "Method": "list_types",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "PublishType",
+      "AuthorizedActions": [
+        {
+          "Name": "PublishType",
+          "Service": "cloudformation"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudformation",
+          "Method": "publish_type",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "RecordHandlerProgress",
+      "AuthorizedActions": [
+        {
+          "Name": "RecordHandlerProgress",
+          "Service": "cloudformation"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudformation",
+          "Method": "record_handler_progress",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "RegisterPublisher",
+      "AuthorizedActions": [
+        {
+          "Name": "RegisterPublisher",
+          "Service": "cloudformation"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudformation",
+          "Method": "register_publisher",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "RegisterType",
+      "AuthorizedActions": [
+        {
+          "Name": "PassRole",
+          "Context": {
+            "iam:PassedToService": [
+              "resources.cloudformation.amazonaws.com"
+            ]
+          },
+          "Service": "iam"
+        },
+        {
+          "Name": "RegisterType",
+          "Service": "cloudformation"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudformation",
+          "Method": "register_type",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "RollbackStack",
+      "AuthorizedActions": [
+        {
+          "Name": "PassRole",
+          "Context": {
+            "iam:PassedToService": [
+              "cloudformation.amazonaws.com"
+            ]
+          },
+          "Service": "iam"
+        },
+        {
+          "Name": "RollbackStack",
+          "Service": "cloudformation"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudformation",
+          "Method": "rollback_stack",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "SetStackPolicy",
+      "AuthorizedActions": [
+        {
+          "Name": "SetStackPolicy",
+          "Service": "cloudformation"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudformation",
+          "Method": "set_stack_policy",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "SetTypeConfiguration",
+      "AuthorizedActions": [
+        {
+          "Name": "SetTypeConfiguration",
+          "Service": "cloudformation"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudformation",
+          "Method": "set_type_configuration",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "SetTypeDefaultVersion",
+      "AuthorizedActions": [
+        {
+          "Name": "SetTypeDefaultVersion",
+          "Service": "cloudformation"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudformation",
+          "Method": "set_type_default_version",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "SignalResource",
+      "AuthorizedActions": [
+        {
+          "Name": "SignalResource",
+          "Service": "cloudformation"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudformation",
+          "Method": "signal_resource",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "StartResourceScan",
+      "AuthorizedActions": [
+        {
+          "Name": "StartResourceScan",
+          "Service": "cloudformation"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudformation",
+          "Method": "start_resource_scan",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "StopStackSetOperation",
+      "AuthorizedActions": [
+        {
+          "Name": "StopStackSetOperation",
+          "Service": "cloudformation"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudformation",
+          "Method": "stop_stack_set_operation",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "TestType",
+      "AuthorizedActions": [
+        {
+          "Name": "TestType",
+          "Service": "cloudformation"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudformation",
+          "Method": "test_type",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "UpdateGeneratedTemplate",
+      "AuthorizedActions": [
+        {
+          "Name": "UpdateGeneratedTemplate",
+          "Service": "cloudformation"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudformation",
+          "Method": "update_generated_template",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "UpdateResource",
+      "AuthorizedActions": [
+        {
+          "Name": "PassRole",
+          "Context": {
+            "iam:PassedToService": [
+              "cloudformation.amazonaws.com"
+            ]
+          },
+          "Service": "iam"
+        },
+        {
+          "Name": "UpdateResource",
+          "Service": "cloudformation"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudcontrol",
+          "Method": "update_resource",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "UpdateStack",
+      "AuthorizedActions": [
+        {
+          "Name": "PassRole",
+          "Context": {
+            "iam:PassedToService": [
+              "cloudformation.amazonaws.com"
+            ]
+          },
+          "Service": "iam"
+        },
+        {
+          "Name": "SetStackPolicy",
+          "Service": "cloudformation"
+        },
+        {
+          "Name": "TagResource",
+          "Service": "cloudformation"
+        },
+        {
+          "Name": "UntagResource",
+          "Service": "cloudformation"
+        },
+        {
+          "Name": "UpdateStack",
+          "Service": "cloudformation"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudformation",
+          "Method": "update_stack",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "UpdateStackInstances",
+      "AuthorizedActions": [
+        {
+          "Name": "UpdateStackInstances",
+          "Service": "cloudformation"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudformation",
+          "Method": "update_stack_instances",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "UpdateStackSet",
+      "AuthorizedActions": [
+        {
+          "Name": "PassRole",
+          "Context": {
+            "iam:PassedToService": [
+              "cloudformation.amazonaws.com"
+            ]
+          },
+          "Service": "iam"
+        },
+        {
+          "Name": "TagResource",
+          "Service": "cloudformation"
+        },
+        {
+          "Name": "UntagResource",
+          "Service": "cloudformation"
+        },
+        {
+          "Name": "UpdateStackSet",
+          "Service": "cloudformation"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudformation",
+          "Method": "update_stack_set",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "UpdateTerminationProtection",
+      "AuthorizedActions": [
+        {
+          "Name": "UpdateTerminationProtection",
+          "Service": "cloudformation"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudformation",
+          "Method": "update_termination_protection",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ValidateTemplate",
+      "AuthorizedActions": [
+        {
+          "Name": "ValidateTemplate",
+          "Service": "cloudformation"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudformation",
+          "Method": "validate_template",
+          "Package": "Boto3"
+        }
+      ]
+    }
+  ],
+  "Resources": [
+    {
+      "Name": "changeset",
+      "ARNFormats": [
+        "arn:${Partition}:cloudformation:${Region}:${Account}:changeSet/${ChangeSetName}/${Id}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ]
+    },
+    {
+      "Name": "generatedtemplate",
+      "ARNFormats": [
+        "arn:${Partition}:cloudformation:${Region}:${Account}:generatedTemplate/${Id}"
+      ]
+    },
+    {
+      "Name": "resourcescan",
+      "ARNFormats": [
+        "arn:${Partition}:cloudformation:${Region}:${Account}:resourceScan/${Id}"
+      ]
+    },
+    {
+      "Name": "stack",
+      "ARNFormats": [
+        "arn:${Partition}:cloudformation:${Region}:${Account}:stack/${StackName}/${Id}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ]
+    },
+    {
+      "Name": "stackset",
+      "ARNFormats": [
+        "arn:${Partition}:cloudformation:${Region}:${Account}:stackset/${StackSetName}:${Id}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ]
+    },
+    {
+      "Name": "stackset-target",
+      "ARNFormats": [
+        "arn:${Partition}:cloudformation:${Region}:${Account}:stackset-target/${StackSetTarget}"
+      ]
+    },
+    {
+      "Name": "type",
+      "ARNFormats": [
+        "arn:${Partition}:cloudformation:${Region}:${Account}:type/resource/${Type}"
+      ]
+    },
+    {
+      "Name": "typeHook",
+      "ARNFormats": [
+        "arn:${Partition}:cloudformation:${Region}:${Account}:type/hook/${Type}"
+      ]
+    }
+  ],
+  "Version": "v1.4"
+}

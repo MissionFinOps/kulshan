@@ -1,0 +1,3045 @@
+{
+  "Name": "eks",
+  "Actions": [
+    {
+      "Name": "AccessKubernetesApi",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "AssociateAccessPolicy",
+      "ActionConditionKeys": [
+        "eks:accessScope",
+        "eks:namespaces",
+        "eks:policyArn"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "access-entry"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "AssociateEncryptionConfig",
+      "ActionConditionKeys": [
+        "eks:encryptionConfigProviderKeyArns"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "AssociateIdentityProviderConfig",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys",
+        "eks:clientId",
+        "eks:issuerUrl"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "CancelUpdate",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "CreateAccessEntry",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys",
+        "eks:accessEntryType",
+        "eks:kubernetesGroups",
+        "eks:principalArn",
+        "eks:username"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "CreateAddon",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster"
+        },
+        {
+          "Name": "podidentityassociation"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "CreateCapability",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "CreateCluster",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys",
+        "eks:authenticationMode",
+        "eks:blockStorageEnabled",
+        "eks:bootstrapClusterCreatorAdminPermissions",
+        "eks:bootstrapSelfManagedAddons",
+        "eks:computeConfigEnabled",
+        "eks:controlPlaneEgressMode",
+        "eks:controlPlaneScalingTier",
+        "eks:deletionProtection",
+        "eks:elasticLoadBalancingEnabled",
+        "eks:encryptionConfigProviderKeyArns",
+        "eks:endpointPrivateAccess",
+        "eks:endpointPublicAccess",
+        "eks:kubeApiServerConfig",
+        "eks:kubeControllerManagerConfig",
+        "eks:kubeSchedulerConfig",
+        "eks:kubernetesVersion",
+        "eks:loggingType/${type}",
+        "eks:supportType",
+        "eks:zonalShiftEnabled"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "CreateEksAnywhereSubscription",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "CreateFargateProfile",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "CreateNodegroup",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "CreatePodIdentityAssociation",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "DeleteAccessEntry",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "access-entry"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteAddon",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "addon"
+        },
+        {
+          "Name": "podidentityassociation"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteCapability",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "capability"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteCluster",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteEksAnywhereSubscription",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "eks-anywhere-subscription"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteFargateProfile",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "fargateprofile"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteNodegroup",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "nodegroup"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeletePodIdentityAssociation",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "podidentityassociation"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeregisterCluster",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeAccessEntry",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "access-entry"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeAddon",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "addon"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeAddonConfiguration",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeAddonVersions",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeCapability",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "capability"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeCluster",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeClusterVersions",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeEksAnywhereSubscription",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "eks-anywhere-subscription"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeFargateProfile",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "fargateprofile"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeIdentityProviderConfig",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "identityproviderconfig"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeInsight",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeInsightsRefresh",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeNodegroup",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "nodegroup"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribePodIdentityAssociation",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "podidentityassociation"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeUpdate",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "addon"
+        },
+        {
+          "Name": "capability"
+        },
+        {
+          "Name": "cluster"
+        },
+        {
+          "Name": "nodegroup"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DisassociateAccessPolicy",
+      "ActionConditionKeys": [
+        "eks:accessScope",
+        "eks:namespaces",
+        "eks:policyArn"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "access-entry"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DisassociateIdentityProviderConfig",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "identityproviderconfig"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListAccessEntries",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListAccessPolicies",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListAddons",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListAssociatedAccessPolicies",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "access-entry"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListCapabilities",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListClusters",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListDashboardData",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "dashboard"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "ListDashboardResources",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "dashboard"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "ListEksAnywhereSubscriptions",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListFargateProfiles",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListIdentityProviderConfigs",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListInsights",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListNodegroups",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListPodIdentityAssociations",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListTagsForResource",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "addon"
+        },
+        {
+          "Name": "capability"
+        },
+        {
+          "Name": "cluster"
+        },
+        {
+          "Name": "dashboard"
+        },
+        {
+          "Name": "eks-anywhere-subscription"
+        },
+        {
+          "Name": "fargateprofile"
+        },
+        {
+          "Name": "identityproviderconfig"
+        },
+        {
+          "Name": "nodegroup"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "ListUpdates",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "addon"
+        },
+        {
+          "Name": "capability"
+        },
+        {
+          "Name": "cluster"
+        },
+        {
+          "Name": "nodegroup"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "MutateViaKubernetesApi",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "RegisterCluster",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "StartInsightsRefresh",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "TagResource",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": true,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "access-entry"
+        },
+        {
+          "Name": "addon"
+        },
+        {
+          "Name": "capability"
+        },
+        {
+          "Name": "cluster"
+        },
+        {
+          "Name": "dashboard"
+        },
+        {
+          "Name": "eks-anywhere-subscription"
+        },
+        {
+          "Name": "fargateprofile"
+        },
+        {
+          "Name": "identityproviderconfig"
+        },
+        {
+          "Name": "nodegroup"
+        },
+        {
+          "Name": "podidentityassociation"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "UntagResource",
+      "ActionConditionKeys": [
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": true,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "access-entry"
+        },
+        {
+          "Name": "addon"
+        },
+        {
+          "Name": "capability"
+        },
+        {
+          "Name": "cluster"
+        },
+        {
+          "Name": "dashboard"
+        },
+        {
+          "Name": "eks-anywhere-subscription"
+        },
+        {
+          "Name": "fargateprofile"
+        },
+        {
+          "Name": "identityproviderconfig"
+        },
+        {
+          "Name": "nodegroup"
+        },
+        {
+          "Name": "podidentityassociation"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "UpdateAccessEntry",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "access-entry"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "UpdateAddon",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "addon"
+        },
+        {
+          "Name": "podidentityassociation"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "UpdateCapability",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "capability"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "UpdateClusterConfig",
+      "ActionConditionKeys": [
+        "eks:authenticationMode",
+        "eks:blockStorageEnabled",
+        "eks:computeConfigEnabled",
+        "eks:controlPlaneEgressMode",
+        "eks:controlPlaneScalingTier",
+        "eks:deletionProtection",
+        "eks:elasticLoadBalancingEnabled",
+        "eks:endpointPrivateAccess",
+        "eks:endpointPublicAccess",
+        "eks:kubeApiServerConfig",
+        "eks:kubeControllerManagerConfig",
+        "eks:kubeSchedulerConfig",
+        "eks:loggingType/${type}",
+        "eks:supportType",
+        "eks:zonalShiftEnabled"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "UpdateClusterVersion",
+      "ActionConditionKeys": [
+        "eks:kubernetesVersion"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "UpdateEksAnywhereSubscription",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "eks-anywhere-subscription"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "UpdateNodegroupConfig",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "nodegroup"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "UpdateNodegroupVersion",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "nodegroup"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "UpdatePodIdentityAssociation",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "podidentityassociation"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    }
+  ],
+  "ConditionKeys": [
+    {
+      "Name": "aws:RequestTag/${TagKey}",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "aws:ResourceTag/${TagKey}",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "aws:TagKeys",
+      "Types": [
+        "ArrayOfString"
+      ]
+    },
+    {
+      "Name": "eks:accessEntryType",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "eks:accessScope",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "eks:authenticationMode",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "eks:blockStorageEnabled",
+      "Types": [
+        "Bool"
+      ]
+    },
+    {
+      "Name": "eks:bootstrapClusterCreatorAdminPermissions",
+      "Types": [
+        "Bool"
+      ]
+    },
+    {
+      "Name": "eks:bootstrapSelfManagedAddons",
+      "Types": [
+        "Bool"
+      ]
+    },
+    {
+      "Name": "eks:clientId",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "eks:clusterName",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "eks:computeConfigEnabled",
+      "Types": [
+        "Bool"
+      ]
+    },
+    {
+      "Name": "eks:controlPlaneEgressMode",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "eks:controlPlaneScalingTier",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "eks:deletionProtection",
+      "Types": [
+        "Bool"
+      ]
+    },
+    {
+      "Name": "eks:elasticLoadBalancingEnabled",
+      "Types": [
+        "Bool"
+      ]
+    },
+    {
+      "Name": "eks:encryptionConfigProviderKeyArns",
+      "Types": [
+        "ArrayOfARN"
+      ]
+    },
+    {
+      "Name": "eks:endpointPrivateAccess",
+      "Types": [
+        "Bool"
+      ]
+    },
+    {
+      "Name": "eks:endpointPublicAccess",
+      "Types": [
+        "Bool"
+      ]
+    },
+    {
+      "Name": "eks:issuerUrl",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "eks:kubeApiServerConfig",
+      "Types": [
+        "Bool"
+      ]
+    },
+    {
+      "Name": "eks:kubeControllerManagerConfig",
+      "Types": [
+        "Bool"
+      ]
+    },
+    {
+      "Name": "eks:kubeSchedulerConfig",
+      "Types": [
+        "Bool"
+      ]
+    },
+    {
+      "Name": "eks:kubernetesGroups",
+      "Types": [
+        "ArrayOfString"
+      ]
+    },
+    {
+      "Name": "eks:kubernetesVersion",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "eks:loggingType/${type}",
+      "Types": [
+        "Bool"
+      ]
+    },
+    {
+      "Name": "eks:namespaces",
+      "Types": [
+        "ArrayOfString"
+      ]
+    },
+    {
+      "Name": "eks:policyArn",
+      "Types": [
+        "ARN"
+      ]
+    },
+    {
+      "Name": "eks:principalArn",
+      "Types": [
+        "ARN"
+      ]
+    },
+    {
+      "Name": "eks:supportType",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "eks:username",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "eks:zonalShiftEnabled",
+      "Types": [
+        "Bool"
+      ]
+    }
+  ],
+  "Operations": [
+    {
+      "Name": "AssociateAccessPolicy",
+      "AuthorizedActions": [
+        {
+          "Name": "AssociateAccessPolicy",
+          "Service": "eks"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "eks",
+          "Method": "associate_access_policy",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "AssociateEncryptionConfig",
+      "AuthorizedActions": [
+        {
+          "Name": "AssociateEncryptionConfig",
+          "Service": "eks"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "eks",
+          "Method": "associate_encryption_config",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "AssociateIdentityProviderConfig",
+      "AuthorizedActions": [
+        {
+          "Name": "AssociateIdentityProviderConfig",
+          "Service": "eks"
+        },
+        {
+          "Name": "TagResource",
+          "Service": "eks"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "eks",
+          "Method": "associate_identity_provider_config",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CancelUpdate",
+      "AuthorizedActions": [
+        {
+          "Name": "CancelUpdate",
+          "Service": "eks"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "eks",
+          "Method": "cancel_update",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreateAccessEntry",
+      "AuthorizedActions": [
+        {
+          "Name": "CreateAccessEntry",
+          "Service": "eks"
+        },
+        {
+          "Name": "PassRole",
+          "Context": {
+            "iam:PassedToService": [
+              "ec2.amazonaws.com"
+            ]
+          },
+          "Service": "iam"
+        },
+        {
+          "Name": "TagResource",
+          "Service": "eks"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "eks",
+          "Method": "create_access_entry",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreateAddon",
+      "AuthorizedActions": [
+        {
+          "Name": "CreateAddon",
+          "Service": "eks"
+        },
+        {
+          "Name": "PassRole",
+          "Context": {
+            "iam:PassedToService": [
+              "eks.amazonaws.com"
+            ]
+          },
+          "Service": "iam"
+        },
+        {
+          "Name": "TagResource",
+          "Service": "eks"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "eks",
+          "Method": "create_addon",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreateCapability",
+      "AuthorizedActions": [
+        {
+          "Name": "CreateCapability",
+          "Service": "eks"
+        },
+        {
+          "Name": "PassRole",
+          "Context": {
+            "iam:PassedToService": [
+              "eks.amazonaws.com"
+            ]
+          },
+          "Service": "iam"
+        },
+        {
+          "Name": "TagResource",
+          "Service": "eks"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "eks",
+          "Method": "create_capability",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreateCluster",
+      "AuthorizedActions": [
+        {
+          "Name": "CreateAccessEntry",
+          "Service": "eks"
+        },
+        {
+          "Name": "CreateCluster",
+          "Service": "eks"
+        },
+        {
+          "Name": "PassRole",
+          "Context": {
+            "iam:PassedToService": [
+              "ec2.amazonaws.com",
+              "eks.amazonaws.com"
+            ]
+          },
+          "Service": "iam"
+        },
+        {
+          "Name": "TagResource",
+          "Service": "eks"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "eks",
+          "Method": "create_cluster",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreateEksAnywhereSubscription",
+      "AuthorizedActions": [
+        {
+          "Name": "CreateEksAnywhereSubscription",
+          "Service": "eks"
+        },
+        {
+          "Name": "TagResource",
+          "Service": "eks"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "eks",
+          "Method": "create_eks_anywhere_subscription",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreateFargateProfile",
+      "AuthorizedActions": [
+        {
+          "Name": "CreateFargateProfile",
+          "Service": "eks"
+        },
+        {
+          "Name": "PassRole",
+          "Context": {
+            "iam:PassedToService": [
+              "eks.amazonaws.com"
+            ]
+          },
+          "Service": "iam"
+        },
+        {
+          "Name": "TagResource",
+          "Service": "eks"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "eks",
+          "Method": "create_fargate_profile",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreateNodegroup",
+      "AuthorizedActions": [
+        {
+          "Name": "CreateNodegroup",
+          "Service": "eks"
+        },
+        {
+          "Name": "PassRole",
+          "Context": {
+            "iam:PassedToService": [
+              "eks.amazonaws.com"
+            ]
+          },
+          "Service": "iam"
+        },
+        {
+          "Name": "TagResource",
+          "Service": "eks"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "eks",
+          "Method": "create_nodegroup",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreatePodIdentityAssociation",
+      "AuthorizedActions": [
+        {
+          "Name": "CreatePodIdentityAssociation",
+          "Service": "eks"
+        },
+        {
+          "Name": "PassRole",
+          "Context": {
+            "iam:PassedToService": [
+              "pods.eks.amazonaws.com"
+            ]
+          },
+          "Service": "iam"
+        },
+        {
+          "Name": "TagResource",
+          "Service": "eks"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "eks",
+          "Method": "create_pod_identity_association",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteAccessEntry",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteAccessEntry",
+          "Service": "eks"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "eks",
+          "Method": "delete_access_entry",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteAddon",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteAddon",
+          "Service": "eks"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "eks",
+          "Method": "delete_addon",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteCapability",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteCapability",
+          "Service": "eks"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "eks",
+          "Method": "delete_capability",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteCluster",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteCluster",
+          "Service": "eks"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "eks",
+          "Method": "delete_cluster",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteEksAnywhereSubscription",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteEksAnywhereSubscription",
+          "Service": "eks"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "eks",
+          "Method": "delete_eks_anywhere_subscription",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteFargateProfile",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteFargateProfile",
+          "Service": "eks"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "eks",
+          "Method": "delete_fargate_profile",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteNodegroup",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteNodegroup",
+          "Service": "eks"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "eks",
+          "Method": "delete_nodegroup",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeletePodIdentityAssociation",
+      "AuthorizedActions": [
+        {
+          "Name": "DeletePodIdentityAssociation",
+          "Service": "eks"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "eks",
+          "Method": "delete_pod_identity_association",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeregisterCluster",
+      "AuthorizedActions": [
+        {
+          "Name": "DeregisterCluster",
+          "Service": "eks"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "eks",
+          "Method": "deregister_cluster",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeAccessEntry",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeAccessEntry",
+          "Service": "eks"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "eks",
+          "Method": "describe_access_entry",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeAddon",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeAddon",
+          "Service": "eks"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "eks",
+          "Method": "describe_addon",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeAddonConfiguration",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeAddonConfiguration",
+          "Service": "eks"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "eks",
+          "Method": "describe_addon_configuration",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeAddonVersions",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeAddonVersions",
+          "Service": "eks"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "eks",
+          "Method": "describe_addon_versions",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeCapability",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeCapability",
+          "Service": "eks"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "eks",
+          "Method": "describe_capability",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeCluster",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeCluster",
+          "Service": "eks"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "eks",
+          "Method": "describe_cluster",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeClusterVersions",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeClusterVersions",
+          "Service": "eks"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "eks",
+          "Method": "describe_cluster_versions",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeEksAnywhereSubscription",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeEksAnywhereSubscription",
+          "Service": "eks"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "eks",
+          "Method": "describe_eks_anywhere_subscription",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeFargateProfile",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeFargateProfile",
+          "Service": "eks"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "eks",
+          "Method": "describe_fargate_profile",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeIdentityProviderConfig",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeIdentityProviderConfig",
+          "Service": "eks"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "eks",
+          "Method": "describe_identity_provider_config",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeInsight",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeInsight",
+          "Service": "eks"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "eks",
+          "Method": "describe_insight",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeInsightsRefresh",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeInsightsRefresh",
+          "Service": "eks"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "eks",
+          "Method": "describe_insights_refresh",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeNodegroup",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeNodegroup",
+          "Service": "eks"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "eks",
+          "Method": "describe_nodegroup",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribePodIdentityAssociation",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribePodIdentityAssociation",
+          "Service": "eks"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "eks",
+          "Method": "describe_pod_identity_association",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeUpdate",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeUpdate",
+          "Service": "eks"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "eks",
+          "Method": "describe_update",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DisassociateAccessPolicy",
+      "AuthorizedActions": [
+        {
+          "Name": "DisassociateAccessPolicy",
+          "Service": "eks"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "eks",
+          "Method": "disassociate_access_policy",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DisassociateIdentityProviderConfig",
+      "AuthorizedActions": [
+        {
+          "Name": "DisassociateIdentityProviderConfig",
+          "Service": "eks"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "eks",
+          "Method": "disassociate_identity_provider_config",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListAccessEntries",
+      "AuthorizedActions": [
+        {
+          "Name": "ListAccessEntries",
+          "Service": "eks"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "eks",
+          "Method": "list_access_entries",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListAccessPolicies",
+      "AuthorizedActions": [
+        {
+          "Name": "ListAccessPolicies",
+          "Service": "eks"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "eks",
+          "Method": "list_access_policies",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListAddons",
+      "AuthorizedActions": [
+        {
+          "Name": "ListAddons",
+          "Service": "eks"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "eks",
+          "Method": "list_addons",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListAssociatedAccessPolicies",
+      "AuthorizedActions": [
+        {
+          "Name": "ListAssociatedAccessPolicies",
+          "Service": "eks"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "eks",
+          "Method": "list_associated_access_policies",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListCapabilities",
+      "AuthorizedActions": [
+        {
+          "Name": "ListCapabilities",
+          "Service": "eks"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "eks",
+          "Method": "list_capabilities",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListClusters",
+      "AuthorizedActions": [
+        {
+          "Name": "ListClusters",
+          "Service": "eks"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "eks",
+          "Method": "list_clusters",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListEksAnywhereSubscriptions",
+      "AuthorizedActions": [
+        {
+          "Name": "ListEksAnywhereSubscriptions",
+          "Service": "eks"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "eks",
+          "Method": "list_eks_anywhere_subscriptions",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListFargateProfiles",
+      "AuthorizedActions": [
+        {
+          "Name": "ListFargateProfiles",
+          "Service": "eks"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "eks",
+          "Method": "list_fargate_profiles",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListIdentityProviderConfigs",
+      "AuthorizedActions": [
+        {
+          "Name": "ListIdentityProviderConfigs",
+          "Service": "eks"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "eks",
+          "Method": "list_identity_provider_configs",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListInsights",
+      "AuthorizedActions": [
+        {
+          "Name": "ListInsights",
+          "Service": "eks"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "eks",
+          "Method": "list_insights",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListNodegroups",
+      "AuthorizedActions": [
+        {
+          "Name": "ListNodegroups",
+          "Service": "eks"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "eks",
+          "Method": "list_nodegroups",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListPodIdentityAssociations",
+      "AuthorizedActions": [
+        {
+          "Name": "ListPodIdentityAssociations",
+          "Service": "eks"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "eks",
+          "Method": "list_pod_identity_associations",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListTagsForResource",
+      "AuthorizedActions": [
+        {
+          "Name": "ListTagsForResource",
+          "Service": "eks"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "eks",
+          "Method": "list_tags_for_resource",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListUpdates",
+      "AuthorizedActions": [
+        {
+          "Name": "ListUpdates",
+          "Service": "eks"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "eks",
+          "Method": "list_updates",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "RegisterCluster",
+      "AuthorizedActions": [
+        {
+          "Name": "PassRole",
+          "Context": {
+            "iam:PassedToService": [
+              "eks.amazonaws.com"
+            ]
+          },
+          "Service": "iam"
+        },
+        {
+          "Name": "RegisterCluster",
+          "Service": "eks"
+        },
+        {
+          "Name": "TagResource",
+          "Service": "eks"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "eks",
+          "Method": "register_cluster",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "StartInsightsRefresh",
+      "AuthorizedActions": [
+        {
+          "Name": "StartInsightsRefresh",
+          "Service": "eks"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "eks",
+          "Method": "start_insights_refresh",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "TagResource",
+      "AuthorizedActions": [
+        {
+          "Name": "TagResource",
+          "Service": "eks"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "eks",
+          "Method": "tag_resource",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "UntagResource",
+      "AuthorizedActions": [
+        {
+          "Name": "UntagResource",
+          "Service": "eks"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "eks",
+          "Method": "untag_resource",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "UpdateAccessEntry",
+      "AuthorizedActions": [
+        {
+          "Name": "UpdateAccessEntry",
+          "Service": "eks"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "eks",
+          "Method": "update_access_entry",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "UpdateAddon",
+      "AuthorizedActions": [
+        {
+          "Name": "PassRole",
+          "Context": {
+            "iam:PassedToService": [
+              "eks.amazonaws.com"
+            ]
+          },
+          "Service": "iam"
+        },
+        {
+          "Name": "UpdateAddon",
+          "Service": "eks"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "eks",
+          "Method": "update_addon",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "UpdateCapability",
+      "AuthorizedActions": [
+        {
+          "Name": "PassRole",
+          "Context": {
+            "iam:PassedToService": [
+              "eks.amazonaws.com"
+            ]
+          },
+          "Service": "iam"
+        },
+        {
+          "Name": "UpdateCapability",
+          "Service": "eks"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "eks",
+          "Method": "update_capability",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "UpdateClusterConfig",
+      "AuthorizedActions": [
+        {
+          "Name": "CreateAccessEntry",
+          "Service": "eks"
+        },
+        {
+          "Name": "PassRole",
+          "Context": {
+            "iam:PassedToService": [
+              "ec2.amazonaws.com",
+              "eks.amazonaws.com"
+            ]
+          },
+          "Service": "iam"
+        },
+        {
+          "Name": "UpdateClusterConfig",
+          "Service": "eks"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "eks",
+          "Method": "update_cluster_config",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "UpdateClusterVersion",
+      "AuthorizedActions": [
+        {
+          "Name": "UpdateClusterVersion",
+          "Service": "eks"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "eks",
+          "Method": "update_cluster_version",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "UpdateEksAnywhereSubscription",
+      "AuthorizedActions": [
+        {
+          "Name": "UpdateEksAnywhereSubscription",
+          "Service": "eks"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "eks",
+          "Method": "update_eks_anywhere_subscription",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "UpdateNodegroupConfig",
+      "AuthorizedActions": [
+        {
+          "Name": "UpdateNodegroupConfig",
+          "Service": "eks"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "eks",
+          "Method": "update_nodegroup_config",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "UpdateNodegroupVersion",
+      "AuthorizedActions": [
+        {
+          "Name": "UpdateNodegroupVersion",
+          "Service": "eks"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "eks",
+          "Method": "update_nodegroup_version",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "UpdatePodIdentityAssociation",
+      "AuthorizedActions": [
+        {
+          "Name": "PassRole",
+          "Context": {
+            "iam:PassedToService": [
+              "pods.eks.amazonaws.com"
+            ]
+          },
+          "Service": "iam"
+        },
+        {
+          "Name": "UpdatePodIdentityAssociation",
+          "Service": "eks"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "eks",
+          "Method": "update_pod_identity_association",
+          "Package": "Boto3"
+        }
+      ]
+    }
+  ],
+  "Resources": [
+    {
+      "Name": "access-entry",
+      "ARNFormats": [
+        "arn:${Partition}:eks:${Region}:${Account}:access-entry/${ClusterName}/${IamIdentityType}/${IamIdentityAccountID}/${IamIdentityName}/${UUID}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}",
+        "eks:accessEntryType",
+        "eks:clusterName",
+        "eks:kubernetesGroups",
+        "eks:principalArn",
+        "eks:username"
+      ]
+    },
+    {
+      "Name": "access-policy",
+      "ARNFormats": [
+        "arn:${Partition}:eks::aws:cluster-access-policy/${AccessPolicyName}"
+      ]
+    },
+    {
+      "Name": "addon",
+      "ARNFormats": [
+        "arn:${Partition}:eks:${Region}:${Account}:addon/${ClusterName}/${AddonName}/${UUID}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ]
+    },
+    {
+      "Name": "capability",
+      "ARNFormats": [
+        "arn:${Partition}:eks:${Region}:${Account}:capability/${ClusterName}/${CapabilityType}/${CapabilityName}/${UUID}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ]
+    },
+    {
+      "Name": "cluster",
+      "ARNFormats": [
+        "arn:${Partition}:eks:${Region}:${Account}:cluster/${ClusterName}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ]
+    },
+    {
+      "Name": "dashboard",
+      "ARNFormats": [
+        "arn:${Partition}:eks:${Region}:${Account}:dashboard/${DashboardName}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ]
+    },
+    {
+      "Name": "eks-anywhere-subscription",
+      "ARNFormats": [
+        "arn:${Partition}:eks:${Region}:${Account}:eks-anywhere-subscription/${UUID}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ]
+    },
+    {
+      "Name": "fargateprofile",
+      "ARNFormats": [
+        "arn:${Partition}:eks:${Region}:${Account}:fargateprofile/${ClusterName}/${FargateProfileName}/${UUID}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ]
+    },
+    {
+      "Name": "identityproviderconfig",
+      "ARNFormats": [
+        "arn:${Partition}:eks:${Region}:${Account}:identityproviderconfig/${ClusterName}/${IdentityProviderType}/${IdentityProviderConfigName}/${UUID}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ]
+    },
+    {
+      "Name": "nodegroup",
+      "ARNFormats": [
+        "arn:${Partition}:eks:${Region}:${Account}:nodegroup/${ClusterName}/${NodegroupName}/${UUID}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ]
+    },
+    {
+      "Name": "podidentityassociation",
+      "ARNFormats": [
+        "arn:${Partition}:eks:${Region}:${Account}:podidentityassociation/${ClusterName}/${UUID}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ]
+    }
+  ],
+  "Version": "v1.4"
+}

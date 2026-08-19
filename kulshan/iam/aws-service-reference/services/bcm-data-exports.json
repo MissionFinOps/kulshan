@@ -1,0 +1,536 @@
+{
+  "Name": "bcm-data-exports",
+  "Actions": [
+    {
+      "Name": "CreateExport",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "billingview"
+        },
+        {
+          "Name": "table"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "DeleteExport",
+      "ActionConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "export"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "GetExecution",
+      "ActionConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "export"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "GetExport",
+      "ActionConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "export"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "GetTable",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "table"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "ListExecutions",
+      "ActionConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "export"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "ListExports",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "ListTables",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "ListTagsForResource",
+      "ActionConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "export"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "TagResource",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:ResourceTag/${TagKey}",
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": true,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "export"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "UntagResource",
+      "ActionConditionKeys": [
+        "aws:ResourceTag/${TagKey}",
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": true,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "export"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "UpdateExport",
+      "ActionConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "billingview"
+        },
+        {
+          "Name": "export"
+        },
+        {
+          "Name": "table"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    }
+  ],
+  "ConditionKeys": [
+    {
+      "Name": "aws:RequestTag/${TagKey}",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "aws:ResourceTag/${TagKey}",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "aws:TagKeys",
+      "Types": [
+        "ArrayOfString"
+      ]
+    }
+  ],
+  "Operations": [
+    {
+      "Name": "CreateExport",
+      "AuthorizedActions": [
+        {
+          "Name": "CreateExport",
+          "Service": "bcm-data-exports"
+        },
+        {
+          "Name": "GetCarbonFootprintSummary",
+          "Service": "sustainability"
+        },
+        {
+          "Name": "GetRecommendation",
+          "Service": "cost-optimization-hub"
+        },
+        {
+          "Name": "ListRecommendations",
+          "Service": "cost-optimization-hub"
+        },
+        {
+          "Name": "TagResource",
+          "Service": "bcm-data-exports"
+        },
+        {
+          "Name": "PutReportDefinition",
+          "Service": "cur"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "bcm-data-exports",
+          "Method": "create_export",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteExport",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteExport",
+          "Service": "bcm-data-exports"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "bcm-data-exports",
+          "Method": "delete_export",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetExecution",
+      "AuthorizedActions": [
+        {
+          "Name": "GetExecution",
+          "Service": "bcm-data-exports"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "bcm-data-exports",
+          "Method": "get_execution",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetExport",
+      "AuthorizedActions": [
+        {
+          "Name": "GetExport",
+          "Service": "bcm-data-exports"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "bcm-data-exports",
+          "Method": "get_export",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetTable",
+      "AuthorizedActions": [
+        {
+          "Name": "GetTable",
+          "Service": "bcm-data-exports"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "bcm-data-exports",
+          "Method": "get_table",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListExecutions",
+      "AuthorizedActions": [
+        {
+          "Name": "ListExecutions",
+          "Service": "bcm-data-exports"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "bcm-data-exports",
+          "Method": "list_executions",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListExports",
+      "AuthorizedActions": [
+        {
+          "Name": "ListExports",
+          "Service": "bcm-data-exports"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "bcm-data-exports",
+          "Method": "list_exports",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListTables",
+      "AuthorizedActions": [
+        {
+          "Name": "ListTables",
+          "Service": "bcm-data-exports"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "bcm-data-exports",
+          "Method": "list_tables",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListTagsForResource",
+      "AuthorizedActions": [
+        {
+          "Name": "ListTagsForResource",
+          "Service": "bcm-data-exports"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "bcm-data-exports",
+          "Method": "list_tags_for_resource",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "TagResource",
+      "AuthorizedActions": [
+        {
+          "Name": "TagResource",
+          "Service": "bcm-data-exports"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "bcm-data-exports",
+          "Method": "tag_resource",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "UntagResource",
+      "AuthorizedActions": [
+        {
+          "Name": "UntagResource",
+          "Service": "bcm-data-exports"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "bcm-data-exports",
+          "Method": "untag_resource",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "UpdateExport",
+      "AuthorizedActions": [
+        {
+          "Name": "UpdateExport",
+          "Service": "bcm-data-exports"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "bcm-data-exports",
+          "Method": "update_export",
+          "Package": "Boto3"
+        }
+      ]
+    }
+  ],
+  "Resources": [
+    {
+      "Name": "billingview",
+      "ARNFormats": [
+        "arn:${Partition}:billing::${Account}:billingview/${ResourceId}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ]
+    },
+    {
+      "Name": "export",
+      "ARNFormats": [
+        "arn:${Partition}:bcm-data-exports:${Region}:${Account}:export/${Identifier}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ]
+    },
+    {
+      "Name": "table",
+      "ARNFormats": [
+        "arn:${Partition}:bcm-data-exports:${Region}:${Account}:table/${Identifier}"
+      ]
+    }
+  ],
+  "Version": "v1.4"
+}

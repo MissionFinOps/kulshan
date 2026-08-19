@@ -1,0 +1,1996 @@
+{
+  "Name": "ce",
+  "Actions": [
+    {
+      "Name": "CreateAnomalyMonitor",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "CreateAnomalySubscription",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "CreateCostCategoryDefinition",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "CreateNotificationSubscription",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "CreateReport",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "DeleteAnomalyMonitor",
+      "ActionConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "anomalymonitor"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "DeleteAnomalySubscription",
+      "ActionConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "anomalysubscription"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "DeleteCostCategoryDefinition",
+      "ActionConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "costcategory"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "DeleteNotificationSubscription",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "DeleteReport",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "DescribeCostCategoryDefinition",
+      "ActionConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "costcategory"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "DescribeNotificationSubscription",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "DescribeReport",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "GetAnomalies",
+      "ActionConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "anomalymonitor"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "GetAnomalyMonitors",
+      "ActionConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "anomalymonitor"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "GetAnomalySubscriptions",
+      "ActionConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "anomalysubscription"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "GetApproximateUsageRecords",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "GetCommitmentPurchaseAnalysis",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "GetConsoleActionSetEnforced",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "GetCostAndUsage",
+      "ActionConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "billingview"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "GetCostAndUsageComparisons",
+      "ActionConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "billingview"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "GetCostAndUsageWithResources",
+      "ActionConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "billingview"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "GetCostCategories",
+      "ActionConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "billingview"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "GetCostComparisonDrivers",
+      "ActionConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "billingview"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "GetCostForecast",
+      "ActionConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "billingview"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "GetDimensionValues",
+      "ActionConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "billingview"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "GetPreferences",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "GetReservationCoverage",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "GetReservationPurchaseRecommendation",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "GetReservationUtilization",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "GetRightsizingRecommendation",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "GetSavingsPlanPurchaseRecommendationDetails",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "GetSavingsPlansCoverage",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "GetSavingsPlansPurchaseRecommendation",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "GetSavingsPlansUtilization",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "GetSavingsPlansUtilizationDetails",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "GetTags",
+      "ActionConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "billingview"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "GetUsageForecast",
+      "ActionConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "billingview"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "ListCommitmentPurchaseAnalyses",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "ListCostAllocationTagBackfillHistory",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "ListCostAllocationTags",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "ListCostCategoryDefinitions",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "ListCostCategoryResourceAssociations",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "ListSavingsPlansPurchaseRecommendationGeneration",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "ListTagsForResource",
+      "ActionConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "anomalymonitor"
+        },
+        {
+          "Name": "anomalysubscription"
+        },
+        {
+          "Name": "costcategory"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "ProvideAnomalyFeedback",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "StartCommitmentPurchaseAnalysis",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "StartCostAllocationTagBackfill",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "StartSavingsPlansPurchaseRecommendationGeneration",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "TagResource",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:ResourceTag/${TagKey}",
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": true,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "anomalymonitor"
+        },
+        {
+          "Name": "anomalysubscription"
+        },
+        {
+          "Name": "costcategory"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "UntagResource",
+      "ActionConditionKeys": [
+        "aws:ResourceTag/${TagKey}",
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": true,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "anomalymonitor"
+        },
+        {
+          "Name": "anomalysubscription"
+        },
+        {
+          "Name": "costcategory"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "UpdateAnomalyMonitor",
+      "ActionConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "anomalymonitor"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "UpdateAnomalySubscription",
+      "ActionConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "anomalysubscription"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "UpdateConsoleActionSetEnforced",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "UpdateCostAllocationTagsStatus",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "UpdateCostCategoryDefinition",
+      "ActionConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "costcategory"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "UpdateNotificationSubscription",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "UpdatePreferences",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "UpdateReport",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    }
+  ],
+  "ConditionKeys": [
+    {
+      "Name": "aws:RequestTag/${TagKey}",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "aws:ResourceTag/${TagKey}",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "aws:TagKeys",
+      "Types": [
+        "ArrayOfString"
+      ]
+    }
+  ],
+  "Operations": [
+    {
+      "Name": "CreateAnomalyMonitor",
+      "AuthorizedActions": [
+        {
+          "Name": "CreateAnomalyMonitor",
+          "Service": "ce"
+        },
+        {
+          "Name": "TagResource",
+          "Service": "ce"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ce",
+          "Method": "create_anomaly_monitor",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreateAnomalySubscription",
+      "AuthorizedActions": [
+        {
+          "Name": "CreateAnomalySubscription",
+          "Service": "ce"
+        },
+        {
+          "Name": "TagResource",
+          "Service": "ce"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ce",
+          "Method": "create_anomaly_subscription",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreateCostCategoryDefinition",
+      "AuthorizedActions": [
+        {
+          "Name": "CreateCostCategoryDefinition",
+          "Service": "ce"
+        },
+        {
+          "Name": "TagResource",
+          "Service": "ce"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ce",
+          "Method": "create_cost_category_definition",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteAnomalyMonitor",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteAnomalyMonitor",
+          "Service": "ce"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ce",
+          "Method": "delete_anomaly_monitor",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteAnomalySubscription",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteAnomalySubscription",
+          "Service": "ce"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ce",
+          "Method": "delete_anomaly_subscription",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteCostCategoryDefinition",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteCostCategoryDefinition",
+          "Service": "ce"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ce",
+          "Method": "delete_cost_category_definition",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeCostCategoryDefinition",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeCostCategoryDefinition",
+          "Service": "ce"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ce",
+          "Method": "describe_cost_category_definition",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetAnomalies",
+      "AuthorizedActions": [
+        {
+          "Name": "GetAnomalies",
+          "Service": "ce"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ce",
+          "Method": "get_anomalies",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetAnomalyMonitors",
+      "AuthorizedActions": [
+        {
+          "Name": "GetAnomalyMonitors",
+          "Service": "ce"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ce",
+          "Method": "get_anomaly_monitors",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetAnomalySubscriptions",
+      "AuthorizedActions": [
+        {
+          "Name": "GetAnomalySubscriptions",
+          "Service": "ce"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ce",
+          "Method": "get_anomaly_subscriptions",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetApproximateUsageRecords",
+      "AuthorizedActions": [
+        {
+          "Name": "GetApproximateUsageRecords",
+          "Service": "ce"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ce",
+          "Method": "get_approximate_usage_records",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetCommitmentPurchaseAnalysis",
+      "AuthorizedActions": [
+        {
+          "Name": "GetCommitmentPurchaseAnalysis",
+          "Service": "ce"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ce",
+          "Method": "get_commitment_purchase_analysis",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetCostAndUsage",
+      "AuthorizedActions": [
+        {
+          "Name": "GetCostAndUsage",
+          "Service": "ce"
+        },
+        {
+          "Name": "ViewBilling",
+          "Service": "aws-portal"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ce",
+          "Method": "get_cost_and_usage",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetCostAndUsageComparisons",
+      "AuthorizedActions": [
+        {
+          "Name": "GetCostAndUsageComparisons",
+          "Service": "ce"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ce",
+          "Method": "get_cost_and_usage_comparisons",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetCostAndUsageWithResources",
+      "AuthorizedActions": [
+        {
+          "Name": "GetCostAndUsageWithResources",
+          "Service": "ce"
+        },
+        {
+          "Name": "ViewBilling",
+          "Service": "aws-portal"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ce",
+          "Method": "get_cost_and_usage_with_resources",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetCostCategories",
+      "AuthorizedActions": [
+        {
+          "Name": "GetCostCategories",
+          "Service": "ce"
+        },
+        {
+          "Name": "ViewBilling",
+          "Service": "aws-portal"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ce",
+          "Method": "get_cost_categories",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetCostComparisonDrivers",
+      "AuthorizedActions": [
+        {
+          "Name": "GetCostComparisonDrivers",
+          "Service": "ce"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ce",
+          "Method": "get_cost_comparison_drivers",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetCostForecast",
+      "AuthorizedActions": [
+        {
+          "Name": "GetCostForecast",
+          "Service": "ce"
+        },
+        {
+          "Name": "ViewBilling",
+          "Service": "aws-portal"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ce",
+          "Method": "get_cost_forecast",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetDimensionValues",
+      "AuthorizedActions": [
+        {
+          "Name": "GetDimensionValues",
+          "Service": "ce"
+        },
+        {
+          "Name": "ViewBilling",
+          "Service": "aws-portal"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ce",
+          "Method": "get_dimension_values",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetReservationCoverage",
+      "AuthorizedActions": [
+        {
+          "Name": "GetReservationCoverage",
+          "Service": "ce"
+        },
+        {
+          "Name": "ViewBilling",
+          "Service": "aws-portal"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ce",
+          "Method": "get_reservation_coverage",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetReservationPurchaseRecommendation",
+      "AuthorizedActions": [
+        {
+          "Name": "GetReservationPurchaseRecommendation",
+          "Service": "ce"
+        },
+        {
+          "Name": "ViewBilling",
+          "Service": "aws-portal"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ce",
+          "Method": "get_reservation_purchase_recommendation",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetReservationUtilization",
+      "AuthorizedActions": [
+        {
+          "Name": "GetReservationUtilization",
+          "Service": "ce"
+        },
+        {
+          "Name": "ViewBilling",
+          "Service": "aws-portal"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ce",
+          "Method": "get_reservation_utilization",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetRightsizingRecommendation",
+      "AuthorizedActions": [
+        {
+          "Name": "GetRightsizingRecommendation",
+          "Service": "ce"
+        },
+        {
+          "Name": "ViewBilling",
+          "Service": "aws-portal"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ce",
+          "Method": "get_rightsizing_recommendation",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetSavingsPlanPurchaseRecommendationDetails",
+      "AuthorizedActions": [
+        {
+          "Name": "GetSavingsPlanPurchaseRecommendationDetails",
+          "Service": "ce"
+        },
+        {
+          "Name": "ViewBilling",
+          "Service": "aws-portal"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ce",
+          "Method": "get_savings_plan_purchase_recommendation_details",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetSavingsPlansCoverage",
+      "AuthorizedActions": [
+        {
+          "Name": "GetSavingsPlansCoverage",
+          "Service": "ce"
+        },
+        {
+          "Name": "ViewBilling",
+          "Service": "aws-portal"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ce",
+          "Method": "get_savings_plans_coverage",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetSavingsPlansPurchaseRecommendation",
+      "AuthorizedActions": [
+        {
+          "Name": "GetSavingsPlansPurchaseRecommendation",
+          "Service": "ce"
+        },
+        {
+          "Name": "ViewBilling",
+          "Service": "aws-portal"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ce",
+          "Method": "get_savings_plans_purchase_recommendation",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetSavingsPlansUtilization",
+      "AuthorizedActions": [
+        {
+          "Name": "GetSavingsPlansUtilization",
+          "Service": "ce"
+        },
+        {
+          "Name": "ViewBilling",
+          "Service": "aws-portal"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ce",
+          "Method": "get_savings_plans_utilization",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetSavingsPlansUtilizationDetails",
+      "AuthorizedActions": [
+        {
+          "Name": "GetSavingsPlansUtilizationDetails",
+          "Service": "ce"
+        },
+        {
+          "Name": "ViewBilling",
+          "Service": "aws-portal"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ce",
+          "Method": "get_savings_plans_utilization_details",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetTags",
+      "AuthorizedActions": [
+        {
+          "Name": "GetTags",
+          "Service": "ce"
+        },
+        {
+          "Name": "ViewBilling",
+          "Service": "aws-portal"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ce",
+          "Method": "get_tags",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetUsageForecast",
+      "AuthorizedActions": [
+        {
+          "Name": "GetUsageForecast",
+          "Service": "ce"
+        },
+        {
+          "Name": "ViewBilling",
+          "Service": "aws-portal"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ce",
+          "Method": "get_usage_forecast",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListCommitmentPurchaseAnalyses",
+      "AuthorizedActions": [
+        {
+          "Name": "ListCommitmentPurchaseAnalyses",
+          "Service": "ce"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ce",
+          "Method": "list_commitment_purchase_analyses",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListCostAllocationTagBackfillHistory",
+      "AuthorizedActions": [
+        {
+          "Name": "ListCostAllocationTagBackfillHistory",
+          "Service": "ce"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ce",
+          "Method": "list_cost_allocation_tag_backfill_history",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListCostAllocationTags",
+      "AuthorizedActions": [
+        {
+          "Name": "ListCostAllocationTags",
+          "Service": "ce"
+        },
+        {
+          "Name": "ViewBilling",
+          "Service": "aws-portal"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ce",
+          "Method": "list_cost_allocation_tags",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListCostCategoryDefinitions",
+      "AuthorizedActions": [
+        {
+          "Name": "ListCostCategoryDefinitions",
+          "Service": "ce"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ce",
+          "Method": "list_cost_category_definitions",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListCostCategoryResourceAssociations",
+      "AuthorizedActions": [
+        {
+          "Name": "ListCostCategoryResourceAssociations",
+          "Service": "ce"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ce",
+          "Method": "list_cost_category_resource_associations",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListSavingsPlansPurchaseRecommendationGeneration",
+      "AuthorizedActions": [
+        {
+          "Name": "ListSavingsPlansPurchaseRecommendationGeneration",
+          "Service": "ce"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ce",
+          "Method": "list_savings_plans_purchase_recommendation_generation",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListTagsForResource",
+      "AuthorizedActions": [
+        {
+          "Name": "ListTagsForResource",
+          "Service": "ce"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ce",
+          "Method": "list_tags_for_resource",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ProvideAnomalyFeedback",
+      "AuthorizedActions": [
+        {
+          "Name": "ProvideAnomalyFeedback",
+          "Service": "ce"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ce",
+          "Method": "provide_anomaly_feedback",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "StartCommitmentPurchaseAnalysis",
+      "AuthorizedActions": [
+        {
+          "Name": "StartCommitmentPurchaseAnalysis",
+          "Service": "ce"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ce",
+          "Method": "start_commitment_purchase_analysis",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "StartCostAllocationTagBackfill",
+      "AuthorizedActions": [
+        {
+          "Name": "StartCostAllocationTagBackfill",
+          "Service": "ce"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ce",
+          "Method": "start_cost_allocation_tag_backfill",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "StartSavingsPlansPurchaseRecommendationGeneration",
+      "AuthorizedActions": [
+        {
+          "Name": "StartSavingsPlansPurchaseRecommendationGeneration",
+          "Service": "ce"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ce",
+          "Method": "start_savings_plans_purchase_recommendation_generation",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "TagResource",
+      "AuthorizedActions": [
+        {
+          "Name": "TagResource",
+          "Service": "ce"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ce",
+          "Method": "tag_resource",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "UntagResource",
+      "AuthorizedActions": [
+        {
+          "Name": "UntagResource",
+          "Service": "ce"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ce",
+          "Method": "untag_resource",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "UpdateAnomalyMonitor",
+      "AuthorizedActions": [
+        {
+          "Name": "UpdateAnomalyMonitor",
+          "Service": "ce"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ce",
+          "Method": "update_anomaly_monitor",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "UpdateAnomalySubscription",
+      "AuthorizedActions": [
+        {
+          "Name": "UpdateAnomalySubscription",
+          "Service": "ce"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ce",
+          "Method": "update_anomaly_subscription",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "UpdateCostAllocationTagsStatus",
+      "AuthorizedActions": [
+        {
+          "Name": "ModifyBilling",
+          "Service": "aws-portal"
+        },
+        {
+          "Name": "UpdateCostAllocationTagsStatus",
+          "Service": "ce"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ce",
+          "Method": "update_cost_allocation_tags_status",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "UpdateCostCategoryDefinition",
+      "AuthorizedActions": [
+        {
+          "Name": "UpdateCostCategoryDefinition",
+          "Service": "ce"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "ce",
+          "Method": "update_cost_category_definition",
+          "Package": "Boto3"
+        }
+      ]
+    }
+  ],
+  "Resources": [
+    {
+      "Name": "anomalymonitor",
+      "ARNFormats": [
+        "arn:${Partition}:ce::${Account}:anomalymonitor/${Identifier}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ]
+    },
+    {
+      "Name": "anomalysubscription",
+      "ARNFormats": [
+        "arn:${Partition}:ce::${Account}:anomalysubscription/${Identifier}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ]
+    },
+    {
+      "Name": "billingview",
+      "ARNFormats": [
+        "arn:${Partition}:billing::${Account}:billingview/${ResourceId}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ]
+    },
+    {
+      "Name": "costcategory",
+      "ARNFormats": [
+        "arn:${Partition}:ce::${Account}:costcategory/${Identifier}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ]
+    }
+  ],
+  "Version": "v1.4"
+}

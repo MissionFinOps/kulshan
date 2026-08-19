@@ -1,0 +1,2534 @@
+{
+  "Name": "organizations",
+  "Actions": [
+    {
+      "Name": "AcceptHandshake",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "handshake"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "AttachPolicy",
+      "ActionConditionKeys": [
+        "organizations:PolicyType"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": true,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "account"
+        },
+        {
+          "Name": "organizationalunit"
+        },
+        {
+          "Name": "policy"
+        },
+        {
+          "Name": "root"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "CancelHandshake",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "handshake"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "CloseAccount",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "account"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "CreateAccount",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:ResourceTag/${TagKey}",
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "CreateGovCloudAccount",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:ResourceTag/${TagKey}",
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "CreateOrganization",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "CreateOrganizationalUnit",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "organizationalunit"
+        },
+        {
+          "Name": "root"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "CreatePolicy",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:ResourceTag/${TagKey}",
+        "aws:TagKeys",
+        "organizations:PolicyType"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "policy"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeclineHandshake",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "handshake"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteOrganization",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteOrganizationalUnit",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "organizationalunit"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeletePolicy",
+      "ActionConditionKeys": [
+        "organizations:PolicyType"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "policy"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteResourcePolicy",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": true,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeregisterDelegatedAdministrator",
+      "ActionConditionKeys": [
+        "organizations:ServicePrincipal"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "account"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeAccount",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "account"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeCreateAccountStatus",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeEffectivePolicy",
+      "ActionConditionKeys": [
+        "organizations:PolicyType"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "account"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeHandshake",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "handshake"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeOrganization",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeOrganizationalUnit",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "organizationalunit"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribePolicy",
+      "ActionConditionKeys": [
+        "organizations:PolicyType"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "policy"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeResourcePolicy",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeResponsibilityTransfer",
+      "ActionConditionKeys": [
+        "organizations:TransferDirection",
+        "organizations:TransferType"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "responsibilitytransfer"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DetachPolicy",
+      "ActionConditionKeys": [
+        "organizations:PolicyType"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": true,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "account"
+        },
+        {
+          "Name": "organizationalunit"
+        },
+        {
+          "Name": "policy"
+        },
+        {
+          "Name": "root"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DisableAWSServiceAccess",
+      "ActionConditionKeys": [
+        "organizations:ServicePrincipal"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DisablePolicyType",
+      "ActionConditionKeys": [
+        "organizations:PolicyType"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "root"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "EnableAWSServiceAccess",
+      "ActionConditionKeys": [
+        "organizations:ServicePrincipal"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "EnableAllFeatures",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "EnablePolicyType",
+      "ActionConditionKeys": [
+        "organizations:PolicyType"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "root"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "InviteAccountToOrganization",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "account"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "InviteOrganizationToTransferResponsibility",
+      "ActionConditionKeys": [
+        "organizations:TransferDirection",
+        "organizations:TransferType"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "account"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "LeaveOrganization",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListAWSServiceAccessForOrganization",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListAccounts",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListAccountsForParent",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "organizationalunit"
+        },
+        {
+          "Name": "root"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListAccountsWithInvalidEffectivePolicy",
+      "ActionConditionKeys": [
+        "organizations:PolicyType"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListChildren",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "organizationalunit"
+        },
+        {
+          "Name": "root"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListCreateAccountStatus",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListDelegatedAdministrators",
+      "ActionConditionKeys": [
+        "organizations:ServicePrincipal"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListDelegatedServicesForAccount",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "account"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListEffectivePolicyValidationErrors",
+      "ActionConditionKeys": [
+        "organizations:PolicyType"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "account"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "ListHandshakesForAccount",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListHandshakesForOrganization",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListInboundResponsibilityTransfers",
+      "ActionConditionKeys": [
+        "organizations:TransferDirection",
+        "organizations:TransferType"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListOrganizationalUnitsForParent",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "organizationalunit"
+        },
+        {
+          "Name": "root"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListOutboundResponsibilityTransfers",
+      "ActionConditionKeys": [
+        "organizations:TransferDirection",
+        "organizations:TransferType"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListParents",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "account"
+        },
+        {
+          "Name": "organizationalunit"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListPolicies",
+      "ActionConditionKeys": [
+        "organizations:PolicyType"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListPoliciesForTarget",
+      "ActionConditionKeys": [
+        "organizations:PolicyType"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "account"
+        },
+        {
+          "Name": "organizationalunit"
+        },
+        {
+          "Name": "root"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListRoots",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListTagsForResource",
+      "ActionConditionKeys": [
+        "organizations:PolicyType"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "account"
+        },
+        {
+          "Name": "organizationalunit"
+        },
+        {
+          "Name": "policy"
+        },
+        {
+          "Name": "resourcepolicy"
+        },
+        {
+          "Name": "responsibilitytransfer",
+          "ConditionKeys": [
+            "organizations:TransferDirection",
+            "organizations:TransferType"
+          ]
+        },
+        {
+          "Name": "root"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "ListTargetsForPolicy",
+      "ActionConditionKeys": [
+        "organizations:PolicyType"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "policy"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "MoveAccount",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "account"
+        },
+        {
+          "Name": "organizationalunit"
+        },
+        {
+          "Name": "root"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "PutResourcePolicy",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": true,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "resourcepolicy"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "RegisterDelegatedAdministrator",
+      "ActionConditionKeys": [
+        "organizations:ServicePrincipal"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "account"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "RemoveAccountFromOrganization",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "account"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "TagResource",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys",
+        "organizations:PolicyType"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": true,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "account"
+        },
+        {
+          "Name": "organizationalunit"
+        },
+        {
+          "Name": "policy",
+          "ConditionKeys": [
+            "organizations:PolicyType"
+          ]
+        },
+        {
+          "Name": "resourcepolicy"
+        },
+        {
+          "Name": "responsibilitytransfer",
+          "ConditionKeys": [
+            "organizations:TransferDirection",
+            "organizations:TransferType"
+          ]
+        },
+        {
+          "Name": "root"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "TerminateResponsibilityTransfer",
+      "ActionConditionKeys": [
+        "organizations:TransferDirection",
+        "organizations:TransferType"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "responsibilitytransfer"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "UntagResource",
+      "ActionConditionKeys": [
+        "aws:TagKeys",
+        "organizations:PolicyType"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": true,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "account"
+        },
+        {
+          "Name": "organizationalunit"
+        },
+        {
+          "Name": "policy"
+        },
+        {
+          "Name": "resourcepolicy"
+        },
+        {
+          "Name": "responsibilitytransfer",
+          "ConditionKeys": [
+            "organizations:TransferDirection",
+            "organizations:TransferType"
+          ]
+        },
+        {
+          "Name": "root"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "UpdateOrganizationalUnit",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "organizationalunit"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "UpdatePolicy",
+      "ActionConditionKeys": [
+        "organizations:PolicyType"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": true,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "policy"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "UpdateResponsibilityTransfer",
+      "ActionConditionKeys": [
+        "organizations:TransferDirection",
+        "organizations:TransferType"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "responsibilitytransfer"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    }
+  ],
+  "ConditionKeys": [
+    {
+      "Name": "aws:RequestTag/${TagKey}",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "aws:ResourceTag/${TagKey}",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "aws:TagKeys",
+      "Types": [
+        "ArrayOfString"
+      ]
+    },
+    {
+      "Name": "organizations:PolicyType",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "organizations:ServicePrincipal",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "organizations:TransferDirection",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "organizations:TransferType",
+      "Types": [
+        "String"
+      ]
+    }
+  ],
+  "Operations": [
+    {
+      "Name": "AcceptHandshake",
+      "AuthorizedActions": [
+        {
+          "Name": "AcceptHandshake",
+          "Service": "organizations"
+        },
+        {
+          "Name": "LeaveOrganization",
+          "Service": "organizations"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "organizations",
+          "Method": "accept_handshake",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "AttachPolicy",
+      "AuthorizedActions": [
+        {
+          "Name": "AttachPolicy",
+          "Service": "organizations"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "organizations",
+          "Method": "attach_policy",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CancelHandshake",
+      "AuthorizedActions": [
+        {
+          "Name": "CancelHandshake",
+          "Service": "organizations"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "organizations",
+          "Method": "cancel_handshake",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CloseAccount",
+      "AuthorizedActions": [
+        {
+          "Name": "CloseAccount",
+          "Service": "organizations"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "organizations",
+          "Method": "close_account",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreateAccount",
+      "AuthorizedActions": [
+        {
+          "Name": "CreateAccount",
+          "Service": "organizations"
+        },
+        {
+          "Name": "TagResource",
+          "Service": "organizations"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "organizations",
+          "Method": "create_account",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreateGovCloudAccount",
+      "AuthorizedActions": [
+        {
+          "Name": "CreateGovCloudAccount",
+          "Service": "organizations"
+        },
+        {
+          "Name": "TagResource",
+          "Service": "organizations"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "organizations",
+          "Method": "create_gov_cloud_account",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreateOrganization",
+      "AuthorizedActions": [
+        {
+          "Name": "CreateOrganization",
+          "Service": "organizations"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "organizations",
+          "Method": "create_organization",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreateOrganizationalUnit",
+      "AuthorizedActions": [
+        {
+          "Name": "CreateOrganizationalUnit",
+          "Service": "organizations"
+        },
+        {
+          "Name": "TagResource",
+          "Service": "organizations"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "organizations",
+          "Method": "create_organizational_unit",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreatePolicy",
+      "AuthorizedActions": [
+        {
+          "Name": "CreatePolicy",
+          "Service": "organizations"
+        },
+        {
+          "Name": "TagResource",
+          "Service": "organizations"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "organizations",
+          "Method": "create_policy",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeclineHandshake",
+      "AuthorizedActions": [
+        {
+          "Name": "DeclineHandshake",
+          "Service": "organizations"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "organizations",
+          "Method": "decline_handshake",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteOrganization",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteOrganization",
+          "Service": "organizations"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "organizations",
+          "Method": "delete_organization",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteOrganizationalUnit",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteOrganizationalUnit",
+          "Service": "organizations"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "organizations",
+          "Method": "delete_organizational_unit",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeletePolicy",
+      "AuthorizedActions": [
+        {
+          "Name": "DeletePolicy",
+          "Service": "organizations"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "organizations",
+          "Method": "delete_policy",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteResourcePolicy",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteResourcePolicy",
+          "Service": "organizations"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "organizations",
+          "Method": "delete_resource_policy",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeregisterDelegatedAdministrator",
+      "AuthorizedActions": [
+        {
+          "Name": "DeregisterDelegatedAdministrator",
+          "Service": "organizations"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "organizations",
+          "Method": "deregister_delegated_administrator",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeAccount",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeAccount",
+          "Service": "organizations"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "organizations",
+          "Method": "describe_account",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeCreateAccountStatus",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeCreateAccountStatus",
+          "Service": "organizations"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "organizations",
+          "Method": "describe_create_account_status",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeEffectivePolicy",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeEffectivePolicy",
+          "Service": "organizations"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "organizations",
+          "Method": "describe_effective_policy",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeHandshake",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeHandshake",
+          "Service": "organizations"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "organizations",
+          "Method": "describe_handshake",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeOrganization",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeOrganization",
+          "Service": "organizations"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "organizations",
+          "Method": "describe_organization",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeOrganizationalUnit",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeOrganizationalUnit",
+          "Service": "organizations"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "organizations",
+          "Method": "describe_organizational_unit",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribePolicy",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribePolicy",
+          "Service": "organizations"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "organizations",
+          "Method": "describe_policy",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeResourcePolicy",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeResourcePolicy",
+          "Service": "organizations"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "organizations",
+          "Method": "describe_resource_policy",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeResponsibilityTransfer",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeResponsibilityTransfer",
+          "Service": "organizations"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "organizations",
+          "Method": "describe_responsibility_transfer",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DetachPolicy",
+      "AuthorizedActions": [
+        {
+          "Name": "DetachPolicy",
+          "Service": "organizations"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "organizations",
+          "Method": "detach_policy",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DisableAWSServiceAccess",
+      "AuthorizedActions": [
+        {
+          "Name": "DisableAWSServiceAccess",
+          "Service": "organizations"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "organizations",
+          "Method": "disable_aws_service_access",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DisablePolicyType",
+      "AuthorizedActions": [
+        {
+          "Name": "DisablePolicyType",
+          "Service": "organizations"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "organizations",
+          "Method": "disable_policy_type",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "EnableAWSServiceAccess",
+      "AuthorizedActions": [
+        {
+          "Name": "EnableAWSServiceAccess",
+          "Service": "organizations"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "organizations",
+          "Method": "enable_aws_service_access",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "EnableAllFeatures",
+      "AuthorizedActions": [
+        {
+          "Name": "EnableAllFeatures",
+          "Service": "organizations"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "organizations",
+          "Method": "enable_all_features",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "EnablePolicyType",
+      "AuthorizedActions": [
+        {
+          "Name": "EnablePolicyType",
+          "Service": "organizations"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "organizations",
+          "Method": "enable_policy_type",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "InviteAccountToOrganization",
+      "AuthorizedActions": [
+        {
+          "Name": "InviteAccountToOrganization",
+          "Service": "organizations"
+        },
+        {
+          "Name": "TagResource",
+          "Service": "organizations"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "organizations",
+          "Method": "invite_account_to_organization",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "InviteOrganizationToTransferResponsibility",
+      "AuthorizedActions": [
+        {
+          "Name": "InviteOrganizationToTransferResponsibility",
+          "Service": "organizations"
+        },
+        {
+          "Name": "TagResource",
+          "Service": "organizations"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "organizations",
+          "Method": "invite_organization_to_transfer_responsibility",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "LeaveOrganization",
+      "AuthorizedActions": [
+        {
+          "Name": "LeaveOrganization",
+          "Service": "organizations"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "organizations",
+          "Method": "leave_organization",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListAWSServiceAccessForOrganization",
+      "AuthorizedActions": [
+        {
+          "Name": "ListAWSServiceAccessForOrganization",
+          "Service": "organizations"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "organizations",
+          "Method": "list_aws_service_access_for_organization",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListAccounts",
+      "AuthorizedActions": [
+        {
+          "Name": "ListAccounts",
+          "Service": "organizations"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "organizations",
+          "Method": "list_accounts",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListAccountsForParent",
+      "AuthorizedActions": [
+        {
+          "Name": "ListAccountsForParent",
+          "Service": "organizations"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "organizations",
+          "Method": "list_accounts_for_parent",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListAccountsWithInvalidEffectivePolicy",
+      "AuthorizedActions": [
+        {
+          "Name": "ListAccountsWithInvalidEffectivePolicy",
+          "Service": "organizations"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "organizations",
+          "Method": "list_accounts_with_invalid_effective_policy",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListChildren",
+      "AuthorizedActions": [
+        {
+          "Name": "ListChildren",
+          "Service": "organizations"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "organizations",
+          "Method": "list_children",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListCreateAccountStatus",
+      "AuthorizedActions": [
+        {
+          "Name": "ListCreateAccountStatus",
+          "Service": "organizations"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "organizations",
+          "Method": "list_create_account_status",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListDelegatedAdministrators",
+      "AuthorizedActions": [
+        {
+          "Name": "ListDelegatedAdministrators",
+          "Service": "organizations"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "organizations",
+          "Method": "list_delegated_administrators",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListDelegatedServicesForAccount",
+      "AuthorizedActions": [
+        {
+          "Name": "ListDelegatedServicesForAccount",
+          "Service": "organizations"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "organizations",
+          "Method": "list_delegated_services_for_account",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListEffectivePolicyValidationErrors",
+      "AuthorizedActions": [
+        {
+          "Name": "ListEffectivePolicyValidationErrors",
+          "Service": "organizations"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "organizations",
+          "Method": "list_effective_policy_validation_errors",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListHandshakesForAccount",
+      "AuthorizedActions": [
+        {
+          "Name": "ListHandshakesForAccount",
+          "Service": "organizations"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "organizations",
+          "Method": "list_handshakes_for_account",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListHandshakesForOrganization",
+      "AuthorizedActions": [
+        {
+          "Name": "ListHandshakesForOrganization",
+          "Service": "organizations"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "organizations",
+          "Method": "list_handshakes_for_organization",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListInboundResponsibilityTransfers",
+      "AuthorizedActions": [
+        {
+          "Name": "ListInboundResponsibilityTransfers",
+          "Service": "organizations"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "organizations",
+          "Method": "list_inbound_responsibility_transfers",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListOrganizationalUnitsForParent",
+      "AuthorizedActions": [
+        {
+          "Name": "ListOrganizationalUnitsForParent",
+          "Service": "organizations"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "organizations",
+          "Method": "list_organizational_units_for_parent",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListOutboundResponsibilityTransfers",
+      "AuthorizedActions": [
+        {
+          "Name": "ListOutboundResponsibilityTransfers",
+          "Service": "organizations"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "organizations",
+          "Method": "list_outbound_responsibility_transfers",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListParents",
+      "AuthorizedActions": [
+        {
+          "Name": "ListParents",
+          "Service": "organizations"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "organizations",
+          "Method": "list_parents",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListPolicies",
+      "AuthorizedActions": [
+        {
+          "Name": "ListPolicies",
+          "Service": "organizations"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "organizations",
+          "Method": "list_policies",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListPoliciesForTarget",
+      "AuthorizedActions": [
+        {
+          "Name": "ListPoliciesForTarget",
+          "Service": "organizations"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "organizations",
+          "Method": "list_policies_for_target",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListRoots",
+      "AuthorizedActions": [
+        {
+          "Name": "ListRoots",
+          "Service": "organizations"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "organizations",
+          "Method": "list_roots",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListTagsForResource",
+      "AuthorizedActions": [
+        {
+          "Name": "ListTagsForResource",
+          "Service": "organizations"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "organizations",
+          "Method": "list_tags_for_resource",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListTargetsForPolicy",
+      "AuthorizedActions": [
+        {
+          "Name": "ListTargetsForPolicy",
+          "Service": "organizations"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "organizations",
+          "Method": "list_targets_for_policy",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "MoveAccount",
+      "AuthorizedActions": [
+        {
+          "Name": "MoveAccount",
+          "Service": "organizations"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "organizations",
+          "Method": "move_account",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "PutResourcePolicy",
+      "AuthorizedActions": [
+        {
+          "Name": "PutResourcePolicy",
+          "Service": "organizations"
+        },
+        {
+          "Name": "TagResource",
+          "Service": "organizations"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "organizations",
+          "Method": "put_resource_policy",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "RegisterDelegatedAdministrator",
+      "AuthorizedActions": [
+        {
+          "Name": "RegisterDelegatedAdministrator",
+          "Service": "organizations"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "organizations",
+          "Method": "register_delegated_administrator",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "RemoveAccountFromOrganization",
+      "AuthorizedActions": [
+        {
+          "Name": "RemoveAccountFromOrganization",
+          "Service": "organizations"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "organizations",
+          "Method": "remove_account_from_organization",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "TagResource",
+      "AuthorizedActions": [
+        {
+          "Name": "TagResource",
+          "Service": "organizations"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "organizations",
+          "Method": "tag_resource",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "TerminateResponsibilityTransfer",
+      "AuthorizedActions": [
+        {
+          "Name": "TerminateResponsibilityTransfer",
+          "Service": "organizations"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "organizations",
+          "Method": "terminate_responsibility_transfer",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "UntagResource",
+      "AuthorizedActions": [
+        {
+          "Name": "UntagResource",
+          "Service": "organizations"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "organizations",
+          "Method": "untag_resource",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "UpdateOrganizationalUnit",
+      "AuthorizedActions": [
+        {
+          "Name": "UpdateOrganizationalUnit",
+          "Service": "organizations"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "organizations",
+          "Method": "update_organizational_unit",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "UpdatePolicy",
+      "AuthorizedActions": [
+        {
+          "Name": "UpdatePolicy",
+          "Service": "organizations"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "organizations",
+          "Method": "update_policy",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "UpdateResponsibilityTransfer",
+      "AuthorizedActions": [
+        {
+          "Name": "UpdateResponsibilityTransfer",
+          "Service": "organizations"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "organizations",
+          "Method": "update_responsibility_transfer",
+          "Package": "Boto3"
+        }
+      ]
+    }
+  ],
+  "Resources": [
+    {
+      "Name": "account",
+      "ARNFormats": [
+        "arn:${Partition}:organizations::${Account}:account/o-${OrganizationId}/${AccountId}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ]
+    },
+    {
+      "Name": "awspolicy",
+      "ARNFormats": [
+        "arn:${Partition}:organizations::aws:policy/${PolicyType}/p-${PolicyId}"
+      ]
+    },
+    {
+      "Name": "handshake",
+      "ARNFormats": [
+        "arn:${Partition}:organizations::${Account}:handshake/o-${OrganizationId}/${HandshakeType}/h-${HandshakeId}"
+      ]
+    },
+    {
+      "Name": "organization",
+      "ARNFormats": [
+        "arn:${Partition}:organizations::${Account}:organization/o-${OrganizationId}"
+      ]
+    },
+    {
+      "Name": "organizationalunit",
+      "ARNFormats": [
+        "arn:${Partition}:organizations::${Account}:ou/o-${OrganizationId}/ou-${OrganizationalUnitId}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ]
+    },
+    {
+      "Name": "policy",
+      "ARNFormats": [
+        "arn:${Partition}:organizations::${Account}:policy/o-${OrganizationId}/${PolicyType}/p-${PolicyId}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ]
+    },
+    {
+      "Name": "resourcepolicy",
+      "ARNFormats": [
+        "arn:${Partition}:organizations::${Account}:resourcepolicy/o-${OrganizationId}/rp-${ResourcePolicyId}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ]
+    },
+    {
+      "Name": "responsibilitytransfer",
+      "ARNFormats": [
+        "arn:${Partition}:organizations::${Account}:transfer/o-${OrganizationId}/${TransferType}/${TransferDirection}/rt-${ResponsibilityTransferId}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ]
+    },
+    {
+      "Name": "root",
+      "ARNFormats": [
+        "arn:${Partition}:organizations::${Account}:root/o-${OrganizationId}/r-${RootId}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ]
+    }
+  ],
+  "Version": "v1.4"
+}

@@ -1,0 +1,3773 @@
+{
+  "Name": "config",
+  "Actions": [
+    {
+      "Name": "AssociateResourceTypes",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "ConfigurationRecorder"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "BatchGetAggregateResourceConfig",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "ConfigurationAggregator"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "BatchGetResourceConfig",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteAggregationAuthorization",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "AggregationAuthorization"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteConfigRule",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "ConfigRule"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteConfigurationAggregator",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "ConfigurationAggregator"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteConfigurationRecorder",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "ConfigurationRecorder"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteConformancePack",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "ConformancePack"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteConnector",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "Connector"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "DeleteDeliveryChannel",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteEvaluationResults",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "ConfigRule"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteOrganizationConfigRule",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "OrganizationConfigRule"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteOrganizationConformancePack",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "OrganizationConformancePack"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeletePendingAggregationRequest",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteRemediationConfiguration",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "RemediationConfiguration"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteRemediationExceptions",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteResourceConfig",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteRetentionConfiguration",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteServiceLinkedConfigurationRecorder",
+      "ActionConditionKeys": [
+        "config:ConfigurationRecorderServicePrincipal"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "ConfigurationRecorder"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "DeleteStoredQuery",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "StoredQuery"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeliverConfigSnapshot",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeAggregateComplianceByConfigRules",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "ConfigurationAggregator"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeAggregateComplianceByConformancePacks",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "ConfigurationAggregator"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeAggregationAuthorizations",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeComplianceByConfigRule",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeComplianceByResource",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeConfigRuleEvaluationStatus",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeConfigRules",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeConfigurationAggregatorSourcesStatus",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "ConfigurationAggregator"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeConfigurationAggregators",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeConfigurationRecorderStatus",
+      "ActionConditionKeys": [
+        "config:ConfigurationRecorderServicePrincipal"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "ConfigurationRecorder"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeConfigurationRecorders",
+      "ActionConditionKeys": [
+        "config:ConfigurationRecorderServicePrincipal"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "ConfigurationRecorder"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeConformancePackCompliance",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "ConformancePack"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeConformancePackStatus",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeConformancePacks",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeDeliveryChannelStatus",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeDeliveryChannels",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeOrganizationConfigRuleStatuses",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeOrganizationConfigRules",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeOrganizationConformancePackStatuses",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeOrganizationConformancePacks",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribePendingAggregationRequests",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeRemediationConfigurations",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "RemediationConfiguration"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeRemediationExceptions",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeRemediationExecutionStatus",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "RemediationConfiguration"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeRetentionConfigurations",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DisassociateResourceTypes",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "ConfigurationRecorder"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "GetAggregateComplianceDetailsByConfigRule",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "ConfigurationAggregator"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "GetAggregateConfigRuleComplianceSummary",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "ConfigurationAggregator"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "GetAggregateConformancePackComplianceSummary",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "ConfigurationAggregator"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "GetAggregateDiscoveredResourceCounts",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "ConfigurationAggregator"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "GetAggregateResourceConfig",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "ConfigurationAggregator"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "GetComplianceDetailsByConfigRule",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "ConfigRule"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetComplianceDetailsByResource",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetComplianceSummaryByConfigRule",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetComplianceSummaryByResourceType",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetConformancePackComplianceDetails",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "ConformancePack"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetConformancePackComplianceSummary",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "ConformancePack"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetConnector",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "Connector"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "GetCustomRulePolicy",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "ConfigRule"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetDiscoveredResourceCounts",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetOrganizationConfigRuleDetailedStatus",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "OrganizationConfigRule"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetOrganizationConformancePackDetailedStatus",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "OrganizationConformancePack"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetOrganizationCustomRulePolicy",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "OrganizationConfigRule"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetResourceConfigHistory",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetResourceEvaluationSummary",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetStoredQuery",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "StoredQuery"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListAggregateDiscoveredResources",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "ConfigurationAggregator"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "ListConfigurationRecorders",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListConformancePackComplianceScores",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListConnectors",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListDiscoveredResources",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListResourceEvaluations",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListStoredQueries",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListTagsForResource",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "AggregationAuthorization"
+        },
+        {
+          "Name": "ConfigRule"
+        },
+        {
+          "Name": "ConfigurationAggregator"
+        },
+        {
+          "Name": "ConfigurationRecorder"
+        },
+        {
+          "Name": "ConformancePack"
+        },
+        {
+          "Name": "Connector"
+        },
+        {
+          "Name": "OrganizationConfigRule"
+        },
+        {
+          "Name": "OrganizationConformancePack"
+        },
+        {
+          "Name": "StoredQuery"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "PutAggregationAuthorization",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "AggregationAuthorization"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "PutConfigRule",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "ConfigRule"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "PutConfigurationAggregator",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "ConfigurationAggregator"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "PutConfigurationRecorder",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "ConfigurationRecorder"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "PutConformancePack",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "ConformancePack"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "PutConnector",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "Connector"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "PutDeliveryChannel",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "PutEvaluations",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "PutExternalEvaluation",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "ConfigRule"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "PutOrganizationConfigRule",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "OrganizationConfigRule"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "PutOrganizationConformancePack",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "OrganizationConformancePack"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "PutRemediationConfigurations",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "RemediationConfiguration"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "PutRemediationExceptions",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "PutResourceConfig",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "PutRetentionConfiguration",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "PutServiceLinkedConfigurationRecorder",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys",
+        "config:ConfigurationRecorderServicePrincipal"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "PutStoredQuery",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "StoredQuery"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "PutThirdPartyServiceLinkedConfigurationRecorder",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys",
+        "config:ConfigurationRecorderServicePrincipal"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "Connector"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "SelectAggregateResourceConfig",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "ConfigurationAggregator"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "SelectResourceConfig",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "StartConfigRulesEvaluation",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "ConfigRule"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "StartConfigurationRecorder",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "ConfigurationRecorder"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "StartRemediationExecution",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "StartResourceEvaluation",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "StopConfigurationRecorder",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "ConfigurationRecorder"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "TagResource",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": true,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "AggregationAuthorization"
+        },
+        {
+          "Name": "ConfigRule"
+        },
+        {
+          "Name": "ConfigurationAggregator"
+        },
+        {
+          "Name": "ConfigurationRecorder"
+        },
+        {
+          "Name": "ConformancePack"
+        },
+        {
+          "Name": "Connector"
+        },
+        {
+          "Name": "OrganizationConfigRule"
+        },
+        {
+          "Name": "OrganizationConformancePack"
+        },
+        {
+          "Name": "StoredQuery"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "UntagResource",
+      "ActionConditionKeys": [
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": true,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "AggregationAuthorization"
+        },
+        {
+          "Name": "ConfigRule"
+        },
+        {
+          "Name": "ConfigurationAggregator"
+        },
+        {
+          "Name": "ConfigurationRecorder"
+        },
+        {
+          "Name": "ConformancePack"
+        },
+        {
+          "Name": "Connector"
+        },
+        {
+          "Name": "OrganizationConfigRule"
+        },
+        {
+          "Name": "OrganizationConformancePack"
+        },
+        {
+          "Name": "StoredQuery"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    }
+  ],
+  "ConditionKeys": [
+    {
+      "Name": "aws:RequestTag/${TagKey}",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "aws:ResourceTag/${TagKey}",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "aws:TagKeys",
+      "Types": [
+        "ArrayOfString"
+      ]
+    },
+    {
+      "Name": "config:ConfigurationRecorderServicePrincipal",
+      "Types": [
+        "String"
+      ]
+    }
+  ],
+  "Operations": [
+    {
+      "Name": "AssociateResourceTypes",
+      "AuthorizedActions": [
+        {
+          "Name": "AssociateResourceTypes",
+          "Service": "config"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "config",
+          "Method": "associate_resource_types",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "BatchGetAggregateResourceConfig",
+      "AuthorizedActions": [
+        {
+          "Name": "BatchGetAggregateResourceConfig",
+          "Service": "config"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "config",
+          "Method": "batch_get_aggregate_resource_config",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "BatchGetResourceConfig",
+      "AuthorizedActions": [
+        {
+          "Name": "BatchGetResourceConfig",
+          "Service": "config"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "config",
+          "Method": "batch_get_resource_config",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteAggregationAuthorization",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteAggregationAuthorization",
+          "Service": "config"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "config",
+          "Method": "delete_aggregation_authorization",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteConfigRule",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteConfigRule",
+          "Service": "config"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "config",
+          "Method": "delete_config_rule",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteConfigurationAggregator",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteConfigurationAggregator",
+          "Service": "config"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "config",
+          "Method": "delete_configuration_aggregator",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteConfigurationRecorder",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteConfigurationRecorder",
+          "Service": "config"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "config",
+          "Method": "delete_configuration_recorder",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteConformancePack",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteConformancePack",
+          "Service": "config"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "config",
+          "Method": "delete_conformance_pack",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteConnector",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteConnector",
+          "Service": "config"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "config",
+          "Method": "delete_connector",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteDeliveryChannel",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteDeliveryChannel",
+          "Service": "config"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "config",
+          "Method": "delete_delivery_channel",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteEvaluationResults",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteEvaluationResults",
+          "Service": "config"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "config",
+          "Method": "delete_evaluation_results",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteOrganizationConfigRule",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteOrganizationConfigRule",
+          "Service": "config"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "config",
+          "Method": "delete_organization_config_rule",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteOrganizationConformancePack",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteOrganizationConformancePack",
+          "Service": "config"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "config",
+          "Method": "delete_organization_conformance_pack",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeletePendingAggregationRequest",
+      "AuthorizedActions": [
+        {
+          "Name": "DeletePendingAggregationRequest",
+          "Service": "config"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "config",
+          "Method": "delete_pending_aggregation_request",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteRemediationConfiguration",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteRemediationConfiguration",
+          "Service": "config"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "config",
+          "Method": "delete_remediation_configuration",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteRemediationExceptions",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteRemediationExceptions",
+          "Service": "config"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "config",
+          "Method": "delete_remediation_exceptions",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteResourceConfig",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteResourceConfig",
+          "Service": "config"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "config",
+          "Method": "delete_resource_config",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteRetentionConfiguration",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteRetentionConfiguration",
+          "Service": "config"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "config",
+          "Method": "delete_retention_configuration",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteServiceLinkedConfigurationRecorder",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteServiceLinkedConfigurationRecorder",
+          "Service": "config"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "config",
+          "Method": "delete_service_linked_configuration_recorder",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteStoredQuery",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteStoredQuery",
+          "Service": "config"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "config",
+          "Method": "delete_stored_query",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeliverConfigSnapshot",
+      "AuthorizedActions": [
+        {
+          "Name": "DeliverConfigSnapshot",
+          "Service": "config"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "config",
+          "Method": "deliver_config_snapshot",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeAggregateComplianceByConfigRules",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeAggregateComplianceByConfigRules",
+          "Service": "config"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "config",
+          "Method": "describe_aggregate_compliance_by_config_rules",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeAggregateComplianceByConformancePacks",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeAggregateComplianceByConformancePacks",
+          "Service": "config"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "config",
+          "Method": "describe_aggregate_compliance_by_conformance_packs",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeAggregationAuthorizations",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeAggregationAuthorizations",
+          "Service": "config"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "config",
+          "Method": "describe_aggregation_authorizations",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeComplianceByConfigRule",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeComplianceByConfigRule",
+          "Service": "config"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "config",
+          "Method": "describe_compliance_by_config_rule",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeComplianceByResource",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeComplianceByResource",
+          "Service": "config"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "config",
+          "Method": "describe_compliance_by_resource",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeConfigRuleEvaluationStatus",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeConfigRuleEvaluationStatus",
+          "Service": "config"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "config",
+          "Method": "describe_config_rule_evaluation_status",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeConfigRules",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeConfigRules",
+          "Service": "config"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "config",
+          "Method": "describe_config_rules",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeConfigurationAggregatorSourcesStatus",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeConfigurationAggregatorSourcesStatus",
+          "Service": "config"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "config",
+          "Method": "describe_configuration_aggregator_sources_status",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeConfigurationAggregators",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeConfigurationAggregators",
+          "Service": "config"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "config",
+          "Method": "describe_configuration_aggregators",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeConfigurationRecorderStatus",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeConfigurationRecorderStatus",
+          "Service": "config"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "config",
+          "Method": "describe_configuration_recorder_status",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeConfigurationRecorders",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeConfigurationRecorders",
+          "Service": "config"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "config",
+          "Method": "describe_configuration_recorders",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeConformancePackCompliance",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeConformancePackCompliance",
+          "Service": "config"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "config",
+          "Method": "describe_conformance_pack_compliance",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeConformancePackStatus",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeConformancePackStatus",
+          "Service": "config"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "config",
+          "Method": "describe_conformance_pack_status",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeConformancePacks",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeConformancePacks",
+          "Service": "config"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "config",
+          "Method": "describe_conformance_packs",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeDeliveryChannelStatus",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeDeliveryChannelStatus",
+          "Service": "config"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "config",
+          "Method": "describe_delivery_channel_status",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeDeliveryChannels",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeDeliveryChannels",
+          "Service": "config"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "config",
+          "Method": "describe_delivery_channels",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeOrganizationConfigRuleStatuses",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeOrganizationConfigRuleStatuses",
+          "Service": "config"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "config",
+          "Method": "describe_organization_config_rule_statuses",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeOrganizationConfigRules",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeOrganizationConfigRules",
+          "Service": "config"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "config",
+          "Method": "describe_organization_config_rules",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeOrganizationConformancePackStatuses",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeOrganizationConformancePackStatuses",
+          "Service": "config"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "config",
+          "Method": "describe_organization_conformance_pack_statuses",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeOrganizationConformancePacks",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeOrganizationConformancePacks",
+          "Service": "config"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "config",
+          "Method": "describe_organization_conformance_packs",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribePendingAggregationRequests",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribePendingAggregationRequests",
+          "Service": "config"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "config",
+          "Method": "describe_pending_aggregation_requests",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeRemediationConfigurations",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeRemediationConfigurations",
+          "Service": "config"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "config",
+          "Method": "describe_remediation_configurations",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeRemediationExceptions",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeRemediationExceptions",
+          "Service": "config"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "config",
+          "Method": "describe_remediation_exceptions",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeRemediationExecutionStatus",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeRemediationExecutionStatus",
+          "Service": "config"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "config",
+          "Method": "describe_remediation_execution_status",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeRetentionConfigurations",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeRetentionConfigurations",
+          "Service": "config"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "config",
+          "Method": "describe_retention_configurations",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DisassociateResourceTypes",
+      "AuthorizedActions": [
+        {
+          "Name": "DisassociateResourceTypes",
+          "Service": "config"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "config",
+          "Method": "disassociate_resource_types",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetAggregateComplianceDetailsByConfigRule",
+      "AuthorizedActions": [
+        {
+          "Name": "GetAggregateComplianceDetailsByConfigRule",
+          "Service": "config"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "config",
+          "Method": "get_aggregate_compliance_details_by_config_rule",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetAggregateConfigRuleComplianceSummary",
+      "AuthorizedActions": [
+        {
+          "Name": "GetAggregateConfigRuleComplianceSummary",
+          "Service": "config"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "config",
+          "Method": "get_aggregate_config_rule_compliance_summary",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetAggregateConformancePackComplianceSummary",
+      "AuthorizedActions": [
+        {
+          "Name": "GetAggregateConformancePackComplianceSummary",
+          "Service": "config"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "config",
+          "Method": "get_aggregate_conformance_pack_compliance_summary",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetAggregateDiscoveredResourceCounts",
+      "AuthorizedActions": [
+        {
+          "Name": "GetAggregateDiscoveredResourceCounts",
+          "Service": "config"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "config",
+          "Method": "get_aggregate_discovered_resource_counts",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetAggregateResourceConfig",
+      "AuthorizedActions": [
+        {
+          "Name": "GetAggregateResourceConfig",
+          "Service": "config"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "config",
+          "Method": "get_aggregate_resource_config",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetComplianceDetailsByConfigRule",
+      "AuthorizedActions": [
+        {
+          "Name": "GetComplianceDetailsByConfigRule",
+          "Service": "config"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "config",
+          "Method": "get_compliance_details_by_config_rule",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetComplianceDetailsByResource",
+      "AuthorizedActions": [
+        {
+          "Name": "GetComplianceDetailsByResource",
+          "Service": "config"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "config",
+          "Method": "get_compliance_details_by_resource",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetComplianceSummaryByConfigRule",
+      "AuthorizedActions": [
+        {
+          "Name": "GetComplianceSummaryByConfigRule",
+          "Service": "config"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "config",
+          "Method": "get_compliance_summary_by_config_rule",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetComplianceSummaryByResourceType",
+      "AuthorizedActions": [
+        {
+          "Name": "GetComplianceSummaryByResourceType",
+          "Service": "config"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "config",
+          "Method": "get_compliance_summary_by_resource_type",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetConformancePackComplianceDetails",
+      "AuthorizedActions": [
+        {
+          "Name": "GetConformancePackComplianceDetails",
+          "Service": "config"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "config",
+          "Method": "get_conformance_pack_compliance_details",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetConformancePackComplianceSummary",
+      "AuthorizedActions": [
+        {
+          "Name": "GetConformancePackComplianceSummary",
+          "Service": "config"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "config",
+          "Method": "get_conformance_pack_compliance_summary",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetConnector",
+      "AuthorizedActions": [
+        {
+          "Name": "GetConnector",
+          "Service": "config"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "config",
+          "Method": "get_connector",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetCustomRulePolicy",
+      "AuthorizedActions": [
+        {
+          "Name": "GetCustomRulePolicy",
+          "Service": "config"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "config",
+          "Method": "get_custom_rule_policy",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetDiscoveredResourceCounts",
+      "AuthorizedActions": [
+        {
+          "Name": "GetDiscoveredResourceCounts",
+          "Service": "config"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "config",
+          "Method": "get_discovered_resource_counts",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetOrganizationConfigRuleDetailedStatus",
+      "AuthorizedActions": [
+        {
+          "Name": "GetOrganizationConfigRuleDetailedStatus",
+          "Service": "config"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "config",
+          "Method": "get_organization_config_rule_detailed_status",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetOrganizationConformancePackDetailedStatus",
+      "AuthorizedActions": [
+        {
+          "Name": "GetOrganizationConformancePackDetailedStatus",
+          "Service": "config"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "config",
+          "Method": "get_organization_conformance_pack_detailed_status",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetOrganizationCustomRulePolicy",
+      "AuthorizedActions": [
+        {
+          "Name": "GetOrganizationCustomRulePolicy",
+          "Service": "config"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "config",
+          "Method": "get_organization_custom_rule_policy",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetResourceConfigHistory",
+      "AuthorizedActions": [
+        {
+          "Name": "GetResourceConfigHistory",
+          "Service": "config"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "config",
+          "Method": "get_resource_config_history",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetResourceEvaluationSummary",
+      "AuthorizedActions": [
+        {
+          "Name": "GetResourceEvaluationSummary",
+          "Service": "config"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "config",
+          "Method": "get_resource_evaluation_summary",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetStoredQuery",
+      "AuthorizedActions": [
+        {
+          "Name": "GetStoredQuery",
+          "Service": "config"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "config",
+          "Method": "get_stored_query",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListAggregateDiscoveredResources",
+      "AuthorizedActions": [
+        {
+          "Name": "ListAggregateDiscoveredResources",
+          "Service": "config"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "config",
+          "Method": "list_aggregate_discovered_resources",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListConfigurationRecorders",
+      "AuthorizedActions": [
+        {
+          "Name": "ListConfigurationRecorders",
+          "Service": "config"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "config",
+          "Method": "list_configuration_recorders",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListConformancePackComplianceScores",
+      "AuthorizedActions": [
+        {
+          "Name": "ListConformancePackComplianceScores",
+          "Service": "config"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "config",
+          "Method": "list_conformance_pack_compliance_scores",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListConnectors",
+      "AuthorizedActions": [
+        {
+          "Name": "ListConnectors",
+          "Service": "config"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "config",
+          "Method": "list_connectors",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListDiscoveredResources",
+      "AuthorizedActions": [
+        {
+          "Name": "ListDiscoveredResources",
+          "Service": "config"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "config",
+          "Method": "list_discovered_resources",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListResourceEvaluations",
+      "AuthorizedActions": [
+        {
+          "Name": "ListResourceEvaluations",
+          "Service": "config"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "config",
+          "Method": "list_resource_evaluations",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListStoredQueries",
+      "AuthorizedActions": [
+        {
+          "Name": "ListStoredQueries",
+          "Service": "config"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "config",
+          "Method": "list_stored_queries",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListTagsForResource",
+      "AuthorizedActions": [
+        {
+          "Name": "ListTagsForResource",
+          "Service": "config"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "config",
+          "Method": "list_tags_for_resource",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "PutAggregationAuthorization",
+      "AuthorizedActions": [
+        {
+          "Name": "PutAggregationAuthorization",
+          "Service": "config"
+        },
+        {
+          "Name": "TagResource",
+          "Service": "config"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "config",
+          "Method": "put_aggregation_authorization",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "PutConfigRule",
+      "AuthorizedActions": [
+        {
+          "Name": "PutConfigRule",
+          "Service": "config"
+        },
+        {
+          "Name": "TagResource",
+          "Service": "config"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "config",
+          "Method": "put_config_rule",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "PutConfigurationAggregator",
+      "AuthorizedActions": [
+        {
+          "Name": "PassRole",
+          "Context": {
+            "iam:PassedToService": [
+              "config.amazonaws.com"
+            ]
+          },
+          "Service": "iam"
+        },
+        {
+          "Name": "PutConfigurationAggregator",
+          "Service": "config"
+        },
+        {
+          "Name": "TagResource",
+          "Service": "config"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "config",
+          "Method": "put_configuration_aggregator",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "PutConfigurationRecorder",
+      "AuthorizedActions": [
+        {
+          "Name": "PassRole",
+          "Context": {
+            "iam:PassedToService": [
+              "config.amazonaws.com"
+            ]
+          },
+          "Service": "iam"
+        },
+        {
+          "Name": "PutConfigurationRecorder",
+          "Service": "config"
+        },
+        {
+          "Name": "TagResource",
+          "Service": "config"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "config",
+          "Method": "put_configuration_recorder",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "PutConformancePack",
+      "AuthorizedActions": [
+        {
+          "Name": "PassRole",
+          "Context": {
+            "iam:PassedToService": [
+              "ssm.amazonaws.com"
+            ]
+          },
+          "Service": "iam"
+        },
+        {
+          "Name": "PutConformancePack",
+          "Service": "config"
+        },
+        {
+          "Name": "TagResource",
+          "Service": "config"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "config",
+          "Method": "put_conformance_pack",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "PutConnector",
+      "AuthorizedActions": [
+        {
+          "Name": "PutConnector",
+          "Service": "config"
+        },
+        {
+          "Name": "TagResource",
+          "Service": "config"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "config",
+          "Method": "put_connector",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "PutDeliveryChannel",
+      "AuthorizedActions": [
+        {
+          "Name": "PutDeliveryChannel",
+          "Service": "config"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "config",
+          "Method": "put_delivery_channel",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "PutEvaluations",
+      "AuthorizedActions": [
+        {
+          "Name": "PutEvaluations",
+          "Service": "config"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "config",
+          "Method": "put_evaluations",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "PutExternalEvaluation",
+      "AuthorizedActions": [
+        {
+          "Name": "PutExternalEvaluation",
+          "Service": "config"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "config",
+          "Method": "put_external_evaluation",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "PutOrganizationConfigRule",
+      "AuthorizedActions": [
+        {
+          "Name": "PutOrganizationConfigRule",
+          "Service": "config"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "config",
+          "Method": "put_organization_config_rule",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "PutOrganizationConformancePack",
+      "AuthorizedActions": [
+        {
+          "Name": "PassRole",
+          "Context": {
+            "iam:PassedToService": [
+              "ssm.amazonaws.com"
+            ]
+          },
+          "Service": "iam"
+        },
+        {
+          "Name": "PutOrganizationConformancePack",
+          "Service": "config"
+        },
+        {
+          "Name": "TagResource",
+          "Service": "config"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "config",
+          "Method": "put_organization_conformance_pack",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "PutRemediationConfigurations",
+      "AuthorizedActions": [
+        {
+          "Name": "PassRole",
+          "Context": {
+            "iam:PassedToService": [
+              "ssm.amazonaws.com"
+            ]
+          },
+          "Service": "iam"
+        },
+        {
+          "Name": "PutRemediationConfigurations",
+          "Service": "config"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "config",
+          "Method": "put_remediation_configurations",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "PutRemediationExceptions",
+      "AuthorizedActions": [
+        {
+          "Name": "PutRemediationExceptions",
+          "Service": "config"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "config",
+          "Method": "put_remediation_exceptions",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "PutResourceConfig",
+      "AuthorizedActions": [
+        {
+          "Name": "PutResourceConfig",
+          "Service": "config"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "config",
+          "Method": "put_resource_config",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "PutRetentionConfiguration",
+      "AuthorizedActions": [
+        {
+          "Name": "PutRetentionConfiguration",
+          "Service": "config"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "config",
+          "Method": "put_retention_configuration",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "PutServiceLinkedConfigurationRecorder",
+      "AuthorizedActions": [
+        {
+          "Name": "PutServiceLinkedConfigurationRecorder",
+          "Service": "config"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "config",
+          "Method": "put_service_linked_configuration_recorder",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "PutStoredQuery",
+      "AuthorizedActions": [
+        {
+          "Name": "PutStoredQuery",
+          "Service": "config"
+        },
+        {
+          "Name": "TagResource",
+          "Service": "config"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "config",
+          "Method": "put_stored_query",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "PutThirdPartyServiceLinkedConfigurationRecorder",
+      "AuthorizedActions": [
+        {
+          "Name": "GetConnector",
+          "Service": "config"
+        },
+        {
+          "Name": "PutThirdPartyServiceLinkedConfigurationRecorder",
+          "Service": "config"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "config",
+          "Method": "put_third_party_service_linked_configuration_recorder",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "SelectAggregateResourceConfig",
+      "AuthorizedActions": [
+        {
+          "Name": "SelectAggregateResourceConfig",
+          "Service": "config"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "config",
+          "Method": "select_aggregate_resource_config",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "SelectResourceConfig",
+      "AuthorizedActions": [
+        {
+          "Name": "SelectResourceConfig",
+          "Service": "config"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "config",
+          "Method": "select_resource_config",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "StartConfigRulesEvaluation",
+      "AuthorizedActions": [
+        {
+          "Name": "StartConfigRulesEvaluation",
+          "Service": "config"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "config",
+          "Method": "start_config_rules_evaluation",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "StartConfigurationRecorder",
+      "AuthorizedActions": [
+        {
+          "Name": "StartConfigurationRecorder",
+          "Service": "config"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "config",
+          "Method": "start_configuration_recorder",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "StartRemediationExecution",
+      "AuthorizedActions": [
+        {
+          "Name": "StartRemediationExecution",
+          "Service": "config"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "config",
+          "Method": "start_remediation_execution",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "StartResourceEvaluation",
+      "AuthorizedActions": [
+        {
+          "Name": "StartResourceEvaluation",
+          "Service": "config"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "config",
+          "Method": "start_resource_evaluation",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "StopConfigurationRecorder",
+      "AuthorizedActions": [
+        {
+          "Name": "StopConfigurationRecorder",
+          "Service": "config"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "config",
+          "Method": "stop_configuration_recorder",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "TagResource",
+      "AuthorizedActions": [
+        {
+          "Name": "TagResource",
+          "Service": "config"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "config",
+          "Method": "tag_resource",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "UntagResource",
+      "AuthorizedActions": [
+        {
+          "Name": "UntagResource",
+          "Service": "config"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "config",
+          "Method": "untag_resource",
+          "Package": "Boto3"
+        }
+      ]
+    }
+  ],
+  "Resources": [
+    {
+      "Name": "AggregationAuthorization",
+      "ARNFormats": [
+        "arn:${Partition}:config:${Region}:${Account}:aggregation-authorization/${AggregatorAccount}/${AggregatorRegion}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ]
+    },
+    {
+      "Name": "ConfigRule",
+      "ARNFormats": [
+        "arn:${Partition}:config:${Region}:${Account}:config-rule/${ConfigRuleId}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ]
+    },
+    {
+      "Name": "ConfigurationAggregator",
+      "ARNFormats": [
+        "arn:${Partition}:config:${Region}:${Account}:config-aggregator/${AggregatorId}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ]
+    },
+    {
+      "Name": "ConfigurationRecorder",
+      "ARNFormats": [
+        "arn:${Partition}:config:${Region}:${Account}:configuration-recorder/${RecorderName}/${RecorderId}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ]
+    },
+    {
+      "Name": "ConformancePack",
+      "ARNFormats": [
+        "arn:${Partition}:config:${Region}:${Account}:conformance-pack/${ConformancePackName}/${ConformancePackId}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ]
+    },
+    {
+      "Name": "Connector",
+      "ARNFormats": [
+        "arn:${Partition}:config:${Region}:${Account}:connector/${Provider}/${ProviderId}/${ConnectorId}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ]
+    },
+    {
+      "Name": "OrganizationConfigRule",
+      "ARNFormats": [
+        "arn:${Partition}:config:${Region}:${Account}:organization-config-rule/${OrganizationConfigRuleId}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ]
+    },
+    {
+      "Name": "OrganizationConformancePack",
+      "ARNFormats": [
+        "arn:${Partition}:config:${Region}:${Account}:organization-conformance-pack/${OrganizationConformancePackId}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ]
+    },
+    {
+      "Name": "RemediationConfiguration",
+      "ARNFormats": [
+        "arn:${Partition}:config:${Region}:${Account}:remediation-configuration/${RemediationConfigurationId}"
+      ]
+    },
+    {
+      "Name": "StoredQuery",
+      "ARNFormats": [
+        "arn:${Partition}:config:${Region}:${Account}:stored-query/${StoredQueryName}/${StoredQueryId}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ]
+    }
+  ],
+  "Version": "v1.4"
+}

@@ -1,0 +1,1485 @@
+{
+  "Name": "sts",
+  "Actions": [
+    {
+      "Name": "AssumeRole",
+      "ActionConditionKeys": [
+        "accounts.google.com:aud",
+        "accounts.google.com:sub",
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys",
+        "cognito-identity.amazonaws.com:amr",
+        "cognito-identity.amazonaws.com:aud",
+        "cognito-identity.amazonaws.com:sub",
+        "graph.facebook.com:app_id",
+        "graph.facebook.com:id",
+        "iam:ResourceTag/${TagKey}",
+        "saml:namequalifier",
+        "saml:sub",
+        "saml:sub_type",
+        "sts:ExternalId",
+        "sts:RoleSessionName",
+        "sts:SourceIdentity",
+        "sts:TransitiveTagKeys",
+        "www.amazon.com:app_id",
+        "www.amazon.com:user_id"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "role"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "AssumeRoleWithSAML",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys",
+        "saml:aud",
+        "saml:cn",
+        "saml:commonName",
+        "saml:doc",
+        "saml:eduorghomepageuri",
+        "saml:eduorgidentityauthnpolicyuri",
+        "saml:eduorglegalname",
+        "saml:eduorgsuperioruri",
+        "saml:eduorgwhitepagesuri",
+        "saml:edupersonaffiliation",
+        "saml:edupersonassurance",
+        "saml:edupersonentitlement",
+        "saml:edupersonnickname",
+        "saml:edupersonorgdn",
+        "saml:edupersonorgunitdn",
+        "saml:edupersonprimaryaffiliation",
+        "saml:edupersonprimaryorgunitdn",
+        "saml:edupersonprincipalname",
+        "saml:edupersonscopedaffiliation",
+        "saml:edupersontargetedid",
+        "saml:givenName",
+        "saml:iss",
+        "saml:mail",
+        "saml:name",
+        "saml:namequalifier",
+        "saml:organizationStatus",
+        "saml:primaryGroupSID",
+        "saml:sub",
+        "saml:sub_type",
+        "saml:surname",
+        "saml:uid",
+        "saml:x500UniqueIdentifier",
+        "sts:RoleSessionName",
+        "sts:SourceIdentity",
+        "sts:TransitiveTagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "role"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "AssumeRoleWithWebIdentity",
+      "ActionConditionKeys": [
+        "accounts.google.com:aud",
+        "accounts.google.com:google/organization_number",
+        "accounts.google.com:oaud",
+        "accounts.google.com:sub",
+        "agent.${Domain}.buildkite.dev:build_branch",
+        "agent.${Domain}.buildkite.dev:cluster_id",
+        "agent.${Domain}.buildkite.dev:cluster_name",
+        "agent.${Domain}.buildkite.dev:organization_id",
+        "agent.${Domain}.buildkite.dev:organization_slug",
+        "agent.${Domain}.buildkite.dev:pipeline_id",
+        "agent.${Domain}.buildkite.dev:pipeline_slug",
+        "agent.${Domain}.buildkite.site:build_branch",
+        "agent.${Domain}.buildkite.site:cluster_id",
+        "agent.${Domain}.buildkite.site:cluster_name",
+        "agent.${Domain}.buildkite.site:organization_id",
+        "agent.${Domain}.buildkite.site:organization_slug",
+        "agent.${Domain}.buildkite.site:pipeline_id",
+        "agent.${Domain}.buildkite.site:pipeline_slug",
+        "agent.buildkite.com:build_branch",
+        "agent.buildkite.com:cluster_id",
+        "agent.buildkite.com:cluster_name",
+        "agent.buildkite.com:organization_id",
+        "agent.buildkite.com:organization_slug",
+        "agent.buildkite.com:pipeline_id",
+        "agent.buildkite.com:pipeline_slug",
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys",
+        "cognito-identity.amazonaws.com:amr",
+        "cognito-identity.amazonaws.com:aud",
+        "cognito-identity.amazonaws.com:sub",
+        "github.com/enterprises/${EnterpriseName}:actor",
+        "github.com/enterprises/${EnterpriseName}:actor_id",
+        "github.com/enterprises/${EnterpriseName}:enterprise_id",
+        "github.com/enterprises/${EnterpriseName}:environment",
+        "github.com/enterprises/${EnterpriseName}:job_workflow_ref",
+        "github.com/enterprises/${EnterpriseName}:ref",
+        "github.com/enterprises/${EnterpriseName}:repository",
+        "github.com/enterprises/${EnterpriseName}:repository_id",
+        "github.com/enterprises/${EnterpriseName}:repository_owner_id",
+        "github.com/enterprises/${EnterpriseName}:workflow",
+        "gitlab.com:namespace_id",
+        "gitlab.com:pipeline_source",
+        "gitlab.com:project_id",
+        "gitlab.com:ref_protected",
+        "gitlab.com:runner_environment",
+        "gitlab.com:user_access_level",
+        "gitlab.com:user_email",
+        "gitlab.com:user_id",
+        "gitlab.com:user_login",
+        "graph.facebook.com:app_id",
+        "graph.facebook.com:id",
+        "idcs-${OciUniqueIdentifier}.identity.oraclecloud.com:rpst_id",
+        "oidc.circleci.com/org/${OrgId}:oidc.circleci.com/project-id",
+        "sts:RoleAuthorizedByIdp",
+        "sts:RoleSessionName",
+        "sts:SourceIdentity",
+        "sts:TransitiveTagKeys",
+        "token.actions.${Domain}.ghe.com:actor",
+        "token.actions.${Domain}.ghe.com:actor_id",
+        "token.actions.${Domain}.ghe.com:enterprise_id",
+        "token.actions.${Domain}.ghe.com:environment",
+        "token.actions.${Domain}.ghe.com:job_workflow_ref",
+        "token.actions.${Domain}.ghe.com:ref",
+        "token.actions.${Domain}.ghe.com:repository",
+        "token.actions.${Domain}.ghe.com:repository_id",
+        "token.actions.${Domain}.ghe.com:repository_owner_id",
+        "token.actions.${Domain}.ghe.com:workflow",
+        "token.actions.githubusercontent.com/${SubPath}:actor",
+        "token.actions.githubusercontent.com/${SubPath}:actor_id",
+        "token.actions.githubusercontent.com/${SubPath}:enterprise_id",
+        "token.actions.githubusercontent.com/${SubPath}:environment",
+        "token.actions.githubusercontent.com/${SubPath}:job_workflow_ref",
+        "token.actions.githubusercontent.com/${SubPath}:ref",
+        "token.actions.githubusercontent.com/${SubPath}:repository",
+        "token.actions.githubusercontent.com/${SubPath}:repository_id",
+        "token.actions.githubusercontent.com/${SubPath}:repository_owner_id",
+        "token.actions.githubusercontent.com/${SubPath}:workflow",
+        "token.actions.githubusercontent.com:actor",
+        "token.actions.githubusercontent.com:actor_id",
+        "token.actions.githubusercontent.com:enterprise_id",
+        "token.actions.githubusercontent.com:environment",
+        "token.actions.githubusercontent.com:job_workflow_ref",
+        "token.actions.githubusercontent.com:ref",
+        "token.actions.githubusercontent.com:repository",
+        "token.actions.githubusercontent.com:repository_id",
+        "token.actions.githubusercontent.com:repository_owner_id",
+        "token.actions.githubusercontent.com:workflow",
+        "www.amazon.com:app_id",
+        "www.amazon.com:user_id"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "role"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "AssumeRoot",
+      "ActionConditionKeys": [
+        "sts:TaskPolicyArn"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "root-user"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "DecodeAuthorizationMessage",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetAccessKeyInfo",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetCallerIdentity",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetDelegatedAccessToken",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "GetFederationToken",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "federated-user"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetServiceBearerToken",
+      "ActionConditionKeys": [
+        "sts:AWSServiceName",
+        "sts:DurationSeconds"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "GetSessionToken",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetWebIdentityToken",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys",
+        "sts:DurationSeconds",
+        "sts:IdentityTokenAudience",
+        "sts:SigningAlgorithm"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "SetContext",
+      "ActionConditionKeys": [
+        "sts:RequestContext/${ContextKey}",
+        "sts:RequestContextProviders"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "role"
+        },
+        {
+          "Name": "self-session"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "SetSourceIdentity",
+      "ActionConditionKeys": [
+        "sts:SourceIdentity"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "role"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "TagGetWebIdentityToken",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": true,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "TagSession",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys",
+        "saml:aud",
+        "sts:TransitiveTagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": true,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "role"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    }
+  ],
+  "ConditionKeys": [
+    {
+      "Name": "accounts.google.com:aud",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "accounts.google.com:google/organization_number",
+      "Types": [
+        "Numeric"
+      ]
+    },
+    {
+      "Name": "accounts.google.com:oaud",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "accounts.google.com:sub",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "agent.${Domain}.buildkite.dev:build_branch",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "agent.${Domain}.buildkite.dev:cluster_id",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "agent.${Domain}.buildkite.dev:cluster_name",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "agent.${Domain}.buildkite.dev:organization_id",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "agent.${Domain}.buildkite.dev:organization_slug",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "agent.${Domain}.buildkite.dev:pipeline_id",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "agent.${Domain}.buildkite.dev:pipeline_slug",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "agent.${Domain}.buildkite.site:build_branch",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "agent.${Domain}.buildkite.site:cluster_id",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "agent.${Domain}.buildkite.site:cluster_name",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "agent.${Domain}.buildkite.site:organization_id",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "agent.${Domain}.buildkite.site:organization_slug",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "agent.${Domain}.buildkite.site:pipeline_id",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "agent.${Domain}.buildkite.site:pipeline_slug",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "agent.buildkite.com:build_branch",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "agent.buildkite.com:cluster_id",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "agent.buildkite.com:cluster_name",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "agent.buildkite.com:organization_id",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "agent.buildkite.com:organization_slug",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "agent.buildkite.com:pipeline_id",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "agent.buildkite.com:pipeline_slug",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "aws:RequestTag/${TagKey}",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "aws:ResourceTag/${TagKey}",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "aws:TagKeys",
+      "Types": [
+        "ArrayOfString"
+      ]
+    },
+    {
+      "Name": "cognito-identity.amazonaws.com:amr",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "cognito-identity.amazonaws.com:aud",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "cognito-identity.amazonaws.com:sub",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "github.com/enterprises/${EnterpriseName}:actor",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "github.com/enterprises/${EnterpriseName}:actor_id",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "github.com/enterprises/${EnterpriseName}:enterprise_id",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "github.com/enterprises/${EnterpriseName}:environment",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "github.com/enterprises/${EnterpriseName}:job_workflow_ref",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "github.com/enterprises/${EnterpriseName}:ref",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "github.com/enterprises/${EnterpriseName}:repository",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "github.com/enterprises/${EnterpriseName}:repository_id",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "github.com/enterprises/${EnterpriseName}:repository_owner_id",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "github.com/enterprises/${EnterpriseName}:workflow",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "gitlab.com:namespace_id",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "gitlab.com:pipeline_source",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "gitlab.com:project_id",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "gitlab.com:ref_protected",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "gitlab.com:runner_environment",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "gitlab.com:user_access_level",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "gitlab.com:user_email",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "gitlab.com:user_id",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "gitlab.com:user_login",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "graph.facebook.com:app_id",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "graph.facebook.com:id",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "iam:ResourceTag/${TagKey}",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "idcs-${OciUniqueIdentifier}.identity.oraclecloud.com:rpst_id",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "oidc.circleci.com/org/${OrgId}:oidc.circleci.com/project-id",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "saml:aud",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "saml:cn",
+      "Types": [
+        "ArrayOfString"
+      ]
+    },
+    {
+      "Name": "saml:commonName",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "saml:doc",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "saml:eduorghomepageuri",
+      "Types": [
+        "ArrayOfString"
+      ]
+    },
+    {
+      "Name": "saml:eduorgidentityauthnpolicyuri",
+      "Types": [
+        "ArrayOfString"
+      ]
+    },
+    {
+      "Name": "saml:eduorglegalname",
+      "Types": [
+        "ArrayOfString"
+      ]
+    },
+    {
+      "Name": "saml:eduorgsuperioruri",
+      "Types": [
+        "ArrayOfString"
+      ]
+    },
+    {
+      "Name": "saml:eduorgwhitepagesuri",
+      "Types": [
+        "ArrayOfString"
+      ]
+    },
+    {
+      "Name": "saml:edupersonaffiliation",
+      "Types": [
+        "ArrayOfString"
+      ]
+    },
+    {
+      "Name": "saml:edupersonassurance",
+      "Types": [
+        "ArrayOfString"
+      ]
+    },
+    {
+      "Name": "saml:edupersonentitlement",
+      "Types": [
+        "ArrayOfString"
+      ]
+    },
+    {
+      "Name": "saml:edupersonnickname",
+      "Types": [
+        "ArrayOfString"
+      ]
+    },
+    {
+      "Name": "saml:edupersonorgdn",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "saml:edupersonorgunitdn",
+      "Types": [
+        "ArrayOfString"
+      ]
+    },
+    {
+      "Name": "saml:edupersonprimaryaffiliation",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "saml:edupersonprimaryorgunitdn",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "saml:edupersonprincipalname",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "saml:edupersonscopedaffiliation",
+      "Types": [
+        "ArrayOfString"
+      ]
+    },
+    {
+      "Name": "saml:edupersontargetedid",
+      "Types": [
+        "ArrayOfString"
+      ]
+    },
+    {
+      "Name": "saml:givenName",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "saml:iss",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "saml:mail",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "saml:name",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "saml:namequalifier",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "saml:organizationStatus",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "saml:primaryGroupSID",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "saml:sub",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "saml:sub_type",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "saml:surname",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "saml:uid",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "saml:x500UniqueIdentifier",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "sts:AWSServiceName",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "sts:DurationSeconds",
+      "Types": [
+        "Numeric"
+      ]
+    },
+    {
+      "Name": "sts:ExternalId",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "sts:IdentityTokenAudience",
+      "Types": [
+        "ArrayOfString"
+      ]
+    },
+    {
+      "Name": "sts:RequestContext/${ContextKey}",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "sts:RequestContextProviders",
+      "Types": [
+        "ArrayOfARN"
+      ]
+    },
+    {
+      "Name": "sts:RoleAuthorizedByIdp",
+      "Types": [
+        "Bool"
+      ]
+    },
+    {
+      "Name": "sts:RoleSessionName",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "sts:SigningAlgorithm",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "sts:SourceIdentity",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "sts:TaskPolicyArn",
+      "Types": [
+        "ARN"
+      ]
+    },
+    {
+      "Name": "sts:TransitiveTagKeys",
+      "Types": [
+        "ArrayOfString"
+      ]
+    },
+    {
+      "Name": "token.actions.${Domain}.ghe.com:actor",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "token.actions.${Domain}.ghe.com:actor_id",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "token.actions.${Domain}.ghe.com:enterprise_id",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "token.actions.${Domain}.ghe.com:environment",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "token.actions.${Domain}.ghe.com:job_workflow_ref",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "token.actions.${Domain}.ghe.com:ref",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "token.actions.${Domain}.ghe.com:repository",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "token.actions.${Domain}.ghe.com:repository_id",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "token.actions.${Domain}.ghe.com:repository_owner_id",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "token.actions.${Domain}.ghe.com:workflow",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "token.actions.githubusercontent.com/${SubPath}:actor",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "token.actions.githubusercontent.com/${SubPath}:actor_id",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "token.actions.githubusercontent.com/${SubPath}:enterprise_id",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "token.actions.githubusercontent.com/${SubPath}:environment",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "token.actions.githubusercontent.com/${SubPath}:job_workflow_ref",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "token.actions.githubusercontent.com/${SubPath}:ref",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "token.actions.githubusercontent.com/${SubPath}:repository",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "token.actions.githubusercontent.com/${SubPath}:repository_id",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "token.actions.githubusercontent.com/${SubPath}:repository_owner_id",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "token.actions.githubusercontent.com/${SubPath}:workflow",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "token.actions.githubusercontent.com:actor",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "token.actions.githubusercontent.com:actor_id",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "token.actions.githubusercontent.com:enterprise_id",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "token.actions.githubusercontent.com:environment",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "token.actions.githubusercontent.com:job_workflow_ref",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "token.actions.githubusercontent.com:ref",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "token.actions.githubusercontent.com:repository",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "token.actions.githubusercontent.com:repository_id",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "token.actions.githubusercontent.com:repository_owner_id",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "token.actions.githubusercontent.com:workflow",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "www.amazon.com:app_id",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "www.amazon.com:user_id",
+      "Types": [
+        "String"
+      ]
+    }
+  ],
+  "Operations": [
+    {
+      "Name": "AssumeRole",
+      "AuthorizedActions": [
+        {
+          "Name": "AssumeRole",
+          "Service": "sts"
+        },
+        {
+          "Name": "SetContext",
+          "Service": "sts"
+        },
+        {
+          "Name": "SetSourceIdentity",
+          "Service": "sts"
+        },
+        {
+          "Name": "TagSession",
+          "Service": "sts"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "sts",
+          "Method": "assume_role",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "AssumeRoleWithSAML",
+      "SDK": [
+        {
+          "Name": "sts",
+          "Method": "assume_role_with_saml",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "AssumeRoleWithWebIdentity",
+      "SDK": [
+        {
+          "Name": "sts",
+          "Method": "assume_role_with_web_identity",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "AssumeRoot",
+      "AuthorizedActions": [
+        {
+          "Name": "AssumeRoot",
+          "Service": "sts"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "sts",
+          "Method": "assume_root",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DecodeAuthorizationMessage",
+      "AuthorizedActions": [
+        {
+          "Name": "DecodeAuthorizationMessage",
+          "Service": "sts"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "sts",
+          "Method": "decode_authorization_message",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetAccessKeyInfo",
+      "AuthorizedActions": [
+        {
+          "Name": "GetAccessKeyInfo",
+          "Service": "sts"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "sts",
+          "Method": "get_access_key_info",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetCallerIdentity",
+      "AuthorizedActions": [
+        {
+          "Name": "GetCallerIdentity",
+          "Service": "sts"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "sts",
+          "Method": "get_caller_identity",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetDelegatedAccessToken",
+      "AuthorizedActions": [
+        {
+          "Name": "GetDelegatedAccessToken",
+          "Service": "sts"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "sts",
+          "Method": "get_delegated_access_token",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetFederationToken",
+      "AuthorizedActions": [
+        {
+          "Name": "GetFederationToken",
+          "Service": "sts"
+        },
+        {
+          "Name": "TagSession",
+          "Service": "sts"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "sts",
+          "Method": "get_federation_token",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetSessionToken",
+      "AuthorizedActions": [
+        {
+          "Name": "GetSessionToken",
+          "Service": "sts"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "sts",
+          "Method": "get_session_token",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetWebIdentityToken",
+      "AuthorizedActions": [
+        {
+          "Name": "GetWebIdentityToken",
+          "Service": "sts"
+        },
+        {
+          "Name": "TagGetWebIdentityToken",
+          "Service": "sts"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "sts",
+          "Method": "get_web_identity_token",
+          "Package": "Boto3"
+        }
+      ]
+    }
+  ],
+  "Resources": [
+    {
+      "Name": "context-provider",
+      "ARNFormats": [
+        "arn:${Partition}:iam::aws:contextProvider/${ContextProviderName}"
+      ]
+    },
+    {
+      "Name": "federated-user",
+      "ARNFormats": [
+        "arn:${Partition}:sts::${Account}:federated-user/${FederatedUserName}"
+      ]
+    },
+    {
+      "Name": "role",
+      "ARNFormats": [
+        "arn:${Partition}:iam::${Account}:role/${RoleNameWithPath}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}",
+        "iam:ResourceTag/${TagKey}"
+      ]
+    },
+    {
+      "Name": "root-user",
+      "ARNFormats": [
+        "arn:${Partition}:iam::${Account}:root"
+      ]
+    },
+    {
+      "Name": "self-session",
+      "ARNFormats": [
+        "arn:${Partition}:sts::${Account}:self"
+      ]
+    }
+  ],
+  "Version": "v1.4"
+}

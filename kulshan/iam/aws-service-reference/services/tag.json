@@ -1,0 +1,287 @@
+{
+  "Name": "tag",
+  "Actions": [
+    {
+      "Name": "DescribeReportCreation",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetComplianceSummary",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetResources",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetTagKeys",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "GetTagValues",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "ListRequiredTags",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "StartReportCreation",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "TagResources",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": true,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "UntagResources",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": true,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    }
+  ],
+  "Operations": [
+    {
+      "Name": "DescribeReportCreation",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeReportCreation",
+          "Service": "tag"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "resourcegroupstaggingapi",
+          "Method": "describe_report_creation",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetComplianceSummary",
+      "AuthorizedActions": [
+        {
+          "Name": "GetComplianceSummary",
+          "Service": "tag"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "resourcegroupstaggingapi",
+          "Method": "get_compliance_summary",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetResources",
+      "AuthorizedActions": [
+        {
+          "Name": "GetResources",
+          "Service": "tag"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "resourcegroupstaggingapi",
+          "Method": "get_resources",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetTagKeys",
+      "AuthorizedActions": [
+        {
+          "Name": "GetTagKeys",
+          "Service": "tag"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "resourcegroupstaggingapi",
+          "Method": "get_tag_keys",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetTagValues",
+      "AuthorizedActions": [
+        {
+          "Name": "GetTagValues",
+          "Service": "tag"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "resourcegroupstaggingapi",
+          "Method": "get_tag_values",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListRequiredTags",
+      "AuthorizedActions": [
+        {
+          "Name": "ListRequiredTags",
+          "Service": "tag"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "resourcegroupstaggingapi",
+          "Method": "list_required_tags",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "StartReportCreation",
+      "AuthorizedActions": [
+        {
+          "Name": "StartReportCreation",
+          "Service": "tag"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "resourcegroupstaggingapi",
+          "Method": "start_report_creation",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "TagResources",
+      "AuthorizedActions": [
+        {
+          "Name": "TagResources",
+          "Service": "tag"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "resourcegroupstaggingapi",
+          "Method": "tag_resources",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "UntagResources",
+      "AuthorizedActions": [
+        {
+          "Name": "UntagResources",
+          "Service": "tag"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "resourcegroupstaggingapi",
+          "Method": "untag_resources",
+          "Package": "Boto3"
+        }
+      ]
+    }
+  ],
+  "Version": "v1.4"
+}

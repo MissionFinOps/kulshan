@@ -1,0 +1,1514 @@
+{
+  "Name": "sns",
+  "Actions": [
+    {
+      "Name": "AddPermission",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": true,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "topic"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "CheckIfPhoneNumberIsOptedOut",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "ConfirmSubscription",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "topic"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "CreatePlatformApplication",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "CreatePlatformEndpoint",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "CreateSMSSandboxPhoneNumber",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "CreateTopic",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "topic"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "DeleteEndpoint",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "DeletePlatformApplication",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "DeleteSMSSandboxPhoneNumber",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "DeleteTopic",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "topic"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "GetDataProtectionPolicy",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "topic"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "GetEndpointAttributes",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "GetPlatformApplicationAttributes",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "GetSMSAttributes",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "GetSMSSandboxAccountStatus",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "GetSubscriptionAttributes",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "topic"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "GetTopicAttributes",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "topic"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "ListEndpointsByPlatformApplication",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "ListOriginationNumbers",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "ListPhoneNumbersOptedOut",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "ListPlatformApplications",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "ListSMSSandboxPhoneNumbers",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "ListSubscriptions",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "ListSubscriptionsByTopic",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "topic"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "ListTagsForResource",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "topic"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "ListTopics",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "OptInPhoneNumber",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "Publish",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "topic"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "PutDataProtectionPolicy",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "topic"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "RemovePermission",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": true,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "topic"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "SetEndpointAttributes",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "SetPlatformApplicationAttributes",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "SetSMSAttributes",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "SetSubscriptionAttributes",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "topic"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "SetTopicAttributes",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": true,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "topic"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "Subscribe",
+      "ActionConditionKeys": [
+        "sns:Endpoint",
+        "sns:Protocol"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "topic"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "TagResource",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": true,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "topic"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "Unsubscribe",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "topic"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "UntagResource",
+      "ActionConditionKeys": [
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": true,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "topic"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "VerifySMSSandboxPhoneNumber",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    }
+  ],
+  "ConditionKeys": [
+    {
+      "Name": "aws:RequestTag/${TagKey}",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "aws:ResourceTag/${TagKey}",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "aws:TagKeys",
+      "Types": [
+        "ArrayOfString"
+      ]
+    },
+    {
+      "Name": "sns:Endpoint",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "sns:Protocol",
+      "Types": [
+        "String"
+      ]
+    }
+  ],
+  "Operations": [
+    {
+      "Name": "AddPermission",
+      "AuthorizedActions": [
+        {
+          "Name": "AddPermission",
+          "Service": "sns"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "sns",
+          "Method": "add_permission",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CheckIfPhoneNumberIsOptedOut",
+      "AuthorizedActions": [
+        {
+          "Name": "CheckIfPhoneNumberIsOptedOut",
+          "Service": "sns"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "sns",
+          "Method": "check_if_phone_number_is_opted_out",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ConfirmSubscription",
+      "AuthorizedActions": [
+        {
+          "Name": "ConfirmSubscription",
+          "Service": "sns"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "sns",
+          "Method": "confirm_subscription",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreatePlatformApplication",
+      "AuthorizedActions": [
+        {
+          "Name": "CreatePlatformApplication",
+          "Service": "sns"
+        },
+        {
+          "Name": "PassRole",
+          "Context": {
+            "iam:PassedToService": [
+              "sns.amazonaws.com"
+            ]
+          },
+          "Service": "iam"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "sns",
+          "Method": "create_platform_application",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreatePlatformEndpoint",
+      "AuthorizedActions": [
+        {
+          "Name": "CreatePlatformEndpoint",
+          "Service": "sns"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "sns",
+          "Method": "create_platform_endpoint",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreateSMSSandboxPhoneNumber",
+      "AuthorizedActions": [
+        {
+          "Name": "CreateSMSSandboxPhoneNumber",
+          "Service": "sns"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "sns",
+          "Method": "create_sms_sandbox_phone_number",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreateTopic",
+      "AuthorizedActions": [
+        {
+          "Name": "CreateTopic",
+          "Service": "sns"
+        },
+        {
+          "Name": "PassRole",
+          "Context": {
+            "iam:PassedToService": [
+              "sns.amazonaws.com"
+            ]
+          },
+          "Service": "iam"
+        },
+        {
+          "Name": "PutDataProtectionPolicy",
+          "Service": "sns"
+        },
+        {
+          "Name": "TagResource",
+          "Service": "sns"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "sns",
+          "Method": "create_topic",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteEndpoint",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteEndpoint",
+          "Service": "sns"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "sns",
+          "Method": "delete_endpoint",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeletePlatformApplication",
+      "AuthorizedActions": [
+        {
+          "Name": "DeletePlatformApplication",
+          "Service": "sns"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "sns",
+          "Method": "delete_platform_application",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteSMSSandboxPhoneNumber",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteSMSSandboxPhoneNumber",
+          "Service": "sns"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "sns",
+          "Method": "delete_sms_sandbox_phone_number",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteTopic",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteTopic",
+          "Service": "sns"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "sns",
+          "Method": "delete_topic",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetDataProtectionPolicy",
+      "AuthorizedActions": [
+        {
+          "Name": "GetDataProtectionPolicy",
+          "Service": "sns"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "sns",
+          "Method": "get_data_protection_policy",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetEndpointAttributes",
+      "AuthorizedActions": [
+        {
+          "Name": "GetEndpointAttributes",
+          "Service": "sns"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "sns",
+          "Method": "get_endpoint_attributes",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetPlatformApplicationAttributes",
+      "AuthorizedActions": [
+        {
+          "Name": "GetPlatformApplicationAttributes",
+          "Service": "sns"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "sns",
+          "Method": "get_platform_application_attributes",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetSMSAttributes",
+      "AuthorizedActions": [
+        {
+          "Name": "GetSMSAttributes",
+          "Service": "sns"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "sns",
+          "Method": "get_sms_attributes",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetSMSSandboxAccountStatus",
+      "AuthorizedActions": [
+        {
+          "Name": "GetSMSSandboxAccountStatus",
+          "Service": "sns"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "sns",
+          "Method": "get_sms_sandbox_account_status",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetSubscriptionAttributes",
+      "AuthorizedActions": [
+        {
+          "Name": "GetSubscriptionAttributes",
+          "Service": "sns"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "sns",
+          "Method": "get_subscription_attributes",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetTopicAttributes",
+      "AuthorizedActions": [
+        {
+          "Name": "GetTopicAttributes",
+          "Service": "sns"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "sns",
+          "Method": "get_topic_attributes",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListEndpointsByPlatformApplication",
+      "AuthorizedActions": [
+        {
+          "Name": "ListEndpointsByPlatformApplication",
+          "Service": "sns"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "sns",
+          "Method": "list_endpoints_by_platform_application",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListOriginationNumbers",
+      "AuthorizedActions": [
+        {
+          "Name": "ListOriginationNumbers",
+          "Service": "sns"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "sns",
+          "Method": "list_origination_numbers",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListPhoneNumbersOptedOut",
+      "AuthorizedActions": [
+        {
+          "Name": "ListPhoneNumbersOptedOut",
+          "Service": "sns"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "sns",
+          "Method": "list_phone_numbers_opted_out",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListPlatformApplications",
+      "AuthorizedActions": [
+        {
+          "Name": "ListPlatformApplications",
+          "Service": "sns"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "sns",
+          "Method": "list_platform_applications",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListSMSSandboxPhoneNumbers",
+      "AuthorizedActions": [
+        {
+          "Name": "ListSMSSandboxPhoneNumbers",
+          "Service": "sns"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "sns",
+          "Method": "list_sms_sandbox_phone_numbers",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListSubscriptions",
+      "AuthorizedActions": [
+        {
+          "Name": "ListSubscriptions",
+          "Service": "sns"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "sns",
+          "Method": "list_subscriptions",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListSubscriptionsByTopic",
+      "AuthorizedActions": [
+        {
+          "Name": "ListSubscriptionsByTopic",
+          "Service": "sns"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "sns",
+          "Method": "list_subscriptions_by_topic",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListTagsForResource",
+      "AuthorizedActions": [
+        {
+          "Name": "ListTagsForResource",
+          "Service": "sns"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "sns",
+          "Method": "list_tags_for_resource",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListTopics",
+      "AuthorizedActions": [
+        {
+          "Name": "ListTopics",
+          "Service": "sns"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "sns",
+          "Method": "list_topics",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "OptInPhoneNumber",
+      "AuthorizedActions": [
+        {
+          "Name": "OptInPhoneNumber",
+          "Service": "sns"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "sns",
+          "Method": "opt_in_phone_number",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "Publish",
+      "AuthorizedActions": [
+        {
+          "Name": "Publish",
+          "Service": "sns"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "sns",
+          "Method": "publish",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "PublishBatch",
+      "AuthorizedActions": [
+        {
+          "Name": "Publish",
+          "Service": "sns"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "sns",
+          "Method": "publish_batch",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "PutDataProtectionPolicy",
+      "AuthorizedActions": [
+        {
+          "Name": "PutDataProtectionPolicy",
+          "Service": "sns"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "sns",
+          "Method": "put_data_protection_policy",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "RemovePermission",
+      "AuthorizedActions": [
+        {
+          "Name": "RemovePermission",
+          "Service": "sns"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "sns",
+          "Method": "remove_permission",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "SetEndpointAttributes",
+      "AuthorizedActions": [
+        {
+          "Name": "SetEndpointAttributes",
+          "Service": "sns"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "sns",
+          "Method": "set_endpoint_attributes",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "SetPlatformApplicationAttributes",
+      "AuthorizedActions": [
+        {
+          "Name": "PassRole",
+          "Context": {
+            "iam:PassedToService": [
+              "sns.amazonaws.com"
+            ]
+          },
+          "Service": "iam"
+        },
+        {
+          "Name": "SetPlatformApplicationAttributes",
+          "Service": "sns"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "sns",
+          "Method": "set_platform_application_attributes",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "SetSMSAttributes",
+      "AuthorizedActions": [
+        {
+          "Name": "PassRole",
+          "Context": {
+            "iam:PassedToService": [
+              "sns.amazonaws.com"
+            ]
+          },
+          "Service": "iam"
+        },
+        {
+          "Name": "SetSMSAttributes",
+          "Service": "sns"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "sns",
+          "Method": "set_sms_attributes",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "SetSubscriptionAttributes",
+      "AuthorizedActions": [
+        {
+          "Name": "PassRole",
+          "Context": {
+            "iam:PassedToService": [
+              "sns.amazonaws.com"
+            ]
+          },
+          "Service": "iam"
+        },
+        {
+          "Name": "SetSubscriptionAttributes",
+          "Service": "sns"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "sns",
+          "Method": "set_subscription_attributes",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "SetTopicAttributes",
+      "AuthorizedActions": [
+        {
+          "Name": "PassRole",
+          "Context": {
+            "iam:PassedToService": [
+              "sns.amazonaws.com"
+            ]
+          },
+          "Service": "iam"
+        },
+        {
+          "Name": "SetTopicAttributes",
+          "Service": "sns"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "sns",
+          "Method": "set_topic_attributes",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "Subscribe",
+      "AuthorizedActions": [
+        {
+          "Name": "PassRole",
+          "Context": {
+            "iam:PassedToService": [
+              "sns.amazonaws.com"
+            ]
+          },
+          "Service": "iam"
+        },
+        {
+          "Name": "Subscribe",
+          "Service": "sns"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "sns",
+          "Method": "subscribe",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "TagResource",
+      "AuthorizedActions": [
+        {
+          "Name": "TagResource",
+          "Service": "sns"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "sns",
+          "Method": "tag_resource",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "Unsubscribe",
+      "AuthorizedActions": [
+        {
+          "Name": "Unsubscribe",
+          "Service": "sns"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "sns",
+          "Method": "unsubscribe",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "UntagResource",
+      "AuthorizedActions": [
+        {
+          "Name": "UntagResource",
+          "Service": "sns"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "sns",
+          "Method": "untag_resource",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "VerifySMSSandboxPhoneNumber",
+      "AuthorizedActions": [
+        {
+          "Name": "VerifySMSSandboxPhoneNumber",
+          "Service": "sns"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "sns",
+          "Method": "verify_sms_sandbox_phone_number",
+          "Package": "Boto3"
+        }
+      ]
+    }
+  ],
+  "Resources": [
+    {
+      "Name": "topic",
+      "ARNFormats": [
+        "arn:${Partition}:sns:${Region}:${Account}:${TopicName}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ]
+    }
+  ],
+  "Version": "v1.4"
+}

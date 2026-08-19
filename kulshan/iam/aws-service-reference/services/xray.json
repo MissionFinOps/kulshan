@@ -1,0 +1,1431 @@
+{
+  "Name": "xray",
+  "Actions": [
+    {
+      "Name": "BatchGetTraceSummaryById",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "BatchGetTraces",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "CancelTraceRetrieval",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "CreateGroup",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "group"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "CreateSamplingRule",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "sampling-rule"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteGroup",
+      "ActionConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "group"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteResourcePolicy",
+      "ActionConditionKeys": [
+        "xray:ResourcePolicyName"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteSamplingRule",
+      "ActionConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "sampling-rule"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetDistinctTraceGraphs",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "GetEncryptionConfig",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetGroup",
+      "ActionConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "group"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetGroups",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetIndexingRules",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "GetInsight",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetInsightEvents",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetInsightImpactGraph",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetInsightSummaries",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetRetrievedTracesGraph",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "GetSamplingRules",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetSamplingStatisticSummaries",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "GetSamplingTargets",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "GetServiceGraph",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "GetTimeSeriesServiceStatistics",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "GetTraceGraph",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "GetTraceSegmentDestination",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "GetTraceSummaries",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "Link",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "ListResourcePolicies",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListRetrievedTraces",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "ListTagsForResource",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "group"
+        },
+        {
+          "Name": "sampling-rule"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "PutEncryptionConfig",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": true,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "PutResourcePolicy",
+      "ActionConditionKeys": [
+        "xray:ResourcePolicyName"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "PutSpans",
+      "ActionConditionKeys": [
+        "logs:LogGeneratingResourceArns"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "PutSpansForIndexing",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "PutTelemetryRecords",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "PutTraceSegments",
+      "ActionConditionKeys": [
+        "logs:LogGeneratingResourceArns"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "StartTraceRetrieval",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "TagResource",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": true,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "group"
+        },
+        {
+          "Name": "sampling-rule"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "UntagResource",
+      "ActionConditionKeys": [
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": true,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "group"
+        },
+        {
+          "Name": "sampling-rule"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "UpdateGroup",
+      "ActionConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "group"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "UpdateIndexingRule",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "UpdateSamplingRule",
+      "ActionConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "sampling-rule"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "UpdateTraceSegmentDestination",
+      "ActionConditionKeys": [
+        "xray:TraceSegmentDestination"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    }
+  ],
+  "ConditionKeys": [
+    {
+      "Name": "aws:RequestTag/${TagKey}",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "aws:ResourceTag/${TagKey}",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "aws:TagKeys",
+      "Types": [
+        "ArrayOfString"
+      ]
+    },
+    {
+      "Name": "logs:LogGeneratingResourceArns",
+      "Types": [
+        "ArrayOfARN"
+      ]
+    },
+    {
+      "Name": "xray:ResourcePolicyName",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "xray:TraceSegmentDestination",
+      "Types": [
+        "String"
+      ]
+    }
+  ],
+  "Operations": [
+    {
+      "Name": "BatchGetTraces",
+      "AuthorizedActions": [
+        {
+          "Name": "BatchGetTraces",
+          "Service": "xray"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "xray",
+          "Method": "batch_get_traces",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CancelTraceRetrieval",
+      "AuthorizedActions": [
+        {
+          "Name": "CancelTraceRetrieval",
+          "Service": "xray"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "xray",
+          "Method": "cancel_trace_retrieval",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreateGroup",
+      "AuthorizedActions": [
+        {
+          "Name": "CreateGroup",
+          "Service": "xray"
+        },
+        {
+          "Name": "TagResource",
+          "Service": "xray"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "xray",
+          "Method": "create_group",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreateSamplingRule",
+      "AuthorizedActions": [
+        {
+          "Name": "CreateSamplingRule",
+          "Service": "xray"
+        },
+        {
+          "Name": "TagResource",
+          "Service": "xray"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "xray",
+          "Method": "create_sampling_rule",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteGroup",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteGroup",
+          "Service": "xray"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "xray",
+          "Method": "delete_group",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteResourcePolicy",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteResourcePolicy",
+          "Service": "xray"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "xray",
+          "Method": "delete_resource_policy",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteSamplingRule",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteSamplingRule",
+          "Service": "xray"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "xray",
+          "Method": "delete_sampling_rule",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetEncryptionConfig",
+      "AuthorizedActions": [
+        {
+          "Name": "GetEncryptionConfig",
+          "Service": "xray"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "xray",
+          "Method": "get_encryption_config",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetGroup",
+      "AuthorizedActions": [
+        {
+          "Name": "GetGroup",
+          "Service": "xray"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "xray",
+          "Method": "get_group",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetGroups",
+      "AuthorizedActions": [
+        {
+          "Name": "GetGroups",
+          "Service": "xray"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "xray",
+          "Method": "get_groups",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetIndexingRules",
+      "AuthorizedActions": [
+        {
+          "Name": "GetIndexingRules",
+          "Service": "xray"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "xray",
+          "Method": "get_indexing_rules",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetInsight",
+      "AuthorizedActions": [
+        {
+          "Name": "GetInsight",
+          "Service": "xray"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "xray",
+          "Method": "get_insight",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetInsightEvents",
+      "AuthorizedActions": [
+        {
+          "Name": "GetInsightEvents",
+          "Service": "xray"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "xray",
+          "Method": "get_insight_events",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetInsightImpactGraph",
+      "AuthorizedActions": [
+        {
+          "Name": "GetInsightImpactGraph",
+          "Service": "xray"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "xray",
+          "Method": "get_insight_impact_graph",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetInsightSummaries",
+      "AuthorizedActions": [
+        {
+          "Name": "GetInsightSummaries",
+          "Service": "xray"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "xray",
+          "Method": "get_insight_summaries",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetRetrievedTracesGraph",
+      "AuthorizedActions": [
+        {
+          "Name": "GetRetrievedTracesGraph",
+          "Service": "xray"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "xray",
+          "Method": "get_retrieved_traces_graph",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetSamplingRules",
+      "AuthorizedActions": [
+        {
+          "Name": "GetSamplingRules",
+          "Service": "xray"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "xray",
+          "Method": "get_sampling_rules",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetSamplingStatisticSummaries",
+      "AuthorizedActions": [
+        {
+          "Name": "GetSamplingStatisticSummaries",
+          "Service": "xray"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "xray",
+          "Method": "get_sampling_statistic_summaries",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetSamplingTargets",
+      "AuthorizedActions": [
+        {
+          "Name": "GetSamplingTargets",
+          "Service": "xray"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "xray",
+          "Method": "get_sampling_targets",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetServiceGraph",
+      "AuthorizedActions": [
+        {
+          "Name": "GetServiceGraph",
+          "Service": "xray"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "xray",
+          "Method": "get_service_graph",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetTimeSeriesServiceStatistics",
+      "AuthorizedActions": [
+        {
+          "Name": "GetTimeSeriesServiceStatistics",
+          "Service": "xray"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "xray",
+          "Method": "get_time_series_service_statistics",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetTraceGraph",
+      "AuthorizedActions": [
+        {
+          "Name": "GetTraceGraph",
+          "Service": "xray"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "xray",
+          "Method": "get_trace_graph",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetTraceSegmentDestination",
+      "AuthorizedActions": [
+        {
+          "Name": "GetTraceSegmentDestination",
+          "Service": "xray"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "xray",
+          "Method": "get_trace_segment_destination",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetTraceSummaries",
+      "AuthorizedActions": [
+        {
+          "Name": "GetTraceSummaries",
+          "Service": "xray"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "xray",
+          "Method": "get_trace_summaries",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListResourcePolicies",
+      "AuthorizedActions": [
+        {
+          "Name": "ListResourcePolicies",
+          "Service": "xray"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "xray",
+          "Method": "list_resource_policies",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListRetrievedTraces",
+      "AuthorizedActions": [
+        {
+          "Name": "ListRetrievedTraces",
+          "Service": "xray"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "xray",
+          "Method": "list_retrieved_traces",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListTagsForResource",
+      "AuthorizedActions": [
+        {
+          "Name": "ListTagsForResource",
+          "Service": "xray"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "xray",
+          "Method": "list_tags_for_resource",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "PutEncryptionConfig",
+      "AuthorizedActions": [
+        {
+          "Name": "PutEncryptionConfig",
+          "Service": "xray"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "xray",
+          "Method": "put_encryption_config",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "PutResourcePolicy",
+      "AuthorizedActions": [
+        {
+          "Name": "PutResourcePolicy",
+          "Service": "xray"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "xray",
+          "Method": "put_resource_policy",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "PutTelemetryRecords",
+      "AuthorizedActions": [
+        {
+          "Name": "PutTelemetryRecords",
+          "Service": "xray"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "xray",
+          "Method": "put_telemetry_records",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "PutTraceSegments",
+      "AuthorizedActions": [
+        {
+          "Name": "PutTraceSegments",
+          "Service": "xray"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "xray",
+          "Method": "put_trace_segments",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "StartTraceRetrieval",
+      "AuthorizedActions": [
+        {
+          "Name": "StartTraceRetrieval",
+          "Service": "xray"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "xray",
+          "Method": "start_trace_retrieval",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "TagResource",
+      "AuthorizedActions": [
+        {
+          "Name": "TagResource",
+          "Service": "xray"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "xray",
+          "Method": "tag_resource",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "UntagResource",
+      "AuthorizedActions": [
+        {
+          "Name": "UntagResource",
+          "Service": "xray"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "xray",
+          "Method": "untag_resource",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "UpdateGroup",
+      "AuthorizedActions": [
+        {
+          "Name": "UpdateGroup",
+          "Service": "xray"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "xray",
+          "Method": "update_group",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "UpdateIndexingRule",
+      "AuthorizedActions": [
+        {
+          "Name": "UpdateIndexingRule",
+          "Service": "xray"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "xray",
+          "Method": "update_indexing_rule",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "UpdateSamplingRule",
+      "AuthorizedActions": [
+        {
+          "Name": "UpdateSamplingRule",
+          "Service": "xray"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "xray",
+          "Method": "update_sampling_rule",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "UpdateTraceSegmentDestination",
+      "AuthorizedActions": [
+        {
+          "Name": "UpdateTraceSegmentDestination",
+          "Service": "xray"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "xray",
+          "Method": "update_trace_segment_destination",
+          "Package": "Boto3"
+        }
+      ]
+    }
+  ],
+  "Resources": [
+    {
+      "Name": "group",
+      "ARNFormats": [
+        "arn:${Partition}:xray:${Region}:${Account}:group/${GroupName}/${Id}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ]
+    },
+    {
+      "Name": "sampling-rule",
+      "ARNFormats": [
+        "arn:${Partition}:xray:${Region}:${Account}:sampling-rule/${SamplingRuleName}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ]
+    }
+  ],
+  "Version": "v1.4"
+}

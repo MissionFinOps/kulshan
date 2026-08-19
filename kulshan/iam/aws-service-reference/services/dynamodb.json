@@ -1,0 +1,3057 @@
+{
+  "Name": "dynamodb",
+  "Actions": [
+    {
+      "Name": "AssociateTableReplica",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "table"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "BatchGetItem",
+      "ActionConditionKeys": [
+        "dynamodb:Attributes",
+        "dynamodb:LeadingKeys",
+        "dynamodb:ReturnConsumedCapacity",
+        "dynamodb:Select"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "table"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "BatchWriteItem",
+      "ActionConditionKeys": [
+        "dynamodb:Attributes",
+        "dynamodb:LeadingKeys",
+        "dynamodb:ReturnConsumedCapacity"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "table"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "ConditionCheckItem",
+      "ActionConditionKeys": [
+        "dynamodb:Attributes",
+        "dynamodb:LeadingKeys",
+        "dynamodb:ReturnConsumedCapacity",
+        "dynamodb:ReturnValues"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "table"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "CreateBackup",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "table"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "CreateGlobalTable",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "global-table"
+        },
+        {
+          "Name": "table"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "CreateGlobalTableWitness",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "table"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "CreateTable",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "table"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "CreateTableReplica",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "table"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "DeleteBackup",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "backup"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteGlobalTableWitness",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "table"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "DeleteItem",
+      "ActionConditionKeys": [
+        "dynamodb:Attributes",
+        "dynamodb:EnclosingOperation",
+        "dynamodb:LeadingKeys",
+        "dynamodb:ReturnConsumedCapacity",
+        "dynamodb:ReturnValues"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "table"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "DeleteResourcePolicy",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": true,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "stream"
+        },
+        {
+          "Name": "table"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "DeleteTable",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "table"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteTableReplica",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "table"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "DescribeBackup",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "backup"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeContinuousBackups",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "table"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeContributorInsights",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "index"
+        },
+        {
+          "Name": "table"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeEndpoints",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeExport",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "export"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeGlobalTable",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "global-table"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeGlobalTableSettings",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "global-table"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeImport",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "import"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeKinesisStreamingDestination",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "table"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeLimits",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeReservedCapacity",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "DescribeReservedCapacityOfferings",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "DescribeStream",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "stream"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeTable",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "table"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeTableReplicaAutoScaling",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "table"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeTimeToLive",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "table"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DisableKinesisStreamingDestination",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "table"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "EnableKinesisStreamingDestination",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "table"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ExportTableToPointInTime",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "table"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetAbacStatus",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "GetItem",
+      "ActionConditionKeys": [
+        "dynamodb:Attributes",
+        "dynamodb:EnclosingOperation",
+        "dynamodb:LeadingKeys",
+        "dynamodb:ReturnConsumedCapacity",
+        "dynamodb:Select"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "table"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "GetRecords",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "stream"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "GetResourcePolicy",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "stream"
+        },
+        {
+          "Name": "table"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetShardIterator",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "stream"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "ImportTable",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "table"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "InjectError",
+      "ActionConditionKeys": [
+        "dynamodb:FisActionId",
+        "dynamodb:FisTargetArns"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "ListBackups",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListContributorInsights",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListExports",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "table"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListGlobalTables",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListImports",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "table"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListStreams",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListTables",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListTagsOfResource",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "stream"
+        },
+        {
+          "Name": "table"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "PartiQLDelete",
+      "ActionConditionKeys": [
+        "dynamodb:Attributes",
+        "dynamodb:EnclosingOperation",
+        "dynamodb:LeadingKeys",
+        "dynamodb:ReturnValues"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "table"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "PartiQLInsert",
+      "ActionConditionKeys": [
+        "dynamodb:Attributes",
+        "dynamodb:EnclosingOperation",
+        "dynamodb:LeadingKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "table"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "PartiQLSelect",
+      "ActionConditionKeys": [
+        "dynamodb:Attributes",
+        "dynamodb:EnclosingOperation",
+        "dynamodb:FullTableScan",
+        "dynamodb:LeadingKeys",
+        "dynamodb:Select"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "index"
+        },
+        {
+          "Name": "table"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "PartiQLUpdate",
+      "ActionConditionKeys": [
+        "dynamodb:Attributes",
+        "dynamodb:EnclosingOperation",
+        "dynamodb:LeadingKeys",
+        "dynamodb:ReturnValues"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "table"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "PurchaseReservedCapacityOfferings",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "PutItem",
+      "ActionConditionKeys": [
+        "dynamodb:Attributes",
+        "dynamodb:EnclosingOperation",
+        "dynamodb:LeadingKeys",
+        "dynamodb:ReturnConsumedCapacity",
+        "dynamodb:ReturnValues"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "table"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "PutResourcePolicy",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": true,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "stream"
+        },
+        {
+          "Name": "table"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "Query",
+      "ActionConditionKeys": [
+        "dynamodb:Attributes",
+        "dynamodb:LeadingKeys",
+        "dynamodb:ReturnConsumedCapacity",
+        "dynamodb:ReturnValues",
+        "dynamodb:Select"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "index"
+        },
+        {
+          "Name": "table"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "ReadDataForReplication",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "table"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "ReplicateSettings",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "table"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "RestoreTableFromAwsBackup",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "table"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "RestoreTableFromBackup",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "backup"
+        },
+        {
+          "Name": "table"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "RestoreTableToPointInTime",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "table"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "Scan",
+      "ActionConditionKeys": [
+        "dynamodb:Attributes",
+        "dynamodb:ReturnConsumedCapacity",
+        "dynamodb:ReturnValues",
+        "dynamodb:Select"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "index"
+        },
+        {
+          "Name": "table"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "SearchVectors",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "index"
+        },
+        {
+          "Name": "table"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "StartAwsBackupJob",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "table"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "TagResource",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": true,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "stream"
+        },
+        {
+          "Name": "table"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "UntagResource",
+      "ActionConditionKeys": [
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": true,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "stream"
+        },
+        {
+          "Name": "table"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "UpdateAbacStatus",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": true,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "UpdateContinuousBackups",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "table"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "UpdateContributorInsights",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "index"
+        },
+        {
+          "Name": "table"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "UpdateGlobalTable",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "global-table"
+        },
+        {
+          "Name": "table"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "UpdateGlobalTableSettings",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "global-table"
+        },
+        {
+          "Name": "table"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "UpdateGlobalTableVersion",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "global-table"
+        },
+        {
+          "Name": "table"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "UpdateItem",
+      "ActionConditionKeys": [
+        "dynamodb:Attributes",
+        "dynamodb:EnclosingOperation",
+        "dynamodb:LeadingKeys",
+        "dynamodb:ReturnConsumedCapacity",
+        "dynamodb:ReturnValues"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "table"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "UpdateKinesisStreamingDestination",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "table"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "UpdateTable",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "table"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "UpdateTableReplicaAutoScaling",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "table"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "UpdateTimeToLive",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "table"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "WriteDataForReplication",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "table"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    }
+  ],
+  "ConditionKeys": [
+    {
+      "Name": "aws:RequestTag/${TagKey}",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "aws:ResourceTag/${TagKey}",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "aws:TagKeys",
+      "Types": [
+        "ArrayOfString"
+      ]
+    },
+    {
+      "Name": "dynamodb:Attributes",
+      "Types": [
+        "ArrayOfString"
+      ]
+    },
+    {
+      "Name": "dynamodb:EnclosingOperation",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "dynamodb:FirstPartitionKeyValues",
+      "Types": [
+        "ArrayOfString"
+      ]
+    },
+    {
+      "Name": "dynamodb:FisActionId",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "dynamodb:FisTargetArns",
+      "Types": [
+        "ArrayOfARN"
+      ]
+    },
+    {
+      "Name": "dynamodb:FourthPartitionKeyValues",
+      "Types": [
+        "ArrayOfString"
+      ]
+    },
+    {
+      "Name": "dynamodb:FullTableScan",
+      "Types": [
+        "Bool"
+      ]
+    },
+    {
+      "Name": "dynamodb:LeadingKeys",
+      "Types": [
+        "ArrayOfString"
+      ]
+    },
+    {
+      "Name": "dynamodb:ReturnConsumedCapacity",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "dynamodb:ReturnValues",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "dynamodb:SecondPartitionKeyValues",
+      "Types": [
+        "ArrayOfString"
+      ]
+    },
+    {
+      "Name": "dynamodb:Select",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "dynamodb:ThirdPartitionKeyValues",
+      "Types": [
+        "ArrayOfString"
+      ]
+    }
+  ],
+  "Operations": [
+    {
+      "Name": "BatchExecuteStatement",
+      "AuthorizedActions": [
+        {
+          "Name": "PartiQLDelete",
+          "Service": "dynamodb"
+        },
+        {
+          "Name": "PartiQLInsert",
+          "Service": "dynamodb"
+        },
+        {
+          "Name": "PartiQLSelect",
+          "Service": "dynamodb"
+        },
+        {
+          "Name": "PartiQLUpdate",
+          "Service": "dynamodb"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "dynamodb",
+          "Method": "batch_execute_statement",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "BatchGetItem",
+      "AuthorizedActions": [
+        {
+          "Name": "BatchGetItem",
+          "Service": "dynamodb"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "dynamodb",
+          "Method": "batch_get_item",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "BatchWriteItem",
+      "AuthorizedActions": [
+        {
+          "Name": "BatchWriteItem",
+          "Service": "dynamodb"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "dynamodb",
+          "Method": "batch_write_item",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreateBackup",
+      "AuthorizedActions": [
+        {
+          "Name": "CreateBackup",
+          "Service": "dynamodb"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "dynamodb",
+          "Method": "create_backup",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreateGlobalTable",
+      "AuthorizedActions": [
+        {
+          "Name": "CreateGlobalTable",
+          "Service": "dynamodb"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "dynamodb",
+          "Method": "create_global_table",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreateTable",
+      "AuthorizedActions": [
+        {
+          "Name": "AssociateTableReplica",
+          "Service": "dynamodb"
+        },
+        {
+          "Name": "BatchWriteItem",
+          "Service": "dynamodb"
+        },
+        {
+          "Name": "CreateTable",
+          "Service": "dynamodb"
+        },
+        {
+          "Name": "CreateTableReplica",
+          "Service": "dynamodb"
+        },
+        {
+          "Name": "DeleteItem",
+          "Service": "dynamodb"
+        },
+        {
+          "Name": "GetItem",
+          "Service": "dynamodb"
+        },
+        {
+          "Name": "PutItem",
+          "Service": "dynamodb"
+        },
+        {
+          "Name": "PutResourcePolicy",
+          "Service": "dynamodb"
+        },
+        {
+          "Name": "Query",
+          "Service": "dynamodb"
+        },
+        {
+          "Name": "Scan",
+          "Service": "dynamodb"
+        },
+        {
+          "Name": "TagResource",
+          "Service": "dynamodb"
+        },
+        {
+          "Name": "UpdateItem",
+          "Service": "dynamodb"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "dynamodb",
+          "Method": "create_table",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteBackup",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteBackup",
+          "Service": "dynamodb"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "dynamodb",
+          "Method": "delete_backup",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteItem",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteItem",
+          "Service": "dynamodb"
+        },
+        {
+          "Name": "WriteDataForReplication",
+          "Service": "dynamodb"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "dynamodb",
+          "Method": "delete_item",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteResourcePolicy",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteResourcePolicy",
+          "Service": "dynamodb"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "dynamodb",
+          "Method": "delete_resource_policy",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteTable",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteTable",
+          "Service": "dynamodb"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "dynamodb",
+          "Method": "delete_table",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeBackup",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeBackup",
+          "Service": "dynamodb"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "dynamodb",
+          "Method": "describe_backup",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeContinuousBackups",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeContinuousBackups",
+          "Service": "dynamodb"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "dynamodb",
+          "Method": "describe_continuous_backups",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeContributorInsights",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeContributorInsights",
+          "Service": "dynamodb"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "dynamodb",
+          "Method": "describe_contributor_insights",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeEndpoints",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeEndpoints",
+          "Service": "dynamodb"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "dynamodb",
+          "Method": "describe_endpoints",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeExport",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeExport",
+          "Service": "dynamodb"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "dynamodb",
+          "Method": "describe_export",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeGlobalTable",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeGlobalTable",
+          "Service": "dynamodb"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "dynamodb",
+          "Method": "describe_global_table",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeGlobalTableSettings",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeGlobalTableSettings",
+          "Service": "dynamodb"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "dynamodb",
+          "Method": "describe_global_table_settings",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeImport",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeImport",
+          "Service": "dynamodb"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "dynamodb",
+          "Method": "describe_import",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeKinesisStreamingDestination",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeKinesisStreamingDestination",
+          "Service": "dynamodb"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "dynamodb",
+          "Method": "describe_kinesis_streaming_destination",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeLimits",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeLimits",
+          "Service": "dynamodb"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "dynamodb",
+          "Method": "describe_limits",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeStream",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeStream",
+          "Service": "dynamodb"
+        },
+        {
+          "Name": "ReadDataForReplication",
+          "Service": "dynamodb"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "dynamodbstreams",
+          "Method": "describe_stream",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeTable",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeTable",
+          "Service": "dynamodb"
+        },
+        {
+          "Name": "ReadDataForReplication",
+          "Service": "dynamodb"
+        },
+        {
+          "Name": "ReplicateSettings",
+          "Service": "dynamodb"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "dynamodb",
+          "Method": "describe_table",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeTableReplicaAutoScaling",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeTableReplicaAutoScaling",
+          "Service": "dynamodb"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "dynamodb",
+          "Method": "describe_table_replica_auto_scaling",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeTimeToLive",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeTimeToLive",
+          "Service": "dynamodb"
+        },
+        {
+          "Name": "ReadDataForReplication",
+          "Service": "dynamodb"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "dynamodb",
+          "Method": "describe_time_to_live",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DisableKinesisStreamingDestination",
+      "AuthorizedActions": [
+        {
+          "Name": "DisableKinesisStreamingDestination",
+          "Service": "dynamodb"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "dynamodb",
+          "Method": "disable_kinesis_streaming_destination",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "EnableKinesisStreamingDestination",
+      "AuthorizedActions": [
+        {
+          "Name": "EnableKinesisStreamingDestination",
+          "Service": "dynamodb"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "dynamodb",
+          "Method": "enable_kinesis_streaming_destination",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ExecuteStatement",
+      "AuthorizedActions": [
+        {
+          "Name": "PartiQLDelete",
+          "Service": "dynamodb"
+        },
+        {
+          "Name": "PartiQLInsert",
+          "Service": "dynamodb"
+        },
+        {
+          "Name": "PartiQLSelect",
+          "Service": "dynamodb"
+        },
+        {
+          "Name": "PartiQLUpdate",
+          "Service": "dynamodb"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "dynamodb",
+          "Method": "execute_statement",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ExecuteTransaction",
+      "AuthorizedActions": [
+        {
+          "Name": "PartiQLDelete",
+          "Service": "dynamodb"
+        },
+        {
+          "Name": "PartiQLInsert",
+          "Service": "dynamodb"
+        },
+        {
+          "Name": "PartiQLSelect",
+          "Service": "dynamodb"
+        },
+        {
+          "Name": "PartiQLUpdate",
+          "Service": "dynamodb"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "dynamodb",
+          "Method": "execute_transaction",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ExportTableToPointInTime",
+      "AuthorizedActions": [
+        {
+          "Name": "ExportTableToPointInTime",
+          "Service": "dynamodb"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "dynamodb",
+          "Method": "export_table_to_point_in_time",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetItem",
+      "AuthorizedActions": [
+        {
+          "Name": "GetItem",
+          "Service": "dynamodb"
+        },
+        {
+          "Name": "ReadDataForReplication",
+          "Service": "dynamodb"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "dynamodb",
+          "Method": "get_item",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetRecords",
+      "AuthorizedActions": [
+        {
+          "Name": "GetRecords",
+          "Service": "dynamodb"
+        },
+        {
+          "Name": "ReadDataForReplication",
+          "Service": "dynamodb"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "dynamodbstreams",
+          "Method": "get_records",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetResourcePolicy",
+      "AuthorizedActions": [
+        {
+          "Name": "GetResourcePolicy",
+          "Service": "dynamodb"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "dynamodb",
+          "Method": "get_resource_policy",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetShardIterator",
+      "AuthorizedActions": [
+        {
+          "Name": "GetShardIterator",
+          "Service": "dynamodb"
+        },
+        {
+          "Name": "ReadDataForReplication",
+          "Service": "dynamodb"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "dynamodbstreams",
+          "Method": "get_shard_iterator",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ImportTable",
+      "AuthorizedActions": [
+        {
+          "Name": "ImportTable",
+          "Service": "dynamodb"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "dynamodb",
+          "Method": "import_table",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListBackups",
+      "AuthorizedActions": [
+        {
+          "Name": "ListBackups",
+          "Service": "dynamodb"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "dynamodb",
+          "Method": "list_backups",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListContributorInsights",
+      "AuthorizedActions": [
+        {
+          "Name": "ListContributorInsights",
+          "Service": "dynamodb"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "dynamodb",
+          "Method": "list_contributor_insights",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListExports",
+      "AuthorizedActions": [
+        {
+          "Name": "ListExports",
+          "Service": "dynamodb"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "dynamodb",
+          "Method": "list_exports",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListGlobalTables",
+      "AuthorizedActions": [
+        {
+          "Name": "ListGlobalTables",
+          "Service": "dynamodb"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "dynamodb",
+          "Method": "list_global_tables",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListImports",
+      "AuthorizedActions": [
+        {
+          "Name": "ListImports",
+          "Service": "dynamodb"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "dynamodb",
+          "Method": "list_imports",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListStreams",
+      "AuthorizedActions": [
+        {
+          "Name": "ListStreams",
+          "Service": "dynamodb"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "dynamodbstreams",
+          "Method": "list_streams",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListTables",
+      "AuthorizedActions": [
+        {
+          "Name": "ListTables",
+          "Service": "dynamodb"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "dynamodb",
+          "Method": "list_tables",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListTagsOfResource",
+      "AuthorizedActions": [
+        {
+          "Name": "ListTagsOfResource",
+          "Service": "dynamodb"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "dynamodb",
+          "Method": "list_tags_of_resource",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "PutItem",
+      "AuthorizedActions": [
+        {
+          "Name": "PutItem",
+          "Service": "dynamodb"
+        },
+        {
+          "Name": "WriteDataForReplication",
+          "Service": "dynamodb"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "dynamodb",
+          "Method": "put_item",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "PutResourcePolicy",
+      "AuthorizedActions": [
+        {
+          "Name": "PutResourcePolicy",
+          "Service": "dynamodb"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "dynamodb",
+          "Method": "put_resource_policy",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "Query",
+      "AuthorizedActions": [
+        {
+          "Name": "Query",
+          "Service": "dynamodb"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "dynamodb",
+          "Method": "query",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "RestoreTableFromBackup",
+      "AuthorizedActions": [
+        {
+          "Name": "BatchWriteItem",
+          "Service": "dynamodb"
+        },
+        {
+          "Name": "DeleteItem",
+          "Service": "dynamodb"
+        },
+        {
+          "Name": "GetItem",
+          "Service": "dynamodb"
+        },
+        {
+          "Name": "PutItem",
+          "Service": "dynamodb"
+        },
+        {
+          "Name": "Query",
+          "Service": "dynamodb"
+        },
+        {
+          "Name": "RestoreTableFromBackup",
+          "Service": "dynamodb"
+        },
+        {
+          "Name": "Scan",
+          "Service": "dynamodb"
+        },
+        {
+          "Name": "UpdateItem",
+          "Service": "dynamodb"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "dynamodb",
+          "Method": "restore_table_from_backup",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "RestoreTableToPointInTime",
+      "AuthorizedActions": [
+        {
+          "Name": "AssociateTableReplica",
+          "Service": "dynamodb"
+        },
+        {
+          "Name": "BatchWriteItem",
+          "Service": "dynamodb"
+        },
+        {
+          "Name": "CreateTableReplica",
+          "Service": "dynamodb"
+        },
+        {
+          "Name": "DeleteItem",
+          "Service": "dynamodb"
+        },
+        {
+          "Name": "GetItem",
+          "Service": "dynamodb"
+        },
+        {
+          "Name": "PutItem",
+          "Service": "dynamodb"
+        },
+        {
+          "Name": "Query",
+          "Service": "dynamodb"
+        },
+        {
+          "Name": "Scan",
+          "Service": "dynamodb"
+        },
+        {
+          "Name": "UpdateItem",
+          "Service": "dynamodb"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "dynamodb",
+          "Method": "restore_table_to_point_in_time",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "Scan",
+      "AuthorizedActions": [
+        {
+          "Name": "Scan",
+          "Service": "dynamodb"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "dynamodb",
+          "Method": "scan",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "SearchVectors",
+      "SDK": [
+        {
+          "Name": "dynamodb",
+          "Method": "search_vectors",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "TagResource",
+      "AuthorizedActions": [
+        {
+          "Name": "TagResource",
+          "Service": "dynamodb"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "dynamodb",
+          "Method": "tag_resource",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "TransactGetItems",
+      "AuthorizedActions": [
+        {
+          "Name": "GetItem",
+          "Service": "dynamodb"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "dynamodb",
+          "Method": "transact_get_items",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "TransactWriteItems",
+      "AuthorizedActions": [
+        {
+          "Name": "ConditionCheckItem",
+          "Service": "dynamodb"
+        },
+        {
+          "Name": "DeleteItem",
+          "Service": "dynamodb"
+        },
+        {
+          "Name": "PutItem",
+          "Service": "dynamodb"
+        },
+        {
+          "Name": "UpdateItem",
+          "Service": "dynamodb"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "dynamodb",
+          "Method": "transact_write_items",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "UntagResource",
+      "AuthorizedActions": [
+        {
+          "Name": "UntagResource",
+          "Service": "dynamodb"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "dynamodb",
+          "Method": "untag_resource",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "UpdateContinuousBackups",
+      "AuthorizedActions": [
+        {
+          "Name": "UpdateContinuousBackups",
+          "Service": "dynamodb"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "dynamodb",
+          "Method": "update_continuous_backups",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "UpdateContributorInsights",
+      "AuthorizedActions": [
+        {
+          "Name": "UpdateContributorInsights",
+          "Service": "dynamodb"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "dynamodb",
+          "Method": "update_contributor_insights",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "UpdateGlobalTable",
+      "AuthorizedActions": [
+        {
+          "Name": "UpdateGlobalTable",
+          "Service": "dynamodb"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "dynamodb",
+          "Method": "update_global_table",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "UpdateGlobalTableSettings",
+      "AuthorizedActions": [
+        {
+          "Name": "UpdateGlobalTableSettings",
+          "Service": "dynamodb"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "dynamodb",
+          "Method": "update_global_table_settings",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "UpdateItem",
+      "AuthorizedActions": [
+        {
+          "Name": "UpdateItem",
+          "Service": "dynamodb"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "dynamodb",
+          "Method": "update_item",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "UpdateKinesisStreamingDestination",
+      "AuthorizedActions": [
+        {
+          "Name": "UpdateKinesisStreamingDestination",
+          "Service": "dynamodb"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "dynamodb",
+          "Method": "update_kinesis_streaming_destination",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "UpdateTable",
+      "AuthorizedActions": [
+        {
+          "Name": "BatchWriteItem",
+          "Service": "dynamodb"
+        },
+        {
+          "Name": "CreateGlobalTableWitness",
+          "Service": "dynamodb"
+        },
+        {
+          "Name": "CreateTable",
+          "Service": "dynamodb"
+        },
+        {
+          "Name": "CreateTableReplica",
+          "Service": "dynamodb"
+        },
+        {
+          "Name": "DeleteGlobalTableWitness",
+          "Service": "dynamodb"
+        },
+        {
+          "Name": "DeleteItem",
+          "Service": "dynamodb"
+        },
+        {
+          "Name": "GetItem",
+          "Service": "dynamodb"
+        },
+        {
+          "Name": "PutItem",
+          "Service": "dynamodb"
+        },
+        {
+          "Name": "Query",
+          "Service": "dynamodb"
+        },
+        {
+          "Name": "ReplicateSettings",
+          "Service": "dynamodb"
+        },
+        {
+          "Name": "Scan",
+          "Service": "dynamodb"
+        },
+        {
+          "Name": "TagResource",
+          "Service": "dynamodb"
+        },
+        {
+          "Name": "UpdateItem",
+          "Service": "dynamodb"
+        },
+        {
+          "Name": "UpdateTable",
+          "Service": "dynamodb"
+        },
+        {
+          "Name": "WriteDataForReplication",
+          "Service": "dynamodb"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "dynamodb",
+          "Method": "update_table",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "UpdateTableReplicaAutoScaling",
+      "AuthorizedActions": [
+        {
+          "Name": "UpdateTableReplicaAutoScaling",
+          "Service": "dynamodb"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "dynamodb",
+          "Method": "update_table_replica_auto_scaling",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "UpdateTimeToLive",
+      "AuthorizedActions": [
+        {
+          "Name": "ReplicateSettings",
+          "Service": "dynamodb"
+        },
+        {
+          "Name": "UpdateTimeToLive",
+          "Service": "dynamodb"
+        },
+        {
+          "Name": "WriteDataForReplication",
+          "Service": "dynamodb"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "dynamodb",
+          "Method": "update_time_to_live",
+          "Package": "Boto3"
+        }
+      ]
+    }
+  ],
+  "Resources": [
+    {
+      "Name": "backup",
+      "ARNFormats": [
+        "arn:${Partition}:dynamodb:${Region}:${Account}:table/${TableName}/backup/${BackupName}"
+      ]
+    },
+    {
+      "Name": "export",
+      "ARNFormats": [
+        "arn:${Partition}:dynamodb:${Region}:${Account}:table/${TableName}/export/${ExportName}"
+      ]
+    },
+    {
+      "Name": "global-table",
+      "ARNFormats": [
+        "arn:${Partition}:dynamodb::${Account}:global-table/${GlobalTableName}"
+      ]
+    },
+    {
+      "Name": "import",
+      "ARNFormats": [
+        "arn:${Partition}:dynamodb:${Region}:${Account}:table/${TableName}/import/${ImportName}"
+      ]
+    },
+    {
+      "Name": "index",
+      "ARNFormats": [
+        "arn:${Partition}:dynamodb:${Region}:${Account}:table/${TableName}/index/${IndexName}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ]
+    },
+    {
+      "Name": "stream",
+      "ARNFormats": [
+        "arn:${Partition}:dynamodb:${Region}:${Account}:table/${TableName}/stream/${StreamLabel}"
+      ]
+    },
+    {
+      "Name": "table",
+      "ARNFormats": [
+        "arn:${Partition}:dynamodb:${Region}:${Account}:table/${TableName}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ]
+    }
+  ],
+  "Version": "v1.4"
+}
