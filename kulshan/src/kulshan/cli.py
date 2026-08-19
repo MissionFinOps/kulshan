@@ -1288,6 +1288,27 @@ from kulshan.reckoner.cli import register_reckoner_commands, register_top_level_
 register_reckoner_commands(query)
 register_top_level_reckoner_commands(main)
 
+# Consultant export commands
+from kulshan.export.cli import export
+main.add_command(export)
+
+
+@main.command("resolve")
+@click.argument("alias")
+@click.option("--cur-path", default=None, help="Path to CUR data for candidate enumeration.")
+def resolve_cmd(alias: str, cur_path: str | None) -> None:
+    """Resolve a pseudonym alias back to the real identifier (forward lookup)."""
+    from kulshan.export.resolve import resolve_alias
+    console = Console()
+    result = resolve_alias(alias, cur_path=cur_path)
+    if result:
+        console.print(result)
+    else:
+        console.print(f"[dim]No match found for alias: {alias}[/dim]")
+        console.print("[dim]Ensure --cur-path points to the same CUR data used for the export.[/dim]")
+        raise SystemExit(1)
+
+
 @cur.command("schema")
 @click.option(
     "--path",
