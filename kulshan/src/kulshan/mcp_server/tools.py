@@ -172,9 +172,9 @@ def _execute_preflight() -> str:
     try:
         from kulshan.pseudonym.engine import PseudonymizationEngine
         from kulshan.pseudonym.policy import PseudonymPolicy
-        from kulshan.workspace.paths import get_data_dir
-        engine = PseudonymizationEngine.create(get_data_dir(), PseudonymPolicy.for_persistence())
-        if engine.is_active:
+        from kulshan.pseudonym.context import create_engine_for_output
+        engine = create_engine_for_output(PseudonymPolicy.for_persistence())
+        if engine and engine.is_active:
             from kulshan.pseudonym.types import IdentifierClass
             account = engine.pseudonymize_value(account, IdentifierClass.ACCOUNT)
             arn = engine.pseudonymize_text(arn)
@@ -324,11 +324,10 @@ def _compact_findings_by_pack(results: dict[str, Any]) -> dict[str, list[dict[st
 
     # Pseudonymize MCP output
     try:
-        from kulshan.pseudonym.engine import PseudonymizationEngine
+        from kulshan.pseudonym.context import create_engine_for_output
         from kulshan.pseudonym.policy import PseudonymPolicy
-        from kulshan.workspace.paths import get_data_dir
-        engine = PseudonymizationEngine.create(get_data_dir(), PseudonymPolicy.for_persistence())
-        if engine.is_active:
+        engine = create_engine_for_output(PseudonymPolicy.for_persistence())
+        if engine and engine.is_active:
             output = engine.pseudonymize_payload(output)
     except Exception:
         pass  # Graceful degradation

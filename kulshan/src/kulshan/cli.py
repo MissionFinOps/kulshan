@@ -73,7 +73,6 @@ def _get_pseudonym_engine(fmt: str, output: Optional[str], show_pii: bool):
     Returns an active engine for structured/file output.
     """
     from kulshan.pseudonym.policy import PseudonymPolicy
-    from kulshan.pseudonym.engine import PseudonymizationEngine
     from kulshan.pseudonym.secret import SecretCorruptError
 
     # Explicit bypass
@@ -87,15 +86,10 @@ def _get_pseudonym_engine(fmt: str, output: Optional[str], show_pii: bool):
     # Structured output or file output: pseudonymize
     policy = PseudonymPolicy.for_structured_output(show_identifiers=False)
 
-    # Resolve workspace path for secret
+    # Resolve workspace-scoped secret
     try:
-        from kulshan.workspace.paths import get_data_dir
-        workspace_path = get_data_dir()
-    except Exception:
-        return None  # Graceful degradation to legacy redact
-
-    try:
-        return PseudonymizationEngine.create(workspace_path, policy)
+        from kulshan.pseudonym.context import create_engine_for_output
+        return create_engine_for_output(policy)
     except SecretCorruptError:
         # Fail closed: do not produce output
         raise

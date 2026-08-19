@@ -206,13 +206,10 @@ class HistoryStore:
             }
             # Pseudonymize full_result_json before storage (persistence policy)
             try:
-                from kulshan.pseudonym.engine import PseudonymizationEngine
+                from kulshan.pseudonym.context import create_engine_for_output
                 from kulshan.pseudonym.policy import PseudonymPolicy
-                from kulshan.workspace.paths import get_data_dir
-                engine = PseudonymizationEngine.create(
-                    get_data_dir(), PseudonymPolicy.for_persistence()
-                )
-                if engine.is_active:
+                engine = create_engine_for_output(PseudonymPolicy.for_persistence())
+                if engine and engine.is_active:
                     full_payload = engine.pseudonymize_payload(full_payload)
             except Exception:
                 pass  # Store raw if pseudonymization unavailable

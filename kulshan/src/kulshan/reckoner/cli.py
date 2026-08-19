@@ -110,14 +110,11 @@ def _maybe_pseudonymize_result(result, output):
 
     # Structured output or non-TTY: pseudonymize
     try:
-        from kulshan.pseudonym.engine import PseudonymizationEngine
+        from kulshan.pseudonym.context import create_engine_for_output
         from kulshan.pseudonym.policy import PseudonymPolicy
-        from kulshan.workspace.paths import get_data_dir
 
-        engine = PseudonymizationEngine.create(
-            get_data_dir(), PseudonymPolicy.for_structured_output()
-        )
-        if not engine.is_active:
+        engine = create_engine_for_output(PseudonymPolicy.for_structured_output())
+        if not engine or not engine.is_active:
             return result
 
         # Pseudonymize row values (account/payer groupings become aliases)
