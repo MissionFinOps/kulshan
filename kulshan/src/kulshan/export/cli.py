@@ -168,10 +168,16 @@ def consultant(
                 )
             )
         ]
-        # Use line_item_line_item_id as row locator if available
-        row_locator = None
-        if "line_item_line_item_id" in cur_result.classification:
-            row_locator = "line_item_line_item_id"
+        # Pseudonymize columns for building distinguishing dimensions
+        pseudo_cols = [
+            c for c, cls in cur_result.classification.items()
+            if cls == _CC.PSEUDONYMIZE
+        ]
+        # Safe non-numeric dimensions for distinguishing rows
+        safe_dims = [
+            c for c, cls in cur_result.classification.items()
+            if cls == _CC.SAFE and c not in numeric_safe
+        ]
 
         # Build source path for comparison
         from kulshan.cur.source import local_parquet_source
@@ -182,8 +188,10 @@ def consultant(
             cur_result.row_count,
             source_path=source_parquet,
             output_path=cur_result.output_path.as_posix(),
-            numeric_columns=numeric_safe if row_locator else None,
-            row_locator=row_locator,
+            numeric_columns=numeric_safe,
+            pseudo_columns=pseudo_cols,
+            safe_dimensions=safe_dims,
+            engine=engine,
         )
         if not g2.passed:
             console.print("[red]GATE 2 FAILED: Evidence integrity[/red]")

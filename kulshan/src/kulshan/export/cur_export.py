@@ -64,11 +64,11 @@ def export_cur(
     """
     # Connect to appropriate source
     if s3_manifest is not None:
-        from kulshan.cur.s3_query import connect_s3_duckdb
+        from kulshan.cur.s3_query import connect_s3_duckdb, _source_sql
         con = connect_s3_duckdb(session=s3_session)
-        # Register the S3 source as cur_raw view
-        from kulshan.cur.s3_query import _source_sql
-        con.execute(f"CREATE VIEW cur_raw AS SELECT * FROM {_source_sql(s3_manifest)}")
+        # Register the S3 source as cur_raw view using the existing source SQL
+        source_sql = _source_sql(s3_manifest)
+        con.execute(f"CREATE VIEW cur_raw AS SELECT * FROM {source_sql}")
         columns = {str(row[0]).lower() for row in con.execute("DESCRIBE cur_raw").fetchall()}
         from kulshan.cur.schema import resolve_cur_columns
         mapping = resolve_cur_columns(columns)

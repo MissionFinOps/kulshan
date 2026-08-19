@@ -69,7 +69,7 @@ def gate_schema(
 
 
 # ---------------------------------------------------------------------------
-# Gate 2: Evidence integrity
+# Gate 2: Evidence integrity (multiset row equivalence)
 # ---------------------------------------------------------------------------
 
 def gate_integrity(
@@ -78,21 +78,31 @@ def gate_integrity(
     source_path: str | None = None,
     output_path: str | None = None,
     numeric_columns: list[str] | None = None,
-    row_locator: str | None = None,
+    pseudo_columns: list[str] | None = None,
+    safe_dimensions: list[str] | None = None,
+    engine: Any = None,
 ) -> GateResult:
-    """Row count equality AND per-row numeric value preservation.
+    """Multiset row equivalence between independently-built source and output projections.
 
-    Compares scoped source and exported Parquet through DuckDB using typed
-    logical values. NULL must remain NULL. Numeric values must be exactly equal.
+    Compares validation projections via:
+        SOURCE_VALIDATION EXCEPT ALL OUTPUT_VALIDATION = 0 rows
+        OUTPUT_VALIDATION EXCEPT ALL SOURCE_VALIDATION = 0 rows
+
+    This handles legitimate duplicate rows correctly (multiplicity matters).
+    No globally unique row identifier is required.
+
+    The SOURCE side is built independently: raw source data is read and
+    pseudonymized identifiers are derived fresh (not read from the export).
 
     Args:
-        source_row_count: Number of rows in scoped source.
-        output_row_count: Number of rows in output parquet.
-        source_path: DuckDB-readable source (Parquet path or glob).
-        output_path: Path to the exported Parquet file.
-        numeric_columns: Cost/usage columns to verify (SAFE numerics).
-        row_locator: Column providing stable row identity for join
-                     (e.g. line_item_line_item_id). If None, only row count is checked.
+        source_row_count: Expected row count from scoped source.
+        output_row_count: Actual row count in exported Parquet.
+        source_path: DuckDB-readable source Parquet (original scoped data).
+        output_path: Exported Parquet file path.
+        numeric_columns: SAFE numeric cost/usage columns to verify preservation.
+        pseudo_columns: PSEUDONYMIZE columns (for building distinguishing dimensions).
+        safe_dimensions: Non-numeric SAFE columns useful for distinguishing rows.
+        engine: PseudonymizationEngine for independent source-side derivation.
     """
     failures = []
 
@@ -101,33 +111,114 @@ def gate_integrity(
             f"Row count mismatch: source={source_row_count}, output={output_row_count}"
         )
 
-    # Per-row numeric verification via DuckDB
-    if source_path and output_path and numeric_columns and row_locator:
+    # Multiset comparison via EXCEPT ALL
+    if (source_path and output_path and numeric_columns
+            and engine is not None):
         import duckdb
+        from kulshan.export.cur_export import _infer_identifier_class
+
         con = duckdb.connect(":memory:")
         try:
-            for col in numeric_columns:
-                # Compare typed values joined on row locator
-                mismatches = con.execute(f"""
-                    SELECT COUNT(*) FROM (
-                        SELECT
-                            s."{row_locator}" AS rid,
-                            s."{col}" AS src_val,
-                            o."{col}" AS out_val
-                        FROM read_parquet('{source_path}') s
-                        JOIN read_parquet('{output_path}') o
-                            ON CAST(s."{row_locator}" AS VARCHAR)
-                             = CAST(o."{row_locator}" AS VARCHAR)
-                        WHERE (s."{col}" IS DISTINCT FROM o."{col}")
+            # Build source validation projection independently
+            con.execute(
+                f"CREATE VIEW gate2_source AS SELECT * FROM read_parquet('{source_path}')"
+            )
+            src_cols = {str(r[0]).lower() for r in con.execute("DESCRIBE gate2_source").fetchall()}
+
+            # Create fresh pseudonymization mappings for source (independent derivation)
+            pseudo_in_source = [c for c in (pseudo_columns or []) if c in src_cols]
+            if pseudo_in_source:
+                # Use gate2_source as the source table for mapping
+                for col in pseudo_in_source:
+                    from kulshan.export.cur_export import _infer_identifier_class
+                    id_class = _infer_identifier_class(col)
+                    rows = con.execute(
+                        f'SELECT DISTINCT CAST("{col}" AS VARCHAR) AS v '
+                        f'FROM gate2_source WHERE "{col}" IS NOT NULL'
+                    ).fetchall()
+                    mappings = []
+                    for (raw_val,) in rows:
+                        if raw_val and raw_val.strip():
+                            alias = engine.pseudonymize_value(raw_val, id_class)
+                            mappings.append((raw_val, alias))
+                        else:
+                            mappings.append((raw_val, raw_val))
+                    table_name = f"_pseudo_map_{col}"
+                    con.execute(f"CREATE TEMP TABLE {table_name} (raw_value VARCHAR, alias VARCHAR)")
+                    if mappings:
+                        con.executemany(f"INSERT INTO {table_name} VALUES (?, ?)", mappings)
+
+            # Build validation column list
+            val_cols = []
+            for col in (numeric_columns or []):
+                if col in src_cols:
+                    val_cols.append(f'CAST(gate2_source."{col}" AS VARCHAR) AS "{col}"')
+
+            # Add pseudonymized dimensions for row distinction
+            for col in pseudo_in_source:
+                map_alias = f"_map_{col}"
+                map_table = f"_pseudo_map_{col}"
+                val_cols.append(f'{map_alias}.alias AS "p_{col}"')
+
+            # Add safe dimensions for row distinction
+            for col in (safe_dimensions or []):
+                if col in src_cols:
+                    val_cols.append(f'CAST(gate2_source."{col}" AS VARCHAR) AS "{col}"')
+
+            if not val_cols:
+                # No columns to compare beyond row count
+                pass
+            else:
+                # Build source projection with joins
+                joins = ""
+                for col in pseudo_in_source:
+                    map_table = f"_pseudo_map_{col}"
+                    map_alias = f"_map_{col}"
+                    joins += (
+                        f' LEFT JOIN {map_table} AS {map_alias}'
+                        f' ON CAST(gate2_source."{col}" AS VARCHAR) = {map_alias}.raw_value'
                     )
-                """).fetchone()[0]
-                if mismatches > 0:
+
+                src_select = ", ".join(val_cols)
+                src_sql = f"SELECT {src_select} FROM gate2_source{joins}"
+
+                # Build output projection (read exported parquet directly)
+                out_val_cols = []
+                for col in (numeric_columns or []):
+                    out_val_cols.append(f'CAST(gate2_output."{col}" AS VARCHAR) AS "{col}"')
+                for col in pseudo_in_source:
+                    out_val_cols.append(f'CAST(gate2_output."{col}" AS VARCHAR) AS "p_{col}"')
+                for col in (safe_dimensions or []):
+                    out_val_cols.append(f'CAST(gate2_output."{col}" AS VARCHAR) AS "{col}"')
+
+                con.execute(
+                    f"CREATE VIEW gate2_output AS SELECT * FROM read_parquet('{output_path}')"
+                )
+                out_select = ", ".join(out_val_cols)
+                out_sql = f"SELECT {out_select} FROM gate2_output"
+
+                # EXCEPT ALL both directions
+                source_minus_output = con.execute(
+                    f"SELECT COUNT(*) FROM (({src_sql}) EXCEPT ALL ({out_sql}))"
+                ).fetchone()[0]
+
+                output_minus_source = con.execute(
+                    f"SELECT COUNT(*) FROM (({out_sql}) EXCEPT ALL ({src_sql}))"
+                ).fetchone()[0]
+
+                if source_minus_output > 0:
                     failures.append(
-                        f"Numeric column '{col}': {mismatches} row(s) differ "
-                        f"between source and output"
+                        f"Source rows not in output: {source_minus_output} "
+                        f"(numeric evidence may be corrupted)"
                     )
+                if output_minus_source > 0:
+                    failures.append(
+                        f"Output rows not in source: {output_minus_source} "
+                        f"(unexpected data introduced)"
+                    )
+
         except Exception as e:
-            failures.append(f"Gate 2 verification error: {type(e).__name__}")
+            failures.append(f"Gate 2 verification error: {type(e).__name__}: {e}")
         finally:
             con.close()
 
@@ -138,6 +229,7 @@ def gate_integrity(
             "source_rows": source_row_count,
             "output_rows": output_row_count,
             "numeric_columns_verified": len(numeric_columns) if numeric_columns else 0,
+            "method": "multiset_except_all",
         },
         failures=failures,
     )
