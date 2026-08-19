@@ -12,7 +12,6 @@ from pathlib import Path
 from typing import Any
 
 from kulshan.cur.duckdb_engine import connect_memory, cur_raw_columns, register_cur_raw
-from kulshan.cur.errors import CurDataError
 from kulshan.cur.source import local_parquet_source
 from kulshan.export.columns import ColumnClass, classify_all_columns
 from kulshan.export.scope import EvidenceScope

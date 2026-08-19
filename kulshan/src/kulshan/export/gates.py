@@ -75,16 +75,24 @@ def gate_schema(
 def gate_integrity(
     source_row_count: int,
     output_row_count: int,
-    source_cost_bytes: bytes | None = None,
-    output_cost_bytes: bytes | None = None,
+    source_path: str | None = None,
+    output_path: str | None = None,
+    numeric_columns: list[str] | None = None,
+    row_locator: str | None = None,
 ) -> GateResult:
-    """Row count and cost byte-identity between source and output.
+    """Row count equality AND per-row numeric value preservation.
+
+    Compares scoped source and exported Parquet through DuckDB using typed
+    logical values. NULL must remain NULL. Numeric values must be exactly equal.
 
     Args:
         source_row_count: Number of rows in scoped source.
         output_row_count: Number of rows in output parquet.
-        source_cost_bytes: Raw bytes of cost column sample (optional).
-        output_cost_bytes: Raw bytes of same cost column from output (optional).
+        source_path: DuckDB-readable source (Parquet path or glob).
+        output_path: Path to the exported Parquet file.
+        numeric_columns: Cost/usage columns to verify (SAFE numerics).
+        row_locator: Column providing stable row identity for join
+                     (e.g. line_item_line_item_id). If None, only row count is checked.
     """
     failures = []
 
@@ -93,9 +101,35 @@ def gate_integrity(
             f"Row count mismatch: source={source_row_count}, output={output_row_count}"
         )
 
-    if source_cost_bytes is not None and output_cost_bytes is not None:
-        if source_cost_bytes != output_cost_bytes:
-            failures.append("Cost column bytes differ between source and output")
+    # Per-row numeric verification via DuckDB
+    if source_path and output_path and numeric_columns and row_locator:
+        import duckdb
+        con = duckdb.connect(":memory:")
+        try:
+            for col in numeric_columns:
+                # Compare typed values joined on row locator
+                mismatches = con.execute(f"""
+                    SELECT COUNT(*) FROM (
+                        SELECT
+                            s."{row_locator}" AS rid,
+                            s."{col}" AS src_val,
+                            o."{col}" AS out_val
+                        FROM read_parquet('{source_path}') s
+                        JOIN read_parquet('{output_path}') o
+                            ON CAST(s."{row_locator}" AS VARCHAR)
+                             = CAST(o."{row_locator}" AS VARCHAR)
+                        WHERE (s."{col}" IS DISTINCT FROM o."{col}")
+                    )
+                """).fetchone()[0]
+                if mismatches > 0:
+                    failures.append(
+                        f"Numeric column '{col}': {mismatches} row(s) differ "
+                        f"between source and output"
+                    )
+        except Exception as e:
+            failures.append(f"Gate 2 verification error: {type(e).__name__}")
+        finally:
+            con.close()
 
     return GateResult(
         passed=len(failures) == 0,
@@ -103,6 +137,7 @@ def gate_integrity(
         details={
             "source_rows": source_row_count,
             "output_rows": output_row_count,
+            "numeric_columns_verified": len(numeric_columns) if numeric_columns else 0,
         },
         failures=failures,
     )

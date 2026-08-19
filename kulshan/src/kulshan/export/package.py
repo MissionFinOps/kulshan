@@ -43,7 +43,7 @@ def create_package(
     Returns:
         Path to created ZIP.
     """
-    manifest = _build_manifest(scope, classification, cur_row_count, ce_datasets, keep_tags)
+    manifest = _build_manifest(scope, classification, cur_row_count, ce_datasets, keep_tags, dropped_columns)
     privacy_report = _build_privacy_report(
         classification, gate_results, dropped_columns, keep_tags
     )
@@ -73,6 +73,7 @@ def _build_manifest(
     cur_row_count: int,
     ce_datasets: list[str] | None,
     keep_tags: list[str] | None,
+    dropped_columns: list[str] | None = None,
 ) -> dict:
     counts = {}
     for cls in ColumnClass:
@@ -92,6 +93,7 @@ def _build_manifest(
         "cur": {
             "row_count": cur_row_count,
             "column_classification": counts,
+            "dropped_columns": sorted(dropped_columns) if dropped_columns else [],
         },
         "ce": {
             "datasets": ce_datasets or [],

@@ -6,7 +6,6 @@ scope -> classification -> pseudonymization -> gates -> package.
 from __future__ import annotations
 
 import json
-import os
 import zipfile
 from datetime import date
 from pathlib import Path
@@ -330,7 +329,7 @@ class TestFullPipeline:
     def test_full_package_creation(self, synthetic_cur, workspace):
         """Full pipeline produces a valid ZIP with expected structure."""
         from kulshan.export.cur_export import export_cur
-        from kulshan.export.gates import gate_integrity, gate_residual, gate_schema
+        from kulshan.export.gates import gate_integrity, gate_schema
         from kulshan.export.package import create_package
         from kulshan.pseudonym.engine import PseudonymizationEngine
         from kulshan.pseudonym.policy import PseudonymPolicy
@@ -424,7 +423,7 @@ class TestGate3NegativeControls:
         bad_dir = tmp_path / "bad_output"
         bad_dir.mkdir()
         con = duckdb.connect(":memory:")
-        con.execute(f"""
+        con.execute("""
             CREATE TABLE bad AS SELECT
                 '111222333444' AS leaked_account,
                 'acct_abc123' AS normal_col
@@ -453,7 +452,7 @@ class TestGate3NegativeControls:
         bad_dir = tmp_path / "bad_arn"
         bad_dir.mkdir()
         con = duckdb.connect(":memory:")
-        con.execute(f"""
+        con.execute("""
             CREATE TABLE bad AS SELECT
                 'arn:aws:ec2:us-east-1:111222333444:instance/i-abc' AS leaked_arn
         """)
@@ -594,3 +593,469 @@ class TestNumericClassificationCounts:
         assert counts[ColumnClass.DROP] == 0, f"Expected 0 DROP, got {counts[ColumnClass.DROP]}"
         assert counts[ColumnClass.UNCLASSIFIED] == 0, f"Expected 0 UNCLASSIFIED, got {counts[ColumnClass.UNCLASSIFIED]}"
         assert sum(counts.values()) == 11
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# GATE 2 PER-ROW COST VERIFICATION + NEGATIVE CONTROL
+# ═══════════════════════════════════════════════════════════════════════════════
+
+
+class TestGate2PerRowVerification:
+    """Gate 2 must verify numeric values per-row, not just row counts."""
+
+    @pytest.fixture
+    def source_and_output(self, tmp_path):
+        """Create source and output parquet with matching row locators."""
+        import duckdb
+
+        src_dir = tmp_path / "src"
+        src_dir.mkdir()
+        out_dir = tmp_path / "out"
+        out_dir.mkdir()
+
+        con = duckdb.connect(":memory:")
+        con.execute("""
+            CREATE TABLE src AS SELECT
+                'lid-001' AS line_item_line_item_id,
+                42.50 AS line_item_unblended_cost,
+                100.0 AS line_item_usage_amount
+            UNION ALL SELECT
+                'lid-002', 5.25, 200.0
+            UNION ALL SELECT
+                'lid-003', 0.0, 0.0
+        """)
+        src_path = src_dir / "source.parquet"
+        con.execute(f"COPY src TO '{src_path.as_posix()}' (FORMAT PARQUET)")
+
+        # Good output: values identical
+        con.execute("""
+            CREATE TABLE good_out AS SELECT
+                'lid-001' AS line_item_line_item_id,
+                42.50 AS line_item_unblended_cost,
+                100.0 AS line_item_usage_amount
+            UNION ALL SELECT
+                'lid-002', 5.25, 200.0
+            UNION ALL SELECT
+                'lid-003', 0.0, 0.0
+        """)
+        good_path = out_dir / "good.parquet"
+        con.execute(f"COPY good_out TO '{good_path.as_posix()}' (FORMAT PARQUET)")
+
+        # Bad output: one cost value mutated
+        con.execute("""
+            CREATE TABLE bad_out AS SELECT
+                'lid-001' AS line_item_line_item_id,
+                42.51 AS line_item_unblended_cost,
+                100.0 AS line_item_usage_amount
+            UNION ALL SELECT
+                'lid-002', 5.25, 200.0
+            UNION ALL SELECT
+                'lid-003', 0.0, 0.0
+        """)
+        bad_path = out_dir / "bad.parquet"
+        con.execute(f"COPY bad_out TO '{bad_path.as_posix()}' (FORMAT PARQUET)")
+        con.close()
+
+        return src_path, good_path, bad_path
+
+    def test_gate2_passes_identical_values(self, source_and_output):
+        from kulshan.export.gates import gate_integrity
+        src, good, _ = source_and_output
+
+        result = gate_integrity(
+            source_row_count=3,
+            output_row_count=3,
+            source_path=src.as_posix(),
+            output_path=good.as_posix(),
+            numeric_columns=["line_item_unblended_cost", "line_item_usage_amount"],
+            row_locator="line_item_line_item_id",
+        )
+        assert result.passed, f"Gate 2 should pass: {result.failures}"
+
+    def test_gate2_negative_control_mutated_cost(self, source_and_output):
+        """Mutated cost value must cause Gate 2 to FAIL."""
+        from kulshan.export.gates import gate_integrity
+        src, _, bad = source_and_output
+
+        result = gate_integrity(
+            source_row_count=3,
+            output_row_count=3,
+            source_path=src.as_posix(),
+            output_path=bad.as_posix(),
+            numeric_columns=["line_item_unblended_cost", "line_item_usage_amount"],
+            row_locator="line_item_line_item_id",
+        )
+        assert not result.passed, "Gate 2 must FAIL on mutated cost"
+        assert any("line_item_unblended_cost" in f for f in result.failures)
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# 1M-ROW SET-BASED SCALING TEST
+# ═══════════════════════════════════════════════════════════════════════════════
+
+
+class TestSetBasedScaling:
+    """Prove set-based pseudonymization scales with distinct values, not rows."""
+
+    def test_million_row_export(self, tmp_path):
+        """1M rows with 10K resources and 100 accounts. Verify O(distinct)."""
+        import duckdb
+        from unittest.mock import patch
+        from kulshan.export.cur_export import export_cur
+        from kulshan.pseudonym.engine import PseudonymizationEngine
+        from kulshan.pseudonym.policy import PseudonymPolicy
+
+        # Generate 1M rows with controlled cardinality
+        cur_dir = tmp_path / "big_cur"
+        cur_dir.mkdir()
+        con = duckdb.connect(":memory:")
+        con.execute("""
+            CREATE TABLE big AS
+            SELECT
+                DATE '2026-07-01' + (i % 31)::INTEGER AS line_item_usage_start_date,
+                LPAD(CAST(100000000000 + (i % 100) AS VARCHAR), 12, '0')
+                    AS line_item_usage_account_id,
+                'AmazonEC2' AS line_item_product_code,
+                'BoxUsage:m5.xlarge' AS line_item_usage_type,
+                'i-' || LPAD(CAST(i % 10000 AS VARCHAR), 17, '0')
+                    AS line_item_resource_id,
+                CAST((i % 1000) * 0.01 AS DOUBLE) AS line_item_unblended_cost,
+                'us-east-1' AS product_region,
+                CAST(i AS VARCHAR) AS line_item_line_item_id
+            FROM generate_series(1, 1000000) t(i)
+        """)
+        parquet_path = cur_dir / "big.parquet"
+        con.execute(f"COPY big TO '{parquet_path.as_posix()}' (FORMAT PARQUET)")
+        con.close()
+
+        # Track alias derivation calls
+        derivation_calls = []
+        original_pseudo_value = PseudonymizationEngine.pseudonymize_value
+
+        def tracking_pseudo(self, value, id_class):
+            derivation_calls.append((value, id_class))
+            return original_pseudo_value(self, value, id_class)
+
+        workspace = tmp_path / "ws"
+        workspace.mkdir()
+        scope = EvidenceScope(from_date=date(2026, 7, 1), to_date=date(2026, 8, 1))
+        policy = PseudonymPolicy(mode="consultant", tty_bypass=False, show_identifiers=False)
+        engine = PseudonymizationEngine.create(workspace, policy)
+
+        output_dir = tmp_path / "output" / "cur"
+
+        with patch.object(PseudonymizationEngine, 'pseudonymize_value', tracking_pseudo):
+            result = export_cur(
+                cur_path=str(cur_dir),
+                scope=scope,
+                engine=engine,
+                output_dir=output_dir,
+            )
+
+        # Verify output
+        assert result.row_count == 1_000_000
+        assert result.source_row_count == 1_000_000
+
+        # Key assertion: derivation calls scale with DISTINCT values
+        # 10,000 distinct resources + 100 distinct accounts + line_item_line_item_id (1M unique)
+        # The resource and account columns should have ~10,100 derivations total
+        # The line_item_line_item_id has 1M distinct (still derived, but via set-based)
+        # Total derivations should be much less than 3M (3 pseudo cols * 1M rows)
+        # With set-based: ~10,000 + 100 + 1,000,000 = ~1,010,100
+        # Without set-based (UDF): 3 * 1,000,000 = 3,000,000
+        total_derivations = len(derivation_calls)
+        # Set-based collects distinct values per column, so max is sum of distinct per column
+        # Not 3 * 1M = 3M
+        assert total_derivations < 1_500_000, (
+            f"Expected O(distinct) derivations, got {total_derivations}. "
+            "Per-row UDF would produce ~3M."
+        )
+
+        # Verify resource derivations specifically
+        resource_derivations = [c for c in derivation_calls if "RESOURCE" in str(c[1])]
+        assert len(resource_derivations) <= 10_001, (
+            f"Resource derivations should be ~10K distinct, got {len(resource_derivations)}"
+        )
+
+        account_derivations = [c for c in derivation_calls if "ACCOUNT" in str(c[1])]
+        assert len(account_derivations) <= 101, (
+            f"Account derivations should be ~100 distinct, got {len(account_derivations)}"
+        )
+
+    def test_alias_equivalence_1000_samples(self, tmp_path):
+        """Aliases from set-based export match direct engine derivation."""
+        import duckdb
+        from kulshan.export.cur_export import export_cur
+        from kulshan.pseudonym.engine import PseudonymizationEngine
+        from kulshan.pseudonym.policy import PseudonymPolicy
+        from kulshan.pseudonym.types import IdentifierClass
+
+        # Create fixture with 1000 distinct account IDs
+        cur_dir = tmp_path / "equiv_cur"
+        cur_dir.mkdir()
+        con = duckdb.connect(":memory:")
+        con.execute("""
+            CREATE TABLE t AS
+            SELECT
+                DATE '2026-07-15' AS line_item_usage_start_date,
+                LPAD(CAST(100000000000 + i AS VARCHAR), 12, '0')
+                    AS line_item_usage_account_id,
+                'AmazonEC2' AS line_item_product_code,
+                'BoxUsage' AS line_item_usage_type,
+                1.0 AS line_item_unblended_cost,
+                'us-east-1' AS product_region,
+                CAST(i AS VARCHAR) AS line_item_line_item_id
+            FROM generate_series(1, 1000) t(i)
+        """)
+        con.execute(
+            f"COPY t TO '{(cur_dir / 'data.parquet').as_posix()}' (FORMAT PARQUET)"
+        )
+        con.close()
+
+        workspace = tmp_path / "ws_equiv"
+        workspace.mkdir()
+        scope = EvidenceScope(from_date=date(2026, 7, 1), to_date=date(2026, 8, 1))
+        policy = PseudonymPolicy(mode="consultant", tty_bypass=False, show_identifiers=False)
+        engine = PseudonymizationEngine.create(workspace, policy)
+
+        output_dir = tmp_path / "equiv_out" / "cur"
+        result = export_cur(str(cur_dir), scope, engine, output_dir)
+
+        # Read source raw accounts joined to output aliases by row locator
+        con2 = duckdb.connect(":memory:")
+        pairs = con2.execute(f"""
+            SELECT
+                s.line_item_usage_account_id AS raw_acct,
+                o.line_item_usage_account_id AS exported_alias
+            FROM read_parquet('{(cur_dir / "data.parquet").as_posix()}') s
+            JOIN read_parquet('{result.output_path.as_posix()}') o
+                ON s.line_item_line_item_id = o.line_item_line_item_id
+        """).fetchall()
+        con2.close()
+
+        # Derive aliases directly via engine and compare
+        mismatches = 0
+        for raw_acct, exported_alias in pairs:
+            direct_alias = engine.pseudonymize_value(
+                raw_acct, IdentifierClass.ACCOUNT
+            )
+            if exported_alias != direct_alias:
+                mismatches += 1
+
+        assert mismatches == 0, (
+            f"Alias equivalence failed: {mismatches}/1000 mismatches"
+        )
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# S3 / DATA EXPORT REGRESSION TEST
+# ═══════════════════════════════════════════════════════════════════════════════
+
+
+class TestS3DataExportPath:
+    """Consultant exporter drives the existing S3 path end-to-end."""
+
+    def test_s3_source_through_consultant_pipeline(self, tmp_path):
+        """Mock S3 transport; prove classification + pseudo + gates execute."""
+        import duckdb
+        from unittest.mock import MagicMock, patch
+        from kulshan.export.cur_export import export_cur
+        from kulshan.pseudonym.engine import PseudonymizationEngine
+        from kulshan.pseudonym.policy import PseudonymPolicy
+
+        # Create local parquet to serve as "S3 source"
+        s3_dir = tmp_path / "s3_mock"
+        s3_dir.mkdir()
+        con = duckdb.connect(":memory:")
+        con.execute("""
+            CREATE TABLE s3data AS SELECT
+                '2026-07-15'::DATE AS line_item_usage_start_date,
+                '111222333444' AS line_item_usage_account_id,
+                'AmazonEC2' AS line_item_product_code,
+                'BoxUsage' AS line_item_usage_type,
+                'i-0abc123def456789a' AS line_item_resource_id,
+                42.50 AS line_item_unblended_cost,
+                'us-east-1' AS product_region,
+                'lid-s3-001' AS line_item_line_item_id
+        """)
+        parquet_path = s3_dir / "s3data.parquet"
+        con.execute(f"COPY s3data TO '{parquet_path.as_posix()}' (FORMAT PARQUET)")
+        con.close()
+
+        # Mock ManifestIndex that points to local parquet
+        mock_manifest = MagicMock()
+        mock_manifest.total_size_bytes = 1000
+
+        # Mock _source_sql to return local read
+        with patch(
+            "kulshan.cur.s3_query._source_sql",
+            return_value=f"read_parquet('{parquet_path.as_posix()}')",
+        ):
+            # Mock connect_s3_duckdb to return a memory connection
+            def mock_s3_connect(session=None):
+                return duckdb.connect(":memory:")
+
+            with patch(
+                "kulshan.cur.s3_query.connect_s3_duckdb",
+                side_effect=mock_s3_connect,
+            ):
+                workspace = tmp_path / "ws_s3"
+                workspace.mkdir()
+                scope = EvidenceScope(
+                    from_date=date(2026, 7, 1), to_date=date(2026, 8, 1)
+                )
+                policy = PseudonymPolicy(
+                    mode="consultant", tty_bypass=False, show_identifiers=False
+                )
+                engine = PseudonymizationEngine.create(workspace, policy)
+
+                output_dir = tmp_path / "s3_out" / "cur"
+                result = export_cur(
+                    cur_path="",  # not used when s3_manifest provided
+                    scope=scope,
+                    engine=engine,
+                    output_dir=output_dir,
+                    s3_manifest=mock_manifest,
+                    s3_session=MagicMock(),
+                )
+
+        assert result.row_count == 1
+        assert result.source_row_count == 1
+        assert result.output_path.exists()
+
+        # Verify pseudonymization occurred
+        con2 = duckdb.connect(":memory:")
+        df = con2.execute(
+            f"SELECT * FROM read_parquet('{result.output_path.as_posix()}')"
+        ).fetchdf()
+        con2.close()
+        all_text = " ".join(str(v) for v in df.values.flatten())
+        assert "111222333444" not in all_text
+        assert "acct_" in all_text
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# --drop-unclassified-columns END-TO-END
+# ═══════════════════════════════════════════════════════════════════════════════
+
+
+class TestDropUnclassifiedEndToEnd:
+    """--drop-unclassified-columns removes unknown columns and discloses."""
+
+    @pytest.fixture
+    def cur_with_unknown_column(self, tmp_path) -> Path:
+        import duckdb
+        cur_dir = tmp_path / "cur_unk"
+        cur_dir.mkdir()
+        con = duckdb.connect(":memory:")
+        con.execute("""
+            CREATE TABLE t AS SELECT
+                '2026-07-15'::DATE AS line_item_usage_start_date,
+                '111222333444' AS line_item_usage_account_id,
+                'AmazonEC2' AS line_item_product_code,
+                'BoxUsage' AS line_item_usage_type,
+                42.50 AS line_item_unblended_cost,
+                'us-east-1' AS product_region,
+                'lid-unk-001' AS line_item_line_item_id,
+                'secret-internal-data' AS brand_new_aws_column_2027
+        """)
+        con.execute(f"COPY t TO '{(cur_dir / 'data.parquet').as_posix()}' (FORMAT PARQUET)")
+        con.close()
+        return cur_dir
+
+    @pytest.fixture
+    def workspace(self, tmp_path) -> Path:
+        ws = tmp_path / "ws_drop"
+        ws.mkdir()
+        return ws
+
+    def test_blocks_by_default(self, cur_with_unknown_column, workspace):
+        """Unclassified column blocks export, naming the column."""
+        from kulshan.export.cur_export import ExportBlockedError, export_cur
+        from kulshan.pseudonym.engine import PseudonymizationEngine
+        from kulshan.pseudonym.policy import PseudonymPolicy
+
+        scope = EvidenceScope(from_date=date(2026, 7, 1), to_date=date(2026, 8, 1))
+        policy = PseudonymPolicy(mode="consultant", tty_bypass=False, show_identifiers=False)
+        engine = PseudonymizationEngine.create(workspace, policy)
+
+        with pytest.raises(ExportBlockedError) as exc_info:
+            export_cur(str(cur_with_unknown_column), scope, engine, workspace / "out")
+        assert "brand_new_aws_column_2027" in str(exc_info.value)
+
+    def test_drops_with_flag(self, cur_with_unknown_column, workspace):
+        """With --drop-unclassified-columns, column is absent from output."""
+        import duckdb
+        from kulshan.export.cur_export import export_cur
+        from kulshan.pseudonym.engine import PseudonymizationEngine
+        from kulshan.pseudonym.policy import PseudonymPolicy
+
+        scope = EvidenceScope(from_date=date(2026, 7, 1), to_date=date(2026, 8, 1))
+        policy = PseudonymPolicy(mode="consultant", tty_bypass=False, show_identifiers=False)
+        engine = PseudonymizationEngine.create(workspace, policy)
+
+        output_dir = workspace / "drop_out" / "cur"
+        result = export_cur(
+            str(cur_with_unknown_column), scope, engine, output_dir,
+            drop_unclassified=True,
+        )
+
+        # Column must be absent from output
+        con = duckdb.connect(":memory:")
+        cols = {
+            r[0].lower() for r in con.execute(
+                f"DESCRIBE SELECT * FROM read_parquet('{result.output_path.as_posix()}')"
+            ).fetchall()
+        }
+        con.close()
+        assert "brand_new_aws_column_2027" not in cols
+        assert "brand_new_aws_column_2027" in result.dropped_columns
+
+    def test_disclosure_in_package(self, cur_with_unknown_column, workspace):
+        """Dropped columns appear in privacy-report.json, manifest.json, README.md."""
+        import json
+        import zipfile
+        from kulshan.export.cur_export import export_cur
+        from kulshan.export.gates import gate_schema
+        from kulshan.export.package import create_package
+        from kulshan.pseudonym.engine import PseudonymizationEngine
+        from kulshan.pseudonym.policy import PseudonymPolicy
+
+        scope = EvidenceScope(from_date=date(2026, 7, 1), to_date=date(2026, 8, 1))
+        policy = PseudonymPolicy(mode="consultant", tty_bypass=False, show_identifiers=False)
+        engine = PseudonymizationEngine.create(workspace, policy)
+
+        cur_dir = workspace / "disc_out" / "cur"
+        result = export_cur(
+            str(cur_with_unknown_column), scope, engine, cur_dir,
+            drop_unclassified=True,
+        )
+
+        g1 = gate_schema(result.classification, drop_unclassified=True)
+        assert g1.passed
+
+        zip_path = workspace / "disclosure-test.zip"
+        create_package(
+            output_path=zip_path,
+            cur_dir=cur_dir,
+            ce_dir=None,
+            scope=scope,
+            classification=result.classification,
+            gate_results=[{"gate": "schema", "passed": True, "details": g1.details}],
+            cur_row_count=result.row_count,
+            dropped_columns=result.dropped_columns,
+        )
+
+        with zipfile.ZipFile(zip_path) as zf:
+            privacy = json.loads(zf.read("privacy-report.json"))
+            manifest = json.loads(zf.read("manifest.json"))
+            readme = zf.read("README.md").decode()
+
+        assert "brand_new_aws_column_2027" in privacy["dropped_columns"]
+        # manifest.json gates details contain dropped_unclassified
+        assert any(
+            "brand_new_aws_column_2027" in str(g.get("details", {}).get("dropped_unclassified", []))
+            for g in manifest.get("gates", [{}])
+            if isinstance(g, dict)
+        ) or "brand_new_aws_column_2027" in str(manifest)
+        assert "brand_new_aws_column_2027" in readme

@@ -153,7 +153,38 @@ def consultant(
         console.print("[green]Gate 1 PASS[/green]: Schema classification")
 
         # ── Gate 2: Integrity ────────────────────────────────────────────
-        g2 = gate_integrity(cur_result.source_row_count, cur_result.row_count)
+        # Identify numeric SAFE columns for per-row verification
+        from kulshan.export.columns import ColumnClass as _CC
+        numeric_safe = [
+            c for c, cls in cur_result.classification.items()
+            if cls == _CC.SAFE and any(
+                c.startswith(p) for p in (
+                    "line_item_unblended", "line_item_blended", "line_item_net",
+                    "line_item_normalized_usage_amount", "line_item_usage_amount",
+                    "pricing_", "discount_", "savings_plan_net_",
+                    "savings_plan_total_commitment", "savings_plan_used_commitment",
+                    "reservation_amortized_", "reservation_effective_cost",
+                    "reservation_net_", "reservation_unused_",
+                )
+            )
+        ]
+        # Use line_item_line_item_id as row locator if available
+        row_locator = None
+        if "line_item_line_item_id" in cur_result.classification:
+            row_locator = "line_item_line_item_id"
+
+        # Build source path for comparison
+        from kulshan.cur.source import local_parquet_source
+        source_parquet = local_parquet_source(cur_path)
+
+        g2 = gate_integrity(
+            cur_result.source_row_count,
+            cur_result.row_count,
+            source_path=source_parquet,
+            output_path=cur_result.output_path.as_posix(),
+            numeric_columns=numeric_safe if row_locator else None,
+            row_locator=row_locator,
+        )
         if not g2.passed:
             console.print("[red]GATE 2 FAILED: Evidence integrity[/red]")
             for f in g2.failures:
