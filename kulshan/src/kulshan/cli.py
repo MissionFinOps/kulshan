@@ -453,7 +453,6 @@ def report(
 
     # Merge deprecated --show-pii with --show-identifiers
     if show_pii and not show_identifiers:
-        import sys as _sys
         Console(stderr=True).print("[dim]warning: --show-pii is deprecated, use --show-identifiers[/dim]")
         show_identifiers = True
     show_pii = show_pii or show_identifiers

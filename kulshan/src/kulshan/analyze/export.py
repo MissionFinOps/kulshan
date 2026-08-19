@@ -243,7 +243,7 @@ def _maybe_pseudonymize_brief(brief, output_format, output_file):
 
 def _pseudonymize_brief_fields(engine, brief):
     """Pseudonymize identifier fields in investigation briefs."""
-    from dataclasses import replace, fields
+    from dataclasses import replace
     from kulshan.pseudonym.types import IdentifierClass
 
     changes = {}
