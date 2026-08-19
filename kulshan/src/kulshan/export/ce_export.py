@@ -124,7 +124,7 @@ def _fetch_dimension(
     results = []
     next_token = None
     page = 0
-    max_pages = 50  # Hard limit to prevent runaway pagination
+    max_pages = 200  # Hard safety ceiling; truncation is a hard failure
 
     while True:
         kwargs: dict[str, Any] = {

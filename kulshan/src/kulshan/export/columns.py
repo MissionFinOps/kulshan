@@ -93,6 +93,8 @@ _SAFE_PREFIXES = (
 _SAFE_EXACT = frozenset({
     "billing_period",
     "cost",
+    "identity_line_item_id",
+    "identity_time_interval",
     "usage_start_date",
     "usage_start",
     "usage_end_date",
@@ -131,10 +133,9 @@ _PSEUDONYMIZE_PREFIXES = (
     "resource_tags_",
 )
 
-# Columns to drop (not useful for investigation, potential risk)
+# Columns to drop (genuinely useless for investigation AND potential risk)
 _DROP_EXACT = frozenset({
-    "identity_line_item_id",
-    "identity_time_interval",
+    # None currently - identity columns reclassified as SAFE below
 })
 
 

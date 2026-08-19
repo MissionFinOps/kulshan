@@ -103,7 +103,10 @@ class TestColumnClassification:
         assert classify_column("resource_tags_user_jira_project", keep_tags=frozenset({"jira_project"})) == ColumnClass.PSEUDONYMIZE
 
     def test_drop_columns(self):
-        assert classify_column("identity_line_item_id") == ColumnClass.DROP
+        # Currently no columns are classified as DROP
+        # identity_ columns are SAFE (opaque AWS hashes, analytically useful)
+        assert classify_column("identity_line_item_id") == ColumnClass.SAFE
+        assert classify_column("identity_time_interval") == ColumnClass.SAFE
 
     def test_truly_unknown(self):
         assert classify_column("completely_new_column_from_future") == ColumnClass.UNCLASSIFIED
@@ -376,3 +379,218 @@ class TestFullPipeline:
                     content = zf.read(name).decode("utf-8")
                     assert SYNTHETIC_ACCOUNT not in content
                     assert "999888777666" not in content
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# GATE 3 NEGATIVE CONTROLS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+
+class TestGate3NegativeControls:
+    """Gate 3 must provably detect leaked identifiers."""
+
+    @pytest.fixture
+    def synthetic_cur(self, tmp_path) -> Path:
+        import duckdb
+        cur_dir = tmp_path / "cur_neg"
+        cur_dir.mkdir()
+        con = duckdb.connect(":memory:")
+        con.execute("""
+            CREATE TABLE t AS SELECT
+                '2026-07-15'::DATE AS line_item_usage_start_date,
+                '111222333444' AS line_item_usage_account_id,
+                'AmazonEC2' AS line_item_product_code,
+                'BoxUsage' AS line_item_usage_type,
+                'i-0abc123def456789a' AS line_item_resource_id,
+                10.0 AS line_item_unblended_cost,
+                'us-east-1' AS product_region
+        """)
+        con.execute(f"COPY t TO '{(cur_dir / 'data.parquet').as_posix()}' (FORMAT PARQUET)")
+        con.close()
+        return cur_dir
+
+    @pytest.fixture
+    def workspace(self, tmp_path) -> Path:
+        ws = tmp_path / "ws_neg"
+        ws.mkdir()
+        return ws
+
+    def test_parquet_negative_control_raw_account(self, synthetic_cur, workspace, tmp_path):
+        """Injecting a raw account ID into output Parquet causes Gate 3 to FAIL."""
+        import duckdb
+        from kulshan.export.gates import gate_residual
+
+        # Create a "bad" parquet with raw identifier
+        bad_dir = tmp_path / "bad_output"
+        bad_dir.mkdir()
+        con = duckdb.connect(":memory:")
+        con.execute(f"""
+            CREATE TABLE bad AS SELECT
+                '111222333444' AS leaked_account,
+                'acct_abc123' AS normal_col
+        """)
+        con.execute(f"COPY bad TO '{(bad_dir / 'billing.parquet').as_posix()}' (FORMAT PARQUET)")
+
+        # Read it back through DuckDB (decoded logical values)
+        rows = con.execute(
+            f"SELECT * FROM read_parquet('{(bad_dir / 'billing.parquet').as_posix()}')"
+        ).fetchall()
+        con.close()
+        output_text = " ".join(str(v) for row in rows for v in row)
+
+        result = gate_residual(
+            source_identifiers={"111222333444"},
+            output_text=output_text,
+        )
+        assert not result.passed, "Gate 3 must FAIL when raw account ID is in decoded Parquet"
+        assert any("identifier" in f.lower() or "leaked" in f.lower() for f in result.failures)
+
+    def test_parquet_negative_control_raw_arn(self, synthetic_cur, workspace, tmp_path):
+        """Injecting a raw ARN into output causes Gate 3 to FAIL."""
+        import duckdb
+        from kulshan.export.gates import gate_residual
+
+        bad_dir = tmp_path / "bad_arn"
+        bad_dir.mkdir()
+        con = duckdb.connect(":memory:")
+        con.execute(f"""
+            CREATE TABLE bad AS SELECT
+                'arn:aws:ec2:us-east-1:111222333444:instance/i-abc' AS leaked_arn
+        """)
+        con.execute(f"COPY bad TO '{(bad_dir / 'billing.parquet').as_posix()}' (FORMAT PARQUET)")
+        rows = con.execute(
+            f"SELECT * FROM read_parquet('{(bad_dir / 'billing.parquet').as_posix()}')"
+        ).fetchall()
+        con.close()
+        output_text = " ".join(str(v) for row in rows for v in row)
+
+        result = gate_residual(source_identifiers=set(), output_text=output_text)
+        assert not result.passed, "Gate 3 must FAIL when raw ARN is in decoded Parquet"
+
+    def test_text_negative_control_manifest(self):
+        """Injecting a raw account ID into manifest text causes Gate 3 to FAIL."""
+        from kulshan.export.gates import gate_residual
+
+        manifest_text = '{"account_id": "111222333444", "scope": {}}'
+        result = gate_residual(
+            source_identifiers={"111222333444"},
+            output_text=manifest_text,
+        )
+        assert not result.passed
+
+    def test_clean_control_passes(self, synthetic_cur, workspace):
+        """A properly pseudonymized package passes Gate 3."""
+        from kulshan.export.cur_export import export_cur
+        from kulshan.export.gates import gate_residual
+        from kulshan.pseudonym.engine import PseudonymizationEngine
+        from kulshan.pseudonym.policy import PseudonymPolicy
+        import duckdb
+
+        scope = EvidenceScope(from_date=date(2026, 7, 1), to_date=date(2026, 8, 1))
+        policy = PseudonymPolicy(mode="consultant", tty_bypass=False, show_identifiers=False)
+        engine = PseudonymizationEngine.create(workspace, policy)
+
+        output_dir = workspace / "clean_out" / "cur"
+        result = export_cur(str(synthetic_cur), scope, engine, output_dir)
+
+        # Read output through DuckDB (decoded logical values)
+        con = duckdb.connect(":memory:")
+        rows = con.execute(
+            f"SELECT * FROM read_parquet('{result.output_path.as_posix()}')"
+        ).fetchall()
+        con.close()
+        output_text = " ".join(str(v) for row in rows for v in row if v is not None)
+
+        source_ids = {"111222333444", "i-0abc123def456789a"}
+        g3 = gate_residual(source_identifiers=source_ids, output_text=output_text)
+        assert g3.passed, f"Clean output should pass Gate 3: {g3.failures}"
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# CE PAGINATION CEILING TEST
+# ═══════════════════════════════════════════════════════════════════════════════
+
+
+class TestCePaginationCeiling:
+    """CE export must hard-fail if pagination is truncated."""
+
+    def test_pagination_truncation_fails(self):
+        """If NextPageToken persists beyond max_pages, export fails."""
+        from unittest.mock import MagicMock
+        from kulshan.export.ce_export import CeTruncationError, _fetch_dimension
+
+        mock_client = MagicMock()
+        # Always return NextPageToken to simulate infinite pagination
+        mock_client.get_cost_and_usage.return_value = {
+            "ResultsByTime": [{"TimePeriod": {"Start": "2026-07-01"}, "Groups": []}],
+            "NextPageToken": "still-more-data",
+        }
+
+        with pytest.raises(CeTruncationError, match="pagination exceeded"):
+            _fetch_dimension(
+                mock_client, "2026-07-01", "2026-08-01", "SERVICE", None
+            )
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# NUMERIC CLASSIFICATION COUNTS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+
+class TestNumericClassificationCounts:
+    """Report actual classification counts from the test fixture."""
+
+    def test_fixture_classification_counts(self, tmp_path):
+        """Count exact classification of the synthetic CUR columns."""
+        import duckdb
+        from kulshan.export.columns import classify_all_columns
+
+        cur_dir = tmp_path / "cur_count"
+        cur_dir.mkdir()
+        con = duckdb.connect(":memory:")
+        con.execute("""
+            CREATE TABLE t AS SELECT
+                '2026-07-15'::DATE AS line_item_usage_start_date,
+                '111222333444' AS line_item_usage_account_id,
+                '999888777666' AS bill_payer_account_id,
+                'AmazonEC2' AS line_item_product_code,
+                'BoxUsage:m5.xlarge' AS line_item_usage_type,
+                'i-0abc123def456789a' AS line_item_resource_id,
+                42.50 AS line_item_unblended_cost,
+                'us-east-1' AS product_region,
+                'RunInstances' AS line_item_operation,
+                'team-alpha' AS resource_tags_user_team,
+                'production' AS resource_tags_user_environment
+        """)
+        con.execute(f"COPY t TO '{(cur_dir / 'data.parquet').as_posix()}' (FORMAT PARQUET)")
+        con.close()
+
+        # Get columns
+        con2 = duckdb.connect(":memory:")
+        con2.execute(
+            f"CREATE VIEW v AS SELECT * FROM read_parquet('{(cur_dir / 'data.parquet').as_posix()}')"
+        )
+        columns = {str(r[0]).lower() for r in con2.execute("DESCRIBE v").fetchall()}
+        con2.close()
+
+        classification = classify_all_columns(columns)
+        from kulshan.export.columns import ColumnClass
+
+        counts = {c: 0 for c in ColumnClass}
+        for cls in classification.values():
+            counts[cls] += 1
+
+        # Assert known counts for THIS fixture
+        # SAFE: line_item_usage_start_date, line_item_product_code,
+        #        line_item_usage_type, line_item_unblended_cost,
+        #        product_region, line_item_operation = 6
+        # PSEUDONYMIZE: line_item_usage_account_id, bill_payer_account_id,
+        #               line_item_resource_id, resource_tags_user_team,
+        #               resource_tags_user_environment = 5
+        # DROP: 0
+        # UNCLASSIFIED: 0
+        assert counts[ColumnClass.SAFE] == 6, f"Expected 6 SAFE, got {counts[ColumnClass.SAFE]}"
+        assert counts[ColumnClass.PSEUDONYMIZE] == 5, f"Expected 5 PSEUDO, got {counts[ColumnClass.PSEUDONYMIZE]}"
+        assert counts[ColumnClass.DROP] == 0, f"Expected 0 DROP, got {counts[ColumnClass.DROP]}"
+        assert counts[ColumnClass.UNCLASSIFIED] == 0, f"Expected 0 UNCLASSIFIED, got {counts[ColumnClass.UNCLASSIFIED]}"
+        assert sum(counts.values()) == 11
