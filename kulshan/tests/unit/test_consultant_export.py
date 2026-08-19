@@ -16,7 +16,6 @@ from kulshan.export.columns import ColumnClass, classify_all_columns, classify_c
 from kulshan.export.gates import gate_integrity, gate_residual, gate_schema
 from kulshan.export.scope import EvidenceScope
 
-
 SYNTHETIC_ACCOUNT = "111222333444"
 SYNTHETIC_RESOURCE = "i-0abc123def456789a"
 
@@ -298,12 +297,12 @@ class TestFullPipeline:
 
     def test_cur_export_blocks_unclassified(self, synthetic_cur, workspace):
         """Unclassified columns block export by default."""
+        # Add a column that will be unclassified
+        import duckdb
+
         from kulshan.export.cur_export import ExportBlockedError, export_cur
         from kulshan.pseudonym.engine import PseudonymizationEngine
         from kulshan.pseudonym.policy import PseudonymPolicy
-
-        # Add a column that will be unclassified
-        import duckdb
         weird_cur = workspace / "weird_cur"
         weird_cur.mkdir()
         con = duckdb.connect(":memory:")
@@ -417,6 +416,7 @@ class TestGate3NegativeControls:
     def test_parquet_negative_control_raw_account(self, synthetic_cur, workspace, tmp_path):
         """Injecting a raw account ID into output Parquet causes Gate 3 to FAIL."""
         import duckdb
+
         from kulshan.export.gates import gate_residual
 
         # Create a "bad" parquet with raw identifier
@@ -447,6 +447,7 @@ class TestGate3NegativeControls:
     def test_parquet_negative_control_raw_arn(self, synthetic_cur, workspace, tmp_path):
         """Injecting a raw ARN into output causes Gate 3 to FAIL."""
         import duckdb
+
         from kulshan.export.gates import gate_residual
 
         bad_dir = tmp_path / "bad_arn"
@@ -479,11 +480,12 @@ class TestGate3NegativeControls:
 
     def test_clean_control_passes(self, synthetic_cur, workspace):
         """A properly pseudonymized package passes Gate 3."""
+        import duckdb
+
         from kulshan.export.cur_export import export_cur
         from kulshan.export.gates import gate_residual
         from kulshan.pseudonym.engine import PseudonymizationEngine
         from kulshan.pseudonym.policy import PseudonymPolicy
-        import duckdb
 
         scope = EvidenceScope(from_date=date(2026, 7, 1), to_date=date(2026, 8, 1))
         policy = PseudonymPolicy(mode="consultant", tty_bypass=False, show_identifiers=False)
@@ -516,6 +518,7 @@ class TestCePaginationCeiling:
     def test_pagination_truncation_fails(self):
         """If NextPageToken persists beyond max_pages, export fails."""
         from unittest.mock import MagicMock
+
         from kulshan.export.ce_export import CeTruncationError, _fetch_dimension
 
         mock_client = MagicMock()
@@ -542,6 +545,7 @@ class TestNumericClassificationCounts:
     def test_fixture_classification_counts(self, tmp_path):
         """Count exact classification of the synthetic CUR columns."""
         import duckdb
+
         from kulshan.export.columns import classify_all_columns
 
         cur_dir = tmp_path / "cur_count"
@@ -612,6 +616,7 @@ class TestGate2PerRowVerification:
     def _make_source_and_export(self, tmp_path, workspace, source_rows, output_rows):
         """Helper: create source parquet, export, and return paths + engine."""
         import duckdb
+
         from kulshan.pseudonym.engine import PseudonymizationEngine
         from kulshan.pseudonym.policy import PseudonymPolicy
 
@@ -797,8 +802,10 @@ class TestSetBasedScaling:
 
     def test_million_row_export(self, tmp_path):
         """1M rows with 10K resources and 100 accounts. Verify O(distinct)."""
-        import duckdb
         from unittest.mock import patch
+
+        import duckdb
+
         from kulshan.export.cur_export import export_cur
         from kulshan.pseudonym.engine import PseudonymizationEngine
         from kulshan.pseudonym.policy import PseudonymPolicy
@@ -883,6 +890,7 @@ class TestSetBasedScaling:
     def test_alias_equivalence_1000_samples(self, tmp_path):
         """Aliases from set-based export match direct engine derivation."""
         import duckdb
+
         from kulshan.export.cur_export import export_cur
         from kulshan.pseudonym.engine import PseudonymizationEngine
         from kulshan.pseudonym.policy import PseudonymPolicy
@@ -955,8 +963,10 @@ class TestS3DataExportPath:
 
     def test_s3_source_through_consultant_pipeline(self, tmp_path):
         """S3 source via real ManifestIndex + _source_sql. Only transport mocked."""
-        import duckdb
         from unittest.mock import MagicMock, patch
+
+        import duckdb
+
         from kulshan.export.cur_export import export_cur
         from kulshan.pseudonym.engine import PseudonymizationEngine
         from kulshan.pseudonym.policy import PseudonymPolicy
@@ -993,8 +1003,8 @@ class TestS3DataExportPath:
         def mock_s3_connect(session=None):
             return duckdb.connect(":memory:")
 
-        # Patch _source_sql to use local path directly (since s3:// won't work without httpfs)
-        # This is the minimal mock: we keep the function real but feed it data it can resolve locally
+        # Patch _source_sql to use local path (s3:// won't work without httpfs)
+        # Minimal mock: keep function real but feed locally resolvable data
         with patch(
             "kulshan.cur.s3_query._source_sql",
             return_value=f"read_parquet('{parquet_path.as_posix()}', hive_partitioning=true)",
@@ -1091,6 +1101,7 @@ class TestDropUnclassifiedEndToEnd:
     def test_drops_with_flag(self, cur_with_unknown_column, workspace):
         """With --drop-unclassified-columns, column is absent from output."""
         import duckdb
+
         from kulshan.export.cur_export import export_cur
         from kulshan.pseudonym.engine import PseudonymizationEngine
         from kulshan.pseudonym.policy import PseudonymPolicy
@@ -1120,6 +1131,7 @@ class TestDropUnclassifiedEndToEnd:
         """Dropped columns appear in privacy-report.json, manifest.json, README.md."""
         import json
         import zipfile
+
         from kulshan.export.cur_export import export_cur
         from kulshan.export.gates import gate_schema
         from kulshan.export.package import create_package
@@ -1164,3 +1176,548 @@ class TestDropUnclassifiedEndToEnd:
             if isinstance(g, dict)
         ) or "brand_new_aws_column_2027" in str(manifest)
         assert "brand_new_aws_column_2027" in readme
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# GATE 2 SCOPE TESTS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+
+class TestGate2ScopeApplication:
+    """Gate 2 must independently apply EvidenceScope to the raw source.
+
+    Out-of-scope rows must NOT influence Gate 2 results.
+    """
+
+    @pytest.fixture
+    def workspace(self, tmp_path) -> Path:
+        ws = tmp_path / "ws_scope"
+        ws.mkdir()
+        return ws
+
+    def _build_source_with_out_of_scope(self, tmp_path, extra_rows_sql: str) -> Path:
+        """Build source Parquet containing in-scope + out-of-scope rows."""
+        import duckdb
+
+        cur_dir = tmp_path / "scope_cur"
+        cur_dir.mkdir(exist_ok=True)
+        con = duckdb.connect(":memory:")
+        con.execute(f"""
+            CREATE TABLE t AS
+            -- In-scope rows (July 2026, account 111222333444, AmazonEC2)
+            SELECT
+                DATE '2026-07-10' AS line_item_usage_start_date,
+                '111222333444' AS line_item_usage_account_id,
+                'AmazonEC2' AS line_item_product_code,
+                'BoxUsage' AS line_item_usage_type,
+                10.0 AS line_item_unblended_cost,
+                'us-east-1' AS product_region
+            UNION ALL
+            SELECT
+                DATE '2026-07-20' AS line_item_usage_start_date,
+                '111222333444' AS line_item_usage_account_id,
+                'AmazonEC2' AS line_item_product_code,
+                'BoxUsage:m5.large' AS line_item_usage_type,
+                25.0 AS line_item_unblended_cost,
+                'eu-west-1' AS product_region
+            UNION ALL
+            {extra_rows_sql}
+        """)
+        parquet_path = cur_dir / "data.parquet"
+        con.execute(f"COPY t TO '{parquet_path.as_posix()}' (FORMAT PARQUET)")
+        con.close()
+        return cur_dir
+
+    def test_date_scope(self, tmp_path, workspace):
+        """A. Source has rows inside and outside date range. Clean scoped export passes."""
+        from kulshan.cur.source import local_parquet_source
+        from kulshan.export.cur_export import export_cur
+        from kulshan.export.gates import gate_integrity
+        from kulshan.pseudonym.engine import PseudonymizationEngine
+        from kulshan.pseudonym.policy import PseudonymPolicy
+
+        # Out-of-scope: June 2026 (before from_date)
+        cur_dir = self._build_source_with_out_of_scope(tmp_path, """
+            SELECT
+                DATE '2026-06-15' AS line_item_usage_start_date,
+                '111222333444' AS line_item_usage_account_id,
+                'AmazonEC2' AS line_item_product_code,
+                'BoxUsage' AS line_item_usage_type,
+                99.99 AS line_item_unblended_cost,
+                'us-west-2' AS product_region
+        """)
+
+        scope = EvidenceScope(from_date=date(2026, 7, 1), to_date=date(2026, 8, 1))
+        policy = PseudonymPolicy(mode="consultant", tty_bypass=False, show_identifiers=False)
+        engine = PseudonymizationEngine.create(workspace, policy)
+
+        output_dir = tmp_path / "date_out" / "cur"
+        result = export_cur(str(cur_dir), scope, engine, output_dir)
+        assert result.row_count == 2  # Only in-scope rows
+
+        # Gate 2 with scope: raw source has 3 rows, but scope filters to 2
+        source_parquet = local_parquet_source(str(cur_dir))
+        g2 = gate_integrity(
+            source_row_count=result.source_row_count,
+            output_row_count=result.row_count,
+            source_path=source_parquet,
+            output_path=result.output_path.as_posix(),
+            numeric_columns=["line_item_unblended_cost"],
+            pseudo_columns=["line_item_usage_account_id"],
+            safe_dimensions=["product_region"],
+            engine=engine,
+            scope=scope,
+        )
+        assert g2.passed, f"Gate 2 date-scope must PASS: {g2.failures}"
+
+    def test_account_scope(self, tmp_path, workspace):
+        """B. Source has selected + non-selected accounts. Clean scoped export passes."""
+        from kulshan.cur.source import local_parquet_source
+        from kulshan.export.cur_export import export_cur
+        from kulshan.export.gates import gate_integrity
+        from kulshan.pseudonym.engine import PseudonymizationEngine
+        from kulshan.pseudonym.policy import PseudonymPolicy
+
+        # Out-of-scope: different account
+        cur_dir = self._build_source_with_out_of_scope(tmp_path, """
+            SELECT
+                DATE '2026-07-15' AS line_item_usage_start_date,
+                '999888777666' AS line_item_usage_account_id,
+                'AmazonEC2' AS line_item_product_code,
+                'BoxUsage' AS line_item_usage_type,
+                77.77 AS line_item_unblended_cost,
+                'ap-southeast-1' AS product_region
+        """)
+
+        scope = EvidenceScope(
+            from_date=date(2026, 7, 1), to_date=date(2026, 8, 1),
+            include_accounts=("111222333444",),
+        )
+        policy = PseudonymPolicy(mode="consultant", tty_bypass=False, show_identifiers=False)
+        engine = PseudonymizationEngine.create(workspace, policy)
+
+        output_dir = tmp_path / "acct_out" / "cur"
+        result = export_cur(str(cur_dir), scope, engine, output_dir)
+        assert result.row_count == 2  # Only account 111222333444
+
+        source_parquet = local_parquet_source(str(cur_dir))
+        g2 = gate_integrity(
+            source_row_count=result.source_row_count,
+            output_row_count=result.row_count,
+            source_path=source_parquet,
+            output_path=result.output_path.as_posix(),
+            numeric_columns=["line_item_unblended_cost"],
+            pseudo_columns=["line_item_usage_account_id"],
+            safe_dimensions=["product_region"],
+            engine=engine,
+            scope=scope,
+        )
+        assert g2.passed, f"Gate 2 account-scope must PASS: {g2.failures}"
+
+    def test_service_scope(self, tmp_path, workspace):
+        """C. Source has selected + non-selected services. Clean scoped export passes."""
+        from kulshan.cur.source import local_parquet_source
+        from kulshan.export.cur_export import export_cur
+        from kulshan.export.gates import gate_integrity
+        from kulshan.pseudonym.engine import PseudonymizationEngine
+        from kulshan.pseudonym.policy import PseudonymPolicy
+
+        # Out-of-scope: different service
+        cur_dir = self._build_source_with_out_of_scope(tmp_path, """
+            SELECT
+                DATE '2026-07-15' AS line_item_usage_start_date,
+                '111222333444' AS line_item_usage_account_id,
+                'AmazonS3' AS line_item_product_code,
+                'TimedStorage' AS line_item_usage_type,
+                33.33 AS line_item_unblended_cost,
+                'us-east-1' AS product_region
+        """)
+
+        scope = EvidenceScope(
+            from_date=date(2026, 7, 1), to_date=date(2026, 8, 1),
+            include_services=("AmazonEC2",),
+        )
+        policy = PseudonymPolicy(mode="consultant", tty_bypass=False, show_identifiers=False)
+        engine = PseudonymizationEngine.create(workspace, policy)
+
+        output_dir = tmp_path / "svc_out" / "cur"
+        result = export_cur(str(cur_dir), scope, engine, output_dir)
+        assert result.row_count == 2  # Only AmazonEC2
+
+        source_parquet = local_parquet_source(str(cur_dir))
+        g2 = gate_integrity(
+            source_row_count=result.source_row_count,
+            output_row_count=result.row_count,
+            source_path=source_parquet,
+            output_path=result.output_path.as_posix(),
+            numeric_columns=["line_item_unblended_cost"],
+            pseudo_columns=["line_item_usage_account_id"],
+            safe_dimensions=["product_region"],
+            engine=engine,
+            scope=scope,
+        )
+        assert g2.passed, f"Gate 2 service-scope must PASS: {g2.failures}"
+
+    def test_combined_scope(self, tmp_path, workspace):
+        """D. Combined date + account + service scope. Clean scoped export passes."""
+        import duckdb
+
+        from kulshan.cur.source import local_parquet_source
+        from kulshan.export.cur_export import export_cur
+        from kulshan.export.gates import gate_integrity
+        from kulshan.pseudonym.engine import PseudonymizationEngine
+        from kulshan.pseudonym.policy import PseudonymPolicy
+
+        cur_dir = tmp_path / "combined_cur"
+        cur_dir.mkdir()
+        con = duckdb.connect(":memory:")
+        con.execute("""
+            CREATE TABLE t AS
+            -- In-scope: July, account 111, EC2
+            SELECT DATE '2026-07-10' AS line_item_usage_start_date,
+                   '111222333444' AS line_item_usage_account_id,
+                   'AmazonEC2' AS line_item_product_code,
+                   'BoxUsage' AS line_item_usage_type,
+                   10.0 AS line_item_unblended_cost,
+                   'us-east-1' AS product_region
+            UNION ALL
+            -- Out: wrong date
+            SELECT DATE '2026-06-10', '111222333444', 'AmazonEC2', 'BoxUsage', 5.0, 'us-east-1'
+            UNION ALL
+            -- Out: wrong account
+            SELECT DATE '2026-07-10', '999888777666', 'AmazonEC2', 'BoxUsage', 7.0, 'us-east-1'
+            UNION ALL
+            -- Out: wrong service
+            SELECT DATE '2026-07-10', '111222333444', 'AmazonS3', 'Storage', 3.0, 'us-east-1'
+        """)
+        con.execute(f"COPY t TO '{(cur_dir / 'data.parquet').as_posix()}' (FORMAT PARQUET)")
+        con.close()
+
+        scope = EvidenceScope(
+            from_date=date(2026, 7, 1), to_date=date(2026, 8, 1),
+            include_accounts=("111222333444",),
+            include_services=("AmazonEC2",),
+        )
+        policy = PseudonymPolicy(mode="consultant", tty_bypass=False, show_identifiers=False)
+        engine = PseudonymizationEngine.create(workspace, policy)
+
+        output_dir = tmp_path / "combined_out" / "cur"
+        result = export_cur(str(cur_dir), scope, engine, output_dir)
+        assert result.row_count == 1  # Only the one fully-in-scope row
+
+        source_parquet = local_parquet_source(str(cur_dir))
+        g2 = gate_integrity(
+            source_row_count=result.source_row_count,
+            output_row_count=result.row_count,
+            source_path=source_parquet,
+            output_path=result.output_path.as_posix(),
+            numeric_columns=["line_item_unblended_cost"],
+            pseudo_columns=["line_item_usage_account_id"],
+            safe_dimensions=["product_region"],
+            engine=engine,
+            scope=scope,
+        )
+        assert g2.passed, f"Gate 2 combined-scope must PASS: {g2.failures}"
+
+    def test_mutated_in_scope_value_fails(self, tmp_path, workspace):
+        """E. Mutate one IN-SCOPE numeric value after export -> Gate 2 FAIL."""
+        import duckdb
+
+        from kulshan.cur.source import local_parquet_source
+        from kulshan.export.cur_export import export_cur
+        from kulshan.export.gates import gate_integrity
+        from kulshan.pseudonym.engine import PseudonymizationEngine
+        from kulshan.pseudonym.policy import PseudonymPolicy
+
+        # Out-of-scope row present
+        cur_dir = self._build_source_with_out_of_scope(tmp_path, """
+            SELECT
+                DATE '2026-06-15' AS line_item_usage_start_date,
+                '111222333444' AS line_item_usage_account_id,
+                'AmazonEC2' AS line_item_product_code,
+                'BoxUsage' AS line_item_usage_type,
+                99.99 AS line_item_unblended_cost,
+                'us-west-2' AS product_region
+        """)
+
+        scope = EvidenceScope(from_date=date(2026, 7, 1), to_date=date(2026, 8, 1))
+        policy = PseudonymPolicy(mode="consultant", tty_bypass=False, show_identifiers=False)
+        engine = PseudonymizationEngine.create(workspace, policy)
+
+        output_dir = tmp_path / "mutate_out" / "cur"
+        result = export_cur(str(cur_dir), scope, engine, output_dir)
+
+        # Tamper: rewrite output with one cost value changed
+        tampered_dir = tmp_path / "tampered"
+        tampered_dir.mkdir()
+        tampered_path = tampered_dir / "billing.parquet"
+        con = duckdb.connect(":memory:")
+        con.execute(f"""
+            COPY (
+                SELECT * REPLACE (
+                    CASE WHEN line_item_unblended_cost = 10.0 THEN 10.01
+                         ELSE line_item_unblended_cost END
+                    AS line_item_unblended_cost
+                )
+                FROM read_parquet('{result.output_path.as_posix()}')
+            ) TO '{tampered_path.as_posix()}' (FORMAT PARQUET)
+        """)
+        con.close()
+
+        source_parquet = local_parquet_source(str(cur_dir))
+        g2 = gate_integrity(
+            source_row_count=result.source_row_count,
+            output_row_count=result.row_count,
+            source_path=source_parquet,
+            output_path=tampered_path.as_posix(),
+            numeric_columns=["line_item_unblended_cost"],
+            pseudo_columns=["line_item_usage_account_id"],
+            safe_dimensions=["product_region"],
+            engine=engine,
+            scope=scope,
+        )
+        assert not g2.passed, "Gate 2 must FAIL when in-scope numeric value is mutated"
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# S3 REAL _source_sql REGRESSION TEST
+# ═══════════════════════════════════════════════════════════════════════════════
+
+
+class TestS3RealSourceSql:
+    """Prove that real _source_sql runs, and consultant export uses its output."""
+
+    def test_real_source_sql_generates_sql_and_export_uses_it(self, tmp_path):
+        """Real _source_sql(manifest) generates SQL; export receives that exact SQL.
+
+        Only the DuckDB execution boundary is mocked (connect_s3_duckdb).
+        _source_sql itself runs REAL.
+        """
+        from unittest.mock import MagicMock, patch
+
+        import duckdb
+
+        from kulshan.cur.manifest_reader import ManifestFile, ManifestIndex
+        from kulshan.cur.s3_query import _source_sql
+        from kulshan.export.cur_export import export_cur
+        from kulshan.pseudonym.engine import PseudonymizationEngine
+        from kulshan.pseudonym.policy import PseudonymPolicy
+
+        # Build a REAL ManifestIndex (not a MagicMock)
+        manifest = ManifestIndex(
+            bucket="test-cur-bucket",
+            prefix="cur/export/",
+            billing_period="2026-07",
+            export_name="test-export",
+            files=(
+                ManifestFile(s3_key="cur/export/data/part-001.parquet", size_bytes=1024),
+            ),
+            columns=(
+                "line_item_usage_start_date",
+                "line_item_usage_account_id",
+                "line_item_product_code",
+                "line_item_usage_type",
+                "line_item_unblended_cost",
+                "product_region",
+            ),
+            total_size_bytes=1024,
+            s3_glob="s3://test-cur-bucket/cur/export/data/*.parquet",
+            manifest_key="cur/export/metadata/Manifest.json",
+            manifest_size_bytes=500,
+        )
+
+        # Call real _source_sql to get the generated SQL
+        generated_sql = _source_sql(manifest)
+        assert "s3://test-cur-bucket/cur/export/data/part-001.parquet" in generated_sql
+        assert "hive_partitioning=true" in generated_sql
+
+        # Now create local parquet to simulate what would come back from S3
+        local_dir = tmp_path / "s3_local"
+        local_dir.mkdir()
+        parquet_path = local_dir / "data.parquet"
+        con = duckdb.connect(":memory:")
+        con.execute("""
+            CREATE TABLE t AS SELECT
+                DATE '2026-07-15' AS line_item_usage_start_date,
+                '111222333444' AS line_item_usage_account_id,
+                'AmazonEC2' AS line_item_product_code,
+                'BoxUsage' AS line_item_usage_type,
+                42.50 AS line_item_unblended_cost,
+                'us-east-1' AS product_region
+        """)
+        con.execute(f"COPY t TO '{parquet_path.as_posix()}' (FORMAT PARQUET)")
+        con.close()
+
+        # Track what SQL gets executed via the mocked connection
+        executed_statements: list[str] = []
+
+        class TrackingConnection:
+            """DuckDB connection wrapper that tracks SQL but uses local data."""
+
+            def __init__(self):
+                self._con = duckdb.connect(":memory:")
+
+            def execute(self, sql, *args, **kwargs):
+                executed_statements.append(sql)
+                # Rewrite s3:// URIs to local path for execution
+                local_sql = sql.replace(
+                    generated_sql,
+                    f"read_parquet('{parquet_path.as_posix()}', hive_partitioning=true)",
+                )
+                return self._con.execute(local_sql, *args, **kwargs)
+
+            def executemany(self, sql, *args, **kwargs):
+                executed_statements.append(sql)
+                return self._con.executemany(sql, *args, **kwargs)
+
+            def close(self):
+                self._con.close()
+
+        # Mock ONLY connect_s3_duckdb (the transport boundary)
+        with patch(
+            "kulshan.cur.s3_query.connect_s3_duckdb",
+            return_value=TrackingConnection(),
+        ):
+            workspace = tmp_path / "ws_real"
+            workspace.mkdir()
+            scope = EvidenceScope(from_date=date(2026, 7, 1), to_date=date(2026, 8, 1))
+            policy = PseudonymPolicy(mode="consultant", tty_bypass=False, show_identifiers=False)
+            engine = PseudonymizationEngine.create(workspace, policy)
+
+            output_dir = tmp_path / "real_out" / "cur"
+            result = export_cur(
+                cur_path="",
+                scope=scope,
+                engine=engine,
+                output_dir=output_dir,
+                s3_manifest=manifest,
+                s3_session=MagicMock(),
+            )
+
+        # Assertions
+        assert result.row_count == 1
+        assert result.output_path.exists()
+
+        # Prove real _source_sql output was used in executed SQL
+        view_creation = [s for s in executed_statements if "CREATE VIEW cur_raw" in s]
+        assert len(view_creation) == 1
+        assert generated_sql in view_creation[0], (
+            f"Expected real _source_sql output in view creation.\n"
+            f"Generated: {generated_sql}\n"
+            f"Actual: {view_creation[0]}"
+        )
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# CLI SOURCE SELECTION TESTS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+
+class TestCliSourceSelection:
+    """CLI rejects invalid source combinations and accepts valid ones."""
+
+    @pytest.fixture
+    def synthetic_cur(self, tmp_path) -> Path:
+        import duckdb
+        cur_dir = tmp_path / "cur_cli"
+        cur_dir.mkdir()
+        con = duckdb.connect(":memory:")
+        con.execute("""
+            CREATE TABLE t AS SELECT
+                DATE '2026-07-15' AS line_item_usage_start_date,
+                '111222333444' AS line_item_usage_account_id,
+                'AmazonEC2' AS line_item_product_code,
+                'BoxUsage' AS line_item_usage_type,
+                42.50 AS line_item_unblended_cost,
+                'us-east-1' AS product_region
+        """)
+        con.execute(f"COPY t TO '{(cur_dir / 'data.parquet').as_posix()}' (FORMAT PARQUET)")
+        con.close()
+        return cur_dir
+
+    def test_local_source_only_accepted(self, synthetic_cur, tmp_path):
+        """Local CUR_PATH without --s3/--workspace is accepted."""
+        from unittest.mock import patch
+
+        from click.testing import CliRunner
+
+        from kulshan.export.cli import export
+
+        runner = CliRunner()
+        mock_target = "kulshan.pseudonym.context.resolve_workspace_secret_path"
+        with patch(mock_target, return_value=tmp_path):
+            result = runner.invoke(export, [
+                "consultant",
+                str(synthetic_cur),
+                "--from", "2026-07-01",
+                "--to", "2026-08-01",
+                "-o", str(tmp_path / "out.zip"),
+            ])
+        # Should succeed (exit 0) or at least not fail on source selection
+        assert "Cannot specify both" not in (result.output or "")
+        assert "No source specified" not in (result.output or "")
+
+    def test_s3_source_only_accepted(self, tmp_path):
+        """--s3 without local CUR_PATH is accepted (up to manifest read)."""
+        from unittest.mock import patch
+
+        from click.testing import CliRunner
+
+        from kulshan.export.cli import export
+
+        runner = CliRunner()
+        # Mock the S3 manifest reading to avoid real AWS call
+        mock_target = "kulshan.pseudonym.context.resolve_workspace_secret_path"
+        with patch(mock_target, return_value=tmp_path), \
+             patch("kulshan.cur.manifest_reader.read_manifest_uri") as mock_read:
+            mock_read.side_effect = Exception("Simulated S3 access")
+            result = runner.invoke(export, [
+                "consultant",
+                "--s3", "s3://my-bucket/cur-prefix",
+                "--from", "2026-07-01",
+                "--to", "2026-08-01",
+                "-o", str(tmp_path / "out.zip"),
+            ])
+        # Should NOT fail on source selection validation
+        assert "Cannot specify both" not in (result.output or "")
+        assert "No source specified" not in (result.output or "")
+
+    def test_both_sources_rejected(self, synthetic_cur, tmp_path):
+        """Local CUR_PATH + --s3 is clearly rejected."""
+        from unittest.mock import patch
+
+        from click.testing import CliRunner
+
+        from kulshan.export.cli import export
+
+        runner = CliRunner()
+        mock_target = "kulshan.pseudonym.context.resolve_workspace_secret_path"
+        with patch(mock_target, return_value=tmp_path):
+            result = runner.invoke(export, [
+                "consultant",
+                str(synthetic_cur),
+                "--s3", "s3://my-bucket/cur-prefix",
+                "--from", "2026-07-01",
+                "--to", "2026-08-01",
+            ])
+        assert result.exit_code != 0
+        assert "Cannot specify both" in (result.output or "")
+
+    def test_neither_source_rejected(self, tmp_path):
+        """No CUR_PATH and no --s3/--workspace is clearly rejected."""
+        from unittest.mock import patch
+
+        from click.testing import CliRunner
+
+        from kulshan.export.cli import export
+
+        runner = CliRunner()
+        mock_target = "kulshan.pseudonym.context.resolve_workspace_secret_path"
+        with patch(mock_target, return_value=tmp_path):
+            result = runner.invoke(export, [
+                "consultant",
+                "--from", "2026-07-01",
+                "--to", "2026-08-01",
+            ])
+        assert result.exit_code != 0
+        assert "No source specified" in (result.output or "")

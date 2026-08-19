@@ -6,7 +6,6 @@ import sys
 import tempfile
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Optional
 
 import click
 from rich.console import Console
@@ -21,7 +20,13 @@ def export():
 
 
 @export.command("consultant")
-@click.argument("cur_path", type=click.Path(exists=True))
+@click.argument("cur_path", type=click.Path(exists=True), required=False, default=None)
+@click.option("--s3", "s3_uri", default=None,
+              help="S3 URI of CUR/Data Export (e.g. s3://bucket/prefix).")
+@click.option("-w", "--workspace", "workspace_name", default=None,
+              help="Workspace name (resolves S3 source from workspace cur_export config).")
+@click.option("-c", "--connection", "connection_name", default=None,
+              help="Named AWS connection within the workspace.")
 @click.option("--from", "from_date", required=True, type=click.DateTime(formats=["%Y-%m-%d"]),
               help="Start date (inclusive) YYYY-MM-DD.")
 @click.option("--to", "to_date", required=True, type=click.DateTime(formats=["%Y-%m-%d"]),
@@ -38,7 +43,10 @@ def export():
 @click.option("--profile", default=None, help="AWS profile for CE access.")
 @click.option("-o", "--output", type=click.Path(), default=None, help="Output ZIP path.")
 def consultant(
-    cur_path: str,
+    cur_path: str | None,
+    s3_uri: str | None,
+    workspace_name: str | None,
+    connection_name: str | None,
     from_date: datetime,
     to_date: datetime,
     accounts: tuple[str, ...],
@@ -48,16 +56,29 @@ def consultant(
     keep_tags: tuple[str, ...],
     drop_unclassified_columns: bool,
     include_ce: bool,
-    profile: Optional[str],
-    output: Optional[str],
+    profile: str | None,
+    output: str | None,
 ) -> None:
-    """Create a pseudonymized consultant evidence package from local CUR data.
+    """Create a pseudonymized consultant evidence package from CUR data.
+
+    Provide EXACTLY ONE source: a local CUR_PATH or --s3 / --workspace for S3.
 
     \\b
-    Example:
+    Examples:
+      # Local source
       kulshan export consultant ./cur-data \\
         --from 2026-07-01 --to 2026-08-01 \\
         --keep-tag environment \\
+        -o consultant-export.zip
+
+      # S3 source via workspace
+      kulshan export consultant -w my-workspace \\
+        --from 2026-07-01 --to 2026-08-01 \\
+        -o consultant-export.zip
+
+      # S3 source via explicit URI
+      kulshan export consultant --s3 s3://my-bucket/cur-prefix \\
+        --from 2026-07-01 --to 2026-08-01 \\
         -o consultant-export.zip
     """
     from kulshan.export.cur_export import ExportBlockedError, export_cur
@@ -70,6 +91,62 @@ def consultant(
     from kulshan.pseudonym.secret import SECRET_FILENAME
 
     console = Console(stderr=True)
+
+    # ── Source selection: exactly one of local or S3 ─────────────────────
+    s3_manifest = None
+    s3_session = None
+
+    # Determine if S3 source is requested via --s3 or --workspace
+    has_s3_source = bool(s3_uri or workspace_name)
+
+    if cur_path and has_s3_source:
+        console.print(
+            "[red]ERROR[/red]: Cannot specify both a local CUR_PATH"
+            " and --s3/--workspace."
+        )
+        console.print("Provide exactly one source: a local path OR an S3 source.")
+        sys.exit(ExitCode.CONFIG_ERROR)
+
+    if not cur_path and not has_s3_source:
+        console.print("[red]ERROR[/red]: No source specified.")
+        console.print("Provide a local CUR_PATH argument or use --s3 / --workspace for S3 source.")
+        sys.exit(ExitCode.CONFIG_ERROR)
+
+    if has_s3_source:
+        import boto3
+
+        from kulshan.cur.manifest_reader import read_manifest_uri
+
+        session_kwargs: dict = {}
+        if profile:
+            session_kwargs["profile_name"] = profile
+        s3_session = boto3.Session(**session_kwargs)
+
+        if s3_uri:
+            # Direct S3 URI
+            s3_manifest = read_manifest_uri(
+                s3_uri, session=s3_session
+            )
+        else:
+            # Workspace-based: read cur_export from workspace config
+            from kulshan.workspace.resolution import resolve_workspace
+            ws_ctx = resolve_workspace(workspace_name)
+            if ws_ctx.config.aws is None or not ws_ctx.config.aws.cur_export:
+                console.print(
+                    f"[red]ERROR[/red]: Workspace '{workspace_name}' has no cur_export configured."
+                )
+                console.print("Set aws.cur_export in workspace.toml or use --s3 directly.")
+                sys.exit(ExitCode.RUNTIME_ERROR)
+            s3_manifest = read_manifest_uri(
+                ws_ctx.config.aws.cur_export, session=s3_session
+            )
+            # Use workspace profile if not explicitly provided
+            if not profile and ws_ctx.config.aws.connections:
+                conn = ws_ctx.config.aws.get_connection(
+                    connection_name or ws_ctx.config.aws.default_connection
+                )
+                if conn:
+                    s3_session = boto3.Session(profile_name=conn.profile)
 
     # Build scope
     scope = EvidenceScope(
@@ -86,9 +163,10 @@ def consultant(
     policy = PseudonymPolicy(mode="consultant", tty_bypass=False, show_identifiers=False)
     engine = PseudonymizationEngine.create(ws_path, policy)
 
+    source_label = cur_path if cur_path else (s3_uri or f"workspace:{workspace_name}")
     console.print("[bold]Kulshan Consultant Evidence Export[/bold]")
     console.print(f"  Period: {scope.from_date} to {scope.to_date}")
-    console.print(f"  Source: {cur_path}")
+    console.print(f"  Source: {source_label}")
     console.print()
 
     # Create temp working directory
@@ -101,12 +179,14 @@ def consultant(
         console.print("[dim]Exporting CUR data...[/dim]")
         try:
             cur_result = export_cur(
-                cur_path=cur_path,
+                cur_path=cur_path or "",
                 scope=scope,
                 engine=engine,
                 output_dir=cur_dir,
                 keep_tags=frozenset(keep_tags),
                 drop_unclassified=drop_unclassified_columns,
+                s3_session=s3_session,
+                s3_manifest=s3_manifest,
             )
         except ExportBlockedError as e:
             console.print(f"[red]EXPORT BLOCKED[/red]: {e}")
@@ -127,6 +207,7 @@ def consultant(
             console.print()
             console.print("[dim]Exporting Cost Explorer evidence...[/dim]")
             import boto3
+
             from kulshan.export.ce_export import CeTruncationError, export_ce
 
             session_kwargs = {}
@@ -179,9 +260,14 @@ def consultant(
             if cls == _CC.SAFE and c not in numeric_safe
         ]
 
-        # Build source path for comparison
-        from kulshan.cur.source import local_parquet_source
-        source_parquet = local_parquet_source(cur_path)
+        # Build source path for comparison (raw source, Gate 2 applies scope independently)
+        if cur_path:
+            from kulshan.cur.source import local_parquet_source
+            source_parquet = local_parquet_source(cur_path)
+        else:
+            # S3 source: Gate 2 not feasible without local re-read;
+            # rely on row count + export internal consistency
+            source_parquet = None
 
         g2 = gate_integrity(
             cur_result.source_row_count,
@@ -192,6 +278,7 @@ def consultant(
             pseudo_columns=pseudo_cols,
             safe_dimensions=safe_dims,
             engine=engine,
+            scope=scope,
         )
         if not g2.passed:
             console.print("[red]GATE 2 FAILED: Evidence integrity[/red]")

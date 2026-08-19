@@ -12,7 +12,6 @@ from typing import Any
 
 from kulshan.export.columns import ColumnClass
 
-
 # ---------------------------------------------------------------------------
 # Gate results
 # ---------------------------------------------------------------------------
@@ -81,8 +80,12 @@ def gate_integrity(
     pseudo_columns: list[str] | None = None,
     safe_dimensions: list[str] | None = None,
     engine: Any = None,
+    scope: Any | None = None,
 ) -> GateResult:
     """Multiset row equivalence between independently-built source and output projections.
+
+    The SOURCE side applies the same EvidenceScope as the export, independently
+    re-derives pseudonym mappings, then builds a validation projection.
 
     Compares validation projections via:
         SOURCE_VALIDATION EXCEPT ALL OUTPUT_VALIDATION = 0 rows
@@ -91,18 +94,19 @@ def gate_integrity(
     This handles legitimate duplicate rows correctly (multiplicity matters).
     No globally unique row identifier is required.
 
-    The SOURCE side is built independently: raw source data is read and
-    pseudonymized identifiers are derived fresh (not read from the export).
+    Numeric cost/usage fields are compared in their native DuckDB types
+    (DOUBLE, DECIMAL, BIGINT, INTEGER) without casting to VARCHAR.
 
     Args:
         source_row_count: Expected row count from scoped source.
         output_row_count: Actual row count in exported Parquet.
-        source_path: DuckDB-readable source Parquet (original scoped data).
+        source_path: DuckDB-readable source Parquet (original raw data).
         output_path: Exported Parquet file path.
         numeric_columns: SAFE numeric cost/usage columns to verify preservation.
         pseudo_columns: PSEUDONYMIZE columns (for building distinguishing dimensions).
         safe_dimensions: Non-numeric SAFE columns useful for distinguishing rows.
         engine: PseudonymizationEngine for independent source-side derivation.
+        scope: EvidenceScope to apply to source before comparison (same scope as export).
     """
     failures = []
 
@@ -115,22 +119,40 @@ def gate_integrity(
     if (source_path and output_path and numeric_columns
             and engine is not None):
         import duckdb
+
         from kulshan.export.cur_export import _infer_identifier_class
 
         con = duckdb.connect(":memory:")
         try:
-            # Build source validation projection independently
+            # Read raw source and apply scope filter independently
             con.execute(
-                f"CREATE VIEW gate2_source AS SELECT * FROM read_parquet('{source_path}')"
+                f"CREATE VIEW gate2_raw_source AS SELECT * FROM read_parquet('{source_path}')"
             )
-            src_cols = {str(r[0]).lower() for r in con.execute("DESCRIBE gate2_source").fetchall()}
+            src_cols = {
+                str(r[0]).lower()
+                for r in con.execute("DESCRIBE gate2_raw_source").fetchall()
+            }
 
-            # Create fresh pseudonymization mappings for source (independent derivation)
+            # Build scope WHERE clause if scope provided
+            scope_where = "TRUE"
+            if scope is not None:
+                from kulshan.cur.schema import resolve_cur_columns
+                mapping = resolve_cur_columns(src_cols)
+                scope_where = scope.duckdb_where_clause(
+                    date_col=mapping.usage_start,
+                    account_col=mapping.account_id,
+                    service_col=mapping.service,
+                )
+
+            # Create scoped source view
+            con.execute(
+                f"CREATE VIEW gate2_source AS SELECT * FROM gate2_raw_source WHERE {scope_where}"
+            )
+
+            # Create fresh pseudonymization mappings from SCOPED source (independent derivation)
             pseudo_in_source = [c for c in (pseudo_columns or []) if c in src_cols]
             if pseudo_in_source:
-                # Use gate2_source as the source table for mapping
                 for col in pseudo_in_source:
-                    from kulshan.export.cur_export import _infer_identifier_class
                     id_class = _infer_identifier_class(col)
                     rows = con.execute(
                         f'SELECT DISTINCT CAST("{col}" AS VARCHAR) AS v '
@@ -144,28 +166,41 @@ def gate_integrity(
                         else:
                             mappings.append((raw_val, raw_val))
                     table_name = f"_pseudo_map_{col}"
-                    con.execute(f"CREATE TEMP TABLE {table_name} (raw_value VARCHAR, alias VARCHAR)")
+                    con.execute(
+                        f"CREATE TEMP TABLE {table_name}"
+                        " (raw_value VARCHAR, alias VARCHAR)"
+                    )
                     if mappings:
                         con.executemany(f"INSERT INTO {table_name} VALUES (?, ?)", mappings)
 
-            # Build validation column list
-            val_cols = []
+            # Discover output column types for native numeric comparison
+            con.execute(
+                f"CREATE VIEW gate2_output AS SELECT * FROM read_parquet('{output_path}')"
+            )
+
+            # Build validation column list - use native types for numerics
+            val_cols_src = []
+            val_cols_out = []
+
             for col in (numeric_columns or []):
                 if col in src_cols:
-                    val_cols.append(f'CAST(gate2_source."{col}" AS VARCHAR) AS "{col}"')
+                    # Use native type directly - no VARCHAR cast
+                    val_cols_src.append(f'gate2_source."{col}"')
+                    val_cols_out.append(f'gate2_output."{col}"')
 
             # Add pseudonymized dimensions for row distinction
             for col in pseudo_in_source:
                 map_alias = f"_map_{col}"
-                map_table = f"_pseudo_map_{col}"
-                val_cols.append(f'{map_alias}.alias AS "p_{col}"')
+                val_cols_src.append(f'{map_alias}.alias AS "p_{col}"')
+                val_cols_out.append(f'CAST(gate2_output."{col}" AS VARCHAR) AS "p_{col}"')
 
             # Add safe dimensions for row distinction
             for col in (safe_dimensions or []):
                 if col in src_cols:
-                    val_cols.append(f'CAST(gate2_source."{col}" AS VARCHAR) AS "{col}"')
+                    val_cols_src.append(f'CAST(gate2_source."{col}" AS VARCHAR) AS "{col}"')
+                    val_cols_out.append(f'CAST(gate2_output."{col}" AS VARCHAR) AS "{col}"')
 
-            if not val_cols:
+            if not val_cols_src:
                 # No columns to compare beyond row count
                 pass
             else:
@@ -179,22 +214,10 @@ def gate_integrity(
                         f' ON CAST(gate2_source."{col}" AS VARCHAR) = {map_alias}.raw_value'
                     )
 
-                src_select = ", ".join(val_cols)
+                src_select = ", ".join(val_cols_src)
                 src_sql = f"SELECT {src_select} FROM gate2_source{joins}"
 
-                # Build output projection (read exported parquet directly)
-                out_val_cols = []
-                for col in (numeric_columns or []):
-                    out_val_cols.append(f'CAST(gate2_output."{col}" AS VARCHAR) AS "{col}"')
-                for col in pseudo_in_source:
-                    out_val_cols.append(f'CAST(gate2_output."{col}" AS VARCHAR) AS "p_{col}"')
-                for col in (safe_dimensions or []):
-                    out_val_cols.append(f'CAST(gate2_output."{col}" AS VARCHAR) AS "{col}"')
-
-                con.execute(
-                    f"CREATE VIEW gate2_output AS SELECT * FROM read_parquet('{output_path}')"
-                )
-                out_select = ", ".join(out_val_cols)
+                out_select = ", ".join(val_cols_out)
                 out_sql = f"SELECT {out_select} FROM gate2_output"
 
                 # EXCEPT ALL both directions
