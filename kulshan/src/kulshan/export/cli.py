@@ -95,6 +95,7 @@ def consultant(
     # ── Source selection: exactly one of local or S3 ─────────────────────
     s3_manifest = None
     s3_session = None
+    selected_workspace_path = None
 
     # Determine if S3 source is requested via --s3 or --workspace
     has_s3_source = bool(s3_uri or workspace_name)
@@ -130,6 +131,7 @@ def consultant(
             # Workspace-based: read cur_export from workspace config
             from kulshan.workspace.resolution import resolve_workspace
             ws_ctx = resolve_workspace(workspace_name)
+            selected_workspace_path = ws_ctx.path
             if ws_ctx.config.aws is None or not ws_ctx.config.aws.cur_export:
                 console.print(
                     f"[red]ERROR[/red]: Workspace '{workspace_name}' has no cur_export configured."
@@ -159,7 +161,7 @@ def consultant(
     )
 
     # Create engine with consultant-strict policy (no bypass)
-    ws_path = resolve_workspace_secret_path()
+    ws_path = selected_workspace_path or resolve_workspace_secret_path()
     policy = PseudonymPolicy(mode="consultant", tty_bypass=False, show_identifiers=False)
     engine = PseudonymizationEngine.create(ws_path, policy)
 

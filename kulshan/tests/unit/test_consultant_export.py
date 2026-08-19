@@ -1723,6 +1723,51 @@ class TestS3ConsultantCliIntegration:
 
 
 class TestWorkspaceS3SessionOrdering:
+    def test_selected_workspace_path_is_used_for_pseudonym_engine(self, tmp_path):
+        from types import SimpleNamespace
+        from unittest.mock import MagicMock, patch
+
+        from click.testing import CliRunner
+
+        from kulshan.export.cli import export
+
+        customer_workspace = tmp_path / "customer-workspace"
+        active_workspace = tmp_path / "active-default-workspace"
+        connection = SimpleNamespace(profile="workspace-audit")
+        aws = MagicMock(
+            cur_export="s3://customer-cur/export",
+            default_connection="audit",
+            connections=[connection],
+        )
+        aws.get_connection.return_value = connection
+        workspace = MagicMock(
+            path=customer_workspace,
+            config=MagicMock(aws=aws),
+        )
+        runner = CliRunner()
+        with patch(
+            "kulshan.workspace.resolution.resolve_workspace", return_value=workspace
+        ), patch("boto3.Session", return_value=MagicMock()), patch(
+            "kulshan.cur.manifest_reader.read_manifest_uri", return_value=MagicMock()
+        ), patch(
+            "kulshan.pseudonym.context.resolve_workspace_secret_path",
+            return_value=active_workspace,
+        ) as resolve_active, patch(
+            "kulshan.pseudonym.engine.PseudonymizationEngine.create",
+            side_effect=RuntimeError("stop after workspace path assertion"),
+        ) as create_engine:
+            result = runner.invoke(export, [
+                "consultant", "--workspace", "customer",
+                "--from", "2026-07-01", "--to", "2026-08-01",
+            ])
+
+        assert result.exit_code != 0
+        assert customer_workspace != active_workspace
+        create_engine.assert_called_once()
+        assert create_engine.call_args.args[0] == customer_workspace
+        assert create_engine.call_args.args[0] != active_workspace
+        resolve_active.assert_not_called()
+
     def test_manifest_uses_workspace_connection_profile_session(self, tmp_path):
         from types import SimpleNamespace
         from unittest.mock import MagicMock, patch
