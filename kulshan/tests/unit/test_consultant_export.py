@@ -1608,6 +1608,192 @@ class TestS3RealSourceSql:
         )
 
 
+class TestS3ConsultantCliIntegration:
+    """Customer-facing S3 consultant command completes all gates and packaging."""
+
+    def test_s3_cli_runs_real_source_sql_all_gates_and_creates_zip(self, tmp_path):
+        import zipfile
+        from unittest.mock import MagicMock, patch
+
+        import duckdb
+        from click.testing import CliRunner
+
+        from kulshan.cur.manifest_reader import ManifestFile, ManifestIndex
+        from kulshan.cur.s3_query import _source_sql
+        from kulshan.export.cli import export
+
+        raw_account = "111222333444"
+        raw_resource = "i-0abc123def456789a"
+        fixture = tmp_path / "s3-fixture.parquet"
+        con = duckdb.connect(":memory:")
+        con.execute(f"""
+            CREATE TABLE fixture AS SELECT
+                DATE '2026-07-15' AS line_item_usage_start_date,
+                '{raw_account}' AS line_item_usage_account_id,
+                'AmazonEC2' AS line_item_product_code,
+                'BoxUsage' AS line_item_usage_type,
+                '{raw_resource}' AS line_item_resource_id,
+                42.50::DECIMAL(18, 4) AS line_item_unblended_cost,
+                'us-east-1' AS product_region
+        """)
+        con.execute(f"COPY fixture TO '{fixture.as_posix()}' (FORMAT PARQUET)")
+        con.close()
+
+        manifest = ManifestIndex(
+            bucket="customer-cur",
+            prefix="exports/cur/",
+            billing_period="2026-07",
+            export_name="customer-export",
+            files=(ManifestFile("exports/cur/part-001.parquet", 1024),),
+            columns=(),
+            total_size_bytes=1024,
+            s3_glob="s3://customer-cur/exports/cur/*.parquet",
+            manifest_key="exports/cur/Manifest.json",
+            manifest_size_bytes=256,
+        )
+        generated_sql = _source_sql(manifest)
+        executed: list[str] = []
+
+        class TrackingConnection:
+            def __init__(self):
+                self._con = duckdb.connect(":memory:")
+
+            def execute(self, sql, *args, **kwargs):
+                executed.append(sql)
+                local_source = (
+                    f"read_parquet('{fixture.as_posix()}', hive_partitioning=true)"
+                )
+                return self._con.execute(
+                    sql.replace(generated_sql, local_source), *args, **kwargs
+                )
+
+            def executemany(self, sql, *args, **kwargs):
+                executed.append(sql)
+                return self._con.executemany(sql, *args, **kwargs)
+
+            def close(self):
+                self._con.close()
+
+        output_zip = tmp_path / "consultant-s3.zip"
+        runner = CliRunner()
+        with patch(
+            "kulshan.cur.manifest_reader.read_manifest_uri", return_value=manifest
+        ), patch(
+            "kulshan.cur.s3_query.connect_s3_duckdb",
+            side_effect=lambda session=None: TrackingConnection(),
+        ), patch(
+            "kulshan.pseudonym.context.resolve_workspace_secret_path",
+            return_value=tmp_path / "workspace",
+        ), patch("boto3.Session", return_value=MagicMock()):
+            result = runner.invoke(export, [
+                "consultant", "--s3", "s3://customer-cur/exports/cur",
+                "--from", "2026-07-01", "--to", "2026-08-01",
+                "-o", str(output_zip),
+            ])
+
+        assert result.exit_code == 0, result.output
+        assert output_zip.exists()
+        assert "Gate 1 PASS" in result.output
+        assert "Gate 2 PASS" in result.output
+        assert "Gate 3 PASS" in result.output
+        assert sum(generated_sql in sql for sql in executed) >= 3
+        except_all_queries = [sql for sql in executed if "EXCEPT ALL" in sql]
+        assert len(except_all_queries) == 2
+
+        with zipfile.ZipFile(output_zip) as package:
+            extract_dir = tmp_path / "extracted"
+            package.extractall(extract_dir)
+            packaged_text = " ".join(
+                path.read_text(encoding="utf-8", errors="ignore")
+                for path in extract_dir.rglob("*") if path.is_file()
+            )
+            parquet_files = list(extract_dir.rglob("*.parquet"))
+        con = duckdb.connect(":memory:")
+        parquet_text = " ".join(
+            str(value)
+            for parquet in parquet_files
+            for row in con.execute(
+                f"SELECT * FROM read_parquet('{parquet.as_posix()}')"
+            ).fetchall()
+            for value in row
+        )
+        con.close()
+        assert raw_account not in packaged_text + parquet_text
+        assert raw_resource not in packaged_text + parquet_text
+
+
+class TestWorkspaceS3SessionOrdering:
+    def test_manifest_uses_workspace_connection_profile_session(self, tmp_path):
+        from types import SimpleNamespace
+        from unittest.mock import MagicMock, patch
+
+        from click.testing import CliRunner
+
+        from kulshan.export.cli import export
+
+        connection = SimpleNamespace(profile="workspace-audit")
+        aws = MagicMock(
+            cur_export="s3://customer-cur/export",
+            default_connection="audit",
+            connections=[connection],
+        )
+        aws.get_connection.return_value = connection
+        workspace = MagicMock(config=MagicMock(aws=aws))
+        effective_session = object()
+        runner = CliRunner()
+        with patch(
+            "kulshan.workspace.resolution.resolve_workspace", return_value=workspace
+        ), patch("boto3.Session", return_value=effective_session) as session_ctor, patch(
+            "kulshan.cur.manifest_reader.read_manifest_uri",
+            side_effect=RuntimeError("stop after manifest session assertion"),
+        ) as read_manifest:
+            result = runner.invoke(export, [
+                "consultant", "--workspace", "customer",
+                "--from", "2026-07-01", "--to", "2026-08-01",
+            ])
+
+        assert result.exit_code != 0
+        session_ctor.assert_called_once_with(profile_name="workspace-audit")
+        read_manifest.assert_called_once_with(
+            "s3://customer-cur/export", session=effective_session
+        )
+
+    def test_explicit_profile_precedes_workspace_profile(self):
+        from types import SimpleNamespace
+        from unittest.mock import MagicMock, patch
+
+        from click.testing import CliRunner
+
+        from kulshan.export.cli import export
+
+        connection = SimpleNamespace(profile="workspace-audit")
+        aws = MagicMock(
+            cur_export="s3://customer-cur/export",
+            default_connection="audit",
+            connections=[connection],
+        )
+        aws.get_connection.return_value = connection
+        workspace = MagicMock(config=MagicMock(aws=aws))
+        effective_session = object()
+        runner = CliRunner()
+        with patch(
+            "kulshan.workspace.resolution.resolve_workspace", return_value=workspace
+        ), patch("boto3.Session", return_value=effective_session) as session_ctor, patch(
+            "kulshan.cur.manifest_reader.read_manifest_uri",
+            side_effect=RuntimeError("stop after manifest session assertion"),
+        ) as read_manifest:
+            result = runner.invoke(export, [
+                "consultant", "--workspace", "customer", "--profile", "explicit",
+                "--from", "2026-07-01", "--to", "2026-08-01",
+            ])
+
+        assert result.exit_code != 0
+        session_ctor.assert_called_once_with(profile_name="explicit")
+        read_manifest.assert_called_once_with(
+            "s3://customer-cur/export", session=effective_session
+        )
+
+
 # ═══════════════════════════════════════════════════════════════════════════════
 # CLI SOURCE SELECTION TESTS
 # ═══════════════════════════════════════════════════════════════════════════════

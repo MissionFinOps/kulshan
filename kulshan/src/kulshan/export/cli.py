@@ -117,13 +117,12 @@ def consultant(
 
         from kulshan.cur.manifest_reader import read_manifest_uri
 
-        session_kwargs: dict = {}
-        if profile:
-            session_kwargs["profile_name"] = profile
-        s3_session = boto3.Session(**session_kwargs)
-
         if s3_uri:
             # Direct S3 URI
+            session_kwargs: dict = {}
+            if profile:
+                session_kwargs["profile_name"] = profile
+            s3_session = boto3.Session(**session_kwargs)
             s3_manifest = read_manifest_uri(
                 s3_uri, session=s3_session
             )
@@ -137,16 +136,17 @@ def consultant(
                 )
                 console.print("Set aws.cur_export in workspace.toml or use --s3 directly.")
                 sys.exit(ExitCode.RUNTIME_ERROR)
+            conn = ws_ctx.config.aws.get_connection(
+                connection_name or ws_ctx.config.aws.default_connection
+            )
+            effective_profile = profile or (conn.profile if conn else None)
+            session_kwargs = {}
+            if effective_profile:
+                session_kwargs["profile_name"] = effective_profile
+            s3_session = boto3.Session(**session_kwargs)
             s3_manifest = read_manifest_uri(
                 ws_ctx.config.aws.cur_export, session=s3_session
             )
-            # Use workspace profile if not explicitly provided
-            if not profile and ws_ctx.config.aws.connections:
-                conn = ws_ctx.config.aws.get_connection(
-                    connection_name or ws_ctx.config.aws.default_connection
-                )
-                if conn:
-                    s3_session = boto3.Session(profile_name=conn.profile)
 
     # Build scope
     scope = EvidenceScope(
@@ -279,6 +279,8 @@ def consultant(
             safe_dimensions=safe_dims,
             engine=engine,
             scope=scope,
+            s3_manifest=s3_manifest,
+            s3_session=s3_session,
         )
         if not g2.passed:
             console.print("[red]GATE 2 FAILED: Evidence integrity[/red]")
@@ -289,7 +291,13 @@ def consultant(
 
         # ── Gate 3: Residual identifiers ─────────────────────────────────
         # Collect source identifiers from pseudonymize columns
-        source_ids = _collect_source_identifiers(cur_path, scope, cur_result.classification)
+        source_ids = _collect_source_identifiers(
+            cur_path,
+            scope,
+            cur_result.classification,
+            s3_manifest=s3_manifest,
+            s3_session=s3_session,
+        )
         # Collect all output text
         output_text = _collect_output_text(cur_dir, ce_dir)
         secret_path = ws_path / SECRET_FILENAME
@@ -338,38 +346,48 @@ def consultant(
 
 
 def _collect_source_identifiers(
-    cur_path: str,
+    cur_path: str | None,
     scope,
     classification: dict,
+    s3_manifest=None,
+    s3_session=None,
 ) -> set[str]:
     """Collect distinct identifier values from PSEUDONYMIZE columns in source."""
     from kulshan.cur.duckdb_engine import connect_memory, cur_raw_columns, register_cur_raw
     from kulshan.cur.source import local_parquet_source
     from kulshan.export.columns import ColumnClass
 
-    source = local_parquet_source(cur_path)
-    con = connect_memory()
-    try:
+    if s3_manifest is not None:
+        from kulshan.cur.s3_query import _source_sql, connect_s3_duckdb
+        from kulshan.cur.schema import resolve_cur_columns
+
+        con = connect_s3_duckdb(session=s3_session)
+        con.execute(f"CREATE VIEW cur_raw AS SELECT * FROM {_source_sql(s3_manifest)}")
+        columns = cur_raw_columns(con)
+        mapping = resolve_cur_columns(columns)
+    else:
+        source = local_parquet_source(cur_path or "")
+        con = connect_memory()
         mapping = register_cur_raw(con, source)
         columns = cur_raw_columns(con)
+    try:
         where = scope.duckdb_where_clause(mapping.usage_start, mapping.account_id, mapping.service)
 
         identifiers: set[str] = set()
-        pseudo_cols = [c for c, cls in classification.items() if cls == ColumnClass.PSEUDONYMIZE and c in columns]
+        pseudo_cols = [
+            c for c, cls in classification.items()
+            if cls == ColumnClass.PSEUDONYMIZE and c in columns
+        ]
 
         for col in pseudo_cols:
-            try:
-                rows = con.execute(
-                    f'SELECT DISTINCT CAST("{col}" AS VARCHAR) FROM cur_raw '
-                    f"WHERE {where} AND \"{col}\" IS NOT NULL "
-                    f"LIMIT 10000"
-                ).fetchall()
-                for row in rows:
-                    val = str(row[0]).strip()
-                    if val:
-                        identifiers.add(val)
-            except Exception:
-                continue
+            rows = con.execute(
+                f'SELECT DISTINCT CAST("{col}" AS VARCHAR) FROM cur_raw '
+                f"WHERE {where} AND \"{col}\" IS NOT NULL"
+            ).fetchall()
+            for row in rows:
+                val = str(row[0]).strip()
+                if val:
+                    identifiers.add(val)
 
         return identifiers
     finally:

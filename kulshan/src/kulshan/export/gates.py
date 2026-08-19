@@ -81,6 +81,8 @@ def gate_integrity(
     safe_dimensions: list[str] | None = None,
     engine: Any = None,
     scope: Any | None = None,
+    s3_manifest: Any = None,
+    s3_session: Any = None,
 ) -> GateResult:
     """Multiset row equivalence between independently-built source and output projections.
 
@@ -107,6 +109,8 @@ def gate_integrity(
         safe_dimensions: Non-numeric SAFE columns useful for distinguishing rows.
         engine: PseudonymizationEngine for independent source-side derivation.
         scope: EvidenceScope to apply to source before comparison (same scope as export).
+        s3_manifest: ManifestIndex for an S3/Data Export source.
+        s3_session: boto3 session used to read the S3 source.
     """
     failures = []
 
@@ -116,17 +120,26 @@ def gate_integrity(
         )
 
     # Multiset comparison via EXCEPT ALL
-    if (source_path and output_path and numeric_columns
-            and engine is not None):
-        import duckdb
-
+    has_source = bool(source_path) or s3_manifest is not None
+    validation_columns = bool(numeric_columns or pseudo_columns or safe_dimensions)
+    if has_source and output_path and validation_columns and engine is not None:
         from kulshan.export.cur_export import _infer_identifier_class
 
-        con = duckdb.connect(":memory:")
+        if s3_manifest is not None:
+            from kulshan.cur.s3_query import _source_sql, connect_s3_duckdb
+
+            con = connect_s3_duckdb(session=s3_session)
+            raw_source_sql = _source_sql(s3_manifest)
+        else:
+            import duckdb
+
+            con = duckdb.connect(":memory:")
+            escaped_source = str(source_path).replace("'", "''")
+            raw_source_sql = f"read_parquet('{escaped_source}')"
         try:
             # Read raw source and apply scope filter independently
             con.execute(
-                f"CREATE VIEW gate2_raw_source AS SELECT * FROM read_parquet('{source_path}')"
+                f"CREATE VIEW gate2_raw_source AS SELECT * FROM {raw_source_sql}"
             )
             src_cols = {
                 str(r[0]).lower()
