@@ -4,14 +4,13 @@ from __future__ import annotations
 import shutil
 import sys
 import tempfile
-from datetime import date, datetime, timezone
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Optional
 
 import click
 from rich.console import Console
 
-from kulshan.__version__ import __version__
 from kulshan.constants import ExitCode
 
 
@@ -61,7 +60,6 @@ def consultant(
         --keep-tag environment \\
         -o consultant-export.zip
     """
-    from kulshan.export.columns import classify_all_columns
     from kulshan.export.cur_export import ExportBlockedError, export_cur
     from kulshan.export.gates import gate_integrity, gate_residual, gate_schema
     from kulshan.export.package import create_package
@@ -88,7 +86,7 @@ def consultant(
     policy = PseudonymPolicy(mode="consultant", tty_bypass=False, show_identifiers=False)
     engine = PseudonymizationEngine.create(ws_path, policy)
 
-    console.print(f"[bold]Kulshan Consultant Evidence Export[/bold]")
+    console.print("[bold]Kulshan Consultant Evidence Export[/bold]")
     console.print(f"  Period: {scope.from_date} to {scope.to_date}")
     console.print(f"  Source: {cur_path}")
     console.print()
@@ -215,7 +213,7 @@ def consultant(
 
 def _collect_source_identifiers(
     cur_path: str,
-    scope: "EvidenceScope",
+    scope,
     classification: dict,
 ) -> set[str]:
     """Collect distinct identifier values from PSEUDONYMIZE columns in source."""

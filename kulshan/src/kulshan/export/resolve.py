@@ -9,11 +9,8 @@ This is a forward lookup, not reversal.
 """
 from __future__ import annotations
 
-from pathlib import Path
 from typing import Optional
 
-import click
-from rich.console import Console
 
 from kulshan.pseudonym.context import resolve_workspace_secret_path
 from kulshan.pseudonym.engine import PseudonymizationEngine

@@ -1,7 +1,7 @@
 """EvidenceScope: single immutable scope object shared by CUR and CE export paths."""
 from __future__ import annotations
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from datetime import date
 from typing import Optional
 

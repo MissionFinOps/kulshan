@@ -5,6 +5,24 @@ All notable changes to Kulshan will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.6.0] - 2026-08-17
+
+### Added
+- `kulshan export consultant`: produce a pseudonymized evidence ZIP from local CUR data.
+- `kulshan resolve <alias>`: forward-lookup an alias back to its real identifier using the workspace HMAC engine.
+- EvidenceScope: single immutable scope object shared by CUR and CE export paths.
+- CUR column classification registry (SAFE / PSEUDONYMIZE / DROP / UNCLASSIFIED).
+- `--keep-tag <KEY>`: opt-in tag keys for consultant export (values still scanned).
+- `--drop-unclassified-columns`: explicitly drop unclassified columns instead of blocking.
+- `--ce` flag: include Cost Explorer evidence alongside CUR.
+- Three fail-closed validation gates before ZIP creation (schema, integrity, residual).
+- Consultant-strict pseudonymization policy: no bypass flag, no TTY exception.
+- Full-schema CUR export via DuckDB COPY with UDF pseudonymization (no pandas round-trip).
+- Cost Explorer multi-dimension evidence export with full pagination.
+
+### Changed
+- Package version bumped to 0.6.0.
+
 ## [0.5.1] - 2026-08-17
 
 ### Added

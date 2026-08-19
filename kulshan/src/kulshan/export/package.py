@@ -8,7 +8,6 @@ import json
 import zipfile
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any
 
 from kulshan.__version__ import __version__
 from kulshan.export.columns import ColumnClass
