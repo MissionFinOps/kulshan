@@ -5,6 +5,30 @@ All notable changes to Kulshan will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.1] - 2026-08-17
+
+### Added
+- Workspace-scoped deterministic pseudonymization engine using HMAC-SHA256 with 64-bit displayed aliases.
+- Structured and file output (JSON, CSV, HTML, SARIF) pseudonymized by default.
+- Interactive TTY terminal may show real identifiers for local diagnostics.
+- `--show-identifiers` flag to explicitly disable pseudonymization for normal outputs.
+- `--show-pii` retained as deprecated hidden compatibility alias.
+- Reckoner, Analyze, and MCP output paths now pseudonymize customer identifiers.
+- History `full_result_json` pseudonymized before SQLite storage.
+- IAM Gate A: offline validation of all 160 policy actions against vendored AWS Service Authorization Reference.
+- IAM Gate B: bidirectional policy-registry consistency checks.
+- Workspace isolation: each workspace owns its own pseudonymization secret.
+
+### Fixed
+- CSV export no longer emits raw account IDs, ARNs, or resource identifiers (privacy defect).
+- JSON stdout (non-TTY/piped) is now pseudonymized by default.
+- MCP `kulshan_preflight` no longer returns raw account ID and ARN.
+- Logger calls and exception messages no longer interpolate full raw account IDs.
+
+### Deprecated
+- `--show-pii` flag. Use `--show-identifiers` instead.
+- `redact.py` remains as legacy compatibility code for workspace CLI display. Removal planned for 0.5.2.
+
 ## [0.5.0] - 2026-08-01
 
 ### Added

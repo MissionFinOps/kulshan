@@ -103,7 +103,8 @@ class WorkspaceCredentialMismatchError(WorkspaceError):
         self.actual_account = actual_account
         super().__init__(
             f"Credential mismatch for workspace '{workspace_name}': "
-            f"expected account {expected_account}, got {actual_account}."
+            f"expected account ***{expected_account[-4:] if expected_account and len(expected_account) >= 4 else '????'}, "
+            f"got ***{actual_account[-4:] if actual_account and len(actual_account) >= 4 else '????'}."
         )
 
 

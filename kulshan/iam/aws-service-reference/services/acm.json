@@ -1,0 +1,1582 @@
+{
+  "Name": "acm",
+  "Actions": [
+    {
+      "Name": "AddTagsToCertificate",
+      "ActionConditionKeys": [
+        "acm:CertificateKeyPairOrigin",
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": true,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "certificate"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "CreateAcmeDomainValidation",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "acme-endpoint",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "CreateAcmeEndpoint",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "CreateAcmeExternalAccountBinding",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "acme-endpoint",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "DeleteAcmeDomainValidation",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "acme-domain-validation",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "DeleteAcmeEndpoint",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "acme-endpoint",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "DeleteAcmeExternalAccountBinding",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "acme-external-account-binding",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "DeleteCertificate",
+      "ActionConditionKeys": [
+        "acm:CertificateKeyPairOrigin"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "certificate"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeAcmeAccount",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "acme-endpoint",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "DescribeAcmeDomainValidation",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "acme-domain-validation",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "DescribeAcmeEndpoint",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "acme-endpoint",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "DescribeAcmeExternalAccountBinding",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "acme-external-account-binding",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "DescribeCertificate",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "certificate"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ExportCertificate",
+      "ActionConditionKeys": [
+        "acm:DomainNames"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "certificate"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetAccountConfiguration",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetAcmeExternalAccountBindingCredentials",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "acme-external-account-binding",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "GetCertificate",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "certificate"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ImportCertificate",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "certificate"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListAcmeAccounts",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "acme-endpoint",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "ListAcmeDomainValidations",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "acme-endpoint",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "ListAcmeEndpoints",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListAcmeExternalAccountBindings",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "acme-endpoint",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "ListCertificateDomainValidations",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "certificate"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "ListCertificates",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListTagsForCertificate",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "certificate"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "ListTagsForResource",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "acme-domain-validation",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}"
+          ]
+        },
+        {
+          "Name": "acme-endpoint",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}"
+          ]
+        },
+        {
+          "Name": "acme-external-account-binding",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "PutAccountConfiguration",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "RemoveTagsFromCertificate",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": true,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "certificate"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "RenewCertificate",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "certificate"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "RequestCertificate",
+      "ActionConditionKeys": [
+        "acm:CertificateAuthority",
+        "acm:CertificateKeyPairOrigin",
+        "acm:CertificateTransparencyLogging",
+        "acm:DomainNames",
+        "acm:Export",
+        "acm:KeyAlgorithm",
+        "acm:ValidationMethod",
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ResendValidationEmail",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "certificate"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "RevokeAcmeAccount",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "acme-endpoint",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "RevokeAcmeExternalAccountBinding",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "acme-external-account-binding",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "RevokeCertificate",
+      "ActionConditionKeys": [
+        "acm:CertificateKeyPairOrigin",
+        "acm:DomainNames"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "certificate"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "SearchCertificates",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "TagResource",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": true,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "acme-domain-validation",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}"
+          ]
+        },
+        {
+          "Name": "acme-endpoint",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}"
+          ]
+        },
+        {
+          "Name": "acme-external-account-binding",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "UntagResource",
+      "ActionConditionKeys": [
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": true,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "acme-domain-validation",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}"
+          ]
+        },
+        {
+          "Name": "acme-endpoint",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}"
+          ]
+        },
+        {
+          "Name": "acme-external-account-binding",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "UpdateAcmeDomainValidation",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "acme-domain-validation",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "UpdateAcmeEndpoint",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "acme-endpoint",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "UpdateCertificate",
+      "ActionConditionKeys": [
+        "acm:CertificateKeyPairOrigin"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "certificate"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "UpdateCertificateOptions",
+      "ActionConditionKeys": [
+        "acm:ValidationMethod"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "certificate"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    }
+  ],
+  "ConditionKeys": [
+    {
+      "Name": "acm:CertificateAuthority",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "acm:CertificateKeyPairOrigin",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "acm:CertificateTransparencyLogging",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "acm:DomainNames",
+      "Types": [
+        "ArrayOfString"
+      ]
+    },
+    {
+      "Name": "acm:Export",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "acm:KeyAlgorithm",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "acm:ValidationMethod",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "aws:RequestTag/${TagKey}",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "aws:ResourceTag/${TagKey}",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "aws:TagKeys",
+      "Types": [
+        "ArrayOfString"
+      ]
+    }
+  ],
+  "Operations": [
+    {
+      "Name": "AddTagsToCertificate",
+      "AuthorizedActions": [
+        {
+          "Name": "AddTagsToCertificate",
+          "Service": "acm"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "acm",
+          "Method": "add_tags_to_certificate",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreateAcmeDomainValidation",
+      "SDK": [
+        {
+          "Name": "acm",
+          "Method": "create_acme_domain_validation",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreateAcmeEndpoint",
+      "SDK": [
+        {
+          "Name": "acm",
+          "Method": "create_acme_endpoint",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreateAcmeExternalAccountBinding",
+      "SDK": [
+        {
+          "Name": "acm",
+          "Method": "create_acme_external_account_binding",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteAcmeDomainValidation",
+      "SDK": [
+        {
+          "Name": "acm",
+          "Method": "delete_acme_domain_validation",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteAcmeEndpoint",
+      "SDK": [
+        {
+          "Name": "acm",
+          "Method": "delete_acme_endpoint",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteAcmeExternalAccountBinding",
+      "SDK": [
+        {
+          "Name": "acm",
+          "Method": "delete_acme_external_account_binding",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteCertificate",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteCertificate",
+          "Service": "acm"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "acm",
+          "Method": "delete_certificate",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeAcmeAccount",
+      "SDK": [
+        {
+          "Name": "acm",
+          "Method": "describe_acme_account",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeAcmeDomainValidation",
+      "SDK": [
+        {
+          "Name": "acm",
+          "Method": "describe_acme_domain_validation",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeAcmeEndpoint",
+      "SDK": [
+        {
+          "Name": "acm",
+          "Method": "describe_acme_endpoint",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeAcmeExternalAccountBinding",
+      "SDK": [
+        {
+          "Name": "acm",
+          "Method": "describe_acme_external_account_binding",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeCertificate",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeCertificate",
+          "Service": "acm"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "acm",
+          "Method": "describe_certificate",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ExportCertificate",
+      "AuthorizedActions": [
+        {
+          "Name": "ExportCertificate",
+          "Service": "acm"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "acm",
+          "Method": "export_certificate",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetAccountConfiguration",
+      "AuthorizedActions": [
+        {
+          "Name": "GetAccountConfiguration",
+          "Service": "acm"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "acm",
+          "Method": "get_account_configuration",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetAcmeExternalAccountBindingCredentials",
+      "SDK": [
+        {
+          "Name": "acm",
+          "Method": "get_acme_external_account_binding_credentials",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetCertificate",
+      "AuthorizedActions": [
+        {
+          "Name": "GetCertificate",
+          "Service": "acm"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "acm",
+          "Method": "get_certificate",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ImportCertificate",
+      "AuthorizedActions": [
+        {
+          "Name": "AddTagsToCertificate",
+          "Service": "acm"
+        },
+        {
+          "Name": "ImportCertificate",
+          "Service": "acm"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "acm",
+          "Method": "import_certificate",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListAcmeAccounts",
+      "SDK": [
+        {
+          "Name": "acm",
+          "Method": "list_acme_accounts",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListAcmeDomainValidations",
+      "SDK": [
+        {
+          "Name": "acm",
+          "Method": "list_acme_domain_validations",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListAcmeEndpoints",
+      "SDK": [
+        {
+          "Name": "acm",
+          "Method": "list_acme_endpoints",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListAcmeExternalAccountBindings",
+      "SDK": [
+        {
+          "Name": "acm",
+          "Method": "list_acme_external_account_bindings",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListCertificateDomainValidations",
+      "AuthorizedActions": [
+        {
+          "Name": "ListCertificateDomainValidations",
+          "Service": "acm"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "acm",
+          "Method": "list_certificate_domain_validations",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListCertificates",
+      "AuthorizedActions": [
+        {
+          "Name": "ListCertificates",
+          "Service": "acm"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "acm",
+          "Method": "list_certificates",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListTagsForCertificate",
+      "AuthorizedActions": [
+        {
+          "Name": "ListTagsForCertificate",
+          "Service": "acm"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "acm",
+          "Method": "list_tags_for_certificate",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListTagsForResource",
+      "AuthorizedActions": [
+        {
+          "Name": "ListTagsForResource",
+          "Service": "acm"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "acm",
+          "Method": "list_tags_for_resource",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "PutAccountConfiguration",
+      "AuthorizedActions": [
+        {
+          "Name": "PutAccountConfiguration",
+          "Service": "acm"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "acm",
+          "Method": "put_account_configuration",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "RemoveTagsFromCertificate",
+      "AuthorizedActions": [
+        {
+          "Name": "RemoveTagsFromCertificate",
+          "Service": "acm"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "acm",
+          "Method": "remove_tags_from_certificate",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "RenewCertificate",
+      "AuthorizedActions": [
+        {
+          "Name": "RenewCertificate",
+          "Service": "acm"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "acm",
+          "Method": "renew_certificate",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "RequestCertificate",
+      "AuthorizedActions": [
+        {
+          "Name": "AddTagsToCertificate",
+          "Service": "acm"
+        },
+        {
+          "Name": "RequestCertificate",
+          "Service": "acm"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "acm",
+          "Method": "request_certificate",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ResendValidationEmail",
+      "AuthorizedActions": [
+        {
+          "Name": "ResendValidationEmail",
+          "Service": "acm"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "acm",
+          "Method": "resend_validation_email",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "RevokeAcmeAccount",
+      "SDK": [
+        {
+          "Name": "acm",
+          "Method": "revoke_acme_account",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "RevokeAcmeExternalAccountBinding",
+      "SDK": [
+        {
+          "Name": "acm",
+          "Method": "revoke_acme_external_account_binding",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "RevokeCertificate",
+      "AuthorizedActions": [
+        {
+          "Name": "RevokeCertificate",
+          "Service": "acm"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "acm",
+          "Method": "revoke_certificate",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "SearchCertificates",
+      "AuthorizedActions": [
+        {
+          "Name": "SearchCertificates",
+          "Service": "acm"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "acm",
+          "Method": "search_certificates",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "TagResource",
+      "AuthorizedActions": [
+        {
+          "Name": "TagResource",
+          "Service": "acm"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "acm",
+          "Method": "tag_resource",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "UntagResource",
+      "AuthorizedActions": [
+        {
+          "Name": "UntagResource",
+          "Service": "acm"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "acm",
+          "Method": "untag_resource",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "UpdateAcmeDomainValidation",
+      "SDK": [
+        {
+          "Name": "acm",
+          "Method": "update_acme_domain_validation",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "UpdateAcmeEndpoint",
+      "SDK": [
+        {
+          "Name": "acm",
+          "Method": "update_acme_endpoint",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "UpdateCertificateOptions",
+      "AuthorizedActions": [
+        {
+          "Name": "UpdateCertificateOptions",
+          "Service": "acm"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "acm",
+          "Method": "update_certificate_options",
+          "Package": "Boto3"
+        }
+      ]
+    }
+  ],
+  "Resources": [
+    {
+      "Name": "acme-domain-validation",
+      "ARNFormats": [
+        "arn:${Partition}:acm:${Region}:${Account}:acme-endpoint/${AcmeEndpointId}/acme-domain-validation/${AcmeDomainValidationId}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ]
+    },
+    {
+      "Name": "acme-endpoint",
+      "ARNFormats": [
+        "arn:${Partition}:acm:${Region}:${Account}:acme-endpoint/${AcmeEndpointId}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ]
+    },
+    {
+      "Name": "acme-external-account-binding",
+      "ARNFormats": [
+        "arn:${Partition}:acm:${Region}:${Account}:acme-endpoint/${AcmeEndpointId}/acme-external-account-binding/${ExternalAccountBindingId}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ]
+    },
+    {
+      "Name": "certificate",
+      "ARNFormats": [
+        "arn:${Partition}:acm:${Region}:${Account}:certificate/${CertificateId}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ]
+    }
+  ],
+  "Version": "v1.4"
+}

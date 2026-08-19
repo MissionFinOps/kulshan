@@ -1,0 +1,2388 @@
+{
+  "Name": "cloudwatch",
+  "Actions": [
+    {
+      "Name": "BatchGetServiceLevelIndicatorReport",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "BatchGetServiceLevelObjectiveBudgetReport",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "slo"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "CallWithBearerToken",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "CreateServiceLevelObjective",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "DeleteAlarmMuteRule",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "alarm-mute-rule"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteAlarms",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "alarm"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteAnomalyDetector",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteDashboards",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "dashboard"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteInsightRules",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "insight-rule"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteMetricStream",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "metric-stream"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeletePipelineRule",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "dataset"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "DeleteServiceLevelObjective",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "slo"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "DescribeAlarmHistory",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "alarm"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeAlarms",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "alarm"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeAlarmsForMetric",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeAnomalyDetectors",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeInsightRules",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DisableAlarmActions",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "alarm"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DisableInsightRules",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "insight-rule"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "EnableAlarmActions",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "alarm"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "EnableInsightRules",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "insight-rule"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "EnableTopologyDiscovery",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "GenerateQuery",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "GenerateQueryResultsSummary",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "GetAlarmMuteRule",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "alarm-mute-rule"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetDashboard",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "dashboard"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetDataset",
+      "ActionConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "dataset"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetInsightRuleReport",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "insight-rule"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetMetricData",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "dataset",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "GetMetricStatistics",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetMetricStream",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "metric-stream"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetMetricWidgetImage",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "GetOTelEnrichment",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "GetService",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "service"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "GetServiceData",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "service"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "GetServiceLevelObjective",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "slo"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "GetTopologyDiscoveryStatus",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "GetTopologyMap",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "Link",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "ListAlarmMuteRules",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "alarm-mute-rule"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListDashboards",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListEntitiesForMetric",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "ListManagedInsightRules",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys",
+        "cloudwatch:requestManagedResourceARNs"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListMetricStreams",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListMetrics",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "dataset",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "ListServiceLevelObjectives",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "ListServices",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "ListTagsForResource",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "alarm",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}"
+          ]
+        },
+        {
+          "Name": "alarm-mute-rule",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}"
+          ]
+        },
+        {
+          "Name": "dashboard",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}"
+          ]
+        },
+        {
+          "Name": "dataset",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}"
+          ]
+        },
+        {
+          "Name": "insight-rule",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}"
+          ]
+        },
+        {
+          "Name": "metric-stream",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}"
+          ]
+        },
+        {
+          "Name": "service",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}"
+          ]
+        },
+        {
+          "Name": "slo",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "PutAlarmMuteRule",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "alarm"
+        },
+        {
+          "Name": "alarm-mute-rule"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "PutAnomalyDetector",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "PutCompositeAlarm",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys",
+        "cloudwatch:AlarmActions"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "alarm"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "PutDashboard",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "dashboard"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "PutInsightRule",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys",
+        "cloudwatch:requestInsightRuleLogGroups"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "insight-rule"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "PutLogAlarm",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys",
+        "cloudwatch:AlarmActions"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "alarm"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "PutManagedInsightRules",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys",
+        "cloudwatch:requestManagedResourceARNs"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "PutMetricAlarm",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys",
+        "cloudwatch:AlarmActions"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "alarm"
+        },
+        {
+          "Name": "dataset",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "PutMetricData",
+      "ActionConditionKeys": [
+        "cloudwatch:namespace"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "dataset",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "PutMetricStream",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "metric-stream"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "PutPipelineRule",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "dataset"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "SetAlarmState",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "alarm"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "StartMetricStreams",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "metric-stream"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "StartOTelEnrichment",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "StopMetricStreams",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "metric-stream"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "StopOTelEnrichment",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "TagResource",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": true,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "alarm",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}"
+          ]
+        },
+        {
+          "Name": "alarm-mute-rule",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}"
+          ]
+        },
+        {
+          "Name": "dashboard",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}"
+          ]
+        },
+        {
+          "Name": "dataset",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}"
+          ]
+        },
+        {
+          "Name": "insight-rule",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}"
+          ]
+        },
+        {
+          "Name": "metric-stream",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}"
+          ]
+        },
+        {
+          "Name": "service",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}"
+          ]
+        },
+        {
+          "Name": "slo",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "UntagResource",
+      "ActionConditionKeys": [
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": true,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "alarm",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}"
+          ]
+        },
+        {
+          "Name": "alarm-mute-rule",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}"
+          ]
+        },
+        {
+          "Name": "dashboard",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}"
+          ]
+        },
+        {
+          "Name": "dataset",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}"
+          ]
+        },
+        {
+          "Name": "insight-rule",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}"
+          ]
+        },
+        {
+          "Name": "metric-stream",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}"
+          ]
+        },
+        {
+          "Name": "service",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}"
+          ]
+        },
+        {
+          "Name": "slo",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "UpdateServiceLevelObjective",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "slo"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    }
+  ],
+  "ConditionKeys": [
+    {
+      "Name": "aws:RequestTag/${TagKey}",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "aws:ResourceTag/${TagKey}",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "aws:TagKeys",
+      "Types": [
+        "ArrayOfString"
+      ]
+    },
+    {
+      "Name": "cloudwatch:AlarmActions",
+      "Types": [
+        "ArrayOfString"
+      ]
+    },
+    {
+      "Name": "cloudwatch:namespace",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "cloudwatch:requestInsightRuleLogGroups",
+      "Types": [
+        "ArrayOfString"
+      ]
+    },
+    {
+      "Name": "cloudwatch:requestManagedResourceARNs",
+      "Types": [
+        "ArrayOfARN"
+      ]
+    }
+  ],
+  "Operations": [
+    {
+      "Name": "AssociateDatasetKmsKey",
+      "SDK": [
+        {
+          "Name": "cloudwatch",
+          "Method": "associate_dataset_kms_key",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteAlarmMuteRule",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteAlarmMuteRule",
+          "Service": "cloudwatch"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudwatch",
+          "Method": "delete_alarm_mute_rule",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteAlarms",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteAlarms",
+          "Service": "cloudwatch"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudwatch",
+          "Method": "delete_alarms",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteAnomalyDetector",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteAnomalyDetector",
+          "Service": "cloudwatch"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudwatch",
+          "Method": "delete_anomaly_detector",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteDashboards",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteDashboards",
+          "Service": "cloudwatch"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudwatch",
+          "Method": "delete_dashboards",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteInsightRules",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteInsightRules",
+          "Service": "cloudwatch"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudwatch",
+          "Method": "delete_insight_rules",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteMetricStream",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteMetricStream",
+          "Service": "cloudwatch"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudwatch",
+          "Method": "delete_metric_stream",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeAlarmContributors",
+      "SDK": [
+        {
+          "Name": "cloudwatch",
+          "Method": "describe_alarm_contributors",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeAlarmHistory",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeAlarmHistory",
+          "Service": "cloudwatch"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudwatch",
+          "Method": "describe_alarm_history",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeAlarms",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeAlarms",
+          "Service": "cloudwatch"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudwatch",
+          "Method": "describe_alarms",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeAlarmsForMetric",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeAlarmsForMetric",
+          "Service": "cloudwatch"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudwatch",
+          "Method": "describe_alarms_for_metric",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeAnomalyDetectors",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeAnomalyDetectors",
+          "Service": "cloudwatch"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudwatch",
+          "Method": "describe_anomaly_detectors",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeInsightRules",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeInsightRules",
+          "Service": "cloudwatch"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudwatch",
+          "Method": "describe_insight_rules",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DisableAlarmActions",
+      "AuthorizedActions": [
+        {
+          "Name": "DisableAlarmActions",
+          "Service": "cloudwatch"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudwatch",
+          "Method": "disable_alarm_actions",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DisableInsightRules",
+      "AuthorizedActions": [
+        {
+          "Name": "DisableInsightRules",
+          "Service": "cloudwatch"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudwatch",
+          "Method": "disable_insight_rules",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DisassociateDatasetKmsKey",
+      "SDK": [
+        {
+          "Name": "cloudwatch",
+          "Method": "disassociate_dataset_kms_key",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "EnableAlarmActions",
+      "AuthorizedActions": [
+        {
+          "Name": "EnableAlarmActions",
+          "Service": "cloudwatch"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudwatch",
+          "Method": "enable_alarm_actions",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "EnableInsightRules",
+      "AuthorizedActions": [
+        {
+          "Name": "EnableInsightRules",
+          "Service": "cloudwatch"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudwatch",
+          "Method": "enable_insight_rules",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetAlarmMuteRule",
+      "AuthorizedActions": [
+        {
+          "Name": "GetAlarmMuteRule",
+          "Service": "cloudwatch"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudwatch",
+          "Method": "get_alarm_mute_rule",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetDashboard",
+      "AuthorizedActions": [
+        {
+          "Name": "GetDashboard",
+          "Service": "cloudwatch"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudwatch",
+          "Method": "get_dashboard",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetDataset",
+      "AuthorizedActions": [
+        {
+          "Name": "GetDataset",
+          "Service": "cloudwatch"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudwatch",
+          "Method": "get_dataset",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetInsightRuleReport",
+      "AuthorizedActions": [
+        {
+          "Name": "GetInsightRuleReport",
+          "Service": "cloudwatch"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudwatch",
+          "Method": "get_insight_rule_report",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetMetricData",
+      "AuthorizedActions": [
+        {
+          "Name": "GetMetricData",
+          "Service": "cloudwatch"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudwatch",
+          "Method": "get_metric_data",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetMetricStatistics",
+      "AuthorizedActions": [
+        {
+          "Name": "GetMetricStatistics",
+          "Service": "cloudwatch"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudwatch",
+          "Method": "get_metric_statistics",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetMetricStream",
+      "AuthorizedActions": [
+        {
+          "Name": "GetMetricStream",
+          "Service": "cloudwatch"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudwatch",
+          "Method": "get_metric_stream",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetMetricWidgetImage",
+      "AuthorizedActions": [
+        {
+          "Name": "GetMetricWidgetImage",
+          "Service": "cloudwatch"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudwatch",
+          "Method": "get_metric_widget_image",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetOTelEnrichment",
+      "AuthorizedActions": [
+        {
+          "Name": "GetOTelEnrichment",
+          "Service": "cloudwatch"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudwatch",
+          "Method": "get_otel_enrichment",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListAlarmMuteRules",
+      "AuthorizedActions": [
+        {
+          "Name": "ListAlarmMuteRules",
+          "Service": "cloudwatch"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudwatch",
+          "Method": "list_alarm_mute_rules",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListDashboards",
+      "AuthorizedActions": [
+        {
+          "Name": "ListDashboards",
+          "Service": "cloudwatch"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudwatch",
+          "Method": "list_dashboards",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListManagedInsightRules",
+      "AuthorizedActions": [
+        {
+          "Name": "ListManagedInsightRules",
+          "Service": "cloudwatch"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudwatch",
+          "Method": "list_managed_insight_rules",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListMetricStreams",
+      "AuthorizedActions": [
+        {
+          "Name": "ListMetricStreams",
+          "Service": "cloudwatch"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudwatch",
+          "Method": "list_metric_streams",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListMetrics",
+      "AuthorizedActions": [
+        {
+          "Name": "ListMetrics",
+          "Service": "cloudwatch"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudwatch",
+          "Method": "list_metrics",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListTagsForResource",
+      "AuthorizedActions": [
+        {
+          "Name": "ListTagsForResource",
+          "Service": "cloudwatch"
+        },
+        {
+          "Name": "ListTagsForResource",
+          "Service": "oam"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudwatch",
+          "Method": "list_tags_for_resource",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "PutAlarmMuteRule",
+      "AuthorizedActions": [
+        {
+          "Name": "PutAlarmMuteRule",
+          "Service": "cloudwatch"
+        },
+        {
+          "Name": "TagResource",
+          "Service": "cloudwatch"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudwatch",
+          "Method": "put_alarm_mute_rule",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "PutAnomalyDetector",
+      "AuthorizedActions": [
+        {
+          "Name": "PutAnomalyDetector",
+          "Service": "cloudwatch"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudwatch",
+          "Method": "put_anomaly_detector",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "PutCompositeAlarm",
+      "AuthorizedActions": [
+        {
+          "Name": "PutCompositeAlarm",
+          "Service": "cloudwatch"
+        },
+        {
+          "Name": "TagResource",
+          "Service": "cloudwatch"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudwatch",
+          "Method": "put_composite_alarm",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "PutDashboard",
+      "AuthorizedActions": [
+        {
+          "Name": "PutDashboard",
+          "Service": "cloudwatch"
+        },
+        {
+          "Name": "TagResource",
+          "Service": "cloudwatch"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudwatch",
+          "Method": "put_dashboard",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "PutInsightRule",
+      "AuthorizedActions": [
+        {
+          "Name": "PutInsightRule",
+          "Service": "cloudwatch"
+        },
+        {
+          "Name": "TagResource",
+          "Service": "cloudwatch"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudwatch",
+          "Method": "put_insight_rule",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "PutLogAlarm",
+      "AuthorizedActions": [
+        {
+          "Name": "PassRole",
+          "Context": {
+            "iam:PassedToService": [
+              "cloudwatch.amazonaws.com"
+            ]
+          },
+          "Service": "iam"
+        },
+        {
+          "Name": "PutLogAlarm",
+          "Service": "cloudwatch"
+        },
+        {
+          "Name": "TagResource",
+          "Service": "cloudwatch"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudwatch",
+          "Method": "put_log_alarm",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "PutManagedInsightRules",
+      "AuthorizedActions": [
+        {
+          "Name": "PutManagedInsightRules",
+          "Service": "cloudwatch"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudwatch",
+          "Method": "put_managed_insight_rules",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "PutMetricAlarm",
+      "AuthorizedActions": [
+        {
+          "Name": "PutMetricAlarm",
+          "Service": "cloudwatch"
+        },
+        {
+          "Name": "TagResource",
+          "Service": "cloudwatch"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudwatch",
+          "Method": "put_metric_alarm",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "PutMetricData",
+      "AuthorizedActions": [
+        {
+          "Name": "PutMetricData",
+          "Service": "cloudwatch"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudwatch",
+          "Method": "put_metric_data",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "PutMetricStream",
+      "AuthorizedActions": [
+        {
+          "Name": "PassRole",
+          "Context": {
+            "iam:PassedToService": [
+              "streams.metrics.cloudwatch.amazonaws.com"
+            ]
+          },
+          "Service": "iam"
+        },
+        {
+          "Name": "PutMetricStream",
+          "Service": "cloudwatch"
+        },
+        {
+          "Name": "TagResource",
+          "Service": "cloudwatch"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudwatch",
+          "Method": "put_metric_stream",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "SetAlarmState",
+      "AuthorizedActions": [
+        {
+          "Name": "SetAlarmState",
+          "Service": "cloudwatch"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudwatch",
+          "Method": "set_alarm_state",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "StartMetricStreams",
+      "AuthorizedActions": [
+        {
+          "Name": "StartMetricStreams",
+          "Service": "cloudwatch"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudwatch",
+          "Method": "start_metric_streams",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "StartOTelEnrichment",
+      "AuthorizedActions": [
+        {
+          "Name": "StartOTelEnrichment",
+          "Service": "cloudwatch"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudwatch",
+          "Method": "start_otel_enrichment",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "StopMetricStreams",
+      "AuthorizedActions": [
+        {
+          "Name": "StopMetricStreams",
+          "Service": "cloudwatch"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudwatch",
+          "Method": "stop_metric_streams",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "StopOTelEnrichment",
+      "AuthorizedActions": [
+        {
+          "Name": "StopOTelEnrichment",
+          "Service": "cloudwatch"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudwatch",
+          "Method": "stop_otel_enrichment",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "TagResource",
+      "AuthorizedActions": [
+        {
+          "Name": "TagResource",
+          "Service": "cloudwatch"
+        },
+        {
+          "Name": "TagResource",
+          "Service": "oam"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudwatch",
+          "Method": "tag_resource",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "UntagResource",
+      "AuthorizedActions": [
+        {
+          "Name": "UntagResource",
+          "Service": "cloudwatch"
+        },
+        {
+          "Name": "UntagResource",
+          "Service": "oam"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudwatch",
+          "Method": "untag_resource",
+          "Package": "Boto3"
+        }
+      ]
+    }
+  ],
+  "Resources": [
+    {
+      "Name": "alarm",
+      "ARNFormats": [
+        "arn:${Partition}:cloudwatch:${Region}:${Account}:alarm:${AlarmName}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ]
+    },
+    {
+      "Name": "alarm-mute-rule",
+      "ARNFormats": [
+        "arn:${Partition}:cloudwatch:${Region}:${Account}:alarm-mute-rule:${AlarmMuteRuleName}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ]
+    },
+    {
+      "Name": "dashboard",
+      "ARNFormats": [
+        "arn:${Partition}:cloudwatch::${Account}:dashboard/${DashboardName}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ]
+    },
+    {
+      "Name": "dataset",
+      "ARNFormats": [
+        "arn:${Partition}:cloudwatch:${Region}:${Account}:dataset/${DatasetId}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ]
+    },
+    {
+      "Name": "insight-rule",
+      "ARNFormats": [
+        "arn:${Partition}:cloudwatch:${Region}:${Account}:insight-rule/${InsightRuleName}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ]
+    },
+    {
+      "Name": "metric-stream",
+      "ARNFormats": [
+        "arn:${Partition}:cloudwatch:${Region}:${Account}:metric-stream/${MetricStreamName}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ]
+    },
+    {
+      "Name": "service",
+      "ARNFormats": [
+        "arn:${Partition}:cloudwatch:${Region}:${Account}:service/${ServiceName}-${UniqueAttributesHex}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ]
+    },
+    {
+      "Name": "slo",
+      "ARNFormats": [
+        "arn:${Partition}:cloudwatch:${Region}:${Account}:slo/${SloName}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ]
+    }
+  ],
+  "Version": "v1.4"
+}

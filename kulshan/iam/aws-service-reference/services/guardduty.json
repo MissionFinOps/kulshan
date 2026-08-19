@@ -1,0 +1,3223 @@
+{
+  "Name": "guardduty",
+  "Actions": [
+    {
+      "Name": "AcceptAdministratorInvitation",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "AcceptInvitation",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ArchiveFindings",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "CreateDetector",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:ResourceTag/${TagKey}",
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "CreateFilter",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "filter"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "CreateIPSet",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:ResourceTag/${TagKey}",
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "CreateInvestigation",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "CreateMalwareProtectionPlan",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:ResourceTag/${TagKey}",
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "CreateMembers",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "CreatePublishingDestination",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:ResourceTag/${TagKey}",
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "CreateSampleFindings",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "CreateThreatEntitySet",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "CreateThreatIntelSet",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "CreateTrustedEntitySet",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:ResourceTag/${TagKey}",
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeclineInvitations",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteDetector",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "detector"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteFilter",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "filter"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteIPSet",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "ipset"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteInvitations",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteMalwareProtectionPlan",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "malwareprotectionplan"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteMembers",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeletePublishingDestination",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "publishingDestination"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteThreatEntitySet",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "threatentityset"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteThreatIntelSet",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "threatintelset"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteTrustedEntitySet",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "trustedentityset"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeMalwareScans",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeOrganizationConfiguration",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribePublishingDestination",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "publishingDestination"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DisableOrganizationAdminAccount",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DisassociateFromAdministratorAccount",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DisassociateFromMasterAccount",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DisassociateMembers",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "EnableOrganizationAdminAccount",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetAdministratorAccount",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetCoverageStatistics",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "detector"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetDetector",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "detector"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetFilter",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "filter"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetFindings",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetFindingsStatistics",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetIPSet",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "ipset"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetInvestigation",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetInvitationsCount",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetMalwareProtectionPlan",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "malwareprotectionplan"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetMalwareScan",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetMalwareScanSettings",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetMasterAccount",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetMemberDetectors",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetMembers",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetOrganizationStatistics",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetRemainingFreeTrialDays",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetThreatEntitySet",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "threatentityset"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetThreatIntelSet",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "threatintelset"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetTrustedEntitySet",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "trustedentityset"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetUsageStatistics",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "InviteMembers",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListCoverage",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "detector"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListDetectors",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListFilters",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListFindings",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListIPSets",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListInvestigations",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListInvitations",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListMalwareProtectionPlans",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListMalwareScans",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListMembers",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListOrganizationAdminAccounts",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListPublishingDestinations",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListTagsForResource",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "detector"
+        },
+        {
+          "Name": "filter"
+        },
+        {
+          "Name": "ipset"
+        },
+        {
+          "Name": "malwareprotectionplan"
+        },
+        {
+          "Name": "publishingDestination"
+        },
+        {
+          "Name": "threatentityset"
+        },
+        {
+          "Name": "threatintelset"
+        },
+        {
+          "Name": "trustedentityset"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "ListThreatEntitySets",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListThreatIntelSets",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListTrustedEntitySets",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "SendObjectMalwareScan",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "SendSecurityTelemetry",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "StartMalwareScan",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "StartMonitoringMembers",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "StopMonitoringMembers",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "TagResource",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": true,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "detector"
+        },
+        {
+          "Name": "filter"
+        },
+        {
+          "Name": "ipset"
+        },
+        {
+          "Name": "malwareprotectionplan"
+        },
+        {
+          "Name": "publishingDestination"
+        },
+        {
+          "Name": "threatentityset"
+        },
+        {
+          "Name": "threatintelset"
+        },
+        {
+          "Name": "trustedentityset"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "UnarchiveFindings",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "UntagResource",
+      "ActionConditionKeys": [
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": true,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "detector"
+        },
+        {
+          "Name": "filter"
+        },
+        {
+          "Name": "ipset"
+        },
+        {
+          "Name": "malwareprotectionplan"
+        },
+        {
+          "Name": "publishingDestination"
+        },
+        {
+          "Name": "threatentityset"
+        },
+        {
+          "Name": "threatintelset"
+        },
+        {
+          "Name": "trustedentityset"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "UpdateDetector",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "detector"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "UpdateFilter",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "filter"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "UpdateFindingsFeedback",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "UpdateIPSet",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "ipset"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "UpdateMalwareProtectionPlan",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "malwareprotectionplan"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "UpdateMalwareScanSettings",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "UpdateMemberDetectors",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "UpdateOrganizationConfiguration",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "UpdatePublishingDestination",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "publishingDestination"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "UpdateThreatEntitySet",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "threatentityset"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "UpdateThreatIntelSet",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "threatintelset"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "UpdateTrustedEntitySet",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "trustedentityset"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    }
+  ],
+  "ConditionKeys": [
+    {
+      "Name": "aws:RequestTag/${TagKey}",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "aws:ResourceTag/${TagKey}",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "aws:TagKeys",
+      "Types": [
+        "ArrayOfString"
+      ]
+    }
+  ],
+  "Operations": [
+    {
+      "Name": "AcceptAdministratorInvitation",
+      "AuthorizedActions": [
+        {
+          "Name": "AcceptAdministratorInvitation",
+          "Service": "guardduty"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "guardduty",
+          "Method": "accept_administrator_invitation",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "AcceptInvitation",
+      "AuthorizedActions": [
+        {
+          "Name": "AcceptInvitation",
+          "Service": "guardduty"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "guardduty",
+          "Method": "accept_invitation",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ArchiveFindings",
+      "AuthorizedActions": [
+        {
+          "Name": "ArchiveFindings",
+          "Service": "guardduty"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "guardduty",
+          "Method": "archive_findings",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreateDetector",
+      "AuthorizedActions": [
+        {
+          "Name": "CreateDetector",
+          "Service": "guardduty"
+        },
+        {
+          "Name": "TagResource",
+          "Service": "guardduty"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "guardduty",
+          "Method": "create_detector",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreateFilter",
+      "AuthorizedActions": [
+        {
+          "Name": "CreateFilter",
+          "Service": "guardduty"
+        },
+        {
+          "Name": "TagResource",
+          "Service": "guardduty"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "guardduty",
+          "Method": "create_filter",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreateIPSet",
+      "AuthorizedActions": [
+        {
+          "Name": "CreateIPSet",
+          "Service": "guardduty"
+        },
+        {
+          "Name": "TagResource",
+          "Service": "guardduty"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "guardduty",
+          "Method": "create_ip_set",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreateInvestigation",
+      "AuthorizedActions": [
+        {
+          "Name": "CreateInvestigation",
+          "Service": "guardduty"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "guardduty",
+          "Method": "create_investigation",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreateMalwareProtectionPlan",
+      "AuthorizedActions": [
+        {
+          "Name": "CreateMalwareProtectionPlan",
+          "Service": "guardduty"
+        },
+        {
+          "Name": "PassRole",
+          "Context": {
+            "iam:PassedToService": [
+              "malware-protection-plan.guardduty.amazonaws.com"
+            ]
+          },
+          "Service": "iam"
+        },
+        {
+          "Name": "TagResource",
+          "Service": "guardduty"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "guardduty",
+          "Method": "create_malware_protection_plan",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreateMembers",
+      "AuthorizedActions": [
+        {
+          "Name": "CreateMembers",
+          "Service": "guardduty"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "guardduty",
+          "Method": "create_members",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreatePublishingDestination",
+      "AuthorizedActions": [
+        {
+          "Name": "CreatePublishingDestination",
+          "Service": "guardduty"
+        },
+        {
+          "Name": "TagResource",
+          "Service": "guardduty"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "guardduty",
+          "Method": "create_publishing_destination",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreateSampleFindings",
+      "AuthorizedActions": [
+        {
+          "Name": "CreateSampleFindings",
+          "Service": "guardduty"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "guardduty",
+          "Method": "create_sample_findings",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreateThreatEntitySet",
+      "AuthorizedActions": [
+        {
+          "Name": "CreateThreatEntitySet",
+          "Service": "guardduty"
+        },
+        {
+          "Name": "TagResource",
+          "Service": "guardduty"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "guardduty",
+          "Method": "create_threat_entity_set",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreateThreatIntelSet",
+      "AuthorizedActions": [
+        {
+          "Name": "CreateThreatIntelSet",
+          "Service": "guardduty"
+        },
+        {
+          "Name": "TagResource",
+          "Service": "guardduty"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "guardduty",
+          "Method": "create_threat_intel_set",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreateTrustedEntitySet",
+      "AuthorizedActions": [
+        {
+          "Name": "CreateTrustedEntitySet",
+          "Service": "guardduty"
+        },
+        {
+          "Name": "TagResource",
+          "Service": "guardduty"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "guardduty",
+          "Method": "create_trusted_entity_set",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeclineInvitations",
+      "AuthorizedActions": [
+        {
+          "Name": "DeclineInvitations",
+          "Service": "guardduty"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "guardduty",
+          "Method": "decline_invitations",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteDetector",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteDetector",
+          "Service": "guardduty"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "guardduty",
+          "Method": "delete_detector",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteFilter",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteFilter",
+          "Service": "guardduty"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "guardduty",
+          "Method": "delete_filter",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteIPSet",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteIPSet",
+          "Service": "guardduty"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "guardduty",
+          "Method": "delete_ip_set",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteInvitations",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteInvitations",
+          "Service": "guardduty"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "guardduty",
+          "Method": "delete_invitations",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteMalwareProtectionPlan",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteMalwareProtectionPlan",
+          "Service": "guardduty"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "guardduty",
+          "Method": "delete_malware_protection_plan",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteMembers",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteMembers",
+          "Service": "guardduty"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "guardduty",
+          "Method": "delete_members",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeletePublishingDestination",
+      "AuthorizedActions": [
+        {
+          "Name": "DeletePublishingDestination",
+          "Service": "guardduty"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "guardduty",
+          "Method": "delete_publishing_destination",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteThreatEntitySet",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteThreatEntitySet",
+          "Service": "guardduty"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "guardduty",
+          "Method": "delete_threat_entity_set",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteThreatIntelSet",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteThreatIntelSet",
+          "Service": "guardduty"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "guardduty",
+          "Method": "delete_threat_intel_set",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteTrustedEntitySet",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteTrustedEntitySet",
+          "Service": "guardduty"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "guardduty",
+          "Method": "delete_trusted_entity_set",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeMalwareScans",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeMalwareScans",
+          "Service": "guardduty"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "guardduty",
+          "Method": "describe_malware_scans",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeOrganizationConfiguration",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeOrganizationConfiguration",
+          "Service": "guardduty"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "guardduty",
+          "Method": "describe_organization_configuration",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribePublishingDestination",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribePublishingDestination",
+          "Service": "guardduty"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "guardduty",
+          "Method": "describe_publishing_destination",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DisableOrganizationAdminAccount",
+      "AuthorizedActions": [
+        {
+          "Name": "DisableOrganizationAdminAccount",
+          "Service": "guardduty"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "guardduty",
+          "Method": "disable_organization_admin_account",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DisassociateFromAdministratorAccount",
+      "AuthorizedActions": [
+        {
+          "Name": "DisassociateFromAdministratorAccount",
+          "Service": "guardduty"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "guardduty",
+          "Method": "disassociate_from_administrator_account",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DisassociateFromMasterAccount",
+      "AuthorizedActions": [
+        {
+          "Name": "DisassociateFromMasterAccount",
+          "Service": "guardduty"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "guardduty",
+          "Method": "disassociate_from_master_account",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DisassociateMembers",
+      "AuthorizedActions": [
+        {
+          "Name": "DisassociateMembers",
+          "Service": "guardduty"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "guardduty",
+          "Method": "disassociate_members",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "EnableOrganizationAdminAccount",
+      "AuthorizedActions": [
+        {
+          "Name": "EnableOrganizationAdminAccount",
+          "Service": "guardduty"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "guardduty",
+          "Method": "enable_organization_admin_account",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetAdministratorAccount",
+      "AuthorizedActions": [
+        {
+          "Name": "GetAdministratorAccount",
+          "Service": "guardduty"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "guardduty",
+          "Method": "get_administrator_account",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetCoverageStatistics",
+      "AuthorizedActions": [
+        {
+          "Name": "GetCoverageStatistics",
+          "Service": "guardduty"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "guardduty",
+          "Method": "get_coverage_statistics",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetDetector",
+      "AuthorizedActions": [
+        {
+          "Name": "GetDetector",
+          "Service": "guardduty"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "guardduty",
+          "Method": "get_detector",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetFilter",
+      "AuthorizedActions": [
+        {
+          "Name": "GetFilter",
+          "Service": "guardduty"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "guardduty",
+          "Method": "get_filter",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetFindings",
+      "AuthorizedActions": [
+        {
+          "Name": "GetFindings",
+          "Service": "guardduty"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "guardduty",
+          "Method": "get_findings",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetFindingsStatistics",
+      "AuthorizedActions": [
+        {
+          "Name": "GetFindingsStatistics",
+          "Service": "guardduty"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "guardduty",
+          "Method": "get_findings_statistics",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetIPSet",
+      "AuthorizedActions": [
+        {
+          "Name": "GetIPSet",
+          "Service": "guardduty"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "guardduty",
+          "Method": "get_ip_set",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetInvestigation",
+      "AuthorizedActions": [
+        {
+          "Name": "GetInvestigation",
+          "Service": "guardduty"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "guardduty",
+          "Method": "get_investigation",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetInvitationsCount",
+      "AuthorizedActions": [
+        {
+          "Name": "GetInvitationsCount",
+          "Service": "guardduty"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "guardduty",
+          "Method": "get_invitations_count",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetMalwareProtectionPlan",
+      "AuthorizedActions": [
+        {
+          "Name": "GetMalwareProtectionPlan",
+          "Service": "guardduty"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "guardduty",
+          "Method": "get_malware_protection_plan",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetMalwareScan",
+      "AuthorizedActions": [
+        {
+          "Name": "GetMalwareScan",
+          "Service": "guardduty"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "guardduty",
+          "Method": "get_malware_scan",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetMalwareScanSettings",
+      "AuthorizedActions": [
+        {
+          "Name": "GetMalwareScanSettings",
+          "Service": "guardduty"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "guardduty",
+          "Method": "get_malware_scan_settings",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetMasterAccount",
+      "AuthorizedActions": [
+        {
+          "Name": "GetMasterAccount",
+          "Service": "guardduty"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "guardduty",
+          "Method": "get_master_account",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetMemberDetectors",
+      "AuthorizedActions": [
+        {
+          "Name": "GetMemberDetectors",
+          "Service": "guardduty"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "guardduty",
+          "Method": "get_member_detectors",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetMembers",
+      "AuthorizedActions": [
+        {
+          "Name": "GetMembers",
+          "Service": "guardduty"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "guardduty",
+          "Method": "get_members",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetOrganizationStatistics",
+      "AuthorizedActions": [
+        {
+          "Name": "GetOrganizationStatistics",
+          "Service": "guardduty"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "guardduty",
+          "Method": "get_organization_statistics",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetRemainingFreeTrialDays",
+      "AuthorizedActions": [
+        {
+          "Name": "GetRemainingFreeTrialDays",
+          "Service": "guardduty"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "guardduty",
+          "Method": "get_remaining_free_trial_days",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetThreatEntitySet",
+      "AuthorizedActions": [
+        {
+          "Name": "GetThreatEntitySet",
+          "Service": "guardduty"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "guardduty",
+          "Method": "get_threat_entity_set",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetThreatIntelSet",
+      "AuthorizedActions": [
+        {
+          "Name": "GetThreatIntelSet",
+          "Service": "guardduty"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "guardduty",
+          "Method": "get_threat_intel_set",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetTrustedEntitySet",
+      "AuthorizedActions": [
+        {
+          "Name": "GetTrustedEntitySet",
+          "Service": "guardduty"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "guardduty",
+          "Method": "get_trusted_entity_set",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetUsageStatistics",
+      "AuthorizedActions": [
+        {
+          "Name": "GetUsageStatistics",
+          "Service": "guardduty"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "guardduty",
+          "Method": "get_usage_statistics",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "InviteMembers",
+      "AuthorizedActions": [
+        {
+          "Name": "InviteMembers",
+          "Service": "guardduty"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "guardduty",
+          "Method": "invite_members",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListCoverage",
+      "AuthorizedActions": [
+        {
+          "Name": "ListCoverage",
+          "Service": "guardduty"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "guardduty",
+          "Method": "list_coverage",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListDetectors",
+      "AuthorizedActions": [
+        {
+          "Name": "ListDetectors",
+          "Service": "guardduty"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "guardduty",
+          "Method": "list_detectors",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListFilters",
+      "AuthorizedActions": [
+        {
+          "Name": "ListFilters",
+          "Service": "guardduty"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "guardduty",
+          "Method": "list_filters",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListFindings",
+      "AuthorizedActions": [
+        {
+          "Name": "ListFindings",
+          "Service": "guardduty"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "guardduty",
+          "Method": "list_findings",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListIPSets",
+      "AuthorizedActions": [
+        {
+          "Name": "ListIPSets",
+          "Service": "guardduty"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "guardduty",
+          "Method": "list_ip_sets",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListInvestigations",
+      "AuthorizedActions": [
+        {
+          "Name": "ListInvestigations",
+          "Service": "guardduty"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "guardduty",
+          "Method": "list_investigations",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListInvitations",
+      "AuthorizedActions": [
+        {
+          "Name": "ListInvitations",
+          "Service": "guardduty"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "guardduty",
+          "Method": "list_invitations",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListMalwareProtectionPlans",
+      "AuthorizedActions": [
+        {
+          "Name": "ListMalwareProtectionPlans",
+          "Service": "guardduty"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "guardduty",
+          "Method": "list_malware_protection_plans",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListMalwareScans",
+      "AuthorizedActions": [
+        {
+          "Name": "ListMalwareScans",
+          "Service": "guardduty"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "guardduty",
+          "Method": "list_malware_scans",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListMembers",
+      "AuthorizedActions": [
+        {
+          "Name": "ListMembers",
+          "Service": "guardduty"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "guardduty",
+          "Method": "list_members",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListOrganizationAdminAccounts",
+      "AuthorizedActions": [
+        {
+          "Name": "ListOrganizationAdminAccounts",
+          "Service": "guardduty"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "guardduty",
+          "Method": "list_organization_admin_accounts",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListPublishingDestinations",
+      "AuthorizedActions": [
+        {
+          "Name": "ListPublishingDestinations",
+          "Service": "guardduty"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "guardduty",
+          "Method": "list_publishing_destinations",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListTagsForResource",
+      "AuthorizedActions": [
+        {
+          "Name": "ListTagsForResource",
+          "Service": "guardduty"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "guardduty",
+          "Method": "list_tags_for_resource",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListThreatEntitySets",
+      "AuthorizedActions": [
+        {
+          "Name": "ListThreatEntitySets",
+          "Service": "guardduty"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "guardduty",
+          "Method": "list_threat_entity_sets",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListThreatIntelSets",
+      "AuthorizedActions": [
+        {
+          "Name": "ListThreatIntelSets",
+          "Service": "guardduty"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "guardduty",
+          "Method": "list_threat_intel_sets",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListTrustedEntitySets",
+      "AuthorizedActions": [
+        {
+          "Name": "ListTrustedEntitySets",
+          "Service": "guardduty"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "guardduty",
+          "Method": "list_trusted_entity_sets",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "SendObjectMalwareScan",
+      "AuthorizedActions": [
+        {
+          "Name": "SendObjectMalwareScan",
+          "Service": "guardduty"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "guardduty",
+          "Method": "send_object_malware_scan",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "StartMalwareScan",
+      "AuthorizedActions": [
+        {
+          "Name": "PassRole",
+          "Context": {
+            "iam:PassedToService": [
+              "malware-protection.guardduty.amazonaws.com"
+            ]
+          },
+          "Service": "iam"
+        },
+        {
+          "Name": "StartMalwareScan",
+          "Service": "guardduty"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "guardduty",
+          "Method": "start_malware_scan",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "StartMonitoringMembers",
+      "AuthorizedActions": [
+        {
+          "Name": "StartMonitoringMembers",
+          "Service": "guardduty"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "guardduty",
+          "Method": "start_monitoring_members",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "StopMonitoringMembers",
+      "AuthorizedActions": [
+        {
+          "Name": "StopMonitoringMembers",
+          "Service": "guardduty"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "guardduty",
+          "Method": "stop_monitoring_members",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "TagResource",
+      "AuthorizedActions": [
+        {
+          "Name": "TagResource",
+          "Service": "guardduty"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "guardduty",
+          "Method": "tag_resource",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "UnarchiveFindings",
+      "AuthorizedActions": [
+        {
+          "Name": "UnarchiveFindings",
+          "Service": "guardduty"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "guardduty",
+          "Method": "unarchive_findings",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "UntagResource",
+      "AuthorizedActions": [
+        {
+          "Name": "UntagResource",
+          "Service": "guardduty"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "guardduty",
+          "Method": "untag_resource",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "UpdateDetector",
+      "AuthorizedActions": [
+        {
+          "Name": "UpdateDetector",
+          "Service": "guardduty"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "guardduty",
+          "Method": "update_detector",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "UpdateFilter",
+      "AuthorizedActions": [
+        {
+          "Name": "UpdateFilter",
+          "Service": "guardduty"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "guardduty",
+          "Method": "update_filter",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "UpdateFindingsFeedback",
+      "AuthorizedActions": [
+        {
+          "Name": "UpdateFindingsFeedback",
+          "Service": "guardduty"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "guardduty",
+          "Method": "update_findings_feedback",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "UpdateIPSet",
+      "AuthorizedActions": [
+        {
+          "Name": "UpdateIPSet",
+          "Service": "guardduty"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "guardduty",
+          "Method": "update_ip_set",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "UpdateMalwareProtectionPlan",
+      "AuthorizedActions": [
+        {
+          "Name": "PassRole",
+          "Context": {
+            "iam:PassedToService": [
+              "malware-protection-plan.guardduty.amazonaws.com"
+            ]
+          },
+          "Service": "iam"
+        },
+        {
+          "Name": "UpdateMalwareProtectionPlan",
+          "Service": "guardduty"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "guardduty",
+          "Method": "update_malware_protection_plan",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "UpdateMalwareScanSettings",
+      "AuthorizedActions": [
+        {
+          "Name": "UpdateMalwareScanSettings",
+          "Service": "guardduty"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "guardduty",
+          "Method": "update_malware_scan_settings",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "UpdateMemberDetectors",
+      "AuthorizedActions": [
+        {
+          "Name": "UpdateMemberDetectors",
+          "Service": "guardduty"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "guardduty",
+          "Method": "update_member_detectors",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "UpdateOrganizationConfiguration",
+      "AuthorizedActions": [
+        {
+          "Name": "UpdateOrganizationConfiguration",
+          "Service": "guardduty"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "guardduty",
+          "Method": "update_organization_configuration",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "UpdatePublishingDestination",
+      "AuthorizedActions": [
+        {
+          "Name": "UpdatePublishingDestination",
+          "Service": "guardduty"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "guardduty",
+          "Method": "update_publishing_destination",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "UpdateThreatEntitySet",
+      "AuthorizedActions": [
+        {
+          "Name": "UpdateThreatEntitySet",
+          "Service": "guardduty"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "guardduty",
+          "Method": "update_threat_entity_set",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "UpdateThreatIntelSet",
+      "AuthorizedActions": [
+        {
+          "Name": "UpdateThreatIntelSet",
+          "Service": "guardduty"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "guardduty",
+          "Method": "update_threat_intel_set",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "UpdateTrustedEntitySet",
+      "AuthorizedActions": [
+        {
+          "Name": "UpdateTrustedEntitySet",
+          "Service": "guardduty"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "guardduty",
+          "Method": "update_trusted_entity_set",
+          "Package": "Boto3"
+        }
+      ]
+    }
+  ],
+  "Resources": [
+    {
+      "Name": "detector",
+      "ARNFormats": [
+        "arn:${Partition}:guardduty:${Region}:${Account}:detector/${DetectorId}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ]
+    },
+    {
+      "Name": "filter",
+      "ARNFormats": [
+        "arn:${Partition}:guardduty:${Region}:${Account}:detector/${DetectorId}/filter/${FilterName}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ]
+    },
+    {
+      "Name": "ipset",
+      "ARNFormats": [
+        "arn:${Partition}:guardduty:${Region}:${Account}:detector/${DetectorId}/ipset/${IPSetId}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ]
+    },
+    {
+      "Name": "malwareprotectionplan",
+      "ARNFormats": [
+        "arn:${Partition}:guardduty:${Region}:${Account}:malware-protection-plan/${MalwareProtectionPlanId}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ]
+    },
+    {
+      "Name": "publishingDestination",
+      "ARNFormats": [
+        "arn:${Partition}:guardduty:${Region}:${Account}:detector/${DetectorId}/publishingdestination/${PublishingDestinationId}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ]
+    },
+    {
+      "Name": "threatentityset",
+      "ARNFormats": [
+        "arn:${Partition}:guardduty:${Region}:${Account}:detector/${DetectorId}/threatentityset/${ThreatEntitySetId}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ]
+    },
+    {
+      "Name": "threatintelset",
+      "ARNFormats": [
+        "arn:${Partition}:guardduty:${Region}:${Account}:detector/${DetectorId}/threatintelset/${ThreatIntelSetId}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ]
+    },
+    {
+      "Name": "trustedentityset",
+      "ARNFormats": [
+        "arn:${Partition}:guardduty:${Region}:${Account}:detector/${DetectorId}/trustedentityset/${TrustedEntitySetId}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ]
+    }
+  ],
+  "Version": "v1.4"
+}

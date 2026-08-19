@@ -1,0 +1,2429 @@
+{
+  "Name": "cloudtrail",
+  "Actions": [
+    {
+      "Name": "AddTags",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": true,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "channel"
+        },
+        {
+          "Name": "dashboard"
+        },
+        {
+          "Name": "eventdatastore"
+        },
+        {
+          "Name": "trail"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "CancelQuery",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "eventdatastore"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "CreateChannel",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "channel"
+        },
+        {
+          "Name": "eventdatastore"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "CreateDashboard",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "dashboard"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "CreateEventDataStore",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "eventdatastore"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "CreateServiceLinkedChannel",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "channel"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "CreateTrail",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "trail"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteChannel",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "channel"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteDashboard",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "dashboard"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteEventDataStore",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "eventdatastore"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteResourcePolicy",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "channel"
+        },
+        {
+          "Name": "dashboard"
+        },
+        {
+          "Name": "eventdatastore"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteServiceLinkedChannel",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "channel"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "DeleteTrail",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "trail"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeregisterOrganizationDelegatedAdmin",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeQuery",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "eventdatastore"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeTrails",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DisableFederation",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "eventdatastore"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "EnableFederation",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "eventdatastore"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "GenerateQuery",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "eventdatastore"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GenerateQueryResultsSummary",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "eventdatastore"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "GetChannel",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "channel"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetDashboard",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "dashboard"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetEventConfiguration",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "eventdatastore"
+        },
+        {
+          "Name": "trail"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetEventDataStore",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "eventdatastore"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetEventDataStoreData",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "eventdatastore"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetEventSelectors",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "trail"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetImport",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetInsightSelectors",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "eventdatastore"
+        },
+        {
+          "Name": "trail"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetQueryResults",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "eventdatastore"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "GetResourcePolicy",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "channel"
+        },
+        {
+          "Name": "dashboard"
+        },
+        {
+          "Name": "eventdatastore"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetServiceLinkedChannel",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "channel"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "GetTrail",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "trail"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetTrailStatus",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "trail"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListChannels",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListDashboards",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListEventDataStores",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListImportFailures",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListImports",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListInsightsData",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "trail"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListPublicKeys",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListQueries",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "eventdatastore"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListServiceLinkedChannels",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "ListTags",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "channel"
+        },
+        {
+          "Name": "dashboard"
+        },
+        {
+          "Name": "eventdatastore"
+        },
+        {
+          "Name": "trail"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "ListTrails",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "LookupEvents",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "PutEventConfiguration",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "eventdatastore"
+        },
+        {
+          "Name": "trail"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "PutEventSelectors",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "trail"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "PutInsightSelectors",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "eventdatastore"
+        },
+        {
+          "Name": "trail"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "PutResourcePolicy",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "channel"
+        },
+        {
+          "Name": "dashboard"
+        },
+        {
+          "Name": "eventdatastore"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "RegisterOrganizationDelegatedAdmin",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "RemoveTags",
+      "ActionConditionKeys": [
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": true,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "channel"
+        },
+        {
+          "Name": "dashboard"
+        },
+        {
+          "Name": "eventdatastore"
+        },
+        {
+          "Name": "trail"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "RestoreEventDataStore",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "eventdatastore"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "SearchSampleQueries",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "StartDashboardRefresh",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "dashboard"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "StartEventDataStoreIngestion",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "eventdatastore"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "StartImport",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "StartLogging",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "trail"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "StartQuery",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "eventdatastore"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "StopEventDataStoreIngestion",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "eventdatastore"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "StopImport",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "StopLogging",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "trail"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "UpdateChannel",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "channel"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "UpdateDashboard",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "dashboard"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "UpdateEventDataStore",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "eventdatastore"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "UpdateServiceLinkedChannel",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "channel"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "UpdateTrail",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "trail"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    }
+  ],
+  "ConditionKeys": [
+    {
+      "Name": "aws:RequestTag/${TagKey}",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "aws:ResourceTag/${TagKey}",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "aws:TagKeys",
+      "Types": [
+        "ArrayOfString"
+      ]
+    }
+  ],
+  "Operations": [
+    {
+      "Name": "AddTags",
+      "AuthorizedActions": [
+        {
+          "Name": "AddTags",
+          "Service": "cloudtrail"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudtrail",
+          "Method": "add_tags",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CancelQuery",
+      "AuthorizedActions": [
+        {
+          "Name": "CancelQuery",
+          "Service": "cloudtrail"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudtrail",
+          "Method": "cancel_query",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreateChannel",
+      "AuthorizedActions": [
+        {
+          "Name": "AddTags",
+          "Service": "cloudtrail"
+        },
+        {
+          "Name": "CreateChannel",
+          "Service": "cloudtrail"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudtrail",
+          "Method": "create_channel",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreateDashboard",
+      "AuthorizedActions": [
+        {
+          "Name": "AddTags",
+          "Service": "cloudtrail"
+        },
+        {
+          "Name": "CreateDashboard",
+          "Service": "cloudtrail"
+        },
+        {
+          "Name": "StartDashboardRefresh",
+          "Service": "cloudtrail"
+        },
+        {
+          "Name": "StartQuery",
+          "Service": "cloudtrail"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudtrail",
+          "Method": "create_dashboard",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreateEventDataStore",
+      "AuthorizedActions": [
+        {
+          "Name": "AddTags",
+          "Service": "cloudtrail"
+        },
+        {
+          "Name": "CreateEventDataStore",
+          "Service": "cloudtrail"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudtrail",
+          "Method": "create_event_data_store",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreateTrail",
+      "AuthorizedActions": [
+        {
+          "Name": "AddTags",
+          "Service": "cloudtrail"
+        },
+        {
+          "Name": "CreateTrail",
+          "Service": "cloudtrail"
+        },
+        {
+          "Name": "PassRole",
+          "Context": {
+            "iam:PassedToService": [
+              "cloudtrail.amazonaws.com",
+              "cloudtrail.preprod.amazonaws.com"
+            ]
+          },
+          "Service": "iam"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudtrail",
+          "Method": "create_trail",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteChannel",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteChannel",
+          "Service": "cloudtrail"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudtrail",
+          "Method": "delete_channel",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteDashboard",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteDashboard",
+          "Service": "cloudtrail"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudtrail",
+          "Method": "delete_dashboard",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteEventDataStore",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteEventDataStore",
+          "Service": "cloudtrail"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudtrail",
+          "Method": "delete_event_data_store",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteResourcePolicy",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteResourcePolicy",
+          "Service": "cloudtrail"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudtrail",
+          "Method": "delete_resource_policy",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteTrail",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteTrail",
+          "Service": "cloudtrail"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudtrail",
+          "Method": "delete_trail",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeregisterOrganizationDelegatedAdmin",
+      "AuthorizedActions": [
+        {
+          "Name": "DeregisterOrganizationDelegatedAdmin",
+          "Service": "cloudtrail"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudtrail",
+          "Method": "deregister_organization_delegated_admin",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeQuery",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeQuery",
+          "Service": "cloudtrail"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudtrail",
+          "Method": "describe_query",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeTrails",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeTrails",
+          "Service": "cloudtrail"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudtrail",
+          "Method": "describe_trails",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DisableFederation",
+      "AuthorizedActions": [
+        {
+          "Name": "DisableFederation",
+          "Service": "cloudtrail"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudtrail",
+          "Method": "disable_federation",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "EnableFederation",
+      "AuthorizedActions": [
+        {
+          "Name": "EnableFederation",
+          "Service": "cloudtrail"
+        },
+        {
+          "Name": "PassRole",
+          "Context": {
+            "iam:PassedToService": [
+              "cloudtrail.amazonaws.com",
+              "cloudtrail.preprod.amazonaws.com"
+            ]
+          },
+          "Service": "iam"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudtrail",
+          "Method": "enable_federation",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GenerateQuery",
+      "AuthorizedActions": [
+        {
+          "Name": "GenerateQuery",
+          "Service": "cloudtrail"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudtrail",
+          "Method": "generate_query",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetChannel",
+      "AuthorizedActions": [
+        {
+          "Name": "GetChannel",
+          "Service": "cloudtrail"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudtrail",
+          "Method": "get_channel",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetDashboard",
+      "AuthorizedActions": [
+        {
+          "Name": "GetDashboard",
+          "Service": "cloudtrail"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudtrail",
+          "Method": "get_dashboard",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetEventConfiguration",
+      "AuthorizedActions": [
+        {
+          "Name": "GetEventConfiguration",
+          "Service": "cloudtrail"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudtrail",
+          "Method": "get_event_configuration",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetEventDataStore",
+      "AuthorizedActions": [
+        {
+          "Name": "GetEventDataStore",
+          "Service": "cloudtrail"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudtrail",
+          "Method": "get_event_data_store",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetEventSelectors",
+      "AuthorizedActions": [
+        {
+          "Name": "GetEventSelectors",
+          "Service": "cloudtrail"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudtrail",
+          "Method": "get_event_selectors",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetImport",
+      "AuthorizedActions": [
+        {
+          "Name": "GetImport",
+          "Service": "cloudtrail"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudtrail",
+          "Method": "get_import",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetInsightSelectors",
+      "AuthorizedActions": [
+        {
+          "Name": "GetInsightSelectors",
+          "Service": "cloudtrail"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudtrail",
+          "Method": "get_insight_selectors",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetQueryResults",
+      "AuthorizedActions": [
+        {
+          "Name": "GetQueryResults",
+          "Service": "cloudtrail"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudtrail",
+          "Method": "get_query_results",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetResourcePolicy",
+      "AuthorizedActions": [
+        {
+          "Name": "GetResourcePolicy",
+          "Service": "cloudtrail"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudtrail",
+          "Method": "get_resource_policy",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetTrail",
+      "AuthorizedActions": [
+        {
+          "Name": "GetTrail",
+          "Service": "cloudtrail"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudtrail",
+          "Method": "get_trail",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetTrailStatus",
+      "AuthorizedActions": [
+        {
+          "Name": "GetTrailStatus",
+          "Service": "cloudtrail"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudtrail",
+          "Method": "get_trail_status",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListChannels",
+      "AuthorizedActions": [
+        {
+          "Name": "ListChannels",
+          "Service": "cloudtrail"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudtrail",
+          "Method": "list_channels",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListDashboards",
+      "AuthorizedActions": [
+        {
+          "Name": "ListDashboards",
+          "Service": "cloudtrail"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudtrail",
+          "Method": "list_dashboards",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListEventDataStores",
+      "AuthorizedActions": [
+        {
+          "Name": "ListEventDataStores",
+          "Service": "cloudtrail"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudtrail",
+          "Method": "list_event_data_stores",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListImportFailures",
+      "AuthorizedActions": [
+        {
+          "Name": "ListImportFailures",
+          "Service": "cloudtrail"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudtrail",
+          "Method": "list_import_failures",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListImports",
+      "AuthorizedActions": [
+        {
+          "Name": "ListImports",
+          "Service": "cloudtrail"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudtrail",
+          "Method": "list_imports",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListInsightsData",
+      "AuthorizedActions": [
+        {
+          "Name": "ListInsightsData",
+          "Service": "cloudtrail"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudtrail",
+          "Method": "list_insights_data",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListInsightsMetricData",
+      "AuthorizedActions": [
+        {
+          "Name": "ListInsightsData",
+          "Service": "cloudtrail"
+        },
+        {
+          "Name": "LookupEvents",
+          "Service": "cloudtrail"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudtrail",
+          "Method": "list_insights_metric_data",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListPublicKeys",
+      "AuthorizedActions": [
+        {
+          "Name": "ListPublicKeys",
+          "Service": "cloudtrail"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudtrail",
+          "Method": "list_public_keys",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListQueries",
+      "AuthorizedActions": [
+        {
+          "Name": "ListQueries",
+          "Service": "cloudtrail"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudtrail",
+          "Method": "list_queries",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListTags",
+      "AuthorizedActions": [
+        {
+          "Name": "ListTags",
+          "Service": "cloudtrail"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudtrail",
+          "Method": "list_tags",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListTrails",
+      "AuthorizedActions": [
+        {
+          "Name": "ListTrails",
+          "Service": "cloudtrail"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudtrail",
+          "Method": "list_trails",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "LookupEvents",
+      "AuthorizedActions": [
+        {
+          "Name": "LookupEvents",
+          "Service": "cloudtrail"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudtrail",
+          "Method": "lookup_events",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "PutEventConfiguration",
+      "AuthorizedActions": [
+        {
+          "Name": "PutEventConfiguration",
+          "Service": "cloudtrail"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudtrail",
+          "Method": "put_event_configuration",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "PutEventSelectors",
+      "AuthorizedActions": [
+        {
+          "Name": "PutEventSelectors",
+          "Service": "cloudtrail"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudtrail",
+          "Method": "put_event_selectors",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "PutInsightSelectors",
+      "AuthorizedActions": [
+        {
+          "Name": "PutInsightSelectors",
+          "Service": "cloudtrail"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudtrail",
+          "Method": "put_insight_selectors",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "PutResourcePolicy",
+      "AuthorizedActions": [
+        {
+          "Name": "PutResourcePolicy",
+          "Service": "cloudtrail"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudtrail",
+          "Method": "put_resource_policy",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "RegisterOrganizationDelegatedAdmin",
+      "AuthorizedActions": [
+        {
+          "Name": "RegisterOrganizationDelegatedAdmin",
+          "Service": "cloudtrail"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudtrail",
+          "Method": "register_organization_delegated_admin",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "RemoveTags",
+      "AuthorizedActions": [
+        {
+          "Name": "RemoveTags",
+          "Service": "cloudtrail"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudtrail",
+          "Method": "remove_tags",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "RestoreEventDataStore",
+      "AuthorizedActions": [
+        {
+          "Name": "RestoreEventDataStore",
+          "Service": "cloudtrail"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudtrail",
+          "Method": "restore_event_data_store",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "SearchSampleQueries",
+      "AuthorizedActions": [
+        {
+          "Name": "SearchSampleQueries",
+          "Service": "cloudtrail"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudtrail",
+          "Method": "search_sample_queries",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "StartDashboardRefresh",
+      "AuthorizedActions": [
+        {
+          "Name": "StartDashboardRefresh",
+          "Service": "cloudtrail"
+        },
+        {
+          "Name": "StartQuery",
+          "Service": "cloudtrail"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudtrail",
+          "Method": "start_dashboard_refresh",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "StartEventDataStoreIngestion",
+      "AuthorizedActions": [
+        {
+          "Name": "StartEventDataStoreIngestion",
+          "Service": "cloudtrail"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudtrail",
+          "Method": "start_event_data_store_ingestion",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "StartImport",
+      "AuthorizedActions": [
+        {
+          "Name": "PassRole",
+          "Context": {
+            "iam:PassedToService": [
+              "cloudtrail.amazonaws.com",
+              "cloudtrail.preprod.amazonaws.com"
+            ]
+          },
+          "Service": "iam"
+        },
+        {
+          "Name": "StartImport",
+          "Service": "cloudtrail"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudtrail",
+          "Method": "start_import",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "StartLogging",
+      "AuthorizedActions": [
+        {
+          "Name": "StartLogging",
+          "Service": "cloudtrail"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudtrail",
+          "Method": "start_logging",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "StartQuery",
+      "AuthorizedActions": [
+        {
+          "Name": "StartQuery",
+          "Service": "cloudtrail"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudtrail",
+          "Method": "start_query",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "StopEventDataStoreIngestion",
+      "AuthorizedActions": [
+        {
+          "Name": "StopEventDataStoreIngestion",
+          "Service": "cloudtrail"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudtrail",
+          "Method": "stop_event_data_store_ingestion",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "StopImport",
+      "AuthorizedActions": [
+        {
+          "Name": "StopImport",
+          "Service": "cloudtrail"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudtrail",
+          "Method": "stop_import",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "StopLogging",
+      "AuthorizedActions": [
+        {
+          "Name": "StopLogging",
+          "Service": "cloudtrail"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudtrail",
+          "Method": "stop_logging",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "UpdateChannel",
+      "AuthorizedActions": [
+        {
+          "Name": "UpdateChannel",
+          "Service": "cloudtrail"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudtrail",
+          "Method": "update_channel",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "UpdateDashboard",
+      "AuthorizedActions": [
+        {
+          "Name": "StartDashboardRefresh",
+          "Service": "cloudtrail"
+        },
+        {
+          "Name": "StartQuery",
+          "Service": "cloudtrail"
+        },
+        {
+          "Name": "UpdateDashboard",
+          "Service": "cloudtrail"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudtrail",
+          "Method": "update_dashboard",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "UpdateEventDataStore",
+      "AuthorizedActions": [
+        {
+          "Name": "UpdateEventDataStore",
+          "Service": "cloudtrail"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudtrail",
+          "Method": "update_event_data_store",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "UpdateTrail",
+      "AuthorizedActions": [
+        {
+          "Name": "PassRole",
+          "Context": {
+            "iam:PassedToService": [
+              "cloudtrail.amazonaws.com",
+              "cloudtrail.preprod.amazonaws.com"
+            ]
+          },
+          "Service": "iam"
+        },
+        {
+          "Name": "UpdateTrail",
+          "Service": "cloudtrail"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "cloudtrail",
+          "Method": "update_trail",
+          "Package": "Boto3"
+        }
+      ]
+    }
+  ],
+  "Resources": [
+    {
+      "Name": "channel",
+      "ARNFormats": [
+        "arn:${Partition}:cloudtrail:${Region}:${Account}:channel/${ChannelId}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ]
+    },
+    {
+      "Name": "dashboard",
+      "ARNFormats": [
+        "arn:${Partition}:cloudtrail:${Region}:${Account}:dashboard/${DashboardName}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ]
+    },
+    {
+      "Name": "eventdatastore",
+      "ARNFormats": [
+        "arn:${Partition}:cloudtrail:${Region}:${Account}:eventdatastore/${EventDataStoreId}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ]
+    },
+    {
+      "Name": "trail",
+      "ARNFormats": [
+        "arn:${Partition}:cloudtrail:${Region}:${Account}:trail/${TrailName}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ]
+    }
+  ],
+  "Version": "v1.4"
+}

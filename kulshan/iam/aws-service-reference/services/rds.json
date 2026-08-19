@@ -1,0 +1,8167 @@
+{
+  "Name": "rds",
+  "Actions": [
+    {
+      "Name": "AddRoleToDBCluster",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "AddRoleToDBInstance",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "db"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "AddSourceIdentifierToSubscription",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "es"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "AddTagsToResource",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys",
+        "rds:TagsFromRequest",
+        "rds:req-tag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": true,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "auto-backup"
+        },
+        {
+          "Name": "cev"
+        },
+        {
+          "Name": "cluster"
+        },
+        {
+          "Name": "cluster-auto-backup"
+        },
+        {
+          "Name": "cluster-endpoint"
+        },
+        {
+          "Name": "cluster-pg"
+        },
+        {
+          "Name": "cluster-snapshot"
+        },
+        {
+          "Name": "db"
+        },
+        {
+          "Name": "deployment"
+        },
+        {
+          "Name": "es"
+        },
+        {
+          "Name": "global-cluster"
+        },
+        {
+          "Name": "integration"
+        },
+        {
+          "Name": "og"
+        },
+        {
+          "Name": "pg"
+        },
+        {
+          "Name": "proxy"
+        },
+        {
+          "Name": "proxy-endpoint"
+        },
+        {
+          "Name": "ri"
+        },
+        {
+          "Name": "secgrp"
+        },
+        {
+          "Name": "shardgrp"
+        },
+        {
+          "Name": "snapshot"
+        },
+        {
+          "Name": "snapshot-tenant-database"
+        },
+        {
+          "Name": "subgrp"
+        },
+        {
+          "Name": "target-group"
+        },
+        {
+          "Name": "tenant-database"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "ApplyPendingMaintenanceAction",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster"
+        },
+        {
+          "Name": "db"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "AuthorizeDBSecurityGroupIngress",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": true,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "secgrp"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "BacktrackDBCluster",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "CancelExportTask",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "CopyCustomDBEngineVersion",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cev"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "CopyDBClusterParameterGroup",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys",
+        "rds:req-tag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster-pg"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "CopyDBClusterSnapshot",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys",
+        "rds:req-tag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster-snapshot"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "CopyDBParameterGroup",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys",
+        "rds:req-tag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "pg"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "CopyDBSnapshot",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys",
+        "rds:CopyOptionGroup",
+        "rds:req-tag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "snapshot"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "CopyOptionGroup",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys",
+        "rds:req-tag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "og"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "CreateBlueGreenDeployment",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:ResourceTag/${TagKey}",
+        "aws:TagKeys",
+        "rds:DatabaseClass",
+        "rds:DatabaseEngine",
+        "rds:DatabaseName",
+        "rds:MultiAz",
+        "rds:Piops",
+        "rds:StorageEncrypted",
+        "rds:StorageSize",
+        "rds:Vpc",
+        "rds:cluster-pg-tag/${TagKey}",
+        "rds:cluster-tag/${TagKey}",
+        "rds:db-tag/${TagKey}",
+        "rds:pg-tag/${TagKey}",
+        "rds:req-tag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster"
+        },
+        {
+          "Name": "cluster-pg"
+        },
+        {
+          "Name": "db"
+        },
+        {
+          "Name": "deployment"
+        },
+        {
+          "Name": "pg"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "CreateCustomDBEngineVersion",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys",
+        "rds:req-tag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cev"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "CreateDBCluster",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys",
+        "rds:DatabaseClass",
+        "rds:DatabaseEngine",
+        "rds:DatabaseName",
+        "rds:ManageMasterUserPassword",
+        "rds:Piops",
+        "rds:StorageEncrypted",
+        "rds:StorageSize",
+        "rds:req-tag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster"
+        },
+        {
+          "Name": "cluster-pg"
+        },
+        {
+          "Name": "db"
+        },
+        {
+          "Name": "global-cluster"
+        },
+        {
+          "Name": "og"
+        },
+        {
+          "Name": "subgrp"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "CreateDBClusterEndpoint",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys",
+        "rds:EndpointType",
+        "rds:req-tag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster"
+        },
+        {
+          "Name": "cluster-endpoint"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "CreateDBClusterParameterGroup",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys",
+        "rds:req-tag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster-pg"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "CreateDBClusterSnapshot",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys",
+        "rds:req-tag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster"
+        },
+        {
+          "Name": "cluster-snapshot"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "CreateDBInstance",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys",
+        "rds:BackupTarget",
+        "rds:ManageMasterUserPassword",
+        "rds:PubliclyAccessible",
+        "rds:req-tag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster"
+        },
+        {
+          "Name": "db"
+        },
+        {
+          "Name": "og"
+        },
+        {
+          "Name": "pg"
+        },
+        {
+          "Name": "secgrp"
+        },
+        {
+          "Name": "subgrp"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "CreateDBInstanceReadReplica",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys",
+        "rds:PubliclyAccessible",
+        "rds:req-tag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster"
+        },
+        {
+          "Name": "db"
+        },
+        {
+          "Name": "og"
+        },
+        {
+          "Name": "pg"
+        },
+        {
+          "Name": "subgrp"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "CreateDBParameterGroup",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys",
+        "rds:req-tag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "pg"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "CreateDBProxy",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "CreateDBProxyEndpoint",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "proxy"
+        },
+        {
+          "Name": "proxy-endpoint"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "CreateDBSecurityGroup",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys",
+        "rds:req-tag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "secgrp"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "CreateDBShardGroup",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys",
+        "rds:PubliclyAccessible",
+        "rds:req-tag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster"
+        },
+        {
+          "Name": "shardgrp"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "CreateDBSnapshot",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys",
+        "rds:BackupTarget",
+        "rds:req-tag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "db"
+        },
+        {
+          "Name": "snapshot"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "CreateDBSubnetGroup",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys",
+        "rds:req-tag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "subgrp"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "CreateEventSubscription",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys",
+        "rds:req-tag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "es"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "CreateGlobalCluster",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys",
+        "rds:req-tag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster"
+        },
+        {
+          "Name": "global-cluster"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "CreateIntegration",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys",
+        "rds:req-tag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster"
+        },
+        {
+          "Name": "db"
+        },
+        {
+          "Name": "integration"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "CreateOptionGroup",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys",
+        "rds:req-tag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "og"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "CreateTenantDatabase",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys",
+        "rds:ManageMasterUserPassword",
+        "rds:TenantDatabaseName",
+        "rds:req-tag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "db"
+        },
+        {
+          "Name": "tenant-database"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "CrossRegionCommunication",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster-snapshot"
+        },
+        {
+          "Name": "db"
+        },
+        {
+          "Name": "snapshot"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "DeleteBlueGreenDeployment",
+      "ActionConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "deployment"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteCustomDBEngineVersion",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cev"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "DeleteDBCluster",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster"
+        },
+        {
+          "Name": "cluster-snapshot"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "DeleteDBClusterAutomatedBackup",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster-auto-backup"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteDBClusterEndpoint",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster-endpoint"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "DeleteDBClusterParameterGroup",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster-pg"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteDBClusterSnapshot",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster-snapshot"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteDBInstance",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "db"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "DeleteDBInstanceAutomatedBackup",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "auto-backup"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteDBParameterGroup",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "pg"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteDBProxy",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "proxy"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteDBProxyEndpoint",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "proxy-endpoint"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteDBSecurityGroup",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "secgrp"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteDBShardGroup",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "shardgrp"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "DeleteDBSnapshot",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "snapshot"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteDBSubnetGroup",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "subgrp"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteEventSubscription",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "es"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteGlobalCluster",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "global-cluster"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteIntegration",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "integration"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "DeleteOptionGroup",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "og"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteTenantDatabase",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "db"
+        },
+        {
+          "Name": "tenant-database"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "DeregisterDBProxyTargets",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster"
+        },
+        {
+          "Name": "db"
+        },
+        {
+          "Name": "proxy"
+        },
+        {
+          "Name": "target-group"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeAccountAttributes",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeBlueGreenDeployments",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "deployment"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeCertificates",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeDBClusterAutomatedBackups",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster"
+        },
+        {
+          "Name": "cluster-auto-backup"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeDBClusterBacktracks",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeDBClusterEndpoints",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster"
+        },
+        {
+          "Name": "cluster-endpoint"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeDBClusterParameterGroups",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster-pg"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeDBClusterParameters",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster-pg"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeDBClusterSnapshotAttributes",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster-snapshot"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeDBClusterSnapshots",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster"
+        },
+        {
+          "Name": "cluster-snapshot"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeDBClusters",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeDBEngineVersions",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeDBInstanceAutomatedBackups",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "auto-backup"
+        },
+        {
+          "Name": "db"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeDBInstances",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "db"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeDBLogFiles",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "db"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeDBMajorEngineVersions",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeDBParameterGroups",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "pg"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeDBParameters",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "pg"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeDBProxies",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "proxy"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeDBProxyEndpoints",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "proxy"
+        },
+        {
+          "Name": "proxy-endpoint"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeDBProxyTargetGroups",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "proxy"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeDBProxyTargets",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "proxy"
+        },
+        {
+          "Name": "target-group"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeDBRecommendations",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeDBSecurityGroups",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "secgrp"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeDBShardGroups",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "shardgrp"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "DescribeDBSnapshotAttributes",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "snapshot"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeDBSnapshotTenantDatabases",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "db"
+        },
+        {
+          "Name": "snapshot"
+        },
+        {
+          "Name": "snapshot-tenant-database"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeDBSnapshots",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "db"
+        },
+        {
+          "Name": "snapshot"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeDBSubnetGroups",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "subgrp"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeEngineDefaultClusterParameters",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeEngineDefaultParameters",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeEventCategories",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeEventSubscriptions",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "es"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeEvents",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeExportTasks",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster"
+        },
+        {
+          "Name": "cluster-snapshot"
+        },
+        {
+          "Name": "snapshot"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeGlobalClusters",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "global-cluster"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeIntegrations",
+      "ActionConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "integration"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeOptionGroupOptions",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeOptionGroups",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "og"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeOrderableDBInstanceOptions",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribePendingMaintenanceActions",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster"
+        },
+        {
+          "Name": "db"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeRecommendationGroups",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "DescribeRecommendations",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "DescribeReservedDBInstances",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "ri"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeReservedDBInstancesOfferings",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeSourceRegions",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeTenantDatabases",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "db"
+        },
+        {
+          "Name": "tenant-database"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeValidDBInstanceModifications",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "db"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DisableHttpEndpoint",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "DownloadCompleteDBLogFile",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "db"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DownloadDBLogFilePortion",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "db"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "EnableHttpEndpoint",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "FailoverDBCluster",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster"
+        },
+        {
+          "Name": "db"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "FailoverGlobalCluster",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster"
+        },
+        {
+          "Name": "global-cluster"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListTagsForResource",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "auto-backup"
+        },
+        {
+          "Name": "cev"
+        },
+        {
+          "Name": "cluster"
+        },
+        {
+          "Name": "cluster-auto-backup"
+        },
+        {
+          "Name": "cluster-endpoint"
+        },
+        {
+          "Name": "cluster-pg"
+        },
+        {
+          "Name": "cluster-snapshot"
+        },
+        {
+          "Name": "db"
+        },
+        {
+          "Name": "es"
+        },
+        {
+          "Name": "global-cluster"
+        },
+        {
+          "Name": "integration"
+        },
+        {
+          "Name": "og"
+        },
+        {
+          "Name": "pg"
+        },
+        {
+          "Name": "proxy"
+        },
+        {
+          "Name": "proxy-endpoint"
+        },
+        {
+          "Name": "ri"
+        },
+        {
+          "Name": "secgrp"
+        },
+        {
+          "Name": "shardgrp"
+        },
+        {
+          "Name": "snapshot"
+        },
+        {
+          "Name": "snapshot-tenant-database"
+        },
+        {
+          "Name": "subgrp"
+        },
+        {
+          "Name": "target-group"
+        },
+        {
+          "Name": "tenant-database"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "ModifyActivityStream",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "db"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ModifyCertificates",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ModifyCurrentDBClusterCapacity",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ModifyCustomDBEngineVersion",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cev"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "ModifyDBCluster",
+      "ActionConditionKeys": [
+        "rds:DatabaseClass",
+        "rds:ManageMasterUserPassword",
+        "rds:Piops",
+        "rds:StorageSize"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster"
+        },
+        {
+          "Name": "cluster-pg"
+        },
+        {
+          "Name": "og"
+        },
+        {
+          "Name": "pg"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "ModifyDBClusterEndpoint",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster-endpoint"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ModifyDBClusterParameterGroup",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster-pg"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ModifyDBClusterSnapshotAttribute",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster-snapshot"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ModifyDBInstance",
+      "ActionConditionKeys": [
+        "rds:ManageMasterUserPassword"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "db"
+        },
+        {
+          "Name": "og"
+        },
+        {
+          "Name": "pg"
+        },
+        {
+          "Name": "secgrp"
+        },
+        {
+          "Name": "subgrp"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "ModifyDBParameterGroup",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "pg"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ModifyDBProxy",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "proxy"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ModifyDBProxyEndpoint",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "proxy-endpoint"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ModifyDBProxyTargetGroup",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "target-group"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ModifyDBRecommendation",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ModifyDBShardGroup",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "shardgrp"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "ModifyDBSnapshot",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "og"
+        },
+        {
+          "Name": "snapshot"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ModifyDBSnapshotAttribute",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "snapshot"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ModifyDBSubnetGroup",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "subgrp"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ModifyEventSubscription",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "es"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ModifyGlobalCluster",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "global-cluster"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ModifyIntegration",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "integration"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "ModifyOptionGroup",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "og"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ModifyRecommendation",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "ModifyTenantDatabase",
+      "ActionConditionKeys": [
+        "rds:ManageMasterUserPassword",
+        "rds:TenantDatabaseName"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "db"
+        },
+        {
+          "Name": "tenant-database"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "PromoteReadReplica",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "db"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "PromoteReadReplicaDBCluster",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "PurchaseReservedDBInstancesOffering",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys",
+        "rds:req-tag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "ri"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "RebootDBCluster",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "RebootDBInstance",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "db"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "RebootDBShardGroup",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "shardgrp"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "RegisterDBProxyTargets",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "db"
+        },
+        {
+          "Name": "target-group"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "RemoveFromGlobalCluster",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster"
+        },
+        {
+          "Name": "global-cluster"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "RemoveRoleFromDBCluster",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "RemoveRoleFromDBInstance",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "db"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "RemoveSourceIdentifierFromSubscription",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "es"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "RemoveTagsFromResource",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys",
+        "rds:req-tag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": true,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "auto-backup"
+        },
+        {
+          "Name": "cev"
+        },
+        {
+          "Name": "cluster"
+        },
+        {
+          "Name": "cluster-auto-backup"
+        },
+        {
+          "Name": "cluster-endpoint"
+        },
+        {
+          "Name": "cluster-pg"
+        },
+        {
+          "Name": "cluster-snapshot"
+        },
+        {
+          "Name": "db"
+        },
+        {
+          "Name": "deployment"
+        },
+        {
+          "Name": "es"
+        },
+        {
+          "Name": "global-cluster"
+        },
+        {
+          "Name": "integration"
+        },
+        {
+          "Name": "og"
+        },
+        {
+          "Name": "pg"
+        },
+        {
+          "Name": "proxy"
+        },
+        {
+          "Name": "proxy-endpoint"
+        },
+        {
+          "Name": "ri"
+        },
+        {
+          "Name": "secgrp"
+        },
+        {
+          "Name": "shardgrp"
+        },
+        {
+          "Name": "snapshot"
+        },
+        {
+          "Name": "snapshot-tenant-database"
+        },
+        {
+          "Name": "subgrp"
+        },
+        {
+          "Name": "target-group"
+        },
+        {
+          "Name": "tenant-database"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "ResetDBClusterParameterGroup",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster-pg"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ResetDBParameterGroup",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "pg"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "RestoreDBClusterFromS3",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys",
+        "rds:DatabaseEngine",
+        "rds:DatabaseName",
+        "rds:ManageMasterUserPassword",
+        "rds:StorageEncrypted",
+        "rds:req-tag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster"
+        },
+        {
+          "Name": "cluster-pg"
+        },
+        {
+          "Name": "og"
+        },
+        {
+          "Name": "subgrp"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "RestoreDBClusterFromSnapshot",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys",
+        "rds:DatabaseClass",
+        "rds:Piops",
+        "rds:StorageSize",
+        "rds:req-tag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster"
+        },
+        {
+          "Name": "cluster-pg"
+        },
+        {
+          "Name": "cluster-snapshot"
+        },
+        {
+          "Name": "og"
+        },
+        {
+          "Name": "snapshot"
+        },
+        {
+          "Name": "subgrp"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "RestoreDBClusterToPointInTime",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys",
+        "rds:DatabaseClass",
+        "rds:Piops",
+        "rds:StorageSize",
+        "rds:req-tag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster"
+        },
+        {
+          "Name": "cluster-auto-backup"
+        },
+        {
+          "Name": "cluster-pg"
+        },
+        {
+          "Name": "og"
+        },
+        {
+          "Name": "subgrp"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "RestoreDBInstanceFromDBSnapshot",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys",
+        "rds:BackupTarget",
+        "rds:ManageMasterUserPassword",
+        "rds:PubliclyAccessible",
+        "rds:req-tag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster-snapshot"
+        },
+        {
+          "Name": "db"
+        },
+        {
+          "Name": "og"
+        },
+        {
+          "Name": "pg"
+        },
+        {
+          "Name": "snapshot"
+        },
+        {
+          "Name": "subgrp"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "RestoreDBInstanceFromS3",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys",
+        "rds:ManageMasterUserPassword",
+        "rds:PubliclyAccessible",
+        "rds:req-tag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "db"
+        },
+        {
+          "Name": "og"
+        },
+        {
+          "Name": "pg"
+        },
+        {
+          "Name": "secgrp"
+        },
+        {
+          "Name": "subgrp"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "RestoreDBInstanceToPointInTime",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys",
+        "rds:BackupTarget",
+        "rds:ManageMasterUserPassword",
+        "rds:PubliclyAccessible",
+        "rds:req-tag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "auto-backup"
+        },
+        {
+          "Name": "db"
+        },
+        {
+          "Name": "og"
+        },
+        {
+          "Name": "pg"
+        },
+        {
+          "Name": "subgrp"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "RevokeDBSecurityGroupIngress",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "secgrp"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "StartActivityStream",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster"
+        },
+        {
+          "Name": "db"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "StartDBCluster",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "StartDBInstance",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "db"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "StartDBInstanceAutomatedBackupsReplication",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys",
+        "rds:req-tag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "auto-backup"
+        },
+        {
+          "Name": "db"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "StartExportTask",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster"
+        },
+        {
+          "Name": "cluster-snapshot"
+        },
+        {
+          "Name": "snapshot"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "StopActivityStream",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster"
+        },
+        {
+          "Name": "db"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "StopDBCluster",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "StopDBInstance",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "db"
+        },
+        {
+          "Name": "snapshot"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "StopDBInstanceAutomatedBackupsReplication",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "db"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "SwitchoverBlueGreenDeployment",
+      "ActionConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "deployment"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "SwitchoverGlobalCluster",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster"
+        },
+        {
+          "Name": "global-cluster"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "SwitchoverReadReplica",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "db"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    }
+  ],
+  "ConditionKeys": [
+    {
+      "Name": "aws:RequestTag/${TagKey}",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "aws:ResourceTag/${TagKey}",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "aws:TagKeys",
+      "Types": [
+        "ArrayOfString"
+      ]
+    },
+    {
+      "Name": "rds:BackupTarget",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "rds:CopyOptionGroup",
+      "Types": [
+        "Bool"
+      ]
+    },
+    {
+      "Name": "rds:DatabaseClass",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "rds:DatabaseEngine",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "rds:DatabaseName",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "rds:EndpointType",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "rds:ManageMasterUserPassword",
+      "Types": [
+        "Bool"
+      ]
+    },
+    {
+      "Name": "rds:MultiAz",
+      "Types": [
+        "Bool"
+      ]
+    },
+    {
+      "Name": "rds:Piops",
+      "Types": [
+        "Numeric"
+      ]
+    },
+    {
+      "Name": "rds:PubliclyAccessible",
+      "Types": [
+        "Bool"
+      ]
+    },
+    {
+      "Name": "rds:StorageEncrypted",
+      "Types": [
+        "Bool"
+      ]
+    },
+    {
+      "Name": "rds:StorageSize",
+      "Types": [
+        "Numeric"
+      ]
+    },
+    {
+      "Name": "rds:TagsFromRequest",
+      "Types": [
+        "Bool"
+      ]
+    },
+    {
+      "Name": "rds:TenantDatabaseName",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "rds:Vpc",
+      "Types": [
+        "Bool"
+      ]
+    },
+    {
+      "Name": "rds:cluster-pg-tag/${TagKey}",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "rds:cluster-snapshot-tag/${TagKey}",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "rds:cluster-tag/${TagKey}",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "rds:db-tag/${TagKey}",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "rds:es-tag/${TagKey}",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "rds:og-tag/${TagKey}",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "rds:pg-tag/${TagKey}",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "rds:req-tag/${TagKey}",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "rds:ri-tag/${TagKey}",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "rds:secgrp-tag/${TagKey}",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "rds:snapshot-tag/${TagKey}",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "rds:subgrp-tag/${TagKey}",
+      "Types": [
+        "String"
+      ]
+    }
+  ],
+  "Operations": [
+    {
+      "Name": "AddRoleToDBCluster",
+      "AuthorizedActions": [
+        {
+          "Name": "AddRoleToDBCluster",
+          "Service": "rds"
+        },
+        {
+          "Name": "PassRole",
+          "Context": {
+            "iam:PassedToService": [
+              "rds-preview.amazonaws.com",
+              "rds.amazonaws.com"
+            ]
+          },
+          "Service": "iam"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "neptune",
+          "Method": "add_role_to_db_cluster",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "rds",
+          "Method": "add_role_to_db_cluster",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "AddRoleToDBInstance",
+      "AuthorizedActions": [
+        {
+          "Name": "AddRoleToDBInstance",
+          "Service": "rds"
+        },
+        {
+          "Name": "PassRole",
+          "Context": {
+            "iam:PassedToService": [
+              "rds-preview.amazonaws.com",
+              "rds.amazonaws.com"
+            ]
+          },
+          "Service": "iam"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "rds",
+          "Method": "add_role_to_db_instance",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "AddSourceIdentifierToSubscription",
+      "AuthorizedActions": [
+        {
+          "Name": "AddSourceIdentifierToSubscription",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "docdb",
+          "Method": "add_source_identifier_to_subscription",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "neptune",
+          "Method": "add_source_identifier_to_subscription",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "rds",
+          "Method": "add_source_identifier_to_subscription",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "AddTagsToResource",
+      "AuthorizedActions": [
+        {
+          "Name": "AddTagsToResource",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "docdb",
+          "Method": "add_tags_to_resource",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "neptune",
+          "Method": "add_tags_to_resource",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "rds",
+          "Method": "add_tags_to_resource",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ApplyPendingMaintenanceAction",
+      "AuthorizedActions": [
+        {
+          "Name": "ApplyPendingMaintenanceAction",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "docdb",
+          "Method": "apply_pending_maintenance_action",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "neptune",
+          "Method": "apply_pending_maintenance_action",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "rds",
+          "Method": "apply_pending_maintenance_action",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "AuthorizeDBSecurityGroupIngress",
+      "AuthorizedActions": [
+        {
+          "Name": "AuthorizeDBSecurityGroupIngress",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "rds",
+          "Method": "authorize_db_security_group_ingress",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "BacktrackDBCluster",
+      "AuthorizedActions": [
+        {
+          "Name": "BacktrackDBCluster",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "rds",
+          "Method": "backtrack_db_cluster",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CancelExportTask",
+      "AuthorizedActions": [
+        {
+          "Name": "CancelExportTask",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "rds",
+          "Method": "cancel_export_task",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CopyDBClusterParameterGroup",
+      "AuthorizedActions": [
+        {
+          "Name": "AddTagsToResource",
+          "Service": "rds"
+        },
+        {
+          "Name": "CopyDBClusterParameterGroup",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "docdb",
+          "Method": "copy_db_cluster_parameter_group",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "neptune",
+          "Method": "copy_db_cluster_parameter_group",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "rds",
+          "Method": "copy_db_cluster_parameter_group",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CopyDBClusterSnapshot",
+      "AuthorizedActions": [
+        {
+          "Name": "AddTagsToResource",
+          "Service": "rds"
+        },
+        {
+          "Name": "CopyDBClusterSnapshot",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "docdb",
+          "Method": "copy_db_cluster_snapshot",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "neptune",
+          "Method": "copy_db_cluster_snapshot",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "rds",
+          "Method": "copy_db_cluster_snapshot",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CopyDBParameterGroup",
+      "AuthorizedActions": [
+        {
+          "Name": "AddTagsToResource",
+          "Service": "rds"
+        },
+        {
+          "Name": "CopyDBParameterGroup",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "neptune",
+          "Method": "copy_db_parameter_group",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "rds",
+          "Method": "copy_db_parameter_group",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CopyDBSnapshot",
+      "AuthorizedActions": [
+        {
+          "Name": "AddTagsToResource",
+          "Service": "rds"
+        },
+        {
+          "Name": "CopyCustomDBEngineVersion",
+          "Service": "rds"
+        },
+        {
+          "Name": "CopyDBSnapshot",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "rds",
+          "Method": "copy_db_snapshot",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CopyOptionGroup",
+      "AuthorizedActions": [
+        {
+          "Name": "AddTagsToResource",
+          "Service": "rds"
+        },
+        {
+          "Name": "CopyOptionGroup",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "rds",
+          "Method": "copy_option_group",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreateBlueGreenDeployment",
+      "AuthorizedActions": [
+        {
+          "Name": "AddTagsToResource",
+          "Service": "rds"
+        },
+        {
+          "Name": "CreateBlueGreenDeployment",
+          "Service": "rds"
+        },
+        {
+          "Name": "CreateDBCluster",
+          "Service": "rds"
+        },
+        {
+          "Name": "CreateDBClusterEndpoint",
+          "Service": "rds"
+        },
+        {
+          "Name": "CreateDBInstance",
+          "Service": "rds"
+        },
+        {
+          "Name": "CreateDBInstanceReadReplica",
+          "Service": "rds"
+        },
+        {
+          "Name": "CreateGlobalCluster",
+          "Service": "rds"
+        },
+        {
+          "Name": "PassRole",
+          "Context": {
+            "iam:PassedToService": [
+              "rds.amazonaws.com"
+            ]
+          },
+          "Service": "iam"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "rds",
+          "Method": "create_blue_green_deployment",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreateCustomDBEngineVersion",
+      "AuthorizedActions": [
+        {
+          "Name": "AddTagsToResource",
+          "Service": "rds"
+        },
+        {
+          "Name": "CreateCustomDBEngineVersion",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "rds",
+          "Method": "create_custom_db_engine_version",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreateDBCluster",
+      "AuthorizedActions": [
+        {
+          "Name": "AddRoleToDBCluster",
+          "Service": "rds"
+        },
+        {
+          "Name": "AddTagsToResource",
+          "Service": "rds"
+        },
+        {
+          "Name": "CreateDBCluster",
+          "Service": "rds"
+        },
+        {
+          "Name": "CreateDBInstance",
+          "Service": "rds"
+        },
+        {
+          "Name": "PassRole",
+          "Context": {
+            "iam:PassedToService": [
+              "rds-preview.amazonaws.com",
+              "rds.amazonaws.com"
+            ]
+          },
+          "Service": "iam"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "docdb",
+          "Method": "create_db_cluster",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "neptune",
+          "Method": "create_db_cluster",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "rds",
+          "Method": "create_db_cluster",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreateDBClusterEndpoint",
+      "AuthorizedActions": [
+        {
+          "Name": "AddTagsToResource",
+          "Service": "rds"
+        },
+        {
+          "Name": "CreateDBClusterEndpoint",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "neptune",
+          "Method": "create_db_cluster_endpoint",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "rds",
+          "Method": "create_db_cluster_endpoint",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreateDBClusterParameterGroup",
+      "AuthorizedActions": [
+        {
+          "Name": "AddTagsToResource",
+          "Service": "rds"
+        },
+        {
+          "Name": "CreateDBClusterParameterGroup",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "docdb",
+          "Method": "create_db_cluster_parameter_group",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "neptune",
+          "Method": "create_db_cluster_parameter_group",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "rds",
+          "Method": "create_db_cluster_parameter_group",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreateDBClusterSnapshot",
+      "AuthorizedActions": [
+        {
+          "Name": "AddTagsToResource",
+          "Service": "rds"
+        },
+        {
+          "Name": "CreateDBClusterSnapshot",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "docdb",
+          "Method": "create_db_cluster_snapshot",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "neptune",
+          "Method": "create_db_cluster_snapshot",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "rds",
+          "Method": "create_db_cluster_snapshot",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreateDBInstance",
+      "AuthorizedActions": [
+        {
+          "Name": "AddTagsToResource",
+          "Service": "rds"
+        },
+        {
+          "Name": "CreateDBInstance",
+          "Service": "rds"
+        },
+        {
+          "Name": "CreateTenantDatabase",
+          "Service": "rds"
+        },
+        {
+          "Name": "PassRole",
+          "Context": {
+            "iam:PassedToService": [
+              "rds-preview.amazonaws.com",
+              "rds.amazonaws.com"
+            ]
+          },
+          "Service": "iam"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "docdb",
+          "Method": "create_db_instance",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "neptune",
+          "Method": "create_db_instance",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "rds",
+          "Method": "create_db_instance",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreateDBInstanceReadReplica",
+      "AuthorizedActions": [
+        {
+          "Name": "AddTagsToResource",
+          "Service": "rds"
+        },
+        {
+          "Name": "CreateDBInstanceReadReplica",
+          "Service": "rds"
+        },
+        {
+          "Name": "CreateTenantDatabase",
+          "Service": "rds"
+        },
+        {
+          "Name": "PassRole",
+          "Context": {
+            "iam:PassedToService": [
+              "rds-preview.amazonaws.com",
+              "rds.amazonaws.com"
+            ]
+          },
+          "Service": "iam"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "rds",
+          "Method": "create_db_instance_read_replica",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreateDBParameterGroup",
+      "AuthorizedActions": [
+        {
+          "Name": "AddTagsToResource",
+          "Service": "rds"
+        },
+        {
+          "Name": "CreateDBParameterGroup",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "neptune",
+          "Method": "create_db_parameter_group",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "rds",
+          "Method": "create_db_parameter_group",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreateDBProxy",
+      "AuthorizedActions": [
+        {
+          "Name": "AddTagsToResource",
+          "Service": "rds"
+        },
+        {
+          "Name": "CreateDBProxy",
+          "Service": "rds"
+        },
+        {
+          "Name": "PassRole",
+          "Context": {
+            "iam:PassedToService": [
+              "rds.amazonaws.com"
+            ]
+          },
+          "Service": "iam"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "rds",
+          "Method": "create_db_proxy",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreateDBProxyEndpoint",
+      "AuthorizedActions": [
+        {
+          "Name": "AddTagsToResource",
+          "Service": "rds"
+        },
+        {
+          "Name": "CreateDBProxyEndpoint",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "rds",
+          "Method": "create_db_proxy_endpoint",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreateDBSecurityGroup",
+      "AuthorizedActions": [
+        {
+          "Name": "AddTagsToResource",
+          "Service": "rds"
+        },
+        {
+          "Name": "CreateDBSecurityGroup",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "rds",
+          "Method": "create_db_security_group",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreateDBShardGroup",
+      "AuthorizedActions": [
+        {
+          "Name": "AddTagsToResource",
+          "Service": "rds"
+        },
+        {
+          "Name": "CreateDBShardGroup",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "rds",
+          "Method": "create_db_shard_group",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreateDBSnapshot",
+      "AuthorizedActions": [
+        {
+          "Name": "AddTagsToResource",
+          "Service": "rds"
+        },
+        {
+          "Name": "CreateDBSnapshot",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "rds",
+          "Method": "create_db_snapshot",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreateDBSubnetGroup",
+      "AuthorizedActions": [
+        {
+          "Name": "AddTagsToResource",
+          "Service": "rds"
+        },
+        {
+          "Name": "CreateDBSubnetGroup",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "docdb",
+          "Method": "create_db_subnet_group",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "neptune",
+          "Method": "create_db_subnet_group",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "rds",
+          "Method": "create_db_subnet_group",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreateEventSubscription",
+      "AuthorizedActions": [
+        {
+          "Name": "AddTagsToResource",
+          "Service": "rds"
+        },
+        {
+          "Name": "CreateEventSubscription",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "docdb",
+          "Method": "create_event_subscription",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "neptune",
+          "Method": "create_event_subscription",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "rds",
+          "Method": "create_event_subscription",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreateGlobalCluster",
+      "AuthorizedActions": [
+        {
+          "Name": "AddTagsToResource",
+          "Service": "rds"
+        },
+        {
+          "Name": "CreateGlobalCluster",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "docdb",
+          "Method": "create_global_cluster",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "neptune",
+          "Method": "create_global_cluster",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "rds",
+          "Method": "create_global_cluster",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreateIntegration",
+      "AuthorizedActions": [
+        {
+          "Name": "AddTagsToResource",
+          "Service": "rds"
+        },
+        {
+          "Name": "CreateIntegration",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "rds",
+          "Method": "create_integration",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreateOptionGroup",
+      "AuthorizedActions": [
+        {
+          "Name": "AddTagsToResource",
+          "Service": "rds"
+        },
+        {
+          "Name": "CreateOptionGroup",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "rds",
+          "Method": "create_option_group",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreateTenantDatabase",
+      "AuthorizedActions": [
+        {
+          "Name": "AddTagsToResource",
+          "Service": "rds"
+        },
+        {
+          "Name": "CreateTenantDatabase",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "rds",
+          "Method": "create_tenant_database",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteBlueGreenDeployment",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteBlueGreenDeployment",
+          "Service": "rds"
+        },
+        {
+          "Name": "DeleteDBCluster",
+          "Service": "rds"
+        },
+        {
+          "Name": "DeleteDBClusterEndpoint",
+          "Service": "rds"
+        },
+        {
+          "Name": "DeleteDBInstance",
+          "Service": "rds"
+        },
+        {
+          "Name": "DeleteGlobalCluster",
+          "Service": "rds"
+        },
+        {
+          "Name": "PromoteReadReplica",
+          "Service": "rds"
+        },
+        {
+          "Name": "PromoteReadReplicaDBCluster",
+          "Service": "rds"
+        },
+        {
+          "Name": "RemoveFromGlobalCluster",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "rds",
+          "Method": "delete_blue_green_deployment",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteCustomDBEngineVersion",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteCustomDBEngineVersion",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "rds",
+          "Method": "delete_custom_db_engine_version",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteDBCluster",
+      "AuthorizedActions": [
+        {
+          "Name": "AddTagsToResource",
+          "Service": "rds"
+        },
+        {
+          "Name": "CreateDBClusterSnapshot",
+          "Service": "rds"
+        },
+        {
+          "Name": "DeleteDBCluster",
+          "Service": "rds"
+        },
+        {
+          "Name": "DeleteDBInstance",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "docdb",
+          "Method": "delete_db_cluster",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "neptune",
+          "Method": "delete_db_cluster",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "rds",
+          "Method": "delete_db_cluster",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteDBClusterAutomatedBackup",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteDBClusterAutomatedBackup",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "rds",
+          "Method": "delete_db_cluster_automated_backup",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteDBClusterEndpoint",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteDBClusterEndpoint",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "neptune",
+          "Method": "delete_db_cluster_endpoint",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "rds",
+          "Method": "delete_db_cluster_endpoint",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteDBClusterParameterGroup",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteDBClusterParameterGroup",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "docdb",
+          "Method": "delete_db_cluster_parameter_group",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "neptune",
+          "Method": "delete_db_cluster_parameter_group",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "rds",
+          "Method": "delete_db_cluster_parameter_group",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteDBClusterSnapshot",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteDBClusterSnapshot",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "docdb",
+          "Method": "delete_db_cluster_snapshot",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "neptune",
+          "Method": "delete_db_cluster_snapshot",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "rds",
+          "Method": "delete_db_cluster_snapshot",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteDBInstance",
+      "AuthorizedActions": [
+        {
+          "Name": "AddTagsToResource",
+          "Service": "rds"
+        },
+        {
+          "Name": "CreateDBSnapshot",
+          "Service": "rds"
+        },
+        {
+          "Name": "DeleteDBInstance",
+          "Service": "rds"
+        },
+        {
+          "Name": "DeleteTenantDatabase",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "docdb",
+          "Method": "delete_db_instance",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "neptune",
+          "Method": "delete_db_instance",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "rds",
+          "Method": "delete_db_instance",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteDBInstanceAutomatedBackup",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteDBInstanceAutomatedBackup",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "rds",
+          "Method": "delete_db_instance_automated_backup",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteDBParameterGroup",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteDBParameterGroup",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "neptune",
+          "Method": "delete_db_parameter_group",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "rds",
+          "Method": "delete_db_parameter_group",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteDBProxy",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteDBProxy",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "rds",
+          "Method": "delete_db_proxy",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteDBProxyEndpoint",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteDBProxyEndpoint",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "rds",
+          "Method": "delete_db_proxy_endpoint",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteDBSecurityGroup",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteDBSecurityGroup",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "rds",
+          "Method": "delete_db_security_group",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteDBShardGroup",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteDBShardGroup",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "rds",
+          "Method": "delete_db_shard_group",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteDBSnapshot",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteDBSnapshot",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "rds",
+          "Method": "delete_db_snapshot",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteDBSubnetGroup",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteDBSubnetGroup",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "docdb",
+          "Method": "delete_db_subnet_group",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "neptune",
+          "Method": "delete_db_subnet_group",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "rds",
+          "Method": "delete_db_subnet_group",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteEventSubscription",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteEventSubscription",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "docdb",
+          "Method": "delete_event_subscription",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "neptune",
+          "Method": "delete_event_subscription",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "rds",
+          "Method": "delete_event_subscription",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteGlobalCluster",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteGlobalCluster",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "docdb",
+          "Method": "delete_global_cluster",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "neptune",
+          "Method": "delete_global_cluster",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "rds",
+          "Method": "delete_global_cluster",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteIntegration",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteIntegration",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "rds",
+          "Method": "delete_integration",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteOptionGroup",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteOptionGroup",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "rds",
+          "Method": "delete_option_group",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteTenantDatabase",
+      "AuthorizedActions": [
+        {
+          "Name": "AddTagsToResource",
+          "Service": "rds"
+        },
+        {
+          "Name": "CreateDBSnapshot",
+          "Service": "rds"
+        },
+        {
+          "Name": "DeleteTenantDatabase",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "rds",
+          "Method": "delete_tenant_database",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeregisterDBProxyTargets",
+      "AuthorizedActions": [
+        {
+          "Name": "DeregisterDBProxyTargets",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "rds",
+          "Method": "deregister_db_proxy_targets",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeAccountAttributes",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeAccountAttributes",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "rds",
+          "Method": "describe_account_attributes",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeBlueGreenDeployments",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeBlueGreenDeployments",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "rds",
+          "Method": "describe_blue_green_deployments",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeCertificates",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeCertificates",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "docdb",
+          "Method": "describe_certificates",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "rds",
+          "Method": "describe_certificates",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeDBClusterAutomatedBackups",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeDBClusterAutomatedBackups",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "rds",
+          "Method": "describe_db_cluster_automated_backups",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeDBClusterBacktracks",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeDBClusterBacktracks",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "rds",
+          "Method": "describe_db_cluster_backtracks",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeDBClusterEndpoints",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeDBClusterEndpoints",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "neptune",
+          "Method": "describe_db_cluster_endpoints",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "rds",
+          "Method": "describe_db_cluster_endpoints",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeDBClusterParameterGroups",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeDBClusterParameterGroups",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "docdb",
+          "Method": "describe_db_cluster_parameter_groups",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "neptune",
+          "Method": "describe_db_cluster_parameter_groups",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "rds",
+          "Method": "describe_db_cluster_parameter_groups",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeDBClusterParameters",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeDBClusterParameters",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "docdb",
+          "Method": "describe_db_cluster_parameters",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "neptune",
+          "Method": "describe_db_cluster_parameters",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "rds",
+          "Method": "describe_db_cluster_parameters",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeDBClusterSnapshotAttributes",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeDBClusterSnapshotAttributes",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "docdb",
+          "Method": "describe_db_cluster_snapshot_attributes",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "neptune",
+          "Method": "describe_db_cluster_snapshot_attributes",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "rds",
+          "Method": "describe_db_cluster_snapshot_attributes",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeDBClusterSnapshots",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeDBClusterSnapshots",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "docdb",
+          "Method": "describe_db_cluster_snapshots",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "neptune",
+          "Method": "describe_db_cluster_snapshots",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "rds",
+          "Method": "describe_db_cluster_snapshots",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeDBClusters",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeDBClusters",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "docdb",
+          "Method": "describe_db_clusters",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "neptune",
+          "Method": "describe_db_clusters",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "rds",
+          "Method": "describe_db_clusters",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeDBEngineVersions",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeDBEngineVersions",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "docdb",
+          "Method": "describe_db_engine_versions",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "neptune",
+          "Method": "describe_db_engine_versions",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "rds",
+          "Method": "describe_db_engine_versions",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeDBInstanceAutomatedBackups",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeDBInstanceAutomatedBackups",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "rds",
+          "Method": "describe_db_instance_automated_backups",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeDBInstances",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeDBInstances",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "docdb",
+          "Method": "describe_db_instances",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "neptune",
+          "Method": "describe_db_instances",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "rds",
+          "Method": "describe_db_instances",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeDBLogFiles",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeDBLogFiles",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "rds",
+          "Method": "describe_db_log_files",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeDBMajorEngineVersions",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeDBMajorEngineVersions",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "rds",
+          "Method": "describe_db_major_engine_versions",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeDBParameterGroups",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeDBParameterGroups",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "neptune",
+          "Method": "describe_db_parameter_groups",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "rds",
+          "Method": "describe_db_parameter_groups",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeDBParameters",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeDBParameters",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "neptune",
+          "Method": "describe_db_parameters",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "rds",
+          "Method": "describe_db_parameters",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeDBProxies",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeDBProxies",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "rds",
+          "Method": "describe_db_proxies",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeDBProxyEndpoints",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeDBProxyEndpoints",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "rds",
+          "Method": "describe_db_proxy_endpoints",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeDBProxyTargetGroups",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeDBProxyTargetGroups",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "rds",
+          "Method": "describe_db_proxy_target_groups",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeDBProxyTargets",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeDBProxyTargets",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "rds",
+          "Method": "describe_db_proxy_targets",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeDBRecommendations",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeDBRecommendations",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "rds",
+          "Method": "describe_db_recommendations",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeDBSecurityGroups",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeDBSecurityGroups",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "rds",
+          "Method": "describe_db_security_groups",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeDBShardGroups",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeDBShardGroups",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "rds",
+          "Method": "describe_db_shard_groups",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeDBSnapshotAttributes",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeDBSnapshotAttributes",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "rds",
+          "Method": "describe_db_snapshot_attributes",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeDBSnapshotTenantDatabases",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeDBSnapshotTenantDatabases",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "rds",
+          "Method": "describe_db_snapshot_tenant_databases",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeDBSnapshots",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeDBSnapshots",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "rds",
+          "Method": "describe_db_snapshots",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeDBSubnetGroups",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeDBSubnetGroups",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "docdb",
+          "Method": "describe_db_subnet_groups",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "neptune",
+          "Method": "describe_db_subnet_groups",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "rds",
+          "Method": "describe_db_subnet_groups",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeEngineDefaultClusterParameters",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeEngineDefaultClusterParameters",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "docdb",
+          "Method": "describe_engine_default_cluster_parameters",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "neptune",
+          "Method": "describe_engine_default_cluster_parameters",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "rds",
+          "Method": "describe_engine_default_cluster_parameters",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeEngineDefaultParameters",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeEngineDefaultParameters",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "neptune",
+          "Method": "describe_engine_default_parameters",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "rds",
+          "Method": "describe_engine_default_parameters",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeEventCategories",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeEventCategories",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "docdb",
+          "Method": "describe_event_categories",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "neptune",
+          "Method": "describe_event_categories",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "rds",
+          "Method": "describe_event_categories",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeEventSubscriptions",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeEventSubscriptions",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "docdb",
+          "Method": "describe_event_subscriptions",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "neptune",
+          "Method": "describe_event_subscriptions",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "rds",
+          "Method": "describe_event_subscriptions",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeEvents",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeEvents",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "docdb",
+          "Method": "describe_events",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "neptune",
+          "Method": "describe_events",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "rds",
+          "Method": "describe_events",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeExportTasks",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeExportTasks",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "rds",
+          "Method": "describe_export_tasks",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeGlobalClusters",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeGlobalClusters",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "docdb",
+          "Method": "describe_global_clusters",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "neptune",
+          "Method": "describe_global_clusters",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "rds",
+          "Method": "describe_global_clusters",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeIntegrations",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeIntegrations",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "rds",
+          "Method": "describe_integrations",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeOptionGroupOptions",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeOptionGroupOptions",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "rds",
+          "Method": "describe_option_group_options",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeOptionGroups",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeOptionGroups",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "rds",
+          "Method": "describe_option_groups",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeOrderableDBInstanceOptions",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeOrderableDBInstanceOptions",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "docdb",
+          "Method": "describe_orderable_db_instance_options",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "neptune",
+          "Method": "describe_orderable_db_instance_options",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "rds",
+          "Method": "describe_orderable_db_instance_options",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribePendingMaintenanceActions",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribePendingMaintenanceActions",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "docdb",
+          "Method": "describe_pending_maintenance_actions",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "neptune",
+          "Method": "describe_pending_maintenance_actions",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "rds",
+          "Method": "describe_pending_maintenance_actions",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeReservedDBInstances",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeReservedDBInstances",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "rds",
+          "Method": "describe_reserved_db_instances",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeReservedDBInstancesOfferings",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeReservedDBInstancesOfferings",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "rds",
+          "Method": "describe_reserved_db_instances_offerings",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeServerlessV2PlatformVersions",
+      "SDK": [
+        {
+          "Name": "rds",
+          "Method": "describe_serverless_v2_platform_versions",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeSourceRegions",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeSourceRegions",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "rds",
+          "Method": "describe_source_regions",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeTenantDatabases",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeTenantDatabases",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "rds",
+          "Method": "describe_tenant_databases",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeValidDBInstanceModifications",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeValidDBInstanceModifications",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "neptune",
+          "Method": "describe_valid_db_instance_modifications",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "rds",
+          "Method": "describe_valid_db_instance_modifications",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DisableHttpEndpoint",
+      "AuthorizedActions": [
+        {
+          "Name": "DisableHttpEndpoint",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "rds",
+          "Method": "disable_http_endpoint",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DownloadDBLogFilePortion",
+      "AuthorizedActions": [
+        {
+          "Name": "DownloadDBLogFilePortion",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "rds",
+          "Method": "download_db_log_file_portion",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "EnableHttpEndpoint",
+      "AuthorizedActions": [
+        {
+          "Name": "EnableHttpEndpoint",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "rds",
+          "Method": "enable_http_endpoint",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "FailoverDBCluster",
+      "AuthorizedActions": [
+        {
+          "Name": "FailoverDBCluster",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "docdb",
+          "Method": "failover_db_cluster",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "neptune",
+          "Method": "failover_db_cluster",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "rds",
+          "Method": "failover_db_cluster",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "FailoverGlobalCluster",
+      "AuthorizedActions": [
+        {
+          "Name": "FailoverGlobalCluster",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "docdb",
+          "Method": "failover_global_cluster",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "neptune",
+          "Method": "failover_global_cluster",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "rds",
+          "Method": "failover_global_cluster",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListTagsForResource",
+      "AuthorizedActions": [
+        {
+          "Name": "ListTagsForResource",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "docdb",
+          "Method": "list_tags_for_resource",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "neptune",
+          "Method": "list_tags_for_resource",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "rds",
+          "Method": "list_tags_for_resource",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ModifyActivityStream",
+      "AuthorizedActions": [
+        {
+          "Name": "ModifyActivityStream",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "rds",
+          "Method": "modify_activity_stream",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ModifyCertificates",
+      "AuthorizedActions": [
+        {
+          "Name": "ModifyCertificates",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "rds",
+          "Method": "modify_certificates",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ModifyCurrentDBClusterCapacity",
+      "AuthorizedActions": [
+        {
+          "Name": "ModifyCurrentDBClusterCapacity",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "rds",
+          "Method": "modify_current_db_cluster_capacity",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ModifyCustomDBEngineVersion",
+      "AuthorizedActions": [
+        {
+          "Name": "ModifyCustomDBEngineVersion",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "rds",
+          "Method": "modify_custom_db_engine_version",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ModifyDBCluster",
+      "AuthorizedActions": [
+        {
+          "Name": "ModifyDBCluster",
+          "Service": "rds"
+        },
+        {
+          "Name": "ModifyDBInstance",
+          "Service": "rds"
+        },
+        {
+          "Name": "PassRole",
+          "Context": {
+            "iam:PassedToService": [
+              "rds-preview.amazonaws.com",
+              "rds.amazonaws.com"
+            ]
+          },
+          "Service": "iam"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "docdb",
+          "Method": "modify_db_cluster",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "neptune",
+          "Method": "modify_db_cluster",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "rds",
+          "Method": "modify_db_cluster",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ModifyDBClusterEndpoint",
+      "AuthorizedActions": [
+        {
+          "Name": "ModifyDBClusterEndpoint",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "neptune",
+          "Method": "modify_db_cluster_endpoint",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "rds",
+          "Method": "modify_db_cluster_endpoint",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ModifyDBClusterParameterGroup",
+      "AuthorizedActions": [
+        {
+          "Name": "ModifyDBClusterParameterGroup",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "docdb",
+          "Method": "modify_db_cluster_parameter_group",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "neptune",
+          "Method": "modify_db_cluster_parameter_group",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "rds",
+          "Method": "modify_db_cluster_parameter_group",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ModifyDBClusterSnapshotAttribute",
+      "AuthorizedActions": [
+        {
+          "Name": "ModifyDBClusterSnapshotAttribute",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "docdb",
+          "Method": "modify_db_cluster_snapshot_attribute",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "neptune",
+          "Method": "modify_db_cluster_snapshot_attribute",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "rds",
+          "Method": "modify_db_cluster_snapshot_attribute",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ModifyDBInstance",
+      "AuthorizedActions": [
+        {
+          "Name": "AddTagsToResource",
+          "Service": "rds"
+        },
+        {
+          "Name": "ModifyDBInstance",
+          "Service": "rds"
+        },
+        {
+          "Name": "PassRole",
+          "Context": {
+            "iam:PassedToService": [
+              "rds-preview.amazonaws.com",
+              "rds.amazonaws.com"
+            ]
+          },
+          "Service": "iam"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "docdb",
+          "Method": "modify_db_instance",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "neptune",
+          "Method": "modify_db_instance",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "rds",
+          "Method": "modify_db_instance",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ModifyDBParameterGroup",
+      "AuthorizedActions": [
+        {
+          "Name": "ModifyDBParameterGroup",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "neptune",
+          "Method": "modify_db_parameter_group",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "rds",
+          "Method": "modify_db_parameter_group",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ModifyDBProxy",
+      "AuthorizedActions": [
+        {
+          "Name": "ModifyDBProxy",
+          "Service": "rds"
+        },
+        {
+          "Name": "PassRole",
+          "Context": {
+            "iam:PassedToService": [
+              "rds.amazonaws.com"
+            ]
+          },
+          "Service": "iam"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "rds",
+          "Method": "modify_db_proxy",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ModifyDBProxyEndpoint",
+      "AuthorizedActions": [
+        {
+          "Name": "ModifyDBProxyEndpoint",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "rds",
+          "Method": "modify_db_proxy_endpoint",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ModifyDBProxyTargetGroup",
+      "AuthorizedActions": [
+        {
+          "Name": "ModifyDBProxyTargetGroup",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "rds",
+          "Method": "modify_db_proxy_target_group",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ModifyDBRecommendation",
+      "AuthorizedActions": [
+        {
+          "Name": "ModifyDBRecommendation",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "rds",
+          "Method": "modify_db_recommendation",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ModifyDBShardGroup",
+      "AuthorizedActions": [
+        {
+          "Name": "ModifyDBShardGroup",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "rds",
+          "Method": "modify_db_shard_group",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ModifyDBSnapshot",
+      "AuthorizedActions": [
+        {
+          "Name": "ModifyDBSnapshot",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "rds",
+          "Method": "modify_db_snapshot",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ModifyDBSnapshotAttribute",
+      "AuthorizedActions": [
+        {
+          "Name": "ModifyDBSnapshotAttribute",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "rds",
+          "Method": "modify_db_snapshot_attribute",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ModifyDBSubnetGroup",
+      "AuthorizedActions": [
+        {
+          "Name": "ModifyDBSubnetGroup",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "docdb",
+          "Method": "modify_db_subnet_group",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "neptune",
+          "Method": "modify_db_subnet_group",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "rds",
+          "Method": "modify_db_subnet_group",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ModifyEventSubscription",
+      "AuthorizedActions": [
+        {
+          "Name": "ModifyEventSubscription",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "docdb",
+          "Method": "modify_event_subscription",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "neptune",
+          "Method": "modify_event_subscription",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "rds",
+          "Method": "modify_event_subscription",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ModifyGlobalCluster",
+      "AuthorizedActions": [
+        {
+          "Name": "ModifyGlobalCluster",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "docdb",
+          "Method": "modify_global_cluster",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "neptune",
+          "Method": "modify_global_cluster",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "rds",
+          "Method": "modify_global_cluster",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ModifyIntegration",
+      "AuthorizedActions": [
+        {
+          "Name": "ModifyIntegration",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "rds",
+          "Method": "modify_integration",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ModifyOptionGroup",
+      "AuthorizedActions": [
+        {
+          "Name": "ModifyOptionGroup",
+          "Service": "rds"
+        },
+        {
+          "Name": "PassRole",
+          "Context": {
+            "iam:PassedToService": [
+              "rds.amazonaws.com"
+            ]
+          },
+          "Service": "iam"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "rds",
+          "Method": "modify_option_group",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ModifyTenantDatabase",
+      "AuthorizedActions": [
+        {
+          "Name": "ModifyTenantDatabase",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "rds",
+          "Method": "modify_tenant_database",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "PromoteReadReplica",
+      "AuthorizedActions": [
+        {
+          "Name": "AddTagsToResource",
+          "Service": "rds"
+        },
+        {
+          "Name": "PromoteReadReplica",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "rds",
+          "Method": "promote_read_replica",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "PromoteReadReplicaDBCluster",
+      "AuthorizedActions": [
+        {
+          "Name": "PromoteReadReplicaDBCluster",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "neptune",
+          "Method": "promote_read_replica_db_cluster",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "rds",
+          "Method": "promote_read_replica_db_cluster",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "PurchaseReservedDBInstancesOffering",
+      "AuthorizedActions": [
+        {
+          "Name": "AddTagsToResource",
+          "Service": "rds"
+        },
+        {
+          "Name": "PurchaseReservedDBInstancesOffering",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "rds",
+          "Method": "purchase_reserved_db_instances_offering",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "RebootDBCluster",
+      "AuthorizedActions": [
+        {
+          "Name": "RebootDBCluster",
+          "Service": "rds"
+        },
+        {
+          "Name": "RebootDBInstance",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "rds",
+          "Method": "reboot_db_cluster",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "RebootDBInstance",
+      "AuthorizedActions": [
+        {
+          "Name": "RebootDBInstance",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "docdb",
+          "Method": "reboot_db_instance",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "neptune",
+          "Method": "reboot_db_instance",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "rds",
+          "Method": "reboot_db_instance",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "RebootDBShardGroup",
+      "AuthorizedActions": [
+        {
+          "Name": "RebootDBShardGroup",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "rds",
+          "Method": "reboot_db_shard_group",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "RegisterDBProxyTargets",
+      "AuthorizedActions": [
+        {
+          "Name": "RegisterDBProxyTargets",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "rds",
+          "Method": "register_db_proxy_targets",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "RemoveFromGlobalCluster",
+      "AuthorizedActions": [
+        {
+          "Name": "RemoveFromGlobalCluster",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "docdb",
+          "Method": "remove_from_global_cluster",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "neptune",
+          "Method": "remove_from_global_cluster",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "rds",
+          "Method": "remove_from_global_cluster",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "RemoveRoleFromDBCluster",
+      "AuthorizedActions": [
+        {
+          "Name": "PassRole",
+          "Context": {
+            "iam:PassedToService": [
+              "rds.amazonaws.com"
+            ]
+          },
+          "Service": "iam"
+        },
+        {
+          "Name": "RemoveRoleFromDBCluster",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "neptune",
+          "Method": "remove_role_from_db_cluster",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "rds",
+          "Method": "remove_role_from_db_cluster",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "RemoveRoleFromDBInstance",
+      "AuthorizedActions": [
+        {
+          "Name": "PassRole",
+          "Context": {
+            "iam:PassedToService": [
+              "rds.amazonaws.com"
+            ]
+          },
+          "Service": "iam"
+        },
+        {
+          "Name": "RemoveRoleFromDBInstance",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "rds",
+          "Method": "remove_role_from_db_instance",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "RemoveSourceIdentifierFromSubscription",
+      "AuthorizedActions": [
+        {
+          "Name": "RemoveSourceIdentifierFromSubscription",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "docdb",
+          "Method": "remove_source_identifier_from_subscription",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "neptune",
+          "Method": "remove_source_identifier_from_subscription",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "rds",
+          "Method": "remove_source_identifier_from_subscription",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "RemoveTagsFromResource",
+      "AuthorizedActions": [
+        {
+          "Name": "RemoveTagsFromResource",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "docdb",
+          "Method": "remove_tags_from_resource",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "neptune",
+          "Method": "remove_tags_from_resource",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "rds",
+          "Method": "remove_tags_from_resource",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ResetDBClusterParameterGroup",
+      "AuthorizedActions": [
+        {
+          "Name": "ResetDBClusterParameterGroup",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "docdb",
+          "Method": "reset_db_cluster_parameter_group",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "neptune",
+          "Method": "reset_db_cluster_parameter_group",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "rds",
+          "Method": "reset_db_cluster_parameter_group",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ResetDBParameterGroup",
+      "AuthorizedActions": [
+        {
+          "Name": "ResetDBParameterGroup",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "neptune",
+          "Method": "reset_db_parameter_group",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "rds",
+          "Method": "reset_db_parameter_group",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "RestoreDBClusterFromS3",
+      "AuthorizedActions": [
+        {
+          "Name": "AddRoleToDBCluster",
+          "Service": "rds"
+        },
+        {
+          "Name": "AddTagsToResource",
+          "Service": "rds"
+        },
+        {
+          "Name": "PassRole",
+          "Context": {
+            "iam:PassedToService": [
+              "rds-preview.amazonaws.com",
+              "rds.amazonaws.com"
+            ]
+          },
+          "Service": "iam"
+        },
+        {
+          "Name": "RestoreDBClusterFromS3",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "rds",
+          "Method": "restore_db_cluster_from_s3",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "RestoreDBClusterFromSnapshot",
+      "AuthorizedActions": [
+        {
+          "Name": "AddRoleToDBCluster",
+          "Service": "rds"
+        },
+        {
+          "Name": "AddTagsToResource",
+          "Service": "rds"
+        },
+        {
+          "Name": "CreateDBInstance",
+          "Service": "rds"
+        },
+        {
+          "Name": "PassRole",
+          "Context": {
+            "iam:PassedToService": [
+              "rds.amazonaws.com"
+            ]
+          },
+          "Service": "iam"
+        },
+        {
+          "Name": "RestoreDBClusterFromSnapshot",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "docdb",
+          "Method": "restore_db_cluster_from_snapshot",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "neptune",
+          "Method": "restore_db_cluster_from_snapshot",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "rds",
+          "Method": "restore_db_cluster_from_snapshot",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "RestoreDBClusterToPointInTime",
+      "AuthorizedActions": [
+        {
+          "Name": "AddTagsToResource",
+          "Service": "rds"
+        },
+        {
+          "Name": "CreateDBInstance",
+          "Service": "rds"
+        },
+        {
+          "Name": "PassRole",
+          "Context": {
+            "iam:PassedToService": [
+              "rds.amazonaws.com"
+            ]
+          },
+          "Service": "iam"
+        },
+        {
+          "Name": "RestoreDBClusterToPointInTime",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "docdb",
+          "Method": "restore_db_cluster_to_point_in_time",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "neptune",
+          "Method": "restore_db_cluster_to_point_in_time",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "rds",
+          "Method": "restore_db_cluster_to_point_in_time",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "RestoreDBInstanceFromDBSnapshot",
+      "AuthorizedActions": [
+        {
+          "Name": "AddTagsToResource",
+          "Service": "rds"
+        },
+        {
+          "Name": "CreateTenantDatabase",
+          "Service": "rds"
+        },
+        {
+          "Name": "PassRole",
+          "Context": {
+            "iam:PassedToService": [
+              "rds-preview.amazonaws.com",
+              "rds.amazonaws.com"
+            ]
+          },
+          "Service": "iam"
+        },
+        {
+          "Name": "RestoreDBInstanceFromDBSnapshot",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "rds",
+          "Method": "restore_db_instance_from_db_snapshot",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "RestoreDBInstanceFromS3",
+      "AuthorizedActions": [
+        {
+          "Name": "AddTagsToResource",
+          "Service": "rds"
+        },
+        {
+          "Name": "PassRole",
+          "Context": {
+            "iam:PassedToService": [
+              "rds.amazonaws.com"
+            ]
+          },
+          "Service": "iam"
+        },
+        {
+          "Name": "RestoreDBInstanceFromS3",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "rds",
+          "Method": "restore_db_instance_from_s3",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "RestoreDBInstanceToPointInTime",
+      "AuthorizedActions": [
+        {
+          "Name": "AddTagsToResource",
+          "Service": "rds"
+        },
+        {
+          "Name": "CreateTenantDatabase",
+          "Service": "rds"
+        },
+        {
+          "Name": "PassRole",
+          "Context": {
+            "iam:PassedToService": [
+              "rds-preview.amazonaws.com",
+              "rds.amazonaws.com"
+            ]
+          },
+          "Service": "iam"
+        },
+        {
+          "Name": "RestoreDBInstanceToPointInTime",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "rds",
+          "Method": "restore_db_instance_to_point_in_time",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "RevokeDBSecurityGroupIngress",
+      "AuthorizedActions": [
+        {
+          "Name": "RevokeDBSecurityGroupIngress",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "rds",
+          "Method": "revoke_db_security_group_ingress",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "StartActivityStream",
+      "AuthorizedActions": [
+        {
+          "Name": "StartActivityStream",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "rds",
+          "Method": "start_activity_stream",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "StartDBCluster",
+      "AuthorizedActions": [
+        {
+          "Name": "StartDBCluster",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "docdb",
+          "Method": "start_db_cluster",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "neptune",
+          "Method": "start_db_cluster",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "rds",
+          "Method": "start_db_cluster",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "StartDBInstance",
+      "AuthorizedActions": [
+        {
+          "Name": "StartDBInstance",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "rds",
+          "Method": "start_db_instance",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "StartDBInstanceAutomatedBackupsReplication",
+      "AuthorizedActions": [
+        {
+          "Name": "AddTagsToResource",
+          "Service": "rds"
+        },
+        {
+          "Name": "StartDBInstanceAutomatedBackupsReplication",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "rds",
+          "Method": "start_db_instance_automated_backups_replication",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "StartExportTask",
+      "AuthorizedActions": [
+        {
+          "Name": "PassRole",
+          "Context": {
+            "iam:PassedToService": [
+              "rds.amazonaws.com"
+            ]
+          },
+          "Service": "iam"
+        },
+        {
+          "Name": "StartExportTask",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "rds",
+          "Method": "start_export_task",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "StopActivityStream",
+      "AuthorizedActions": [
+        {
+          "Name": "StopActivityStream",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "rds",
+          "Method": "stop_activity_stream",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "StopDBCluster",
+      "AuthorizedActions": [
+        {
+          "Name": "StopDBCluster",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "docdb",
+          "Method": "stop_db_cluster",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "neptune",
+          "Method": "stop_db_cluster",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "rds",
+          "Method": "stop_db_cluster",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "StopDBInstance",
+      "AuthorizedActions": [
+        {
+          "Name": "AddTagsToResource",
+          "Service": "rds"
+        },
+        {
+          "Name": "CreateDBSnapshot",
+          "Service": "rds"
+        },
+        {
+          "Name": "StopDBInstance",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "rds",
+          "Method": "stop_db_instance",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "StopDBInstanceAutomatedBackupsReplication",
+      "AuthorizedActions": [
+        {
+          "Name": "StopDBInstanceAutomatedBackupsReplication",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "rds",
+          "Method": "stop_db_instance_automated_backups_replication",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "SwitchoverBlueGreenDeployment",
+      "AuthorizedActions": [
+        {
+          "Name": "ModifyDBCluster",
+          "Service": "rds"
+        },
+        {
+          "Name": "ModifyDBInstance",
+          "Service": "rds"
+        },
+        {
+          "Name": "ModifyGlobalCluster",
+          "Service": "rds"
+        },
+        {
+          "Name": "PromoteReadReplica",
+          "Service": "rds"
+        },
+        {
+          "Name": "PromoteReadReplicaDBCluster",
+          "Service": "rds"
+        },
+        {
+          "Name": "SwitchoverBlueGreenDeployment",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "rds",
+          "Method": "switchover_blue_green_deployment",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "SwitchoverGlobalCluster",
+      "AuthorizedActions": [
+        {
+          "Name": "SwitchoverGlobalCluster",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "docdb",
+          "Method": "switchover_global_cluster",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "neptune",
+          "Method": "switchover_global_cluster",
+          "Package": "Boto3"
+        },
+        {
+          "Name": "rds",
+          "Method": "switchover_global_cluster",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "SwitchoverReadReplica",
+      "AuthorizedActions": [
+        {
+          "Name": "SwitchoverReadReplica",
+          "Service": "rds"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "rds",
+          "Method": "switchover_read_replica",
+          "Package": "Boto3"
+        }
+      ]
+    }
+  ],
+  "Resources": [
+    {
+      "Name": "auto-backup",
+      "ARNFormats": [
+        "arn:${Partition}:rds:${Region}:${Account}:auto-backup:${DbInstanceAutomatedBackupId}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ]
+    },
+    {
+      "Name": "cev",
+      "ARNFormats": [
+        "arn:${Partition}:rds:${Region}:${Account}:cev:${Engine}/${EngineVersion}/${CustomDbEngineVersionId}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ]
+    },
+    {
+      "Name": "cluster",
+      "ARNFormats": [
+        "arn:${Partition}:rds:${Region}:${Account}:cluster:${DbClusterInstanceName}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}",
+        "rds:cluster-tag/${TagKey}"
+      ]
+    },
+    {
+      "Name": "cluster-auto-backup",
+      "ARNFormats": [
+        "arn:${Partition}:rds:${Region}:${Account}:cluster-auto-backup:${DbClusterAutomatedBackupId}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ]
+    },
+    {
+      "Name": "cluster-endpoint",
+      "ARNFormats": [
+        "arn:${Partition}:rds:${Region}:${Account}:cluster-endpoint:${DbClusterEndpoint}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ]
+    },
+    {
+      "Name": "cluster-pg",
+      "ARNFormats": [
+        "arn:${Partition}:rds:${Region}:${Account}:cluster-pg:${ClusterParameterGroupName}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}",
+        "rds:cluster-pg-tag/${TagKey}"
+      ]
+    },
+    {
+      "Name": "cluster-snapshot",
+      "ARNFormats": [
+        "arn:${Partition}:rds:${Region}:${Account}:cluster-snapshot:${ClusterSnapshotName}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}",
+        "rds:cluster-snapshot-tag/${TagKey}"
+      ]
+    },
+    {
+      "Name": "db",
+      "ARNFormats": [
+        "arn:${Partition}:rds:${Region}:${Account}:db:${DbInstanceName}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}",
+        "rds:DatabaseClass",
+        "rds:DatabaseEngine",
+        "rds:DatabaseName",
+        "rds:MultiAz",
+        "rds:Piops",
+        "rds:StorageEncrypted",
+        "rds:StorageSize",
+        "rds:Vpc",
+        "rds:db-tag/${TagKey}"
+      ]
+    },
+    {
+      "Name": "deployment",
+      "ARNFormats": [
+        "arn:${Partition}:rds:${Region}:${Account}:deployment:${BlueGreenDeploymentIdentifier}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ]
+    },
+    {
+      "Name": "es",
+      "ARNFormats": [
+        "arn:${Partition}:rds:${Region}:${Account}:es:${SubscriptionName}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}",
+        "rds:es-tag/${TagKey}"
+      ]
+    },
+    {
+      "Name": "global-cluster",
+      "ARNFormats": [
+        "arn:${Partition}:rds::${Account}:global-cluster:${GlobalCluster}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ]
+    },
+    {
+      "Name": "integration",
+      "ARNFormats": [
+        "arn:${Partition}:rds:${Region}:${Account}:integration:${IntegrationIdentifier}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ]
+    },
+    {
+      "Name": "og",
+      "ARNFormats": [
+        "arn:${Partition}:rds:${Region}:${Account}:og:${OptionGroupName}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}",
+        "rds:og-tag/${TagKey}"
+      ]
+    },
+    {
+      "Name": "pg",
+      "ARNFormats": [
+        "arn:${Partition}:rds:${Region}:${Account}:pg:${ParameterGroupName}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}",
+        "rds:pg-tag/${TagKey}"
+      ]
+    },
+    {
+      "Name": "proxy",
+      "ARNFormats": [
+        "arn:${Partition}:rds:${Region}:${Account}:db-proxy:${DbProxyId}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ]
+    },
+    {
+      "Name": "proxy-endpoint",
+      "ARNFormats": [
+        "arn:${Partition}:rds:${Region}:${Account}:db-proxy-endpoint:${DbProxyEndpointId}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ]
+    },
+    {
+      "Name": "ri",
+      "ARNFormats": [
+        "arn:${Partition}:rds:${Region}:${Account}:ri:${ReservedDbInstanceName}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}",
+        "rds:ri-tag/${TagKey}"
+      ]
+    },
+    {
+      "Name": "secgrp",
+      "ARNFormats": [
+        "arn:${Partition}:rds:${Region}:${Account}:secgrp:${SecurityGroupName}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}",
+        "rds:secgrp-tag/${TagKey}"
+      ]
+    },
+    {
+      "Name": "shardgrp",
+      "ARNFormats": [
+        "arn:${Partition}:rds:${Region}:${Account}:shard-group:${DbShardGroupResourceId}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ]
+    },
+    {
+      "Name": "snapshot",
+      "ARNFormats": [
+        "arn:${Partition}:rds:${Region}:${Account}:snapshot:${SnapshotName}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}",
+        "rds:snapshot-tag/${TagKey}"
+      ]
+    },
+    {
+      "Name": "snapshot-tenant-database",
+      "ARNFormats": [
+        "arn:${Partition}:rds:${Region}:${Account}:snapshot-tenant-database:${SnapshotName}:${TenantResourceId}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ]
+    },
+    {
+      "Name": "subgrp",
+      "ARNFormats": [
+        "arn:${Partition}:rds:${Region}:${Account}:subgrp:${SubnetGroupName}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}",
+        "rds:subgrp-tag/${TagKey}"
+      ]
+    },
+    {
+      "Name": "target-group",
+      "ARNFormats": [
+        "arn:${Partition}:rds:${Region}:${Account}:target-group:${TargetGroupId}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ]
+    },
+    {
+      "Name": "tenant-database",
+      "ARNFormats": [
+        "arn:${Partition}:rds:${Region}:${Account}:tenant-database:${TenantResourceId}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ]
+    }
+  ],
+  "Version": "v1.4"
+}

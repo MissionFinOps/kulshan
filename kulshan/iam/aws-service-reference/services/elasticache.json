@@ -1,0 +1,3677 @@
+{
+  "Name": "elasticache",
+  "Actions": [
+    {
+      "Name": "AddTagsToResource",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:ResourceTag/${TagKey}",
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": true,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster"
+        },
+        {
+          "Name": "parametergroup"
+        },
+        {
+          "Name": "replicationgroup"
+        },
+        {
+          "Name": "reserved-instance"
+        },
+        {
+          "Name": "securitygroup"
+        },
+        {
+          "Name": "serverlesscache"
+        },
+        {
+          "Name": "serverlesscachesnapshot"
+        },
+        {
+          "Name": "snapshot"
+        },
+        {
+          "Name": "subnetgroup"
+        },
+        {
+          "Name": "user"
+        },
+        {
+          "Name": "usergroup"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "AuthorizeCacheSecurityGroupIngress",
+      "ActionConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "securitygroup"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "BatchApplyUpdateAction",
+      "ActionConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster"
+        },
+        {
+          "Name": "replicationgroup"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "BatchStopUpdateAction",
+      "ActionConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster"
+        },
+        {
+          "Name": "replicationgroup"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "CompleteMigration",
+      "ActionConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster"
+        },
+        {
+          "Name": "replicationgroup"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "Connect",
+      "ActionConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "replicationgroup"
+        },
+        {
+          "Name": "serverlesscache"
+        },
+        {
+          "Name": "user"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "CopyServerlessCacheSnapshot",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "serverlesscachesnapshot",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}",
+            "elasticache:KmsKeyId"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "CopySnapshot",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:ResourceTag/${TagKey}",
+        "aws:TagKeys",
+        "elasticache:KmsKeyId"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "snapshot"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "CreateCacheCluster",
+      "ActionConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster",
+          "ConditionKeys": [
+            "aws:RequestTag/${TagKey}",
+            "aws:TagKeys",
+            "elasticache:AuthTokenEnabled",
+            "elasticache:CacheNodeType",
+            "elasticache:CacheParameterGroupName",
+            "elasticache:EngineType",
+            "elasticache:EngineVersion",
+            "elasticache:MultiAZEnabled",
+            "elasticache:SnapshotRetentionLimit"
+          ]
+        },
+        {
+          "Name": "parametergroup"
+        },
+        {
+          "Name": "replicationgroup",
+          "ConditionKeys": [
+            "elasticache:AuthTokenEnabled",
+            "elasticache:CacheNodeType",
+            "elasticache:CacheParameterGroupName",
+            "elasticache:EngineType",
+            "elasticache:EngineVersion",
+            "elasticache:MultiAZEnabled",
+            "elasticache:SnapshotRetentionLimit"
+          ]
+        },
+        {
+          "Name": "securitygroup"
+        },
+        {
+          "Name": "snapshot"
+        },
+        {
+          "Name": "subnetgroup"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "CreateCacheParameterGroup",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:ResourceTag/${TagKey}",
+        "aws:TagKeys",
+        "elasticache:CacheParameterGroupName"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "parametergroup"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "CreateCacheSecurityGroup",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:ResourceTag/${TagKey}",
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "securitygroup"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "CreateCacheSubnetGroup",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:ResourceTag/${TagKey}",
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "subnetgroup"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "CreateGlobalReplicationGroup",
+      "ActionConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "globalreplicationgroup"
+        },
+        {
+          "Name": "replicationgroup"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "CreateReplicationGroup",
+      "ActionConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster"
+        },
+        {
+          "Name": "globalreplicationgroup",
+          "ConditionKeys": [
+            "elasticache:AtRestEncryptionEnabled",
+            "elasticache:AuthTokenEnabled",
+            "elasticache:AutomaticFailoverEnabled",
+            "elasticache:CacheNodeType",
+            "elasticache:CacheParameterGroupName",
+            "elasticache:ClusterModeEnabled",
+            "elasticache:EngineType",
+            "elasticache:EngineVersion",
+            "elasticache:KmsKeyId",
+            "elasticache:MultiAZEnabled",
+            "elasticache:NumNodeGroups",
+            "elasticache:ReplicasPerNodeGroup",
+            "elasticache:SnapshotRetentionLimit",
+            "elasticache:TransitEncryptionEnabled"
+          ]
+        },
+        {
+          "Name": "parametergroup"
+        },
+        {
+          "Name": "replicationgroup",
+          "ConditionKeys": [
+            "aws:RequestTag/${TagKey}",
+            "aws:TagKeys",
+            "elasticache:AtRestEncryptionEnabled",
+            "elasticache:AuthTokenEnabled",
+            "elasticache:AutomaticFailoverEnabled",
+            "elasticache:CacheNodeType",
+            "elasticache:CacheParameterGroupName",
+            "elasticache:ClusterModeEnabled",
+            "elasticache:Durability",
+            "elasticache:EngineType",
+            "elasticache:EngineVersion",
+            "elasticache:KmsKeyId",
+            "elasticache:MultiAZEnabled",
+            "elasticache:NumNodeGroups",
+            "elasticache:ReplicasPerNodeGroup",
+            "elasticache:SnapshotRetentionLimit",
+            "elasticache:TransitEncryptionEnabled"
+          ]
+        },
+        {
+          "Name": "securitygroup"
+        },
+        {
+          "Name": "snapshot"
+        },
+        {
+          "Name": "subnetgroup"
+        },
+        {
+          "Name": "usergroup"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "CreateServerlessCache",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "serverlesscache",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}",
+            "elasticache:DataStorageUnit",
+            "elasticache:EngineType",
+            "elasticache:EngineVersion",
+            "elasticache:KmsKeyId",
+            "elasticache:MaximumDataStorage",
+            "elasticache:MaximumECPUPerSecond",
+            "elasticache:MinimumDataStorage",
+            "elasticache:MinimumECPUPerSecond",
+            "elasticache:SnapshotRetentionLimit"
+          ]
+        },
+        {
+          "Name": "serverlesscachesnapshot",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}"
+          ]
+        },
+        {
+          "Name": "snapshot",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}"
+          ]
+        },
+        {
+          "Name": "usergroup",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "CreateServerlessCacheSnapshot",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "serverlesscache",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}"
+          ]
+        },
+        {
+          "Name": "serverlesscachesnapshot",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}",
+            "elasticache:KmsKeyId"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "CreateSnapshot",
+      "ActionConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster"
+        },
+        {
+          "Name": "replicationgroup"
+        },
+        {
+          "Name": "snapshot",
+          "ConditionKeys": [
+            "aws:RequestTag/${TagKey}",
+            "aws:TagKeys",
+            "elasticache:KmsKeyId"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "CreateUser",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:ResourceTag/${TagKey}",
+        "aws:TagKeys",
+        "elasticache:UserAuthenticationMode"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "user"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "CreateUserGroup",
+      "ActionConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "user"
+        },
+        {
+          "Name": "usergroup",
+          "ConditionKeys": [
+            "aws:RequestTag/${TagKey}",
+            "aws:TagKeys"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DecreaseNodeGroupsInGlobalReplicationGroup",
+      "ActionConditionKeys": [
+        "elasticache:NumNodeGroups"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "globalreplicationgroup"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DecreaseReplicaCount",
+      "ActionConditionKeys": [
+        "aws:ResourceTag/${TagKey}",
+        "elasticache:ReplicasPerNodeGroup"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "replicationgroup"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteCacheCluster",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}"
+          ]
+        },
+        {
+          "Name": "snapshot"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteCacheParameterGroup",
+      "ActionConditionKeys": [
+        "aws:ResourceTag/${TagKey}",
+        "elasticache:CacheParameterGroupName"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "parametergroup"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteCacheSecurityGroup",
+      "ActionConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "securitygroup"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteCacheSubnetGroup",
+      "ActionConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "subnetgroup"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteGlobalReplicationGroup",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "globalreplicationgroup"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteReplicationGroup",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "replicationgroup",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}"
+          ]
+        },
+        {
+          "Name": "snapshot"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteServerlessCache",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "serverlesscache",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}"
+          ]
+        },
+        {
+          "Name": "serverlesscachesnapshot"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteServerlessCacheSnapshot",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "serverlesscachesnapshot",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteSnapshot",
+      "ActionConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "snapshot"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteUser",
+      "ActionConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "user"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteUserGroup",
+      "ActionConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "usergroup"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeCacheClusters",
+      "ActionConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeCacheEngineVersions",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeCacheParameterGroups",
+      "ActionConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "parametergroup"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeCacheParameters",
+      "ActionConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "parametergroup"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeCacheSecurityGroups",
+      "ActionConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "securitygroup"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeCacheSubnetGroups",
+      "ActionConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "subnetgroup"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeEngineDefaultParameters",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeEvents",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeGlobalReplicationGroups",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "globalreplicationgroup"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeReplicationGroups",
+      "ActionConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "replicationgroup"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeReservedCacheNodes",
+      "ActionConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "reserved-instance"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeReservedCacheNodesOfferings",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeServerlessCacheSnapshots",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "serverlesscache",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}"
+          ]
+        },
+        {
+          "Name": "serverlesscachesnapshot",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeServerlessCaches",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "serverlesscache",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeServiceUpdates",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeSnapshots",
+      "ActionConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "snapshot"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeUpdateActions",
+      "ActionConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster"
+        },
+        {
+          "Name": "replicationgroup"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeUserGroups",
+      "ActionConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "usergroup"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeUsers",
+      "ActionConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "user"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DisassociateGlobalReplicationGroup",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "globalreplicationgroup"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ExportServerlessCacheSnapshot",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "serverlesscachesnapshot",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "FailoverGlobalReplicationGroup",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "globalreplicationgroup"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "IncreaseNodeGroupsInGlobalReplicationGroup",
+      "ActionConditionKeys": [
+        "elasticache:NumNodeGroups"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "globalreplicationgroup"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "IncreaseReplicaCount",
+      "ActionConditionKeys": [
+        "aws:ResourceTag/${TagKey}",
+        "elasticache:ReplicasPerNodeGroup"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "replicationgroup"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "InterruptClusterAzPower",
+      "ActionConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "replicationgroup"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "ListAllowedNodeTypeModifications",
+      "ActionConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster"
+        },
+        {
+          "Name": "replicationgroup"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListTagsForResource",
+      "ActionConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster"
+        },
+        {
+          "Name": "parametergroup"
+        },
+        {
+          "Name": "replicationgroup"
+        },
+        {
+          "Name": "reserved-instance"
+        },
+        {
+          "Name": "securitygroup"
+        },
+        {
+          "Name": "serverlesscache"
+        },
+        {
+          "Name": "serverlesscachesnapshot"
+        },
+        {
+          "Name": "snapshot"
+        },
+        {
+          "Name": "subnetgroup"
+        },
+        {
+          "Name": "user"
+        },
+        {
+          "Name": "usergroup"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "ModifyCacheCluster",
+      "ActionConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster",
+          "ConditionKeys": [
+            "elasticache:AuthTokenEnabled",
+            "elasticache:CacheNodeType",
+            "elasticache:CacheParameterGroupName",
+            "elasticache:EngineVersion",
+            "elasticache:MultiAZEnabled",
+            "elasticache:SnapshotRetentionLimit"
+          ]
+        },
+        {
+          "Name": "parametergroup"
+        },
+        {
+          "Name": "securitygroup"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ModifyCacheParameterGroup",
+      "ActionConditionKeys": [
+        "aws:ResourceTag/${TagKey}",
+        "elasticache:CacheParameterGroupName"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "parametergroup"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ModifyCacheSubnetGroup",
+      "ActionConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "subnetgroup"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ModifyGlobalReplicationGroup",
+      "ActionConditionKeys": [
+        "elasticache:AutomaticFailoverEnabled",
+        "elasticache:CacheNodeType",
+        "elasticache:EngineVersion"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "globalreplicationgroup"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ModifyReplicationGroup",
+      "ActionConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "parametergroup"
+        },
+        {
+          "Name": "replicationgroup",
+          "ConditionKeys": [
+            "elasticache:AuthTokenEnabled",
+            "elasticache:AutomaticFailoverEnabled",
+            "elasticache:CacheNodeType",
+            "elasticache:CacheParameterGroupName",
+            "elasticache:ClusterModeEnabled",
+            "elasticache:Durability",
+            "elasticache:EngineVersion",
+            "elasticache:MultiAZEnabled",
+            "elasticache:SnapshotRetentionLimit",
+            "elasticache:TransitEncryptionEnabled"
+          ]
+        },
+        {
+          "Name": "securitygroup"
+        },
+        {
+          "Name": "usergroup"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ModifyReplicationGroupShardConfiguration",
+      "ActionConditionKeys": [
+        "aws:ResourceTag/${TagKey}",
+        "elasticache:NumNodeGroups"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "replicationgroup"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ModifyServerlessCache",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "serverlesscache",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}",
+            "elasticache:DataStorageUnit",
+            "elasticache:EngineVersion",
+            "elasticache:MaximumDataStorage",
+            "elasticache:MaximumECPUPerSecond",
+            "elasticache:MinimumDataStorage",
+            "elasticache:MinimumECPUPerSecond",
+            "elasticache:SnapshotRetentionLimit"
+          ]
+        },
+        {
+          "Name": "usergroup",
+          "ConditionKeys": [
+            "aws:ResourceTag/${TagKey}"
+          ]
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ModifyUser",
+      "ActionConditionKeys": [
+        "aws:ResourceTag/${TagKey}",
+        "elasticache:UserAuthenticationMode"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "user"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ModifyUserGroup",
+      "ActionConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "user"
+        },
+        {
+          "Name": "usergroup"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "PurchaseReservedCacheNodesOffering",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:ResourceTag/${TagKey}",
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "reserved-instance"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "RebalanceSlotsInGlobalReplicationGroup",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "globalreplicationgroup"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "RebootCacheCluster",
+      "ActionConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "RemoveTagsFromResource",
+      "ActionConditionKeys": [
+        "aws:ResourceTag/${TagKey}",
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": true,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "cluster"
+        },
+        {
+          "Name": "parametergroup"
+        },
+        {
+          "Name": "replicationgroup"
+        },
+        {
+          "Name": "reserved-instance"
+        },
+        {
+          "Name": "securitygroup"
+        },
+        {
+          "Name": "serverlesscache"
+        },
+        {
+          "Name": "serverlesscachesnapshot"
+        },
+        {
+          "Name": "snapshot"
+        },
+        {
+          "Name": "subnetgroup"
+        },
+        {
+          "Name": "user"
+        },
+        {
+          "Name": "usergroup"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "ResetCacheParameterGroup",
+      "ActionConditionKeys": [
+        "aws:ResourceTag/${TagKey}",
+        "elasticache:CacheParameterGroupName"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "parametergroup"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "RevokeCacheSecurityGroupIngress",
+      "ActionConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "securitygroup"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "StartMigration",
+      "ActionConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "replicationgroup"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "TestFailover",
+      "ActionConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "replicationgroup"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "TestMigration",
+      "ActionConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "replicationgroup"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    }
+  ],
+  "ConditionKeys": [
+    {
+      "Name": "aws:RequestTag/${TagKey}",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "aws:ResourceTag/${TagKey}",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "aws:TagKeys",
+      "Types": [
+        "ArrayOfString"
+      ]
+    },
+    {
+      "Name": "elasticache:AtRestEncryptionEnabled",
+      "Types": [
+        "Bool"
+      ]
+    },
+    {
+      "Name": "elasticache:AuthTokenEnabled",
+      "Types": [
+        "Bool"
+      ]
+    },
+    {
+      "Name": "elasticache:AutomaticFailoverEnabled",
+      "Types": [
+        "Bool"
+      ]
+    },
+    {
+      "Name": "elasticache:CacheNodeType",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "elasticache:CacheParameterGroupName",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "elasticache:ClusterModeEnabled",
+      "Types": [
+        "Bool"
+      ]
+    },
+    {
+      "Name": "elasticache:DataStorageUnit",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "elasticache:Durability",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "elasticache:EngineType",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "elasticache:EngineVersion",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "elasticache:KmsKeyId",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "elasticache:MaximumDataStorage",
+      "Types": [
+        "Numeric"
+      ]
+    },
+    {
+      "Name": "elasticache:MaximumECPUPerSecond",
+      "Types": [
+        "Numeric"
+      ]
+    },
+    {
+      "Name": "elasticache:MinimumDataStorage",
+      "Types": [
+        "Numeric"
+      ]
+    },
+    {
+      "Name": "elasticache:MinimumECPUPerSecond",
+      "Types": [
+        "Numeric"
+      ]
+    },
+    {
+      "Name": "elasticache:MultiAZEnabled",
+      "Types": [
+        "Bool"
+      ]
+    },
+    {
+      "Name": "elasticache:NumNodeGroups",
+      "Types": [
+        "Numeric"
+      ]
+    },
+    {
+      "Name": "elasticache:ReplicasPerNodeGroup",
+      "Types": [
+        "Numeric"
+      ]
+    },
+    {
+      "Name": "elasticache:SnapshotRetentionLimit",
+      "Types": [
+        "Numeric"
+      ]
+    },
+    {
+      "Name": "elasticache:TransitEncryptionEnabled",
+      "Types": [
+        "Bool"
+      ]
+    },
+    {
+      "Name": "elasticache:UserAuthenticationMode",
+      "Types": [
+        "String"
+      ]
+    }
+  ],
+  "Operations": [
+    {
+      "Name": "AddTagsToResource",
+      "AuthorizedActions": [
+        {
+          "Name": "AddTagsToResource",
+          "Service": "elasticache"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "elasticache",
+          "Method": "add_tags_to_resource",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "AuthorizeCacheSecurityGroupIngress",
+      "AuthorizedActions": [
+        {
+          "Name": "AuthorizeCacheSecurityGroupIngress",
+          "Service": "elasticache"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "elasticache",
+          "Method": "authorize_cache_security_group_ingress",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "BatchApplyUpdateAction",
+      "AuthorizedActions": [
+        {
+          "Name": "BatchApplyUpdateAction",
+          "Service": "elasticache"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "elasticache",
+          "Method": "batch_apply_update_action",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "BatchStopUpdateAction",
+      "AuthorizedActions": [
+        {
+          "Name": "BatchStopUpdateAction",
+          "Service": "elasticache"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "elasticache",
+          "Method": "batch_stop_update_action",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CompleteMigration",
+      "AuthorizedActions": [
+        {
+          "Name": "CompleteMigration",
+          "Service": "elasticache"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "elasticache",
+          "Method": "complete_migration",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CopyServerlessCacheSnapshot",
+      "AuthorizedActions": [
+        {
+          "Name": "AddTagsToResource",
+          "Service": "elasticache"
+        },
+        {
+          "Name": "CopyServerlessCacheSnapshot",
+          "Service": "elasticache"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "elasticache",
+          "Method": "copy_serverless_cache_snapshot",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CopySnapshot",
+      "AuthorizedActions": [
+        {
+          "Name": "AddTagsToResource",
+          "Service": "elasticache"
+        },
+        {
+          "Name": "CopySnapshot",
+          "Service": "elasticache"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "elasticache",
+          "Method": "copy_snapshot",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreateCacheCluster",
+      "AuthorizedActions": [
+        {
+          "Name": "AddTagsToResource",
+          "Service": "elasticache"
+        },
+        {
+          "Name": "CreateCacheCluster",
+          "Service": "elasticache"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "elasticache",
+          "Method": "create_cache_cluster",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreateCacheParameterGroup",
+      "AuthorizedActions": [
+        {
+          "Name": "AddTagsToResource",
+          "Service": "elasticache"
+        },
+        {
+          "Name": "CreateCacheParameterGroup",
+          "Service": "elasticache"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "elasticache",
+          "Method": "create_cache_parameter_group",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreateCacheSecurityGroup",
+      "AuthorizedActions": [
+        {
+          "Name": "AddTagsToResource",
+          "Service": "elasticache"
+        },
+        {
+          "Name": "CreateCacheSecurityGroup",
+          "Service": "elasticache"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "elasticache",
+          "Method": "create_cache_security_group",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreateCacheSubnetGroup",
+      "AuthorizedActions": [
+        {
+          "Name": "AddTagsToResource",
+          "Service": "elasticache"
+        },
+        {
+          "Name": "CreateCacheSubnetGroup",
+          "Service": "elasticache"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "elasticache",
+          "Method": "create_cache_subnet_group",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreateGlobalReplicationGroup",
+      "AuthorizedActions": [
+        {
+          "Name": "CreateGlobalReplicationGroup",
+          "Service": "elasticache"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "elasticache",
+          "Method": "create_global_replication_group",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreateReplicationGroup",
+      "AuthorizedActions": [
+        {
+          "Name": "AddTagsToResource",
+          "Service": "elasticache"
+        },
+        {
+          "Name": "CreateReplicationGroup",
+          "Service": "elasticache"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "elasticache",
+          "Method": "create_replication_group",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreateServerlessCache",
+      "AuthorizedActions": [
+        {
+          "Name": "AddTagsToResource",
+          "Service": "elasticache"
+        },
+        {
+          "Name": "CreateServerlessCache",
+          "Service": "elasticache"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "elasticache",
+          "Method": "create_serverless_cache",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreateServerlessCacheSnapshot",
+      "AuthorizedActions": [
+        {
+          "Name": "AddTagsToResource",
+          "Service": "elasticache"
+        },
+        {
+          "Name": "CreateServerlessCacheSnapshot",
+          "Service": "elasticache"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "elasticache",
+          "Method": "create_serverless_cache_snapshot",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreateSnapshot",
+      "AuthorizedActions": [
+        {
+          "Name": "AddTagsToResource",
+          "Service": "elasticache"
+        },
+        {
+          "Name": "CreateSnapshot",
+          "Service": "elasticache"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "elasticache",
+          "Method": "create_snapshot",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreateUser",
+      "AuthorizedActions": [
+        {
+          "Name": "AddTagsToResource",
+          "Service": "elasticache"
+        },
+        {
+          "Name": "CreateUser",
+          "Service": "elasticache"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "elasticache",
+          "Method": "create_user",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreateUserGroup",
+      "AuthorizedActions": [
+        {
+          "Name": "AddTagsToResource",
+          "Service": "elasticache"
+        },
+        {
+          "Name": "CreateUserGroup",
+          "Service": "elasticache"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "elasticache",
+          "Method": "create_user_group",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DecreaseNodeGroupsInGlobalReplicationGroup",
+      "AuthorizedActions": [
+        {
+          "Name": "DecreaseNodeGroupsInGlobalReplicationGroup",
+          "Service": "elasticache"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "elasticache",
+          "Method": "decrease_node_groups_in_global_replication_group",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DecreaseReplicaCount",
+      "AuthorizedActions": [
+        {
+          "Name": "DecreaseReplicaCount",
+          "Service": "elasticache"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "elasticache",
+          "Method": "decrease_replica_count",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteCacheCluster",
+      "AuthorizedActions": [
+        {
+          "Name": "CreateSnapshot",
+          "Service": "elasticache"
+        },
+        {
+          "Name": "DeleteCacheCluster",
+          "Service": "elasticache"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "elasticache",
+          "Method": "delete_cache_cluster",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteCacheParameterGroup",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteCacheParameterGroup",
+          "Service": "elasticache"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "elasticache",
+          "Method": "delete_cache_parameter_group",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteCacheSecurityGroup",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteCacheSecurityGroup",
+          "Service": "elasticache"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "elasticache",
+          "Method": "delete_cache_security_group",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteCacheSubnetGroup",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteCacheSubnetGroup",
+          "Service": "elasticache"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "elasticache",
+          "Method": "delete_cache_subnet_group",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteGlobalReplicationGroup",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteGlobalReplicationGroup",
+          "Service": "elasticache"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "elasticache",
+          "Method": "delete_global_replication_group",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteReplicationGroup",
+      "AuthorizedActions": [
+        {
+          "Name": "CreateSnapshot",
+          "Service": "elasticache"
+        },
+        {
+          "Name": "DeleteReplicationGroup",
+          "Service": "elasticache"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "elasticache",
+          "Method": "delete_replication_group",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteServerlessCache",
+      "AuthorizedActions": [
+        {
+          "Name": "CreateServerlessCacheSnapshot",
+          "Service": "elasticache"
+        },
+        {
+          "Name": "DeleteServerlessCache",
+          "Service": "elasticache"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "elasticache",
+          "Method": "delete_serverless_cache",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteServerlessCacheSnapshot",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteServerlessCacheSnapshot",
+          "Service": "elasticache"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "elasticache",
+          "Method": "delete_serverless_cache_snapshot",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteSnapshot",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteSnapshot",
+          "Service": "elasticache"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "elasticache",
+          "Method": "delete_snapshot",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteUser",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteUser",
+          "Service": "elasticache"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "elasticache",
+          "Method": "delete_user",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteUserGroup",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteUserGroup",
+          "Service": "elasticache"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "elasticache",
+          "Method": "delete_user_group",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeCacheClusters",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeCacheClusters",
+          "Service": "elasticache"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "elasticache",
+          "Method": "describe_cache_clusters",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeCacheEngineVersions",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeCacheEngineVersions",
+          "Service": "elasticache"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "elasticache",
+          "Method": "describe_cache_engine_versions",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeCacheParameterGroups",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeCacheParameterGroups",
+          "Service": "elasticache"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "elasticache",
+          "Method": "describe_cache_parameter_groups",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeCacheParameters",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeCacheParameters",
+          "Service": "elasticache"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "elasticache",
+          "Method": "describe_cache_parameters",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeCacheSecurityGroups",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeCacheSecurityGroups",
+          "Service": "elasticache"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "elasticache",
+          "Method": "describe_cache_security_groups",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeCacheSubnetGroups",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeCacheSubnetGroups",
+          "Service": "elasticache"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "elasticache",
+          "Method": "describe_cache_subnet_groups",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeEngineDefaultParameters",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeEngineDefaultParameters",
+          "Service": "elasticache"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "elasticache",
+          "Method": "describe_engine_default_parameters",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeEvents",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeEvents",
+          "Service": "elasticache"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "elasticache",
+          "Method": "describe_events",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeGlobalReplicationGroups",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeGlobalReplicationGroups",
+          "Service": "elasticache"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "elasticache",
+          "Method": "describe_global_replication_groups",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeReplicationGroups",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeReplicationGroups",
+          "Service": "elasticache"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "elasticache",
+          "Method": "describe_replication_groups",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeReservedCacheNodes",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeReservedCacheNodes",
+          "Service": "elasticache"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "elasticache",
+          "Method": "describe_reserved_cache_nodes",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeReservedCacheNodesOfferings",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeReservedCacheNodesOfferings",
+          "Service": "elasticache"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "elasticache",
+          "Method": "describe_reserved_cache_nodes_offerings",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeServerlessCacheSnapshots",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeServerlessCacheSnapshots",
+          "Service": "elasticache"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "elasticache",
+          "Method": "describe_serverless_cache_snapshots",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeServerlessCaches",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeServerlessCaches",
+          "Service": "elasticache"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "elasticache",
+          "Method": "describe_serverless_caches",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeServiceUpdates",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeServiceUpdates",
+          "Service": "elasticache"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "elasticache",
+          "Method": "describe_service_updates",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeSnapshots",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeSnapshots",
+          "Service": "elasticache"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "elasticache",
+          "Method": "describe_snapshots",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeUpdateActions",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeUpdateActions",
+          "Service": "elasticache"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "elasticache",
+          "Method": "describe_update_actions",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeUserGroups",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeUserGroups",
+          "Service": "elasticache"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "elasticache",
+          "Method": "describe_user_groups",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeUsers",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeUsers",
+          "Service": "elasticache"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "elasticache",
+          "Method": "describe_users",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DisassociateGlobalReplicationGroup",
+      "AuthorizedActions": [
+        {
+          "Name": "DisassociateGlobalReplicationGroup",
+          "Service": "elasticache"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "elasticache",
+          "Method": "disassociate_global_replication_group",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ExportServerlessCacheSnapshot",
+      "AuthorizedActions": [
+        {
+          "Name": "ExportServerlessCacheSnapshot",
+          "Service": "elasticache"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "elasticache",
+          "Method": "export_serverless_cache_snapshot",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "FailoverGlobalReplicationGroup",
+      "AuthorizedActions": [
+        {
+          "Name": "FailoverGlobalReplicationGroup",
+          "Service": "elasticache"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "elasticache",
+          "Method": "failover_global_replication_group",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "IncreaseNodeGroupsInGlobalReplicationGroup",
+      "AuthorizedActions": [
+        {
+          "Name": "IncreaseNodeGroupsInGlobalReplicationGroup",
+          "Service": "elasticache"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "elasticache",
+          "Method": "increase_node_groups_in_global_replication_group",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "IncreaseReplicaCount",
+      "AuthorizedActions": [
+        {
+          "Name": "IncreaseReplicaCount",
+          "Service": "elasticache"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "elasticache",
+          "Method": "increase_replica_count",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListAllowedNodeTypeModifications",
+      "AuthorizedActions": [
+        {
+          "Name": "ListAllowedNodeTypeModifications",
+          "Service": "elasticache"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "elasticache",
+          "Method": "list_allowed_node_type_modifications",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListTagsForResource",
+      "AuthorizedActions": [
+        {
+          "Name": "ListTagsForResource",
+          "Service": "elasticache"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "elasticache",
+          "Method": "list_tags_for_resource",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ModifyCacheCluster",
+      "AuthorizedActions": [
+        {
+          "Name": "ModifyCacheCluster",
+          "Service": "elasticache"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "elasticache",
+          "Method": "modify_cache_cluster",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ModifyCacheParameterGroup",
+      "AuthorizedActions": [
+        {
+          "Name": "ModifyCacheParameterGroup",
+          "Service": "elasticache"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "elasticache",
+          "Method": "modify_cache_parameter_group",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ModifyCacheSubnetGroup",
+      "AuthorizedActions": [
+        {
+          "Name": "ModifyCacheSubnetGroup",
+          "Service": "elasticache"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "elasticache",
+          "Method": "modify_cache_subnet_group",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ModifyGlobalReplicationGroup",
+      "AuthorizedActions": [
+        {
+          "Name": "ModifyGlobalReplicationGroup",
+          "Service": "elasticache"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "elasticache",
+          "Method": "modify_global_replication_group",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ModifyReplicationGroup",
+      "AuthorizedActions": [
+        {
+          "Name": "ModifyReplicationGroup",
+          "Service": "elasticache"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "elasticache",
+          "Method": "modify_replication_group",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ModifyReplicationGroupShardConfiguration",
+      "AuthorizedActions": [
+        {
+          "Name": "ModifyReplicationGroupShardConfiguration",
+          "Service": "elasticache"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "elasticache",
+          "Method": "modify_replication_group_shard_configuration",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ModifyServerlessCache",
+      "AuthorizedActions": [
+        {
+          "Name": "ModifyServerlessCache",
+          "Service": "elasticache"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "elasticache",
+          "Method": "modify_serverless_cache",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ModifyUser",
+      "AuthorizedActions": [
+        {
+          "Name": "ModifyUser",
+          "Service": "elasticache"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "elasticache",
+          "Method": "modify_user",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ModifyUserGroup",
+      "AuthorizedActions": [
+        {
+          "Name": "ModifyUserGroup",
+          "Service": "elasticache"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "elasticache",
+          "Method": "modify_user_group",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "PurchaseReservedCacheNodesOffering",
+      "AuthorizedActions": [
+        {
+          "Name": "AddTagsToResource",
+          "Service": "elasticache"
+        },
+        {
+          "Name": "PurchaseReservedCacheNodesOffering",
+          "Service": "elasticache"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "elasticache",
+          "Method": "purchase_reserved_cache_nodes_offering",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "RebalanceSlotsInGlobalReplicationGroup",
+      "AuthorizedActions": [
+        {
+          "Name": "RebalanceSlotsInGlobalReplicationGroup",
+          "Service": "elasticache"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "elasticache",
+          "Method": "rebalance_slots_in_global_replication_group",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "RebootCacheCluster",
+      "AuthorizedActions": [
+        {
+          "Name": "RebootCacheCluster",
+          "Service": "elasticache"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "elasticache",
+          "Method": "reboot_cache_cluster",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "RemoveTagsFromResource",
+      "AuthorizedActions": [
+        {
+          "Name": "RemoveTagsFromResource",
+          "Service": "elasticache"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "elasticache",
+          "Method": "remove_tags_from_resource",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ResetCacheParameterGroup",
+      "AuthorizedActions": [
+        {
+          "Name": "ResetCacheParameterGroup",
+          "Service": "elasticache"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "elasticache",
+          "Method": "reset_cache_parameter_group",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "RevokeCacheSecurityGroupIngress",
+      "AuthorizedActions": [
+        {
+          "Name": "RevokeCacheSecurityGroupIngress",
+          "Service": "elasticache"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "elasticache",
+          "Method": "revoke_cache_security_group_ingress",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "StartMigration",
+      "AuthorizedActions": [
+        {
+          "Name": "StartMigration",
+          "Service": "elasticache"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "elasticache",
+          "Method": "start_migration",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "TestFailover",
+      "AuthorizedActions": [
+        {
+          "Name": "TestFailover",
+          "Service": "elasticache"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "elasticache",
+          "Method": "test_failover",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "TestMigration",
+      "AuthorizedActions": [
+        {
+          "Name": "TestMigration",
+          "Service": "elasticache"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "elasticache",
+          "Method": "test_migration",
+          "Package": "Boto3"
+        }
+      ]
+    }
+  ],
+  "Resources": [
+    {
+      "Name": "cluster",
+      "ARNFormats": [
+        "arn:${Partition}:elasticache:${Region}:${Account}:cluster:${CacheClusterId}"
+      ],
+      "ConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:ResourceTag/${TagKey}",
+        "aws:TagKeys",
+        "elasticache:AuthTokenEnabled",
+        "elasticache:CacheNodeType",
+        "elasticache:CacheParameterGroupName",
+        "elasticache:EngineType",
+        "elasticache:EngineVersion",
+        "elasticache:MultiAZEnabled",
+        "elasticache:SnapshotRetentionLimit"
+      ]
+    },
+    {
+      "Name": "globalreplicationgroup",
+      "ARNFormats": [
+        "arn:${Partition}:elasticache::${Account}:globalreplicationgroup:${GlobalReplicationGroupId}"
+      ],
+      "ConditionKeys": [
+        "elasticache:AtRestEncryptionEnabled",
+        "elasticache:AuthTokenEnabled",
+        "elasticache:AutomaticFailoverEnabled",
+        "elasticache:CacheNodeType",
+        "elasticache:CacheParameterGroupName",
+        "elasticache:ClusterModeEnabled",
+        "elasticache:EngineType",
+        "elasticache:EngineVersion",
+        "elasticache:KmsKeyId",
+        "elasticache:MultiAZEnabled",
+        "elasticache:NumNodeGroups",
+        "elasticache:ReplicasPerNodeGroup",
+        "elasticache:SnapshotRetentionLimit",
+        "elasticache:TransitEncryptionEnabled"
+      ]
+    },
+    {
+      "Name": "parametergroup",
+      "ARNFormats": [
+        "arn:${Partition}:elasticache:${Region}:${Account}:parametergroup:${CacheParameterGroupName}"
+      ],
+      "ConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:ResourceTag/${TagKey}",
+        "aws:TagKeys",
+        "elasticache:CacheParameterGroupName"
+      ]
+    },
+    {
+      "Name": "replicationgroup",
+      "ARNFormats": [
+        "arn:${Partition}:elasticache:${Region}:${Account}:replicationgroup:${ReplicationGroupId}"
+      ],
+      "ConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:ResourceTag/${TagKey}",
+        "aws:TagKeys",
+        "elasticache:AtRestEncryptionEnabled",
+        "elasticache:AuthTokenEnabled",
+        "elasticache:AutomaticFailoverEnabled",
+        "elasticache:CacheNodeType",
+        "elasticache:CacheParameterGroupName",
+        "elasticache:ClusterModeEnabled",
+        "elasticache:Durability",
+        "elasticache:EngineType",
+        "elasticache:EngineVersion",
+        "elasticache:KmsKeyId",
+        "elasticache:MultiAZEnabled",
+        "elasticache:NumNodeGroups",
+        "elasticache:ReplicasPerNodeGroup",
+        "elasticache:SnapshotRetentionLimit",
+        "elasticache:TransitEncryptionEnabled"
+      ]
+    },
+    {
+      "Name": "reserved-instance",
+      "ARNFormats": [
+        "arn:${Partition}:elasticache:${Region}:${Account}:reserved-instance:${ReservedCacheNodeId}"
+      ],
+      "ConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:ResourceTag/${TagKey}",
+        "aws:TagKeys"
+      ]
+    },
+    {
+      "Name": "securitygroup",
+      "ARNFormats": [
+        "arn:${Partition}:elasticache:${Region}:${Account}:securitygroup:${CacheSecurityGroupName}"
+      ],
+      "ConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:ResourceTag/${TagKey}",
+        "aws:TagKeys"
+      ]
+    },
+    {
+      "Name": "serverlesscache",
+      "ARNFormats": [
+        "arn:${Partition}:elasticache:${Region}:${Account}:serverlesscache:${ServerlessCacheName}"
+      ],
+      "ConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:ResourceTag/${TagKey}",
+        "aws:TagKeys",
+        "elasticache:DataStorageUnit",
+        "elasticache:EngineType",
+        "elasticache:EngineVersion",
+        "elasticache:KmsKeyId",
+        "elasticache:MaximumDataStorage",
+        "elasticache:MaximumECPUPerSecond",
+        "elasticache:MinimumDataStorage",
+        "elasticache:MinimumECPUPerSecond",
+        "elasticache:SnapshotRetentionLimit"
+      ]
+    },
+    {
+      "Name": "serverlesscachesnapshot",
+      "ARNFormats": [
+        "arn:${Partition}:elasticache:${Region}:${Account}:serverlesscachesnapshot:${ServerlessCacheSnapshotName}"
+      ],
+      "ConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:ResourceTag/${TagKey}",
+        "aws:TagKeys",
+        "elasticache:KmsKeyId"
+      ]
+    },
+    {
+      "Name": "snapshot",
+      "ARNFormats": [
+        "arn:${Partition}:elasticache:${Region}:${Account}:snapshot:${SnapshotName}"
+      ],
+      "ConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:ResourceTag/${TagKey}",
+        "aws:TagKeys",
+        "elasticache:KmsKeyId"
+      ]
+    },
+    {
+      "Name": "subnetgroup",
+      "ARNFormats": [
+        "arn:${Partition}:elasticache:${Region}:${Account}:subnetgroup:${CacheSubnetGroupName}"
+      ],
+      "ConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:ResourceTag/${TagKey}",
+        "aws:TagKeys"
+      ]
+    },
+    {
+      "Name": "user",
+      "ARNFormats": [
+        "arn:${Partition}:elasticache:${Region}:${Account}:user:${UserId}"
+      ],
+      "ConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:ResourceTag/${TagKey}",
+        "aws:TagKeys",
+        "elasticache:UserAuthenticationMode"
+      ]
+    },
+    {
+      "Name": "usergroup",
+      "ARNFormats": [
+        "arn:${Partition}:elasticache:${Region}:${Account}:usergroup:${UserGroupId}"
+      ],
+      "ConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:ResourceTag/${TagKey}",
+        "aws:TagKeys"
+      ]
+    }
+  ],
+  "Version": "v1.4"
+}

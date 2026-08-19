@@ -1,0 +1,895 @@
+{
+  "Name": "servicequotas",
+  "Actions": [
+    {
+      "Name": "AssociateServiceQuotaTemplate",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "CreateSupportCase",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteServiceQuotaIncreaseRequestFromTemplate",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DisassociateServiceQuotaTemplate",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetAWSDefaultServiceQuota",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetAssociationForServiceQuotaTemplate",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetAutoManagementConfiguration",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetQuotaUtilizationReport",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetRequestedServiceQuotaChange",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetServiceQuota",
+      "ActionConditionKeys": [
+        "servicequotas:service"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "quota"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetServiceQuotaIncreaseRequestFromTemplate",
+      "ActionConditionKeys": [
+        "servicequotas:service"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "quota"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListAWSDefaultServiceQuotas",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListRequestedServiceQuotaChangeHistory",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListRequestedServiceQuotaChangeHistoryByQuota",
+      "ActionConditionKeys": [
+        "servicequotas:service"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "quota"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListServiceQuotaIncreaseRequestsInTemplate",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListServiceQuotas",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListServices",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListTagsForResource",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "PutServiceQuotaIncreaseRequestIntoTemplate",
+      "ActionConditionKeys": [
+        "servicequotas:service"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "quota"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "RequestServiceQuotaIncrease",
+      "ActionConditionKeys": [
+        "servicequotas:service"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "quota"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "StartAutoManagement",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "StartQuotaUtilizationReport",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "StopAutoManagement",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "TagResource",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": true,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "UntagResource",
+      "ActionConditionKeys": [
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": true,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "UpdateAutoManagement",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    }
+  ],
+  "ConditionKeys": [
+    {
+      "Name": "aws:RequestTag/${TagKey}",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "aws:ResourceTag/${TagKey}",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "aws:TagKeys",
+      "Types": [
+        "ArrayOfString"
+      ]
+    },
+    {
+      "Name": "servicequotas:service",
+      "Types": [
+        "String"
+      ]
+    }
+  ],
+  "Operations": [
+    {
+      "Name": "AssociateServiceQuotaTemplate",
+      "AuthorizedActions": [
+        {
+          "Name": "AssociateServiceQuotaTemplate",
+          "Service": "servicequotas"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "service-quotas",
+          "Method": "associate_service_quota_template",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreateSupportCase",
+      "AuthorizedActions": [
+        {
+          "Name": "CreateSupportCase",
+          "Service": "servicequotas"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "service-quotas",
+          "Method": "create_support_case",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteServiceQuotaIncreaseRequestFromTemplate",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteServiceQuotaIncreaseRequestFromTemplate",
+          "Service": "servicequotas"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "service-quotas",
+          "Method": "delete_service_quota_increase_request_from_template",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DisassociateServiceQuotaTemplate",
+      "AuthorizedActions": [
+        {
+          "Name": "DisassociateServiceQuotaTemplate",
+          "Service": "servicequotas"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "service-quotas",
+          "Method": "disassociate_service_quota_template",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetAWSDefaultServiceQuota",
+      "AuthorizedActions": [
+        {
+          "Name": "GetAWSDefaultServiceQuota",
+          "Service": "servicequotas"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "service-quotas",
+          "Method": "get_aws_default_service_quota",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetAssociationForServiceQuotaTemplate",
+      "AuthorizedActions": [
+        {
+          "Name": "GetAssociationForServiceQuotaTemplate",
+          "Service": "servicequotas"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "service-quotas",
+          "Method": "get_association_for_service_quota_template",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetAutoManagementConfiguration",
+      "AuthorizedActions": [
+        {
+          "Name": "GetAutoManagementConfiguration",
+          "Service": "servicequotas"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "service-quotas",
+          "Method": "get_auto_management_configuration",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetQuotaUtilizationReport",
+      "AuthorizedActions": [
+        {
+          "Name": "GetQuotaUtilizationReport",
+          "Service": "servicequotas"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "service-quotas",
+          "Method": "get_quota_utilization_report",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetRequestedServiceQuotaChange",
+      "AuthorizedActions": [
+        {
+          "Name": "GetRequestedServiceQuotaChange",
+          "Service": "servicequotas"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "service-quotas",
+          "Method": "get_requested_service_quota_change",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetServiceQuota",
+      "AuthorizedActions": [
+        {
+          "Name": "GetServiceQuota",
+          "Service": "servicequotas"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "service-quotas",
+          "Method": "get_service_quota",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetServiceQuotaIncreaseRequestFromTemplate",
+      "AuthorizedActions": [
+        {
+          "Name": "GetServiceQuotaIncreaseRequestFromTemplate",
+          "Service": "servicequotas"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "service-quotas",
+          "Method": "get_service_quota_increase_request_from_template",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListAWSDefaultServiceQuotas",
+      "AuthorizedActions": [
+        {
+          "Name": "ListAWSDefaultServiceQuotas",
+          "Service": "servicequotas"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "service-quotas",
+          "Method": "list_aws_default_service_quotas",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListRequestedServiceQuotaChangeHistory",
+      "AuthorizedActions": [
+        {
+          "Name": "ListRequestedServiceQuotaChangeHistory",
+          "Service": "servicequotas"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "service-quotas",
+          "Method": "list_requested_service_quota_change_history",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListRequestedServiceQuotaChangeHistoryByQuota",
+      "AuthorizedActions": [
+        {
+          "Name": "ListRequestedServiceQuotaChangeHistoryByQuota",
+          "Service": "servicequotas"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "service-quotas",
+          "Method": "list_requested_service_quota_change_history_by_quota",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListServiceQuotaIncreaseRequestsInTemplate",
+      "AuthorizedActions": [
+        {
+          "Name": "ListServiceQuotaIncreaseRequestsInTemplate",
+          "Service": "servicequotas"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "service-quotas",
+          "Method": "list_service_quota_increase_requests_in_template",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListServiceQuotas",
+      "AuthorizedActions": [
+        {
+          "Name": "ListServiceQuotas",
+          "Service": "servicequotas"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "service-quotas",
+          "Method": "list_service_quotas",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListServices",
+      "AuthorizedActions": [
+        {
+          "Name": "ListServices",
+          "Service": "servicequotas"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "service-quotas",
+          "Method": "list_services",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListTagsForResource",
+      "AuthorizedActions": [
+        {
+          "Name": "ListTagsForResource",
+          "Service": "servicequotas"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "service-quotas",
+          "Method": "list_tags_for_resource",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "PutServiceQuotaIncreaseRequestIntoTemplate",
+      "AuthorizedActions": [
+        {
+          "Name": "PutServiceQuotaIncreaseRequestIntoTemplate",
+          "Service": "servicequotas"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "service-quotas",
+          "Method": "put_service_quota_increase_request_into_template",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "RequestServiceQuotaIncrease",
+      "AuthorizedActions": [
+        {
+          "Name": "RequestServiceQuotaIncrease",
+          "Service": "servicequotas"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "service-quotas",
+          "Method": "request_service_quota_increase",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "StartAutoManagement",
+      "AuthorizedActions": [
+        {
+          "Name": "StartAutoManagement",
+          "Service": "servicequotas"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "service-quotas",
+          "Method": "start_auto_management",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "StartQuotaUtilizationReport",
+      "AuthorizedActions": [
+        {
+          "Name": "StartQuotaUtilizationReport",
+          "Service": "servicequotas"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "service-quotas",
+          "Method": "start_quota_utilization_report",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "StopAutoManagement",
+      "AuthorizedActions": [
+        {
+          "Name": "StopAutoManagement",
+          "Service": "servicequotas"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "service-quotas",
+          "Method": "stop_auto_management",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "TagResource",
+      "AuthorizedActions": [
+        {
+          "Name": "TagResource",
+          "Service": "servicequotas"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "service-quotas",
+          "Method": "tag_resource",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "UntagResource",
+      "AuthorizedActions": [
+        {
+          "Name": "UntagResource",
+          "Service": "servicequotas"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "service-quotas",
+          "Method": "untag_resource",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "UpdateAutoManagement",
+      "AuthorizedActions": [
+        {
+          "Name": "UpdateAutoManagement",
+          "Service": "servicequotas"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "service-quotas",
+          "Method": "update_auto_management",
+          "Package": "Boto3"
+        }
+      ]
+    }
+  ],
+  "Resources": [
+    {
+      "Name": "quota",
+      "ARNFormats": [
+        "arn:${Partition}:servicequotas:${Region}:${Account}:${ServiceCode}/${QuotaCode}"
+      ]
+    }
+  ],
+  "Version": "v1.4"
+}

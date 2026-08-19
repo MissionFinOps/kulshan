@@ -1,0 +1,1404 @@
+{
+  "Name": "access-analyzer",
+  "Actions": [
+    {
+      "Name": "ApplyArchiveRule",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "Analyzer"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "CancelPolicyGeneration",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "CheckAccessNotGranted",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "CheckNoNewAccess",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "CheckNoPublicAccess",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "CreateAccessPreview",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "Analyzer"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "CreateAnalyzer",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "Analyzer"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "CreateArchiveRule",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "ArchiveRule"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "CreateServiceLinkedAnalyzer",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "Analyzer"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "DeleteAnalyzer",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "Analyzer"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteArchiveRule",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "ArchiveRule"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteServiceLinkedAnalyzer",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "Analyzer"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "GenerateFindingRecommendation",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "Analyzer"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetAccessPreview",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "Analyzer"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetAnalyzedResource",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "Analyzer"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetAnalyzer",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "Analyzer"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetArchiveRule",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "ArchiveRule"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetFinding",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "Analyzer"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetFindingRecommendation",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "Analyzer"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetFindingsStatistics",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "Analyzer"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetGeneratedPolicy",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListAccessPreviewFindings",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "Analyzer"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListAccessPreviews",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "Analyzer"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListAnalyzedResources",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "Analyzer"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListAnalyzers",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListArchiveRules",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "Analyzer"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListFindings",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "Analyzer"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListPolicyGenerations",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListTagsForResource",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "Analyzer"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "StartPolicyGeneration",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "StartResourceScan",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "Analyzer"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "TagResource",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": true,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "Analyzer"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "UntagResource",
+      "ActionConditionKeys": [
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": true,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "Analyzer"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "UpdateAnalyzer",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "Analyzer"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "UpdateArchiveRule",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "ArchiveRule"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "UpdateFindings",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "Analyzer"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ValidatePolicy",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    }
+  ],
+  "ConditionKeys": [
+    {
+      "Name": "aws:RequestTag/${TagKey}",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "aws:ResourceTag/${TagKey}",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "aws:TagKeys",
+      "Types": [
+        "ArrayOfString"
+      ]
+    }
+  ],
+  "Operations": [
+    {
+      "Name": "ApplyArchiveRule",
+      "AuthorizedActions": [
+        {
+          "Name": "ApplyArchiveRule",
+          "Service": "access-analyzer"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "accessanalyzer",
+          "Method": "apply_archive_rule",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CancelPolicyGeneration",
+      "AuthorizedActions": [
+        {
+          "Name": "CancelPolicyGeneration",
+          "Service": "access-analyzer"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "accessanalyzer",
+          "Method": "cancel_policy_generation",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CheckAccessNotGranted",
+      "AuthorizedActions": [
+        {
+          "Name": "CheckAccessNotGranted",
+          "Service": "access-analyzer"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "accessanalyzer",
+          "Method": "check_access_not_granted",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CheckNoNewAccess",
+      "AuthorizedActions": [
+        {
+          "Name": "CheckNoNewAccess",
+          "Service": "access-analyzer"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "accessanalyzer",
+          "Method": "check_no_new_access",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CheckNoPublicAccess",
+      "AuthorizedActions": [
+        {
+          "Name": "CheckNoPublicAccess",
+          "Service": "access-analyzer"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "accessanalyzer",
+          "Method": "check_no_public_access",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreateAccessPreview",
+      "AuthorizedActions": [
+        {
+          "Name": "CreateAccessPreview",
+          "Service": "access-analyzer"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "accessanalyzer",
+          "Method": "create_access_preview",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreateAnalyzer",
+      "AuthorizedActions": [
+        {
+          "Name": "CreateAnalyzer",
+          "Service": "access-analyzer"
+        },
+        {
+          "Name": "TagResource",
+          "Service": "access-analyzer"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "accessanalyzer",
+          "Method": "create_analyzer",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreateArchiveRule",
+      "AuthorizedActions": [
+        {
+          "Name": "CreateArchiveRule",
+          "Service": "access-analyzer"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "accessanalyzer",
+          "Method": "create_archive_rule",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreateServiceLinkedAnalyzer",
+      "AuthorizedActions": [
+        {
+          "Name": "CreateServiceLinkedAnalyzer",
+          "Service": "access-analyzer"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "accessanalyzer",
+          "Method": "create_service_linked_analyzer",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteAnalyzer",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteAnalyzer",
+          "Service": "access-analyzer"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "accessanalyzer",
+          "Method": "delete_analyzer",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteArchiveRule",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteArchiveRule",
+          "Service": "access-analyzer"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "accessanalyzer",
+          "Method": "delete_archive_rule",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteServiceLinkedAnalyzer",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteServiceLinkedAnalyzer",
+          "Service": "access-analyzer"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "accessanalyzer",
+          "Method": "delete_service_linked_analyzer",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GenerateFindingRecommendation",
+      "AuthorizedActions": [
+        {
+          "Name": "GenerateFindingRecommendation",
+          "Service": "access-analyzer"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "accessanalyzer",
+          "Method": "generate_finding_recommendation",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetAccessPreview",
+      "AuthorizedActions": [
+        {
+          "Name": "GetAccessPreview",
+          "Service": "access-analyzer"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "accessanalyzer",
+          "Method": "get_access_preview",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetAnalyzedResource",
+      "AuthorizedActions": [
+        {
+          "Name": "GetAnalyzedResource",
+          "Service": "access-analyzer"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "accessanalyzer",
+          "Method": "get_analyzed_resource",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetAnalyzer",
+      "AuthorizedActions": [
+        {
+          "Name": "GetAnalyzer",
+          "Service": "access-analyzer"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "accessanalyzer",
+          "Method": "get_analyzer",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetArchiveRule",
+      "AuthorizedActions": [
+        {
+          "Name": "GetArchiveRule",
+          "Service": "access-analyzer"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "accessanalyzer",
+          "Method": "get_archive_rule",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetFinding",
+      "AuthorizedActions": [
+        {
+          "Name": "GetFinding",
+          "Service": "access-analyzer"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "accessanalyzer",
+          "Method": "get_finding",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetFindingRecommendation",
+      "AuthorizedActions": [
+        {
+          "Name": "GetFindingRecommendation",
+          "Service": "access-analyzer"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "accessanalyzer",
+          "Method": "get_finding_recommendation",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetFindingV2",
+      "AuthorizedActions": [
+        {
+          "Name": "GetFinding",
+          "Service": "access-analyzer"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "accessanalyzer",
+          "Method": "get_finding_v2",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetFindingsStatistics",
+      "AuthorizedActions": [
+        {
+          "Name": "GetFindingsStatistics",
+          "Service": "access-analyzer"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "accessanalyzer",
+          "Method": "get_findings_statistics",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetGeneratedPolicy",
+      "AuthorizedActions": [
+        {
+          "Name": "GetGeneratedPolicy",
+          "Service": "access-analyzer"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "accessanalyzer",
+          "Method": "get_generated_policy",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListAccessPreviewFindings",
+      "AuthorizedActions": [
+        {
+          "Name": "ListAccessPreviewFindings",
+          "Service": "access-analyzer"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "accessanalyzer",
+          "Method": "list_access_preview_findings",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListAccessPreviews",
+      "AuthorizedActions": [
+        {
+          "Name": "ListAccessPreviews",
+          "Service": "access-analyzer"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "accessanalyzer",
+          "Method": "list_access_previews",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListAnalyzedResources",
+      "AuthorizedActions": [
+        {
+          "Name": "ListAnalyzedResources",
+          "Service": "access-analyzer"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "accessanalyzer",
+          "Method": "list_analyzed_resources",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListAnalyzers",
+      "AuthorizedActions": [
+        {
+          "Name": "ListAnalyzers",
+          "Service": "access-analyzer"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "accessanalyzer",
+          "Method": "list_analyzers",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListArchiveRules",
+      "AuthorizedActions": [
+        {
+          "Name": "ListArchiveRules",
+          "Service": "access-analyzer"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "accessanalyzer",
+          "Method": "list_archive_rules",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListFindings",
+      "AuthorizedActions": [
+        {
+          "Name": "ListFindings",
+          "Service": "access-analyzer"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "accessanalyzer",
+          "Method": "list_findings",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListFindingsV2",
+      "AuthorizedActions": [
+        {
+          "Name": "ListFindings",
+          "Service": "access-analyzer"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "accessanalyzer",
+          "Method": "list_findings_v2",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListPolicyGenerations",
+      "AuthorizedActions": [
+        {
+          "Name": "ListPolicyGenerations",
+          "Service": "access-analyzer"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "accessanalyzer",
+          "Method": "list_policy_generations",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListTagsForResource",
+      "AuthorizedActions": [
+        {
+          "Name": "ListTagsForResource",
+          "Service": "access-analyzer"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "accessanalyzer",
+          "Method": "list_tags_for_resource",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "StartPolicyGeneration",
+      "AuthorizedActions": [
+        {
+          "Name": "PassRole",
+          "Context": {
+            "iam:PassedToService": [
+              "access-analyzer.amazonaws.com"
+            ]
+          },
+          "Service": "iam"
+        },
+        {
+          "Name": "StartPolicyGeneration",
+          "Service": "access-analyzer"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "accessanalyzer",
+          "Method": "start_policy_generation",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "StartResourceScan",
+      "AuthorizedActions": [
+        {
+          "Name": "StartResourceScan",
+          "Service": "access-analyzer"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "accessanalyzer",
+          "Method": "start_resource_scan",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "TagResource",
+      "AuthorizedActions": [
+        {
+          "Name": "TagResource",
+          "Service": "access-analyzer"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "accessanalyzer",
+          "Method": "tag_resource",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "UntagResource",
+      "AuthorizedActions": [
+        {
+          "Name": "UntagResource",
+          "Service": "access-analyzer"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "accessanalyzer",
+          "Method": "untag_resource",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "UpdateAnalyzer",
+      "AuthorizedActions": [
+        {
+          "Name": "UpdateAnalyzer",
+          "Service": "access-analyzer"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "accessanalyzer",
+          "Method": "update_analyzer",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "UpdateArchiveRule",
+      "AuthorizedActions": [
+        {
+          "Name": "UpdateArchiveRule",
+          "Service": "access-analyzer"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "accessanalyzer",
+          "Method": "update_archive_rule",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "UpdateFindings",
+      "AuthorizedActions": [
+        {
+          "Name": "UpdateFindings",
+          "Service": "access-analyzer"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "accessanalyzer",
+          "Method": "update_findings",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ValidatePolicy",
+      "AuthorizedActions": [
+        {
+          "Name": "ValidatePolicy",
+          "Service": "access-analyzer"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "accessanalyzer",
+          "Method": "validate_policy",
+          "Package": "Boto3"
+        }
+      ]
+    }
+  ],
+  "Resources": [
+    {
+      "Name": "Analyzer",
+      "ARNFormats": [
+        "arn:${Partition}:access-analyzer:${Region}:${Account}:analyzer/${AnalyzerName}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ]
+    },
+    {
+      "Name": "ArchiveRule",
+      "ARNFormats": [
+        "arn:${Partition}:access-analyzer:${Region}:${Account}:analyzer/${AnalyzerName}/archive-rule/${RuleName}"
+      ]
+    }
+  ],
+  "Version": "v1.4"
+}

@@ -165,7 +165,23 @@ def _execute_preflight() -> str:
     import boto3
 
     identity = boto3.client("sts").get_caller_identity()
-    return _json({"status": "ok", "account": identity.get("Account"), "arn": identity.get("Arn")})
+
+    # Pseudonymize account and ARN for MCP responses
+    account = identity.get("Account", "")
+    arn = identity.get("Arn", "")
+    try:
+        from kulshan.pseudonym.engine import PseudonymizationEngine
+        from kulshan.pseudonym.policy import PseudonymPolicy
+        from kulshan.pseudonym.context import create_engine_for_output
+        engine = create_engine_for_output(PseudonymPolicy.for_persistence())
+        if engine and engine.is_active:
+            from kulshan.pseudonym.types import IdentifierClass
+            account = engine.pseudonymize_value(account, IdentifierClass.ACCOUNT)
+            arn = engine.pseudonymize_text(arn)
+    except Exception:
+        pass  # Graceful degradation
+
+    return _json({"status": "ok", "account": account, "arn": arn})
 
 
 def _execute_report(packs: list[str], days: int, regions: list[str] | None) -> str:
@@ -305,6 +321,17 @@ def _compact_findings_by_pack(results: dict[str, Any]) -> dict[str, list[dict[st
     for pack, result in results.items():
         findings = result.get("findings", []) if isinstance(result, dict) else []
         output[pack] = [_compact_finding(finding) for finding in findings[:15]]
+
+    # Pseudonymize MCP output
+    try:
+        from kulshan.pseudonym.context import create_engine_for_output
+        from kulshan.pseudonym.policy import PseudonymPolicy
+        engine = create_engine_for_output(PseudonymPolicy.for_persistence())
+        if engine and engine.is_active:
+            output = engine.pseudonymize_payload(output)
+    except Exception:
+        pass  # Graceful degradation
+
     return output
 
 

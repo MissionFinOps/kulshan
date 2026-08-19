@@ -1,0 +1,4498 @@
+{
+  "Name": "backup",
+  "Actions": [
+    {
+      "Name": "AssociateBackupVaultMpaApprovalTeam",
+      "ActionConditionKeys": [
+        "backup:MpaApprovalTeamArn"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "backupVault"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "CancelLegalHold",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "legalHold"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "CopyFromBackupVault",
+      "ActionConditionKeys": [
+        "backup:CopyTargetOrgPaths",
+        "backup:CopyTargets"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "recoveryPoint"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "CopyIntoBackupVault",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "backupVault"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "CreateBackupAccessPoint",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "recoveryPoint"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "CreateBackupPlan",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "backupPlan"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "CreateBackupSelection",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "backupPlan"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "CreateBackupVault",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "backupVault"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "CreateFramework",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "framework"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "CreateLegalHold",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "legalHold"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "CreateLogicallyAirGappedBackupVault",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys",
+        "backup:MaxRetentionDays",
+        "backup:MinRetentionDays"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "backupVault"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "CreateReportPlan",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys",
+        "backup:FrameworkArns"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "reportPlan"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "CreateRestoreAccessBackupVault",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "backupVault"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "CreateRestoreTestingPlan",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "restoreTestingPlan"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "CreateRestoreTestingSelection",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "restoreTestingPlan"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "CreateTieringConfiguration",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "tieringConfiguration"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteBackupAccessPoint",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "backupAccessPoint"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "DeleteBackupPlan",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "backupPlan"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteBackupSelection",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "backupPlan"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteBackupVault",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "backupVault"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteBackupVaultAccessPolicy",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": true,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "backupVault"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteBackupVaultLockConfiguration",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "backupVault"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteBackupVaultNotifications",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "backupVault"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteBackupVaultSharingPolicy",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": true,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "backupVault"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "DeleteFramework",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "framework"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteRecoveryPoint",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "recoveryPoint"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteReportPlan",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "reportPlan"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteRestoreTestingPlan",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "restoreTestingPlan"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteRestoreTestingSelection",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "restoreTestingPlan"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DeleteTieringConfiguration",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "tieringConfiguration"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeBackupAccessPoint",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "backupAccessPoint"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "DescribeBackupJob",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeBackupVault",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "backupVault"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeCopyJob",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeFramework",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "framework"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeGlobalSettings",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeProtectedResource",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeRecoveryPoint",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "recoveryPoint"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeRegionSettings",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeReportJob",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeReportPlan",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "reportPlan"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeRestoreJob",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DescribeScanJob",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DisassociateBackupVaultMpaApprovalTeam",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "backupVault"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "DisassociateRecoveryPoint",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "recoveryPoint"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "DisassociateRecoveryPointFromParent",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "recoveryPoint"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ExportBackupPlanTemplate",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetBackupPlan",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "backupPlan"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetBackupPlanFromJSON",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetBackupPlanFromTemplate",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetBackupSelection",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "backupPlan"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetBackupVaultAccessPolicy",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "backupVault"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetBackupVaultNotifications",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "backupVault"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetBackupVaultSharingPolicy",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "backupVault"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "GetLegalHold",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "legalHold"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetPITRMalwareScanResults",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "recoveryPoint"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "GetRecoveryPointIndexDetails",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "recoveryPoint"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "GetRecoveryPointRestoreMetadata",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "recoveryPoint"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetRestoreJobMetadata",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetRestoreTestingInferredMetadata",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetRestoreTestingPlan",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "restoreTestingPlan"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetRestoreTestingSelection",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "restoreTestingPlan"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetSupportedResourceTypes",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "GetTieringConfiguration",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "tieringConfiguration"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListBackupAccessPoints",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListBackupAccessPointsByRecoveryPoint",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListBackupAccessPointsByResource",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListBackupJobSummaries",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListBackupJobs",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListBackupPlanTemplates",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListBackupPlanVersions",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "backupPlan"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListBackupPlans",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListBackupSelections",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "backupPlan"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListBackupVaults",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListCopyJobSummaries",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListCopyJobs",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListFrameworks",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListIndexedRecoveryPoints",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListIndexedRecoveryPointsForSearch",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": true,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "ListLegalHolds",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListProtectedResources",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListProtectedResourcesByBackupVault",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "backupVault"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "ListRecoveryPointsByBackupVault",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "backupVault"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListRecoveryPointsByLegalHold",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "legalHold"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListRecoveryPointsByResource",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListReportJobs",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListReportPlans",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListRestoreAccessBackupVaults",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "backupVault"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListRestoreJobSummaries",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListRestoreJobs",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListRestoreJobsByProtectedResource",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListRestoreTestingPlans",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListRestoreTestingSelections",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "restoreTestingPlan"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListScanJobSummaries",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListScanJobs",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "ListTags",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "Resources": [
+        {
+          "Name": "backupAccessPoint"
+        },
+        {
+          "Name": "backupPlan"
+        },
+        {
+          "Name": "backupVault"
+        },
+        {
+          "Name": "framework"
+        },
+        {
+          "Name": "legalHold"
+        },
+        {
+          "Name": "recoveryPoint"
+        },
+        {
+          "Name": "reportPlan"
+        },
+        {
+          "Name": "restoreTestingPlan"
+        },
+        {
+          "Name": "tieringConfiguration"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "ListTieringConfigurations",
+      "Annotations": {
+        "Properties": {
+          "IsList": true,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": false
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "PutBackupVaultAccessPolicy",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": true,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "backupVault"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "PutBackupVaultLockConfiguration",
+      "ActionConditionKeys": [
+        "backup:ChangeableForDays",
+        "backup:MaxRetentionDays",
+        "backup:MinRetentionDays"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "backupVault"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "PutBackupVaultNotifications",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "backupVault"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "PutBackupVaultSharingPolicy",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": true,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "backupVault"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "PutRestoreValidationResult",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "RevokeRestoreAccessBackupVault",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "backupVault"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "SearchRecoveryPoint",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": true,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "recoveryPoint"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "StartBackupJob",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "backupVault"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "StartCopyJob",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "recoveryPoint"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "StartReportJob",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "reportPlan"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "StartRestoreJob",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "recoveryPoint"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "StartScanJob",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "recoveryPoint"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "StopBackupJob",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "TagResource",
+      "ActionConditionKeys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": true,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "backupAccessPoint"
+        },
+        {
+          "Name": "backupPlan"
+        },
+        {
+          "Name": "backupVault"
+        },
+        {
+          "Name": "framework"
+        },
+        {
+          "Name": "legalHold"
+        },
+        {
+          "Name": "recoveryPoint"
+        },
+        {
+          "Name": "reportPlan"
+        },
+        {
+          "Name": "restoreTestingPlan"
+        },
+        {
+          "Name": "tieringConfiguration"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "UntagResource",
+      "ActionConditionKeys": [
+        "aws:TagKeys"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": true,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "backupAccessPoint"
+        },
+        {
+          "Name": "backupPlan"
+        },
+        {
+          "Name": "backupVault"
+        },
+        {
+          "Name": "framework"
+        },
+        {
+          "Name": "legalHold"
+        },
+        {
+          "Name": "recoveryPoint"
+        },
+        {
+          "Name": "reportPlan"
+        },
+        {
+          "Name": "restoreTestingPlan"
+        },
+        {
+          "Name": "tieringConfiguration"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "UpdateBackupPlan",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "backupPlan"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "UpdateFramework",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "framework"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "UpdateGlobalSettings",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "UpdateRecoveryPointIndexSettings",
+      "ActionConditionKeys": [
+        "backup:Index"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "recoveryPoint"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": false,
+        "IAM Action Last Accessed": false
+      }
+    },
+    {
+      "Name": "UpdateRecoveryPointLifecycle",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "recoveryPoint"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "UpdateRegionSettings",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "UpdateReportPlan",
+      "ActionConditionKeys": [
+        "backup:FrameworkArns"
+      ],
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "reportPlan"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "UpdateRestoreTestingPlan",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "restoreTestingPlan"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "UpdateRestoreTestingSelection",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "restoreTestingPlan"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    },
+    {
+      "Name": "UpdateTieringConfiguration",
+      "Annotations": {
+        "Properties": {
+          "IsList": false,
+          "IsPermissionManagement": false,
+          "IsTaggingOnly": false,
+          "IsWrite": true
+        }
+      },
+      "Resources": [
+        {
+          "Name": "tieringConfiguration"
+        }
+      ],
+      "SupportedBy": {
+        "IAM Access Analyzer Policy Generation": true,
+        "IAM Action Last Accessed": true
+      }
+    }
+  ],
+  "ConditionKeys": [
+    {
+      "Name": "aws:RequestTag/${TagKey}",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "aws:ResourceTag/${TagKey}",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "aws:TagKeys",
+      "Types": [
+        "ArrayOfString"
+      ]
+    },
+    {
+      "Name": "backup:ChangeableForDays",
+      "Types": [
+        "Numeric"
+      ]
+    },
+    {
+      "Name": "backup:CopyTargetOrgPaths",
+      "Types": [
+        "ArrayOfString"
+      ]
+    },
+    {
+      "Name": "backup:CopyTargets",
+      "Types": [
+        "ArrayOfARN"
+      ]
+    },
+    {
+      "Name": "backup:FrameworkArns",
+      "Types": [
+        "ArrayOfARN"
+      ]
+    },
+    {
+      "Name": "backup:Index",
+      "Types": [
+        "String"
+      ]
+    },
+    {
+      "Name": "backup:MaxRetentionDays",
+      "Types": [
+        "Numeric"
+      ]
+    },
+    {
+      "Name": "backup:MinRetentionDays",
+      "Types": [
+        "Numeric"
+      ]
+    },
+    {
+      "Name": "backup:MpaApprovalTeamArn",
+      "Types": [
+        "ARN"
+      ]
+    }
+  ],
+  "Operations": [
+    {
+      "Name": "AssociateBackupVaultMpaApprovalTeam",
+      "AuthorizedActions": [
+        {
+          "Name": "AssociateBackupVaultMpaApprovalTeam",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "associate_backup_vault_mpa_approval_team",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CancelLegalHold",
+      "AuthorizedActions": [
+        {
+          "Name": "CancelLegalHold",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "cancel_legal_hold",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreateBackupAccessPoint",
+      "AuthorizedActions": [
+        {
+          "Name": "CreateBackupAccessPoint",
+          "Service": "backup"
+        },
+        {
+          "Name": "TagResource",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "create_backup_access_point",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreateBackupPlan",
+      "AuthorizedActions": [
+        {
+          "Name": "CreateBackupPlan",
+          "Service": "backup"
+        },
+        {
+          "Name": "PassRole",
+          "Context": {
+            "iam:PassedToService": [
+              "malware-protection.guardduty.amazonaws.com"
+            ]
+          },
+          "Service": "iam"
+        },
+        {
+          "Name": "TagResource",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "create_backup_plan",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreateBackupSelection",
+      "AuthorizedActions": [
+        {
+          "Name": "CreateBackupSelection",
+          "Service": "backup"
+        },
+        {
+          "Name": "PassRole",
+          "Context": {
+            "iam:PassedToService": [
+              "backup.amazonaws.com"
+            ]
+          },
+          "Service": "iam"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "create_backup_selection",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreateBackupVault",
+      "AuthorizedActions": [
+        {
+          "Name": "CreateBackupVault",
+          "Service": "backup"
+        },
+        {
+          "Name": "TagResource",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "create_backup_vault",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreateFramework",
+      "AuthorizedActions": [
+        {
+          "Name": "CreateFramework",
+          "Service": "backup"
+        },
+        {
+          "Name": "TagResource",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "create_framework",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreateLegalHold",
+      "AuthorizedActions": [
+        {
+          "Name": "CreateLegalHold",
+          "Service": "backup"
+        },
+        {
+          "Name": "TagResource",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "create_legal_hold",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreateLogicallyAirGappedBackupVault",
+      "AuthorizedActions": [
+        {
+          "Name": "CreateLogicallyAirGappedBackupVault",
+          "Service": "backup"
+        },
+        {
+          "Name": "TagResource",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "create_logically_air_gapped_backup_vault",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreateReportPlan",
+      "AuthorizedActions": [
+        {
+          "Name": "CreateReportPlan",
+          "Service": "backup"
+        },
+        {
+          "Name": "TagResource",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "create_report_plan",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreateRestoreAccessBackupVault",
+      "AuthorizedActions": [
+        {
+          "Name": "CreateRestoreAccessBackupVault",
+          "Service": "backup"
+        },
+        {
+          "Name": "TagResource",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "create_restore_access_backup_vault",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreateRestoreTestingPlan",
+      "AuthorizedActions": [
+        {
+          "Name": "CreateRestoreTestingPlan",
+          "Service": "backup"
+        },
+        {
+          "Name": "TagResource",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "create_restore_testing_plan",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreateRestoreTestingSelection",
+      "AuthorizedActions": [
+        {
+          "Name": "CreateRestoreTestingSelection",
+          "Service": "backup"
+        },
+        {
+          "Name": "PassRole",
+          "Context": {
+            "iam:PassedToService": [
+              "restore-testing.backup.amazonaws.com"
+            ]
+          },
+          "Service": "iam"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "create_restore_testing_selection",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "CreateTieringConfiguration",
+      "AuthorizedActions": [
+        {
+          "Name": "CreateTieringConfiguration",
+          "Service": "backup"
+        },
+        {
+          "Name": "TagResource",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "create_tiering_configuration",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteBackupAccessPoint",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteBackupAccessPoint",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "delete_backup_access_point",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteBackupPlan",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteBackupPlan",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "delete_backup_plan",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteBackupSelection",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteBackupSelection",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "delete_backup_selection",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteBackupVault",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteBackupVault",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "delete_backup_vault",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteBackupVaultAccessPolicy",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteBackupVaultAccessPolicy",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "delete_backup_vault_access_policy",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteBackupVaultLockConfiguration",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteBackupVaultLockConfiguration",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "delete_backup_vault_lock_configuration",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteBackupVaultNotifications",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteBackupVaultNotifications",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "delete_backup_vault_notifications",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteFramework",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteFramework",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "delete_framework",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteRecoveryPoint",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteRecoveryPoint",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "delete_recovery_point",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteReportPlan",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteReportPlan",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "delete_report_plan",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteRestoreTestingPlan",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteRestoreTestingPlan",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "delete_restore_testing_plan",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteRestoreTestingSelection",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteRestoreTestingSelection",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "delete_restore_testing_selection",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DeleteTieringConfiguration",
+      "AuthorizedActions": [
+        {
+          "Name": "DeleteTieringConfiguration",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "delete_tiering_configuration",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeBackupAccessPoint",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeBackupAccessPoint",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "describe_backup_access_point",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeBackupJob",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeBackupJob",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "describe_backup_job",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeBackupVault",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeBackupVault",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "describe_backup_vault",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeCopyJob",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeCopyJob",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "describe_copy_job",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeFramework",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeFramework",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "describe_framework",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeGlobalSettings",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeGlobalSettings",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "describe_global_settings",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeProtectedResource",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeProtectedResource",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "describe_protected_resource",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeRecoveryPoint",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeRecoveryPoint",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "describe_recovery_point",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeRegionSettings",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeRegionSettings",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "describe_region_settings",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeReportJob",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeReportJob",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "describe_report_job",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeReportPlan",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeReportPlan",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "describe_report_plan",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeRestoreJob",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeRestoreJob",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "describe_restore_job",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DescribeScanJob",
+      "AuthorizedActions": [
+        {
+          "Name": "DescribeScanJob",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "describe_scan_job",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DisassociateBackupVaultMpaApprovalTeam",
+      "AuthorizedActions": [
+        {
+          "Name": "DisassociateBackupVaultMpaApprovalTeam",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "disassociate_backup_vault_mpa_approval_team",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DisassociateRecoveryPoint",
+      "AuthorizedActions": [
+        {
+          "Name": "DisassociateRecoveryPoint",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "disassociate_recovery_point",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "DisassociateRecoveryPointFromParent",
+      "AuthorizedActions": [
+        {
+          "Name": "DisassociateRecoveryPointFromParent",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "disassociate_recovery_point_from_parent",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ExportBackupPlanTemplate",
+      "AuthorizedActions": [
+        {
+          "Name": "ExportBackupPlanTemplate",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "export_backup_plan_template",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetBackupPlan",
+      "AuthorizedActions": [
+        {
+          "Name": "GetBackupPlan",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "get_backup_plan",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetBackupPlanFromJSON",
+      "AuthorizedActions": [
+        {
+          "Name": "GetBackupPlanFromJSON",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "get_backup_plan_from_json",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetBackupPlanFromTemplate",
+      "AuthorizedActions": [
+        {
+          "Name": "GetBackupPlanFromTemplate",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "get_backup_plan_from_template",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetBackupSelection",
+      "AuthorizedActions": [
+        {
+          "Name": "GetBackupSelection",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "get_backup_selection",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetBackupVaultAccessPolicy",
+      "AuthorizedActions": [
+        {
+          "Name": "GetBackupVaultAccessPolicy",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "get_backup_vault_access_policy",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetBackupVaultNotifications",
+      "AuthorizedActions": [
+        {
+          "Name": "GetBackupVaultNotifications",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "get_backup_vault_notifications",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetLegalHold",
+      "AuthorizedActions": [
+        {
+          "Name": "GetLegalHold",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "get_legal_hold",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetPITRMalwareScanResults",
+      "AuthorizedActions": [
+        {
+          "Name": "GetPITRMalwareScanResults",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "get_pitr_malware_scan_results",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetRecoveryPointIndexDetails",
+      "AuthorizedActions": [
+        {
+          "Name": "GetRecoveryPointIndexDetails",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "get_recovery_point_index_details",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetRecoveryPointRestoreMetadata",
+      "AuthorizedActions": [
+        {
+          "Name": "GetRecoveryPointRestoreMetadata",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "get_recovery_point_restore_metadata",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetRestoreJobMetadata",
+      "AuthorizedActions": [
+        {
+          "Name": "GetRestoreJobMetadata",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "get_restore_job_metadata",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetRestoreTestingInferredMetadata",
+      "AuthorizedActions": [
+        {
+          "Name": "GetRestoreTestingInferredMetadata",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "get_restore_testing_inferred_metadata",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetRestoreTestingPlan",
+      "AuthorizedActions": [
+        {
+          "Name": "GetRestoreTestingPlan",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "get_restore_testing_plan",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetRestoreTestingSelection",
+      "AuthorizedActions": [
+        {
+          "Name": "GetRestoreTestingSelection",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "get_restore_testing_selection",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetSupportedResourceTypes",
+      "AuthorizedActions": [
+        {
+          "Name": "GetSupportedResourceTypes",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "get_supported_resource_types",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "GetTieringConfiguration",
+      "AuthorizedActions": [
+        {
+          "Name": "GetTieringConfiguration",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "get_tiering_configuration",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListBackupAccessPoints",
+      "AuthorizedActions": [
+        {
+          "Name": "ListBackupAccessPoints",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "list_backup_access_points",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListBackupAccessPointsByRecoveryPoint",
+      "AuthorizedActions": [
+        {
+          "Name": "ListBackupAccessPointsByRecoveryPoint",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "list_backup_access_points_by_recovery_point",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListBackupAccessPointsByResource",
+      "AuthorizedActions": [
+        {
+          "Name": "ListBackupAccessPointsByResource",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "list_backup_access_points_by_resource",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListBackupJobSummaries",
+      "AuthorizedActions": [
+        {
+          "Name": "ListBackupJobSummaries",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "list_backup_job_summaries",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListBackupJobs",
+      "AuthorizedActions": [
+        {
+          "Name": "ListBackupJobs",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "list_backup_jobs",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListBackupPlanTemplates",
+      "AuthorizedActions": [
+        {
+          "Name": "ListBackupPlanTemplates",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "list_backup_plan_templates",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListBackupPlanVersions",
+      "AuthorizedActions": [
+        {
+          "Name": "ListBackupPlanVersions",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "list_backup_plan_versions",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListBackupPlans",
+      "AuthorizedActions": [
+        {
+          "Name": "ListBackupPlans",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "list_backup_plans",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListBackupSelections",
+      "AuthorizedActions": [
+        {
+          "Name": "ListBackupSelections",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "list_backup_selections",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListBackupVaults",
+      "AuthorizedActions": [
+        {
+          "Name": "ListBackupVaults",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "list_backup_vaults",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListCopyJobSummaries",
+      "AuthorizedActions": [
+        {
+          "Name": "ListCopyJobSummaries",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "list_copy_job_summaries",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListCopyJobs",
+      "AuthorizedActions": [
+        {
+          "Name": "ListCopyJobs",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "list_copy_jobs",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListFrameworks",
+      "AuthorizedActions": [
+        {
+          "Name": "ListFrameworks",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "list_frameworks",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListIndexedRecoveryPoints",
+      "AuthorizedActions": [
+        {
+          "Name": "ListIndexedRecoveryPoints",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "list_indexed_recovery_points",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListLegalHolds",
+      "AuthorizedActions": [
+        {
+          "Name": "ListLegalHolds",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "list_legal_holds",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListProtectedResources",
+      "AuthorizedActions": [
+        {
+          "Name": "ListProtectedResources",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "list_protected_resources",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListProtectedResourcesByBackupVault",
+      "AuthorizedActions": [
+        {
+          "Name": "ListProtectedResourcesByBackupVault",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "list_protected_resources_by_backup_vault",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListRecoveryPointsByBackupVault",
+      "AuthorizedActions": [
+        {
+          "Name": "ListRecoveryPointsByBackupVault",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "list_recovery_points_by_backup_vault",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListRecoveryPointsByLegalHold",
+      "AuthorizedActions": [
+        {
+          "Name": "ListRecoveryPointsByLegalHold",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "list_recovery_points_by_legal_hold",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListRecoveryPointsByResource",
+      "AuthorizedActions": [
+        {
+          "Name": "ListRecoveryPointsByResource",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "list_recovery_points_by_resource",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListReportJobs",
+      "AuthorizedActions": [
+        {
+          "Name": "ListReportJobs",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "list_report_jobs",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListReportPlans",
+      "AuthorizedActions": [
+        {
+          "Name": "ListReportPlans",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "list_report_plans",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListRestoreAccessBackupVaults",
+      "AuthorizedActions": [
+        {
+          "Name": "ListRestoreAccessBackupVaults",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "list_restore_access_backup_vaults",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListRestoreJobSummaries",
+      "AuthorizedActions": [
+        {
+          "Name": "ListRestoreJobSummaries",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "list_restore_job_summaries",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListRestoreJobs",
+      "AuthorizedActions": [
+        {
+          "Name": "ListRestoreJobs",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "list_restore_jobs",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListRestoreJobsByProtectedResource",
+      "AuthorizedActions": [
+        {
+          "Name": "ListRestoreJobsByProtectedResource",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "list_restore_jobs_by_protected_resource",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListRestoreTestingPlans",
+      "AuthorizedActions": [
+        {
+          "Name": "ListRestoreTestingPlans",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "list_restore_testing_plans",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListRestoreTestingSelections",
+      "AuthorizedActions": [
+        {
+          "Name": "ListRestoreTestingSelections",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "list_restore_testing_selections",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListScanJobSummaries",
+      "AuthorizedActions": [
+        {
+          "Name": "ListScanJobSummaries",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "list_scan_job_summaries",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListScanJobs",
+      "AuthorizedActions": [
+        {
+          "Name": "ListScanJobs",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "list_scan_jobs",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListTags",
+      "AuthorizedActions": [
+        {
+          "Name": "ListTags",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "list_tags",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "ListTieringConfigurations",
+      "AuthorizedActions": [
+        {
+          "Name": "ListTieringConfigurations",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "list_tiering_configurations",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "PutBackupVaultAccessPolicy",
+      "AuthorizedActions": [
+        {
+          "Name": "PutBackupVaultAccessPolicy",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "put_backup_vault_access_policy",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "PutBackupVaultLockConfiguration",
+      "AuthorizedActions": [
+        {
+          "Name": "PutBackupVaultLockConfiguration",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "put_backup_vault_lock_configuration",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "PutBackupVaultNotifications",
+      "AuthorizedActions": [
+        {
+          "Name": "PutBackupVaultNotifications",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "put_backup_vault_notifications",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "PutRestoreValidationResult",
+      "AuthorizedActions": [
+        {
+          "Name": "PutRestoreValidationResult",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "put_restore_validation_result",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "RevokeRestoreAccessBackupVault",
+      "AuthorizedActions": [
+        {
+          "Name": "RevokeRestoreAccessBackupVault",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "revoke_restore_access_backup_vault",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "StartBackupJob",
+      "AuthorizedActions": [
+        {
+          "Name": "PassRole",
+          "Context": {
+            "iam:PassedToService": [
+              "backup.amazonaws.com"
+            ]
+          },
+          "Service": "iam"
+        },
+        {
+          "Name": "StartBackupJob",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "start_backup_job",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "StartCopyJob",
+      "AuthorizedActions": [
+        {
+          "Name": "PassRole",
+          "Context": {
+            "iam:PassedToService": [
+              "backup.amazonaws.com"
+            ]
+          },
+          "Service": "iam"
+        },
+        {
+          "Name": "StartCopyJob",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "start_copy_job",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "StartReportJob",
+      "AuthorizedActions": [
+        {
+          "Name": "StartReportJob",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "start_report_job",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "StartRestoreJob",
+      "AuthorizedActions": [
+        {
+          "Name": "PassRole",
+          "Context": {
+            "iam:PassedToService": [
+              "backup.amazonaws.com"
+            ]
+          },
+          "Service": "iam"
+        },
+        {
+          "Name": "StartRestoreJob",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "start_restore_job",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "StartScanJob",
+      "AuthorizedActions": [
+        {
+          "Name": "PassRole",
+          "Context": {
+            "iam:PassedToService": [
+              "backup.amazonaws.com",
+              "malware-protection.guardduty.amazonaws.com"
+            ]
+          },
+          "Service": "iam"
+        },
+        {
+          "Name": "StartScanJob",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "start_scan_job",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "StopBackupJob",
+      "AuthorizedActions": [
+        {
+          "Name": "StopBackupJob",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "stop_backup_job",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "TagResource",
+      "AuthorizedActions": [
+        {
+          "Name": "TagResource",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "tag_resource",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "UntagResource",
+      "AuthorizedActions": [
+        {
+          "Name": "UntagResource",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "untag_resource",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "UpdateBackupPlan",
+      "AuthorizedActions": [
+        {
+          "Name": "PassRole",
+          "Context": {
+            "iam:PassedToService": [
+              "malware-protection.guardduty.amazonaws.com"
+            ]
+          },
+          "Service": "iam"
+        },
+        {
+          "Name": "UpdateBackupPlan",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "update_backup_plan",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "UpdateFramework",
+      "AuthorizedActions": [
+        {
+          "Name": "UpdateFramework",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "update_framework",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "UpdateGlobalSettings",
+      "AuthorizedActions": [
+        {
+          "Name": "UpdateGlobalSettings",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "update_global_settings",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "UpdateRecoveryPointIndexSettings",
+      "AuthorizedActions": [
+        {
+          "Name": "PassRole",
+          "Context": {
+            "iam:PassedToService": [
+              "backup.amazonaws.com"
+            ]
+          },
+          "Service": "iam"
+        },
+        {
+          "Name": "UpdateRecoveryPointIndexSettings",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "update_recovery_point_index_settings",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "UpdateRecoveryPointLifecycle",
+      "AuthorizedActions": [
+        {
+          "Name": "UpdateRecoveryPointLifecycle",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "update_recovery_point_lifecycle",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "UpdateRegionSettings",
+      "AuthorizedActions": [
+        {
+          "Name": "UpdateRegionSettings",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "update_region_settings",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "UpdateReportPlan",
+      "AuthorizedActions": [
+        {
+          "Name": "UpdateReportPlan",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "update_report_plan",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "UpdateRestoreTestingPlan",
+      "AuthorizedActions": [
+        {
+          "Name": "UpdateRestoreTestingPlan",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "update_restore_testing_plan",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "UpdateRestoreTestingSelection",
+      "AuthorizedActions": [
+        {
+          "Name": "PassRole",
+          "Context": {
+            "iam:PassedToService": [
+              "restore-testing.backup.amazonaws.com"
+            ]
+          },
+          "Service": "iam"
+        },
+        {
+          "Name": "UpdateRestoreTestingSelection",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "update_restore_testing_selection",
+          "Package": "Boto3"
+        }
+      ]
+    },
+    {
+      "Name": "UpdateTieringConfiguration",
+      "AuthorizedActions": [
+        {
+          "Name": "UpdateTieringConfiguration",
+          "Service": "backup"
+        }
+      ],
+      "SDK": [
+        {
+          "Name": "backup",
+          "Method": "update_tiering_configuration",
+          "Package": "Boto3"
+        }
+      ]
+    }
+  ],
+  "Resources": [
+    {
+      "Name": "backupAccessPoint",
+      "ARNFormats": [
+        "arn:${Partition}:backup:${Region}:${Account}:accesspoint/${AccessPointName}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ]
+    },
+    {
+      "Name": "backupPlan",
+      "ARNFormats": [
+        "arn:${Partition}:backup:${Region}:${Account}:backup-plan:${BackupPlanId}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ]
+    },
+    {
+      "Name": "backupVault",
+      "ARNFormats": [
+        "arn:${Partition}:backup:${Region}:${Account}:backup-vault:${BackupVaultName}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ]
+    },
+    {
+      "Name": "framework",
+      "ARNFormats": [
+        "arn:${Partition}:backup:${Region}:${Account}:framework:${FrameworkName}-${FrameworkId}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ]
+    },
+    {
+      "Name": "legalHold",
+      "ARNFormats": [
+        "arn:${Partition}:backup:${Region}:${Account}:legal-hold:${LegalHoldId}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ]
+    },
+    {
+      "Name": "recoveryPoint",
+      "ARNFormats": [
+        "arn:${Partition}:${Vendor}:${Region}:*:${ResourceType}:${RecoveryPointId}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ]
+    },
+    {
+      "Name": "reportPlan",
+      "ARNFormats": [
+        "arn:${Partition}:backup:${Region}:${Account}:report-plan:${ReportPlanName}-${ReportPlanId}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ]
+    },
+    {
+      "Name": "restoreTestingPlan",
+      "ARNFormats": [
+        "arn:${Partition}:backup:${Region}:${Account}:restore-testing-plan:${RestoreTestingPlanName}-${RestoreTestingPlanId}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ]
+    },
+    {
+      "Name": "tieringConfiguration",
+      "ARNFormats": [
+        "arn:${Partition}:backup:${Region}:${Account}:tiering-configuration:${TieringConfigurationName}-${TieringConfigurationId}"
+      ],
+      "ConditionKeys": [
+        "aws:ResourceTag/${TagKey}"
+      ]
+    }
+  ],
+  "Version": "v1.4"
+}

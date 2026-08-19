@@ -198,12 +198,22 @@ class HistoryStore:
 
         full_json = None
         if store_full_result:
-            full_json = json.dumps({
+            full_payload = {
                 "tools": results,
                 "findings": findings,
                 "overall_score": overall_score,
                 "overall_grade": overall_grade,
-            }, default=str)
+            }
+            # Pseudonymize full_result_json before storage (persistence policy)
+            try:
+                from kulshan.pseudonym.context import create_engine_for_output
+                from kulshan.pseudonym.policy import PseudonymPolicy
+                engine = create_engine_for_output(PseudonymPolicy.for_persistence())
+                if engine and engine.is_active:
+                    full_payload = engine.pseudonymize_payload(full_payload)
+            except Exception:
+                pass  # Store raw if pseudonymization unavailable
+            full_json = json.dumps(full_payload, default=str)
 
         conn.execute(
             """INSERT INTO scans (id, timestamp, account_id, regions, duration_seconds,
