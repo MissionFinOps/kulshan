@@ -8,7 +8,7 @@ Kulshan is read-only by construction. This document covers the security model, I
 
 There is no write mode to enable, no cleanup command to accidentally run, no configuration that could cause modifications.
 
-- 159 read-only actions (Get, List, Describe). Zero write actions.
+- 160 unique IAM actions, all classified non-write in the AWS Service Authorization Reference snapshot dated 2026-08-19. Three use nonstandard names: `cloudformation:DetectStackDrift`, `iam:GenerateCredentialReport`, and `iam:GenerateServiceLastAccessedDetails`.
 - Every action verified against the [AWS Service Authorization Reference](https://docs.aws.amazon.com/service-authorization/latest/reference/)
 - No code path in Kulshan calls a write API
 - No telemetry or crash analytics. Optional PyPI update checks occur only after explicit consent; Yes or No is remembered silently for nine hours and the default is No.
@@ -22,7 +22,7 @@ The complete policy: [`iam/kulshan-readonly.json`](../iam/kulshan-readonly.json)
 
 | Property | Value |
 |----------|-------|
-| Total actions | 159 |
+| Total actions | 160 |
 | Write actions | 0 |
 | Services covered | 32 |
 | Resource scope | `*` |

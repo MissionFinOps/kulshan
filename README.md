@@ -27,7 +27,7 @@ Reads your Cost Explorer data and your own CUR/Data Export Parquet files in plac
 
 ## What Kulshan does not do
 
-- Does not write to AWS. The IAM policy contains only Get, List, and Describe actions.
+- Does not write to AWS. The published policy contains 160 unique IAM actions, all classified non-write in the AWS Service Authorization Reference snapshot dated 2026-08-19.
 - Does not phone home. No telemetry or analytics. An optional PyPI update request is made only after you explicitly approve it.
 - Does not require infrastructure. No databases, no containers, no SaaS.
 - Does not hold credentials. Uses the same credential chain as the AWS CLI.
@@ -82,7 +82,7 @@ kulshan report --packs all --regions us-east-1    # full diagnostic
 
 > Read-only by construction, not read-only by default. There is no cleanup mode to leave off, no write path to enable. The published IAM policy contains zero actions that create, modify, or delete AWS resources.
 
-- 159 read-only actions, zero write actions. [Read every line.](kulshan/iam/kulshan-readonly.json)
+- 160 unique IAM actions, all classified non-write in the vendored AWS Service Authorization Reference snapshot dated 2026-08-19. [Read every line.](kulshan/iam/kulshan-readonly.json)
 - Reports stay on your machine
 - No telemetry or analytics; optional PyPI checks require consent; either answer is remembered locally for nine hours
 - Open source: Apache 2.0. IAM policy additionally CC BY 4.0.

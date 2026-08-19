@@ -55,7 +55,7 @@ Reads Cost Explorer data and your own CUR/Data Export Parquet files in place. No
 
 Read-only by construction, not by default. There is no cleanup mode, no write path, and no telemetry. Optional PyPI update checks require explicit consent, with either decision remembered for nine hours.
 
-- 159 read-only IAM actions, zero write actions. [Verify the policy.](https://github.com/MissionFinOps/kulshan/blob/master/kulshan/iam/kulshan-readonly.json)
+- 160 unique IAM actions, all classified non-write in the vendored AWS Service Authorization Reference snapshot dated 2026-08-19. [Verify the policy.](https://github.com/MissionFinOps/kulshan/blob/master/kulshan/iam/kulshan-readonly.json)
 - Reports stay on your machine.
 - Per-pack least-privilege policies at [`iam/per-check/`](https://github.com/MissionFinOps/kulshan/tree/master/kulshan/iam/per-check).
 - Open source: Apache 2.0. IAM policy additionally CC BY 4.0.

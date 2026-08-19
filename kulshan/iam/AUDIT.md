@@ -4,7 +4,7 @@ Last updated: Commit 3 — Align published IAM policy with implemented AWS calls
 
 ## Summary
 
-- **Baseline policy actions:** 159 (read-only Get, List, Describe)
+- **Baseline policy actions:** 160 unique actions, all classified non-write in the AWS Service Authorization Reference snapshot dated 2026-08-19
 - **Services:** 32
 - **Write actions:** 0
 - **New actions added this commit:** 12

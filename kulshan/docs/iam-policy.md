@@ -7,7 +7,15 @@
 | `kulshan/iam/kulshan-readonly.json` | Composed union of all pack policies (source of truth) |
 | `kulshan/iam/per-check/<key>.json` | Per-pack policies (10 files, one per pack) |
 
-The composed policy is the exact union of all per-check policies: 159 non-mutating audit actions across 32 AWS services. Actions are primarily Get, List, and Describe calls. `cloudformation:DetectStackDrift` starts a drift assessment but does not change stack resources. The published IAM policy contains zero actions that create, modify, or delete AWS resources.
+The composed policy is the exact union of all per-check policies: 160 unique IAM actions across 32 AWS services. It grants no permission to create, modify, or delete customer resources. Every action is classified non-write in the AWS Service Authorization Reference snapshot dated 2026-08-19.
+
+Three actions do not use Get, List, or Describe naming:
+
+- `cloudformation:DetectStackDrift`
+- `iam:GenerateCredentialReport`
+- `iam:GenerateServiceLastAccessedDetails`
+
+All three are classified non-write by AWS in that snapshot.
 
 ## Website
 

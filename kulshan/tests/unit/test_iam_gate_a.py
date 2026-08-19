@@ -20,6 +20,7 @@ POLICY_PATH = IAM_DIR / "kulshan-readonly.json"
 SNAPSHOT_DIR = IAM_DIR / "aws-service-reference"
 SERVICES_DIR = SNAPSHOT_DIR / "services"
 METADATA_PATH = SNAPSHOT_DIR / "snapshot-metadata.json"
+REGISTRY_PATH = IAM_DIR / "registry.json"
 
 
 def _load_policy_actions() -> list[str]:
@@ -55,6 +56,22 @@ def _load_service_actions(prefix: str) -> set[str] | None:
             if name:
                 actions.add(name)
     return actions if actions else None
+
+
+def _load_action_annotations(action: str) -> dict[str, bool] | None:
+    """Return AWS authorization annotations for an IAM action, if vendored."""
+    prefix, name = action.split(":", 1)
+    ref_path = SERVICES_DIR / f"{prefix}.json"
+    if not ref_path.exists():
+        return None
+    try:
+        data = json.loads(ref_path.read_text(encoding="utf-8"))
+    except (json.JSONDecodeError, OSError):
+        return None
+    entry = next((item for item in data.get("Actions", []) if item.get("Name") == name), None)
+    if entry is None:
+        return None
+    return entry.get("Annotations", {}).get("Properties", {})
 
 
 def _validate_all_actions() -> tuple[list[str], list[str], list[str]]:
@@ -151,3 +168,43 @@ class TestIamGateA:
         actions = _load_policy_actions()
         wildcards = [a for a in actions if "*" in a]
         assert not wildcards, f"Wildcard actions found: {wildcards}"
+
+    @pytest.mark.parametrize("action", [
+        "cloudformation:DetectStackDrift",
+        "iam:GenerateCredentialReport",
+        "iam:GenerateServiceLastAccessedDetails",
+    ])
+    def test_exceptional_actions_are_non_write_in_snapshot(self, action):
+        annotations = _load_action_annotations(action)
+        assert annotations == {
+            "IsList": False,
+            "IsPermissionManagement": False,
+            "IsTaggingOnly": False,
+            "IsWrite": False,
+        }
+
+    def test_registry_access_level_agrees_with_snapshot(self):
+        """Registry access levels must agree wherever reference data exists."""
+        registry = json.loads(REGISTRY_PATH.read_text(encoding="utf-8"))
+        disagreements = []
+        for entry in registry["actions"]:
+            annotations = _load_action_annotations(entry["iam_action"])
+            if annotations is None:
+                continue
+            if annotations.get("IsPermissionManagement"):
+                expected = "Permissions management"
+            elif annotations.get("IsTaggingOnly"):
+                expected = "Tagging"
+            elif annotations.get("IsWrite"):
+                expected = "Write"
+            elif annotations.get("IsList"):
+                expected = "List"
+            else:
+                expected = "Read"
+            # Full access-level agreement is enforced because registry metadata is used in
+            # reviewer-facing trust claims. Read/List drift does not change the granted IAM
+            # permission set, but stale metadata can make public claims inconsistent with
+            # the vendored AWS reference.
+            if entry.get("aws_access_level") != expected:
+                disagreements.append((entry["iam_action"], entry.get("aws_access_level"), expected))
+        assert not disagreements, f"Registry/snapshot classifications disagree: {disagreements}"

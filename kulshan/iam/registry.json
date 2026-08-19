@@ -28,7 +28,7 @@
     {
       "iam_action": "access-analyzer:ListFindings",
       "boto3_method": "accessanalyzer.list_findings",
-      "aws_access_level": "List",
+      "aws_access_level": "Read",
       "status": "required",
       "capability": "security",
       "baseline_eligible": true
@@ -36,7 +36,7 @@
     {
       "iam_action": "acm:DescribeCertificate",
       "boto3_method": "acm.describe_certificate",
-      "aws_access_level": "List",
+      "aws_access_level": "Read",
       "status": "required",
       "capability": "security",
       "baseline_eligible": true
@@ -60,7 +60,7 @@
     {
       "iam_action": "backup:DescribeRecoveryPoint",
       "boto3_method": "backup.describe_recovery_point",
-      "aws_access_level": "List",
+      "aws_access_level": "Read",
       "status": "required",
       "capability": "dr",
       "baseline_eligible": true
@@ -268,7 +268,7 @@
     {
       "iam_action": "cloudformation:DescribeStackDriftDetectionStatus",
       "boto3_method": "cloudformation.describe_stack_drift_detection_status",
-      "aws_access_level": "List",
+      "aws_access_level": "Read",
       "status": "required",
       "capability": "drift",
       "baseline_eligible": true
@@ -276,7 +276,7 @@
     {
       "iam_action": "cloudformation:DescribeStackResourceDrifts",
       "boto3_method": "cloudformation.describe_stack_resource_drifts",
-      "aws_access_level": "List",
+      "aws_access_level": "Read",
       "status": "required",
       "capability": "drift",
       "baseline_eligible": true
@@ -284,7 +284,7 @@
     {
       "iam_action": "cloudformation:DetectStackDrift",
       "boto3_method": "cloudformation.detect_stack_drift",
-      "aws_access_level": "Write",
+      "aws_access_level": "Read",
       "status": "required",
       "capability": "drift",
       "baseline_eligible": true
@@ -308,7 +308,7 @@
     {
       "iam_action": "cloudtrail:DescribeTrails",
       "boto3_method": "cloudtrail.describe_trails",
-      "aws_access_level": "List",
+      "aws_access_level": "Read",
       "status": "required",
       "capability": "security",
       "baseline_eligible": true
@@ -348,7 +348,7 @@
     {
       "iam_action": "cloudwatch:DescribeAlarms",
       "boto3_method": "cloudwatch.describe_alarms",
-      "aws_access_level": "List",
+      "aws_access_level": "Read",
       "status": "required",
       "capability": "pulse",
       "baseline_eligible": true
@@ -380,7 +380,7 @@
     {
       "iam_action": "config:DescribeConfigurationRecorderStatus",
       "boto3_method": "config.describe_configuration_recorder_status",
-      "aws_access_level": "List",
+      "aws_access_level": "Read",
       "status": "required",
       "capability": "security",
       "baseline_eligible": true
@@ -388,7 +388,7 @@
     {
       "iam_action": "config:DescribeConfigurationRecorders",
       "boto3_method": "config.describe_configuration_recorders",
-      "aws_access_level": "List",
+      "aws_access_level": "Read",
       "status": "required",
       "capability": "security",
       "baseline_eligible": true
@@ -404,7 +404,7 @@
     {
       "iam_action": "dynamodb:DescribeContinuousBackups",
       "boto3_method": "dynamodb.describe_continuous_backups",
-      "aws_access_level": "List",
+      "aws_access_level": "Read",
       "status": "required",
       "capability": "dr",
       "baseline_eligible": true
@@ -412,7 +412,7 @@
     {
       "iam_action": "dynamodb:DescribeTable",
       "boto3_method": "dynamodb.describe_table",
-      "aws_access_level": "List",
+      "aws_access_level": "Read",
       "status": "required",
       "capability": "dr",
       "baseline_eligible": true
@@ -428,7 +428,7 @@
     {
       "iam_action": "dynamodb:ListTagsOfResource",
       "boto3_method": "dynamodb.list_tags_of_resource",
-      "aws_access_level": "List",
+      "aws_access_level": "Read",
       "status": "required",
       "capability": "dr",
       "baseline_eligible": true
@@ -612,7 +612,7 @@
     {
       "iam_action": "ecr:DescribeRepositories",
       "boto3_method": "ecr.describe_repositories",
-      "aws_access_level": "List",
+      "aws_access_level": "Read",
       "status": "required",
       "capability": "sweep",
       "baseline_eligible": true
@@ -628,7 +628,7 @@
     {
       "iam_action": "ecs:DescribeClusters",
       "boto3_method": "ecs.describe_clusters",
-      "aws_access_level": "List",
+      "aws_access_level": "Read",
       "status": "required",
       "capability": "sweep",
       "baseline_eligible": true
@@ -636,7 +636,7 @@
     {
       "iam_action": "ecs:DescribeServices",
       "boto3_method": "ecs.describe_services",
-      "aws_access_level": "List",
+      "aws_access_level": "Read",
       "status": "required",
       "capability": "sweep",
       "baseline_eligible": true
@@ -660,7 +660,7 @@
     {
       "iam_action": "eks:DescribeCluster",
       "boto3_method": "eks.describe_cluster",
-      "aws_access_level": "List",
+      "aws_access_level": "Read",
       "status": "required",
       "capability": "security",
       "baseline_eligible": true
@@ -700,7 +700,7 @@
     {
       "iam_action": "elasticloadbalancing:DescribeTags",
       "boto3_method": "elbv2.describe_tags",
-      "aws_access_level": "List",
+      "aws_access_level": "Read",
       "status": "required",
       "capability": "sweep",
       "baseline_eligible": true
@@ -708,7 +708,7 @@
     {
       "iam_action": "elasticloadbalancing:DescribeTargetGroups",
       "boto3_method": "elbv2.describe_target_groups",
-      "aws_access_level": "List",
+      "aws_access_level": "Read",
       "status": "required",
       "capability": "sweep",
       "baseline_eligible": true
@@ -716,7 +716,7 @@
     {
       "iam_action": "elasticloadbalancing:DescribeTargetHealth",
       "boto3_method": "elbv2.describe_target_health",
-      "aws_access_level": "List",
+      "aws_access_level": "Read",
       "status": "required",
       "capability": "sweep",
       "baseline_eligible": true
@@ -788,7 +788,7 @@
     {
       "iam_action": "iam:GetAccountSummary",
       "boto3_method": "iam.get_account_summary",
-      "aws_access_level": "Read",
+      "aws_access_level": "List",
       "status": "required",
       "capability": "security",
       "baseline_eligible": true
@@ -940,7 +940,7 @@
     {
       "iam_action": "kms:DescribeKey",
       "boto3_method": "kms.describe_key",
-      "aws_access_level": "List",
+      "aws_access_level": "Read",
       "status": "required",
       "capability": "security",
       "baseline_eligible": true
@@ -1020,7 +1020,7 @@
     {
       "iam_action": "lambda:ListTags",
       "boto3_method": "lambda.list_tags",
-      "aws_access_level": "List",
+      "aws_access_level": "Read",
       "status": "required",
       "capability": "security",
       "baseline_eligible": true
@@ -1044,7 +1044,7 @@
     {
       "iam_action": "organizations:DescribeOrganization",
       "boto3_method": "organizations.describe_organization",
-      "aws_access_level": "List",
+      "aws_access_level": "Read",
       "status": "required",
       "capability": "core",
       "baseline_eligible": true
@@ -1108,7 +1108,7 @@
     {
       "iam_action": "rds:ListTagsForResource",
       "boto3_method": "rds.list_tags_for_resource",
-      "aws_access_level": "List",
+      "aws_access_level": "Read",
       "status": "required",
       "capability": "security",
       "baseline_eligible": true
@@ -1116,7 +1116,7 @@
     {
       "iam_action": "route53:ListHealthChecks",
       "boto3_method": "route53.list_health_checks",
-      "aws_access_level": "List",
+      "aws_access_level": "Read",
       "status": "required",
       "capability": "dr",
       "baseline_eligible": true
@@ -1276,7 +1276,7 @@
     {
       "iam_action": "servicequotas:ListRequestedServiceQuotaChangeHistory",
       "boto3_method": "servicequotas.list_requested_service_quota_change_history",
-      "aws_access_level": "List",
+      "aws_access_level": "Read",
       "status": "required",
       "capability": "limit",
       "baseline_eligible": true
@@ -1284,7 +1284,7 @@
     {
       "iam_action": "servicequotas:ListServiceQuotas",
       "boto3_method": "servicequotas.list_service_quotas",
-      "aws_access_level": "List",
+      "aws_access_level": "Read",
       "status": "required",
       "capability": "limit",
       "baseline_eligible": true
@@ -1292,7 +1292,7 @@
     {
       "iam_action": "servicequotas:ListServices",
       "boto3_method": "servicequotas.list_services",
-      "aws_access_level": "List",
+      "aws_access_level": "Read",
       "status": "required",
       "capability": "limit",
       "baseline_eligible": true

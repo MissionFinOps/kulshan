@@ -20,7 +20,13 @@ PER_CHECK_DIR = IAM_DIR / "per-check"
 REGISTRY_PATH = IAM_DIR / "registry.json"
 HASH_PATH = IAM_DIR / "policy-hash.txt"
 
-WRITE_VERBS = ("Put", "Delete", "Create", "Modify", "Terminate", "Detach", "Attach", "Update")
+WRITE_VERBS = ("Create", "Put", "Update", "Delete", "Modify", "Write", "Terminate", "Detach", "Attach")
+EXPECTED_POLICY_HASH = "6533e48168c2a4ce8e96f383f42534a9f05575ad459f1e5b9f86dcbac632678f"
+EXPECTED_NONSTANDARD_ACTIONS = {
+    "cloudformation:DetectStackDrift",
+    "iam:GenerateCredentialReport",
+    "iam:GenerateServiceLastAccessedDetails",
+}
 
 
 def _actions(policy: dict) -> set[str]:
@@ -109,18 +115,13 @@ def test_no_write_actions_anywhere(policy_file: Path):
 
 
 def test_no_write_access_level_in_baseline():
-    """No action with baseline_eligible: true should have aws_access_level: Write,
-    except actions explicitly documented as non-mutating despite Write classification."""
+    """No baseline-eligible action may have registry access level Write."""
     registry = _load_registry()
-    # Actions that AWS classifies as Write but do not modify resources.
-    # cloudformation:DetectStackDrift starts a drift assessment but changes nothing.
-    WRITE_LEVEL_ALLOWLIST = {"cloudformation:DetectStackDrift"}
     violations = [
         entry["iam_action"]
         for entry in registry["actions"]
         if entry.get("baseline_eligible")
         and entry.get("aws_access_level") == "Write"
-        and entry["iam_action"] not in WRITE_LEVEL_ALLOWLIST
     ]
     assert not violations, (
         f"Baseline-eligible actions must not have Write access level: {violations}"
@@ -159,6 +160,7 @@ def test_policy_hash_matches_recorded():
     content = COMPOSED_PATH.read_text(encoding="utf-8").replace("\r\n", "\n").encode("utf-8")
     actual_hash = hashlib.sha256(content).hexdigest()
     expected_hash = HASH_PATH.read_text(encoding="utf-8").strip()
+    assert expected_hash == EXPECTED_POLICY_HASH
     assert actual_hash == expected_hash, (
         f"Policy hash mismatch.\n  Expected: {expected_hash}\n  Actual:   {actual_hash}\n"
         "Regenerate with: python kulshan/iam/compose.py && "
@@ -166,3 +168,14 @@ def test_policy_hash_matches_recorded():
         "print(hashlib.sha256(Path('kulshan/iam/kulshan-readonly.json').read_bytes()).hexdigest())\" "
         "> kulshan/iam/policy-hash.txt"
     )
+
+
+def test_composed_policy_truth_facts():
+    actions = _actions(json.loads(COMPOSED_PATH.read_text(encoding="utf-8")))
+    assert len(actions) == 160
+    assert not {action for action in actions if _is_write_action(action)}
+    nonstandard = {
+        action for action in actions
+        if not action.split(":", 1)[1].startswith(("Get", "List", "Describe"))
+    }
+    assert nonstandard == EXPECTED_NONSTANDARD_ACTIONS
