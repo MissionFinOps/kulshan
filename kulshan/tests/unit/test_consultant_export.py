@@ -1952,3 +1952,276 @@ class TestCliSourceSelection:
             ])
         assert result.exit_code != 0
         assert "No source specified" in (result.output or "")
+
+
+class TestConsultantExportTrustGate:
+    @pytest.fixture
+    def cur_source(self, tmp_path):
+        import duckdb
+
+        source = tmp_path / "trust-cur"
+        source.mkdir()
+        con = duckdb.connect(":memory:")
+        con.execute("""
+            CREATE TABLE t AS SELECT
+                DATE '2026-07-15' AS line_item_usage_start_date,
+                '111222333444' AS line_item_usage_account_id,
+                'AmazonEC2' AS line_item_product_code,
+                'BoxUsage' AS line_item_usage_type,
+                42.50 AS line_item_unblended_cost,
+                'us-east-1' AS product_region
+        """)
+        con.execute(f"COPY t TO '{(source / 'data.parquet').as_posix()}' (FORMAT PARQUET)")
+        con.close()
+        return source
+
+    def _invoke(self, cur_source, tmp_path, *extra):
+        from unittest.mock import patch
+
+        from click.testing import CliRunner
+
+        from kulshan.export.cli import export
+
+        output = tmp_path / "evidence.zip"
+        with patch(
+            "kulshan.pseudonym.context.resolve_workspace_secret_path",
+            return_value=tmp_path / "workspace",
+        ):
+            result = CliRunner().invoke(export, [
+                "consultant", str(cur_source),
+                "--from", "2026-07-01", "--to", "2026-08-01",
+                *extra, "-o", str(output),
+            ])
+        return result, output
+
+    @pytest.mark.parametrize(
+        "arguments",
+        [
+            ("--account", SYNTHETIC_ACCOUNT),
+            ("--exclude-account", "999888777666"),
+        ],
+    )
+    def test_metadata_contains_aliases_not_source_accounts(
+        self, cur_source, tmp_path, arguments
+    ):
+        import re
+
+        source_account = arguments[1]
+        result, output = self._invoke(cur_source, tmp_path, *arguments)
+        assert result.exit_code == 0, result.output
+        with zipfile.ZipFile(output) as package:
+            for name in ("manifest.json", "privacy-report.json", "README.md"):
+                text = package.read(name).decode("utf-8")
+                assert source_account not in text
+                assert "arn:" not in text.lower()
+            manifest = json.loads(package.read("manifest.json"))
+        account_values = (
+            manifest["scope"]["include_accounts"]
+            + manifest["scope"]["exclude_accounts"]
+        )
+        assert account_values
+        assert all(re.fullmatch(r"acct_[0-9a-f]{16}", value) for value in account_values)
+
+    def test_valid_alias_with_twelve_decimal_digits_is_preserved(
+        self, cur_source, tmp_path
+    ):
+        import re
+
+        from kulshan.pseudonym.engine import PseudonymizationEngine
+        from kulshan.pseudonym.policy import PseudonymPolicy
+        from kulshan.pseudonym.secret import SECRET_FILENAME
+        from kulshan.pseudonym.types import IdentifierClass
+
+        workspace = tmp_path / "workspace"
+        workspace.mkdir()
+        secret = bytes(range(32))
+        (workspace / SECRET_FILENAME).write_bytes(secret)
+        engine = PseudonymizationEngine(
+            secret,
+            PseudonymPolicy(mode="consultant", tty_bypass=False, show_identifiers=False),
+        )
+        source_account = None
+        expected_alias = None
+        for suffix in range(10_000):
+            candidate = f"{100_000_000_000 + suffix:012d}"
+            alias = engine.pseudonymize_value(candidate, IdentifierClass.ACCOUNT)
+            if re.search(r"(?<=[0-9a-f])\d{12}", alias.removeprefix("acct_")):
+                source_account = candidate
+                expected_alias = alias
+                break
+        assert source_account is not None
+        assert expected_alias is not None
+        assert re.search(r"\d{12}", expected_alias)
+
+        result, output = self._invoke(
+            cur_source, tmp_path, "--exclude-account", source_account
+        )
+        assert result.exit_code == 0, result.output
+        with zipfile.ZipFile(output) as package:
+            manifest = json.loads(package.read("manifest.json"))
+        assert manifest["scope"]["exclude_accounts"] == [expected_alias]
+
+    def test_positive_package_contents_and_schema(self, cur_source, tmp_path):
+        import duckdb
+
+        result, output = self._invoke(cur_source, tmp_path)
+        assert result.exit_code == 0, result.output
+        with zipfile.ZipFile(output) as package:
+            assert set(package.namelist()) == {
+                "README.md", "cur/billing.parquet", "manifest.json",
+                "privacy-report.json",
+            }
+            manifest = json.loads(package.read("manifest.json"))
+            privacy = json.loads(package.read("privacy-report.json"))
+            assert manifest["export_type"] == "consultant-evidence"
+            assert manifest["cur"]["row_count"] == 1
+            assert [gate["gate"] for gate in privacy["gates"]] == [
+                "schema", "integrity", "residual",
+            ]
+            assert all(gate["passed"] for gate in privacy["gates"])
+            assert all("details" in gate for gate in privacy["gates"])
+            extracted = tmp_path / "billing.parquet"
+            extracted.write_bytes(package.read("cur/billing.parquet"))
+        con = duckdb.connect(":memory:")
+        columns = con.execute(
+            f"DESCRIBE SELECT * FROM read_parquet('{extracted.as_posix()}')"
+        ).fetchall()
+        con.close()
+        assert {row[0] for row in columns} >= {
+            "line_item_usage_start_date", "line_item_usage_account_id",
+            "line_item_unblended_cost",
+        }
+
+    @pytest.mark.parametrize(
+        "mutation",
+        ["account", "arn", "corrupt", "manifest", "row_count"],
+    )
+    def test_planted_or_invalid_artifact_fails_without_output(
+        self, cur_source, tmp_path, mutation
+    ):
+        from unittest.mock import patch
+
+        import duckdb
+
+        from kulshan.export.package import stage_package as real_stage
+
+        def damaged_stage(*args, **kwargs):
+            staged = real_stage(*args, **kwargs)
+            parquet = staged / "cur" / "billing.parquet"
+            if mutation in {"account", "arn"}:
+                value = (
+                    "999888777666" if mutation == "account"
+                    else "arn:aws:ec2:us-east-1:999888777666:instance/i-1234"
+                )
+                con = duckdb.connect(":memory:")
+                replacement = staged / "cur" / "replacement.parquet"
+                con.execute(
+                    f"COPY (SELECT * REPLACE ('{value}' AS product_region) "
+                    f"FROM read_parquet('{parquet.as_posix()}')) TO "
+                    f"'{replacement.as_posix()}' (FORMAT PARQUET)"
+                )
+                con.close()
+                replacement.replace(parquet)
+            elif mutation == "corrupt":
+                parquet.write_bytes(b"PAR1 truncated")
+            else:
+                manifest_path = staged / "manifest.json"
+                manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+                if mutation == "manifest":
+                    manifest["scope"]["include_accounts"] = ["999888777666"]
+                else:
+                    manifest["cur"]["row_count"] = 99
+                manifest_path.write_text(json.dumps(manifest), encoding="utf-8")
+            return staged
+
+        with patch("kulshan.export.package.stage_package", side_effect=damaged_stage):
+            result, output = self._invoke(cur_source, tmp_path)
+        assert result.exit_code != 0
+        assert not output.exists()
+
+    def test_unreadable_artifact_fails_without_output(self, cur_source, tmp_path):
+        from unittest.mock import patch
+
+        with patch(
+            "kulshan.export.cli._iter_output_text",
+            side_effect=PermissionError("fixture denies package read"),
+        ):
+            result, output = self._invoke(cur_source, tmp_path)
+        assert result.exit_code != 0
+        assert "GATE 3 FAILED" in result.output
+        assert not output.exists()
+
+    def test_service_filter_with_ce_fails_fast(self, cur_source, tmp_path):
+        result, output = self._invoke(
+            cur_source, tmp_path, "--ce", "--service", "AmazonEC2"
+        )
+        assert result.exit_code != 0
+        assert "cannot be resolved unambiguously" in result.output
+        assert "CUR" in result.output
+        assert "Cost Explorer" in result.output
+        assert not output.exists()
+
+    def test_identifier_after_previous_row_cap_is_scanned(self, tmp_path):
+        import duckdb
+
+        from kulshan.export.cli import _iter_output_text
+        from kulshan.export.gates import gate_residual
+
+        package = tmp_path / "package"
+        package.mkdir()
+        parquet = package / "large.parquet"
+        con = duckdb.connect(":memory:")
+        con.execute(
+            "CREATE TABLE values_to_scan AS SELECT CASE WHEN i = 100000 "
+            "THEN '999888777666' ELSE 'clean' END AS value FROM range(100001) t(i)"
+        )
+        con.execute(f"COPY values_to_scan TO '{parquet.as_posix()}' (FORMAT PARQUET)")
+        con.close()
+        result = gate_residual(set(), _iter_output_text(package))
+        assert not result.passed
+        assert any("12-digit" in failure for failure in result.failures)
+
+    @pytest.mark.parametrize("role_arn", [None, "arn:aws:iam::111222333444:role/Audit"])
+    def test_workspace_ce_credential_mismatch_fails_fast(self, tmp_path, role_arn):
+        from types import SimpleNamespace
+        from unittest.mock import MagicMock, patch
+
+        from click.testing import CliRunner
+
+        from kulshan.export.cli import export
+
+        connection = SimpleNamespace(profile="workspace-audit", role_arn=role_arn)
+        aws = MagicMock(cur_export="s3://customer-cur/export", default_connection="audit")
+        aws.get_connection.return_value = connection
+        workspace = MagicMock(path=tmp_path / "workspace", config=MagicMock(aws=aws))
+        output = tmp_path / "mismatch.zip"
+        with patch(
+            "kulshan.workspace.resolution.resolve_workspace", return_value=workspace
+        ), patch("boto3.Session", return_value=MagicMock()), patch(
+            "kulshan.cur.manifest_reader.read_manifest_uri", return_value=MagicMock()
+        ):
+            result = CliRunner().invoke(export, [
+                "consultant", "--workspace", "customer", "--ce",
+                "--from", "2026-07-01", "--to", "2026-08-01",
+                "-o", str(output),
+            ])
+        assert result.exit_code != 0
+        assert "--profile" in result.output
+        if role_arn:
+            assert "role ARN" in result.output
+        else:
+            assert "ambient credentials" in result.output
+        assert not output.exists()
+
+    def test_packaging_exception_leaves_no_output(self, cur_source, tmp_path):
+        from unittest.mock import patch
+
+        def partial_then_fail(output_path, staging_dir):
+            output_path.write_bytes(b"partial")
+            raise OSError("fixture packaging failure")
+
+        with patch("kulshan.export.package.write_zip", side_effect=partial_then_fail):
+            result, output = self._invoke(cur_source, tmp_path)
+        assert result.exit_code != 0
+        assert "PACKAGE FAILED" in result.output
+        assert not output.exists()

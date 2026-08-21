@@ -6,6 +6,7 @@ Any failure deletes intermediate artifacts and exits non-zero.
 from __future__ import annotations
 
 import re
+from collections.abc import Iterable
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
@@ -284,7 +285,7 @@ _BUCKET_RE = re.compile(r"\b[a-z0-9][a-z0-9.\-]{1,61}[a-z0-9]\b")
 
 def gate_residual(
     source_identifiers: set[str],
-    output_text: str,
+    output_text: str | Iterable[str],
     secret_path: Path | None = None,
 ) -> GateResult:
     """Scan output for residual source identifiers and generic patterns.
@@ -294,6 +295,27 @@ def gate_residual(
         output_text: Concatenated text content of all output files.
         secret_path: Path to workspace pseudonym.key (must not be in ZIP).
     """
+    failures = []
+    chunks = [output_text] if isinstance(output_text, str) else output_text
+    identifiers_checked = len(source_identifiers)
+    secret_hex = None
+    if secret_path and secret_path.exists():
+        secret_hex = secret_path.read_bytes().hex()
+
+    for chunk in chunks:
+        failures.extend(_scan_residual_chunk(source_identifiers, chunk, secret_hex))
+
+    return GateResult(
+        passed=len(failures) == 0,
+        gate="residual",
+        details={"identifiers_checked": identifiers_checked},
+        failures=failures,
+    )
+
+
+def _scan_residual_chunk(
+    source_identifiers: set[str], output_text: str, secret_hex: str | None
+) -> list[str]:
     failures = []
 
     # Check source identifiers don't appear in output
@@ -320,17 +342,9 @@ def gate_residual(
         failures.append(f"Email pattern found ({len(real_emails)} occurrences)")
 
     # Assert key material not present
-    if secret_path and secret_path.exists():
-        secret_hex = secret_path.read_bytes().hex()
-        if secret_hex in output_text:
-            failures.append("Workspace secret key material found in output")
-
-    return GateResult(
-        passed=len(failures) == 0,
-        gate="residual",
-        details={"identifiers_checked": len(source_identifiers)},
-        failures=failures,
-    )
+    if secret_hex and secret_hex in output_text:
+        failures.append("Workspace secret key material found in output")
+    return failures
 
 
 def _is_likely_non_account(value: str) -> bool:

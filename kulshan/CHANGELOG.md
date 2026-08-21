@@ -5,6 +5,15 @@ All notable changes to Kulshan will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.6.1] - 2026-08-21
+
+### Fixed
+- Version 0.6.0 could write real AWS account identifiers into the consultant evidence export manifest. Regenerate any package produced with version 0.6.0.
+- Packages are assembled and validated in temporary storage and moved to the output path only after every gate passes.
+- The residual identifier gate scans every row of every package member, including manifest, privacy report, and README, and scan errors now fail the export.
+- **Breaking:** A combined CUR and Cost Explorer export now fails when a service filter is supplied because the same literal cannot be resolved unambiguously against both datasets. Run separate exports.
+- **Breaking:** A workspace Cost Explorer export now fails when the workspace connection has a role ARN, or when `--profile` is absent and the connection specifies a profile, because CUR and CE would otherwise read as different AWS identities. Pass `--profile`.
+
 ## [0.6.0] - 2026-08-17
 
 ### Added

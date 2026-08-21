@@ -1,6 +1,7 @@
 """CLI commands for consultant evidence export and alias resolution."""
 from __future__ import annotations
 
+import os
 import shutil
 import sys
 import tempfile
@@ -83,7 +84,7 @@ def consultant(
     """
     from kulshan.export.cur_export import ExportBlockedError, export_cur
     from kulshan.export.gates import gate_integrity, gate_residual, gate_schema
-    from kulshan.export.package import create_package
+    from kulshan.export.package import stage_package, write_zip
     from kulshan.export.scope import EvidenceScope
     from kulshan.pseudonym.context import resolve_workspace_secret_path
     from kulshan.pseudonym.engine import PseudonymizationEngine
@@ -111,6 +112,15 @@ def consultant(
     if not cur_path and not has_s3_source:
         console.print("[red]ERROR[/red]: No source specified.")
         console.print("Provide a local CUR_PATH argument or use --s3 / --workspace for S3 source.")
+        sys.exit(ExitCode.CONFIG_ERROR)
+
+    if include_ce and (services or exclude_services):
+        service_filter = (services or exclude_services)[0]
+        console.print(
+            f"[red]ERROR[/red]: Service filter '{service_filter}' cannot be resolved "
+            "unambiguously for both CUR and Cost Explorer."
+        )
+        console.print("Remove the service filter or run separate CUR and CE exports.")
         sys.exit(ExitCode.CONFIG_ERROR)
 
     if has_s3_source:
@@ -141,6 +151,28 @@ def consultant(
             conn = ws_ctx.config.aws.get_connection(
                 connection_name or ws_ctx.config.aws.default_connection
             )
+            if include_ce and conn is not None:
+                role_arn = getattr(conn, "role_arn", None)
+                if role_arn:
+                    console.print(
+                        "[red]ERROR[/red]: Cost Explorer cannot use the workspace role ARN "
+                        "in consultant export."
+                    )
+                    console.print(
+                        "Pass --profile for a direct profile connection without a role ARN."
+                    )
+                    sys.exit(ExitCode.CONFIG_ERROR)
+                connection_profile = getattr(conn, "profile", None)
+                if profile is None and connection_profile is not None:
+                    console.print(
+                        "[red]ERROR[/red]: Cost Explorer would use ambient credentials while "
+                        f"CUR uses workspace profile '{connection_profile}'."
+                    )
+                    console.print(
+                        f"Pass --profile {connection_profile} so both datasets use "
+                        "the same credentials."
+                    )
+                    sys.exit(ExitCode.CONFIG_ERROR)
             effective_profile = profile or (conn.profile if conn else None)
             session_kwargs = {}
             if effective_profile:
@@ -165,6 +197,13 @@ def consultant(
     policy = PseudonymPolicy(mode="consultant", tty_bypass=False, show_identifiers=False)
     engine = PseudonymizationEngine.create(ws_path, policy)
 
+    if output is None:
+        ws_name = ws_path.name if ws_path else "default"
+        ts = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+        output = f"consultant-export-{ws_name}-{ts}.zip"
+    output_path = Path(output).resolve()
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+
     source_label = cur_path if cur_path else (s3_uri or f"workspace:{workspace_name}")
     console.print("[bold]Kulshan Consultant Evidence Export[/bold]")
     console.print(f"  Period: {scope.from_date} to {scope.to_date}")
@@ -172,7 +211,7 @@ def consultant(
     console.print()
 
     # Create temp working directory
-    work_dir = Path(tempfile.mkdtemp(prefix="kulshan-export-"))
+    work_dir = Path(tempfile.mkdtemp(prefix=".kulshan-export-", dir=output_path.parent))
     cur_dir = work_dir / "cur"
     ce_dir = work_dir / "ce"
 
@@ -215,7 +254,7 @@ def consultant(
             session_kwargs = {}
             if profile:
                 session_kwargs["profile_name"] = profile
-            session = boto3.Session(**session_kwargs)
+            session = s3_session if s3_session is not None else boto3.Session(**session_kwargs)
 
             try:
                 ce_result = export_ce(session, scope, engine, ce_dir)
@@ -227,6 +266,26 @@ def consultant(
 
         # ── Gate 1: Schema ───────────────────────────────────────────────
         console.print()
+        package_dir = work_dir / "package"
+        projected_gates = [
+            {"gate": "schema", "passed": True},
+            {"gate": "integrity", "passed": True},
+            {"gate": "residual", "passed": True},
+        ]
+        stage_package(
+            package_dir,
+            cur_dir,
+            ce_dir if ce_result else None,
+            scope,
+            cur_result.classification,
+            projected_gates,
+            cur_result.row_count,
+            ce_result.datasets if ce_result else None,
+            cur_result.dropped_columns,
+            list(keep_tags),
+            engine,
+        )
+
         g1 = gate_schema(cur_result.classification, drop_unclassified_columns)
         if not g1.passed:
             console.print("[red]GATE 1 FAILED: Schema classification[/red]")
@@ -275,7 +334,7 @@ def consultant(
             cur_result.source_row_count,
             cur_result.row_count,
             source_path=source_parquet,
-            output_path=cur_result.output_path.as_posix(),
+            output_path=(package_dir / "cur" / cur_result.output_path.name).as_posix(),
             numeric_columns=numeric_safe,
             pseudo_columns=pseudo_cols,
             safe_dimensions=safe_dims,
@@ -291,6 +350,15 @@ def consultant(
             sys.exit(ExitCode.RUNTIME_ERROR)
         console.print("[green]Gate 2 PASS[/green]: Evidence integrity")
 
+        manifest_count = _manifest_cur_row_count(package_dir / "manifest.json")
+        if manifest_count != cur_result.row_count:
+            console.print("[red]GATE 2 FAILED: Evidence integrity[/red]")
+            console.print(
+                f"  Manifest row count mismatch: manifest={manifest_count}, "
+                f"output={cur_result.row_count}"
+            )
+            sys.exit(ExitCode.RUNTIME_ERROR)
+
         # ── Gate 3: Residual identifiers ─────────────────────────────────
         # Collect source identifiers from pseudonymize columns
         source_ids = _collect_source_identifiers(
@@ -301,41 +369,52 @@ def consultant(
             s3_session=s3_session,
         )
         # Collect all output text
-        output_text = _collect_output_text(cur_dir, ce_dir)
         secret_path = ws_path / SECRET_FILENAME
 
-        g3 = gate_residual(source_ids, output_text, secret_path)
+        try:
+            output_text = _iter_output_text(package_dir)
+            g3 = gate_residual(source_ids, output_text, secret_path)
+        except Exception as exc:
+            console.print("[red]GATE 3 FAILED: Residual identifiers[/red]")
+            console.print(f"  Output scan error: {type(exc).__name__}: {exc}")
+            sys.exit(ExitCode.RUNTIME_ERROR)
         if not g3.passed:
             console.print("[red]GATE 3 FAILED: Residual identifiers[/red]")
             for f in g3.failures:
                 console.print(f"  {f}")
             sys.exit(ExitCode.RUNTIME_ERROR)
+
+        gate_dicts = [
+            {"gate": gate.gate, "passed": gate.passed, "details": gate.details}
+            for gate in (g1, g2, g3)
+        ]
+        _write_privacy_gate_results(package_dir / "privacy-report.json", gate_dicts)
+        try:
+            final_g3 = gate_residual(
+                source_ids, _iter_output_text(package_dir), secret_path
+            )
+        except Exception as exc:
+            console.print("[red]GATE 3 FAILED: Final package scan[/red]")
+            console.print(f"  Output scan error: {type(exc).__name__}: {exc}")
+            sys.exit(ExitCode.RUNTIME_ERROR)
+        if not final_g3.passed:
+            console.print("[red]GATE 3 FAILED: Final package scan[/red]")
+            for failure in final_g3.failures:
+                console.print(f"  {failure}")
+            sys.exit(ExitCode.RUNTIME_ERROR)
         console.print("[green]Gate 3 PASS[/green]: Residual identifier scan")
 
         # ── Package ──────────────────────────────────────────────────────
         console.print()
-        gate_dicts = [
-            {"gate": g.gate, "passed": g.passed, "details": g.details}
-            for g in [g1, g2, g3]
-        ]
-
-        if output is None:
-            ws_name = ws_path.name if ws_path else "default"
-            ts = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
-            output = f"consultant-export-{ws_name}-{ts}.zip"
-
-        zip_path = create_package(
-            output_path=Path(output),
-            cur_dir=cur_dir,
-            ce_dir=ce_dir if ce_result else None,
-            scope=scope,
-            classification=cur_result.classification,
-            gate_results=gate_dicts,
-            cur_row_count=cur_result.row_count,
-            ce_datasets=ce_result.datasets if ce_result else None,
-            dropped_columns=cur_result.dropped_columns,
-            keep_tags=list(keep_tags),
-        )
+        temporary_zip = work_dir / "consultant-export.zip"
+        try:
+            write_zip(temporary_zip, package_dir)
+            os.replace(temporary_zip, output_path)
+        except Exception as exc:
+            console.print("[red]PACKAGE FAILED[/red]: Validated ZIP was not published")
+            console.print(f"  {type(exc).__name__}: {exc}")
+            sys.exit(ExitCode.RUNTIME_ERROR)
+        zip_path = output_path
 
         console.print(f"[bold green]Evidence package created:[/bold green] {zip_path}")
         console.print(f"  CUR rows: {cur_result.row_count:,}")
@@ -396,31 +475,47 @@ def _collect_source_identifiers(
         con.close()
 
 
-def _collect_output_text(cur_dir: Path, ce_dir: Path) -> str:
-    """Read all output Parquet files and extract string column values for scanning."""
+def _manifest_cur_row_count(manifest_path: Path) -> int:
+    """Read the staged manifest row count, failing closed on invalid metadata."""
+    import json
+
+    return int(json.loads(manifest_path.read_text(encoding="utf-8"))["cur"]["row_count"])
+
+
+def _write_privacy_gate_results(privacy_path: Path, gate_results: list[dict]) -> None:
+    """Write real gate results before the final package scan."""
+    import json
+
+    report = json.loads(privacy_path.read_text(encoding="utf-8"))
+    report["gates"] = gate_results
+    privacy_path.write_text(json.dumps(report, indent=2), encoding="utf-8")
+
+
+def _iter_output_text(package_dir: Path):
+    """Yield every value from every staged package member for scanning."""
     import duckdb
 
-    texts = []
-    for d in [cur_dir, ce_dir]:
-        if not d or not d.exists():
+    for path in sorted(item for item in package_dir.rglob("*") if item.is_file()):
+        if path.suffix != ".parquet":
+            yield path.read_text(encoding="utf-8")
             continue
-        for f in d.rglob("*.parquet"):
-            try:
-                con = duckdb.connect(":memory:")
-                # Get string columns only
-                desc = con.execute(f"DESCRIBE SELECT * FROM read_parquet('{f.as_posix()}')").fetchall()
-                str_cols = [row[0] for row in desc if "VARCHAR" in str(row[1]).upper()]
-                if str_cols:
-                    select = ", ".join(f'CAST("{c}" AS VARCHAR)' for c in str_cols)
-                    rows = con.execute(
-                        f"SELECT {select} FROM read_parquet('{f.as_posix()}') LIMIT 100000"
-                    ).fetchall()
-                    for row in rows:
-                        for val in row:
-                            if val:
-                                texts.append(str(val))
-                con.close()
-            except Exception:
-                continue
-
-    return " ".join(texts)
+        con = duckdb.connect(":memory:")
+        try:
+            escaped = path.as_posix().replace("'", "''")
+            description = con.execute(
+                f"DESCRIBE SELECT * FROM read_parquet('{escaped}')"
+            ).fetchall()
+            columns = ", ".join(
+                f'CAST("{str(row[0]).replace(chr(34), chr(34) * 2)}" AS VARCHAR)'
+                for row in description
+            )
+            cursor = con.execute(f"SELECT {columns} FROM read_parquet('{escaped}')")
+            while True:
+                rows = cursor.fetchmany(10_000)
+                if not rows:
+                    break
+                yield " ".join(
+                    str(value) for row in rows for value in row if value is not None
+                )
+        finally:
+            con.close()
