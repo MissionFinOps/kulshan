@@ -2001,18 +2001,65 @@ class TestConsultantExportTrustGate:
             ("--exclude-account", "999888777666"),
         ],
     )
-    def test_metadata_contains_no_raw_identifier_patterns(
+    def test_metadata_contains_aliases_not_source_accounts(
         self, cur_source, tmp_path, arguments
     ):
         import re
 
+        source_account = arguments[1]
         result, output = self._invoke(cur_source, tmp_path, *arguments)
         assert result.exit_code == 0, result.output
         with zipfile.ZipFile(output) as package:
             for name in ("manifest.json", "privacy-report.json", "README.md"):
                 text = package.read(name).decode("utf-8")
-                assert re.search(r"\d{12}", text) is None
+                assert source_account not in text
                 assert "arn:" not in text.lower()
+            manifest = json.loads(package.read("manifest.json"))
+        account_values = (
+            manifest["scope"]["include_accounts"]
+            + manifest["scope"]["exclude_accounts"]
+        )
+        assert account_values
+        assert all(re.fullmatch(r"acct_[0-9a-f]{16}", value) for value in account_values)
+
+    def test_valid_alias_with_twelve_decimal_digits_is_preserved(
+        self, cur_source, tmp_path
+    ):
+        import re
+
+        from kulshan.pseudonym.engine import PseudonymizationEngine
+        from kulshan.pseudonym.policy import PseudonymPolicy
+        from kulshan.pseudonym.secret import SECRET_FILENAME
+        from kulshan.pseudonym.types import IdentifierClass
+
+        workspace = tmp_path / "workspace"
+        workspace.mkdir()
+        secret = bytes(range(32))
+        (workspace / SECRET_FILENAME).write_bytes(secret)
+        engine = PseudonymizationEngine(
+            secret,
+            PseudonymPolicy(mode="consultant", tty_bypass=False, show_identifiers=False),
+        )
+        source_account = None
+        expected_alias = None
+        for suffix in range(10_000):
+            candidate = f"{100_000_000_000 + suffix:012d}"
+            alias = engine.pseudonymize_value(candidate, IdentifierClass.ACCOUNT)
+            if re.search(r"(?<=[0-9a-f])\d{12}", alias.removeprefix("acct_")):
+                source_account = candidate
+                expected_alias = alias
+                break
+        assert source_account is not None
+        assert expected_alias is not None
+        assert re.search(r"\d{12}", expected_alias)
+
+        result, output = self._invoke(
+            cur_source, tmp_path, "--exclude-account", source_account
+        )
+        assert result.exit_code == 0, result.output
+        with zipfile.ZipFile(output) as package:
+            manifest = json.loads(package.read("manifest.json"))
+        assert manifest["scope"]["exclude_accounts"] == [expected_alias]
 
     def test_positive_package_contents_and_schema(self, cur_source, tmp_path):
         import duckdb
@@ -2025,8 +2072,14 @@ class TestConsultantExportTrustGate:
                 "privacy-report.json",
             }
             manifest = json.loads(package.read("manifest.json"))
+            privacy = json.loads(package.read("privacy-report.json"))
             assert manifest["export_type"] == "consultant-evidence"
             assert manifest["cur"]["row_count"] == 1
+            assert [gate["gate"] for gate in privacy["gates"]] == [
+                "schema", "integrity", "residual",
+            ]
+            assert all(gate["passed"] for gate in privacy["gates"])
+            assert all("details" in gate for gate in privacy["gates"])
             extracted = tmp_path / "billing.parquet"
             extracted.write_bytes(package.read("cur/billing.parquet"))
         con = duckdb.connect(":memory:")

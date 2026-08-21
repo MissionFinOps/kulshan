@@ -163,23 +163,14 @@ def _manifest_scope(scope: EvidenceScope, engine) -> dict:
             raise ValueError("Account-scoped manifests require a pseudonymization engine")
         return result
     result["include_accounts"] = [
-        _manifest_account_alias(engine, value)
+        engine.pseudonymize_value(value, IdentifierClass.ACCOUNT)
         for value in scope.include_accounts
     ]
     result["exclude_accounts"] = [
-        _manifest_account_alias(engine, value)
+        engine.pseudonymize_value(value, IdentifierClass.ACCOUNT)
         for value in scope.exclude_accounts
     ]
     return result
-
-
-def _manifest_account_alias(engine, value: str) -> str:
-    alias = engine.pseudonymize_value(value, IdentifierClass.ACCOUNT)
-    prefix, separator, digest = alias.partition("_")
-    if not separator:
-        raise ValueError("Account alias is not in the expected alias space")
-    grouped = "-".join(digest[index:index + 4] for index in range(0, len(digest), 4))
-    return f"{prefix}_{grouped}"
 
 
 def _build_privacy_report(

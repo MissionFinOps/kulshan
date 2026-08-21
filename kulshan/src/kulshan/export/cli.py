@@ -383,6 +383,25 @@ def consultant(
             for f in g3.failures:
                 console.print(f"  {f}")
             sys.exit(ExitCode.RUNTIME_ERROR)
+
+        gate_dicts = [
+            {"gate": gate.gate, "passed": gate.passed, "details": gate.details}
+            for gate in (g1, g2, g3)
+        ]
+        _write_privacy_gate_results(package_dir / "privacy-report.json", gate_dicts)
+        try:
+            final_g3 = gate_residual(
+                source_ids, _iter_output_text(package_dir), secret_path
+            )
+        except Exception as exc:
+            console.print("[red]GATE 3 FAILED: Final package scan[/red]")
+            console.print(f"  Output scan error: {type(exc).__name__}: {exc}")
+            sys.exit(ExitCode.RUNTIME_ERROR)
+        if not final_g3.passed:
+            console.print("[red]GATE 3 FAILED: Final package scan[/red]")
+            for failure in final_g3.failures:
+                console.print(f"  {failure}")
+            sys.exit(ExitCode.RUNTIME_ERROR)
         console.print("[green]Gate 3 PASS[/green]: Residual identifier scan")
 
         # ── Package ──────────────────────────────────────────────────────
@@ -461,6 +480,15 @@ def _manifest_cur_row_count(manifest_path: Path) -> int:
     import json
 
     return int(json.loads(manifest_path.read_text(encoding="utf-8"))["cur"]["row_count"])
+
+
+def _write_privacy_gate_results(privacy_path: Path, gate_results: list[dict]) -> None:
+    """Write real gate results before the final package scan."""
+    import json
+
+    report = json.loads(privacy_path.read_text(encoding="utf-8"))
+    report["gates"] = gate_results
+    privacy_path.write_text(json.dumps(report, indent=2), encoding="utf-8")
 
 
 def _iter_output_text(package_dir: Path):
