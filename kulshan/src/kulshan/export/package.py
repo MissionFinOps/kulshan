@@ -5,6 +5,9 @@ Creates the final ZIP containing CUR, CE, manifest, privacy report, and README.
 from __future__ import annotations
 
 import json
+import os
+import shutil
+import tempfile
 import zipfile
 from datetime import datetime, timezone
 from pathlib import Path
@@ -12,6 +15,7 @@ from pathlib import Path
 from kulshan.__version__ import __version__
 from kulshan.export.columns import ColumnClass
 from kulshan.export.scope import EvidenceScope
+from kulshan.pseudonym.types import IdentifierClass
 
 
 def create_package(
@@ -25,6 +29,7 @@ def create_package(
     ce_datasets: list[str] | None = None,
     dropped_columns: list[str] | None = None,
     keep_tags: list[str] | None = None,
+    engine=None,
 ) -> Path:
     """Assemble the consultant evidence ZIP package.
 
@@ -43,27 +48,75 @@ def create_package(
     Returns:
         Path to created ZIP.
     """
-    manifest = _build_manifest(scope, classification, cur_row_count, ce_datasets, keep_tags, dropped_columns)
+    staging_root = Path(tempfile.mkdtemp(prefix=".kulshan-package-", dir=output_path.parent))
+    staging_dir = staging_root / "contents"
+    try:
+        stage_package(
+            staging_dir,
+            cur_dir,
+            ce_dir,
+            scope,
+            classification,
+            gate_results,
+            cur_row_count,
+            ce_datasets,
+            dropped_columns,
+            keep_tags,
+            engine,
+        )
+        temporary_zip = staging_root / "package.zip"
+        write_zip(temporary_zip, staging_dir)
+        os.replace(temporary_zip, output_path)
+    finally:
+        shutil.rmtree(staging_root, ignore_errors=True)
+    return output_path
+
+
+def stage_package(
+    staging_dir: Path,
+    cur_dir: Path | None,
+    ce_dir: Path | None,
+    scope: EvidenceScope,
+    classification: dict[str, ColumnClass],
+    gate_results: list[dict],
+    cur_row_count: int = 0,
+    ce_datasets: list[str] | None = None,
+    dropped_columns: list[str] | None = None,
+    keep_tags: list[str] | None = None,
+    engine=None,
+) -> Path:
+    """Write every package member to a staging directory."""
+    staging_dir.mkdir(parents=True, exist_ok=False)
+    manifest = _build_manifest(
+        scope, classification, cur_row_count, ce_datasets, keep_tags,
+        dropped_columns, engine,
+    )
     privacy_report = _build_privacy_report(
         classification, gate_results, dropped_columns, keep_tags
     )
     readme = _build_readme(scope, cur_row_count, ce_datasets, dropped_columns)
 
-    with zipfile.ZipFile(output_path, "w", zipfile.ZIP_DEFLATED) as zf:
-        zf.writestr("manifest.json", json.dumps(manifest, indent=2))
-        zf.writestr("privacy-report.json", json.dumps(privacy_report, indent=2))
-        zf.writestr("README.md", readme)
+    (staging_dir / "manifest.json").write_text(json.dumps(manifest, indent=2), encoding="utf-8")
+    (staging_dir / "privacy-report.json").write_text(
+        json.dumps(privacy_report, indent=2), encoding="utf-8"
+    )
+    (staging_dir / "README.md").write_text(readme, encoding="utf-8")
+    for source_dir, name in ((cur_dir, "cur"), (ce_dir, "ce")):
+        if source_dir and source_dir.exists():
+            destination = staging_dir / name
+            destination.mkdir()
+            for source in sorted(source_dir.rglob("*.parquet")):
+                target = destination / source.relative_to(source_dir)
+                target.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copy2(source, target)
+    return staging_dir
 
-        if cur_dir and cur_dir.exists():
-            for f in sorted(cur_dir.rglob("*.parquet")):
-                arcname = f"cur/{f.relative_to(cur_dir).as_posix()}"
-                zf.write(f, arcname)
 
-        if ce_dir and ce_dir.exists():
-            for f in sorted(ce_dir.rglob("*.parquet")):
-                arcname = f"ce/{f.relative_to(ce_dir).as_posix()}"
-                zf.write(f, arcname)
-
+def write_zip(output_path: Path, staging_dir: Path) -> Path:
+    """Create a ZIP from a completed and validated staging directory."""
+    with zipfile.ZipFile(output_path, "w", zipfile.ZIP_DEFLATED) as archive:
+        for source in sorted(path for path in staging_dir.rglob("*") if path.is_file()):
+            archive.write(source, source.relative_to(staging_dir).as_posix())
     return output_path
 
 
@@ -74,6 +127,7 @@ def _build_manifest(
     ce_datasets: list[str] | None,
     keep_tags: list[str] | None,
     dropped_columns: list[str] | None = None,
+    engine=None,
 ) -> dict:
     counts = {}
     for cls in ColumnClass:
@@ -89,7 +143,7 @@ def _build_manifest(
             "alias_format": "16-hex HMAC-SHA256",
             "bypass_available": False,
         },
-        "scope": scope.to_dict(),
+        "scope": _manifest_scope(scope, engine),
         "cur": {
             "row_count": cur_row_count,
             "column_classification": counts,
@@ -100,6 +154,32 @@ def _build_manifest(
         },
         "keep_tags": keep_tags or [],
     }
+
+
+def _manifest_scope(scope: EvidenceScope, engine) -> dict:
+    result = scope.to_dict()
+    if engine is None:
+        if scope.include_accounts or scope.exclude_accounts:
+            raise ValueError("Account-scoped manifests require a pseudonymization engine")
+        return result
+    result["include_accounts"] = [
+        _manifest_account_alias(engine, value)
+        for value in scope.include_accounts
+    ]
+    result["exclude_accounts"] = [
+        _manifest_account_alias(engine, value)
+        for value in scope.exclude_accounts
+    ]
+    return result
+
+
+def _manifest_account_alias(engine, value: str) -> str:
+    alias = engine.pseudonymize_value(value, IdentifierClass.ACCOUNT)
+    prefix, separator, digest = alias.partition("_")
+    if not separator:
+        raise ValueError("Account alias is not in the expected alias space")
+    grouped = "-".join(digest[index:index + 4] for index in range(0, len(digest), 4))
+    return f"{prefix}_{grouped}"
 
 
 def _build_privacy_report(
