@@ -535,9 +535,9 @@ MUST_FAIL = [
         "012345678901",
     ),
     (
-        # 15 digits, not 12, never trips _ACCOUNT_RE regardless of the
-        # trailing-zero heuristic; the real 12-digit round-number case is
-        # the row below.
+        # Exactly 12 digits, ending in six zeros. _ACCOUNT_RE is \b\d{12}\b,
+        # so a longer round number (e.g. 15 digits) would never have tripped
+        # it in the first place, heuristic or not - this is the real case.
         "12-digit account ID with six trailing zeros - old round-number branch",
         set(),
         "123456000000",
