@@ -5,6 +5,7 @@ Any failure deletes intermediate artifacts and exits non-zero.
 """
 from __future__ import annotations
 
+import ipaddress
 import re
 from collections.abc import Iterable
 from dataclasses import dataclass, field
@@ -279,8 +280,31 @@ def gate_integrity(
 _ACCOUNT_RE = re.compile(r"\b\d{12}\b")
 _ARN_RE = re.compile(r"arn:aws[a-z-]*:[a-z0-9-]+:[a-z0-9-]*:\d{12}:[^\s,\"']+")
 _EMAIL_RE = re.compile(r"[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}")
-_IPV4_RE = re.compile(r"\b(?:10|172\.(?:1[6-9]|2\d|3[01])|192\.168)\.\d{1,3}\.\d{1,3}\b")
-_BUCKET_RE = re.compile(r"\b[a-z0-9][a-z0-9.\-]{1,61}[a-z0-9]\b")
+
+# Octet-validated (0-255), matches public and private IPv4 addresses alike.
+# There is no bucket-name equivalent of this: bucket names have no
+# distinguishing shape, so they are not regex-detectable at all. Bucket
+# coverage instead depends entirely on Gate 1 classifying resource-id-style
+# columns PSEUDONYMIZE (see export/columns.py) so a real bucket value is
+# already in `source_identifiers` and caught by the membership check below.
+_IPV4_OCTET = r"(?:25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])"
+_IPV4_RE = re.compile(rf"\b{_IPV4_OCTET}(?:\.{_IPV4_OCTET}){{3}}\b")
+
+# Reserved ranges that legitimately appear in tests, fixtures, and docs
+# (RFC 5737 documentation ranges, loopback, link-local). Excluded so normal
+# development artifacts don't trip the gate. Real RFC1918 private ranges are
+# intentionally NOT excluded: a private IP is still a residual identifier.
+_IPV4_EXCLUDED_NETWORKS = (
+    ipaddress.ip_network("127.0.0.0/8"),
+    ipaddress.ip_network("169.254.0.0/16"),
+    ipaddress.ip_network("192.0.2.0/24"),
+    ipaddress.ip_network("198.51.100.0/24"),
+    ipaddress.ip_network("203.0.113.0/24"),
+)
+
+# Below this length, a substring match on a source identifier is too noisy
+# to use as-is (see _scan_residual_chunk); above it, substring match stands.
+_SHORT_IDENTIFIER_THRESHOLD = 4
 
 
 def gate_residual(
@@ -318,18 +342,33 @@ def _scan_residual_chunk(
 ) -> list[str]:
     failures = []
 
-    # Check source identifiers don't appear in output
+    # Check source identifiers don't appear in output.
+    # Below the length threshold, a substring match is too noisy (a 3-char
+    # tag value like "FIN" would match inside "FINANCE" or "confine"), so use
+    # a word-boundary match instead of skipping the value outright. At or
+    # above the threshold, a plain substring match is precise enough on its
+    # own (real identifiers this long rarely collide with unrelated text).
     for identifier in source_identifiers:
-        if identifier and len(identifier) >= 4 and identifier in output_text:
+        if not identifier:
+            continue
+        if len(identifier) < _SHORT_IDENTIFIER_THRESHOLD:
+            if re.search(rf"\b{re.escape(identifier)}\b", output_text):
+                failures.append(f"Source identifier leaked (length {len(identifier)})")
+        elif identifier in output_text:
             failures.append(f"Source identifier leaked (length {len(identifier)})")
             # Do not print the value itself
 
-    # Generic pattern scan
+    # Generic pattern scan.
+    # Every 12-digit match is treated as a potential account ID. There is no
+    # value-based skip list here: this is the last gate before evidence
+    # leaves the customer's environment, so a false positive (blocking a
+    # clean export) is the correct failure mode, not a false negative
+    # (shipping a leak). A column that legitimately produces 12-digit noise
+    # is a Gate 1 classification problem, not something Gate 3 should guess
+    # around by value.
     account_matches = _ACCOUNT_RE.findall(output_text)
-    # Filter out known-safe patterns (years, timestamps)
-    real_accounts = [m for m in account_matches if not _is_likely_non_account(m)]
-    if real_accounts:
-        failures.append(f"Potential 12-digit account ID pattern found ({len(real_accounts)} occurrences)")
+    if account_matches:
+        failures.append(f"Potential 12-digit account ID pattern found ({len(account_matches)} occurrences)")
 
     arn_matches = _ARN_RE.findall(output_text)
     if arn_matches:
@@ -341,19 +380,21 @@ def _scan_residual_chunk(
     if real_emails:
         failures.append(f"Email pattern found ({len(real_emails)} occurrences)")
 
+    ipv4_matches = _IPV4_RE.findall(output_text)
+    real_ipv4 = [m for m in ipv4_matches if not _is_excluded_ipv4(m)]
+    if real_ipv4:
+        failures.append(f"IPv4 address pattern found ({len(real_ipv4)} occurrences)")
+
     # Assert key material not present
     if secret_hex and secret_hex in output_text:
         failures.append("Workspace secret key material found in output")
     return failures
 
 
-def _is_likely_non_account(value: str) -> bool:
-    """Heuristic: is this 12-digit string likely NOT an account ID?"""
-    # Timestamps in milliseconds often look like 12-digit numbers
-    # Account IDs don't start with 0
-    if value.startswith("0"):
+def _is_excluded_ipv4(value: str) -> bool:
+    """True if `value` is a reserved/documentation address, not a real leak."""
+    try:
+        addr = ipaddress.ip_address(value)
+    except ValueError:
         return True
-    # Very round numbers are unlikely accounts
-    if value.endswith("000000"):
-        return True
-    return False
+    return any(addr in network for network in _IPV4_EXCLUDED_NETWORKS)
