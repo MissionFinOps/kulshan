@@ -492,12 +492,14 @@ def _write_privacy_gate_results(privacy_path: Path, gate_results: list[dict]) ->
 
 
 def _iter_output_text(package_dir: Path):
-    """Yield every value from every staged package member for scanning."""
+    """Yield (source_label, text) for every staged package member, so a Gate 3
+    failure can name the file it fired on without printing the leaked value."""
     import duckdb
 
     for path in sorted(item for item in package_dir.rglob("*") if item.is_file()):
+        label = path.relative_to(package_dir).as_posix()
         if path.suffix != ".parquet":
-            yield path.read_text(encoding="utf-8")
+            yield label, path.read_text(encoding="utf-8")
             continue
         con = duckdb.connect(":memory:")
         try:
@@ -514,7 +516,7 @@ def _iter_output_text(package_dir: Path):
                 rows = cursor.fetchmany(10_000)
                 if not rows:
                     break
-                yield " ".join(
+                yield label, " ".join(
                     str(value) for row in rows for value in row if value is not None
                 )
         finally:

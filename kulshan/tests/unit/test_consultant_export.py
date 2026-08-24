@@ -115,6 +115,15 @@ class TestColumnClassification:
         assert result["line_item_unblended_cost"] == ColumnClass.SAFE
         assert result["line_item_usage_account_id"] == ColumnClass.PSEUDONYMIZE
 
+    def test_bucket_bearing_columns_are_pseudonymized(self):
+        """CUR has no dedicated bucket-name column: an S3 bucket surfaces as
+        the resource ID. Gate 3 has no bucket regex (unfixable - bucket
+        names have no distinguishing shape), so this classification is the
+        entire control. If any of these regress to SAFE or UNCLASSIFIED, a
+        bucket name ships in plain text."""
+        for col in ("line_item_resource_id", "lineitem_resourceid", "resource_id"):
+            assert classify_column(col) == ColumnClass.PSEUDONYMIZE, col
+
 
 # ═══════════════════════════════════════════════════════════════════════════════
 # GATE TESTS
@@ -505,6 +514,143 @@ class TestGate3NegativeControls:
         source_ids = {"111222333444", "i-0abc123def456789a"}
         g3 = gate_residual(source_identifiers=source_ids, output_text=output_text)
         assert g3.passed, f"Clean output should pass Gate 3: {g3.failures}"
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# GATE 3 BYPASS CORPUS (0.6.2 hardening)
+#
+# Every value below identifies a customer. gate_residual MUST fail on all of
+# them. Add a row every time a new bypass is found. Never delete a row.
+# ═══════════════════════════════════════════════════════════════════════════════
+
+MUST_FAIL = [
+    (
+        "account ID, all zeros - matches samples/sample-report.json",
+        set(),
+        "000000000000",
+    ),
+    (
+        "account ID with leading zero",
+        set(),
+        "012345678901",
+    ),
+    (
+        # Exactly 12 digits, ending in six zeros. _ACCOUNT_RE is \b\d{12}\b,
+        # so a longer round number (e.g. 15 digits) would never have tripped
+        # it in the first place, heuristic or not - this is the real case.
+        "12-digit account ID with six trailing zeros - old round-number branch",
+        set(),
+        "123456000000",
+    ),
+    (
+        "ordinary account ID - regression guard against over-widening",
+        set(),
+        "912345678901",
+    ),
+    (
+        "public Elastic IP",
+        set(),
+        "reachable at 54.239.28.85 from the internet",
+    ),
+    (
+        "private RFC1918 IP - still a residual identifier, not excluded",
+        set(),
+        "internal host 10.0.0.5",
+    ),
+    (
+        "customer-named bucket, via source_identifiers membership check",
+        {"acme-corp-prod-billing"},
+        "manifest references acme-corp-prod-billing as the source",
+    ),
+    (
+        "short identifier below the substring threshold, via word-boundary match",
+        {"FIN"},
+        "cost center tag is FIN this month",
+    ),
+    (
+        "ARN pattern - migrated from test_gate_residual_detects_arn_pattern",
+        set(),
+        "arn:aws:ec2:us-east-1:123456789012:instance/i-abc123",
+    ),
+    (
+        "real email address - migrated from the ARN/email detection tests",
+        set(),
+        "contact ops@realcustomer.com for details",
+    ),
+]
+
+
+class TestGateResidualMustFailCorpus:
+    """Proves the gate cannot be bypassed, as distinct from proving it
+    catches things (TestGate3NegativeControls, above). Every row is a
+    confirmed or previously-confirmed 0.6.1 bypass."""
+
+    @pytest.mark.parametrize(
+        "description,source_identifiers,output_text",
+        MUST_FAIL,
+        ids=[case[0] for case in MUST_FAIL],
+    )
+    def test_must_fail(self, description, source_identifiers, output_text):
+        result = gate_residual(
+            source_identifiers=source_identifiers, output_text=output_text
+        )
+        assert not result.passed, f"Gate 3 must fail: {description}"
+
+    def test_sample_report_fixture_no_longer_passes(self):
+        """samples/sample-report.json ships in this repo and contains the
+        all-zeros account ID that passed Gate 3 in 0.6.1. Regression guard."""
+        sample_path = (
+            Path(__file__).resolve().parents[3] / "samples" / "sample-report.json"
+        )
+        assert sample_path.exists(), f"fixture missing: {sample_path}"
+        content = sample_path.read_text(encoding="utf-8")
+        assert "000000000000" in content, "fixture no longer contains the regression value"
+        result = gate_residual(source_identifiers=set(), output_text=content)
+        assert not result.passed
+
+
+class TestGateResidualCleanControls:
+    """The hardened patterns must not fail exports that were never leaky."""
+
+    def test_documentation_ip_ranges_pass(self):
+        result = gate_residual(
+            source_identifiers=set(),
+            output_text=(
+                "docs example 192.0.2.10, 198.51.100.20, 203.0.113.30, "
+                "loopback 127.0.0.1, link-local 169.254.1.1"
+            ),
+        )
+        assert result.passed, result.failures
+
+    def test_pseudonymized_alias_and_pseudo_email_pass(self):
+        result = gate_residual(
+            source_identifiers=set(),
+            output_text="acct_7f31c2a9102d774b user_abc123@pseudo.invalid",
+        )
+        assert result.passed, result.failures
+
+    def test_short_identifier_absent_from_unrelated_word_passes(self):
+        """'FIN' must not match inside 'FINANCE' - proves the word-boundary
+        fix didn't just trade a false negative for a false positive."""
+        result = gate_residual(
+            source_identifiers={"FIN"},
+            output_text="the FINANCE department reviewed the report",
+        )
+        assert result.passed, result.failures
+
+
+class TestGateResidualFailsClosedOnScanError:
+    def test_scan_error_propagates_not_swallowed_into_a_pass(self):
+        """0.6.1 changed export scan errors to fail the export (CLI catches
+        the exception and exits non-zero). Pin that gate_residual itself
+        never turns a scan error into passed=True."""
+
+        def bad_chunks():
+            yield "clean text"
+            raise OSError("simulated output read failure")
+
+        with pytest.raises(OSError):
+            gate_residual(source_identifiers=set(), output_text=bad_chunks())
 
 
 # ═══════════════════════════════════════════════════════════════════════════════

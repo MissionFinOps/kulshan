@@ -5,6 +5,17 @@ All notable changes to Kulshan will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.6.2] - 2026-08-23
+
+### Fixed
+- **Security:** The residual identifier gate (Gate 3), the last check before a pseudonymized evidence package leaves the customer's environment, could silently pass three classes of real identifiers: account IDs beginning with `0`, account IDs ending in `000000`, and public IPv4 addresses. It also never scanned for bucket names, though bucket values reaching the gate through classified columns were still caught by the existing identifier-membership check.
+- **Packages produced with 0.6.0 and 0.6.1 may contain real identifiers and should be regenerated.**
+- The account ID pattern check no longer filters matches by value; every 12-digit match is now treated as a potential leak. A value-based skip list on a last-line leak gate is itself a bypass, and a column that produces legitimate 12-digit noise is a Gate 1 classification problem, not a Gate 3 heuristic.
+- The IPv4 pattern check now covers public and private addresses with octet validation (0-255), not just RFC1918 ranges, while excluding the RFC 5737 documentation ranges, loopback, and link-local so tests and docs do not trip the gate.
+- Source-identifier values shorter than 4 characters (for example a 3-character tag value) are now checked with a word-boundary match instead of being skipped outright.
+- Bucket names have no distinguishing shape and remain undetectable by pattern matching; their coverage rests entirely on Gate 1 classifying resource-id-style columns `PSEUDONYMIZE`, with the residual scan as a backstop for any value that reaches it. A dead, unused bucket-name regex was removed rather than wired up, since enabling it would fail nearly every export (it matches most lowercase CUR tokens).
+- **Known limitation, by design:** no CUR column is classified to pseudonymize IP addresses, so the IPv4 pattern check above is not a backstop to a classification, it is the only control. An export containing any IP-shaped string anywhere now hard-fails with no pseudonymization path. That is the intended posture: a gate that stops and names what it found and where, rather than one that silently decides a value is safe. Gate 3 failure messages now name the source file the match came from. If a real export trips this on a legitimate value, the fix is adding an IP identifier class to Gate 1's column registry, not loosening this pattern.
+
 ## [0.6.1] - 2026-08-21
 
 ### Fixed
