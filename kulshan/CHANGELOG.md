@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - The IPv4 pattern check now covers public and private addresses with octet validation (0-255), not just RFC1918 ranges, while excluding the RFC 5737 documentation ranges, loopback, and link-local so tests and docs do not trip the gate.
 - Source-identifier values shorter than 4 characters (for example a 3-character tag value) are now checked with a word-boundary match instead of being skipped outright.
 - Bucket names have no distinguishing shape and remain undetectable by pattern matching; their coverage rests entirely on Gate 1 classifying resource-id-style columns `PSEUDONYMIZE`, with the residual scan as a backstop for any value that reaches it. A dead, unused bucket-name regex was removed rather than wired up, since enabling it would fail nearly every export (it matches most lowercase CUR tokens).
+- **Known limitation, by design:** no CUR column is classified to pseudonymize IP addresses, so the IPv4 pattern check above is not a backstop to a classification, it is the only control. An export containing any IP-shaped string anywhere now hard-fails with no pseudonymization path. That is the intended posture: a gate that stops and names what it found and where, rather than one that silently decides a value is safe. Gate 3 failure messages now name the source file the match came from. If a real export trips this on a legitimate value, the fix is adding an IP identifier class to Gate 1's column registry, not loosening this pattern.
 
 ## [0.6.1] - 2026-08-21
 

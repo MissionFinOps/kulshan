@@ -309,14 +309,17 @@ _SHORT_IDENTIFIER_THRESHOLD = 4
 
 def gate_residual(
     source_identifiers: set[str],
-    output_text: str | Iterable[str],
+    output_text: str | Iterable[str | tuple[str, str]],
     secret_path: Path | None = None,
 ) -> GateResult:
     """Scan output for residual source identifiers and generic patterns.
 
     Args:
         source_identifiers: Set of real identifier values from PSEUDONYMIZE columns.
-        output_text: Concatenated text content of all output files.
+        output_text: Concatenated text content of all output files. Each chunk
+            may be a plain string (source unknown) or a (source_label, text)
+            tuple, so a failure can name where it fired without printing the
+            leaked value itself.
         secret_path: Path to workspace pseudonym.key (must not be in ZIP).
     """
     failures = []
@@ -327,7 +330,8 @@ def gate_residual(
         secret_hex = secret_path.read_bytes().hex()
 
     for chunk in chunks:
-        failures.extend(_scan_residual_chunk(source_identifiers, chunk, secret_hex))
+        source, text = chunk if isinstance(chunk, tuple) else (None, chunk)
+        failures.extend(_scan_residual_chunk(source_identifiers, text, secret_hex, source))
 
     return GateResult(
         passed=len(failures) == 0,
@@ -338,8 +342,16 @@ def gate_residual(
 
 
 def _scan_residual_chunk(
-    source_identifiers: set[str], output_text: str, secret_hex: str | None
+    source_identifiers: set[str],
+    output_text: str,
+    secret_hex: str | None,
+    source: str | None = None,
 ) -> list[str]:
+    # "What was found" is the pattern type and count, never the matched
+    # value - printing a leaked account ID or email to the console/CI log
+    # to explain the failure would defeat the point of the gate. "Where"
+    # (the source label, when known) is safe to print and narrows the fix.
+    where = f" (in {source})" if source else ""
     failures = []
 
     # Check source identifiers don't appear in output.
@@ -353,9 +365,9 @@ def _scan_residual_chunk(
             continue
         if len(identifier) < _SHORT_IDENTIFIER_THRESHOLD:
             if re.search(rf"\b{re.escape(identifier)}\b", output_text):
-                failures.append(f"Source identifier leaked (length {len(identifier)})")
+                failures.append(f"Source identifier leaked (length {len(identifier)}){where}")
         elif identifier in output_text:
-            failures.append(f"Source identifier leaked (length {len(identifier)})")
+            failures.append(f"Source identifier leaked (length {len(identifier)}){where}")
             # Do not print the value itself
 
     # Generic pattern scan.
@@ -368,26 +380,36 @@ def _scan_residual_chunk(
     # around by value.
     account_matches = _ACCOUNT_RE.findall(output_text)
     if account_matches:
-        failures.append(f"Potential 12-digit account ID pattern found ({len(account_matches)} occurrences)")
+        failures.append(
+            f"Potential 12-digit account ID pattern found "
+            f"({len(account_matches)} occurrences){where}"
+        )
 
     arn_matches = _ARN_RE.findall(output_text)
     if arn_matches:
-        failures.append(f"ARN pattern found ({len(arn_matches)} occurrences)")
+        failures.append(f"ARN pattern found ({len(arn_matches)} occurrences){where}")
 
     email_matches = _EMAIL_RE.findall(output_text)
     # Filter pseudo.invalid emails (those are our aliases)
     real_emails = [e for e in email_matches if not e.endswith("pseudo.invalid")]
     if real_emails:
-        failures.append(f"Email pattern found ({len(real_emails)} occurrences)")
+        failures.append(f"Email pattern found ({len(real_emails)} occurrences){where}")
 
     ipv4_matches = _IPV4_RE.findall(output_text)
     real_ipv4 = [m for m in ipv4_matches if not _is_excluded_ipv4(m)]
     if real_ipv4:
-        failures.append(f"IPv4 address pattern found ({len(real_ipv4)} occurrences)")
+        failures.append(
+            f"IPv4 address pattern found ({len(real_ipv4)} occurrences){where}. "
+            f"No CUR column is classified to pseudonymize IP addresses, so this "
+            f"gate is the only control for them - it fails closed rather than "
+            f"silently passing. If this fired on a legitimate value, the fix is "
+            f"a Gate 1 classification for the column it came from, not loosening "
+            f"this pattern."
+        )
 
     # Assert key material not present
     if secret_hex and secret_hex in output_text:
-        failures.append("Workspace secret key material found in output")
+        failures.append(f"Workspace secret key material found in output{where}")
     return failures
 
 
