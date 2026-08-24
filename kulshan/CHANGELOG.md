@@ -45,6 +45,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.5.1] - 2026-08-17
 
+These changes were folded into 0.6.0. No v0.5.1 tag or PyPI release was published.
+
 ### Added
 - Workspace-scoped deterministic pseudonymization engine using HMAC-SHA256 with 64-bit displayed aliases.
 - Structured and file output (JSON, CSV, HTML, SARIF) pseudonymized by default.

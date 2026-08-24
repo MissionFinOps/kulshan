@@ -78,7 +78,7 @@ Python 3.9+. macOS, Linux, Windows. Optional extras: `kulshan[pdf]`, `kulshan[ex
 Every interactive run shows when the installed Kulshan version was released and asks before checking PyPI. The default is **No**. No request is sent unless you answer **Yes**, and the question appears before AWS credentials, profiles, workspaces, or APIs are accessed.
 
 ```text
-Kulshan 0.5.0: August 1, 2026 - released today.
+Kulshan 0.6.2: August 23, 2026 - released today.
 Check PyPI for a newer version? [y/N]
 ```
 
@@ -119,6 +119,25 @@ kulshan analyze cost --s3 s3://bucket/prefix/ --month 2024-06
 ```
 
 Top movers by service, account, region, usage type. Period-over-period deltas. Resource-level contributors. Tag coverage. All outputs include provenance, evidence IDs, and `human_review_required: true`.
+
+---
+
+## Consultant Evidence Export
+
+Create a consultant evidence package from local CUR data, an S3 CUR or Data Export, or a configured workspace. The package aliases account and resource identifiers with a workspace-scoped key and includes a manifest, privacy report, README, and Parquet evidence.
+
+```bash
+kulshan export consultant ./cur-data \
+  --from 2026-07-01 --to 2026-08-01 \
+  -o consultant-evidence.zip
+```
+
+Add `--ce` to include Cost Explorer evidence. Two fail-fast restrictions apply:
+
+- A combined CUR and Cost Explorer export fails if `--service` or `--exclude-service` is supplied. Run separate exports because one service literal cannot be resolved unambiguously against both datasets.
+- A workspace Cost Explorer export fails when the connection has a role ARN, or when the connection specifies a profile and `--profile` is absent. Pass `--profile` so CUR and Cost Explorer use the same AWS identity.
+
+The export builds and validates the complete ZIP in temporary storage, scanning every package member for residual identifiers before the completed ZIP is moved to the requested output path.
 
 ---
 
@@ -194,7 +213,7 @@ kulshan report --format csv -o f.csv    # Spreadsheet / JIRA import
 kulshan convert -i scan.json -o r.html  # Re-render without re-scanning
 ```
 
-Account IDs redacted by default. `--show-pii` for full IDs. Atomic writes prevent partial files.
+Identifiers are pseudonymized in structured output using a workspace-scoped key. `--show-identifiers` disables pseudonymization. Atomic writes prevent partial files.
 
 ---
 

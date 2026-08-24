@@ -1,6 +1,6 @@
 # Kulshan
 
-Read-only AWS audit CLI.
+Local-first AWS cost analysis and evidence CLI. Read-only by construction.
 
 ```bash
 pip install kulshan
@@ -19,9 +19,11 @@ One command. One report. Zero writes to your AWS account.
 
 ## What Kulshan does
 
-Ten read-only audit packs in one CLI. Cost anomalies, security posture, waste detection, DR gaps, drift, tag compliance, observability blind spots, quota headroom, and network topology - scored 0-100, exportable as HTML, JSON, SARIF, or CSV.
+Local-first AWS cost analysis and evidence CLI with ten read-only audit packs. Cost anomalies, security posture, waste detection, DR gaps, drift, tag compliance, observability blind spots, quota headroom, and network topology are scored 0-100 and exportable as HTML, JSON, SARIF, or CSV.
 
 Reads your Cost Explorer data and your own CUR/Data Export Parquet files in place. No data leaves your machine. No SaaS account. No telemetry. No automatic outbound update requests.
+
+Creates a consultant evidence package that aliases account and resource identifiers in CUR data, with optional Cost Explorer evidence. [See the Consultant Evidence Export documentation.](kulshan/README.md#consultant-evidence-export)
 
 ---
 
@@ -47,7 +49,7 @@ Python 3.9+. macOS, Linux, Windows. Optional extras: `kulshan[mcp]`, `kulshan[pd
 When no update decision has been recorded in the previous nine hours, Kulshan shows the installed release date and age, then asks whether to check PyPI. The default is **No**. PyPI is contacted only after you answer **Yes**, before Kulshan reads AWS credentials or calls AWS.
 
 ```text
-Kulshan 0.5.0: August 1, 2026 - released today.
+Kulshan 0.6.2: August 23, 2026 - released today.
 Check PyPI for a newer version? [y/N]
 ```
 

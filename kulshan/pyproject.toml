@@ -67,7 +67,7 @@ all = ["kulshan[pdf,excel,pptx,mcp]"]
 kulshan = "kulshan.cli:main"
 
 [project.urls]
-Homepage = "https://github.com/MissionFinOps/kulshan"
+Homepage = "https://missionfinops.com"
 Repository = "https://github.com/MissionFinOps/kulshan"
 Documentation = "https://github.com/MissionFinOps/kulshan/tree/master/kulshan/docs"
 Issues = "https://github.com/MissionFinOps/kulshan/issues"
