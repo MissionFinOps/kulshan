@@ -95,8 +95,27 @@ def test_prior_month_does_not_prove_reconciliation():
 )
 def test_customer_text_is_not_safe(column):
     from kulshan.export.columns import ColumnClass, classify_column
+    expected = ColumnClass.DROP if column.startswith("cost_category_") else ColumnClass.PSEUDONYMIZE
+    assert classify_column(column) is expected
 
-    assert classify_column(column) is ColumnClass.PSEUDONYMIZE
+
+def test_assumed_cross_account_session_is_authoritative(monkeypatch):
+    from kulshan.session import create_session
+    base, assumed = Mock(), Mock()
+    assumed_client = assumed.client
+    base.client.return_value.assume_role.return_value = {"Credentials": {
+        "AccessKeyId": "assumed-key", "SecretAccessKey": "assumed-secret",
+        "SessionToken": "assumed-token",
+    }}
+    constructor = Mock(side_effect=[base, assumed])
+    monkeypatch.setattr("boto3.Session", constructor)
+    role = "arn:aws:iam::444455556666:role/Audit"
+    verified = create_session(profile="source-account", role_arn=role)
+    CostFetcher(profile="source-account", session=verified)
+    assert verified is assumed
+    assert constructor.call_count == 2
+    assert constructor.call_args.kwargs["aws_access_key_id"] == "assumed-key"
+    assert [call.args[0] for call in assumed_client.call_args_list] == ["ce", "organizations"]
 
 
 @pytest.mark.parametrize("value", ["=1+1", "  +cmd", "\t@SUM(1)", "\r-1+cmd"])

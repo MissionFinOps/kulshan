@@ -167,6 +167,11 @@ def classify_column(column_name: str, keep_tags: frozenset[str] = frozenset()) -
     """
     col = column_name.lower()
 
+    # Category names themselves are customer-defined schema labels.
+    # Dropping the column protects both its header and its values.
+    if col.startswith("cost_category_"):
+        return ColumnClass.DROP
+
     # Explicit pseudonymize takes priority over safe prefixes
     if col in _PSEUDONYMIZE_EXACT:
         return ColumnClass.PSEUDONYMIZE
