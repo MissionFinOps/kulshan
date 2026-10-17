@@ -12,6 +12,7 @@ This engine:
 """
 from __future__ import annotations
 
+import re
 from pathlib import Path
 from typing import Any
 
@@ -111,7 +112,51 @@ class PseudonymizationEngine:
         """
         if not self.is_active:
             return payload
-        return self._walk(payload, field_key="")
+        # Learn named identifiers from semantic fields, then protect references
+        # to those values in findings and otherwise unclassified text fields.
+        replacements: dict[str, str] = {}
+        self._collect_identifiers(payload, "", replacements)
+        return self._replace_references(self._walk(payload, field_key=""), replacements)
+
+    @staticmethod
+    def _child_key(parent: str, key: str) -> str:
+        semantic = classify_field(parent) in {IdentifierClass.RESOURCE, IdentifierClass.ACCOUNT}
+        if semantic and key.lower() in {"id", "name", "identifier", "value"}:
+            return parent
+        return key
+
+    def _collect_identifiers(self, obj: Any, field: str, values: dict[str, str]) -> None:
+        if isinstance(obj, dict):
+            for key, value in obj.items():
+                self._collect_identifiers(value, self._child_key(field, str(key)), values)
+        elif isinstance(obj, (list, tuple)):
+            if self._is_ranked_pair(obj, field):
+                self._collect_identifiers(obj[0], field, values)
+                return
+            for value in obj:
+                self._collect_identifiers(value, field, values)
+        elif not isinstance(obj, bool) and isinstance(obj, (str, int, float)):
+            kind = classify_field(field)
+            if kind is not None and str(obj):
+                values[str(obj)] = self.pseudonymize_value(str(obj), kind)
+
+    @staticmethod
+    def _is_ranked_pair(obj: Any, field: str) -> bool:
+        return (field in {"top_accounts", "top_resources"} and len(obj) == 2
+                and isinstance(obj[0], (str, int)) and isinstance(obj[1], (int, float)))
+
+    def _replace_references(self, obj: Any, values: dict[str, str]) -> Any:
+        if isinstance(obj, str):
+            # Longest first prevents a shorter identifier consuming a prefix.
+            for raw in sorted(values, key=len, reverse=True):
+                obj = re.sub(r"(?<!\w)" + re.escape(raw) + r"(?!\w)", values[raw], obj)
+            return obj
+        if isinstance(obj, dict):
+            return {key: self._replace_references(value, values)
+                    for key, value in obj.items()}
+        if isinstance(obj, (list, tuple)):
+            return type(obj)(self._replace_references(value, values) for value in obj)
+        return obj
 
     def _walk(self, obj: Any, field_key: str) -> Any:
         if obj is None:
@@ -119,13 +164,20 @@ class PseudonymizationEngine:
         if isinstance(obj, bool):
             return obj
         if isinstance(obj, (int, float)):
+            kind = classify_field(field_key)
+            if kind is not None:
+                return self.pseudonymize_value(str(obj), kind)
             return obj
         if isinstance(obj, str):
             return self._transform_string(obj, field_key)
         if isinstance(obj, dict):
-            return {self.pseudonymize_text(str(k)): self._walk(v, str(k))
-                    for k, v in obj.items()}
+            return {
+                self.pseudonymize_text(str(k)): self._walk(v, self._child_key(field_key, str(k)))
+                for k, v in obj.items()
+            }
         if isinstance(obj, (list, tuple)):
+            if self._is_ranked_pair(obj, field_key):
+                return type(obj)([self._walk(obj[0], field_key), obj[1]])
             result = [self._walk(item, field_key) for item in obj]
             return type(obj)(result) if isinstance(obj, tuple) else result
         # Unsupported type: fail closed

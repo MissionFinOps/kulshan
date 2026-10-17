@@ -12,7 +12,7 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
 
-from kulshan.export.columns import ColumnClass
+from kulshan.export.columns import ColumnClass, public_dropped_columns
 
 # ---------------------------------------------------------------------------
 # Gate results
@@ -64,7 +64,9 @@ def gate_schema(
         details={
             "counts": {k.value: v for k, v in counts.items()},
             "total": len(classification),
-            "dropped_unclassified": sorted(unclassified) if drop_unclassified else [],
+            "dropped_unclassified": (
+                public_dropped_columns(unclassified) if drop_unclassified else []
+            ),
         },
     )
 

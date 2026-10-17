@@ -84,7 +84,7 @@ class CoverageReport:
     packs_failed: int = 0
     packs_skipped: int = 0
     regions_scanned: int = 0
-    report_status: Literal["complete", "partial", "failed"] = "complete"
+    report_status: Literal["complete", "partial", "unavailable", "failed"] = "complete"
     kulshan_version: str = field(default_factory=lambda: __version__)
     generated_at: str = field(
         default_factory=lambda: datetime.now(timezone.utc).isoformat(timespec="seconds")
@@ -164,6 +164,9 @@ def build_coverage_from_results(
     Examines each pack's result for errors, skipped status, and findings
     to determine execution completeness.
     """
+    from kulshan.orchestrator import summarize_completeness
+    completeness = summarize_completeness(results)
+
     executions: List[ExecutionRecord] = []
     denied_actions: List[str] = []
     packs_completed = 0
@@ -173,11 +176,16 @@ def build_coverage_from_results(
 
     for pack_name, result in results.items():
         if result.get("skipped"):
+            pack_errors = result.get("errors", [])
+            denied_actions.extend(f"{pack_name}: {error}"
+                                  for error in result.get("missing_permissions", []))
             packs_skipped += 1
             for region in regions:
                 executions.append(ExecutionRecord(
                     pack=pack_name, region=region,
                     account_id=account_id, status="skipped",
+                    errors=[CoverageError(service=pack_name, action="", code="Unavailable",
+                                          message=str(error)) for error in pack_errors],
                 ))
             continue
 
@@ -193,7 +201,7 @@ def build_coverage_from_results(
         if pack_errors and not findings_count:
             packs_failed += 1
             status: ExecutionStatus = "failed"
-        elif pack_denied:
+        elif result.get("partial"):
             packs_partial += 1
             status = "partial"
         else:
@@ -218,13 +226,8 @@ def build_coverage_from_results(
 
     packs_attempted = len(results)
 
-    # Determine overall report status
-    if packs_failed == packs_attempted:
-        report_status: Literal["complete", "partial", "failed"] = "failed"
-    elif packs_partial > 0 or packs_failed > 0 or packs_skipped > 0:
-        report_status = "partial"
-    else:
-        report_status = "complete"
+    # Share the same completion decision as CLI exit and MCP output.
+    report_status = completeness["status"]
 
     # Data sources
     data_sources: Dict[str, str] = {}

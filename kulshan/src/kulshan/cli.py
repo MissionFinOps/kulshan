@@ -162,7 +162,7 @@ def _emit_output(
             "account_id": account_id,
             "regions": regions,
             "duration_seconds": round(duration, 1),
-            "overall_score": overall_score,
+            "overall_score": overall_score if overall_grade != "N/A" else None,
             "overall_grade": overall_grade,
             "scan_metadata": scan_metadata,
             "coverage": coverage,
@@ -738,7 +738,9 @@ def report(
             # Compute top actions and metadata for output
             from kulshan.findings_processor import process_findings
             top_actions = process_findings(all_findings)[:10] if all_findings else []
+            from kulshan.orchestrator import summarize_completeness
             scan_metadata = {
+                **summarize_completeness(results),
                 "report_status": consolidated.report_status,
                 "payer_cost_coverage": consolidated.payer_cost_coverage,
                 "connections": [
@@ -768,6 +770,7 @@ def report(
                 scan_metadata=scan_metadata, console=console,
                 history_db_path=ws_ctx.history_db_path,
                 billing_data_integrity=billing_data_integrity,
+                coverage=coverage_payload,
             )
 
             from kulshan.orchestrator import scan_exit_code
@@ -1071,8 +1074,9 @@ def report(
             }
         
         # Skip the rest of normal report flow for CUR-only mode
-        scan_metadata = {"partial": False, "skipped": [], "errors": []}
-        overall_score, overall_grade = 50, "N/A"
+        from kulshan.orchestrator import summarize_completeness
+        scan_metadata = summarize_completeness(results)
+        overall_score, overall_grade = compute_overall(results)
         all_findings = []
         top_actions = []
         

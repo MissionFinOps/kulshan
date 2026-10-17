@@ -17,10 +17,11 @@ from __future__ import annotations
 
 import logging
 import time
+from copy import deepcopy
 from dataclasses import dataclass, field
 from typing import Any, Dict, List, Literal, Optional
 
-from kulshan.orchestrator import run_all_scans, compute_overall
+from kulshan.orchestrator import run_all_scans, compute_overall, summarize_completeness
 from kulshan.workspace.sts import create_verified_session, StsVerificationError
 
 logger = logging.getLogger(__name__)
@@ -31,7 +32,7 @@ PAYER_SCOPED_PACKS = frozenset({"cost"})
 # All other packs are account-scoped.
 ACCOUNT_SCOPED_PACKS = frozenset({"security", "sweep", "dr", "age", "drift", "tag", "pulse", "limit", "topo"})
 
-ReportStatus = Literal["complete", "partial", "failed"]
+ReportStatus = Literal["complete", "partial", "unavailable", "failed"]
 PayerCostCoverage = Literal["verified_payer_wide", "account_scoped", "unavailable", "cur_authoritative"]
 
 
@@ -269,6 +270,8 @@ def run_consolidated_report(
 
         # Collect results
         for pack_name, pack_result in results.items():
+            pack_result = deepcopy(pack_result)
+            pack_result["source_connections"] = [conn_name]
             if pack_name not in all_pack_results:
                 all_pack_results[pack_name] = []
             all_pack_results[pack_name].append(pack_result)
@@ -280,7 +283,7 @@ def run_consolidated_report(
                     finding["account_id"] = verified.account_id
                 all_findings_raw.append(finding)
 
-            if not pack_result.get("skipped"):
+            if summarize_completeness({pack_name: pack_result})["status"] == "complete":
                 packs_completed.append(pack_name)
 
         exec_meta = ConnectionExecution(
@@ -309,13 +312,30 @@ def run_consolidated_report(
     elif payer_packs:
         payer_cost_coverage = "unavailable"
 
+    # Failed connections must remain represented in the packs they should cover.
+    for execution in connection_executions:
+        if execution.status != "failed":
+            continue
+        expected_packs = list(account_packs)
+        if cost_authority and execution.connection_name == cost_authority["name"]:
+            expected_packs += payer_packs
+        for pack_name in expected_packs:
+            all_pack_results.setdefault(pack_name, []).append({
+                "skipped": True, "errors": [execution.error_code or "Connection unavailable"],
+                "source_connections": [execution.connection_name], "findings": [],
+            })
+    for pack_name in selected_packs:
+        all_pack_results.setdefault(pack_name, [{
+            "skipped": True, "errors": ["No eligible connection executed this pack"],
+            "findings": [], "source_connections": [],
+        }])
+
     # Merge pack results
     merged_results: Dict[str, dict] = {}
     for pack_name, result_list in all_pack_results.items():
-        if pack_name in PAYER_SCOPED_PACKS:
-            merged_results[pack_name] = result_list[0] if result_list else {}
-        else:
-            merged_results[pack_name] = _merge_pack_results(result_list)
+        merged_results[pack_name] = _merge_pack_results(result_list)
+    if "cost" in merged_results and merged_results["cost"].get("skipped"):
+        payer_cost_coverage = "unavailable"
 
     # Deduplicate findings (account-aware)
     deduped_findings = deduplicate_findings(all_findings_raw)
@@ -324,14 +344,7 @@ def run_consolidated_report(
     overall_score, overall_grade = compute_overall(merged_results)
 
     # Determine report status
-    total_connections = len(connections)
-    successful_count = len(successful)
-    if successful_count == total_connections:
-        report_status: ReportStatus = "complete"
-    elif successful_count > 0:
-        report_status = "partial"
-    else:
-        report_status = "failed"
+    report_status = summarize_completeness(merged_results)["status"]
 
     duration = time.time() - start_time
 
@@ -358,18 +371,53 @@ def _merge_pack_results(result_list: list[dict]) -> dict:
     base = None
     for r in result_list:
         if not r.get("skipped"):
-            base = dict(r)
+            base = deepcopy(r)
             break
     if base is None:
-        base = dict(result_list[0])
+        base = deepcopy(result_list[0])
+
+    coverage = summarize_completeness({str(i): r for i, r in enumerate(deepcopy(result_list))})
+    base["errors"] = list(dict.fromkeys(
+        str(error) for result in result_list for error in result.get("errors", [])
+    ))
+    base["missing_permissions"] = sorted({
+        value for result in result_list for value in result.get("missing_permissions", [])
+    })
+    base["source_connections"] = sorted({
+        value for result in result_list for value in result.get("source_connections", [])
+    })
+    base["coverage_by_source"] = [
+        {"source_connections": result.get("source_connections", []),
+         "coverage": summarize_completeness({"pack": deepcopy(result)}),
+         "region_coverage": deepcopy(result.get("coverage", {})),
+         "metadata": deepcopy(result.get("metadata", {})),
+         "errors": result.get("errors", [])}
+        for result in result_list
+    ]
+    base["skipped"] = coverage["status"] == "unavailable"
+    base["partial"] = coverage["partial"]
+    base["completeness"] = "partial" if coverage["partial"] else "complete"
 
     all_findings = []
     for r in result_list:
         all_findings.extend(r.get("findings", []))
     base["findings"] = all_findings
 
-    if "scores" in base:
-        base["scores"]["total_findings"] = len(all_findings)
+    scores = base.setdefault("scores", {})
+    scores["total_findings"] = len(all_findings)
+    counts: dict[str, int] = {}
+    for finding in all_findings:
+        severity = finding.get("severity", "info")
+        counts[severity] = counts.get(severity, 0) + finding.get("grouped_count", 1)
+    scores["severity_counts"] = counts
+    known_scores = [result.get("scores", {}).get("overall_score") for result in result_list]
+    if coverage["partial"] or any(score is None for score in known_scores):
+        scores["overall_score"], scores["grade"] = None, "N/A"
+    else:
+        # Do not silently present the first account's score as a combined score.
+        scores["overall_score"] = min(known_scores)
+        from kulshan.orchestrator import _grade
+        scores["grade"] = _grade(scores["overall_score"])
 
     return base
 

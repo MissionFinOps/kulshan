@@ -21,6 +21,11 @@ class ColumnClass(Enum):
     UNCLASSIFIED = "unclassified"
 
 
+def public_dropped_columns(columns: list[str] | None) -> list[str]:
+    """Expose removed-column cardinality without exporting customer schema labels."""
+    return [f"removed_column_{index + 1:04d}" for index in range(len(set(columns or [])))]
+
+
 # Tag key handling:
 #   aws: prefixed keys -> key SAFE, values passthrough
 #   allowlisted customer keys -> key passthrough, values pseudonymized

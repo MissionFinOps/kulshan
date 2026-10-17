@@ -340,6 +340,8 @@ def _compact_finding(finding: dict[str, Any]) -> dict[str, Any]:
         "service": finding.get("service") or finding.get("resource_type") or finding.get("pack"),
         "dollar_impact": finding.get("estimated_monthly_impact"),
         "recommendation": finding.get("recommended_action") or finding.get("remediation"),
+        "resource_id": finding.get("resource_id"),
+        "account_id": finding.get("account_id"),
     }
     remediation_cost = finding.get("estimated_remediation_cost")
     if remediation_cost:

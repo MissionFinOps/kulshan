@@ -156,7 +156,7 @@ class TestGates:
         }
         result = gate_schema(classification, drop_unclassified=True)
         assert result.passed
-        assert "col_unknown" in result.details["dropped_unclassified"]
+        assert result.details["dropped_unclassified"] == ["removed_column_0001"]
 
     def test_gate_integrity_passes(self):
         result = gate_integrity(source_row_count=1000, output_row_count=1000)
@@ -1314,14 +1314,10 @@ class TestDropUnclassifiedEndToEnd:
             manifest = json.loads(zf.read("manifest.json"))
             readme = zf.read("README.md").decode()
 
-        assert "brand_new_aws_column_2027" in privacy["dropped_columns"]
-        # manifest.json gates details contain dropped_unclassified
-        assert any(
-            "brand_new_aws_column_2027" in str(g.get("details", {}).get("dropped_unclassified", []))
-            for g in manifest.get("gates", [{}])
-            if isinstance(g, dict)
-        ) or "brand_new_aws_column_2027" in str(manifest)
-        assert "brand_new_aws_column_2027" in readme
+        assert privacy["dropped_columns"] == ["removed_column_0001"]
+        assert "brand_new_aws_column_2027" not in json.dumps(privacy)
+        assert "brand_new_aws_column_2027" not in json.dumps(manifest)
+        assert "brand_new_aws_column_2027" not in readme
 
 
 # ═══════════════════════════════════════════════════════════════════════════════

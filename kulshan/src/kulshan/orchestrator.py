@@ -510,11 +510,13 @@ def summarize_completeness(results: Dict[str, dict]) -> dict:
 def _annotate_completeness(result: dict) -> None:
     errors = [str(error) for error in result.get("errors", []) if error]
     result["errors"] = errors
-    result["missing_permissions"] = _extract_missing_permissions(errors)
+    result["missing_permissions"] = sorted(set(
+        result.get("missing_permissions", []) + _extract_missing_permissions(errors)
+    ))
 
     if result.get("skipped"):
         status = "skipped"
-    elif errors:
+    elif errors or result.get("partial") or result.get("completeness") == "partial":
         status = "partial"
     else:
         status = "complete"
