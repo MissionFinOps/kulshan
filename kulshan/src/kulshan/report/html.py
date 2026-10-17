@@ -41,8 +41,10 @@ def _grade_color(grade: str) -> str:
     return _GRADE_COLORS.get(first, "#c62828")
 
 
-def _svg_dial(score: int, size: int = 120) -> str:
+def _svg_dial(score: int | None, size: int = 120) -> str:
     """Return an inline SVG circle dial for a 0-100 score."""
+    if score is None:
+        return '<span class="score-unavailable">Unavailable</span>'
     score = max(0, min(100, score))
     radius = size * 0.4
     stroke_width = size * 0.08
@@ -79,8 +81,10 @@ def _svg_dial(score: int, size: int = 120) -> str:
     )
 
 
-def _svg_bar(score: int, width: int = 200, height: int = 12) -> str:
+def _svg_bar(score: int | None, width: int = 200, height: int = 12) -> str:
     """Return an inline SVG horizontal bar for a 0-100 score."""
+    if score is None:
+        return '<span class="score-unavailable">Unavailable</span>'
     score = max(0, min(100, score))
     fill_width = int(width * score / 100)
     if score >= 90:
@@ -288,7 +292,7 @@ def _build_tool_details(results: dict) -> str:
         color = _grade_color(grade)
         bar = _svg_bar(score, width=300, height=14)
 
-        status = "Skipped" if skipped else f"{score}/100"
+        status = "Skipped" if skipped else "Unavailable" if score is None else f"{score}/100"
 
         # Build breakdown rows from scores dict (exclude known meta keys)
         meta_keys = {"overall_score", "grade", "total_findings", "severity_counts"}
@@ -1085,7 +1089,7 @@ def _build_detailed_breakdown(results: dict, ran_packs: list) -> str:
             f'<span class="detail-icon">{icon}</span>'
             f'<span class="detail-name">{html.escape(label)}</span>'
             f'<span class="detail-grade" style="color:{color}">{html.escape(grade)}</span>'
-            f'<span class="detail-status">{score}/100</span>'
+            f'<span class="detail-status">{score if score is not None else "Unavailable"}</span>'
             f'</summary>'
             f'<div class="detail-body">'
             f'<div class="detail-bar">{bar}</div>'

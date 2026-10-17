@@ -82,6 +82,10 @@ def test_grouped_currency_has_no_cross_currency_total(tmp_path):
             ),
         )
         assert result.totals == {"CAD": 10, "USD": 20}
+        from kulshan.reckoner.terminal import render_result
+        text = render_result(result, mode="compact")
+        assert "CAD 10.00" in text
+        assert "USD 20.00" in text
     finally:
         con.close()
 

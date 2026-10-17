@@ -329,6 +329,8 @@ def run_all_scans(
                     # Print completion status
                     if result.get("skipped"):
                         progress.console.print(f"  [dim]⊘ {label}[/dim] [dim italic]skipped[/dim italic]")
+                    elif result.get("partial"):
+                        progress.console.print(f"  [yellow]{label}: partial coverage[/yellow]")
                     elif finding_count == 0:
                         progress.console.print(f"  [green]✓ {label}[/green] [dim]0 findings[/dim]")
                     else:
@@ -364,6 +366,8 @@ def run_all_scans(
                 finding_count = len(result.get("findings", []))
                 if result.get("skipped"):
                     progress.console.print(f"  [dim]⊘ {label}[/dim] [dim italic]skipped[/dim italic]")
+                elif result.get("partial"):
+                    progress.console.print(f"  [yellow]{label}: partial coverage[/yellow]")
                 elif finding_count == 0:
                     progress.console.print(f"  [green]✓ {label}[/green] [dim]0 findings[/dim]")
                 else:
@@ -517,6 +521,9 @@ def _annotate_completeness(result: dict) -> None:
 
     result["completeness"] = status
     result["partial"] = status != "complete"
+    if status != "complete" and isinstance(result.get("scores"), dict):
+        result["scores"]["overall_score"] = None
+        result["scores"]["grade"] = "N/A"
 
 
 def _extract_missing_permissions(errors: List[str]) -> List[str]:

@@ -314,7 +314,7 @@ def _parse_packs(packs: str) -> list[str]:
     selected = [part.strip() for part in value.split(",") if part.strip()]
     invalid = [pack for pack in selected if pack not in VALID_PACKS]
     if invalid:
-        raise ToolError(f"Unknown pack(s): {', '.join(invalid)}")
+        raise ToolError("Unknown pack selection; use kulshan_list_packs for supported names.")
     return selected or ["cost"]
 
 

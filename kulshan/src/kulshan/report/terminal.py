@@ -30,7 +30,9 @@ def grade_color(grade: str) -> str:
     return "red"
 
 
-def score_bar(score: int, width: int = 20) -> str:
+def score_bar(score: int | None, width: int = 20) -> str:
+    if score is None:
+        return "Unavailable"
     filled = int(score / 100 * width)
     empty = width - filled
     if score >= 80:
@@ -242,7 +244,7 @@ def render_report(
         gc = grade_color(grade)
         table.add_row(
             f"{icon} {label}",
-            f"[{gc}]{score}[/{gc}]",
+            f"[{gc}]{score if score is not None else 'Unavailable'}[/{gc}]",
             f"[{gc}]{grade}[/{gc}]",
             score_bar(score),
             str(findings),

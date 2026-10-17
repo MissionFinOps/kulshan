@@ -199,6 +199,7 @@ def test_registry_vocabulary_and_status_are_stable() -> None:
     )
     assert set(PERIOD_IDS) == {
         "current-billing-period",
+        "latest-available-billing-period",
         "previous-complete-month",
         "last-7-days",
         "last-30-days",

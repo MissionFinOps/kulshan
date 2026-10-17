@@ -90,7 +90,7 @@ def _render(result, output):
     except AttributeError:
         names = [column.column_id for column in result.columns]
         rows = [" | ".join(str(row.get(name, "")) for name in names) for row in result.rows]
-        return "\n".join([" | ".join(names), *rows, f"Total: {result.totals.get('value', 0)}"])
+        return "\n".join([" | ".join(names), *rows, f"Totals: {dict(result.totals)}"])
 
 
 def _echo(result, output):

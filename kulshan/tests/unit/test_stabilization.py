@@ -59,6 +59,16 @@ def test_scan_process_status(result, code):
     assert scan_exit_code({"security": result}) == code
 
 
+def test_partial_pack_cannot_keep_clean_score():
+    from kulshan.report.html import _svg_bar, _svg_dial
+    from kulshan.report.terminal import score_bar
+    result = {"scores": {"overall_score": 100, "grade": "A"}, "errors": ["AccessDenied"]}
+    summarize_completeness({"security": result})
+    assert result["scores"]["overall_score"] is None
+    assert result["scores"]["grade"] == "N/A"
+    assert all("Unavailable" in render(None) for render in (_svg_bar, _svg_dial, score_bar))
+
+
 def test_cost_pack_passes_injected_session(monkeypatch):
     import pandas as pd
 
