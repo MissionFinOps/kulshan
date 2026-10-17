@@ -122,7 +122,7 @@ class CostMetricResult:
     formula_version: str
     currency: str | None
     rows: tuple[Mapping[str, Any], ...]
-    total: float
+    total: float | None
     source_schema: str
     source_version: str
     limitations: tuple[str, ...]
@@ -690,6 +690,30 @@ GROUPINGS: Mapping[str, str] = {
 }
 
 
+def validate_currencies(
+    connection: Any, relation: CanonicalRelation, groupings: Sequence[str]
+) -> tuple[str, ...]:
+    """Enforce the same source currency contract for all query executors."""
+    null_count = connection.execute(
+        f"SELECT count(*) FROM {_q(relation.relation_name)} "
+        "WHERE currency IS NULL OR trim(currency) = ''"
+    ).fetchone()[0]
+    if null_count:
+        raise MissingCurrencyError("source contains null or malformed billing currency")
+    currencies = tuple(
+        row[0]
+        for row in connection.execute(
+            f"SELECT DISTINCT currency FROM {_q(relation.relation_name)} "
+            "WHERE currency IS NOT NULL ORDER BY currency"
+        ).fetchall()
+    )
+    if len(currencies) > 1 and "currency" not in groupings:
+        raise MixedCurrencyError(
+            "multiple billing currencies require currency grouping; conversion is forbidden"
+        )
+    return currencies
+
+
 def query_metric(
     connection: Any,
     relation: CanonicalRelation,
@@ -713,23 +737,7 @@ def query_metric(
     if period_end is not None:
         where.append("usage_start < CAST(? AS TIMESTAMP)")
         bindings.append(period_end)
-    null_count = connection.execute(
-        f"SELECT count(*) FROM {_q(relation.relation_name)} "
-        "WHERE currency IS NULL OR trim(currency) = ''"
-    ).fetchone()[0]
-    if null_count:
-        raise MissingCurrencyError("source contains null or malformed billing currency")
-    currencies = tuple(
-        row[0]
-        for row in connection.execute(
-            f"SELECT DISTINCT currency FROM {_q(relation.relation_name)} "
-            "WHERE currency IS NOT NULL ORDER BY currency"
-        ).fetchall()
-    )
-    if len(currencies) > 1 and "currency" not in groupings:
-        raise MixedCurrencyError(
-            "multiple billing currencies require currency grouping; conversion is forbidden"
-        )
+    currencies = validate_currencies(connection, relation, groupings)
     columns = [GROUPINGS[item] for item in groupings]
     select_group = ", ".join(_q(item) for item in columns)
     select_prefix = f"{select_group}, " if select_group else ""
@@ -743,7 +751,7 @@ def query_metric(
     cursor = connection.execute(sql, bindings)
     names = [item[0] for item in cursor.description]
     result_rows = tuple(dict(zip(names, row)) for row in cursor.fetchall())
-    total = sum(float(row["value"] or 0) for row in result_rows)
+    total = sum(float(row["value"] or 0) for row in result_rows) if len(currencies) <= 1 else None
     return CostMetricResult(
         formula.metric_id,
         formula.formula_id,

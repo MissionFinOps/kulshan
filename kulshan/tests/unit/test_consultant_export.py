@@ -1716,6 +1716,9 @@ class TestS3RealSourceSql:
                 executed_statements.append(sql)
                 return self._con.executemany(sql, *args, **kwargs)
 
+            def cursor(self):
+                return self._con.cursor()
+
             def close(self):
                 self._con.close()
 
@@ -1816,6 +1819,9 @@ class TestS3ConsultantCliIntegration:
             def executemany(self, sql, *args, **kwargs):
                 executed.append(sql)
                 return self._con.executemany(sql, *args, **kwargs)
+
+            def cursor(self):
+                return self._con.cursor()
 
             def close(self):
                 self._con.close()

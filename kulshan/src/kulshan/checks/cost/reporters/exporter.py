@@ -115,7 +115,8 @@ class CostExporter:
 
         if frames:
             combined = pd.concat(frames, ignore_index=True)
-            self._redact_df(combined).to_csv(path, index=False)
+            from kulshan.csv_safety import safe_csv_value
+            self._redact_df(combined).map(safe_csv_value).to_csv(path, index=False)
         else:
             Path(path).write_text("")
         return path

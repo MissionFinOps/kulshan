@@ -363,6 +363,9 @@ def compute_executive_scorecard(
       - composite_grade: str
       - headline: str (one-line executive summary)
     """
+    if any(item.get("score") is None for item in efficiency_breakdown.values()):
+        return {"composite_score": None, "grade": "N/A", "status": "unavailable",
+                "limitations": ["Required efficiency evidence is unavailable."]}
     # ── Pillar 1: Cost Health ──
     cost_health = 80  # Start optimistic
     # Penalize for high velocity

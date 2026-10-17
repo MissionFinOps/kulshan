@@ -27,3 +27,11 @@ Source currency is preserved and never converted. Null or malformed currency fai
 CUDOS amortized and public On-Demand semantics are adapted from the exact pinned `summary_view.sql` blob and recorded in `provenance-records.json`. Golden fixtures qualify their behavior. The formulas provide analytical allocation, not proof of a finalized AWS invoice, and this PR does not claim full CUDOS parity.
 
 Existing cost commands still use their compatibility paths; migrating them is deliberately deferred until it can preserve their public output contracts without broadening PR 1.
+
+## Stabilized query semantics
+
+`current-billing-period` means the UTC calendar month now. `latest-available-billing-period` means the month containing the latest source usage timestamp. Historical-only datasets do not silently substitute their oldest month for the calendar current month. Explicit `custom` ranges remain half-open.
+
+Both query executors reject missing currency and require currency grouping for mixed currencies. The high-level result records currency in cost_basis; currency-grouped totals are a mapping by currency, never a cross-currency sum. Overall totals use a separate aggregate over the filtered range before LIMIT; visible rows may be a subset. The lower-level mixed-currency aggregate total is None.
+
+Ended months have unknown invoice finality without reconciliation evidence. CE/CUR agreement provides corroboration, not independent invoice verification. CSV text cells protect spreadsheet formulas; signed numeric values remain numeric. Strong privacy processing cannot silently fall back to weaker output.

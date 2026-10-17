@@ -351,7 +351,7 @@ def run_scan(session=None, regions=None, *, quick: bool = False, **kwargs) -> di
 
     findings = statistical_findings + aws_findings
 
-    score_val = 50
+    score_val = None
     breakdown: dict = {}
     try:
         ri_cov = fetcher.get_reservation_coverage(days=min(days, 90))
@@ -361,7 +361,7 @@ def run_scan(session=None, regions=None, *, quick: bool = False, **kwargs) -> di
         score_data = compute_efficiency_score(
             ri_cov, sp_util, ri_util, idle, anomalies, total_spend
         )
-        score_val = int(score_data.get("total_score", 50))
+        score_val = score_data.get("total_score")
         breakdown = score_data.get("breakdown", {})
     except Exception as e:
         errors.append(f"Efficiency scoring: {e}")
@@ -416,7 +416,7 @@ def run_scan(session=None, regions=None, *, quick: bool = False, **kwargs) -> di
         "tool": "cost",
         "scores": {
             "overall_score": score_val,
-            "grade": _grade(score_val),
+            "grade": _grade(score_val) if score_val is not None else "N/A",
             "total_findings": len(findings),
             "severity_counts": severity_counts,
             "breakdown": breakdown,

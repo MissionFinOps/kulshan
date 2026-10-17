@@ -1,4 +1,5 @@
 """Protect spreadsheet cells without altering numeric evidence."""
+
 from __future__ import annotations
 
 import re

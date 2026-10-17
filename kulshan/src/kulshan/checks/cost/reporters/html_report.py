@@ -268,7 +268,12 @@ def generate_html_report(
         </div>""")
 
     # ── Efficiency Score ──────────────────────────────────────────────
-    if efficiency_score:
+    if efficiency_score and efficiency_score.get("total_score") is None:
+        sections.append(
+            "<p>Efficiency score unavailable: independent utilization "
+            "and stability evidence required.</p>"
+        )
+    if efficiency_score and efficiency_score.get("total_score") is not None:
         total_s = efficiency_score["total_score"]
         grade = efficiency_score["grade"]
         grade_colors = {"A": "#3fb950", "B": "#3fb950", "C": "#d29922", "D": "#f85149", "F": "#f85149"}

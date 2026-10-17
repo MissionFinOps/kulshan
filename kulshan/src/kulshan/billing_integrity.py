@@ -4,7 +4,7 @@ from __future__ import annotations
 from dataclasses import dataclass, asdict
 from datetime import date, datetime, timezone
 from statistics import median
-from typing import Optional
+from typing import Any, Optional
 
 STATUS = {"trusted", "provisional", "suspect", "unknown"}
 FINALITY = {"estimated", "closed", "unknown"}
@@ -25,7 +25,7 @@ class BillingDataIntegrity:
     current_value: Optional[float] = None
     prior_value: Optional[float] = None
 
-    def to_dict(self) -> dict:
+    def to_dict(self) -> dict[str, Any]:
         return asdict(self)
 
     @property
@@ -37,7 +37,8 @@ class BillingDataIntegrity:
 def _finality(period: str, today: date) -> str:
     try:
         year, month = (int(x) for x in period.split("-"))
-        return "estimated" if (year, month) >= (today.year, today.month) else "closed"
+        date(year, month, 1)  # validate month before assigning any finality
+        return "estimated" if (year, month) >= (today.year, today.month) else "unknown"
     except (TypeError, ValueError):
         return "unknown"
 
@@ -67,6 +68,11 @@ def assess_billing_integrity(
     reasons: list[str] = []
     comparison = "available" if history else "not_available"
     status = "unknown" if finality == "unknown" else ("provisional" if finality == "estimated" else "trusted")
+    if finality == "unknown":
+        reasons.append(
+            "Invoice reconciliation evidence is unavailable; "
+            "calendar closure does not establish finality."
+        )
     prior = median(history) if history else None
     if finality == "estimated":
         reasons.append("The selected period includes the current billing month and may still change.")
@@ -90,11 +96,11 @@ def assess_billing_integrity(
 
 
 def build_report_billing_integrity(
-    results: dict,
+    results: dict[str, Any],
     *,
     today: Optional[date] = None,
     retrieved_at: Optional[str] = None,
-) -> Optional[dict]:
+) -> Optional[dict[str, Any]]:
     """Build a billing-integrity disclosure from evidence already in a report.
 
     Cost Explorer totals and CUR totals can cover different windows, so their

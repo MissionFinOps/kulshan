@@ -417,3 +417,10 @@ These are purely numeric/categorical operations. They do not interact with ident
 | `real-cur/` directory content | Directory exists in repo root; may contain real CUR extracts with production identifiers |
 | Whether `test_redact.py` existed before HEAD commit | `.pyc` cache files exist for it but no `.py` source; the HEAD commit message is "remove unimplemented placeholder stubs" — this test may have been deleted |
 | Full content of `workspace/onboarding.py` logger calls | Lines 271, 386, 492 use `logger.info()` but only the surrounding context was read; exact interpolated values not confirmed for all three |
+
+
+## Stabilization privacy boundary
+
+MCP dynamic responses always require an active pseudonym engine, including EC2/cost investigations and quick security. Supported detection includes account IDs, ARNs (including accountless S3 ARNs), common EC2/network resource identifiers, IPv4/IPv6, email, access keys and labeled AWS secret keys. Unknown string fields and map keys are scanned. Numerical JSON evidence remains unchanged. Bare 40-character hashes are not assumed to be credentials.
+
+Consultant export uses a closed column vocabulary: unknown prefix suffixes block or require explicit dropping. Cost Category values and line-item descriptions are pseudonymized as whole values. Residual scanning includes IPv6; schema and independent multiset row-equivalence gates remain mandatory. Alias-map construction uses bounded Python batches; DuckDB still stores full mapping tables and residual source-identifier sets can grow with source cardinality. This is not a claim of bounded total process memory.

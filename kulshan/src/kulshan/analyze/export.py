@@ -227,7 +227,7 @@ def _maybe_pseudonymize_brief(brief, output_format, output_file):
 
         engine = create_engine_for_output(PseudonymPolicy.for_structured_output())
         if not engine or not engine.is_active:
-            return brief
+            raise RuntimeError("Required privacy engine unavailable")
 
         # Pseudonymize the brief by converting to dict, transforming, then
         # creating a new brief-like object that the renderers can consume.
@@ -238,7 +238,7 @@ def _maybe_pseudonymize_brief(brief, output_format, output_file):
             brief = _pseudonymize_brief_fields(engine, brief)
         return brief
     except Exception:
-        return brief  # Graceful degradation
+        raise RuntimeError("Required privacy processing failed; output withheld") from None
 
 
 def _pseudonymize_brief_fields(engine, brief):

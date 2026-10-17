@@ -6,6 +6,7 @@ import csv
 import io
 import json
 
+from kulshan.csv_safety import safe_csv_value
 from kulshan.reckoner.contracts import QueryResult
 
 
@@ -18,7 +19,9 @@ def render_csv(result: QueryResult) -> str:
     names = [c.column_id for c in result.columns]
     writer = csv.DictWriter(out, fieldnames=names, lineterminator="\n")
     writer.writeheader()
-    writer.writerows(result.rows)
+    writer.writerows(
+        {key: safe_csv_value(value) for key, value in row.items()} for row in result.rows
+    )
     return out.getvalue()
 
 

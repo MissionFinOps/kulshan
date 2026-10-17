@@ -10,7 +10,7 @@ from unittest.mock import Mock
 import pytest
 
 pytest.importorskip("mcp", reason="mcp extra not installed")
-from mcp.server import fastmcp as mcp_fastmcp
+from mcp.server import fastmcp as mcp_fastmcp  # noqa: F401
 from mcp.server.fastmcp.exceptions import ToolError  # noqa: E402
 
 from kulshan import console_compat  # noqa: E402

@@ -123,7 +123,8 @@ class PseudonymizationEngine:
         if isinstance(obj, str):
             return self._transform_string(obj, field_key)
         if isinstance(obj, dict):
-            return {k: self._walk(v, k) for k, v in obj.items()}
+            return {self.pseudonymize_text(str(k)): self._walk(v, str(k))
+                    for k, v in obj.items()}
         if isinstance(obj, (list, tuple)):
             result = [self._walk(item, field_key) for item in obj]
             return type(obj)(result) if isinstance(obj, tuple) else result
@@ -137,6 +138,9 @@ class PseudonymizationEngine:
         """Transform a string value based on field context and content."""
         if not value:
             return value
+
+        if field_key.lower() in {"aws_secret_access_key", "secret_access_key", "secret_key"}:
+            return self.pseudonymize_value(value, IdentifierClass.UNKNOWN)
 
         # Check if field is explicitly passthrough
         if field_key and is_passthrough_field(field_key):

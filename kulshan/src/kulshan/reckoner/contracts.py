@@ -19,6 +19,7 @@ MAX_RESULT_LIMIT = 10_000
 SUPPORTED_PERIOD_IDS = frozenset(
     {
         "current-billing-period",
+        "latest-available-billing-period",
         "previous-complete-month",
         "last-7-days",
         "last-30-days",

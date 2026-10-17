@@ -108,11 +108,16 @@ _EMAIL_RE = re.compile(r"\b([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})\b")
 _ACCESS_KEY_RE = re.compile(r"\b((?:AKIA|ASIA)[A-Z0-9]{16})\b")
 _RESOURCE_RE = re.compile(r"\b((?:vpc|subnet|sg|rtb|nat|igw|tgw|vpce)-[0-9a-f]{8,17})\b")
 _IPV6_RE = re.compile(r"(?<![\w:])([0-9A-Fa-f]*:[0-9A-Fa-f:.]*:[0-9A-Fa-f:.]+)(?![\w:])")
+_SECRET_RE = re.compile(
+    r"(?i)(?:aws[_ -]?)?secret(?:[_ -]access)?[_ -]?key[\s:=\"']+"
+    r"([A-Za-z0-9/+=]{40})(?![A-Za-z0-9/+=])"
+)
 _IPV4_RE = re.compile(r"\b(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})\b")
 
 # Ordered list: ARN first (longer matches), then shorter patterns
 _FREE_TEXT_PATTERNS: list[tuple[re.Pattern, IdentifierClass]] = [
     (_ARN_RE, IdentifierClass.ARN),
+    (_SECRET_RE, IdentifierClass.UNKNOWN),
     (_RESOURCE_RE, IdentifierClass.RESOURCE),
     (_ACCOUNT_ID_RE, IdentifierClass.ACCOUNT),
     (_EC2_INSTANCE_RE, IdentifierClass.RESOURCE),

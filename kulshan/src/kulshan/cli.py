@@ -89,12 +89,15 @@ def _get_pseudonym_engine(fmt: str, output: Optional[str], show_pii: bool):
     # Resolve workspace-scoped secret
     try:
         from kulshan.pseudonym.context import create_engine_for_output
-        return create_engine_for_output(policy)
+        engine = create_engine_for_output(policy)
+        if engine is None or not engine.is_active:
+            raise RuntimeError("Required privacy engine unavailable; output withheld")
+        return engine
     except SecretCorruptError:
         # Fail closed: do not produce output
         raise
     except Exception:
-        return None  # Graceful degradation
+        raise RuntimeError("Required privacy processing failed; output withheld") from None
 
 
 def _emit_output(
@@ -767,12 +770,8 @@ def report(
                 billing_data_integrity=billing_data_integrity,
             )
 
-            has_critical = any(
-                r.get("scores", {}).get("severity_counts", {}).get("critical", 0) > 0
-                for r in results.values()
-            )
-            sys.exit(ExitCode.RUNTIME_ERROR if scan_metadata.get("partial") else
-                     ExitCode.FINDING_FAIL if has_critical else ExitCode.SUCCESS)
+            from kulshan.orchestrator import scan_exit_code
+            sys.exit(scan_exit_code(results))
 
         else:
             # Single-connection bound workspace: traditional execution
@@ -1239,12 +1238,8 @@ def report(
         )
         console.print("  [dim]Use --show-pii for full account IDs. Open in browser for interactive view.[/dim]")
 
-    has_critical = any(
-        r.get("scores", {}).get("severity_counts", {}).get("critical", 0) > 0
-        for r in results.values()
-    )
-    sys.exit(ExitCode.RUNTIME_ERROR if scan_metadata.get("partial") else
-                     ExitCode.FINDING_FAIL if has_critical else ExitCode.SUCCESS)
+    from kulshan.orchestrator import scan_exit_code
+    sys.exit(scan_exit_code(results))
 
 
 # Per-pack subcommands (`Kulshan cost`, `Kulshan security`, ...) were

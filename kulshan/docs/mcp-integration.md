@@ -297,3 +297,10 @@ Kulshan's MCP integration follows these principles:
 3. **Inspectable.** Every finding has an ID, fingerprint, and schema version. Humans can verify any claim.
 4. **Bounded cost.** The `kulshan_report` tool respects the same API cost model as the CLI. Cost Explorer calls are ~$0.01 each.
 5. **No side effects.** Tools only read from AWS. Nothing is created, modified, or deleted.
+
+
+## Supported SDK and coverage
+
+Install `pip install 'kulshan[mcp]'`. The supported SDK range is `mcp>=1.0,<2`; SDK 2 is not supported. CI installs the extra and tests stdio initialization and seven-tool discovery. An absent optional SDK may skip MCP tests; an installed incompatible SDK fails collection.
+
+Report and quick-security tools return `status` and `coverage` describing `complete`, `partial`, or `unavailable`. A denied or skipped scan is never clean. Partial findings remain available together with error and missing-permission coverage. All six dynamic tools pass through mandatory pseudonymization in the parent process; initialization, parsing, or sanitization failures withhold output. Worker error details are suppressed to avoid leaking identifiers. Numeric JSON evidence is preserved. Arbitrary customer labels without a known identifier field or supported pattern cannot be inferred from prose; review before sharing.

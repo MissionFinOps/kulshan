@@ -3,6 +3,8 @@ from __future__ import annotations
 
 import csv
 import io
+
+from kulshan.csv_safety import safe_csv_value
 from typing import List
 
 
@@ -50,7 +52,7 @@ def findings_to_csv(findings: List[dict]) -> str:
             # Flatten multi-line remediation for CSV
             if isinstance(val, str):
                 val = val.replace("\n", " | ")
-            row[col] = val
+            row[col] = safe_csv_value(val)
         writer.writerow(row)
 
     return output.getvalue()

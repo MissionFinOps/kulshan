@@ -444,12 +444,26 @@ def compute_overall(results: Dict[str, dict]) -> tuple[int, str]:
         if result.get("skipped"):
             continue
         score = result.get("scores", {}).get("overall_score", 0)
+        if score is None:
+            return 0, "N/A"
         weight = TOOL_WEIGHTS.get(tool_key, 0.05)
         weighted_sum += score * weight
         total_weight += weight
 
     overall = int(weighted_sum / total_weight) if total_weight > 0 else 0
     return overall, _grade(overall)
+
+
+def scan_exit_code(results: dict[str, dict]) -> int:
+    """Process status follows coverage first, then critical finding policy."""
+    from kulshan.constants import ExitCode
+
+    if summarize_completeness(results)["partial"]:
+        return ExitCode.RUNTIME_ERROR
+    if any(r.get("scores", {}).get("severity_counts", {}).get("critical", 0)
+           for r in results.values()):
+        return ExitCode.FINDING_FAIL
+    return ExitCode.SUCCESS
 
 
 def summarize_completeness(results: Dict[str, dict]) -> dict:

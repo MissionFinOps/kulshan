@@ -322,3 +322,10 @@ Schema migrations are forward-only and non-destructive.
 1. Define the tool in `src/kulshan/mcp_server/tools.py`
 2. Implement the handler function
 3. Register with the MCP server in `server.py`
+
+
+## Stabilization contract (4252c6c)
+
+The verified orchestration session is authoritative for Cost Explorer and Organizations clients, including assumed roles. A standalone CostFetcher may still select a profile. Coverage is `complete`, `partial`, or `unavailable`; incomplete CLI execution exits 2, critical findings exit 1, complete execution otherwise exits 0. Missing evidence withholds overall scores. Cost efficiency composites are unavailable until utilization, waste, and stability have sufficient evidence; low service spend is only a review candidate.
+
+Structured output requires pseudonymization and fails closed if the engine cannot be initialized. Interactive terminal output and explicit identifier opt-outs retain their documented behavior. MCP always applies mandatory privacy processing at its parent response boundary. No AWS write permissions or background network checks were added.

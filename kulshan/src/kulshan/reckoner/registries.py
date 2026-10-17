@@ -184,6 +184,7 @@ DIMENSIONS = {dimension_id: _dimension(dimension_id) for dimension_id in DIMENSI
 
 PERIOD_IDS = (
     "current-billing-period",
+    "latest-available-billing-period",
     "previous-complete-month",
     "last-7-days",
     "last-30-days",

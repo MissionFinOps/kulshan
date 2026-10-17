@@ -17,3 +17,16 @@ MCP installation: `pip install -e "./kulshan[mcp]" "mcp>=1.0,<2"`: exit 0; insta
 Changes: cost CostFetcher and run_scan preserve injected session; standalone profile remains available. Orchestrator summary adds unavailable status. CLI incomplete execution exits 2. MCP dynamic responses require active pseudonymization; worker errors suppress raw diagnostics; clean scans distinguish unavailable/partial. Unsupported MCP installations fail collection instead of skipping.
 
 Regression files: `kulshan/tests/unit/test_stabilization.py`, `test_mcp_privacy.py`, `test_mcp_execution.py`.
+
+## Milestone 2
+
+Pass 2 command: `.venv/Scripts/python.exe -m pytest -c kulshan/pyproject.toml kulshan/tests/unit/test_stabilization.py kulshan/tests/unit/test_stabilization_finance.py kulshan/tests/unit/test_stabilization_scale.py kulshan/tests/unit/test_consultant_export.py kulshan/tests/unit/test_privacy_output.py kulshan/tests/unit/test_reckoner_query.py kulshan/tests/unit/test_billing_integrity.py --tb=short`: exit 0, 153 passed, no skips. Normal temporary-file permissions were required; sandbox attempts produced fixture setup permission errors, not passing tests.
+
+P1-05 and P2-01 through P2-07 implemented. Added period discovery, shared currency validation, unlimited totals, unknown billing finality, withheld unsupported efficiency scores, CSV protection, and unknown-field redaction. Consultant classification now blocks unknown suffixes instead of broad SAFE prefixes. Compatibility: partial scans exit 2; new unavailable coverage; unknown finality; None efficiency and mixed-currency totals; previously accepted unknown export columns may block. Mapping construction now uses 2048-value batches independently in transformation and integrity validation; no enterprise throughput claims. Test transport wrappers expose DuckDB cursors accordingly.
+
+P3-01: added core CI matrix 3.9/3.11/3.13 and separate MCP 3.12 job. Locally available interpreters are 3.12 and 3.14; matrix has not executed locally. MCP SDK compatibility on Python 3.9 is not claimed.
+P3-02: baseline measured 2318 configured Ruff violations. Per-file/rule no-increase gate added; fatal-rule gate retained. Focused strict typing targets CSV safety, alias batching, billing integrity and semantic query execution; imports skipped, not whole-repository type safety.
+P3-03: no source import/use of Jinja2 or PyJWT; removed direct dependencies. Retained awscrt for botocore credential support (including modern login paths); package verification pending.
+P3-04: synthetic 10,000 distinct-identifier alias test, independent row-equivalence tests; full residual identifier set and DuckDB map storage remain cardinality-dependent.
+P3-05: architecture, MCP, Reckoner cost semantics, redaction surface updated.
+P3-06: final packaging/trust validation pending.

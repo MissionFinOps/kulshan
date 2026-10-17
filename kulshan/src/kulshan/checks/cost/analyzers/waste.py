@@ -22,7 +22,8 @@ def detect_idle_services(
                 "daily_avg_cost": round(daily_avg, 4),
                 "total_cost": round(total, 2),
                 "days_active": len(group),
-                "recommendation": "Review - possibly idle resource",
+                "recommendation": "Low spend only; utilization and idle status are unknown",
+                "idle_status": "unknown",
             })
 
     result = pd.DataFrame(results)
