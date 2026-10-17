@@ -97,7 +97,7 @@ _PASSTHROUGH_FIELDS = frozenset({
 # ---------------------------------------------------------------------------
 
 _ACCOUNT_ID_RE = re.compile(r"\b(\d{12})\b")
-_ARN_RE = re.compile(r"(arn:aws[a-z-]*:[a-z0-9-]+:[a-z0-9-]*:\d{12}:[^\s,\"']+)")
+_ARN_RE = re.compile(r"(arn:aws[a-z-]*:[a-z0-9-]+:[a-z0-9-]*:(?:\d{12})?:[^\s,\"']+)")
 _EC2_INSTANCE_RE = re.compile(r"\b(i-[0-9a-f]{8,17})\b")
 _EBS_VOLUME_RE = re.compile(r"\b(vol-[0-9a-f]{8,17})\b")
 _EBS_SNAPSHOT_RE = re.compile(r"\b(snap-[0-9a-f]{8,17})\b")
@@ -105,12 +105,15 @@ _AMI_RE = re.compile(r"\b(ami-[0-9a-f]{8,17})\b")
 _ENI_RE = re.compile(r"\b(eni-[0-9a-f]{8,17})\b")
 _EIP_ALLOC_RE = re.compile(r"\b(eipalloc-[0-9a-f]{8,17})\b")
 _EMAIL_RE = re.compile(r"\b([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})\b")
-_ACCESS_KEY_RE = re.compile(r"\b(AKIA[A-Z0-9]{16})\b")
+_ACCESS_KEY_RE = re.compile(r"\b((?:AKIA|ASIA)[A-Z0-9]{16})\b")
+_RESOURCE_RE = re.compile(r"\b((?:vpc|subnet|sg|rtb|nat|igw|tgw|vpce)-[0-9a-f]{8,17})\b")
+_IPV6_RE = re.compile(r"(?<![\w:])([0-9A-Fa-f]*:[0-9A-Fa-f:.]*:[0-9A-Fa-f:.]+)(?![\w:])")
 _IPV4_RE = re.compile(r"\b(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})\b")
 
 # Ordered list: ARN first (longer matches), then shorter patterns
 _FREE_TEXT_PATTERNS: list[tuple[re.Pattern, IdentifierClass]] = [
     (_ARN_RE, IdentifierClass.ARN),
+    (_RESOURCE_RE, IdentifierClass.RESOURCE),
     (_ACCOUNT_ID_RE, IdentifierClass.ACCOUNT),
     (_EC2_INSTANCE_RE, IdentifierClass.RESOURCE),
     (_EBS_VOLUME_RE, IdentifierClass.RESOURCE),
@@ -121,6 +124,7 @@ _FREE_TEXT_PATTERNS: list[tuple[re.Pattern, IdentifierClass]] = [
     (_ACCESS_KEY_RE, IdentifierClass.UNKNOWN),
     (_EMAIL_RE, IdentifierClass.EMAIL),
     (_IPV4_RE, IdentifierClass.IP_ADDRESS),
+    (_IPV6_RE, IdentifierClass.IP_ADDRESS),
 ]
 
 
@@ -175,6 +179,12 @@ def scan_text_for_identifiers(text: str) -> list[tuple[str, IdentifierClass, int
 
     for pattern, id_class in _FREE_TEXT_PATTERNS:
         for match in pattern.finditer(text):
+            if pattern is _IPV6_RE:
+                import ipaddress
+                try:
+                    ipaddress.IPv6Address(match.group(1))
+                except ValueError:
+                    continue
             start, end = match.start(1), match.end(1)
             # Skip if this span is already covered by a longer match
             if any(s <= start and end <= e for s, e in covered):

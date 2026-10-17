@@ -140,7 +140,7 @@ class PseudonymizationEngine:
 
         # Check if field is explicitly passthrough
         if field_key and is_passthrough_field(field_key):
-            return value
+            return self.pseudonymize_text(value)
 
         # Check if field has a known identifier class
         if field_key:

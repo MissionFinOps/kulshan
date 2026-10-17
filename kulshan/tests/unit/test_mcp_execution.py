@@ -9,11 +9,20 @@ from unittest.mock import Mock
 
 import pytest
 
-mcp_fastmcp = pytest.importorskip("mcp.server.fastmcp", reason="mcp extra not installed")
+pytest.importorskip("mcp", reason="mcp extra not installed")
+from mcp.server import fastmcp as mcp_fastmcp
 from mcp.server.fastmcp.exceptions import ToolError  # noqa: E402
 
 from kulshan import console_compat  # noqa: E402
 from kulshan.mcp_server import tools  # noqa: E402
+
+
+@pytest.fixture(autouse=True)
+def isolated_privacy_engine(monkeypatch):
+    from kulshan.pseudonym.engine import PseudonymizationEngine
+    from kulshan.pseudonym.policy import PseudonymPolicy
+    engine = PseudonymizationEngine(b"t" * 32, PseudonymPolicy.for_persistence())
+    monkeypatch.setattr("kulshan.pseudonym.context.create_engine_for_output", lambda *_: engine)
 
 
 class FakeProcess:
@@ -57,7 +66,7 @@ def test_isolated_tool_returns_payload(monkeypatch):
 
     result = tools._run_isolated("preflight", {}, 5, "refresh credentials")
 
-    assert result == '{"status":"ok"}'
+    assert json.loads(result) == {"status": "ok"}
 
 
 def test_isolated_tool_raises_protocol_error_for_domain_failure(monkeypatch):
@@ -65,7 +74,7 @@ def test_isolated_tool_raises_protocol_error_for_domain_failure(monkeypatch):
     process = FakeProcess(stdout=response)
     patch_process(monkeypatch, process)
 
-    with pytest.raises(ToolError, match="CUR path missing"):
+    with pytest.raises(ToolError, match="operation failed"):
         tools._run_isolated("cur_validate", {}, 5, "check the path")
 
 

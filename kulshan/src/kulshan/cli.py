@@ -771,7 +771,8 @@ def report(
                 r.get("scores", {}).get("severity_counts", {}).get("critical", 0) > 0
                 for r in results.values()
             )
-            sys.exit(ExitCode.FINDING_FAIL if has_critical else ExitCode.SUCCESS)
+            sys.exit(ExitCode.RUNTIME_ERROR if scan_metadata.get("partial") else
+                     ExitCode.FINDING_FAIL if has_critical else ExitCode.SUCCESS)
 
         else:
             # Single-connection bound workspace: traditional execution
@@ -1242,7 +1243,8 @@ def report(
         r.get("scores", {}).get("severity_counts", {}).get("critical", 0) > 0
         for r in results.values()
     )
-    sys.exit(ExitCode.FINDING_FAIL if has_critical else ExitCode.SUCCESS)
+    sys.exit(ExitCode.RUNTIME_ERROR if scan_metadata.get("partial") else
+                     ExitCode.FINDING_FAIL if has_critical else ExitCode.SUCCESS)
 
 
 # Per-pack subcommands (`Kulshan cost`, `Kulshan security`, ...) were

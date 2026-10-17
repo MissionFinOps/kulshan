@@ -54,12 +54,12 @@ dependencies = [
 pdf = ["weasyprint>=60.0"]
 excel = ["openpyxl>=3.1.0"]
 pptx = ["python-pptx>=0.6.21"]
-mcp = ["mcp>=1.0"]
+mcp = ["mcp>=1.0,<2"]
 dev = [
     "pytest>=8.0",
     "ruff>=0.5",
     "PyYAML>=6.0",
-    "mcp>=1.0",
+    "mcp>=1.0,<2",
 ]
 all = ["kulshan[pdf,excel,pptx,mcp]"]
 

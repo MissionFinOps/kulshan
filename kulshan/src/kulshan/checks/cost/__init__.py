@@ -277,8 +277,8 @@ def _build_aws_native_findings(
 def run_scan(session=None, regions=None, *, quick: bool = False, **kwargs) -> dict:
     """Run cost analysis and return a scored result dict.
 
-    The Cost Explorer API is global, so ``session`` and ``regions`` are accepted
-    but unused. ``profile`` (str), ``days`` (int, default 30), and
+    The verified session is authoritative; regions are unused for this global API.
+    ``profile`` (standalone fallback), ``days`` (int, default 30), and
     ``attribute_anomalies`` (int, default 5; Phase 6 Q1 cap) are read from
     ``kwargs`` so the orchestrator can call every check pack uniformly.
     """
@@ -303,7 +303,7 @@ def run_scan(session=None, regions=None, *, quick: bool = False, **kwargs) -> di
     errors: list[str] = []
 
     try:
-        fetcher = CostFetcher(profile=profile)
+        fetcher = CostFetcher(profile=profile, session=session)
     except Exception as e:
         return _empty(f"CostFetcher init failed: {e}")
 

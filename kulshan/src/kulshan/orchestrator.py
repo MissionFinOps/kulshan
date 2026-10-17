@@ -474,10 +474,13 @@ def summarize_completeness(results: Dict[str, dict]) -> dict:
             failed_checks.append(tool_key)
         missing_permissions.update(result.get("missing_permissions", []))
 
-    incomplete = bool(partial_checks or skipped_checks)
+    incomplete = not results or bool(partial_checks or skipped_checks)
     return {
         "partial": incomplete,
-        "status": "partial" if incomplete else "complete",
+        "status": (
+            "unavailable" if not results or len(skipped_checks) == len(results)
+            else "partial" if incomplete else "complete"
+        ),
         "completed_checks": completed_checks,
         "partial_checks": partial_checks,
         "skipped_checks": skipped_checks,
