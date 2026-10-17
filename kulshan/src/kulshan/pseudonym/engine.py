@@ -116,7 +116,7 @@ class PseudonymizationEngine:
         # to those values in findings and otherwise unclassified text fields.
         replacements: dict[str, str] = {}
         self._collect_identifiers(payload, "", replacements)
-        return self._replace_references(self._walk(payload, field_key=""), replacements)
+        return self._protect_prose_references(self._walk(payload, field_key=""), replacements)
 
     @staticmethod
     def _child_key(parent: str, key: str) -> str:
@@ -145,17 +145,38 @@ class PseudonymizationEngine:
         return (field in {"top_accounts", "top_resources"} and len(obj) == 2
                 and isinstance(obj[0], (str, int)) and isinstance(obj[1], (int, float)))
 
-    def _replace_references(self, obj: Any, values: dict[str, str]) -> Any:
+    def _protect_prose_references(
+        self, obj: Any, values: dict[str, str], field_key: str = ""
+    ) -> Any:
+        """Protect prose references without rewriting identifiers or schema values.
+
+        Identifier fields were already transformed by _walk. Authoritative
+        classifications and metadata must never inherit another field's alias.
+        Ambiguous prose is withheld rather than guessing what a common word means.
+        """
         if isinstance(obj, str):
-            # Longest first prevents a shorter identifier consuming a prefix.
+            if is_passthrough_field(field_key) or classify_field(field_key) is not None:
+                return obj
             for raw in sorted(values, key=len, reverse=True):
-                obj = re.sub(r"(?<!\w)" + re.escape(raw) + r"(?!\w)", values[raw], obj)
+                pattern = r"(?<!\w)" + re.escape(raw) + r"(?!\w)"
+                if not re.search(pattern, obj, re.IGNORECASE):
+                    continue
+                ambiguous = (
+                    len(raw) < 8 or raw.isalnum()
+                    or re.fullmatch(r"[a-z]{2}(?:-[a-z]+)+-\d+", raw, re.IGNORECASE)
+                )
+                if ambiguous:
+                    return "[PROSE_WITHHELD]"
+                obj = re.sub(pattern, values[raw], obj, flags=re.IGNORECASE)
             return obj
         if isinstance(obj, dict):
-            return {key: self._replace_references(value, values)
+            return {key: self._protect_prose_references(
+                        value, values, self._child_key(field_key, str(key)))
                     for key, value in obj.items()}
         if isinstance(obj, (list, tuple)):
-            return type(obj)(self._replace_references(value, values) for value in obj)
+            return type(obj)(
+                self._protect_prose_references(value, values, field_key) for value in obj
+            )
         return obj
 
     def _walk(self, obj: Any, field_key: str) -> Any:

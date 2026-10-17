@@ -95,6 +95,10 @@ _PASSTHROUGH_FIELDS = frozenset({
     "kulshan_version", "overall_score", "overall_grade",
     "timestamp", "date", "duration_seconds",
     "estimated_monthly_impact", "format",
+    "currency", "currency_code", "currencies", "billing_currency",
+    "status", "statuses", "state", "completeness", "report_status",
+    "grade", "composite_grade", "regions", "region_name", "region_code", "aws_region",
+    "service_name",
 })
 
 
