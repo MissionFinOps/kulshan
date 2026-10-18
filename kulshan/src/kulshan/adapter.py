@@ -149,6 +149,10 @@ def adapt(pack: str, raw_finding: dict) -> dict:
     else:
         out["estimated_monthly_impact"] = DEFAULTS["estimated_monthly_impact"]
 
+    if ("estimated_monthly_impact" in raw_finding
+            and raw_finding["estimated_monthly_impact"] is None):
+        out["estimated_monthly_impact"] = None
+
     # --- Effort (effort string or effort_minutes bucketing) -----------------
 
     effort_raw = raw.pop("effort", None)

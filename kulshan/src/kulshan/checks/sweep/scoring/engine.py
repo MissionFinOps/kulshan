@@ -4,7 +4,7 @@ from typing import Dict, List
 from datetime import datetime, timezone
 
 
-def calculate_score(orphans: List[Dict]) -> Dict:
+def calculate_score(orphans: List[Dict], *, complete: bool = False) -> Dict:
     """Calculate overall Account Hygiene Score based on orphan findings."""
     categories = {
         "compute": {"weight": 0.25, "orphans": [], "label": "Compute Hygiene"},
@@ -32,15 +32,9 @@ def calculate_score(orphans: List[Dict]) -> Dict:
         count = len(items)
         count_penalty = min(60, count * 3)  # Max 60 points lost from count
 
-        # Penalty based on monthly cost
-        total_cost = sum(o.get("monthly_cost", 0) for o in items)
-        cost_penalty = min(30, total_cost / 50)  # $50/mo = 1 point, max 30
-
-        # Penalty for high-confidence orphans
-        high_conf = sum(1 for o in items if o.get("confidence") == "high")
-        conf_penalty = min(10, high_conf * 2)
-
-        score = max(0, 100 - count_penalty - cost_penalty - conf_penalty)
+        # Review counts affect hygiene; unknown costs and observation confidence
+        # do not establish financial waste or confidence in a removal decision.
+        score = max(0, 100 - count_penalty)
         cat_scores[cat] = round(score, 1)
 
     # Age factor: penalize for very old orphans
@@ -54,19 +48,15 @@ def calculate_score(orphans: List[Dict]) -> Dict:
 
     grade = _grade(overall)
 
-    # Monthly waste total
-    total_monthly_waste = sum(o.get("monthly_cost", 0) for o in orphans)
-    annual_waste = total_monthly_waste * 12
-
-    # Top offenders by cost
+    # Resource types ranked by review count; financial impact remains unknown.
     by_type = {}
     for o in orphans:
         rtype = o["resource_type"]
         if rtype not in by_type:
-            by_type[rtype] = {"count": 0, "monthly_cost": 0}
+            by_type[rtype] = {"count": 0, "monthly_cost": None}
         by_type[rtype]["count"] += 1
-        by_type[rtype]["monthly_cost"] += o.get("monthly_cost", 0)
-    top_offenders = sorted(by_type.items(), key=lambda x: x[1]["monthly_cost"], reverse=True)
+        by_type[rtype]["monthly_cost"] = None
+    top_offenders = sorted(by_type.items(), key=lambda x: x[1]["count"], reverse=True)
 
     # Oldest orphan
     oldest = None
@@ -76,18 +66,18 @@ def calculate_score(orphans: List[Dict]) -> Dict:
             oldest = o
 
     return {
-        "overall_score": round(overall, 1),
-        "grade": grade,
+        "overall_score": round(overall, 1) if complete else None,
+        "grade": grade if complete else "N/A",
         "total_orphans": len(orphans),
-        "total_monthly_waste": round(total_monthly_waste, 2),
-        "annual_waste": round(annual_waste, 2),
+        "total_monthly_waste": None,
+        "annual_waste": None,
         "breakdown": {
             cat: {
-                "score": cat_scores[cat],
+                "score": cat_scores[cat] if complete else None,
                 "weight": f"{int(data['weight'] * 100)}%",
                 "label": data["label"],
                 "count": len(data["orphans"]),
-                "monthly_cost": round(sum(o.get("monthly_cost", 0) for o in data["orphans"]), 2),
+                "monthly_cost": None,
             }
             for cat, data in categories.items()
         },
