@@ -5,6 +5,25 @@ All notable changes to Kulshan will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.7.1] - 2026-10-18
+
+### Waste evidence integrity
+- Missing CloudWatch datapoints no longer count as observed zero activity. Correct NAT Gateway 14-day and Lambda 90-day rolling UTC observation windows.
+- Distinguish complete observations from partial, invalid, duplicate, missing and failed measurements. Sparse metric emissions do not establish inactivity or removal safety.
+
+### AWS inventory correctness
+- Failed, malformed or incomplete AWS discovery no longer produces unsupported orphan classifications for security groups, load balancers, snapshots, AMIs and storage dependencies.
+- Handle dependency errors explicitly and retain successful observations when unrelated checks or regions fail.
+
+### Financial correctness
+- Remove unsupported hardcoded waste-cost estimates. Unknown savings remain unknown rather than zero or fabricated amounts.
+- Preserve resource-attributed billed cost, currency, actual period and accounting provenance separately from potential deletion savings.
+
+### Reports and integrations
+- Retain evidence completeness, uncertainty and financial provenance through canonical findings, terminal, JSON, HTML, CSV, SARIF and MCP output.
+- Withhold misleading hygiene scores for incomplete scans. Cleanup references require manual review; observations are not proof that removal is safe.
+- Add offline mocked-AWS regression coverage for activity windows, discovery failures, financial semantics, output contracts and MCP privacy. These tests do not claim real-world AWS validation.
+
 ## [0.7.0] - 2026-10-17
 
 ### Security and privacy

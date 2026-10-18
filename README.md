@@ -44,7 +44,7 @@ pip install kulshan
 
 Python 3.11+. macOS, Linux, Windows. Optional extras: `kulshan[mcp]`, `kulshan[pdf]`, `kulshan[excel]`, `kulshan[pptx]`, or `kulshan[all]`.
 
-Version 0.7.0 requires Python 3.11+. See the [release process](kulshan/docs/releasing.md) and changelog for compatibility changes.
+Source version: **0.7.1**, requiring Python 3.11+. Published availability is listed on [PyPI](https://pypi.org/project/kulshan/); source metadata alone does not establish publication. See the [release process](kulshan/docs/releasing.md) and changelog for compatibility changes.
 
 ### Consent-first update checks
 

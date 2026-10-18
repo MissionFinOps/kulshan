@@ -27,9 +27,9 @@ def test_python_support_and_optional_mcp_contract() -> None:
 
 def test_prepared_release_metadata_state() -> None:
     version = runpy.run_path(str(ROOT / "src/kulshan/__version__.py"))
-    assert version["__version__"] == "0.7.0"
+    assert version["__version__"] == "0.7.1"
     assert version["__release_date__"]
-    assert not validate("v0.7.0", ROOT)
+    assert not validate("v0.7.1", ROOT)
 
 
 def test_draft_release_is_not_publishable(tmp_path: Path) -> None:
