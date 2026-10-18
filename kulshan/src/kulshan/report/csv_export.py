@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import csv
 import io
+import json
 
 from kulshan.csv_safety import safe_csv_value
 from typing import List
@@ -21,6 +22,7 @@ CSV_COLUMNS = [
     "estimated_monthly_impact",
     "recommended_action",
     "remediation_snippet",
+    "evidence",
 ]
 
 
@@ -47,6 +49,8 @@ def findings_to_csv(findings: List[dict]) -> str:
         row = {}
         for col in CSV_COLUMNS:
             val = finding.get(col, "")
+            if col == "evidence":
+                val = json.dumps(val, sort_keys=True)
             if val is None:
                 val = ""
             # Flatten multi-line remediation for CSV

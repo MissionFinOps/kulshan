@@ -99,7 +99,8 @@ def _render_top_actions(
             impact = float(f.get("estimated_monthly_impact") or 0)
         except (TypeError, ValueError):
             impact = 0.0
-        impact_str = f"${impact:,.0f}" if impact >= 1 else "~$0"
+        impact_str = ("Unknown" if f.get("estimated_monthly_impact") is None
+                      else f"${impact:,.0f}" if impact >= 1 else "~$0")
         try:
             conf = float(f.get("confidence") or 0)
         except (TypeError, ValueError):
@@ -304,7 +305,17 @@ def render_report(
 
     # -- Next steps (contextual) --
     console.print("  [dim]─── Next steps ───[/dim]")
-    if total_sev.get("critical", 0) > 0:
+    if any(r.get("partial") or r.get("errors") for r in results.values()):
+        console.print(
+            "  [dim]Assessment incomplete. Review coverage limitations "
+            "and retry failed checks.[/dim]"
+        )
+    elif results.get("sweep", {}).get("findings"):
+        console.print(
+            "  [dim]Review resource observations with their owners; "
+            "removal safety is unverified.[/dim]"
+        )
+    elif total_sev.get("critical", 0) > 0:
         console.print("  [dim]Review critical findings above. Export: [green]kulshan report -o report.html[/green][/dim]")
     elif total_sev.get("high", 0) > 0:
         console.print("  [dim]Review high-severity findings. Share: [green]kulshan report -o report.html[/green][/dim]")

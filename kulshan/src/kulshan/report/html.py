@@ -620,6 +620,8 @@ def _build_finding_card(f: dict) -> str:
     sev_color = _SEV_COLORS.get(sev, "#9e9e9e")
     title = html.escape(str(f.get("title") or ""))
     impact = _money(f.get("estimated_monthly_impact"))
+    if f.get("pack") == "sweep" and f.get("estimated_monthly_impact") is None:
+        impact = "Unknown"
     conf = _pct(f.get("confidence"))
 
     impact_html = (
@@ -826,7 +828,9 @@ def _build_what_to_do_next(top_actions: list, ran_packs: list) -> str:
 
         # Impact: show $ if available, otherwise show "Risk" or "Visibility"
         impact_val = float(f.get("estimated_monthly_impact", 0) or 0)
-        if impact_val >= 1:
+        if f.get("estimated_monthly_impact") is None:
+            impact = "Unknown"
+        elif impact_val >= 1:
             impact = f"${impact_val:,.0f}/mo"
         else:
             # Non-monetary impact
