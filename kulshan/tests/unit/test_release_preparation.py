@@ -28,12 +28,22 @@ def test_python_support_and_optional_mcp_contract() -> None:
 def test_prepared_release_metadata_state() -> None:
     version = runpy.run_path(str(ROOT / "src/kulshan/__version__.py"))
     assert version["__version__"] == "0.7.0"
-    errors = validate("v0.7.0", ROOT)
-    if version["__release_date__"]:
-        assert not errors
-    else:
-        assert any("YYYY-MM-DD" in e for e in errors)
-        assert any("no dated" in e for e in errors)
+    assert version["__release_date__"]
+    assert not validate("v0.7.0", ROOT)
+
+
+def test_draft_release_is_not_publishable(tmp_path: Path) -> None:
+    version_dir = tmp_path / "src/kulshan"
+    version_dir.mkdir(parents=True)
+    (version_dir / "__version__.py").write_text(
+        '__version__ = "0.7.0"\n__release_date__ = ""\n', encoding="utf-8"
+    )
+    (tmp_path / "CHANGELOG.md").write_text(
+        "## [0.7.0] - Unreleased\n", encoding="utf-8"
+    )
+    errors = validate("v0.7.0", tmp_path)
+    assert any("YYYY-MM-DD" in e for e in errors)
+    assert any("no dated" in e for e in errors)
 
 
 @pytest.mark.parametrize("heading_date,valid", [("2026-01-01", True), ("2026-01-02", False)])

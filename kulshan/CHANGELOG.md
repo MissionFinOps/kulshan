@@ -5,7 +5,7 @@ All notable changes to Kulshan will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [0.7.0] - Unreleased
+## [0.7.0] - 2026-10-17
 
 ### Security and privacy
 - Preserve verified AWS sessions, including assumed roles, throughout cost orchestration.
@@ -21,7 +21,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Breaking:** Python 3.11 is now required; supported CI versions are 3.11, 3.12 and 3.13. Remove the obsolete Python <3.11 `tomli` reader dependency.
 - Support MCP SDK 1.x (`>=1.0,<2`); numeric identifier fields become string aliases, incomplete execution exits 2, and unavailable scores are null/N/A. Ambiguous sensitive prose may be withheld.
 - Add focused regressions for independent audit blockers, MCP startup/discovery, a Ruff regression baseline and focused strict typing. Historical lint debt and arbitrary unclassified prose limitations remain documented in the stabilization ledger.
-- This entry is preparation only: no publication date or tag has been assigned. Set matching actual dates in this heading and `__version__.py` after release authorization, then run the release validator.
 
 ## [0.6.2] - 2026-08-23
 

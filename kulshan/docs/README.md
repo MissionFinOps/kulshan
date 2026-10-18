@@ -1,6 +1,6 @@
 # Kulshan Documentation
 
-Version 0.7.0 (unreleased) | Python 3.11+ | [GitHub](https://github.com/MissionFinOps/kulshan) | [PyPI](https://pypi.org/project/kulshan/)
+Version 0.7.0 | Python 3.11+ | [GitHub](https://github.com/MissionFinOps/kulshan) | [PyPI](https://pypi.org/project/kulshan/)
 
 ---
 
@@ -16,7 +16,7 @@ Version 0.7.0 (unreleased) | Python 3.11+ | [GitHub](https://github.com/MissionF
 | [Security & IAM](security-and-iam.md) | Trust model, IAM policy, data residency |
 | [Architecture](architecture.md) | Module layout, data flow, extension points |
 | [Contributing](contributing.md) | Dev setup, testing, troubleshooting, FAQ |
-| [Release preparation](releasing.md) | Unreleased metadata and later authorized release checks |
+| [Release process](releasing.md) | Release metadata, validation and authorized publication |
 
 ---
 
