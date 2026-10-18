@@ -61,10 +61,10 @@ def run_preflight(
 
     # 1. Python version
     py_version = sys.version_info
-    if py_version >= (3, 9):
+    if py_version >= (3, 11):
         console.print(f"  [green]✓[/green] Python {py_version.major}.{py_version.minor}")
     else:
-        console.print(f"  [red]✗[/red] Python {py_version.major}.{py_version.minor} (need 3.9+)")
+        console.print(f"  [red]✗[/red] Python {py_version.major}.{py_version.minor} (need 3.11+)")
         all_passed = False
 
     # 2. AWS credentials exist

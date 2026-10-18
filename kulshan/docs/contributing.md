@@ -24,7 +24,7 @@ mypy src/kulshan/             # Type check
 
 ## Code Style
 
-- **Linter/formatter:** ruff (line-length 100, target py39)
+- **Linter/formatter:** ruff (line-length 100, target py311)
 - **Type checking:** mypy strict mode
 - **Tests:** pytest with moto for AWS mocking, hypothesis for property tests
 
@@ -129,7 +129,7 @@ Maintainer-managed: update `__version__.py` → CHANGELOG → tag → push tag �
 
 **Without Cost Explorer?** Yes: `kulshan report --packs security,sweep,dr --regions us-east-1` (free APIs only).
 
-**Python versions?** 3.9, 3.10, 3.11, 3.12, 3.13.
+**Python versions?** 3.11, 3.12, 3.13.
 
 **Windows?** Yes. macOS, Linux, and Windows all supported.
 

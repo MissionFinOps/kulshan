@@ -17,14 +17,10 @@ import hmac
 import logging
 import os
 import tempfile
+import tomllib
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
-
-try:
-    import tomllib
-except ImportError:
-    import tomli as tomllib  # type: ignore[import-not-found]
 
 import tomli_w
 

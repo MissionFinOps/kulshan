@@ -196,3 +196,21 @@ Distinctive known names may be aliased in human-readable/unknown prose fields. S
 Unknown arbitrary customer names cannot be inferred reliably without a supported identifier field, recognizable pattern or a known identifier elsewhere in the payload. Ambiguous prose can now be withheld, reducing narrative detail. Direct identifier-pattern handling of dynamic map keys retains its prior behavior; learned common names do not rename schema properties. Existing Windows/POSIX and unexecuted remote Python-matrix limitations remain. No raw privacy fallback was added, and schema preservation does not require stripping legitimate severity/currency values simply because a resource shares their spelling.
 
 This specific P1 regression is locally resolved with simultaneous confidentiality and schema/financial checks. Final status: **READY FOR INDEPENDENT AUDIT**. No push, merge, tag, release, publication or AWS modification.
+
+## PR #6 compatibility correction and v0.7.0 preparation
+
+The first remote CI invalidated the earlier P3-01 support claim: Python 3.9 had 13 collection errors (`enum.StrEnum` and `dataclass(slots=True)`). Python 3.11/3.13 pytest steps passed (657 passed, 6 skipped each), but their jobs were cancelled by matrix fail-fast. Per the maintainer's decision, Python **3.11 is now the minimum**, with advertised/tested 3.11/3.12/3.13 support. P3-01's historical 3.9 PASS is superseded, not evidence of runtime support.
+
+Changed metadata, README/install documentation, Ruff/mypy targets, runtime preflight and CI matrix; removed only the obsolete conditional `tomli` dependency and three fallback imports. `tomli_w` remains required. CI disables matrix fail-fast, reports skip reasons (`-ra`), runs all MCP test modules with the extra installed, and checks installed-wheel dependencies.
+
+Prepared package version 0.7.0 with an Unreleased changelog and blank release date. `publish.yml` is unchanged: only a later `v*` tag push can trigger validation, reusable CI and publishing. The validator now also rejects mismatched changelog/version dates. A draft intentionally fails `validate_release.py --tag v0.7.0` (exit 1: missing actual date and dated heading). No date, tag or publication was fabricated. GitHub tag lookup returned 404 and PyPI's release map had no 0.7.0; these availability checks must be repeated at release time.
+
+Local checks (Python 3.12.10, mocked/offline tests):
+
+- Focused release/update/MCP: 32 passed, exit 0. Four new release-preparation tests cover supported metadata, draft rejection and matching/mismatching authorized dates. Initial red run exposed the missing date-equality check; sandbox temp-directory errors required rerunning with access to the existing pytest temp directory.
+- Full suite: 715 passed, 1 skipped, exit 0, 20.14 seconds. The skip is still POSIX permissions on Windows, not a PASS.
+- Ruff fatal gate and configured regression gate: exit 0; focused mypy four files: exit 0. The py311 target alone enables 86 historical detections (UP017 71, UP042 8, B905 5, UP035 1, UP045 1). The baseline migration records exactly that measured delta, not new source debt: baseline 2404, current residual 2399. One import ordering issue caused by removing the fallback was fixed.
+- Isolated wheel/sdist build: exit 0, 0.7.0. Installed explicit wheel into the existing isolated dependency environment; pip check, CLI version/help and seven-tool MCP discovery passed. This is not a fresh dependency-resolution claim. First discovery probe used a nonexistent factory; corrected to FastMCP plus register_tools and passed.
+- Relevant commands: `P -m pytest -c kulshan/pyproject.toml kulshan/tests --disable-warnings --tb=short -ra`; `P kulshan/tools/check_ruff_baseline.py`; `P -m ruff check --select E9,F63,F7,F82 kulshan/src kulshan/tests`; from kulshan/: `../.venv/Scripts/python.exe -m mypy --config-file mypy-stabilization.ini` and `../.venv/Scripts/python.exe -m build`. Wheel install used `--force-reinstall --no-deps` on `kulshan-0.7.0-py3-none-any.whl`.
+
+Remote CI for the corrected branch will be reported in PR #6. No merge, tag, deployment, AWS modification or PyPI publication is authorized by this preparation.

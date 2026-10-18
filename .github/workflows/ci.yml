@@ -48,8 +48,9 @@ jobs:
     name: Core tests
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
-        python: ['3.9', '3.11', '3.13']
+        python: ['3.11', '3.12', '3.13']
     defaults:
       run:
         working-directory: kulshan
@@ -65,7 +66,7 @@ jobs:
       - name: Install project and test tooling
         run: python -m pip install --upgrade pip && python -m pip install -e . pytest PyYAML
 
-      - run: python -m pytest
+      - run: python -m pytest -ra
 
   mcp:
     name: MCP extra and discovery
@@ -80,7 +81,7 @@ jobs:
           python-version: '3.12'
       - run: python -m pip install -e ".[mcp]" pytest
       - run: python -m pip check
-      - run: python -m pytest tests/unit/test_mcp_execution.py tests/unit/test_mcp_privacy.py
+      - run: python -m pytest -ra tests/unit/test_mcp_*.py
 
   package:
     name: Build and install package
@@ -104,7 +105,7 @@ jobs:
         run: python -m build
 
       - name: Install wheel
-        run: python -m pip install dist/*.whl
+        run: python -m pip install dist/*.whl && python -m pip check
 
       - name: Smoke test installed CLI
         run: kulshan --version
