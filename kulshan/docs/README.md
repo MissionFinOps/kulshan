@@ -1,6 +1,6 @@
 # Kulshan Documentation
 
-Version 0.7.0 | Python 3.11+ | [GitHub](https://github.com/MissionFinOps/kulshan) | [PyPI](https://pypi.org/project/kulshan/)
+Source version 0.7.1 | Python 3.11+ | [GitHub](https://github.com/MissionFinOps/kulshan) | [PyPI](https://pypi.org/project/kulshan/)
 
 ---
 
