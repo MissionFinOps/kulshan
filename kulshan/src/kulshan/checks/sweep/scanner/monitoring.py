@@ -3,6 +3,7 @@
 from datetime import datetime, timezone
 from typing import Dict, List, Tuple
 from ..utils.aws import safe_api_call, paginate_all
+from .evidence import activity_evidence, qualify_findings
 
 
 def scan_monitoring(session, regions, progress=None, task_id=None) -> Tuple[List[Dict], List[str]]:
@@ -33,7 +34,7 @@ def scan_monitoring(session, regions, progress=None, task_id=None) -> Tuple[List
                             "region": region,
                             "reason": "Zero stored bytes",
                             "age_days": age_days,
-                            "monthly_cost": 0,
+                            "monthly_cost": None,
                             "created": datetime.fromtimestamp(created / 1000, tz=timezone.utc).isoformat() if created else None,
                             "tags": {},
                             "cleanup_action": f"aws logs delete-log-group --log-group-name '{lg['logGroupName']}' --region {region}",
@@ -54,7 +55,7 @@ def scan_monitoring(session, regions, progress=None, task_id=None) -> Tuple[List
                     updated = alarm.get("StateUpdatedTimestamp", datetime.now(timezone.utc))
                     age_days = (datetime.now(timezone.utc) - updated).days
                     if age_days >= 30:
-                        # $0.10/alarm/month for standard alarms
+
                         orphans.append({
                             "resource_id": alarm["AlarmName"],
                             "resource_type": "CloudWatch Alarm (stale)",
@@ -62,7 +63,7 @@ def scan_monitoring(session, regions, progress=None, task_id=None) -> Tuple[List
                             "region": region,
                             "reason": f"INSUFFICIENT_DATA for {age_days} days",
                             "age_days": age_days,
-                            "monthly_cost": 0.10,
+                            "monthly_cost": None,
                             "created": None,
                             "tags": {},
                             "cleanup_action": f"aws cloudwatch delete-alarms --alarm-names '{alarm['AlarmName']}' --region {region}",
@@ -84,7 +85,9 @@ def scan_monitoring(session, regions, progress=None, task_id=None) -> Tuple[List
                     last_modified = fn.get("LastModified", "")
                     # Check invocations in last 90 days
                     idle = _check_lambda_idle(cw, fn_name)
-                    if idle:
+                    if idle["status"] != "confirmed_observation":
+                        errors.append(f"cloudwatch.GetMetricStatistics ({region}): {idle['missing_data_reason']}")
+                    if idle["idle"] is not False:
                         age_days = None
                         if last_modified:
                             try:
@@ -94,12 +97,13 @@ def scan_monitoring(session, regions, progress=None, task_id=None) -> Tuple[List
                                 pass
                         orphans.append({
                             "resource_id": fn_name,
-                            "resource_type": "Lambda Function (idle)",
+                            "resource_type": "Lambda Function",
                             "category": "monitoring",
                             "region": region,
-                            "reason": f"Zero invocations in last 90 days (runtime: {fn.get('Runtime', '?')})",
+                            "reason": "Lambda invocation observation: " + idle["status"],
+                            "status": idle["status"], "evidence": idle,
                             "age_days": age_days,
-                            "monthly_cost": 0,
+                            "monthly_cost": None,
                             "created": last_modified or None,
                             "tags": {},
                             "cleanup_action": f"aws lambda delete-function --function-name {fn_name} --region {region}",
@@ -111,26 +115,10 @@ def scan_monitoring(session, regions, progress=None, task_id=None) -> Tuple[List
         if progress and task_id:
             progress.advance(task_id)
 
-    return orphans, errors
+    return qualify_findings(orphans), errors
 
 
-def _check_lambda_idle(cw, function_name):
-    """Check if a Lambda function has had zero invocations in the last 90 days."""
-    try:
-        end = datetime.now(timezone.utc)
-        start = end.replace(month=max(1, end.month - 3) if end.month > 3 else end.month + 9,
-                            year=end.year if end.month > 3 else end.year - 1)
-        resp = cw.get_metric_statistics(
-            Namespace="AWS/Lambda",
-            MetricName="Invocations",
-            Dimensions=[{"Name": "FunctionName", "Value": function_name}],
-            StartTime=start, EndTime=end,
-            Period=86400 * 30, Statistics=["Sum"],
-        )
-        datapoints = resp.get("Datapoints", [])
-        if not datapoints:
-            return True
-        total = sum(dp.get("Sum", 0) for dp in datapoints)
-        return total == 0
-    except Exception:
-        return False
+def _check_lambda_idle(cw, resource_id, *, now=None):
+    """Return validated rolling-window activity evidence."""
+    return activity_evidence(cw, "AWS/Lambda", "Invocations",
+                             "FunctionName", resource_id, 90, now)

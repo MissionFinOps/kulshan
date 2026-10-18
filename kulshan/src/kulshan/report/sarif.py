@@ -106,6 +106,9 @@ def findings_to_sarif(
             },
         }
 
+        if finding.get("pack") == "sweep":
+            result["properties"]["evidence"] = finding.get("evidence", {})
+
         # Add fingerprint for deduplication
         fingerprint = finding.get("fingerprint", finding.get("id", ""))
         if fingerprint:

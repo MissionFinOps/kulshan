@@ -43,6 +43,7 @@ class ExecutionRecord:
     account_id: str = ""
     connection_id: str = ""
     status: ExecutionStatus = "complete"
+    check: str = ""
     duration_seconds: float = 0.0
     findings_count: int = 0
     data_sources: List[str] = field(default_factory=list)
@@ -54,6 +55,8 @@ class ExecutionRecord:
             "region": self.region,
             "status": self.status,
         }
+        if self.check:
+            d["check"] = self.check
         if self.account_id:
             d["account_id"] = self.account_id
         if self.connection_id:
@@ -198,7 +201,10 @@ def build_coverage_from_results(
             for err_msg in pack_denied:
                 denied_actions.append(f"{pack_name}: {err_msg}")
 
-        if pack_errors and not findings_count:
+        successful_sweep_scanner = pack_name == "sweep" and any(
+            record.get("status") == "complete" for record in result.get("coverage", [])
+        )
+        if pack_errors and not findings_count and not successful_sweep_scanner:
             packs_failed += 1
             status: ExecutionStatus = "failed"
         elif result.get("partial"):
@@ -207,6 +213,19 @@ def build_coverage_from_results(
         else:
             packs_completed += 1
             status = "complete"
+
+        # Sweep supplies scanner/region records, including successful empty inventories.
+        # Retain their exact failed operation and limitation in consolidated output.
+        detail = result.get("coverage")
+        if pack_name == "sweep" and isinstance(detail, list) and detail:
+            for record in detail:
+                executions.append(ExecutionRecord(
+                    pack=pack_name, region=record["region"], account_id=account_id,
+                    check=record.get("check", record.get("scanner", "")),
+                    status=record["status"], findings_count=record.get("findings_count", 0),
+                    errors=[CoverageError(**error) for error in record.get("errors", [])],
+                ))
+            continue
 
         for region in regions:
             errors = []

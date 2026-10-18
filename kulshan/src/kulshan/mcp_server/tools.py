@@ -223,7 +223,10 @@ def _execute_report(packs: list[str], days: int, regions: list[str] | None) -> s
 
 def _coverage(results: dict[str, Any]) -> dict:
     from kulshan.orchestrator import summarize_completeness
-    return summarize_completeness(results)
+    summary = summarize_completeness(results)
+    if results.get("sweep", {}).get("coverage"):
+        summary["executions"] = results["sweep"]["coverage"]
+    return summary
 
 
 def _raise_if_all_packs_unavailable(results: dict[str, Any]) -> None:
@@ -343,6 +346,14 @@ def _compact_finding(finding: dict[str, Any]) -> dict[str, Any]:
         "resource_id": finding.get("resource_id"),
         "account_id": finding.get("account_id"),
     }
+    if finding.get("pack") == "sweep":
+        evidence = finding.get("evidence") or {}
+        compact.update({
+            "resource_id": finding.get("resource_id") or evidence.get("resource_id"),
+            "region": finding.get("region"),
+            "confidence": finding.get("confidence"),
+            "evidence": evidence,
+        })
     remediation_cost = finding.get("estimated_remediation_cost")
     if remediation_cost:
         compact["remediation_cost_monthly"] = remediation_cost.get("monthly_cost")

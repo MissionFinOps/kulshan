@@ -272,6 +272,9 @@ def _parse_v1(d: Dict[str, Any]) -> Dict[str, Any]:
     else:
         out["estimated_monthly_impact"] = 0.0
 
+    if "estimated_monthly_impact" in d and d["estimated_monthly_impact"] is None:
+        out["estimated_monthly_impact"] = None
+
     # score_impact derived from severity
     sev_val = out["severity"]
     out["score_impact"] = SEVERITY_SCORE_IMPACT.get(sev_val, 0)
@@ -351,7 +354,7 @@ class Finding:
     title: str
     severity: Severity
     score_impact: int
-    estimated_monthly_impact: float
+    estimated_monthly_impact: float | None
     confidence: float
     effort: str
     risk: str
@@ -486,7 +489,8 @@ class Finding:
             title=parsed["title"],
             severity=severity,
             score_impact=int(parsed["score_impact"]),
-            estimated_monthly_impact=float(parsed["estimated_monthly_impact"]),
+            estimated_monthly_impact=(float(parsed["estimated_monthly_impact"])
+                                      if parsed["estimated_monthly_impact"] is not None else None),
             confidence=float(parsed["confidence"]),
             effort=parsed["effort"],
             risk=parsed["risk"],
