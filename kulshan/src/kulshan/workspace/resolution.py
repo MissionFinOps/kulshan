@@ -5,10 +5,7 @@ import logging
 import os
 from pathlib import Path
 
-try:
-    import tomllib
-except ImportError:
-    import tomli as tomllib  # type: ignore[import-not-found]
+import tomllib
 
 import tomli_w
 

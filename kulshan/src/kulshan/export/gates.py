@@ -12,7 +12,7 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
 
-from kulshan.export.columns import ColumnClass
+from kulshan.export.columns import ColumnClass, public_dropped_columns
 
 # ---------------------------------------------------------------------------
 # Gate results
@@ -64,7 +64,9 @@ def gate_schema(
         details={
             "counts": {k.value: v for k, v in counts.items()},
             "total": len(classification),
-            "dropped_unclassified": sorted(unclassified) if drop_unclassified else [],
+            "dropped_unclassified": (
+                public_dropped_columns(unclassified) if drop_unclassified else []
+            ),
         },
     )
 
@@ -169,24 +171,13 @@ def gate_integrity(
             if pseudo_in_source:
                 for col in pseudo_in_source:
                     id_class = _infer_identifier_class(col)
-                    rows = con.execute(
+                    from kulshan.export.batching import populate_alias_map
+                    populate_alias_map(
+                        con, f"_pseudo_map_{col}",
                         f'SELECT DISTINCT CAST("{col}" AS VARCHAR) AS v '
-                        f'FROM gate2_source WHERE "{col}" IS NOT NULL'
-                    ).fetchall()
-                    mappings = []
-                    for (raw_val,) in rows:
-                        if raw_val and raw_val.strip():
-                            alias = engine.pseudonymize_value(raw_val, id_class)
-                            mappings.append((raw_val, alias))
-                        else:
-                            mappings.append((raw_val, raw_val))
-                    table_name = f"_pseudo_map_{col}"
-                    con.execute(
-                        f"CREATE TEMP TABLE {table_name}"
-                        " (raw_value VARCHAR, alias VARCHAR)"
+                        f'FROM gate2_source WHERE "{col}" IS NOT NULL',
+                        engine, id_class,
                     )
-                    if mappings:
-                        con.executemany(f"INSERT INTO {table_name} VALUES (?, ?)", mappings)
 
             # Discover output column types for native numeric comparison
             con.execute(
@@ -406,6 +397,13 @@ def _scan_residual_chunk(
             f"a Gate 1 classification for the column it came from, not loosening "
             f"this pattern."
         )
+
+    from kulshan.pseudonym.classifier import scan_text_for_identifiers
+    from kulshan.pseudonym.types import IdentifierClass
+    ipv6 = [m for m in scan_text_for_identifiers(output_text)
+            if m[1] is IdentifierClass.IP_ADDRESS and ":" in m[0]]
+    if ipv6:
+        failures.append(f"IPv6 address pattern found ({len(ipv6)} occurrences){where}")
 
     # Assert key material not present
     if secret_hex and secret_hex in output_text:

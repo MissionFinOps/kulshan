@@ -21,6 +21,11 @@ class ColumnClass(Enum):
     UNCLASSIFIED = "unclassified"
 
 
+def public_dropped_columns(columns: list[str] | None) -> list[str]:
+    """Expose removed-column cardinality without exporting customer schema labels."""
+    return [f"removed_column_{index + 1:04d}" for index in range(len(set(columns or [])))]
+
+
 # Tag key handling:
 #   aws: prefixed keys -> key SAFE, values passthrough
 #   allowlisted customer keys -> key passthrough, values pseudonymized
@@ -46,7 +51,7 @@ _SAFE_PREFIXES = (
     "identity_",
     "line_item_currency_code",
     "line_item_legal_entity",
-    "line_item_line_item_description",
+
     "line_item_line_item_type",
     "line_item_net_",
     "line_item_normalization_factor",
@@ -86,11 +91,25 @@ _SAFE_PREFIXES = (
     "reservation_units_per_reservation",
     "reservation_total_reserved_units",
     "reservation_unused_",
-    "cost_category_",
+
     "split_line_item_",
 )
 
 _SAFE_EXACT = frozenset({
+    "bill_billing_period_start_date", "bill_billing_period_end_date",
+    "line_item_unblended_cost", "line_item_unblended_rate",
+    "line_item_blended_cost", "line_item_blended_rate",
+    "line_item_net_unblended_cost", "line_item_net_unblended_rate",
+    "pricing_public_on_demand_cost", "pricing_public_on_demand_rate",
+    "pricing_unit", "pricing_term", "pricing_currency", "pricing_rate_code", "pricing_rate_id",
+    "product_instance_type", "product_instance_family", "product_operating_system",
+    "product_location", "product_from_location", "product_to_location", "product_sku",
+    "product_usagetype", "product_operation", "product_service_name",
+    "reservation_amortized_upfront_cost_for_usage",
+    "reservation_unused_amortized_upfront_fee_for_billing_period",
+    "reservation_net_effective_cost", "reservation_net_amortized_upfront_cost_for_usage",
+    "savings_plan_net_savings_plan_effective_cost", "savings_plan_savings_plan_effective_cost",
+    "split_line_item_split_cost", "split_line_item_split_usage", "split_line_item_actual_usage",
     "billing_period",
     "cost",
     "identity_line_item_id",
@@ -112,6 +131,7 @@ _SAFE_EXACT = frozenset({
 
 # Columns that must be pseudonymized (contain customer identifiers)
 _PSEUDONYMIZE_EXACT = frozenset({
+    "line_item_line_item_description",
     "line_item_usage_account_id",
     "line_item_usage_account_name",
     "lineitem_usageaccountid",
@@ -131,6 +151,7 @@ _PSEUDONYMIZE_EXACT = frozenset({
 
 _PSEUDONYMIZE_PREFIXES = (
     "resource_tags_",
+    "cost_category_",
 )
 
 # Columns to drop (genuinely useless for investigation AND potential risk)
@@ -150,6 +171,11 @@ def classify_column(column_name: str, keep_tags: frozenset[str] = frozenset()) -
         ColumnClass indicating how to handle this column.
     """
     col = column_name.lower()
+
+    # Category names themselves are customer-defined schema labels.
+    # Dropping the column protects both its header and its values.
+    if col.startswith("cost_category_"):
+        return ColumnClass.DROP
 
     # Explicit pseudonymize takes priority over safe prefixes
     if col in _PSEUDONYMIZE_EXACT:
@@ -185,9 +211,9 @@ def classify_column(column_name: str, keep_tags: frozenset[str] = frozenset()) -
     if col in _SAFE_EXACT:
         return ColumnClass.SAFE
 
-    # Safe prefix match
+    # Closed vocabulary: unknown suffixes must not inherit SAFE status.
     for prefix in _SAFE_PREFIXES:
-        if col.startswith(prefix):
+        if col == prefix.rstrip("_"):
             return ColumnClass.SAFE
 
     return ColumnClass.UNCLASSIFIED

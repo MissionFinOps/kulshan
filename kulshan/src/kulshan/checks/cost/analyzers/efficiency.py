@@ -27,88 +27,28 @@ def compute_efficiency_score(
       - Anomaly Health:     0-15 points (fewer critical anomalies = better)
       - Cost Stability:     0-15 points (low variance = predictable spend)
     """
+    # Billing aggregates cannot establish resource utilization or cost stability.
+    # Withhold composite scores until those inputs have independent evidence.
     breakdown = {}
-
-    # ── RI/SP Coverage (0-25) ─────────────────────────────────────────
-    coverage_pct = 0.0
-    if not ri_coverage.empty and "coverage_pct" in ri_coverage.columns:
-        coverage_pct = ri_coverage["coverage_pct"].mean()
-    coverage_score = min(25, coverage_pct / 80 * 25)
-    breakdown["ri_sp_coverage"] = {
-        "score": round(coverage_score, 1),
-        "max": 25,
-        "value": f"{coverage_pct:.1f}%",
-        "target": "80%",
-        "status": "✅" if coverage_pct >= 70 else ("⚠️" if coverage_pct >= 40 else "❌"),
-    }
-
-    # ── RI/SP Utilization (0-25) ──────────────────────────────────────
-    util_pct = 0.0
-    if not sp_utilization.empty and "utilization_pct" in sp_utilization.columns:
-        util_pct = sp_utilization["utilization_pct"].mean()
-    elif not ri_utilization.empty and "utilization_pct" in ri_utilization.columns:
-        util_pct = ri_utilization["utilization_pct"].mean()
-    util_score = min(25, util_pct / 90 * 25)
-    breakdown["ri_sp_utilization"] = {
-        "score": round(util_score, 1),
-        "max": 25,
-        "value": f"{util_pct:.1f}%",
-        "target": "90%",
-        "status": "✅" if util_pct >= 80 else ("⚠️" if util_pct >= 50 else "❌"),
-    }
-
-    # ── Waste Detection (0-20) ────────────────────────────────────────
-    idle_count = len(idle_df) if not idle_df.empty else 0
-    idle_cost = idle_df["total_cost"].sum() if not idle_df.empty and "total_cost" in idle_df.columns else 0
-    waste_pct = (idle_cost / total_spend * 100) if total_spend > 0 else 0
-    # Perfect = 0 idle, worst = 10+ idle resources
-    waste_score = max(0, 20 - idle_count * 2)
-    breakdown["waste_detection"] = {
-        "score": round(waste_score, 1),
-        "max": 20,
-        "value": f"{idle_count} idle ({waste_pct:.1f}% of spend)",
-        "target": "0 idle resources",
-        "status": "✅" if idle_count == 0 else ("⚠️" if idle_count <= 3 else "❌"),
-    }
-
-    # ── Anomaly Health (0-15) ─────────────────────────────────────────
-    critical_count = 0
-    warning_count = 0
-    if not anomalies_df.empty and "severity" in anomalies_df.columns:
-        critical_count = len(anomalies_df[anomalies_df["severity"] == "critical"])
-        warning_count = len(anomalies_df[anomalies_df["severity"] == "warning"])
-    anomaly_penalty = critical_count * 5 + warning_count * 2
-    anomaly_score = max(0, 15 - anomaly_penalty)
-    breakdown["anomaly_health"] = {
-        "score": round(anomaly_score, 1),
-        "max": 15,
-        "value": f"{critical_count} critical, {warning_count} warning",
-        "target": "0 critical anomalies",
-        "status": "✅" if critical_count == 0 else ("⚠️" if critical_count <= 2 else "❌"),
-    }
-
-    # ── Cost Stability (0-15) ─────────────────────────────────────────
-    # No RI/SP = all on-demand = less predictable
-    has_commitments = (not ri_coverage.empty and coverage_pct > 10) or (not sp_utilization.empty and util_pct > 10)
-    stability_score = 15 if has_commitments else 8
-    # Penalize if anomalies suggest instability
-    if critical_count > 0:
-        stability_score = max(0, stability_score - 5)
-    breakdown["cost_stability"] = {
-        "score": round(stability_score, 1),
-        "max": 15,
-        "value": "Committed" if has_commitments else "On-Demand only",
-        "target": "Committed pricing",
-        "status": "✅" if has_commitments else "⚠️",
-    }
-
-    total_score = sum(v["score"] for v in breakdown.values())
-
+    for key, frame, column, maximum in (
+        ("ri_sp_coverage", ri_coverage, "coverage_pct", 25),
+        ("ri_sp_utilization", sp_utilization if not sp_utilization.empty else ri_utilization,
+         "utilization_pct", 25),
+    ):
+        measured = frame[column].dropna() if column in frame.columns else pd.Series(dtype=float)
+        breakdown[key] = {
+            "score": None, "max": maximum,
+            "value": f"{measured.mean():.1f}%" if not measured.empty else "unknown",
+            "status": "measured" if not measured.empty else "unknown",
+        }
+    for key, maximum in (("waste_detection", 20), ("cost_stability", 15), ("anomaly_health", 15)):
+        breakdown[key] = {"score": None, "max": maximum, "value": "unknown", "status": "unknown"}
     return {
-        "total_score": round(total_score),
-        "max_score": 100,
-        "grade": _grade(total_score),
-        "breakdown": breakdown,
+        "total_score": None, "max_score": 100, "grade": "N/A", "breakdown": breakdown,
+        "status": "unavailable",
+        "limitations": [
+            "Billing spend and commitment ownership do not measure utilization, waste or stability."
+        ],
     }
 
 

@@ -13,7 +13,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 from kulshan.__version__ import __version__
-from kulshan.export.columns import ColumnClass
+from kulshan.export.columns import ColumnClass, public_dropped_columns
 from kulshan.export.scope import EvidenceScope
 from kulshan.pseudonym.types import IdentifierClass
 
@@ -147,7 +147,7 @@ def _build_manifest(
         "cur": {
             "row_count": cur_row_count,
             "column_classification": counts,
-            "dropped_columns": sorted(dropped_columns) if dropped_columns else [],
+            "dropped_columns": public_dropped_columns(dropped_columns),
         },
         "ce": {
             "datasets": ce_datasets or [],
@@ -183,8 +183,10 @@ def _build_privacy_report(
         "policy": "consultant-strict-v1",
         "column_treatment": {
             col: cls.value for col, cls in sorted(classification.items())
+            if cls != ColumnClass.DROP and col not in (dropped_columns or [])
         },
-        "dropped_columns": sorted(dropped_columns) if dropped_columns else [],
+        "dropped_columns": public_dropped_columns(dropped_columns),
+        "removed_column_treatment": "drop",
         "kept_tags": sorted(keep_tags) if keep_tags else [],
         "gates": gate_results,
         "note": (
@@ -236,7 +238,7 @@ def _build_readme(
             "The following columns were removed from the export:",
             "",
         ])
-        for col in sorted(dropped_columns):
+        for col in public_dropped_columns(dropped_columns):
             lines.append(f"- {col}")
 
     lines.extend([

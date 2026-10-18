@@ -329,6 +329,8 @@ def run_all_scans(
                     # Print completion status
                     if result.get("skipped"):
                         progress.console.print(f"  [dim]⊘ {label}[/dim] [dim italic]skipped[/dim italic]")
+                    elif result.get("partial"):
+                        progress.console.print(f"  [yellow]{label}: partial coverage[/yellow]")
                     elif finding_count == 0:
                         progress.console.print(f"  [green]✓ {label}[/green] [dim]0 findings[/dim]")
                     else:
@@ -364,6 +366,8 @@ def run_all_scans(
                 finding_count = len(result.get("findings", []))
                 if result.get("skipped"):
                     progress.console.print(f"  [dim]⊘ {label}[/dim] [dim italic]skipped[/dim italic]")
+                elif result.get("partial"):
+                    progress.console.print(f"  [yellow]{label}: partial coverage[/yellow]")
                 elif finding_count == 0:
                     progress.console.print(f"  [green]✓ {label}[/green] [dim]0 findings[/dim]")
                 else:
@@ -444,12 +448,26 @@ def compute_overall(results: Dict[str, dict]) -> tuple[int, str]:
         if result.get("skipped"):
             continue
         score = result.get("scores", {}).get("overall_score", 0)
+        if score is None:
+            return 0, "N/A"
         weight = TOOL_WEIGHTS.get(tool_key, 0.05)
         weighted_sum += score * weight
         total_weight += weight
 
     overall = int(weighted_sum / total_weight) if total_weight > 0 else 0
     return overall, _grade(overall)
+
+
+def scan_exit_code(results: dict[str, dict]) -> int:
+    """Process status follows coverage first, then critical finding policy."""
+    from kulshan.constants import ExitCode
+
+    if summarize_completeness(results)["partial"]:
+        return ExitCode.RUNTIME_ERROR
+    if any(r.get("scores", {}).get("severity_counts", {}).get("critical", 0)
+           for r in results.values()):
+        return ExitCode.FINDING_FAIL
+    return ExitCode.SUCCESS
 
 
 def summarize_completeness(results: Dict[str, dict]) -> dict:
@@ -474,10 +492,13 @@ def summarize_completeness(results: Dict[str, dict]) -> dict:
             failed_checks.append(tool_key)
         missing_permissions.update(result.get("missing_permissions", []))
 
-    incomplete = bool(partial_checks or skipped_checks)
+    incomplete = not results or bool(partial_checks or skipped_checks)
     return {
         "partial": incomplete,
-        "status": "partial" if incomplete else "complete",
+        "status": (
+            "unavailable" if not results or len(skipped_checks) == len(results)
+            else "partial" if incomplete else "complete"
+        ),
         "completed_checks": completed_checks,
         "partial_checks": partial_checks,
         "skipped_checks": skipped_checks,
@@ -489,17 +510,22 @@ def summarize_completeness(results: Dict[str, dict]) -> dict:
 def _annotate_completeness(result: dict) -> None:
     errors = [str(error) for error in result.get("errors", []) if error]
     result["errors"] = errors
-    result["missing_permissions"] = _extract_missing_permissions(errors)
+    result["missing_permissions"] = sorted(set(
+        result.get("missing_permissions", []) + _extract_missing_permissions(errors)
+    ))
 
     if result.get("skipped"):
         status = "skipped"
-    elif errors:
+    elif errors or result.get("partial") or result.get("completeness") == "partial":
         status = "partial"
     else:
         status = "complete"
 
     result["completeness"] = status
     result["partial"] = status != "complete"
+    if status != "complete" and isinstance(result.get("scores"), dict):
+        result["scores"]["overall_score"] = None
+        result["scores"]["grade"] = "N/A"
 
 
 def _extract_missing_permissions(errors: List[str]) -> List[str]:

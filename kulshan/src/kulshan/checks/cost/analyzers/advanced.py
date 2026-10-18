@@ -363,6 +363,48 @@ def compute_executive_scorecard(
       - composite_grade: str
       - headline: str (one-line executive summary)
     """
+    def measured(value: Any, lower: float, upper: float = float("inf")) -> bool:
+        return (isinstance(value, (int, float)) and not isinstance(value, bool)
+                and math.isfinite(value) and lower <= value <= upper)
+
+    required = {"ri_sp_coverage": 25, "ri_sp_utilization": 25, "waste_detection": 20}
+    unavailable = {
+        "unavailable", "unknown", "partial", "not-assessed", "not_assessed",
+        "insufficient", "insufficient data", "no data", "failed", "skipped",
+    }
+    evidence = (efficiency_breakdown, purchase_mix, velocity, hhi)
+    eligible = all(isinstance(item, dict) and item and item.get("status") not in unavailable
+                   for item in evidence)
+    eligible = eligible and all(
+        isinstance(efficiency_breakdown.get(key), dict)
+        and efficiency_breakdown[key].get("status") not in unavailable
+        and measured(efficiency_breakdown[key].get("score"), 0, maximum)
+        for key, maximum in required.items()
+    )
+    eligible = eligible and (
+        measured(purchase_mix.get("committed_pct"), 0, 100)
+        and measured(purchase_mix.get("on_demand_pct"), 0, 100)
+        and measured(velocity.get("velocity_pct"), -float("inf"))
+        and isinstance(velocity.get("trend"), str) and bool(velocity["trend"])
+        and velocity["trend"] not in unavailable
+        and "warning" in velocity
+        and (velocity["warning"] is None or isinstance(velocity["warning"], (str, bool)))
+        and measured(hhi.get("hhi"), 0, 10000)
+        and isinstance(hhi.get("classification"), str) and bool(hhi["classification"])
+        and hhi["classification"] not in unavailable
+        and measured(total_spend, 0) and total_spend > 0
+        and measured(total_findings, 0)
+    )
+    if not eligible:
+        return {
+            "pillars": [], "composite_score": None, "composite_grade": "N/A", "grade": "N/A",
+            "status": "unavailable",
+            "headline": "Executive score not assessed: insufficient evidence.",
+            "limitations": [
+                "Required efficiency, purchase mix, velocity and concentration "
+                "evidence is unavailable."
+            ],
+        }
     # ── Pillar 1: Cost Health ──
     cost_health = 80  # Start optimistic
     # Penalize for high velocity
@@ -515,5 +557,6 @@ def compute_executive_scorecard(
         "composite_score": composite,
         "composite_grade": _grade(composite),
         "headline": headline,
+        "status": "assessed",
     }
 

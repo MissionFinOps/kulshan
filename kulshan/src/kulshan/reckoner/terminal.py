@@ -38,7 +38,11 @@ def render_result(result: QueryResult, *, mode: str = "standard", ascii_only: bo
     output = StringIO()
     console = Console(file=output, force_terminal=not ascii_only)
     currency = _currency(result)
-    total = _number(result.totals.get("value", 0), currency=currency)
+    total = (
+        _number(result.totals["value"], currency=currency) if "value" in result.totals
+        else "; ".join(_number(amount, currency=str(code))
+                       for code, amount in result.totals.items())
+    )
 
     if mode == "compact":
         console.print(

@@ -8,7 +8,7 @@ dynamic = ["version"]
 description = "Local-first AWS cost analysis and evidence CLI. Read-only by construction."
 readme = "README.md"
 license = { text = "Apache-2.0" }
-requires-python = ">=3.9"
+requires-python = ">=3.11"
 authors = [
     { name = "Mission FinOps" }
 ]
@@ -19,8 +19,6 @@ classifiers = [
     "Intended Audience :: Developers",
     "Intended Audience :: System Administrators",
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.9",
-    "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
@@ -34,13 +32,10 @@ dependencies = [
     "click>=8.0",
     "rich>=13.0",
     "rich-click>=1.7",
-    "jinja2>=3.1",
-    "pyjwt[crypto]>=2.8",
     "httpx>=0.25",
     "platformdirs>=4.0",
     "prompt_toolkit>=3.0",
     "packaging>=23.0",
-    "tomli>=2.0; python_version<'3.11'",
     "tomli_w>=1.0",
     "pandas>=2.2.0",
     "numpy>=1.23.0",
@@ -54,12 +49,12 @@ dependencies = [
 pdf = ["weasyprint>=60.0"]
 excel = ["openpyxl>=3.1.0"]
 pptx = ["python-pptx>=0.6.21"]
-mcp = ["mcp>=1.0"]
+mcp = ["mcp>=1.0,<2"]
 dev = [
     "pytest>=8.0",
     "ruff>=0.5",
     "PyYAML>=6.0",
-    "mcp>=1.0",
+    "mcp>=1.0,<2",
 ]
 all = ["kulshan[pdf,excel,pptx,mcp]"]
 
@@ -95,13 +90,13 @@ include = [
 
 [tool.ruff]
 line-length = 100
-target-version = "py39"
+target-version = "py311"
 
 [tool.ruff.lint]
 select = ["E", "F", "W", "I", "N", "UP", "B", "A", "C4", "SIM", "TID"]
 
 [tool.mypy]
-python_version = "3.9"
+python_version = "3.11"
 strict = true
 
 [tool.pytest.ini_options]

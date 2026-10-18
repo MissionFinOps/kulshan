@@ -1,2 +1,3 @@
-__version__ = "0.6.2"
-__release_date__ = "2026-08-23"
+__version__ = "0.7.0"
+# Set the actual date only when the release is authorized.
+__release_date__ = ""

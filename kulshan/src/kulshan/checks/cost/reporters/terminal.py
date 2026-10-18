@@ -807,6 +807,9 @@ def print_efficiency_score(score_data: dict):
     if not score_data:
         return
 
+    if score_data.get("total_score") is None:
+        console.print("Efficiency score unavailable: utilization and stability evidence required.")
+        return
     total = score_data["total_score"]
     grade = score_data["grade"]
     grade_color = {"A": "bold green", "B": "green", "C": "yellow", "D": "red", "F": "bold red"}.get(grade, "white")
@@ -1557,6 +1560,9 @@ def print_slot_machine_score(score_data: dict):
         return
     from rich.live import Live
 
+    if score_data.get("total_score") is None:
+        print_efficiency_score(score_data)
+        return
     final_score = score_data["total_score"]
     grade = score_data["grade"]
 

@@ -50,11 +50,12 @@ DIMENSIONS = {
 class CostFetcher:
     """Fetches cost data from AWS Cost Explorer API."""
 
-    def __init__(self, profile: Optional[str] = None, region: str = "us-east-1"):
+    def __init__(self, profile: Optional[str] = None, region: str = "us-east-1", *, session=None):
         session_kwargs = {}
         if profile:
             session_kwargs["profile_name"] = profile
-        session = boto3.Session(**session_kwargs)
+        if session is None:
+            session = boto3.Session(**session_kwargs)
         self.ce = session.client("ce", region_name=region, config=BOTO_CONFIG)
         self.org = session.client("organizations", region_name=region, config=BOTO_CONFIG)
         self.region = region

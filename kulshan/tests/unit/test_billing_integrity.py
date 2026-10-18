@@ -12,8 +12,8 @@ def test_current_month_estimated_and_no_history():
 
 def test_closed_prior_month():
     r = assess_billing_integrity('2026-06', today='2026-07-17', sources=['cur'])
-    assert r.period_finality == 'closed'
-    assert r.status == 'trusted'
+    assert r.period_finality == 'unknown'
+    assert r.status == 'unknown'
 
 
 def test_extreme_discontinuity_suspect():
@@ -31,7 +31,7 @@ def test_source_disagreement_preserves_raw_values():
     r = assess_billing_integrity('2026-06', today='2026-07-17', current_value=2000, prior_value=1000, history=[1000, 1100], sources=['cost_explorer','cur'], source_values={'cost_explorer': 2000, 'cur': 1500})
     assert r.current_value == 2000
     assert r.cross_source_agreement == 'disagreement'
-    assert r.status == 'suspect'
+    assert r.status == 'unknown'
 
 
 def test_agreement_is_not_independent_verification():

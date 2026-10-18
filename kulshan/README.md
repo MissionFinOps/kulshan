@@ -13,7 +13,7 @@ kulshan report
 
 [![PyPI](https://img.shields.io/pypi/v/kulshan)](https://pypi.org/project/kulshan/)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue)](LICENSE.txt)
-[![Python](https://img.shields.io/badge/python-3.9%2B-blue)](https://python.org)
+[![Python](https://img.shields.io/badge/python-3.11%2B-blue)](https://python.org)
 
 ---
 
@@ -71,7 +71,9 @@ Read-only by construction, not by default. There is no cleanup mode, no write pa
 pip install kulshan
 ```
 
-Python 3.9+. macOS, Linux, Windows. Optional extras: `kulshan[pdf]`, `kulshan[excel]`, `kulshan[pptx]`, `kulshan[mcp]`, or `kulshan[all]`.
+Python 3.11+. macOS, Linux, Windows. Optional extras: `kulshan[pdf]`, `kulshan[excel]`, `kulshan[pptx]`, `kulshan[mcp]`, or `kulshan[all]`.
+
+Version 0.7.0 is prepared but unreleased. See the [release checklist](docs/releasing.md); no publication date has been assigned.
 
 ### Consent-first update checks
 

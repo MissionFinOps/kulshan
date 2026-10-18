@@ -30,7 +30,9 @@ def grade_color(grade: str) -> str:
     return "red"
 
 
-def score_bar(score: int, width: int = 20) -> str:
+def score_bar(score: int | None, width: int = 20) -> str:
+    if score is None:
+        return "Unavailable"
     filled = int(score / 100 * width)
     empty = width - filled
     if score >= 80:
@@ -192,9 +194,10 @@ def render_report(
     total_spend = cost_result.get("scores", {}).get("total_spend")
     spend_str = f"  │  [dim]Spend:[/dim] [bold]${total_spend:,.0f}[/bold]" if total_spend and total_spend > 0 else ""
 
+    displayed_score = str(overall_score) + "/100" if overall_grade != "N/A" else "Unavailable"
     console.print(
         f"  [{g_clr} bold]{overall_grade}[/{g_clr} bold]"
-        f"  [{g_clr}]{overall_score}/100[/{g_clr}]"
+        f"  [{g_clr}]{displayed_score}[/{g_clr}]"
         f"{spend_str}"
     )
 
@@ -204,7 +207,7 @@ def render_report(
         store = HistoryStore(history_db_path) if history_db_path else HistoryStore()
         prev = store.get_previous_scan(account_id)
         store.close()
-        if prev and prev.get("overall_score") is not None:
+        if overall_grade != "N/A" and prev and prev.get("overall_score") is not None:
             delta = overall_score - prev["overall_score"]
             prev_grade = prev.get("overall_grade", "?")
             if delta > 0:
@@ -242,7 +245,7 @@ def render_report(
         gc = grade_color(grade)
         table.add_row(
             f"{icon} {label}",
-            f"[{gc}]{score}[/{gc}]",
+            f"[{gc}]{score if score is not None else 'Unavailable'}[/{gc}]",
             f"[{gc}]{grade}[/{gc}]",
             score_bar(score),
             str(findings),

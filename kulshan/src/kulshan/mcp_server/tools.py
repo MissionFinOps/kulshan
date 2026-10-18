@@ -135,7 +135,7 @@ def _run_isolated(
         ) from None
 
     if process.returncode != 0:
-        detail = stderr.strip() or f"worker exited with code {process.returncode}"
+        detail = f"worker exited with code {process.returncode}"
         raise ToolError(f"Kulshan tool '{operation}' failed: {detail}. {suggestion}")
     try:
         response = json.loads(stdout)
@@ -144,8 +144,23 @@ def _run_isolated(
             f"Kulshan tool '{operation}' returned an invalid worker response. {suggestion}"
         ) from exc
     if response.get("status") == "error":
-        raise ToolError(f"{response.get('payload', 'Unknown tool error')} {suggestion}")
-    return str(response.get("payload", ""))
+        raise ToolError(f"Kulshan operation failed. {suggestion}")
+    return _private_response(str(response.get("payload", "")))
+
+
+def _private_response(payload: str) -> str:
+    """Mandatory privacy boundary for every dynamic MCP tool response."""
+    try:
+        from kulshan.pseudonym.context import create_engine_for_output
+        from kulshan.pseudonym.policy import PseudonymPolicy
+
+        engine = create_engine_for_output(PseudonymPolicy.for_persistence())
+        if engine is None or not engine.is_active:
+            raise RuntimeError("privacy engine unavailable")
+        data = json.loads(payload)
+        return json.dumps(engine.pseudonymize_payload(data))
+    except Exception:
+        raise ToolError("MCP privacy processing failed; output withheld.") from None
 
 
 def _execute_operation(operation: str, arguments: dict[str, Any]) -> str:
@@ -166,21 +181,8 @@ def _execute_preflight() -> str:
 
     identity = boto3.client("sts").get_caller_identity()
 
-    # Pseudonymize account and ARN for MCP responses
     account = identity.get("Account", "")
     arn = identity.get("Arn", "")
-    try:
-        from kulshan.pseudonym.engine import PseudonymizationEngine
-        from kulshan.pseudonym.policy import PseudonymPolicy
-        from kulshan.pseudonym.context import create_engine_for_output
-        engine = create_engine_for_output(PseudonymPolicy.for_persistence())
-        if engine and engine.is_active:
-            from kulshan.pseudonym.types import IdentifierClass
-            account = engine.pseudonymize_value(account, IdentifierClass.ACCOUNT)
-            arn = engine.pseudonymize_text(arn)
-    except Exception:
-        pass  # Graceful degradation
-
     return _json({"status": "ok", "account": account, "arn": arn})
 
 
@@ -207,16 +209,21 @@ def _execute_report(packs: list[str], days: int, regions: list[str] | None) -> s
         console=Console(stderr=True),
         days=days,
     )
-    _raise_if_all_packs_unavailable(results)
     return _json(
         {
-            "status": "ok",
+            "status": _coverage(results)["status"],
+            "coverage": _coverage(results),
             "days": days,
             "packs": packs,
             "regions": selected_regions,
             "findings": _compact_findings_by_pack(results),
         }
     )
+
+
+def _coverage(results: dict[str, Any]) -> dict:
+    from kulshan.orchestrator import summarize_completeness
+    return summarize_completeness(results)
 
 
 def _raise_if_all_packs_unavailable(results: dict[str, Any]) -> None:
@@ -290,7 +297,8 @@ def _execute_quick_security(region: str) -> str:
     critical_high = [f for f in findings if f.get("severity") in ("critical", "high")]
     return _json(
         {
-            "status": "ok",
+            "status": _coverage(results)["status"],
+            "coverage": _coverage(results),
             "region": region,
             "total_findings": len(findings),
             "critical_high_count": len(critical_high),
@@ -306,7 +314,7 @@ def _parse_packs(packs: str) -> list[str]:
     selected = [part.strip() for part in value.split(",") if part.strip()]
     invalid = [pack for pack in selected if pack not in VALID_PACKS]
     if invalid:
-        raise ToolError(f"Unknown pack(s): {', '.join(invalid)}")
+        raise ToolError("Unknown pack selection; use kulshan_list_packs for supported names.")
     return selected or ["cost"]
 
 
@@ -322,16 +330,6 @@ def _compact_findings_by_pack(results: dict[str, Any]) -> dict[str, list[dict[st
         findings = result.get("findings", []) if isinstance(result, dict) else []
         output[pack] = [_compact_finding(finding) for finding in findings[:15]]
 
-    # Pseudonymize MCP output
-    try:
-        from kulshan.pseudonym.context import create_engine_for_output
-        from kulshan.pseudonym.policy import PseudonymPolicy
-        engine = create_engine_for_output(PseudonymPolicy.for_persistence())
-        if engine and engine.is_active:
-            output = engine.pseudonymize_payload(output)
-    except Exception:
-        pass  # Graceful degradation
-
     return output
 
 
@@ -342,6 +340,8 @@ def _compact_finding(finding: dict[str, Any]) -> dict[str, Any]:
         "service": finding.get("service") or finding.get("resource_type") or finding.get("pack"),
         "dollar_impact": finding.get("estimated_monthly_impact"),
         "recommendation": finding.get("recommended_action") or finding.get("remediation"),
+        "resource_id": finding.get("resource_id"),
+        "account_id": finding.get("account_id"),
     }
     remediation_cost = finding.get("estimated_remediation_cost")
     if remediation_cost:

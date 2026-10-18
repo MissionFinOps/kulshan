@@ -6,7 +6,7 @@ This guide covers installation, credential setup, and running your first Kulshan
 
 ## Prerequisites
 
-- Python 3.9 or later
+- Python 3.11 or later
 - AWS credentials configured (any method supported by the AWS SDK)
 - macOS, Linux, or Windows
 

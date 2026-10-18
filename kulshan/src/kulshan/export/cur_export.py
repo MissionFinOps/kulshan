@@ -193,28 +193,13 @@ def _create_mapping_tables(
     """
     for col in pseudo_cols:
         id_class = _infer_identifier_class(col)
-        # Get distinct values
-        rows = con.execute(
+        from kulshan.export.batching import populate_alias_map
+        populate_alias_map(
+            con, f"_pseudo_map_{col}",
             f'SELECT DISTINCT CAST("{col}" AS VARCHAR) AS v '
-            f"FROM cur_raw WHERE {where} AND \"{col}\" IS NOT NULL"
-        ).fetchall()
-
-        # Derive aliases
-        mappings = []
-        for (raw_val,) in rows:
-            if raw_val and raw_val.strip():
-                alias = engine.pseudonymize_value(raw_val, id_class)
-                mappings.append((raw_val, alias))
-            else:
-                mappings.append((raw_val, raw_val))
-
-        # Create temp table
-        table_name = f"_pseudo_map_{col}"
-        con.execute(f"CREATE TEMP TABLE {table_name} (raw_value VARCHAR, alias VARCHAR)")
-        if mappings:
-            con.executemany(
-                f"INSERT INTO {table_name} VALUES (?, ?)", mappings
-            )
+            f'FROM cur_raw WHERE {where} AND "{col}" IS NOT NULL',
+            engine, id_class,
+        )
 
 
 def _infer_identifier_class(column_name: str) -> IdentifierClass:

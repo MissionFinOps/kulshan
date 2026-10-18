@@ -11,7 +11,7 @@ One command. One report. Zero writes to your AWS account.
 
 [![PyPI](https://img.shields.io/pypi/v/kulshan)](https://pypi.org/project/kulshan/)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue)](LICENSE)
-[![Python](https://img.shields.io/badge/python-3.9%2B-blue)](https://python.org)
+[![Python](https://img.shields.io/badge/python-3.11%2B-blue)](https://python.org)
 
 [Documentation](kulshan/docs/README.md) | [IAM Policy](kulshan/iam/kulshan-readonly.json) | [Changelog](kulshan/CHANGELOG.md)
 
@@ -42,7 +42,9 @@ Creates a consultant evidence package that aliases account and resource identifi
 pip install kulshan
 ```
 
-Python 3.9+. macOS, Linux, Windows. Optional extras: `kulshan[mcp]`, `kulshan[pdf]`, `kulshan[excel]`, `kulshan[pptx]`, or `kulshan[all]`.
+Python 3.11+. macOS, Linux, Windows. Optional extras: `kulshan[mcp]`, `kulshan[pdf]`, `kulshan[excel]`, `kulshan[pptx]`, or `kulshan[all]`.
+
+Version 0.7.0 is prepared but unreleased. See the [release checklist](kulshan/docs/releasing.md); no publication date has been assigned.
 
 ### Consent-first update checks
 

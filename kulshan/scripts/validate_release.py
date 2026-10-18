@@ -13,7 +13,7 @@ SEMVER_TAG = re.compile(
 )
 VERSION_ASSIGNMENT = re.compile(r'^__version__\s*=\s*["\'](?P<value>[^"\']+)["\']$', re.MULTILINE)
 DATE_ASSIGNMENT = re.compile(
-    r'^__release_date__\s*=\s*["\'](?P<value>[^"\']+)["\']$', re.MULTILINE
+    r'^__release_date__\s*=\s*["\'](?P<value>[^"\']*)["\']$', re.MULTILINE
 )
 
 
@@ -51,10 +51,14 @@ def validate(tag: str, project_root: Path) -> list[str]:
 
     changelog = changelog_path.read_text(encoding="utf-8")
     heading = re.compile(
-        rf"^## \[{re.escape(expected_version)}\] - \d{{4}}-\d{{2}}-\d{{2}}$", re.MULTILINE
+        rf"^## \[{re.escape(expected_version)}\] - (?P<date>\d{{4}}-\d{{2}}-\d{{2}})$",
+        re.MULTILINE,
     )
-    if heading.search(changelog) is None:
+    heading_match = heading.search(changelog)
+    if heading_match is None:
         errors.append(f"CHANGELOG.md has no dated [{expected_version}] release heading")
+    elif date_match is not None and heading_match.group("date") != date_match.group("value"):
+        errors.append("CHANGELOG.md release date does not match __release_date__")
 
     return errors
 

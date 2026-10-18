@@ -20,8 +20,11 @@ _AWS_ACCOUNT_RE = re.compile(r"\b(\d{12})\b")
 _ARN_RE = re.compile(r"arn:aws[^:]*:[^:]+:[^:]*:(\d{12}):")
 _EMAIL_RE = re.compile(r"\b([a-zA-Z0-9._%+-]+)@([a-zA-Z0-9.-]+\.[a-zA-Z]{2,})\b")
 _IP_RE = re.compile(r"\b(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})\b")
-_ACCESS_KEY_RE = re.compile(r"\bAKIA[A-Z0-9]{16}\b")
-_SECRET_KEY_RE = re.compile(r"\b[A-Za-z0-9/+=]{40}\b")  # AWS secret keys are 40 chars base64
+_ACCESS_KEY_RE = re.compile(r"\b(?:AKIA|ASIA)[A-Z0-9]{16}\b")
+_SECRET_KEY_RE = re.compile(
+    r"(?i)(?:aws[_ -]?)?secret(?:[_ -]access)?[_ -]?key[\s:=\"']+"
+    r"([A-Za-z0-9/+=]{40})(?![A-Za-z0-9/+=])"
+)
 
 
 # ---------------------------------------------------------------------------
@@ -138,6 +141,13 @@ def redact_text(text: str | None) -> str:
     if not text:
         return ""
     s = str(text)
+    from kulshan.pseudonym.classifier import scan_text_for_identifiers
+    from kulshan.pseudonym.types import IdentifierClass
+    for value, kind, start, end in reversed(scan_text_for_identifiers(s)):
+        if kind in {IdentifierClass.ARN, IdentifierClass.RESOURCE, IdentifierClass.IP_ADDRESS}:
+            replacement = (redact_ip(value) if "." in value and ":" not in value
+                           else "[REDACTED_IDENTIFIER]")
+            s = s[:start] + replacement + s[end:]
     # Replace 12-digit account IDs
     s = _AWS_ACCOUNT_RE.sub(lambda m: f"XXXX{m.group(1)[-4:]}", s)
     # Replace AWS access keys
@@ -229,6 +239,9 @@ def _redact_string(value: str, key: str) -> str:
     """Redact a string value based on its field name context."""
     key_lower = key.lower()
 
+    if key_lower in {"aws_secret_access_key", "secret_access_key", "secret_key"}:
+        return "[REDACTED_KEY]"
+
     if key_lower in _ACCOUNT_FIELDS or key_lower == "account_id":
         return redact_account_id(value)
     if key_lower in _ARN_FIELDS:
@@ -245,10 +258,7 @@ def _redact_string(value: str, key: str) -> str:
         return redact_text(value)
 
     # For any other string field, scan common inline sensitive values.
-    if _AWS_ACCOUNT_RE.search(value) or _EMAIL_RE.search(value) or _ACCESS_KEY_RE.search(value):
-        return redact_text(value)
-
-    return value
+    return redact_text(value)
 
 
 # ---------------------------------------------------------------------------

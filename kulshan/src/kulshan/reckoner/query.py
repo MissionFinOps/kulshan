@@ -3,12 +3,14 @@
 from __future__ import annotations
 
 import time
-from datetime import timedelta
+from collections.abc import Sequence
+from datetime import datetime, timedelta, timezone
 from typing import Any
 
 from kulshan.reckoner.contracts import (
     ColumnDefinition,
     ExecutionSource,
+    FilterSpec,
     PlannerDecision,
     PlannerReason,
     QueryResult,
@@ -16,7 +18,12 @@ from kulshan.reckoner.contracts import (
     ResolvedRange,
     TrustInspection,
 )
-from kulshan.reckoner.cost.semantics import GROUPINGS, CanonicalRelation, select_formula
+from kulshan.reckoner.cost.semantics import (
+    GROUPINGS,
+    CanonicalRelation,
+    select_formula,
+    validate_currencies,
+)
 
 
 class QueryExecutionError(RuntimeError):
@@ -85,7 +92,13 @@ def _resolved_period(
     if days:
         start = end - timedelta(days=days)
     elif query.period.period_id == "current-billing-period":
-        start = row[0].replace(day=1)
+        start = datetime.now(timezone.utc).replace(
+            day=1, hour=0, minute=0, second=0, microsecond=0, tzinfo=None
+        )
+        end = (start.replace(day=28) + timedelta(days=4)).replace(day=1)
+    elif query.period.period_id == "latest-available-billing-period":
+        start = row[1].replace(day=1, hour=0, minute=0, second=0, microsecond=0)
+        end = (start.replace(day=28) + timedelta(days=4)).replace(day=1)
     else:
         raise QueryExecutionError(
             f"named period {query.period.period_id} requires period discovery"
@@ -93,8 +106,11 @@ def _resolved_period(
     return ResolvedRange(start.isoformat(), end.isoformat())
 
 
-def _predicate_sql(items, *, negate=False):
-    clauses, values = [], []
+def _predicate_sql(
+    items: Sequence[FilterSpec], *, negate: bool = False
+) -> tuple[str, list[Any]]:
+    clauses: list[str] = []
+    values: list[Any] = []
     for item in items:
         if item.dimension not in GROUPINGS:
             raise QueryExecutionError(f"unsupported filter dimension: {item.dimension}")
@@ -135,6 +151,7 @@ def execute_query(connection: Any, relation: CanonicalRelation, query: QuerySpec
     unknown = [item for item in query.groupings if item not in GROUPINGS]
     if unknown or len(query.groupings) > 3:
         raise QueryExecutionError(f"unsupported grouping: {unknown}")
+    currencies = validate_currencies(connection, relation, query.groupings)
     groups = [GROUPINGS[item] for item in query.groupings]
     group_sql = ", ".join('"' + item + '"' for item in groups)
     prefix = f"{group_sql}, " if group_sql else ""
@@ -165,6 +182,15 @@ def execute_query(connection: Any, relation: CanonicalRelation, query: QuerySpec
     cursor = connection.execute(sql, [period.start, period.end, *include_values, *exclude_values])
     names = [column[0] for column in cursor.description]
     rows = tuple(dict(zip(names, row)) for row in cursor.fetchall())
+    total_groups = 'currency, ' if 'currency' in query.groupings else ''
+    total_by = ' GROUP BY currency' if total_groups else ''
+    total_rows = connection.execute(
+        f'SELECT {total_groups}SUM({formula.expression}) FROM "{relation.relation_name}" '
+        f"WHERE {' AND '.join(predicates)}{total_by}",
+        [period.start, period.end, *include_values, *exclude_values],
+    ).fetchall()
+    totals = ({str(row[0]): float(row[1] or 0) for row in total_rows} if total_groups
+              else {"value": float(total_rows[0][0] or 0)})
     duration = int((time.perf_counter() - start) * 1000)
     columns = tuple(
         ColumnDefinition(item, item.replace("_", " ").title(), "string") for item in groups
@@ -175,8 +201,11 @@ def execute_query(connection: Any, relation: CanonicalRelation, query: QuerySpec
         execution_source=ExecutionSource.LOCAL,
         columns=columns,
         rows=rows,
-        totals={"value": sum(float(row["value"] or 0) for row in rows)},
-        cost_basis={"metric": formula.metric_id},
+        totals=totals,
+        cost_basis={
+            "metric": formula.metric_id,
+            "currency": currencies[0] if len(currencies) == 1 else None,
+        },
         formula_id=formula.formula_id,
         formula_version=formula.formula_version,
         provisional=True,

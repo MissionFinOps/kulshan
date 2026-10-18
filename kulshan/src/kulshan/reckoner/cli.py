@@ -90,7 +90,7 @@ def _render(result, output):
     except AttributeError:
         names = [column.column_id for column in result.columns]
         rows = [" | ".join(str(row.get(name, "")) for name in names) for row in result.rows]
-        return "\n".join([" | ".join(names), *rows, f"Total: {result.totals.get('value', 0)}"])
+        return "\n".join([" | ".join(names), *rows, f"Totals: {dict(result.totals)}"])
 
 
 def _echo(result, output):
@@ -115,7 +115,7 @@ def _maybe_pseudonymize_result(result, output):
 
         engine = create_engine_for_output(PseudonymPolicy.for_structured_output())
         if not engine or not engine.is_active:
-            return result
+            raise RuntimeError("Required privacy engine unavailable")
 
         # Pseudonymize row values (account/payer groupings become aliases)
         new_rows = tuple(
@@ -124,7 +124,7 @@ def _maybe_pseudonymize_result(result, output):
         )
         return replace(result, rows=new_rows)
     except Exception:
-        return result  # Graceful degradation
+        raise RuntimeError("Required privacy processing failed; output withheld") from None
 
 
 def _pseudonymize_row_value(engine, key, value):
